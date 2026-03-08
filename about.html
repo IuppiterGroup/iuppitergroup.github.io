@@ -1,67 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Iuppiter Group</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta name="referrer" content="no-referrer">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Iuppiter Group</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">IUPPITER GROUP</span>
+            </a>
+            <button class="nav-toggle" aria-label="Menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="software.html">Software & Tools</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">IUPPITER <span>GROUP</span></a>
-    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="software.html">Software</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+    <section class="page-header">
+        <h1>About</h1>
+        <p>Independent research and development</p>
+    </section>
 
-<header class="page-header">
-  <div class="container">
-    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
-    <h1>About</h1>
-    <p>Who we are and what drives our work</p>
-  </div>
-</header>
+    <section class="content-section">
+        <div class="container">
+            <div class="about-content">
+                <p>Iuppiter Group is an independent research and software firm. We produce original research in quantitative finance and theoretical physics, build professional-grade analytical tools, and develop strategy games rooted in history.</p>
 
-<section>
-  <div class="container">
-    <div class="about-text">
-      <p>Iuppiter Group is a research and consulting firm specializing in finance, science, and strategic analysis.</p>
-      <br>
-      <p>We publish original research across equity valuation, quantitative trading, applied physics, and public policy. Our software division builds professional-grade analytical tools designed for practitioners who demand rigor and reliability.</p>
-      <br>
-      <p>Named for the Roman king of the gods — a symbol of authority, order, and far-reaching vision — Iuppiter Group brings classical discipline to modern analytical challenges.</p>
-      <br>
-      <p style="color:var(--gold-dim); font-style:italic; font-family:var(--font-heading);">"Scientia potentia est."</p>
-    </div>
-  </div>
-</section>
+                <p>Our work is driven by intellectual curiosity and a commitment to rigor. We don't publish to meet quotas or chase trends — we publish when we have something worth saying.</p>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-links">
-      <a href="research.html">Research</a>
-      <a href="software.html">Software</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <p>&copy; 2026 Iuppiter Group. All rights reserved.</p>
-  </div>
-</footer>
+                <h2>What We Do</h2>
+                <ul>
+                    <li><strong>Research</strong> — Original papers in physics, astrophysics, and quantitative finance. Peer-reviewed quality without the institutional gatekeeping.</li>
+                    <li><strong>Financial Tools</strong> — DCF models, portfolio trackers, backtesting engines, and filing analyzers. Built for analysts who want precision, not pretty dashboards.</li>
+                    <li><strong>Games</strong> — Strategy and roguelike games with historical depth. We believe games can be both entertaining and intellectually substantive.</li>
+                    <li><strong>Consulting</strong> — Available for select research and analytical projects. <a href="mailto:contact@jupitergroup.org">Get in touch</a>.</li>
+                </ul>
 
-<script src="main.js"></script>
+                <h2>Philosophy</h2>
+                <p>We believe in ownership over subscription, substance over polish, and building things that last. Our software runs in your browser or on your machine — we don't hold your data hostage in the cloud. Our research is freely available because knowledge shouldn't have a paywall (tools that save you time do).</p>
+                
+                <p style="color:#c4a44a;font-style:italic;margin-top:40px;font-family:'Cinzel',serif;text-align:center;">Faber est suae quisque fortunae.</p>
+                <p style="text-align:center;color:#666;font-size:13px;">Every man is the architect of his own fortune. — Appius Claudius Caecus</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Iuppiter Group</h4>
+                    <p class="footer-tagline">Sic parvis magna.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="software.html">Software</a></li>
+                        <li><a href="games.html">Games</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="tos.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://x.com/juliuscaeser420" target="_blank">𝕏 / Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Iuppiter Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
 </body>
 </html>
