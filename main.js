@@ -14,6 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
     nextQuote();
   }
 
+  // Spawn particles in hero
+  const particleBox = document.getElementById('particles');
+  if (particleBox) {
+    function spawnParticle() {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.top = 40 + Math.random() * 50 + '%';
+      p.style.animationDuration = (3 + Math.random() * 3) + 's';
+      p.style.animationDelay = '0s';
+      const hue = Math.random() > 0.5 ? '43,70%,55%' : '0,60%,45%';
+      p.style.background = 'hsl(' + hue + ')';
+      p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+      particleBox.appendChild(p);
+      setTimeout(() => p.remove(), 6000);
+    }
+    setInterval(spawnParticle, 200);
+  }
+
   // Category filter (research page)
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
