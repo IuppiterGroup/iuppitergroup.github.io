@@ -331,6 +331,41 @@ section + section { border-top: 1px solid var(--border); }
   .card-grid { grid-template-columns: 1fr; }
 }
 
+/* Coming Soon Cards */
+.card-coming-soon {
+  border-style: dashed;
+  opacity: 0.85;
+}
+.card-coming-soon:hover {
+  opacity: 1;
+}
+.card-badge {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+}
+.divider-ornament {
+  text-align: center;
+  color: var(--gold);
+  font-size: 1.2rem;
+  letter-spacing: 12px;
+  margin: 56px 0 16px;
+}
+.section-subtitle {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  color: var(--cream);
+  margin-bottom: 32px;
+  font-size: 1.6rem;
+}
+
 /* TOS Warning */
 .tos-warning {
   font-size: 0.75rem;
