@@ -1,0 +1,29 @@
+# Secrets — NEVER commit these
+*.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.secret
+credentials.*
+auth-*.json
+*token*
+*password*
+
+# Build/gen scripts (not needed on site)
+gen_*.py
+build.py
+__pycache__/
+*.pyc
+
+# OS junk
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*.swo
+*~
