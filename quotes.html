@@ -1,290 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wisdom of the Ages — 500+ Historical Quotes | Iuppiter Group</title>
-    <meta name="description" content="Explore 500+ quotes from history's greatest leaders, warriors, philosophers, and builders. Julius Caesar, Marcus Aurelius, Sun Tzu, Napoleon, and more.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        .quotes-hero {
-            padding: 120px 0 40px; text-align: center;
-            background:
-                radial-gradient(ellipse at 50% 30%, rgba(139, 26, 26, 0.10) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(196, 164, 74, 0.06) 0%, transparent 50%);
-        }
-        .quotes-hero h1 {
-            font-family: 'Cinzel', serif; font-size: clamp(28px, 5vw, 48px);
-            color: #c4a44a; letter-spacing: 6px; margin-bottom: 8px;
-        }
-        .quotes-hero p { color: #666; font-size: 16px; letter-spacing: 1px; }
-        
-        /* Category filter bar */
-        .filter-bar {
-            display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
-            padding: 24px 0 40px;
-        }
-        .filter-btn {
-            font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 1px;
-            text-transform: uppercase; padding: 8px 18px;
-            background: transparent; border: 1px solid rgba(255,255,255,0.08);
-            color: #666; cursor: pointer; transition: all 0.2s; border-radius: 2px;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            color: #c4a44a; border-color: rgba(196, 164, 74, 0.4);
-            background: rgba(196, 164, 74, 0.05);
-        }
-
-        /* Random quote spotlight */
-        .spotlight {
-            max-width: 750px; margin: 0 auto 60px;
-            background: rgba(15, 12, 10, 0.7);
-            border: 1px solid rgba(196, 164, 74, 0.2);
-            border-radius: 4px; padding: 48px 40px;
-            text-align: center; position: relative;
-        }
-        .spotlight::before, .spotlight::after {
-            content: ''; position: absolute; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 2px;
-            background: linear-gradient(90deg, transparent, #c4a44a, transparent);
-        }
-        .spotlight::before { top: -1px; }
-        .spotlight::after { bottom: -1px; }
-        .spotlight .big-quote {
-            font-family: 'Cinzel', serif; font-size: 64px;
-            color: rgba(196, 164, 74, 0.12); line-height: 1; margin-bottom: -16px;
-        }
-        .spotlight .text {
-            font-family: 'Cinzel', serif; font-size: clamp(20px, 3vw, 28px);
-            color: #e0ddd5; line-height: 1.5; margin-bottom: 20px;
-            transition: opacity 0.4s;
-        }
-        .spotlight .text.fading { opacity: 0; }
-        .spotlight .author {
-            font-family: 'Inter', sans-serif; font-size: 14px;
-            color: #c4a44a; letter-spacing: 2px; text-transform: uppercase;
-            margin-bottom: 4px; transition: opacity 0.4s;
-        }
-        .spotlight .author.fading { opacity: 0; }
-        .spotlight .meta {
-            font-size: 12px; color: #555; letter-spacing: 1px;
-            margin-bottom: 24px; transition: opacity 0.4s;
-        }
-        .spotlight .meta.fading { opacity: 0; }
-        .spotlight-btn {
-            background: rgba(196, 164, 74, 0.1); border: 1px solid rgba(196, 164, 74, 0.3);
-            color: #c4a44a; padding: 12px 28px; font-family: 'Cinzel', serif;
-            font-size: 14px; letter-spacing: 1px; cursor: pointer;
-            transition: all 0.2s; border-radius: 2px;
-        }
-        .spotlight-btn:hover {
-            background: rgba(196, 164, 74, 0.2); border-color: #c4a44a;
-        }
-
-        /* Quote grid */
-        .quotes-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 20px; padding-bottom: 80px;
-        }
-        .quote-card {
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 3px; padding: 28px 24px;
-            transition: all 0.3s; position: relative;
-        }
-        .quote-card:hover {
-            border-color: rgba(196, 164, 74, 0.2);
-            background: rgba(196, 164, 74, 0.02);
-            transform: translateY(-2px);
-        }
-        .quote-card .card-text {
-            font-family: 'Cinzel', serif; font-size: 15px;
-            color: #d0cdc5; line-height: 1.6; margin-bottom: 16px;
-        }
-        .quote-card .card-author {
-            font-size: 12px; color: #c4a44a; letter-spacing: 1px;
-            text-transform: uppercase; margin-bottom: 2px;
-        }
-        .quote-card .card-meta {
-            font-size: 11px; color: #444; letter-spacing: 0.5px;
-        }
-        .quote-card .card-cats {
-            margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap;
-        }
-        .quote-card .cat-tag {
-            font-size: 9px; text-transform: uppercase; letter-spacing: 1px;
-            padding: 2px 8px; border: 1px solid rgba(255,255,255,0.06);
-            color: #555; border-radius: 2px;
-        }
-
-        .load-more {
-            text-align: center; padding: 40px 0;
-        }
-
-        .quote-count {
-            text-align: center; color: #444; font-size: 13px;
-            padding: 16px 0 0; letter-spacing: 1px;
-        }
-
-        @media (max-width: 768px) {
-            .quotes-grid { grid-template-columns: 1fr; }
-            .spotlight { padding: 32px 20px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wisdom of the Ages — 500+ Historical Quotes | Iuppiter Group</title>
+  <meta name="description" content="Explore 500+ quotes from history's greatest leaders, warriors, philosophers, and builders. Julius Caesar, Marcus Aurelius, Sun Tzu, Napoleon, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <style>
+    .spotlight-box{max-width:650px;margin:0 auto 40px;text-align:center;padding:44px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;}
+    .spotlight-box .bq{font-family:var(--font-heading);font-size:3rem;color:var(--gold-dim);line-height:1;margin-bottom:-8px;}
+    .spotlight-box .qt{font-family:var(--font-heading);font-size:1.3rem;color:var(--cream);line-height:1.5;margin-bottom:16px;min-height:60px;}
+    .spotlight-box .qa{font-size:0.82rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+    .spotlight-box .qe{font-size:0.75rem;color:var(--text-dim);margin-bottom:24px;}
+    .quote-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 20px;transition:border-color .25s,transform .2s;}
+    .quote-card:hover{border-color:var(--border-gold);transform:translateY(-2px);}
+    .quote-card .qt{font-family:var(--font-heading);font-size:0.95rem;color:var(--cream);line-height:1.5;margin-bottom:14px;}
+    .quote-card .qa{font-size:0.72rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+    .quote-card .qe{font-size:0.68rem;color:var(--text-dim);}
+    .quote-card .cats{margin-top:10px;display:flex;gap:5px;flex-wrap:wrap;}
+    .quote-card .cat-tag{font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border:1px solid var(--border);color:var(--text-dim);border-radius:2px;}
+    .qcount{text-align:center;color:var(--text-dim);font-size:0.8rem;margin-bottom:20px;}
+  </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <span class="logo-icon">⚡</span>
-                <span class="logo-text">IUPPITER GROUP</span>
-            </a>
-            <button class="nav-toggle" aria-label="Menu">☰</button>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="research.html">Research</a></li>
-                <li><a href="software.html">Software & Tools</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="quotes.html" class="active">Wisdom</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <section class="quotes-hero">
-        <span class="eagle-emblem">🏛️</span>
-        <h1>WISDOM OF THE AGES</h1>
-        <p>500+ quotes from history's greatest leaders, warriors, philosophers, and builders</p>
-    </section>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">IUPPITER <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="quotes.html" class="active">Wisdom</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <div class="container">
-        <!-- Category filter -->
-        <div class="filter-bar" id="filterBar"></div>
+<header class="page-header">
+  <div class="container">
+    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
+    <h1>Wisdom of the Ages</h1>
+    <p>500+ quotes from history's greatest leaders, warriors, philosophers, and builders</p>
+  </div>
+</header>
 
-        <!-- Random spotlight -->
-        <div class="spotlight">
-            <div class="big-quote">"</div>
-            <div class="text" id="spotText">Loading...</div>
-            <div class="author" id="spotAuthor"></div>
-            <div class="meta" id="spotMeta"></div>
-            <button class="spotlight-btn" onclick="randomSpotlight()">✦ New Wisdom ✦</button>
-        </div>
+<section>
+  <div class="container">
+    <!-- Category filter -->
+    <div class="filter-bar" id="filterBar"></div>
 
-        <div class="quote-count" id="quoteCount"></div>
-
-        <!-- Quote grid -->
-        <div class="quotes-grid" id="quotesGrid"></div>
-
-        <div class="load-more" id="loadMore">
-            <button class="spotlight-btn" onclick="loadMoreQuotes()">Load More</button>
-        </div>
+    <!-- Spotlight -->
+    <div class="spotlight-box">
+      <div class="bq">"</div>
+      <div class="qt" id="spotText">Loading...</div>
+      <div class="qa" id="spotAuthor"></div>
+      <div class="qe" id="spotMeta"></div>
+      <button class="btn" onclick="randomSpotlight()">&#x2726; New Wisdom &#x2726;</button>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2026 Iuppiter Group. All rights reserved. &nbsp;|&nbsp; <a href="/">Home</a> &nbsp;|&nbsp; <a href="about.html">About</a></p>
-            </div>
-        </div>
-    </footer>
+    <div class="qcount" id="quoteCount"></div>
 
-    <script src="quotes-data.js"></script>
-    <script>
-    // State
-    let activeFilter = 'all';
-    let displayCount = 24;
-    let filteredQuotes = [];
+    <!-- Quote grid -->
+    <div class="card-grid" id="quotesGrid"></div>
 
-    function init() {
-        // Build filter bar
-        const bar = document.getElementById('filterBar');
-        QUOTE_CATEGORIES.forEach(cat => {
-            const btn = document.createElement('button');
-            btn.className = 'filter-btn' + (cat === 'all' ? ' active' : '');
-            btn.textContent = cat === 'all' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1);
-            btn.onclick = () => filterBy(cat);
-            bar.appendChild(btn);
-        });
+    <div style="text-align:center;padding:40px 0;" id="loadMore">
+      <button class="btn" onclick="loadMoreQuotes()">Load More</button>
+    </div>
+  </div>
+</section>
 
-        randomSpotlight();
-        filterBy('all');
-    }
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="about.html">About</a>
+      <a href="quotes.html">Wisdom</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 Iuppiter Group. All rights reserved.</p>
+  </div>
+</footer>
 
-    function filterBy(cat) {
-        activeFilter = cat;
-        displayCount = 24;
-        
-        // Update button states
-        document.querySelectorAll('.filter-btn').forEach(b => {
-            b.classList.toggle('active', b.textContent.toLowerCase() === cat);
-        });
-
-        if (cat === 'all') {
-            filteredQuotes = [...QUOTES];
-        } else {
-            filteredQuotes = QUOTES.filter(q => q.cat.includes(cat));
-        }
-        
-        // Shuffle for variety
-        filteredQuotes.sort(() => Math.random() - 0.5);
-        
-        renderGrid();
-    }
-
-    function renderGrid() {
-        const grid = document.getElementById('quotesGrid');
-        const showing = filteredQuotes.slice(0, displayCount);
-        
-        grid.innerHTML = showing.map(q => `
-            <div class="quote-card">
-                <div class="card-text">"${q.q}"</div>
-                <div class="card-author">— ${q.a}</div>
-                <div class="card-meta">${q.era} · ${q.civ}</div>
-                <div class="card-cats">${q.cat.map(c => `<span class="cat-tag">${c}</span>`).join('')}</div>
-            </div>
-        `).join('');
-
-        document.getElementById('quoteCount').textContent = 
-            `Showing ${Math.min(displayCount, filteredQuotes.length)} of ${filteredQuotes.length} quotes`;
-        
-        document.getElementById('loadMore').style.display = 
-            displayCount >= filteredQuotes.length ? 'none' : 'block';
-    }
-
-    function loadMoreQuotes() {
-        displayCount += 24;
-        renderGrid();
-    }
-
-    function randomSpotlight() {
-        const q = getRandomQuote(activeFilter);
-        const text = document.getElementById('spotText');
-        const author = document.getElementById('spotAuthor');
-        const meta = document.getElementById('spotMeta');
-        
-        text.classList.add('fading');
-        author.classList.add('fading');
-        meta.classList.add('fading');
-        
-        setTimeout(() => {
-            text.textContent = '"' + q.q + '"';
-            author.textContent = '— ' + q.a.toUpperCase();
-            meta.textContent = q.era + ' · ' + q.civ;
-            text.classList.remove('fading');
-            author.classList.remove('fading');
-            meta.classList.remove('fading');
-        }, 350);
-    }
-
-    // Mobile nav
-    document.addEventListener('DOMContentLoaded', () => {
-        const toggle = document.querySelector('.nav-toggle');
-        const links = document.querySelector('.nav-links');
-        if (toggle && links) toggle.addEventListener('click', () => links.classList.toggle('open'));
-        init();
-    });
-    </script>
+<script src="quotes-data.js"></script>
+<script>
+let activeFilter='all',displayCount=24,filteredQuotes=[];
+function init(){
+  const bar=document.getElementById('filterBar');
+  QUOTE_CATEGORIES.forEach(cat=>{
+    const btn=document.createElement('button');
+    btn.className='filter-btn'+(cat==='all'?' active':'');
+    btn.textContent=cat==='all'?'All':cat.charAt(0).toUpperCase()+cat.slice(1);
+    btn.onclick=()=>filterBy(cat);
+    bar.appendChild(btn);
+  });
+  randomSpotlight();filterBy('all');
+}
+function filterBy(cat){
+  activeFilter=cat;displayCount=24;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===cat));
+  filteredQuotes=cat==='all'?[...QUOTES]:QUOTES.filter(q=>q.cat.includes(cat));
+  filteredQuotes.sort(()=>Math.random()-0.5);
+  renderGrid();
+}
+function renderGrid(){
+  const grid=document.getElementById('quotesGrid');
+  const showing=filteredQuotes.slice(0,displayCount);
+  grid.innerHTML=showing.map(q=>'<div class="quote-card"><div class="qt">\u201C'+q.q+'\u201D</div><div class="qa">\u2014 '+q.a+'</div><div class="qe">'+q.era+' \u00B7 '+q.civ+'</div><div class="cats">'+q.cat.map(c=>'<span class="cat-tag">'+c+'</span>').join('')+'</div></div>').join('');
+  document.getElementById('quoteCount').textContent='Showing '+Math.min(displayCount,filteredQuotes.length)+' of '+filteredQuotes.length+' quotes';
+  document.getElementById('loadMore').style.display=displayCount>=filteredQuotes.length?'none':'block';
+}
+function loadMoreQuotes(){displayCount+=24;renderGrid();}
+function randomSpotlight(){
+  const q=getRandomQuote(activeFilter);
+  document.getElementById('spotText').textContent='\u201C'+q.q+'\u201D';
+  document.getElementById('spotAuthor').textContent='\u2014 '+q.a.toUpperCase();
+  document.getElementById('spotMeta').textContent=q.era+' \u00B7 '+q.civ;
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const toggle=document.querySelector('.nav-toggle');
+  const links=document.querySelector('.nav-links');
+  if(toggle&&links)toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  init();
+});
+</script>
 </body>
 </html>

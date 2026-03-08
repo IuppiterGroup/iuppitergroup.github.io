@@ -1,175 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iuppiter Group — Research · Software · Strategy</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iuppiter Group — Research. Software. Strategy.</title>
+  <meta name="description" content="Iuppiter Group is a research and consulting firm specializing in finance, science, and strategic analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <span class="logo-icon">⚡</span>
-                <span class="logo-text">IUPPITER GROUP</span>
-            </a>
-            <button class="nav-toggle" aria-label="Menu">☰</button>
-            <ul class="nav-links">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="research.html">Research</a></li>
-                <li><a href="software.html">Software & Tools</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="quotes.html">Wisdom</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero roman-pattern-bg">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <div class="hero-title-wrapper">
-                <h1 class="hero-title">IUPPITER GROUP</h1>
-            </div>
-            <p class="hero-subtitle">Research · Software · Strategy</p>
-            <p class="hero-motto">Faber est suae quisque fortunae</p>
-            <p class="hero-desc">Independent research in finance and science. Tools built for serious analysts. Games forged in the fires of history.</p>
-            <div class="hero-cta">
-                <a href="research.html" class="btn btn-primary">Explore Research</a>
-                <a href="software.html" class="btn btn-secondary">Browse Tools</a>
-                <a href="quotes.html" class="btn btn-red">Wisdom of the Ages</a>
-            </div>
-        </div>
-        <div class="hero-particles" id="particles"></div>
-    </section>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">IUPPITER <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="quotes.html">Wisdom</a></li><li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Stats Bar -->
-    <section class="stats-bar">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-num">6+</div>
-                    <div class="stat-label">Research Papers</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-num">5</div>
-                    <div class="stat-label">Software Tools</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-num">500+</div>
-                    <div class="stat-label">Historical Quotes</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-num">∞</div>
-                    <div class="stat-label">Ambition</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<header class="hero">
+  <div class="container">
+    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
+    <h1 class="hero-tagline"><em>Research.</em> Software. Strategy.</h1>
+    <p class="hero-sub">Iuppiter Group is a research and consulting firm delivering rigorous analysis in finance, science, and strategic advisory.</p>
+    <a href="research.html" class="hero-cta">Explore Our Research</a>
+  </div>
+</header>
 
-    <!-- Featured Sections -->
-    <section class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>WHAT WE BUILD</h2>
-                <p>Knowledge, tools, and experiences for the serious mind</p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card" onclick="window.location='research.html'">
-                    <div class="feature-icon">📜</div>
-                    <h3>Research</h3>
-                    <p>PhD-level papers in antimatter physics, stellar engineering, and quantitative finance. Dividend studies, RSI backtests, and more.</p>
-                    <span class="feature-link">View Papers →</span>
-                </div>
-                <div class="feature-card" onclick="window.location='software.html'">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>Software & Tools</h3>
-                    <p>Professional-grade financial tools. DCF modeler with Monte Carlo simulation, portfolio tracker, SEC filing analyzer, and trading backtester.</p>
-                    <span class="feature-link">Browse Tools →</span>
-                </div>
-                <div class="feature-card" onclick="window.location='games.html'">
-                    <div class="feature-icon">🏛️</div>
-                    <h3>Games</h3>
-                    <p>Strategy games rooted in history. Descent of Rome — an Isaac-style roguelike set in the fall of the Roman Empire.</p>
-                    <span class="feature-link">Play Now →</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FEATURED RESEARCH -->
+<section>
+  <div class="container">
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Featured Research</h2>
+    <p class="section-subtitle">Recent publications from our finance and science divisions</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-category">Finance</div>
+        <h3>DCF Model</h3>
+        <p>A comprehensive discounted cash-flow framework for equity valuation with scenario analysis.</p>
+        <div class="card-price">$15</div>
+        <a href="research.html" class="btn">Learn More</a>
+      </div>
+      <div class="card">
+        <div class="card-category">Science</div>
+        <h3>Antimatter Report</h3>
+        <p>An in-depth examination of antimatter production, containment, and potential applications.</p>
+        <div class="card-price free">Free</div>
+        <a href="research.html" class="btn">Read Paper</a>
+      </div>
+      <div class="card">
+        <div class="card-category">Finance</div>
+        <h3>RSI Study</h3>
+        <p>Statistical analysis of relative strength index signals and their predictive reliability across market regimes.</p>
+        <div class="card-price free">Free</div>
+        <a href="research.html" class="btn">Read Paper</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Quote Widget Preview -->
-    <section class="quote-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>WISDOM OF THE AGES</h2>
-                <p>500+ quotes from history's greatest minds</p>
-            </div>
-            <div class="quote-widget">
-                <div class="quote-mark">"</div>
-                <div class="quote-text" id="quoteText">Veni, vidi, vici.</div>
-                <div class="quote-author" id="quoteAuthor">— JULIUS CAESAR</div>
-                <div class="quote-era" id="quoteEra">100–44 BC · Roman Republic</div>
-                <div class="quote-controls">
-                    <button class="quote-btn" onclick="nextQuote()">Next Wisdom →</button>
-                    <a href="quotes.html" class="quote-btn">Full Collection →</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FEATURED SOFTWARE -->
+<section>
+  <div class="container">
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Software</h2>
+    <p class="section-subtitle">Professional-grade tools for analysts and portfolio managers</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-category">Tool</div>
+        <h3>DCF Modeler</h3>
+        <p>Bear/Base/Bull scenario modeling with integrated Monte Carlo simulation.</p>
+        <div class="card-price">$15</div>
+        <a href="software.html" class="btn">Details</a>
+      </div>
+      <div class="card">
+        <div class="card-category">Tool</div>
+        <h3>SEC Filing Analyzer</h3>
+        <p>Automated analysis of SEC filings — extract key metrics, flag anomalies, save hours.</p>
+        <div class="card-price">$25</div>
+        <a href="software.html" class="btn">Details</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Highlight / CTA -->
-    <section class="highlight">
-        <div class="container">
-            <div class="highlight-inner">
-                <span class="eagle-emblem">🦅</span>
-                <h2>Built for Builders</h2>
-                <p>Iuppiter Group produces research and tools for people who think seriously about markets, science, and strategy. No fluff. No subscriptions. One-time purchases, open papers, and software that works.</p>
-            </div>
-        </div>
-    </section>
+<!-- WISDOM OF THE AGES -->
+<section>
+  <div class="container">
+    <div class="gold-rule"></div>
+    <h2 class="section-title">Wisdom of the Ages</h2>
+    <p class="section-subtitle" style="font-size:0.95rem;color:var(--text-dim);">500+ quotes from history's greatest leaders, warriors, and philosophers</p>
+    <div style="max-width:650px;margin:0 auto;text-align:center;padding:40px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;">
+      <div style="font-family:var(--font-heading);font-size:3rem;color:var(--gold-dim);line-height:1;margin-bottom:-8px;">"</div>
+      <p id="quoteText" style="font-family:var(--font-heading);font-size:1.3rem;color:var(--cream);line-height:1.5;margin-bottom:16px;">Veni, vidi, vici.</p>
+      <p id="quoteAuthor" style="font-size:0.82rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">— JULIUS CAESAR</p>
+      <p id="quoteEra" style="font-size:0.75rem;color:var(--text-dim);margin-bottom:24px;">100–44 BC · Roman Republic</p>
+      <button class="btn" onclick="nextQuote()" style="margin-right:8px;">Next Wisdom →</button>
+      <a href="quotes.html" class="btn">Full Collection →</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>Iuppiter Group</h4>
-                    <p class="footer-tagline">Sic parvis magna.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="research.html">Research</a></li>
-                        <li><a href="software.html">Software</a></li>
-                        <li><a href="games.html">Games</a></li>
-                        <li><a href="quotes.html">Wisdom</a></li>
-                        <li><a href="about.html">About</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="tos.html">Terms of Service</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="https://x.com/juliuscaeser420" target="_blank">𝕏 / Twitter</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Iuppiter Group. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="about.html">About</a><a href="quotes.html">Wisdom</a><a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 Iuppiter Group. All rights reserved.</p>
+  </div>
+</footer>
 
-    <script src="quotes-data.js"></script>
-    <script src="main.js"></script>
+<script src="quotes-data.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
+
+
