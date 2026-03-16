@@ -1,2 +1,2 @@
-# iuppitergroup.github.io
-Iuppiter Group - Research and Software
+# luppitergroup.github.io
+luppiter Group - Research and Software
