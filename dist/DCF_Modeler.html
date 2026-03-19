@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCF Modeler — Iuppiter Group</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2332;
+    --border: #2a3444;
+    --gold: #d4a843;
+    --gold-dim: #8b7230;
+    --green: #22c55e;
+    --green-dim: #166534;
+    --red: #ef4444;
+    --red-dim: #991b1b;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --orange: #f97316;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #111827 0%, #1a1a2e 50%, #16213e 100%);
+    border-bottom: 1px solid var(--gold-dim);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--gold); letter-spacing: -0.5px; }
+  .header h1 span { color: var(--text-dim); font-weight: 300; }
+  .header .badge {
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    color: #000; padding: 4px 12px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  .container {
+    max-width: 1700px; margin: 0 auto; padding: 20px;
+    display: grid; grid-template-columns: 360px 1fr; gap: 20px;
+  }
+
+  .panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px;
+  }
+
+  .panel h2 {
+    font-size: 12px; font-weight: 600; color: var(--gold);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+
+  .input-group { margin-bottom: 12px; }
+
+  .input-group label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--text-dim); margin-bottom: 4px; font-weight: 500;
+  }
+
+  .input-group label .value {
+    font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 12px; font-weight: 500;
+  }
+
+  input[type="number"], input[type="text"], select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 5px; padding: 8px 10px; color: var(--text);
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none;
+    transition: border-color 0.2s;
+  }
+
+  select { cursor: pointer; }
+  input:focus, select:focus { border-color: var(--gold); }
+
+  input[type="range"] {
+    width: 100%; -webkit-appearance: none; appearance: none;
+    height: 5px; background: var(--surface2); border-radius: 3px; outline: none; margin-top: 3px;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 16px; height: 16px;
+    background: var(--gold); border-radius: 50%; cursor: pointer;
+    box-shadow: 0 0 6px rgba(212,168,67,0.4);
+  }
+
+  .row { display: flex; gap: 8px; }
+  .row > * { flex: 1; }
+
+  .btn {
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    color: #000; border: none; padding: 8px 16px; border-radius: 5px;
+    font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+  }
+
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(212,168,67,0.3); }
+  .btn-sm { padding: 5px 12px; font-size: 11px; }
+
+  .right-area { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Scenario Cards */
+  .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  .scenario-card {
+    background: var(--surface); border: 2px solid var(--border);
+    border-radius: 10px; padding: 16px; text-align: center; transition: all 0.3s;
+  }
+
+  .scenario-card.bear { border-color: var(--red-dim); }
+  .scenario-card.base { border-color: var(--gold-dim); }
+  .scenario-card.bull { border-color: var(--green-dim); }
+
+  .scenario-card .scenario-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 6px; font-weight: 600;
+  }
+
+  .scenario-card.bear .scenario-label { color: var(--red); }
+  .scenario-card.base .scenario-label { color: var(--gold); }
+  .scenario-card.bull .scenario-label { color: var(--green); }
+
+  .scenario-card .price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 32px; font-weight: 700; margin-bottom: 4px;
+  }
+
+  .scenario-card.bear .price { color: var(--red); }
+  .scenario-card.base .price { color: var(--gold); }
+  .scenario-card.bull .price { color: var(--green); }
+
+  .scenario-card .upside-label { font-size: 12px; font-weight: 500; }
+  .scenario-card .details { font-size: 10px; color: var(--text-muted); margin-top: 8px; line-height: 1.6; }
+
+  /* Summary row */
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+
+  .summary-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px; text-align: center;
+  }
+
+  .summary-card .s-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+  .summary-card .s-value {
+    font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700;
+    color: var(--text); margin-top: 4px;
+  }
+
+  /* Charts */
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .chart-container {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px;
+  }
+
+  .chart-container h3 {
+    font-size: 11px; color: var(--text-dim); font-weight: 600;
+    margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  canvas { width: 100% !important; height: 240px !important; }
+
+  /* Tables */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  }
+
+  .data-table th {
+    background: var(--surface2); padding: 7px 8px; font-weight: 600;
+    color: var(--gold); border: 1px solid var(--border); font-size: 10px; text-align: right;
+  }
+
+  .data-table th:first-child { text-align: left; }
+
+  .data-table td {
+    padding: 6px 8px; text-align: right; border: 1px solid var(--border);
+  }
+
+  .data-table td:first-child { text-align: left; color: var(--text-dim); font-weight: 500; }
+  .data-table tr:last-child { font-weight: 700; color: var(--gold); }
+  .data-table tr:hover td { background: var(--surface2); }
+
+  .sensitivity-table {
+    width: 100%; border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  }
+
+  .sensitivity-table th {
+    background: var(--surface2); padding: 6px 8px; font-weight: 600;
+    color: var(--gold); border: 1px solid var(--border); font-size: 10px;
+  }
+
+  .sensitivity-table td {
+    padding: 6px 8px; text-align: center; border: 1px solid var(--border); transition: all 0.2s;
+  }
+
+  .sensitivity-table td.current { background: var(--gold); color: #000; font-weight: 700; }
+
+  .mc-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 10px; }
+  .mc-stat { text-align: center; padding: 6px; background: var(--surface2); border-radius: 5px; }
+  .mc-stat .mc-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .mc-stat .mc-value { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text); margin-top: 2px; }
+
+  .full-width { grid-column: 1 / -1; }
+
+  .export-bar { display: flex; gap: 8px; justify-content: flex-end; padding: 2px 0; }
+
+  .tab-row { display: flex; gap: 2px; margin-bottom: 12px; }
+  .tab {
+    padding: 6px 14px; border-radius: 5px 5px 0 0; cursor: pointer;
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    background: var(--surface2); border: 1px solid var(--border); border-bottom: none;
+    transition: all 0.2s;
+  }
+  .tab.active { color: var(--gold); background: var(--surface); }
+
+  @media (max-width: 1300px) {
+    .container { grid-template-columns: 1fr; }
+    .scenario-grid { grid-template-columns: 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏛️ <span>DCF Modeler v2</span></h1>
+  <div class="badge">Iuppiter Group</div>
+</div>
+
+<div class="container">
+  <!-- LEFT PANEL -->
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    
+    <div class="panel">
+      <h2>Company</h2>
+      <div class="row" style="margin-bottom:12px;">
+        <div class="input-group" style="margin-bottom:0">
+          <label>Ticker</label>
+          <input type="text" id="ticker" placeholder="AAPL" value="AAPL" style="text-transform:uppercase;font-weight:600;">
+        </div>
+        <div class="input-group" style="margin-bottom:0">
+          <label>Current Price</label>
+          <input type="number" id="currentPrice" value="175" step="0.01">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group">
+          <label>Shares Out (M)</label>
+          <input type="number" id="sharesOut" value="15500" step="100">
+        </div>
+        <div class="input-group">
+          <label>Net Debt ($M)</label>
+          <input type="number" id="netDebt" value="50000" step="1000">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Metric Basis</label>
+        <select id="metricBasis">
+          <option value="fcf_total">Total FCF ($M)</option>
+          <option value="fcf_per_share">FCF / Share</option>
+          <option value="eps">EPS (Earnings Per Share)</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Current <span id="metricLabel">FCF ($M)</span> <span class="value" id="metricDisplay"></span></label>
+        <input type="number" id="metricValue" value="100000" step="100">
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Base Case Assumptions</h2>
+      <div class="input-group">
+        <label>Growth Rate (Yr 1) <span class="value" id="growthVal">8.0%</span></label>
+        <input type="range" id="growthRate" min="-10" max="50" step="0.5" value="8">
+      </div>
+      <div class="input-group">
+        <label>Growth Decay / Year <span class="value" id="decayVal">10%</span></label>
+        <input type="range" id="growthDecay" min="0" max="50" step="1" value="10">
+      </div>
+      <div class="input-group">
+        <label>Terminal Multiple <span class="value" id="termMultVal">15.0x</span></label>
+        <input type="range" id="termMultiple" min="5" max="40" step="0.5" value="15">
+      </div>
+      <div class="input-group">
+        <label>Discount Rate (WACC) <span class="value" id="waccVal">10.0%</span></label>
+        <input type="range" id="wacc" min="5" max="20" step="0.25" value="10">
+      </div>
+      <div class="input-group">
+        <label>Annual Buyback % <span class="value" id="buybackVal">2.0%</span></label>
+        <input type="range" id="buybackRate" min="0" max="10" step="0.25" value="2">
+      </div>
+      
+      <div class="input-group">
+        <label>Projection Years <span class="value" id="yearsVal">10</span></label>
+        <input type="range" id="projYears" min="3" max="20" step="1" value="10">
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Scenario Offsets</h2>
+      <p style="font-size:10px;color:var(--text-muted);margin-bottom:12px;">Bear/Bull auto-computed from base ± these offsets</p>
+      <div class="row">
+        <div class="input-group">
+          <label>Growth ±</label>
+          <input type="number" id="scenGrowthOff" value="3" step="0.5" style="font-size:12px;">
+        </div>
+        <div class="input-group">
+          <label>Multiple ±</label>
+          <input type="number" id="scenMultOff" value="3" step="0.5" style="font-size:12px;">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group">
+          <label>WACC ±</label>
+          <input type="number" id="scenWaccOff" value="1.5" step="0.25" style="font-size:12px;">
+        </div>
+        <div class="input-group">
+          <label>Buyback ±</label>
+          <input type="number" id="scenBuybackOff" value="1" step="0.25" style="font-size:12px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="export-bar">
+        <button class="btn btn-sm" onclick="runMonteCarlo()">🎲 Monte Carlo</button>
+        <button class="btn btn-sm" onclick="exportCSV()">📊 CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT AREA -->
+  <div class="right-area">
+    
+    <!-- Scenario Cards -->
+    <div class="scenario-grid">
+      <div class="scenario-card bear" id="bearCard">
+        <div class="scenario-label">🐻 Bear Case</div>
+        <div class="price" id="bearPrice">$0</div>
+        <div class="upside-label" id="bearUpside" style="color:var(--red)">0%</div>
+        <div class="details" id="bearDetails"></div>
+      </div>
+      <div class="scenario-card base" id="baseCard">
+        <div class="scenario-label">⚖️ Base Case</div>
+        <div class="price" id="basePrice">$0</div>
+        <div class="upside-label" id="baseUpside" style="color:var(--gold)">0%</div>
+        <div class="details" id="baseDetails"></div>
+      </div>
+      <div class="scenario-card bull" id="bullCard">
+        <div class="scenario-label">🐂 Bull Case</div>
+        <div class="price" id="bullPrice">$0</div>
+        <div class="upside-label" id="bullUpside" style="color:var(--green)">0%</div>
+        <div class="details" id="bullDetails"></div>
+      </div>
+    </div>
+
+    <!-- Summary Row -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="s-label">Current Price</div>
+        <div class="s-value" id="sumPrice">$0</div>
+      </div>
+      <div class="summary-card">
+        <div class="s-label">EV (Base)</div>
+        <div class="s-value" id="sumEV">$0</div>
+      </div>
+      <div class="summary-card">
+        <div class="s-label">Terminal Yr <span id="metricName2">FCF</span>/S</div>
+        <div class="s-value" id="sumTermFCFS">$0</div>
+      </div>
+      <div class="summary-card">
+        <div class="s-label">Terminal Shares (M)</div>
+        <div class="s-value" id="sumTermShares">0</div>
+      </div>
+      <div class="summary-card">
+        <div class="s-label">Implied Current Mult</div>
+        <div class="s-value" id="sumCurrMult">0x</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+      <div class="chart-container">
+        <h3><span id="metricName3">FCF</span> / Share Progression</h3>
+        <canvas id="fcfChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Share Count Over Time</h3>
+        <canvas id="sharesChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Sensitivity — Growth vs Exit Multiple</h3>
+        <div id="sensitivityTable"></div>
+      </div>
+      <div class="chart-container">
+        <h3>Monte Carlo Distribution</h3>
+        <canvas id="mcChart"></canvas>
+        <div class="mc-stats" id="mcStats" style="display:none;">
+          <div class="mc-stat"><div class="mc-label">5th</div><div class="mc-value" id="mc5">—</div></div>
+          <div class="mc-stat"><div class="mc-label">25th</div><div class="mc-value" id="mc25">—</div></div>
+          <div class="mc-stat"><div class="mc-label">Median</div><div class="mc-value" id="mc50">—</div></div>
+          <div class="mc-stat"><div class="mc-label">75th</div><div class="mc-value" id="mc75">—</div></div>
+          <div class="mc-stat"><div class="mc-label">95th</div><div class="mc-value" id="mc95">—</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Table -->
+    <div class="panel full-width">
+      <h2>Base Case Projections</h2>
+      <div id="projTable"></div>
+    </div>
+
+    <!-- Equation Display -->
+    <div class="panel full-width">
+      <h2>DCF Equation <span style="float:right"><button class="btn btn-sm" onclick="copyEquation()">📋 Copy</button></span></h2>
+      <pre id="equationDisplay" style="
+        background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+        padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+        line-height: 1.8; color: var(--text); overflow-x: auto; white-space: pre-wrap;
+        user-select: all; cursor: text; max-height: 600px; overflow-y: auto;
+      "></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Mini Chart Library ──
+class MiniChart {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.resize();
+    window.addEventListener('resize', () => { this.resize(); updateModel(); });
+  }
+  resize() {
+    const rect = this.canvas.parentElement.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    this.canvas.width = (rect.width - 32) * dpr;
+    this.canvas.height = 240 * dpr;
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.w = rect.width - 32;
+    this.h = 240;
+  }
+  clear() { this.ctx.clearRect(0, 0, this.w * 3, this.h * 3); }
+
+  drawGroupedBar(datasets, labels) {
+    this.clear();
+    const ctx = this.ctx;
+    const pad = { top: 24, bottom: 36, left: 56, right: 16 };
+    const cW = this.w - pad.left - pad.right;
+    const cH = this.h - pad.top - pad.bottom;
+    const n = labels.length;
+    const g = datasets.length;
+    const allVals = datasets.flatMap(d => d.data);
+    const maxV = Math.max(...allVals) * 1.15;
+    const groupW = cW / n;
+    const barW = (groupW * 0.75) / g;
+    const colors = ['#ef4444', '#d4a843', '#22c55e'];
+
+    // Grid
+    ctx.strokeStyle = '#2a3444'; ctx.lineWidth = 0.5;
+    for (let i = 0; i <= 4; i++) {
+      const y = pad.top + (cH / 4) * i;
+      ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(this.w - pad.right, y); ctx.stroke();
+      ctx.fillStyle = '#64748b'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'right';
+      ctx.fillText('$' + ((maxV - maxV / 4 * i)).toFixed(1), pad.left - 6, y + 4);
+    }
+
+    labels.forEach((lbl, i) => {
+      const gx = pad.left + i * groupW + groupW * 0.125;
+      datasets.forEach((ds, j) => {
+        const x = gx + j * barW;
+        const barH = (ds.data[i] / maxV) * cH;
+        const y = pad.top + cH - barH;
+        ctx.fillStyle = colors[j] + 'cc';
+        ctx.beginPath(); ctx.roundRect(x, y, barW - 2, barH, [3, 3, 0, 0]); ctx.fill();
+      });
+      ctx.fillStyle = '#94a3b8'; ctx.font = '9px Inter'; ctx.textAlign = 'center';
+      ctx.fillText(lbl, pad.left + i * groupW + groupW / 2, this.h - pad.bottom + 14);
+    });
+
+    // Legend
+    datasets.forEach((ds, j) => {
+      const lx = pad.left + j * 80;
+      ctx.fillStyle = colors[j]; ctx.fillRect(lx, 4, 10, 10);
+      ctx.fillStyle = '#94a3b8'; ctx.font = '10px Inter'; ctx.textAlign = 'left';
+      ctx.fillText(ds.label, lx + 14, 13);
+    });
+  }
+
+  drawLine(datasets, labels) {
+    this.clear();
+    const ctx = this.ctx;
+    const pad = { top: 24, bottom: 36, left: 56, right: 16 };
+    const cW = this.w - pad.left - pad.right;
+    const cH = this.h - pad.top - pad.bottom;
+    const allVals = datasets.flatMap(d => d.data);
+    const minV = Math.min(...allVals) * 0.95;
+    const maxV = Math.max(...allVals) * 1.05;
+    const range = maxV - minV || 1;
+    const colors = ['#ef4444', '#d4a843', '#22c55e'];
+
+    // Grid
+    ctx.strokeStyle = '#2a3444'; ctx.lineWidth = 0.5;
+    for (let i = 0; i <= 4; i++) {
+      const y = pad.top + (cH / 4) * i;
+      ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(this.w - pad.right, y); ctx.stroke();
+      ctx.fillStyle = '#64748b'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'right';
+      const val = maxV - (range / 4) * i;
+      ctx.fillText(fmtCompact(val), pad.left - 6, y + 4);
+    }
+
+    datasets.forEach((ds, j) => {
+      ctx.strokeStyle = colors[j]; ctx.lineWidth = 2; ctx.setLineDash(j === 1 ? [] : [4, 3]);
+      ctx.beginPath();
+      ds.data.forEach((v, i) => {
+        const x = pad.left + (i / (labels.length - 1)) * cW;
+        const y = pad.top + cH - ((v - minV) / range) * cH;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    labels.forEach((lbl, i) => {
+      if (i % 2 === 0 || i === labels.length - 1) {
+        ctx.fillStyle = '#94a3b8'; ctx.font = '9px Inter'; ctx.textAlign = 'center';
+        ctx.fillText(lbl, pad.left + (i / (labels.length - 1)) * cW, this.h - pad.bottom + 14);
+      }
+    });
+
+    // Legend
+    datasets.forEach((ds, j) => {
+      const lx = pad.left + j * 80;
+      ctx.fillStyle = colors[j]; ctx.fillRect(lx, 4, 10, 10);
+      ctx.fillStyle = '#94a3b8'; ctx.font = '10px Inter'; ctx.textAlign = 'left';
+      ctx.fillText(ds.label, lx + 14, 13);
+    });
+  }
+
+  drawHistogram(data, bins = 40) {
+    this.clear();
+    const ctx = this.ctx;
+    const pad = { top: 20, bottom: 36, left: 56, right: 16 };
+    const cW = this.w - pad.left - pad.right;
+    const cH = this.h - pad.top - pad.bottom;
+    const min = Math.min(...data); const max = Math.max(...data);
+    const binW = (max - min) / bins;
+    const hist = new Array(bins).fill(0);
+    data.forEach(v => { const idx = Math.min(Math.floor((v - min) / binW), bins - 1); hist[idx]++; });
+    const maxC = Math.max(...hist);
+    const barW = cW / bins;
+    const curPrice = parseFloat(document.getElementById('currentPrice').value);
+
+    hist.forEach((c, i) => {
+      const x = pad.left + i * barW;
+      const bH = (c / maxC) * cH;
+      const y = pad.top + cH - bH;
+      const midV = min + (i + 0.5) * binW;
+      ctx.fillStyle = midV >= curPrice ? '#22c55e44' : '#ef444444';
+      ctx.strokeStyle = midV >= curPrice ? '#22c55e' : '#ef4444';
+      ctx.lineWidth = 1;
+      ctx.fillRect(x, y, barW - 1, bH);
+      ctx.strokeRect(x, y, barW - 1, bH);
+    });
+
+    const priceX = pad.left + ((curPrice - min) / (max - min)) * cW;
+    if (priceX > pad.left && priceX < this.w - pad.right) {
+      ctx.strokeStyle = '#d4a843'; ctx.lineWidth = 2; ctx.setLineDash([5, 3]);
+      ctx.beginPath(); ctx.moveTo(priceX, pad.top); ctx.lineTo(priceX, pad.top + cH); ctx.stroke();
+      ctx.setLineDash([]); ctx.fillStyle = '#d4a843'; ctx.font = '10px Inter'; ctx.textAlign = 'center';
+      ctx.fillText('Current', priceX, pad.top - 4);
+    }
+
+    ctx.fillStyle = '#64748b'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'center';
+    for (let i = 0; i <= 4; i++) {
+      const val = min + (max - min) * (i / 4);
+      ctx.fillText('$' + val.toFixed(0), pad.left + cW * (i / 4), this.h - pad.bottom + 14);
+    }
+  }
+}
+
+// ── Helpers ──
+function fmtCompact(n) {
+  const a = Math.abs(n);
+  if (a >= 1e12) return '$' + (n/1e12).toFixed(1) + 'T';
+  if (a >= 1e9) return '$' + (n/1e9).toFixed(1) + 'B';
+  if (a >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
+  if (a >= 1e3) return '$' + (n/1e3).toFixed(1) + 'K';
+  return '$' + n.toFixed(0);
+}
+
+function fmt(n, d = 2) { return n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+function randn() { let u=0,v=0; while(!u) u=Math.random(); while(!v) v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+
+// ── Charts ──
+const fcfChart = new MiniChart(document.getElementById('fcfChart'));
+const sharesChart = new MiniChart(document.getElementById('sharesChart'));
+const mcChart = new MiniChart(document.getElementById('mcChart'));
+
+// ── Core DCF ──
+function calcDCF(p) {
+  const basis = document.getElementById('metricBasis').value;
+  let totalMetric, perShare;
+  const shares0 = p.shares;
+
+  if (basis === 'fcf_total') {
+    totalMetric = p.metric; // $M
+    perShare = totalMetric * 1e6 / (shares0 * 1e6);
+  } else {
+    perShare = p.metric;
+    totalMetric = perShare * shares0; // $M
+  }
+
+  const projections = [];
+  let currentTotal = totalMetric;
+  let currentGrowth = p.growth;
+  let currentShares = shares0;
+  let cumPV = 0;
+
+  for (let yr = 1; yr <= p.years; yr++) {
+    currentTotal *= (1 + currentGrowth / 100);
+    currentShares *= (1 - p.buyback / 100);
+
+    const currentPS = currentTotal * 1e6 / (currentShares * 1e6);
+    const df = Math.pow(1 + p.wacc / 100, yr);
+    const pvPS = currentPS / df;
+    cumPV += pvPS;
+
+    projections.push({
+      year: yr, total: currentTotal, perShare: currentPS,
+      shares: currentShares, growth: currentGrowth, df, pvPS, cumPV
+    });
+
+    currentGrowth *= (1 - p.decay / 100);
+    if (currentGrowth < 0) currentGrowth = 0;
+  }
+
+  const last = projections[projections.length - 1];
+  const terminalValuePS = last.perShare * p.termMult;
+  const pvTerminalPS = terminalValuePS / Math.pow(1 + p.wacc / 100, p.years);
+  const intrinsicPS = cumPV + pvTerminalPS;
+
+  const terminalTotal = last.total * p.termMult;
+  const evTotal = (cumPV * last.shares * 1e6 + terminalTotal * 1e6) ; // rough EV in $
+
+  return { projections, cumPV, pvTerminalPS, intrinsicPS, terminalValuePS, lastShares: last.shares, lastPS: last.perShare, lastTotal: last.total, evTotal };
+}
+
+function getParams() {
+  return {
+    metric: parseFloat(document.getElementById('metricValue').value),
+    growth: parseFloat(document.getElementById('growthRate').value),
+    decay: parseFloat(document.getElementById('growthDecay').value),
+    termMult: parseFloat(document.getElementById('termMultiple').value),
+    wacc: parseFloat(document.getElementById('wacc').value),
+    buyback: parseFloat(document.getElementById('buybackRate').value),
+    marginBps: 0,
+    years: parseInt(document.getElementById('projYears').value),
+    shares: parseFloat(document.getElementById('sharesOut').value),
+    netDebt: parseFloat(document.getElementById('netDebt').value)
+  };
+}
+
+function getScenarios() {
+  const base = getParams();
+  const gOff = parseFloat(document.getElementById('scenGrowthOff').value);
+  const mOff = parseFloat(document.getElementById('scenMultOff').value);
+  const wOff = parseFloat(document.getElementById('scenWaccOff').value);
+  const bOff = parseFloat(document.getElementById('scenBuybackOff').value);
+
+  const bear = { ...base, growth: base.growth - gOff, termMult: base.termMult - mOff, wacc: base.wacc + wOff, buyback: Math.max(0, base.buyback - bOff) };
+  const bull = { ...base, growth: base.growth + gOff, termMult: base.termMult + mOff, wacc: Math.max(4, base.wacc - wOff), buyback: base.buyback + bOff };
+
+  return { bear, base, bull };
+}
+
+function updateModel() {
+  const price = parseFloat(document.getElementById('currentPrice').value);
+  const basis = document.getElementById('metricBasis').value;
+  const metricName = basis === 'eps' ? 'EPS' : 'FCF';
+
+  // Update labels
+  document.getElementById('metricLabel').textContent = basis === 'fcf_total' ? 'FCF ($M)' : basis === 'fcf_per_share' ? 'FCF/Share' : 'EPS';
+  document.getElementById('metricName2').textContent = metricName;
+  document.getElementById('metricName3').textContent = metricName;
+
+  // Update slider displays
+  const p = getParams();
+  document.getElementById('growthVal').textContent = p.growth.toFixed(1) + '%';
+  document.getElementById('decayVal').textContent = p.decay + '%';
+  document.getElementById('termMultVal').textContent = p.termMult.toFixed(1) + 'x';
+  document.getElementById('waccVal').textContent = p.wacc.toFixed(2) + '%';
+  document.getElementById('buybackVal').textContent = p.buyback.toFixed(2) + '%';
+  // margin expansion removed
+  document.getElementById('yearsVal').textContent = p.years;
+
+  // Scenarios
+  const scen = getScenarios();
+  const bearR = calcDCF(scen.bear);
+  const baseR = calcDCF(scen.base);
+  const bullR = calcDCF(scen.bull);
+
+  function setCard(prefix, result, params, color) {
+    const iv = result.intrinsicPS;
+    const upPct = ((iv - price) / price * 100);
+    document.getElementById(prefix + 'Price').textContent = '$' + fmt(iv);
+    const upEl = document.getElementById(prefix + 'Upside');
+    upEl.textContent = (upPct >= 0 ? '+' : '') + fmt(upPct, 1) + '%';
+    upEl.style.color = upPct >= 0 ? 'var(--green)' : 'var(--red)';
+    document.getElementById(prefix + 'Details').innerHTML =
+      `Growth: ${params.growth.toFixed(1)}% · WACC: ${params.wacc.toFixed(1)}%<br>` +
+      `Exit Multiple: ${params.termMult.toFixed(1)}x · Buyback: ${params.buyback.toFixed(1)}%<br>` +
+      `Terminal ${metricName}/S: $${fmt(result.lastPS)} · Shares: ${fmt(result.lastShares, 0)}M`;
+  }
+
+  setCard('bear', bearR, scen.bear, 'red');
+  setCard('base', baseR, scen.base, 'gold');
+  setCard('bull', bullR, scen.bull, 'green');
+
+  // Summary
+  document.getElementById('sumPrice').textContent = '$' + fmt(price);
+  document.getElementById('sumEV').textContent = fmtCompact(baseR.evTotal);
+  document.getElementById('sumTermFCFS').textContent = '$' + fmt(baseR.lastPS);
+  document.getElementById('sumTermShares').textContent = fmt(baseR.lastShares, 0);
+
+  const currentPS = basis === 'fcf_total' ? p.metric * 1e6 / (p.shares * 1e6) : p.metric;
+  document.getElementById('sumCurrMult').textContent = (price / currentPS).toFixed(1) + 'x';
+
+  // FCF/S Chart — grouped bar (bear/base/bull)
+  const labels = baseR.projections.map(p => 'Y' + p.year);
+  fcfChart.drawGroupedBar([
+    { label: 'Bear', data: bearR.projections.map(p => p.perShare) },
+    { label: 'Base', data: baseR.projections.map(p => p.perShare) },
+    { label: 'Bull', data: bullR.projections.map(p => p.perShare) }
+  ], labels);
+
+  // Shares Chart — line (bear/base/bull)
+  const shareLabels = ['Now', ...baseR.projections.map(p => 'Y' + p.year)];
+  sharesChart.drawLine([
+    { label: 'Bear', data: [p.shares, ...bearR.projections.map(p => p.shares)] },
+    { label: 'Base', data: [p.shares, ...baseR.projections.map(p => p.shares)] },
+    { label: 'Bull', data: [p.shares, ...bullR.projections.map(p => p.shares)] }
+  ], shareLabels);
+
+  // Sensitivity Table — Growth vs Exit Multiple
+  buildSensitivityTable(scen.base, price);
+
+  // Projection Table
+  buildProjectionTable(baseR, scen.base, metricName);
+
+  // Equation Display
+  document.getElementById('equationDisplay').textContent = buildEquation(baseR, scen.base, metricName);
+}
+
+function buildSensitivityTable(params, price) {
+  const gSteps = [-4, -2, 0, 2, 4].map(d => params.growth + d);
+  const mSteps = [-4, -2, 0, 2, 4].map(d => params.termMult + d);
+
+  let html = '<table class="sensitivity-table"><tr><th>Growth \\ Multiple</th>';
+  mSteps.forEach(m => html += `<th>${m.toFixed(1)}x</th>`);
+  html += '</tr>';
+
+  gSteps.forEach(g => {
+    html += `<tr><td style="text-align:left;font-weight:600;color:var(--gold)">${g.toFixed(1)}%</td>`;
+    mSteps.forEach(m => {
+      const r = calcDCF({ ...params, growth: g, termMult: m });
+      const iv = r.intrinsicPS;
+      const cur = Math.abs(g - params.growth) < 0.1 && Math.abs(m - params.termMult) < 0.1;
+      const col = iv > price ? 'color:var(--green)' : 'color:var(--red)';
+      html += `<td class="${cur ? 'current' : ''}" style="${cur ? '' : col}">$${fmt(iv)}</td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</table>';
+  document.getElementById('sensitivityTable').innerHTML = html;
+}
+
+function buildProjectionTable(result, params, metricName) {
+  const basis = document.getElementById('metricBasis').value;
+  let html = `<table class="data-table"><tr>
+    <th>Year</th><th>Growth</th><th>${metricName} ($M)</th><th>${metricName}/Share</th>
+    <th>Shares (M)</th><th>Disc. Factor</th><th>PV ${metricName}/S</th><th>Cum PV/S</th></tr>`;
+
+  result.projections.forEach(p => {
+    html += `<tr>
+      <td>Year ${p.year}</td><td>${p.growth.toFixed(1)}%</td>
+      <td>${fmt(p.total, 0)}</td><td>$${fmt(p.perShare)}</td>
+      <td>${fmt(p.shares, 0)}</td><td>${p.df.toFixed(3)}</td>
+      <td>$${fmt(p.pvPS)}</td><td>$${fmt(p.cumPV)}</td></tr>`;
+  });
+
+  html += `<tr>
+    <td>Terminal (${params.termMult.toFixed(1)}x)</td><td>—</td>
+    <td>—</td><td>$${fmt(result.terminalValuePS)}</td>
+    <td>${fmt(result.lastShares, 0)}</td><td>—</td>
+    <td>$${fmt(result.pvTerminalPS)}</td><td>$${fmt(result.intrinsicPS)}</td></tr></table>`;
+
+  document.getElementById('projTable').innerHTML = html;
+}
+
+function runMonteCarlo() {
+  const base = getParams();
+  const results = [];
+  const N = 2000;
+  for (let i = 0; i < N; i++) {
+    const p = {
+      ...base,
+      growth: base.growth + randn() * 4,
+      wacc: Math.max(4, base.wacc + randn() * 1.5),
+      termMult: Math.max(3, base.termMult + randn() * 3),
+      buyback: Math.max(0, base.buyback + randn() * 1),
+      marginBps: base.marginBps + randn() * 30
+    };
+    const r = calcDCF(p);
+    if (isFinite(r.intrinsicPS) && r.intrinsicPS > 0 && r.intrinsicPS < 100000) results.push(r.intrinsicPS);
+  }
+  results.sort((a, b) => a - b);
+  mcChart.drawHistogram(results);
+  const pct = p => results[Math.floor(results.length * p)];
+  document.getElementById('mc5').textContent = '$' + fmt(pct(0.05));
+  document.getElementById('mc25').textContent = '$' + fmt(pct(0.25));
+  document.getElementById('mc50').textContent = '$' + fmt(pct(0.50));
+  document.getElementById('mc75').textContent = '$' + fmt(pct(0.75));
+  document.getElementById('mc95').textContent = '$' + fmt(pct(0.95));
+  document.getElementById('mcStats').style.display = 'grid';
+}
+
+function buildEquation(result, params, metricName) {
+  const basis = document.getElementById('metricBasis').value;
+  const ticker = document.getElementById('ticker').value.toUpperCase() || 'STOCK';
+  const price = parseFloat(document.getElementById('currentPrice').value);
+
+  let perShare0;
+  if (basis === 'fcf_total') {
+    perShare0 = params.metric * 1e6 / (params.shares * 1e6);
+  } else {
+    perShare0 = params.metric;
+  }
+
+  let eq = '';
+  eq += `══════════════════════════════════════════════════════════════\n`;
+  eq += `  DCF VALUATION — ${ticker}  (${metricName}-based)\n`;
+  eq += `══════════════════════════════════════════════════════════════\n\n`;
+
+  eq += `INPUTS:\n`;
+  eq += `  Current Price         = $${fmt(price)}\n`;
+  eq += `  Current ${metricName.padEnd(14)} = $${fmt(perShare0)} /share`;
+  if (basis === 'fcf_total') eq += `  ($${fmt(params.metric, 0)}M total)`;
+  eq += `\n`;
+  eq += `  Shares Outstanding    = ${fmt(params.shares, 0)}M\n`;
+  eq += `  Net Debt              = $${fmt(params.netDebt, 0)}M\n`;
+  eq += `  Growth Rate (Yr 1)    = ${params.growth.toFixed(1)}%\n`;
+  eq += `  Growth Decay          = ${params.decay}% per year\n`;
+  eq += `  Terminal Multiple     = ${params.termMult.toFixed(1)}x\n`;
+  eq += `  Discount Rate (WACC)  = ${params.wacc.toFixed(2)}%\n`;
+  eq += `  Annual Buyback        = ${params.buyback.toFixed(2)}%\n`;
+  if (params.marginBps !== 0) eq += `  Margin Expansion      = ${params.marginBps} bps/yr\n`;
+  eq += `  Projection Years      = ${params.years}\n`;
+  eq += `\n`;
+
+  // General formula
+  eq += `GENERAL FORMULA:\n`;
+  eq += `  Intrinsic Value = Σ(PV of ${metricName}/Share) + PV of Terminal Value\n\n`;
+  eq += `  Where:\n`;
+  eq += `    ${metricName}_yr  = ${metricName}_(yr-1) × (1 + g_yr)`;
+  if (params.marginBps !== 0) eq += ` × (1 + margin_bps/10000)`;
+  eq += `\n`;
+  eq += `    Shares_yr = Shares_(yr-1) × (1 - buyback%)\n`;
+  eq += `    ${metricName}/S_yr = ${metricName}_yr / Shares_yr\n`;
+  eq += `    PV(${metricName}/S_yr) = ${metricName}/S_yr / (1 + WACC)^yr\n`;
+  eq += `    Terminal Value/S = ${metricName}/S_final × Exit Multiple\n`;
+  eq += `    PV(Terminal) = Terminal Value/S / (1 + WACC)^n\n`;
+  eq += `\n`;
+
+  // Year-by-year with numbers
+  eq += `YEAR-BY-YEAR COMPUTATION:\n`;
+  eq += `─────────────────────────────────────────────────────────────\n`;
+
+  let cumPV = 0;
+  result.projections.forEach(p => {
+    const prevPS = p.year === 1 ? perShare0 : result.projections[p.year - 2].perShare;
+    cumPV += p.pvPS;
+
+    eq += `\n  Year ${p.year}:  (g = ${p.growth.toFixed(2)}%)\n`;
+    eq += `    ${metricName} total  = $${fmt(result.projections[Math.max(0, p.year-2)].total || params.metric, 0)}M × ${(1 + p.growth/100).toFixed(4)}`;
+    if (params.marginBps !== 0) eq += ` × ${(1 + params.marginBps/10000).toFixed(4)}`;
+    eq += ` = $${fmt(p.total, 0)}M\n`;
+    eq += `    Shares     = ${fmt(p.year === 1 ? params.shares : result.projections[p.year-2].shares, 0)}M × ${(1 - params.buyback/100).toFixed(4)} = ${fmt(p.shares, 0)}M\n`;
+    eq += `    ${metricName}/Share  = $${fmt(p.total, 0)}M / ${fmt(p.shares, 0)}M = $${fmt(p.perShare)}\n`;
+    eq += `    PV         = $${fmt(p.perShare)} / (1 + ${(params.wacc/100).toFixed(4)})^${p.year} = $${fmt(p.perShare)} / ${p.df.toFixed(4)} = $${fmt(p.pvPS)}\n`;
+    eq += `    Cum PV     = $${fmt(cumPV)}\n`;
+  });
+
+  const last = result.projections[result.projections.length - 1];
+  eq += `\n─────────────────────────────────────────────────────────────\n`;
+  eq += `\nTERMINAL VALUE:\n`;
+  eq += `  Terminal ${metricName}/S  = $${fmt(last.perShare)} × ${params.termMult.toFixed(1)} = $${fmt(result.terminalValuePS)}\n`;
+  eq += `  PV(Terminal)     = $${fmt(result.terminalValuePS)} / (1 + ${(params.wacc/100).toFixed(4)})^${params.years}\n`;
+  eq += `                   = $${fmt(result.terminalValuePS)} / ${Math.pow(1 + params.wacc/100, params.years).toFixed(4)}\n`;
+  eq += `                   = $${fmt(result.pvTerminalPS)}\n`;
+
+  eq += `\nFINAL VALUATION:\n`;
+  eq += `  Sum of PV (${metricName}/S)  = $${fmt(result.cumPV)}\n`;
+  eq += `  PV of Terminal       = $${fmt(result.pvTerminalPS)}\n`;
+  eq += `  ─────────────────────────────\n`;
+  eq += `  Intrinsic Value/Share = $${fmt(result.cumPV)} + $${fmt(result.pvTerminalPS)} = $${fmt(result.intrinsicPS)}\n`;
+  eq += `\n`;
+
+  const upPct = ((result.intrinsicPS - price) / price * 100);
+  eq += `  Current Price    = $${fmt(price)}\n`;
+  eq += `  Intrinsic Value  = $${fmt(result.intrinsicPS)}\n`;
+  eq += `  Upside/Downside  = ${upPct >= 0 ? '+' : ''}${fmt(upPct, 1)}%\n`;
+  eq += `  Implied Current ${metricName} Multiple = ${(price / perShare0).toFixed(1)}x\n`;
+  eq += `\n══════════════════════════════════════════════════════════════\n`;
+
+  return eq;
+}
+
+function copyEquation() {
+  const text = document.getElementById('equationDisplay').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.panel:last-of-type .btn-sm');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+function exportCSV() {
+  const scen = getScenarios();
+  const baseR = calcDCF(scen.base);
+  const bearR = calcDCF(scen.bear);
+  const bullR = calcDCF(scen.bull);
+  const basis = document.getElementById('metricBasis').value;
+  const mn = basis === 'eps' ? 'EPS' : 'FCF';
+
+  let csv = `DCF Model — ${document.getElementById('ticker').value}\n\n`;
+  csv += `Scenario,Intrinsic Value,Growth,WACC,Exit Multiple,Buyback,Terminal ${mn}/S\n`;
+  csv += `Bear,$${fmt(bearR.intrinsicPS)},${scen.bear.growth.toFixed(1)}%,${scen.bear.wacc.toFixed(1)}%,${scen.bear.termMult.toFixed(1)}x,${scen.bear.buyback.toFixed(1)}%,$${fmt(bearR.lastPS)}\n`;
+  csv += `Base,$${fmt(baseR.intrinsicPS)},${scen.base.growth.toFixed(1)}%,${scen.base.wacc.toFixed(1)}%,${scen.base.termMult.toFixed(1)}x,${scen.base.buyback.toFixed(1)}%,$${fmt(baseR.lastPS)}\n`;
+  csv += `Bull,$${fmt(bullR.intrinsicPS)},${scen.bull.growth.toFixed(1)}%,${scen.bull.wacc.toFixed(1)}%,${scen.bull.termMult.toFixed(1)}x,${scen.bull.buyback.toFixed(1)}%,$${fmt(bullR.lastPS)}\n\n`;
+
+  csv += `Year,Growth,${mn} ($M),${mn}/Share,Shares (M),PV ${mn}/S,Cum PV/S\n`;
+  baseR.projections.forEach(p => {
+    csv += `${p.year},${p.growth.toFixed(2)}%,${p.total.toFixed(0)},${p.perShare.toFixed(2)},${p.shares.toFixed(0)},${p.pvPS.toFixed(2)},${p.cumPV.toFixed(2)}\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `DCF_${document.getElementById('ticker').value}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+// ── Init ──
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input', updateModel);
+  el.addEventListener('change', updateModel);
+});
+
+updateModel();
+</script>
+</body>
+</html>
