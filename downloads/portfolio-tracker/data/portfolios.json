@@ -1,0 +1,36 @@
+{
+  "portfolios": [
+    {
+      "id": "sample01",
+      "name": "Sample Portfolio",
+      "description": "Example portfolio — replace with your own positions",
+      "benchmark": "SPY",
+      "createdAt": 1741651200,
+      "positions": [
+        {
+          "ticker": "AAPL",
+          "shares": 50,
+          "avgEntry": 178.50,
+          "entryDate": "2026-01-15",
+          "target": 210.00,
+          "stop": 160.00,
+          "thesis": "iPhone cycle + services growth",
+          "sector": "Technology",
+          "notes": "Sample position — edit or delete"
+        },
+        {
+          "ticker": "XOM",
+          "shares": 30,
+          "avgEntry": 105.00,
+          "entryDate": "2026-01-15",
+          "target": 130.00,
+          "stop": 95.00,
+          "thesis": "Energy sector strength",
+          "sector": "Energy",
+          "notes": "Sample position — edit or delete"
+        }
+      ]
+    }
+  ],
+  "closedTrades": []
+}
