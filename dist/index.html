@@ -712,8 +712,8 @@ function renderHoldings() {
     const selected = S.selectedPosition && S.selectedPosition.ticker === p.ticker ? ' selected-row' : '';
     return `<tr class="pos-row${selected}" data-ticker="${p.ticker}" onclick="selectPosition('${p.ticker}')">
       <td class="ticker-cell">${p.ticker}</td>
-      <td>${p.shares}</td>
-      <td>$${p.avgEntry.toFixed(2)}</td>
+      <td class="edit-cell" data-field="shares" data-ticker="${p.ticker}" onclick="event.stopPropagation(); startEdit(this, '${p.ticker}', 'shares')" title="Click to edit shares">${p.shares}</td>
+      <td class="edit-cell" data-field="avgEntry" data-ticker="${p.ticker}" onclick="event.stopPropagation(); startEdit(this, '${p.ticker}', 'avgEntry')" title="Click to edit cost basis">$${p.avgEntry.toFixed(2)}</td>
       <td><span class="${changeClass}">$${p.livePrice > 0 ? p.livePrice.toFixed(2) : '—'}</span><br><span style="font-size:10px;color:var(--text-muted)">${p.changePct >= 0 ? '+' : ''}${p.changePct.toFixed(2)}%</span></td>
       <td>$${fmt(p.marketValue)}</td>
       <td>${p.weight.toFixed(1)}%</td>
@@ -745,7 +745,7 @@ function renderHoldings() {
       <table>
         <thead><tr>
           <th style="text-align:left">Ticker</th>
-          <th>Shares</th><th>Avg Entry</th><th>Live Price</th>
+          <th title="Click to edit">Shares ✏</th><th title="Click to edit">Avg Entry ✏</th><th>Live Price</th>
           <th>Mkt Value</th><th>Weight</th><th>Cost</th>
           <th>P/L $</th><th>P/L %</th>
           <th>Target</th><th>Upside</th><th>Stop</th><th>Cushion</th>
@@ -2139,4 +2139,3 @@ init();
 </script>
 </body>
 </html>
-
