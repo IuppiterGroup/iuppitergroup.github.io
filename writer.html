@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iuppiter Writer — luppiter Group</title>
-  <meta name="description" content="Iuppiter Writer — A Word-compatible document editor. Web version runs in any browser. Desktop version opens and saves .docx files natively.">
+  <meta name="description" content="Iuppiter Writer — A Word-compatible document editor. Coming soon.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -13,10 +13,63 @@
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="no-referrer">
   <style>
-    /* ---- Writer page extras ---- */
+    /* ─── Coming Soon Banner ─── */
+    .coming-soon-banner {
+      background: linear-gradient(135deg, rgba(201,168,76,0.13) 0%, rgba(201,168,76,0.04) 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .coming-soon-banner .cs-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 14px;
+    }
+    .coming-soon-banner h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      color: var(--gold);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(201,168,76,0.2);
+    }
+    .coming-soon-banner p {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .cs-ornament {
+      font-size: 1.4rem;
+      letter-spacing: 10px;
+      color: var(--gold-dim);
+      margin-top: 20px;
+    }
+
+    /* ─── Disabled Buttons ─── */
+    .btn-disabled {
+      display: inline-block;
+      padding: 10px 24px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: not-allowed;
+      background: none;
+      font-family: var(--font-body);
+      opacity: 0.45;
+    }
+
+    /* ─── Writer Page Layout ─── */
     .beta-banner {
-      background: linear-gradient(135deg, rgba(196,164,74,0.12) 0%, rgba(196,164,74,0.04) 100%);
-      border: 1px solid rgba(196,164,74,0.4);
+      background: linear-gradient(135deg, rgba(196,164,74,0.10) 0%, rgba(196,164,74,0.03) 100%);
+      border: 1px solid rgba(196,164,74,0.35);
       border-left: 4px solid var(--gold);
       border-radius: 4px;
       padding: 20px 28px;
@@ -25,7 +78,7 @@
     .beta-banner h3 {
       font-family: 'Cinzel', serif;
       color: var(--gold);
-      font-size: 1rem;
+      font-size: 0.85rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 10px;
@@ -35,9 +88,8 @@
       color: var(--text-dim);
       line-height: 1.7;
     }
-    .beta-banner ul {
-      margin: 8px 0 0 20px;
-    }
+    .beta-banner ul { margin: 8px 0 0 20px; }
+
     .beta-badge {
       display: inline-block;
       padding: 4px 14px;
@@ -55,6 +107,7 @@
       position: relative;
       top: -4px;
     }
+
     .product-hero {
       padding: 80px 0 60px;
       text-align: center;
@@ -74,9 +127,10 @@
       font-size: 1.05rem;
       color: var(--text-dim);
       max-width: 580px;
-      margin: 0 auto 32px;
+      margin: 0 auto;
       line-height: 1.7;
     }
+
     .download-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -89,11 +143,7 @@
       border-radius: 4px;
       padding: 36px 28px;
       text-align: center;
-      transition: border-color .25s, transform .2s;
-    }
-    .download-card:hover {
-      border-color: var(--border-gold);
-      transform: translateY(-2px);
+      opacity: 0.85;
     }
     .download-card .version-label {
       font-size: 0.72rem;
@@ -124,6 +174,7 @@
       margin-bottom: 24px;
       line-height: 1.6;
     }
+
     .feature-cols {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -158,6 +209,7 @@
       margin-top: 3px;
       flex-shrink: 0;
     }
+
     .demo-placeholder {
       background: var(--bg-card);
       border: 1px dashed var(--border);
@@ -176,9 +228,8 @@
       font-size: 3rem;
       opacity: 0.4;
     }
-    .demo-placeholder p {
-      opacity: 0.6;
-    }
+    .demo-placeholder p { opacity: 0.6; }
+
     .disclaimer-box {
       background: rgba(139,26,26,0.08);
       border: 1px solid rgba(139,26,26,0.25);
@@ -200,9 +251,80 @@
       color: var(--text-dim);
       line-height: 1.7;
     }
-    .disclaimer-box ul {
-      margin: 8px 0 0 20px;
+    .disclaimer-box ul { margin: 8px 0 0 20px; }
+
+    /* ─── Get Notified ─── */
+    .notify-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 60px;
     }
+    .notify-section h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--cream);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .notify-section p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .notify-form {
+      display: flex;
+      gap: 0;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .notify-form input[type="email"] {
+      flex: 1;
+      padding: 12px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-right: none;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      border-radius: 2px 0 0 2px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .notify-form input[type="email"]:focus {
+      border-color: var(--gold-dim);
+    }
+    .notify-form input[type="email"]::placeholder {
+      color: var(--text-dim);
+      opacity: 0.6;
+    }
+    .notify-form button {
+      padding: 12px 22px;
+      background: var(--gold);
+      color: var(--bg-primary);
+      border: 1px solid var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: not-allowed;
+      border-radius: 0 2px 2px 0;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .notify-note {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 12px;
+      opacity: 0.7;
+    }
+
+    /* ─── Policy ─── */
     .policy-section h3 {
       font-family: 'Playfair Display', serif;
       color: var(--gold);
@@ -215,9 +337,8 @@
       color: var(--text-dim);
       line-height: 1.7;
     }
-    .policy-section ul {
-      margin: 8px 0 12px 20px;
-    }
+    .policy-section ul { margin: 8px 0 12px 20px; }
+
     .donate-block {
       text-align: center;
       padding: 48px 24px;
@@ -228,14 +349,23 @@
       font-size: 0.92rem;
       margin-bottom: 20px;
     }
+
     @media (max-width: 768px) {
       .feature-cols { grid-template-columns: 1fr; }
       .download-grid { grid-template-columns: 1fr; }
+      .notify-form { flex-direction: column; }
+      .notify-form input[type="email"] {
+        border-right: 1px solid var(--border);
+        border-bottom: none;
+        border-radius: 2px 2px 0 0;
+      }
+      .notify-form button { border-radius: 0 0 2px 2px; }
     }
   </style>
 </head>
 <body>
 
+<!-- Nav: Writer is intentionally omitted from nav until launch -->
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">lUPPITER <span>GROUP</span></a>
@@ -244,7 +374,6 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="software.html">Software</a></li>
-      <li><a href="writer.html" class="active">Writer</a></li>
       <li><a href="chrome-extensions.html">Extensions</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="quotes.html">Wisdom</a></li>
@@ -253,17 +382,41 @@
   </div>
 </nav>
 
+<!-- ═══════════════════════════════════════════
+     COMING SOON BANNER — remove on launch
+     ═══════════════════════════════════════════ -->
+<div class="coming-soon-banner">
+  <div class="cs-eyebrow">Iuppiter Group — New Product</div>
+  <h2>Coming Soon</h2>
+  <p>Iuppiter Writer is in active development. Downloads and purchase will be available at launch. Sign up below to be notified.</p>
+  <div class="cs-ornament">&#x2726; &#x2726; &#x2726;</div>
+</div>
+
 <!-- Product Hero -->
 <header class="product-hero">
   <div class="container">
-    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
     <h1>Iuppiter Writer <span class="beta-badge">Beta</span></h1>
     <p class="subtitle">A Word-compatible document editor. The web version runs in any browser — no install required. The desktop version opens and saves real .docx files natively on your machine.</p>
-    <a href="#download" class="hero-cta">Download Now</a>
   </div>
 </header>
 
-<section id="download">
+<!-- Get Notified -->
+<section id="notify">
+  <div class="container">
+    <div class="notify-section">
+      <h3>Get Notified at Launch</h3>
+      <p>Be the first to know when Iuppiter Writer is available. No spam — one email when it ships.</p>
+      <form class="notify-form" onsubmit="return false;">
+        <input type="email" placeholder="your@email.com" autocomplete="off">
+        <!-- TODO: Wire to email provider (Mailchimp / ConvertKit / etc.) before launch -->
+        <button type="submit" disabled>Notify Me</button>
+      </form>
+      <p class="notify-note"><!-- TODO: Replace form action with live signup endpoint before launch --></p>
+    </div>
+  </div>
+</section>
+
+<section id="product">
   <div class="container">
 
     <!-- Beta Warning -->
@@ -277,7 +430,7 @@
       </ul>
     </div>
 
-    <!-- Download Cards -->
+    <!-- Download Cards (disabled until launch) -->
     <div class="download-grid">
 
       <div class="download-card">
@@ -285,7 +438,8 @@
         <h3>Web Version</h3>
         <p>A full-featured word processor that runs entirely in your browser. No installation, no accounts, no cloud. Just open the HTML file and start writing. Works offline.</p>
         <div class="price free">Free</div>
-        <a href="downloads/iuppiter-writer-web.zip" class="btn btn-solid" download>Download (.zip)</a>
+        <!-- TODO: Replace with live download link on launch -->
+        <span class="btn-disabled">Coming Soon</span>
         <p class="tos-warning">Single HTML file · Runs in any modern browser · No install needed</p>
       </div>
 
@@ -294,8 +448,8 @@
         <h3>Desktop Version</h3>
         <p>A native Python application that reads and writes real .docx files. Full round-trip fidelity — open existing Word documents, edit them, and save back. Requires Python 3 + pip install.</p>
         <div class="price">$5</div>
-        <!-- TODO: Replace #buy with Stripe payment link -->
-        <a href="#buy" class="btn btn-solid">Buy &amp; Download — $5</a>
+        <!-- TODO: Replace with Stripe payment link on launch -->
+        <span class="btn-disabled">Coming Soon</span>
         <p class="tos-warning">Requires Python 3.8+ · <code>pip install python-docx Pillow</code> · Windows / Mac / Linux</p>
       </div>
 
@@ -364,7 +518,7 @@
 
     </div>
 
-    <!-- Beta Disclaimer (full) -->
+    <!-- Full Beta Disclaimer -->
     <div class="disclaimer-box">
       <h3>&#9888; Beta Disclaimer</h3>
       <p><strong>BETA SOFTWARE — This is an early release.</strong> Iuppiter Writer is functional but not production-complete.</p>
@@ -412,7 +566,7 @@
 
 <!-- Donate -->
 <div class="donate-block">
-  <p>Find Iuppiter Writer useful? Consider supporting continued development.</p>
+  <p>Find our software useful? Consider supporting continued development.</p>
   <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn" target="_blank" rel="noopener noreferrer">&#9825; Donate</a>
 </div>
 
@@ -421,7 +575,6 @@
     <div class="footer-links">
       <a href="research.html">Research</a>
       <a href="software.html">Software</a>
-      <a href="writer.html">Writer</a>
       <a href="chrome-extensions.html">Extensions</a>
       <a href="about.html">About</a>
       <a href="quotes.html">Wisdom</a>
