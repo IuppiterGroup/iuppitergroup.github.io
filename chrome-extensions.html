@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chrome Extensions — Iuppiter Group</title>
-  <meta name="description" content="Free Chrome extensions from Iuppiter Group. Hush silences cookie popups. Tab Manager controls memory. Mail Tracker shows reply status. Bookmarks Manager replaces Chrome's default. Clipboard Manager tracks copy history. Dashboard replaces new tab.">
+  <meta name="description" content="Free Chrome extensions from Iuppiter Group. Hush silences cookie popups. Tab Manager controls memory. Mail Tracker shows reply status. Bookmarks Manager replaces Chrome's default. Clipboard Manager tracks copy history. Dashboard replaces new tab. Session Saver saves tab sessions. Volume Control boosts per-tab audio. Notepad for quick notes. Calendar with events and reminders.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -426,6 +426,10 @@
       <a href="#bookmarks">📌 Bookmarks</a>
       <a href="#clipboard">📋 Clipboard</a>
       <a href="#dashboard">⊞ Dashboard</a>
+      <a href="#session-saver">⚡ Session Saver</a>
+      <a href="#volume-control">🔊 Volume Control</a>
+      <a href="#notepad">✒ Notepad</a>
+      <a href="#calendar">📅 Calendar</a>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════
@@ -784,6 +788,241 @@
       </div>
     </div>
     <!-- /ext-card#dashboard -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXTENSION 7 — SESSION SAVER
+    ════════════════════════════════════════════════════════════════════ -->
+    <div class="ext-card" id="session-saver">
+      <div class="ext-card-header">
+        <div class="ext-icon">⚡</div>
+        <div class="ext-meta">
+          <div class="ext-category">Productivity · Tab Management</div>
+          <h2 class="ext-name">Session Saver</h2>
+          <p class="ext-tagline">Save, restore, and manage named browser sessions. Never lose a tab setup again — quick-save with Ctrl+Shift+S, restore in one click.</p>
+        </div>
+      </div>
+
+      <div class="ext-body">
+        <div>
+          <p class="ext-desc">
+            Iuppiter Session Saver captures your entire current window of tabs as a named session
+            you can restore later — in the same window, a new window, or with current tabs closed.
+            Perfect for juggling multiple projects: save your research tabs before switching to a
+            work meeting, then restore them exactly where you left off.
+          </p>
+          <br>
+          <p class="ext-desc">
+            Auto-save keeps a rolling snapshot of your session every 5, 10, 15, 30, or 60 minutes.
+            Merge sessions to combine tabs from multiple saves into one. Drag-and-drop reordering
+            lets you organize sessions by priority. Import and export your entire session library
+            as JSON for backup or migration between machines.
+          </p>
+        </div>
+        <ul class="ext-features">
+          <li>Save the current window's tabs as a named session in one click or Ctrl+Shift+S</li>
+          <li>Restore sessions in the same window, a new window, or with current tabs closed</li>
+          <li>Auto-save at configurable intervals: 5, 10, 15, 30, or 60 minutes</li>
+          <li>Rename sessions inline — double-click to edit</li>
+          <li>Merge view — combine two or more sessions, deduplicating URLs automatically</li>
+          <li>Drag-and-drop reordering — prioritize your session list visually</li>
+          <li>View tabs within a session before restoring — title, URL, and favicon</li>
+          <li>Import / Export as JSON — portable backups across machines</li>
+          <li>Delete All with confirmation — no accidental wipes</li>
+          <li>100% local · No accounts · No data transmitted anywhere</li>
+        </ul>
+      </div>
+
+      <div class="ext-actions">
+        <a href="downloads/iuppiter-session-saver.zip" class="btn btn-solid" download>↓ Download Session Saver (.zip)</a>
+        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn-donate" target="_blank" rel="noopener">Donate</a>
+        <span class="ext-badge free">Free · Open Source</span>
+        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">Manifest V3</span>
+      </div>
+
+      <div class="bug-banner">
+        <p>Found a bug? Email us at <a href="mailto:Caesar192038@proton.me" style="color:#c4a44a;">Caesar192038@proton.me</a></p>
+      </div>
+    </div>
+    <!-- /ext-card#session-saver -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXTENSION 8 — VOLUME CONTROL
+    ════════════════════════════════════════════════════════════════════ -->
+    <div class="ext-card" id="volume-control">
+      <div class="ext-card-header">
+        <div class="ext-icon">🔊</div>
+        <div class="ext-meta">
+          <div class="ext-category">Audio · Browser Utility</div>
+          <h2 class="ext-name">Volume Control</h2>
+          <p class="ext-tagline">Per-tab audio volume with boost up to 200%. Mute, balance, and save domain defaults — all from one popup.</p>
+        </div>
+      </div>
+
+      <div class="ext-body">
+        <div>
+          <p class="ext-desc">
+            Iuppiter Volume Control gives you precise audio control over every tab independently.
+            Using the Web Audio API, it can boost volume beyond Chrome's built-in 100% ceiling —
+            all the way to 200% — making quiet videos actually audible. A master volume slider
+            affects every tab at once; individual sliders let you balance a loud ad tab against
+            a background music stream.
+          </p>
+          <br>
+          <p class="ext-desc">
+            Per-domain memory saves your preferred volume for a site so it restores automatically
+            the next time you visit. Quick presets at 25%, 50%, 100%, 150%, and 200% let you
+            snap to common levels instantly. Keyboard shortcut Ctrl+Shift+M mutes and unmutes
+            the active tab without opening the popup.
+          </p>
+        </div>
+        <ul class="ext-features">
+          <li>Per-tab volume control — each tab has its own independent slider</li>
+          <li>Volume boost up to 200% via Web Audio API GainNode</li>
+          <li>Master volume slider — scale all tabs simultaneously</li>
+          <li>Per-tab mute toggle and master mute-all button</li>
+          <li>Quick presets: 25%, 50%, 100%, 150%, 200%</li>
+          <li>Domain memory — save a volume preference for any site permanently</li>
+          <li>Auto-detects audio tabs as they start playing</li>
+          <li>Keyboard shortcut: Ctrl+Shift+M to mute / unmute the active tab</li>
+          <li>Works on video and audio elements including iframes</li>
+          <li>100% local · No data transmitted · All processing in-browser</li>
+        </ul>
+      </div>
+
+      <div class="ext-actions">
+        <a href="downloads/iuppiter-volume-control.zip" class="btn btn-solid" download>↓ Download Volume Control (.zip)</a>
+        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn-donate" target="_blank" rel="noopener">Donate</a>
+        <span class="ext-badge free">Free · Open Source</span>
+        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">Manifest V3</span>
+      </div>
+
+      <div class="bug-banner">
+        <p>Found a bug? Email us at <a href="mailto:Caesar192038@proton.me" style="color:#c4a44a;">Caesar192038@proton.me</a></p>
+      </div>
+    </div>
+    <!-- /ext-card#volume-control -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXTENSION 9 — NOTEPAD
+    ════════════════════════════════════════════════════════════════════ -->
+    <div class="ext-card" id="notepad">
+      <div class="ext-card-header">
+        <div class="ext-icon">✒</div>
+        <div class="ext-meta">
+          <div class="ext-category">Productivity · Writing Tool</div>
+          <h2 class="ext-name">Notepad</h2>
+          <p class="ext-tagline">A fast, always-accessible notepad in your toolbar. Multiple notes, rich text, Markdown, categories, search, and fullscreen mode.</p>
+        </div>
+      </div>
+
+      <div class="ext-body">
+        <div>
+          <p class="ext-desc">
+            Iuppiter Notepad puts a full-featured writing environment one click away in your
+            browser toolbar. Create as many notes as you need, organize them into categories,
+            pin important ones to the top, and search across all of them instantly. Notes
+            auto-save as you type — no manual saving required.
+          </p>
+          <br>
+          <p class="ext-desc">
+            Switch between rich text mode (with a formatting toolbar for bold, italic, lists,
+            and headings) and Markdown mode with live preview. Open any note in fullscreen for
+            distraction-free writing. Export individual notes as .txt or .md files. Import
+            existing text and Markdown files directly. Light and dark themes included.
+          </p>
+        </div>
+        <ul class="ext-features">
+          <li>Multi-note sidebar — create, delete, and pin unlimited notes</li>
+          <li>Rich text editor with toolbar: bold, italic, underline, lists, headings, font size</li>
+          <li>Markdown mode with live toggle preview — write in MD, see rendered output</li>
+          <li>Auto-save as you type — no manual save button needed</li>
+          <li>Categories — color-coded tags to organize notes by topic</li>
+          <li>Pin important notes to keep them at the top of the list</li>
+          <li>Full-text search across titles and content in all notes</li>
+          <li>Fullscreen mode — opens the notepad in a full browser tab</li>
+          <li>Export notes as .txt or .md files</li>
+          <li>Import .txt and .md files directly into your note library</li>
+          <li>Word count and character count live in the editor footer</li>
+          <li>Light and dark theme toggle — your preference is remembered</li>
+          <li>100% local · chrome.storage.local only · No external services</li>
+        </ul>
+      </div>
+
+      <div class="ext-actions">
+        <a href="downloads/iuppiter-notepad.zip" class="btn btn-solid" download>↓ Download Notepad (.zip)</a>
+        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn-donate" target="_blank" rel="noopener">Donate</a>
+        <span class="ext-badge free">Free · Open Source</span>
+        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">Manifest V3</span>
+      </div>
+
+      <div class="bug-banner">
+        <p>Found a bug? Email us at <a href="mailto:Caesar192038@proton.me" style="color:#c4a44a;">Caesar192038@proton.me</a></p>
+      </div>
+    </div>
+    <!-- /ext-card#notepad -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXTENSION 10 — CALENDAR
+    ════════════════════════════════════════════════════════════════════ -->
+    <div class="ext-card" id="calendar">
+      <div class="ext-card-header">
+        <div class="ext-icon">📅</div>
+        <div class="ext-meta">
+          <div class="ext-category">Productivity · Scheduling</div>
+          <h2 class="ext-name">Calendar</h2>
+          <p class="ext-tagline">A standalone popup calendar with events, reminders, and recurring events. Month, week, and agenda views — no external services required.</p>
+        </div>
+      </div>
+
+      <div class="ext-body">
+        <div>
+          <p class="ext-desc">
+            Iuppiter Calendar is a fully self-contained scheduling tool that lives in your
+            browser toolbar. Add events with titles, times, descriptions, and calendar groupings.
+            Switch between month, week, and agenda views to see your schedule at any granularity.
+            The day panel lets you view and add events by clicking any date in the calendar grid.
+          </p>
+          <br>
+          <p class="ext-desc">
+            Recurring events repeat daily, weekly, monthly, or yearly with optional end dates.
+            Reminders fire as desktop notifications at 5, 15, 30, or 60 minutes before an
+            event, or a full day ahead. Manage multiple named calendars with custom colors.
+            Import and export your event data as JSON for portability. Open in fullscreen
+            for a proper calendar experience across your full browser window.
+          </p>
+        </div>
+        <ul class="ext-features">
+          <li>Month view with dot indicators showing events per day</li>
+          <li>Week view with event chips for each day of the week</li>
+          <li>Agenda view showing all events in the next 30 days</li>
+          <li>Add events with title, date, time, description, calendar, and reminder</li>
+          <li>Recurring events: daily, weekly, monthly, yearly — with optional end date</li>
+          <li>Desktop notifications for reminders: 5 min, 15 min, 30 min, 1 hr, 1 day before</li>
+          <li>Multiple calendars with custom names and colors (Personal, Work, and more)</li>
+          <li>Search events across titles and descriptions</li>
+          <li>Import / Export calendar data as JSON</li>
+          <li>Fullscreen mode — full browser tab calendar experience</li>
+          <li>Navigate with Today / Prev / Next buttons; click any date to open day panel</li>
+          <li>100% local · No accounts · No external calendar services · No data shared</li>
+        </ul>
+      </div>
+
+      <div class="ext-actions">
+        <a href="downloads/iuppiter-calendar.zip" class="btn btn-solid" download>↓ Download Calendar (.zip)</a>
+        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn-donate" target="_blank" rel="noopener">Donate</a>
+        <span class="ext-badge free">Free · Open Source</span>
+        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">Manifest V3</span>
+      </div>
+
+      <div class="bug-banner">
+        <p>Found a bug? Email us at <a href="mailto:Caesar192038@proton.me" style="color:#c4a44a;">Caesar192038@proton.me</a></p>
+      </div>
+    </div>
+    <!-- /ext-card#calendar -->
 
     <!-- ═══════════════════════════════════════════════════════════════════
          PRIVACY POLICY + TERMS OF SERVICE
