@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrome Extensions — luppiter Group</title>
+  <meta name="description" content="Free Chrome extensions from luppiter Group. Hush silences cookie popups. Iuppiter Tab Manager monitors and controls browser memory usage.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <style>
+    /* ── Page-specific overrides ─────────────────────────────── */
+
+    /* Donate button — prominent gold CTA */
+    .btn-donate {
+      display: inline-block;
+      padding: 12px 36px;
+      background: #c4a44a;
+      color: #0a0a0f;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+      border: 2px solid #e2c97e;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      text-decoration: none;
+    }
+    .btn-donate:hover {
+      background: #e2c97e;
+      color: #0a0a0f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(196,164,74,0.4);
+    }
+    .btn-donate::before {
+      content: "♥  ";
+      font-size: 0.9em;
+    }
+
+    /* Donate banner — top of page */
+    .donate-banner {
+      background: linear-gradient(135deg, rgba(196,164,74,0.12) 0%, rgba(196,164,74,0.04) 100%);
+      border: 1px solid rgba(196,164,74,0.35);
+      border-radius: 4px;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .donate-banner-text {
+      font-size: 0.95rem;
+      color: var(--cream-dim);
+      line-height: 1.5;
+    }
+    .donate-banner-text strong {
+      color: var(--gold);
+    }
+
+    /* Extension card layout */
+    .ext-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 40px 36px;
+      margin-bottom: 48px;
+      transition: border-color .25s;
+    }
+    .ext-card:hover {
+      border-color: var(--border-gold);
+    }
+    .ext-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .ext-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+    }
+    .ext-icon img {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+    }
+    .ext-meta {
+      flex: 1;
+      min-width: 200px;
+    }
+    .ext-category {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 6px;
+    }
+    .ext-name {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .ext-tagline {
+      font-size: 1rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .ext-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 680px) {
+      .ext-body { grid-template-columns: 1fr; }
+    }
+    .ext-desc {
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+    .ext-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ext-features li {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .ext-features li::before {
+      content: "✦";
+      color: var(--gold-dim);
+      font-size: 0.7rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .ext-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .ext-badge {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    .ext-badge.free {
+      color: #5a9e6f;
+      border-color: rgba(90,158,111,0.3);
+    }
+
+    /* Install steps */
+    .install-steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .install-steps li {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px;
+      counter-increment: step;
+      position: relative;
+    }
+    .install-steps li::before {
+      content: counter(step);
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold-dim);
+      margin-bottom: 10px;
+    }
+    .install-steps li strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    .install-steps li p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .install-steps li code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    /* Policy section */
+    .policy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 680px) {
+      .policy-grid { grid-template-columns: 1fr; }
+    }
+    .policy-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px;
+    }
+    .policy-box h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .policy-box p,
+    .policy-box li {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .policy-box ul {
+      padding-left: 16px;
+    }
+    .policy-box li {
+      margin-bottom: 6px;
+    }
+
+    /* Inline donate strip after each extension */
+    .donate-strip {
+      background: rgba(196,164,74,0.06);
+      border: 1px solid rgba(196,164,74,0.2);
+      border-radius: 4px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: -24px;
+      margin-bottom: 48px;
+    }
+    .donate-strip p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin: 0;
+    }
+    .donate-strip p strong {
+      color: var(--cream-dim);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">lUPPITER <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="chrome-extensions.html" class="active">Extensions</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="quotes.html">Wisdom</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
+    <h1>Chrome Extensions</h1>
+    <p>Free browser tools built for speed, privacy, and control</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <!-- ── TOP DONATE BANNER ───────────────────────────────────────────── -->
+    <!-- TODO: Replace #donate with Stripe payment link -->
+    <div class="donate-banner">
+      <div class="donate-banner-text">
+        <strong>These extensions are completely free.</strong><br>
+        No subscriptions, no accounts, no data collection. If they make your browsing better, consider supporting our work.
+      </div>
+      <a href="#donate" class="btn-donate">Support Our Work</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXTENSION 1 — HUSH
+    ════════════════════════════════════════════════════════════════════ -->
+
+    <div class="ext-card" id="hush">
+      <div class="ext-card-header">
+        <div class="ext-icon">
+          🤫
+        </div>
+        <div class="ext-meta">
+          <div class="ext-category">Privacy · Browser Utility</div>
+          <h2 class="ext-name">Hush</h2>
+          <p class="ext-tagline">Cookie banners, GDPR popups, newsletter nags — silenced automatically on every site you visit.</p>
+        </div>
+      </div>
+
+      <div class="ext-body">
+        <div>
+          <p class="ext-desc">
+            Hush detects and dismisses the endless parade of consent dialogs, cookie banners,
+            and overlay nags that modern websites throw at you — automatically, before you ever see them.
+            It recognizes all major consent management platforms plus hundreds of generic patterns,
+            clicks "Accept" on your behalf, or hides banners that don't respond to clicks.
+          </p>
+          <br>
+          <p class="ext-desc">
+            A per-site whitelist lets you preserve popups on sites where you want them.
+            The live counter shows how many popups Hush has eliminated today and all-time.
+            Everything runs in your browser. Nothing is sent anywhere.
+          </p>
+        </div>
+        <ul class="ext-features">
+          <li>Blocks 50+ consent frameworks — OneTrust, CookieBot, Quantcast, TrustArc, Didomi, Osano, Complianz, iubenda, Klaro, and more</li>
+          <li>Auto-clicks "Accept" or hides the banner when no button is found</li>
+          <li>Supports English, German, French, Spanish, and Italian consent text</li>
+          <li>Per-site whitelist — keep popups on sites you trust</li>
+          <li>Live counter: blocked today &amp; all-time</li>
+          <li>One-click pause / resume from the toolbar</li>
+          <li>MutationObserver — catches dynamically loaded banners</li>
+          <li>Zero data collection · Zero analytics · Fully offline</li>
+        </ul>
+      </div>
+
+      <div class="ext-actions">
+        <a href="downloads/hush-extension.zip" class="btn btn-solid" download>
+          ↓ Download Hush (.zip)
+        </a>
+        <span class="ext-badge free">Free · Open Source</span>
+        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">Manifest V3</span>
+      </div>
+    </div>
+
+    <!-- Donate strip after Hush -->
+    <!-- TODO: Replace #donate with Stripe payment link -->
+    <div class="donate-strip">
+      <p><strong>Hush saved you from another cookie popup.</strong> That's worth something, isn't it?</p>
+      <a href="#donate" class="btn-donate">Support Our Work</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXTENSION 2 — IUPPITER TAB MANAGER
+    ════════════════════════════════════════════════════════════════════ -->
+
+    <div class="ext-card" id="tab-manager">
+      <div class="ext-card-header">
+        <div class="ext-icon">
+          🗂️
+        </div>
+        <div class="ext-meta">
+          <div class="ext-category">Performance · Tab Management</div>
+          <h2 class="ext-name">Iuppiter Tab Manager</h2>
+          <p class="ext-tagline">See exactly how much RAM each tab is eating. Suspend, close, and tame your browser before it grinds to a halt.</p>
+        </div>
+      </div>
+
+      <div class="ext-body">
+        <div>
+          <p class="ext-desc">
+            Modern browsers are memory hogs. Iuppiter Tab Manager gives you full visibility into
+            which tabs are responsible, sorted by memory usage in real time. When Chrome is
+            consuming 6 GB of RAM and your system is starting to slow, you want to know
+            which three tabs are responsible — and close them in one click.
+          </p>
+          <br>
+          <p class="ext-desc">
+            Suspend individual tabs or bulk-close everything above a threshold you set.
+            Group tabs by domain to see which sites are cumulatively draining your resources.
+            An alert badge appears on the toolbar icon when total memory exceeds your limit.
+            Optional auto-suspend runs silently in the background.
+          </p>
+        </div>
+        <ul class="ext-features">
+          <li>Real-time memory usage per tab — MB or GB, color-coded by severity</li>
+          <li>Sort all open tabs by memory, highest first</li>
+          <li>Suspend individual tabs instantly to free RAM</li>
+          <li>Bulk close: kill every tab over X MB with one click</li>
+          <li>Group view — see total memory consumption by domain</li>
+          <li>Search / filter across all open tabs by title or domain</li>
+          <li>Configurable alert threshold — toolbar badge turns red when exceeded</li>
+          <li>Optional auto-suspend for background tabs over your limit</li>
+          <li>Adjustable refresh interval (5–300 seconds)</li>
+          <li>No data transmitted anywhere · All processing is local</li>
+        </ul>
+      </div>
+
+      <div class="ext-actions">
+        <a href="downloads/iuppiter-tab-manager.zip" class="btn btn-solid" download>
+          ↓ Download Tab Manager (.zip)
+        </a>
+        <span class="ext-badge free">Free · Open Source</span>
+        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">Manifest V3</span>
+      </div>
+    </div>
+
+    <!-- Donate strip after Tab Manager -->
+    <!-- TODO: Replace #donate with Stripe payment link -->
+    <div class="donate-strip">
+      <p><strong>Your tabs are under control. We did that.</strong> Help us keep building tools like this.</p>
+      <a href="#donate" class="btn-donate">Support Our Work</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         INSTALLATION INSTRUCTIONS
+    ════════════════════════════════════════════════════════════════════ -->
+
+    <div class="gold-rule"></div>
+    <h2 class="section-title" style="font-size:1.8rem; margin-bottom:12px;">How to Install</h2>
+    <p class="section-subtitle" style="font-size:0.9rem; color:var(--text-dim); margin-bottom:40px;">
+      These are unpacked Chrome extensions — not on the Chrome Web Store. Installation takes about 60 seconds.
+    </p>
+
+    <ol class="install-steps">
+      <li>
+        <strong>Download the .zip file</strong>
+        <p>Click the download button above for the extension you want. Save the .zip file anywhere on your computer.</p>
+      </li>
+      <li>
+        <strong>Extract the folder</strong>
+        <p>Right-click the .zip → <em>Extract All</em> (Windows) or double-click (Mac). You'll get a folder containing the extension files.</p>
+      </li>
+      <li>
+        <strong>Open Chrome Extensions</strong>
+        <p>In Chrome, navigate to <code>chrome://extensions</code> in your address bar, or open the Chrome menu → <em>More tools</em> → <em>Extensions</em>.</p>
+      </li>
+      <li>
+        <strong>Enable Developer Mode</strong>
+        <p>Toggle the <em>Developer mode</em> switch in the top-right corner of the Extensions page. It must be ON.</p>
+      </li>
+      <li>
+        <strong>Load the extension</strong>
+        <p>Click <em>Load unpacked</em> (top-left). Navigate to and select the extracted extension folder — the one containing <code>manifest.json</code>.</p>
+      </li>
+      <li>
+        <strong>You're done</strong>
+        <p>The extension appears in your toolbar. Pin it via the puzzle-piece icon for easy access. Updates require re-downloading and repeating steps 2–5.</p>
+      </li>
+    </ol>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SUPPORT / DONATE SECTION
+    ════════════════════════════════════════════════════════════════════ -->
+
+    <div id="donate" style="padding-top: 16px;">
+      <div class="gold-rule"></div>
+      <h2 class="section-title" style="font-size:1.8rem; margin-bottom:12px;">Support Our Work</h2>
+      <p class="section-subtitle" style="font-size:0.9rem; color:var(--text-dim); margin-bottom:40px;">
+        luppiter Group produces free tools, open research, and free-to-use software. No venture capital. No surveillance business model. Just builders.
+      </p>
+
+      <div style="max-width:600px; margin:0 auto; text-align:center; background:var(--bg-card); border:1px solid var(--border-gold); border-radius:4px; padding:48px 36px;">
+        <div style="font-size:2.5rem; margin-bottom:16px;">🏛️</div>
+        <h3 style="font-family:var(--font-heading); font-size:1.4rem; color:var(--cream); margin-bottom:12px;">Built for serious users</h3>
+        <p style="font-size:0.9rem; color:var(--text-dim); line-height:1.7; margin-bottom:28px;">
+          If these extensions save you time, frustration, or memory — consider a one-time contribution.
+          It funds new extensions, updates to existing ones, and the rest of what we build at luppiter Group.
+        </p>
+        <!-- TODO: Replace #donate with Stripe payment link -->
+        <a href="#donate" class="btn-donate" style="font-size:1rem; padding:16px 48px;">Support Our Work</a>
+        <p style="font-size:0.75rem; color:var(--text-dim); margin-top:16px;">
+          Completely optional. These tools are and will remain free.
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         PRIVACY POLICY + TERMS OF SERVICE
+    ════════════════════════════════════════════════════════════════════ -->
+
+    <div class="gold-rule" style="margin-top:80px;"></div>
+    <h2 class="section-title" style="font-size:1.8rem; margin-bottom:40px;">Privacy &amp; Terms</h2>
+
+    <div class="policy-grid">
+
+      <div class="policy-box">
+        <h3>🔒 Privacy Policy</h3>
+        <p>Applies to all luppiter Group Chrome extensions.</p>
+        <ul>
+          <li><strong>No personal data collected.</strong> Extensions do not access, read, or store any personally identifiable information.</li>
+          <li><strong>No analytics or tracking.</strong> We use no analytics libraries, no telemetry, no crash reporting services.</li>
+          <li><strong>All processing is local.</strong> Everything runs inside your browser. No data is transmitted to any server — including ours.</li>
+          <li><strong>Storage stays on your device.</strong> Preferences (whitelist entries, settings) are saved in Chrome's local storage and never leave your machine.</li>
+          <li><strong>No third-party SDKs.</strong> Extensions contain no embedded third-party code that could collect data.</li>
+          <li><strong>Permissions explained:</strong> Extensions request only the permissions required for their stated function. See each extension's manifest for the complete list.</li>
+        </ul>
+      </div>
+
+      <div class="policy-box">
+        <h3>📜 Terms of Service</h3>
+        <p>By downloading or using any luppiter Group Chrome extension, you agree to the following:</p>
+        <ul>
+          <li><strong>Provided as-is.</strong> Extensions are provided without warranty of any kind, express or implied, including fitness for a particular purpose.</li>
+          <li><strong>No guarantee of uptime or compatibility.</strong> Browser updates may affect extension functionality. We make no commitment to maintain compatibility with future Chrome versions.</li>
+          <li><strong>Free to use.</strong> Extensions are free for personal use. You may not sell, sublicense, or redistribute them as your own work.</li>
+          <li><strong>Open source.</strong> Source code is included in the download. You are free to inspect, modify, and learn from it for personal use.</li>
+          <li><strong>User responsibility.</strong> You assume all responsibility for installation and use. luppiter Group is not liable for any damages arising from the use of these extensions.</li>
+          <li><strong>Limitation of liability.</strong> In no event shall luppiter Group be liable for any indirect, incidental, special, or consequential damages, even if advised of the possibility of such damages. Maximum liability is limited to zero dollars ($0.00), as these products are provided free of charge.</li>
+          <li><strong>Not financial or legal advice.</strong> Extensions are utility tools only.</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="chrome-extensions.html">Extensions</a>
+      <a href="games.html">Games</a>
+      <a href="quotes.html">Wisdom</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 luppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
