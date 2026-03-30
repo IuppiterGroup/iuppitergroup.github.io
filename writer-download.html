@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Iuppiter Writer — Iuppiter Group</title>
+  <meta name="description" content="Thank you for your purchase. Download Iuppiter Writer here.">
+  <!-- Unlisted: not in navigation, not indexed by search engines -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <style>
+
+    .thankyou-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(90,158,111,0.07) 0%, transparent 60%),
+        var(--bg-primary);
+    }
+    .thankyou-hero .check-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .thankyou-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--cream);
+      letter-spacing: 4px;
+      margin-bottom: 14px;
+    }
+    .thankyou-hero p {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Download card */
+    .download-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+      padding: 40px 36px;
+      max-width: 640px;
+      margin: 0 auto 48px;
+      text-align: center;
+      transition: box-shadow .25s;
+    }
+    .download-card:hover {
+      box-shadow: 0 4px 32px rgba(196,164,74,0.1);
+    }
+    .download-card .product-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .download-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .download-card .version-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      border: 1px solid rgba(196,164,74,0.25);
+      border-radius: 20px;
+      padding: 3px 12px;
+      margin-bottom: 16px;
+    }
+    .download-card p.desc {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .btn-download {
+      display: inline-block;
+      padding: 15px 44px;
+      background: var(--gold);
+      color: var(--bg-primary);
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      border: 2px solid var(--gold);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-download:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      color: var(--bg-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(196,164,74,0.35);
+    }
+    .download-card .dl-note {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 14px;
+    }
+
+    /* Install steps */
+    .install-steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .install-steps li {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 22px;
+      counter-increment: step;
+      transition: border-color .2s;
+    }
+    .install-steps li:hover {
+      border-color: var(--border-gold);
+    }
+    .install-steps li::before {
+      content: counter(step);
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold-dim);
+      margin-bottom: 10px;
+    }
+    .install-steps li strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    .install-steps li p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .install-steps li code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    /* Beta notice */
+    .beta-notice {
+      background: linear-gradient(135deg, rgba(196,164,74,0.08) 0%, rgba(196,164,74,0.02) 100%);
+      border: 1px solid rgba(196,164,74,0.3);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 4px 4px 0;
+      padding: 18px 24px;
+      margin-bottom: 40px;
+    }
+    .beta-notice p, .beta-notice li {
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .beta-notice strong { color: var(--gold); }
+    .beta-notice ul { margin: 8px 0 0 20px; }
+
+    /* Support section */
+    .support-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+    .support-block .support-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .support-block h3 {
+      font-family: var(--font-heading);
+      color: var(--cream);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    .support-block p {
+      font-size: 0.87rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .support-block a.support-link {
+      font-size: 0.82rem;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(196,164,74,0.3);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .support-block a.support-link:hover {
+      color: var(--gold-light);
+    }
+  </style>
+</head>
+<body>
+
+<!-- No nav on this page — it's unlisted -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">lUPPITER <span>GROUP</span></a>
+    <!-- Intentionally minimal nav — this page is not linked from the site -->
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="writer.html">Iuppiter Writer</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Thank You Header -->
+<header class="thankyou-hero">
+  <div class="container">
+    <span class="check-icon">✅</span>
+    <h1>Thank You for Your Purchase</h1>
+    <p>Your download is ready below. Bookmark this page &mdash; it's the only place to re-download Iuppiter Writer if you need it again.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <!-- Beta notice -->
+    <div class="beta-notice">
+      <p><strong>Beta Software:</strong> Iuppiter Writer is in active development. It's functional and usable, but this is an early release &mdash; keep backups of important documents. We push fixes regularly.</p>
+      <ul>
+        <li>Not yet supported: Track Changes, Comments, Review features, Mail Merge, Macros</li>
+        <li>Complex .docx formatting may not render perfectly in all cases</li>
+      </ul>
+    </div>
+
+    <!-- Download card -->
+    <div class="download-card">
+      <div class="product-icon">📄</div>
+      <div class="version-tag">Desktop · v1.0 Beta</div>
+      <h2>Iuppiter Writer</h2>
+      <p class="desc">
+        Native Python application. Opens, edits, and saves real <code style="font-family:monospace; color:var(--gold); background:rgba(201,168,76,0.08); padding:1px 5px; border-radius:2px;">.docx</code> files
+        with full Microsoft Word round-trip compatibility. Works on Windows, macOS, and Linux.
+        Source code included.
+      </p>
+      <a href="downloads/iuppiter-writer-desktop.zip" class="btn-download" download>
+        ↓ Download Iuppiter Writer
+      </a>
+      <p class="dl-note">iuppiter-writer-desktop.zip &nbsp;·&nbsp; ~33 KB &nbsp;·&nbsp; Python source</p>
+    </div>
+
+    <!-- Installation instructions -->
+    <h2 class="section-title" style="font-size:1.8rem; margin-bottom:12px;">Installation</h2>
+    <p class="section-subtitle" style="font-size:0.9rem; color:var(--text-dim); margin-bottom:40px;">
+      Five steps. Takes about two minutes on any machine with Python installed.
+    </p>
+
+    <ol class="install-steps">
+      <li>
+        <strong>Install Python 3.8+</strong>
+        <p>If you don't already have Python, download it free from <code>python.org</code>. Make sure to check <em>"Add Python to PATH"</em> during installation on Windows.</p>
+      </li>
+      <li>
+        <strong>Extract the .zip</strong>
+        <p>Right-click <code>iuppiter-writer-desktop.zip</code> → <em>Extract All</em> (Windows) or double-click (Mac). Place the extracted folder wherever you like.</p>
+      </li>
+      <li>
+        <strong>Install dependencies</strong>
+        <p>Open a terminal / command prompt and run:<br>
+        <code>pip install python-docx Pillow</code><br>
+        This installs the two required libraries (one-time, ~5 MB).</p>
+      </li>
+      <li>
+        <strong>Launch the app</strong>
+        <p>
+          <strong>Windows:</strong> Double-click <code>IuppiterWriter.bat</code><br>
+          <strong>Mac / Linux:</strong> In terminal, run <code>python iuppiter_writer.py</code>
+        </p>
+      </li>
+      <li>
+        <strong>Open a document</strong>
+        <p>Click <em>File → Open</em> to load an existing .docx, or start a new blank document. Save back to .docx anytime with Ctrl+S.</p>
+      </li>
+    </ol>
+
+    <!-- Included README note -->
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:4px; padding:20px 24px; margin-top:28px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+      <span style="font-size:1.5rem;">📋</span>
+      <div>
+        <p style="font-size:0.88rem; color:var(--cream-dim); margin:0 0 4px; font-weight:600;">README included</p>
+        <p style="font-size:0.83rem; color:var(--text-dim); margin:0;">The download includes a <code style="color:var(--gold); font-family:monospace;">README.md</code> with full installation and usage notes.</p>
+      </div>
+    </div>
+
+    <!-- Support block -->
+    <div class="support-block">
+      <div class="support-icon">💬</div>
+      <div>
+        <h3>Questions or Issues?</h3>
+        <p>
+          If something isn't working right &mdash; a crash, a .docx compatibility issue, or a feature that's broken &mdash;
+          email us directly. We read every report and push fixes fast.
+        </p>
+        <a href="mailto:Caesar192038@proton.me?subject=Iuppiter%20Writer%20Support" class="support-link">Caesar192038@proton.me</a>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <a href="mailto:Caesar192038@proton.me?subject=Bug%20Report%3A%20Iuppiter%20Writer" class="support-link">Report a bug</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="writer.html">Iuppiter Writer</a>
+      <a href="tos.html">Terms of Service</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 Iuppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

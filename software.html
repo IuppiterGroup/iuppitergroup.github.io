@@ -3,14 +3,202 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software — luppiter Group</title>
+  <title>Software — Iuppiter Group</title>
+  <meta name="description" content="Professional-grade tools from Iuppiter Group. DCF Modeler, Vox Codex audiobook generator, Portfolio Tracker, and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="no-referrer">
+  <style>
+
+    /* ── Product card — expanded layout ─────────────────────────────── */
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 40px 36px;
+      margin-bottom: 32px;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .product-card:hover {
+      border-color: var(--border-gold);
+      box-shadow: 0 4px 32px rgba(196,164,74,0.06);
+    }
+    .product-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .product-card-title-group { flex: 1; min-width: 200px; }
+    .product-card-category {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 8px;
+    }
+    .product-card-name {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .product-card-tagline {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+    .product-card-price-group {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .product-card-price {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .product-card-price.free {
+      font-size: 1.2rem;
+      color: #5a9e6f;
+    }
+    .product-card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 24px 0;
+    }
+    @media (max-width: 680px) {
+      .product-card-body { grid-template-columns: 1fr; }
+      .product-card-price-group { text-align: left; }
+      .product-card-header { flex-direction: column; }
+    }
+    .product-card-desc {
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.78;
+    }
+    .product-card-desc + .product-card-desc {
+      margin-top: 14px;
+    }
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .feature-list li {
+      font-size: 0.87rem;
+      color: var(--text-dim);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .feature-list li::before {
+      content: "✦";
+      color: var(--gold-dim);
+      font-size: 0.65rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .product-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .product-badge {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    .product-badge.free {
+      color: #5a9e6f;
+      border-color: rgba(90,158,111,0.3);
+    }
+    .product-badge.new {
+      color: var(--gold);
+      border-color: rgba(196,164,74,0.4);
+    }
+
+    /* Coming soon card */
+    .product-card.coming-soon {
+      border-style: dashed;
+      opacity: 0.8;
+    }
+    .product-card.coming-soon:hover {
+      opacity: 1;
+    }
+    .coming-soon-badge {
+      display: inline-block;
+      padding: 5px 16px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      border: 1px solid rgba(196,164,74,0.4);
+      border-radius: 4px;
+    }
+
+    /* Disclaimer */
+    .tos-warning {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+    .tos-warning a { color: var(--gold); text-decoration: underline; }
+    .tos-warning code {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    /* Use case chips */
+    .use-cases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .use-case-chip {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Section divider */
+    .section-divider {
+      text-align: center;
+      color: var(--gold-dim);
+      font-size: 1.1rem;
+      letter-spacing: 12px;
+      margin: 64px 0 48px;
+    }
+  </style>
 </head>
 <body>
 
@@ -22,9 +210,12 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="software.html" class="active">Software</a></li>
+      <li><a href="writer.html">Writer</a></li>
       <li><a href="chrome-extensions.html">Extensions</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="quotes.html">Wisdom</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="quotes.html">Wisdom</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -33,86 +224,259 @@
   <div class="container">
     <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
     <h1>Software</h1>
-    <p>Professional-grade tools for analysts and portfolio managers</p>
+    <p>Professional-grade tools for analysts, writers, and serious users</p>
   </div>
 </header>
 
 <section>
   <div class="container">
-    <div class="card-grid">
 
-      <div class="card">
-        <div class="card-category">Financial Modeling</div>
-        <h3>DCF Modeler</h3>
-        <p>Build discounted cash-flow models with Bear, Base, and Bull scenario assumptions. Integrated Monte Carlo simulation engine provides probability-weighted valuation ranges and sensitivity analysis.</p>
-        <div class="card-price">$15</div>
-        <a href="https://buy.stripe.com/8wMcPA8AagE07kYdQQ" class="btn btn-solid">Buy Now</a>
-        <p class="tos-warning">NO REFUNDS OR RE-DISTRIBUTION. NOT FINANCIAL ADVICE — JUST A TOOL.<br><a href="tos.html">Terms of Service (click here)</a> before purchase.</p>
+    <!-- ════════════════════════════════════════════════════════════════
+         DCF MODELER
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="product-card" id="dcf-modeler">
+      <div class="product-card-header">
+        <div class="product-card-title-group">
+          <div class="product-card-category">Financial Modeling</div>
+          <h2 class="product-card-name">DCF Modeler</h2>
+          <p class="product-card-tagline">Build institutional-grade discounted cash-flow models in a browser. Bear, Base, Bull scenarios. Monte Carlo simulation. No Excel required.</p>
+        </div>
+        <div class="product-card-price-group">
+          <div class="product-card-price">$15</div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">one-time</div>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="card-category">Audio Production</div>
-        <h3>Vox Codex</h3>
-        <p>Transform any text into a professional audiobook with one click. AI-powered text-to-speech engine with multiple narrator voices, chapter detection, and MP3 export. Paste your manuscript, pick a voice, and let Vox Codex do the rest. <strong>Windows only.</strong> Note: program takes a moment to initialize on first launch.</p>
-        <div class="card-price">$25</div>
-        <a href="https://buy.stripe.com/7sYcN7d3c1DZgPQ0IH14401" class="btn btn-solid">Buy Now</a>
-        <p class="tos-warning">NO REFUNDS OR RE-DISTRIBUTION. WINDOWS ONLY.<br><a href="tos.html">Terms of Service (click here)</a> before purchase.</p>
+      <div class="product-card-body">
+        <div>
+          <p class="product-card-desc">
+            DCF Modeler is a self-contained HTML application — no install, no accounts, no cloud. Open it in any browser and you have a full discounted cash-flow modeling environment. Build three scenario models (Bear, Base, Bull) with customizable revenue growth assumptions, operating margin evolution, capex and working capital dynamics, and terminal value calculations.
+          </p>
+          <p class="product-card-desc" style="margin-top:14px;">
+            The integrated Monte Carlo simulation engine runs thousands of randomized trials across your assumption ranges to produce probability-weighted valuation distributions. See not just a point estimate but the full range of outcomes — and the likelihood of each.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-chip">Equity research</span>
+            <span class="use-case-chip">Buy-side analysis</span>
+            <span class="use-case-chip">Student modeling</span>
+            <span class="use-case-chip">Due diligence</span>
+            <span class="use-case-chip">Earnings previews</span>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>Bear, Base, and Bull scenario models with independent assumption sets</li>
+          <li>Revenue growth, operating margin, D&amp;A, capex, and working capital inputs</li>
+          <li>WACC calculator with customizable cost of equity and debt components</li>
+          <li>Terminal value via Gordon Growth Model or Exit Multiple</li>
+          <li>Monte Carlo simulation — probability-weighted valuation ranges</li>
+          <li>Sensitivity analysis tables (WACC × terminal growth rate)</li>
+          <li>Visual charts: revenue bridge, EBITDA waterfall, valuation distribution</li>
+          <li>Export to PDF via browser print</li>
+          <li>Runs entirely in the browser — no install, no server, no accounts</li>
+          <li>Works offline after download</li>
+        </ul>
       </div>
 
-      <div class="card card-coming-soon">
-        <div class="card-category">Regulatory Analysis</div>
-        <h3>SEC Filing Analyzer</h3>
-        <p>Automated parsing and analysis of SEC filings — 10-K, 10-Q, 8-K, and proxy statements. Extracts key financial metrics, flags material changes, and generates summary reports in seconds.</p>
-        <div class="card-price">$25</div>
-        <div class="card-badge">Coming Soon</div>
+      <div class="product-card-actions">
+        <a href="https://buy.stripe.com/8wMcPA8AagE07kYdQQ" class="btn btn-solid">Buy Now — $15</a>
+        <span class="product-badge">Single HTML file</span>
+        <span class="product-badge">No install needed</span>
+        <p class="tos-warning" style="width:100%; margin-top:8px;">
+          NO REFUNDS OR RE-DISTRIBUTION. NOT FINANCIAL ADVICE — JUST A TOOL.&nbsp;
+          <a href="tos.html">Terms of Service</a> before purchase.
+        </p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         VOX CODEX
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="product-card" id="vox-codex">
+      <div class="product-card-header">
+        <div class="product-card-title-group">
+          <div class="product-card-category">Audio Production</div>
+          <h2 class="product-card-name">Vox Codex</h2>
+          <p class="product-card-tagline">Transform any text into a professional audiobook in minutes. AI-powered narration, chapter detection, MP3 export. Paste your manuscript and press go.</p>
+        </div>
+        <div class="product-card-price-group">
+          <div class="product-card-price">$25</div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">one-time</div>
+        </div>
       </div>
 
-      <div class="card card-coming-soon">
-        <div class="card-category">Quantitative Trading</div>
-        <h3>Trading Signal Backtester</h3>
-        <p>Backtest trading strategies against historical data with customizable signal logic, position sizing rules, and comprehensive performance analytics including Sharpe ratio and drawdown analysis.</p>
-        <div class="card-price">$20</div>
-        <div class="card-badge">Coming Soon</div>
+      <div class="product-card-body">
+        <div>
+          <p class="product-card-desc">
+            Vox Codex is a Windows desktop application that converts written text into fully narrated audio using AI text-to-speech. Paste your manuscript, article, report, or script — pick from multiple narrator voices — and Vox Codex handles the rest. It automatically detects chapter breaks, paces the narration naturally, and exports to MP3.
+          </p>
+          <p class="product-card-desc" style="margin-top:14px;">
+            There are no subscription fees, no per-minute charges, and no cloud uploads. Your content stays on your machine. The program takes a moment to initialize on first launch as the TTS engine loads — this is normal.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-chip">Self-publishing</span>
+            <span class="use-case-chip">Content creators</span>
+            <span class="use-case-chip">Newsletter narration</span>
+            <span class="use-case-chip">Research reports</span>
+            <span class="use-case-chip">Accessibility</span>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>AI-powered text-to-speech with multiple narrator voices</li>
+          <li>Automatic chapter detection from headings and structure</li>
+          <li>Natural pacing and pause logic between sections</li>
+          <li>MP3 export — one file per chapter or one full audiobook</li>
+          <li>Supports plain text, markdown, and structured documents</li>
+          <li>Adjustable narration speed</li>
+          <li>No subscription, no per-minute charges, no cloud uploads</li>
+          <li>All processing is local — your content never leaves your machine</li>
+          <li>Windows only (see requirements)</li>
+          <li>One-time payment — use it as long as you want</li>
+        </ul>
       </div>
 
-      <div class="card">
-        <div class="card-category">Portfolio Management</div>
-        <h3>Portfolio Tracker & Stock Screener</h3>
-        <p>Bloomberg-style portfolio tracking with real-time P&L, sector allocation breakdowns, interactive charts, full financial statements, and performance analytics. Now includes a <strong>built-in S&P 500 stock screener</strong> with 12 filter criteria — P/E, market cap, dividend yield, beta, margins, debt ratios, 52-week proximity, and more. Inline-editable positions for easy DCA and profit adjustments. Auto-refreshing data, sortable results, click-through to full financials. Runs locally on your machine — no accounts, no cloud, no subscriptions. Requires Python 3.8+ and yfinance.</p>
-        <div class="card-price">Free</div>
-        <a href="downloads/portfolio-tracker.zip" class="btn btn-solid" download>Download (.zip)</a>
-        <p class="tos-warning">FREE — NO WARRANTY. NOT FINANCIAL ADVICE — JUST A TOOL.<br>Requires Python 3.8+ · <code>pip install yfinance</code></p>
+      <div class="product-card-actions">
+        <a href="https://buy.stripe.com/7sYcN7d3c1DZgPQ0IH14401" class="btn btn-solid">Buy Now — $25</a>
+        <span class="product-badge">Windows only</span>
+        <p class="tos-warning" style="width:100%; margin-top:8px;">
+          NO REFUNDS OR RE-DISTRIBUTION. WINDOWS ONLY. Note: program takes a moment to initialize on first launch.&nbsp;
+          <a href="tos.html">Terms of Service</a> before purchase.
+        </p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         PORTFOLIO TRACKER
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="product-card" id="portfolio-tracker">
+      <div class="product-card-header">
+        <div class="product-card-title-group">
+          <div class="product-card-category">Portfolio Management · Free</div>
+          <h2 class="product-card-name">Portfolio Tracker &amp; Stock Screener</h2>
+          <p class="product-card-tagline">Bloomberg-style portfolio analytics on your local machine. Real-time P&amp;L, sector allocation, full financials, and a built-in S&amp;P 500 screener with 12 filter criteria.</p>
+        </div>
+        <div class="product-card-price-group">
+          <div class="product-card-price free">Free</div>
+        </div>
+      </div>
+
+      <div class="product-card-body">
+        <div>
+          <p class="product-card-desc">
+            Portfolio Tracker runs locally via a lightweight Python web server — open your browser and you have a full institutional-style portfolio dashboard. Track unlimited positions with real-time P&amp;L, cost basis, unrealized gains, sector allocation breakdowns, and interactive performance charts pulled live from Yahoo Finance.
+          </p>
+          <p class="product-card-desc" style="margin-top:14px;">
+            The built-in S&amp;P 500 stock screener lets you filter the entire index by 12 criteria simultaneously — P/E ratio, market cap, dividend yield, beta, profit margins, debt-to-equity, revenue growth, 52-week proximity, and more. Click any result to load full financial statements, income statement, balance sheet, and cash flow data inline. All data is fetched on-demand via yfinance. No accounts, no subscriptions, no cloud.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-chip">Individual investors</span>
+            <span class="use-case-chip">Portfolio tracking</span>
+            <span class="use-case-chip">Stock screening</span>
+            <span class="use-case-chip">Dividend monitoring</span>
+            <span class="use-case-chip">Sector analysis</span>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>Real-time P&amp;L, cost basis, and unrealized gain/loss per position</li>
+          <li>Sector allocation breakdown with visual charts</li>
+          <li>Interactive performance charts (daily, weekly, monthly, YTD)</li>
+          <li>Full financial statements inline — income, balance sheet, cash flow</li>
+          <li>Inline-editable positions — DCA entries, profit adjustments, notes</li>
+          <li>S&amp;P 500 screener: P/E, market cap, dividend yield, beta, margins, debt ratios, 52-week range, and more</li>
+          <li>12 simultaneous filter criteria with instant results</li>
+          <li>Click-through to full company financials from any screener result</li>
+          <li>Auto-refreshing data at configurable intervals</li>
+          <li>Runs locally — no accounts, no cloud, no subscriptions</li>
+          <li>Requires Python 3.8+ and <code style="color:var(--gold); font-family:monospace; font-size:0.82rem;">pip install yfinance</code></li>
+        </ul>
+      </div>
+
+      <div class="product-card-actions">
+        <a href="downloads/portfolio-tracker.zip" class="btn btn-solid" download>Download Free (.zip)</a>
+        <span class="product-badge free">Free</span>
+        <span class="product-badge">Python 3.8+</span>
+        <span class="product-badge">Local · No accounts</span>
+        <p class="tos-warning" style="width:100%; margin-top:8px;">
+          FREE — NO WARRANTY. NOT FINANCIAL ADVICE — JUST A TOOL.&nbsp;
+          Requires Python 3.8+ · <code>pip install yfinance</code>
+        </p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         COMING SOON — SEC FILING ANALYZER
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="section-divider">&#x2726; &#x2726; &#x2726;</div>
+
+    <h2 class="section-title" style="font-size:1.5rem; margin-bottom:8px;">In Development</h2>
+    <p class="section-subtitle" style="font-size:0.88rem; color:var(--text-dim); margin-bottom:40px;">
+      Tools currently being built. Follow <a href="about.html">our work</a> for updates.
+    </p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:24px;">
+
+      <div class="product-card coming-soon">
+        <div class="product-card-category">Regulatory Analysis</div>
+        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">SEC Filing Analyzer</h3>
+        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
+          Automated parsing of SEC filings — 10-K, 10-Q, 8-K, and proxy statements. Extracts key financial metrics, flags material changes year-over-year, and generates summary reports in seconds. Stop reading 200-page filings manually.
+        </p>
+        <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:16px;">Planned price: <strong style="color:var(--gold);">$25</strong></div>
+        <div class="coming-soon-badge">Coming Soon</div>
+      </div>
+
+      <div class="product-card coming-soon">
+        <div class="product-card-category">Quantitative Trading</div>
+        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">Trading Signal Backtester</h3>
+        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
+          Backtest any trading strategy against historical data with configurable signal logic, position sizing rules, and full performance analytics. Sharpe ratio, max drawdown, win rate, and equity curve visualization. Build it, test it, trust it.
+        </p>
+        <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:16px;">Planned price: <strong style="color:var(--gold);">$20</strong></div>
+        <div class="coming-soon-badge">Coming Soon</div>
       </div>
 
     </div>
 
-    <div class="divider-ornament">&#x2726; &#x2726; &#x2726;</div>
+    <!-- ════════════════════════════════════════════════════════════════
+         GAMES SECTION
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="section-divider">&#x2726; &#x2726; &#x2726;</div>
 
-    <h2 class="section-subtitle">Games — Coming Soon</h2>
-    <div class="card-grid">
+    <h2 class="section-title" style="font-size:1.5rem; margin-bottom:8px;">Games</h2>
+    <p class="section-subtitle" style="font-size:0.88rem; color:var(--text-dim); margin-bottom:40px;">
+      Narrative and strategy games in development. Ambitious projects — built at our own pace.
+    </p>
 
-      <div class="card card-coming-soon">
-        <div class="card-category">Strategy / Roguelike</div>
-        <h3>Descent of Rome</h3>
-        <p>An Isaac-style roguelike set in the fall of Rome. 7 playable characters, 100+ items, 44 synergies, 48+ enemy types, 12+ bosses, active items, trinkets, omens, and Greed Mode. All hand-crafted, no external assets.</p>
-        <div class="card-badge">Coming Soon</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:24px;">
+
+      <div class="product-card coming-soon">
+        <div class="product-card-category">Strategy · Roguelike</div>
+        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">Descent of Rome</h3>
+        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
+          An Isaac-style roguelike set in the fall of the Roman Empire. 7 playable characters, 100+ items, 44 synergies, 48+ enemy types, 12+ bosses, active items, trinkets, omens, and Greed Mode. Handcrafted — no procedurally generated filler.
+        </p>
+        <div class="coming-soon-badge">Coming Soon</div>
       </div>
 
-      <div class="card card-coming-soon">
-        <div class="card-category">Narrative / Interactive Fiction</div>
-        <h3>Disconnected</h3>
-        <p>A story told through screens. An Emily is Away-style narrative game about social media, isolation, and the relationships we build — and break — online. Multiple acts, branching choices, and endings shaped by how you treat the people in your feed.</p>
-        <div class="card-badge">Coming Soon</div>
+      <div class="product-card coming-soon">
+        <div class="product-card-category">Narrative · Interactive Fiction</div>
+        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">Disconnected</h3>
+        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
+          A story told through screens. An Emily is Away-style narrative game about social media, isolation, and the relationships we build and break online. Multiple acts, branching choices, and endings shaped by how you treat the people in your feed.
+        </p>
+        <div class="coming-soon-badge">Coming Soon</div>
       </div>
 
-      <div class="card card-coming-soon">
-        <div class="card-category">Grand Strategy</div>
-        <h3>Untitled Empire Builder</h3>
-        <p>A freemium mobile strategy game in the tradition of Rise of Kingdoms. Build your civilization from a single settlement to continental dominance. Designed for the patient and the ambitious.</p>
-        <div class="card-badge">In Development</div>
+      <div class="product-card coming-soon">
+        <div class="product-card-category">Grand Strategy</div>
+        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">Untitled Empire Builder</h3>
+        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
+          A mobile strategy game in the tradition of Rise of Kingdoms. Build from a single settlement to continental dominance. Designed for the patient and the ambitious. Freemium model with no pay-to-win mechanics.
+        </p>
+        <div class="coming-soon-badge">In Development</div>
       </div>
 
     </div>
+
   </div>
 </section>
 
@@ -121,15 +485,17 @@
     <div class="footer-links">
       <a href="research.html">Research</a>
       <a href="software.html">Software</a>
+      <a href="writer.html">Writer</a>
       <a href="chrome-extensions.html">Extensions</a>
-      <a href="about.html">About</a><a href="quotes.html">Wisdom</a><a href="contact.html">Contact</a>
+      <a href="games.html">Games</a>
+      <a href="quotes.html">Wisdom</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </div>
-    <p>&copy; 2026 luppiter Group. All rights reserved.</p>
+    <p>&copy; 2026 Iuppiter Group. All rights reserved.</p>
   </div>
 </footer>
 
 <script src="main.js"></script>
 </body>
 </html>
-
-
