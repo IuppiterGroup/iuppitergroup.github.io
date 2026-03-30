@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iuppiter Writer — luppiter Group</title>
+  <meta name="description" content="Iuppiter Writer — A Word-compatible document editor. Web version runs in any browser. Desktop version opens and saves .docx files natively.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <style>
+    /* ---- Writer page extras ---- */
+    .beta-banner {
+      background: linear-gradient(135deg, rgba(196,164,74,0.12) 0%, rgba(196,164,74,0.04) 100%);
+      border: 1px solid rgba(196,164,74,0.4);
+      border-left: 4px solid var(--gold);
+      border-radius: 4px;
+      padding: 20px 28px;
+      margin-bottom: 40px;
+    }
+    .beta-banner h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .beta-banner p, .beta-banner li {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .beta-banner ul {
+      margin: 8px 0 0 20px;
+    }
+    .beta-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(196,164,74,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      vertical-align: middle;
+      margin-left: 12px;
+      position: relative;
+      top: -4px;
+    }
+    .product-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 60%),
+        var(--bg-primary);
+    }
+    .product-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--cream);
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+    }
+    .product-hero .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 580px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+    .download-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color .25s, transform .2s;
+    }
+    .download-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-2px);
+    }
+    .download-card .version-label {
+      font-size: 0.72rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 10px;
+    }
+    .download-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+    .download-card .price {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .download-card .price.free {
+      color: var(--cream-dim);
+      font-size: 1.3rem;
+    }
+    .download-card p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .feature-cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+    .feature-col h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream);
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .feature-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    .feature-col ul li {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(42,42,53,0.6);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .feature-col ul li::before {
+      content: "✦";
+      color: var(--gold-dim);
+      font-size: 0.7rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .demo-placeholder {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      height: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin: 40px 0;
+      gap: 12px;
+    }
+    .demo-placeholder .demo-icon {
+      font-size: 3rem;
+      opacity: 0.4;
+    }
+    .demo-placeholder p {
+      opacity: 0.6;
+    }
+    .disclaimer-box {
+      background: rgba(139,26,26,0.08);
+      border: 1px solid rgba(139,26,26,0.25);
+      border-left: 4px solid #8b1a1a;
+      border-radius: 4px;
+      padding: 24px 28px;
+      margin: 40px 0;
+    }
+    .disclaimer-box h3 {
+      font-family: 'Cinzel', serif;
+      color: #c44;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .disclaimer-box p, .disclaimer-box li {
+      font-size: 0.87rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .disclaimer-box ul {
+      margin: 8px 0 0 20px;
+    }
+    .policy-section h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      margin-top: 28px;
+    }
+    .policy-section p, .policy-section li {
+      font-size: 0.87rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .policy-section ul {
+      margin: 8px 0 12px 20px;
+    }
+    .donate-block {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .donate-block p {
+      color: var(--text-dim);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
+      .feature-cols { grid-template-columns: 1fr; }
+      .download-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">lUPPITER <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="writer.html" class="active">Writer</a></li>
+      <li><a href="chrome-extensions.html">Extensions</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="quotes.html">Wisdom</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Product Hero -->
+<header class="product-hero">
+  <div class="container">
+    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
+    <h1>Iuppiter Writer <span class="beta-badge">Beta</span></h1>
+    <p class="subtitle">A Word-compatible document editor. The web version runs in any browser — no install required. The desktop version opens and saves real .docx files natively on your machine.</p>
+    <a href="#download" class="hero-cta">Download Now</a>
+  </div>
+</header>
+
+<section id="download">
+  <div class="container">
+
+    <!-- Beta Warning -->
+    <div class="beta-banner">
+      <h3>&#9888; Beta Software — Early Release</h3>
+      <p>Iuppiter Writer is currently in beta. It is functional and usable, but may contain bugs.</p>
+      <ul>
+        <li>Does not yet support: Track Changes, Comments, Review features, Mail Merge, Macros</li>
+        <li>Some complex .docx formatting may not render perfectly</li>
+        <li>Use at your own risk — always keep backups of important documents</li>
+      </ul>
+    </div>
+
+    <!-- Download Cards -->
+    <div class="download-grid">
+
+      <div class="download-card">
+        <div class="version-label">Version 1 · Web</div>
+        <h3>Web Version</h3>
+        <p>A full-featured word processor that runs entirely in your browser. No installation, no accounts, no cloud. Just open the HTML file and start writing. Works offline.</p>
+        <div class="price free">Free</div>
+        <a href="downloads/iuppiter-writer-web.zip" class="btn btn-solid" download>Download (.zip)</a>
+        <p class="tos-warning">Single HTML file · Runs in any modern browser · No install needed</p>
+      </div>
+
+      <div class="download-card">
+        <div class="version-label">Version 2 · Desktop</div>
+        <h3>Desktop Version</h3>
+        <p>A native Python application that reads and writes real .docx files. Full round-trip fidelity — open existing Word documents, edit them, and save back. Requires Python 3 + pip install.</p>
+        <div class="price">$5</div>
+        <!-- TODO: Replace #buy with Stripe payment link -->
+        <a href="#buy" class="btn btn-solid">Buy &amp; Download — $5</a>
+        <p class="tos-warning">Requires Python 3.8+ · <code>pip install python-docx Pillow</code> · Windows / Mac / Linux</p>
+      </div>
+
+    </div>
+
+    <!-- Demo Placeholder -->
+    <div class="demo-placeholder">
+      <div class="demo-icon">📄</div>
+      <p>Screenshots / Demo — Coming Soon</p>
+    </div>
+
+    <!-- Features -->
+    <h2 class="section-title">Features</h2>
+    <p class="section-subtitle">Two versions, one vision: a clean, capable writing environment</p>
+
+    <div class="feature-cols">
+
+      <div class="feature-col">
+        <h3>Web Version (Free)</h3>
+        <ul>
+          <li>Runs entirely in the browser — no install</li>
+          <li>Microsoft Word-style ribbon interface</li>
+          <li>Bold, Italic, Underline, Strikethrough</li>
+          <li>Font family and size picker</li>
+          <li>Text color and highlight</li>
+          <li>Paragraph alignment (L / C / R / Justify)</li>
+          <li>Bullet and numbered lists</li>
+          <li>Heading styles (H1–H6)</li>
+          <li>Find &amp; Replace</li>
+          <li>Table insertion</li>
+          <li>Image insertion</li>
+          <li>Print / Export to PDF via browser</li>
+          <li>Open and save .docx files (via JSZip)</li>
+          <li>Page layout view with ruler</li>
+          <li>Header &amp; Footer editing</li>
+          <li>Word and character count</li>
+          <li>Keyboard shortcuts (Ctrl+B, S, Z, Y, etc.)</li>
+          <li>Dark mode</li>
+          <li>Works offline after download</li>
+        </ul>
+      </div>
+
+      <div class="feature-col">
+        <h3>Desktop Version ($5)</h3>
+        <ul>
+          <li>Native .docx read/write — true Word compatibility</li>
+          <li>Full round-trip fidelity (open → edit → save)</li>
+          <li>python-docx powered — industry-standard library</li>
+          <li>Rich text formatting with per-character precision</li>
+          <li>Paragraph styles: Normal, Heading 1–6, Title, Subtitle, Quote</li>
+          <li>Line spacing control</li>
+          <li>Indent / outdent</li>
+          <li>Bullet and numbered lists</li>
+          <li>Font family and size</li>
+          <li>Text color and highlight</li>
+          <li>Tables (open existing)</li>
+          <li>Image rendering (via Pillow)</li>
+          <li>Undo / Redo stack</li>
+          <li>Find &amp; Replace</li>
+          <li>Print support</li>
+          <li>Recent files list</li>
+          <li>Dark mode toggle</li>
+          <li>Runs on Windows, Mac, Linux</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Beta Disclaimer (full) -->
+    <div class="disclaimer-box">
+      <h3>&#9888; Beta Disclaimer</h3>
+      <p><strong>BETA SOFTWARE — This is an early release.</strong> Iuppiter Writer is functional but not production-complete.</p>
+      <ul>
+        <li><strong>Does not yet support:</strong> Track Changes, Comments, Review features, Mail Merge, Macros</li>
+        <li><strong>Some complex .docx formatting</strong> (advanced tables, embedded objects, custom styles) may not render perfectly</li>
+        <li><strong>Use at your own risk</strong> — always keep backups of important documents</li>
+        <li>This is not a replacement for Microsoft Word for mission-critical or professional publishing work</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Terms & Privacy -->
+<section id="terms">
+  <div class="container">
+    <h2 class="section-title">Terms of Service &amp; Privacy</h2>
+    <div class="gold-rule"></div>
+
+    <div class="policy-section" style="max-width:760px; margin:0 auto;">
+
+      <h3>Terms of Service</h3>
+      <ul>
+        <li><strong>As-is software.</strong> Iuppiter Writer is provided as-is, with no warranty of any kind, expressed or implied. Use it at your own risk.</li>
+        <li><strong>Beta software may contain bugs.</strong> Expect rough edges. Save your work frequently. Keep backups.</li>
+        <li><strong>Not mission-critical.</strong> This software is not a replacement for Microsoft Word for professional publishing, legal, or mission-critical document work.</li>
+        <li><strong>No data collection.</strong> All processing happens locally on your machine. Nothing is transmitted anywhere. We have no servers receiving your documents.</li>
+        <li><strong>No redistribution.</strong> The $5 desktop license is for personal use. Do not redistribute or resell the software.</li>
+        <li><strong>Limitation of liability.</strong> Iuppiter Group shall not be liable for any damages — direct, indirect, incidental, special, or consequential — arising from the use or inability to use this software. In no event shall our liability exceed the amount you paid for the software.</li>
+        <li><strong>No refunds.</strong> Due to the digital nature of the product, all sales are final.</li>
+      </ul>
+
+      <h3>Privacy Policy</h3>
+      <ul>
+        <li><strong>No data collected.</strong> Iuppiter Writer does not collect, store, or transmit any personal data, document contents, or usage information.</li>
+        <li><strong>All local.</strong> Every file you open and every document you save stays on your machine. Period.</li>
+        <li><strong>No server communication.</strong> The software makes no network requests. Your work is yours alone.</li>
+        <li><strong>No accounts required.</strong> No registration, no login, no cloud sync.</li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<!-- Donate -->
+<div class="donate-block">
+  <p>Find Iuppiter Writer useful? Consider supporting continued development.</p>
+  <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn" target="_blank" rel="noopener noreferrer">&#9825; Donate</a>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="writer.html">Writer</a>
+      <a href="chrome-extensions.html">Extensions</a>
+      <a href="about.html">About</a>
+      <a href="quotes.html">Wisdom</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 luppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
