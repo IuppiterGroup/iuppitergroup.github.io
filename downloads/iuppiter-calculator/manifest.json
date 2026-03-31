@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Iuppiter Calculator",
-  "version": "1.0.0",
-  "description": "A clean, offline calculator with dark theme and Iuppiter branding. Fully local — no network access, no data collection.",
+  "version": "2.0.0",
+  "description": "A full scientific calculator with dark theme and Iuppiter branding. Trig, logarithms, powers, factorial, memory, DEG/RAD modes — fully local, no network access, no data collection.",
   "action": {
     "default_popup": "popup.html",
     "default_title": "Iuppiter Calculator",

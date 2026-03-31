@@ -10,6 +10,7 @@
   <div class="calc-wrapper">
     <div class="calc-header">
       <span class="calc-brand">IUPPITER</span>
+      <button class="btn-angle" id="angleModeBtn" data-action="anglemode">DEG</button>
     </div>
 
     <div class="calc-display">
@@ -17,6 +18,34 @@
       <div class="calc-result" id="result">0</div>
     </div>
 
+    <!-- Scientific section (6 columns) -->
+    <div class="calc-sci">
+      <!-- Row 1: 2nd + trig + ln/log -->
+      <button class="btn btn-second" id="btnSecond" data-action="second">2nd</button>
+      <button class="btn btn-sci" id="btnSin" data-action="sin">sin</button>
+      <button class="btn btn-sci" id="btnCos" data-action="cos">cos</button>
+      <button class="btn btn-sci" id="btnTan" data-action="tan">tan</button>
+      <button class="btn btn-sci" id="btnLn"  data-action="ln">ln</button>
+      <button class="btn btn-sci" id="btnLog" data-action="log">log</button>
+
+      <!-- Row 2: parens + power ops -->
+      <button class="btn btn-sci" data-action="lparen">(</button>
+      <button class="btn btn-sci" data-action="rparen">)</button>
+      <button class="btn btn-sci" data-action="square">x²</button>
+      <button class="btn btn-sci" data-action="power">x<sup>y</sup></button>
+      <button class="btn btn-sci" data-action="sqrt">√</button>
+      <button class="btn btn-sci" data-action="fact">n!</button>
+
+      <!-- Row 3: constants + memory -->
+      <button class="btn btn-sci" data-action="pi">π</button>
+      <button class="btn btn-sci" data-action="eul">e</button>
+      <button class="btn btn-mem" data-action="memclear">MC</button>
+      <button class="btn btn-mem" data-action="memrecall">MR</button>
+      <button class="btn btn-mem" data-action="memadd">M+</button>
+      <button class="btn btn-mem" data-action="memsub">M−</button>
+    </div>
+
+    <!-- Number pad (4 columns) — same layout as before -->
     <div class="calc-buttons">
       <!-- Row 1 -->
       <button class="btn btn-fn" data-action="clear">C</button>
