@@ -1,0 +1,181 @@
+/* ── Reset & Base ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 320px;
+  background: #0d0d12;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* ── Wrapper ──────────────────────────────────────────── */
+.calc-wrapper {
+  background: #111118;
+  border: 1px solid rgba(196, 164, 74, 0.2);
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid rgba(196, 164, 74, 0.12);
+}
+
+.calc-brand {
+  font-family: 'Georgia', serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #c4a44a;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* ── Display ──────────────────────────────────────────── */
+.calc-display {
+  background: #0a0a0f;
+  padding: 16px 20px 14px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  border-bottom: 1px solid rgba(196, 164, 74, 0.08);
+}
+
+.calc-expression {
+  font-size: 0.8rem;
+  color: rgba(196, 164, 74, 0.5);
+  min-height: 1.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  direction: rtl;
+  text-align: right;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.calc-result {
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: #f0e8d5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  direction: rtl;
+  text-align: right;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  transition: color 0.1s;
+}
+
+.calc-result.error {
+  color: #e05a5a;
+  font-size: 1.4rem;
+}
+
+/* ── Button Grid ──────────────────────────────────────── */
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(196, 164, 74, 0.08);
+  padding: 1px;
+}
+
+/* ── Base Button ──────────────────────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  font-size: 1.3rem;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, transform 0.08s;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.btn:active {
+  transform: scale(0.94);
+}
+
+/* Number buttons */
+.btn-num {
+  background: #1a1a24;
+  color: #e8e0cc;
+}
+.btn-num:hover {
+  background: #22222f;
+}
+
+/* Function buttons (C, +/-, %) */
+.btn-fn {
+  background: #1e1d2a;
+  color: #c4a44a;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.btn-fn:hover {
+  background: #28273a;
+}
+
+/* Operator buttons */
+.btn-op {
+  background: #1c1a14;
+  color: #c4a44a;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.btn-op:hover {
+  background: #272514;
+}
+
+/* Active operator highlight */
+.btn-op.active {
+  background: #c4a44a;
+  color: #0a0a0f;
+}
+
+/* Equals button */
+.btn-eq {
+  background: #c4a44a;
+  color: #0a0a0f;
+  font-size: 1.6rem;
+  font-weight: 400;
+  grid-row: span 1;
+}
+.btn-eq:hover {
+  background: #d4b55e;
+}
+.btn-eq:active {
+  background: #b8963e;
+}
+
+/* Backspace button — use operator color, smaller icon */
+.btn-backspace {
+  font-size: 1.1rem;
+}
+
+/* Wide 0 button */
+.btn-wide {
+  grid-column: span 2;
+  justify-content: flex-start;
+  padding-left: 26px;
+  font-size: 1.3rem;
+}
