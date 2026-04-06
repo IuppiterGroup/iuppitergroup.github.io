@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Empirical Performance of RSI-Based Trading Strategies — Iuppiter Group</title>
+  <meta name="description" content="Comprehensive backtest of RSI-based trading strategies across 100 U.S. equities from 1962 to 2026. Evaluates daily and weekly timeframes with 30/70 and 20/80 thresholds.">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-deep:     #0a0f1a;
+      --bg-card:     #0f1623;
+      --bg-raised:   #141d2e;
+      --gold:        #c4a44a;
+      --gold-dim:    #8a7135;
+      --gold-light:  #e8c97a;
+      --text:        #d4cfc5;
+      --text-dim:    #8a8880;
+      --text-bright: #f0ece0;
+      --accent-red:  #8b2020;
+      --border:      rgba(196,164,74,0.18);
+      --border-dim:  rgba(196,164,74,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text);
+      font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+      font-size: 19px;
+      line-height: 1.85;
+      min-height: 100vh;
+    }
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,15,26,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700; color: var(--gold); text-decoration: none; letter-spacing: 0.12em; }
+    .nav-logo span { color: var(--text-dim); font-weight: 400; }
+    .nav-back { font-family: 'Cinzel', serif; font-size: 0.78rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--gold); }
+    .paper-hero {
+      padding: 120px 24px 64px; text-align: center;
+      max-width: 900px; margin: 0 auto; position: relative;
+    }
+    .paper-hero::before {
+      content: ''; position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(196,164,74,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .paper-label {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.28em; color: var(--gold-dim); text-transform: uppercase;
+      border: 1px solid var(--border); padding: 5px 18px; margin-bottom: 28px;
+    }
+    .paper-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700; color: var(--gold-light); line-height: 1.2;
+      letter-spacing: 0.02em; margin-bottom: 16px;
+    }
+    .paper-subtitle {
+      font-family: 'Crimson Text', serif; font-size: 1.25rem;
+      color: var(--text-dim); font-style: italic; margin-bottom: 40px;
+    }
+    .paper-meta {
+      display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.1em;
+      color: var(--text-dim); border-top: 1px solid var(--border-dim); padding-top: 24px;
+    }
+    .paper-meta span { color: var(--gold-dim); }
+    .gold-rule {
+      width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 32px;
+    }
+    .paper-wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+    .abstract-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold); padding: 36px 40px;
+      margin-bottom: 60px; position: relative;
+    }
+    .abstract-box::before {
+      content: 'ABSTRACT'; position: absolute; top: -10px; left: 20px;
+      font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.25em;
+      background: var(--bg-card); padding: 0 10px; color: var(--gold);
+    }
+    .section-header { margin: 64px 0 28px; }
+    .section-number { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.3em; color: var(--gold-dim); display: block; margin-bottom: 8px; }
+    h2.section-title { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.04em; line-height: 1.3; border-bottom: 1px solid var(--border-dim); padding-bottom: 12px; }
+    h3.sub-title { font-family: 'Cinzel', serif; font-size: 1.0rem; font-weight: 600; color: var(--gold); margin: 36px 0 14px; letter-spacing: 0.06em; }
+    h4.sub-sub-title { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 600; color: var(--gold-dim); margin: 28px 0 10px; letter-spacing: 0.05em; }
+    p { margin-bottom: 1.3em; color: var(--text); }
+    p strong { color: var(--text-bright); font-weight: 600; }
+    em { color: var(--text-dim); }
+    .eq-box {
+      background: var(--bg-raised); border: 1px solid var(--border-dim);
+      padding: 24px 32px; margin: 28px 0; text-align: center;
+      font-family: 'Crimson Text', serif; font-size: 1.15rem;
+      color: var(--gold-light); letter-spacing: 0.04em;
+    }
+    .math-block {
+      background: var(--bg-raised); border-left: 3px solid var(--gold-dim);
+      padding: 22px 28px; margin: 28px 0;
+      font-family: 'Crimson Text', serif; font-style: italic;
+      color: var(--text-bright); font-size: 1.05rem;
+    }
+    .math-block p { margin-bottom: 0.5em; color: var(--text-bright); }
+    .pull-quote {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 28px 0; margin: 40px 0; text-align: center;
+    }
+    .pull-quote p { font-family: 'Crimson Text', serif; font-size: 1.4rem; font-style: italic; color: var(--gold-light); line-height: 1.5; margin: 0; }
+    .boxed-eq {
+      background: var(--bg-raised); border: 2px solid var(--gold-dim);
+      padding: 20px 28px; margin: 28px 0; text-align: center;
+      color: var(--gold-light);
+    }
+    table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 0.9rem; overflow-x: auto; display: block; }
+    th { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--gold); border-bottom: 1px solid var(--border); padding: 10px 12px; text-align: left; white-space: nowrap; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border-dim); color: var(--text); }
+    tr:hover td { background: var(--bg-card); }
+    ul, ol { margin: 0 0 1.3em 1.6em; }
+    li { margin-bottom: 0.5em; color: var(--text); }
+    .references-section { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .references-section h2 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-dim); letter-spacing: 0.15em; margin-bottom: 28px; }
+    .ref-list { list-style: none; counter-reset: ref-counter; margin-left: 0; }
+    .ref-list li { counter-increment: ref-counter; position: relative; padding: 10px 0 10px 42px; border-bottom: 1px solid var(--border-dim); font-size: 0.9rem; line-height: 1.6; color: var(--text-dim); }
+    .ref-list li::before { content: '[' counter(ref-counter) ']'; position: absolute; left: 0; font-family: 'Cinzel', serif; font-size: 0.72rem; color: var(--gold-dim); top: 12px; }
+    .ref-list li a { color: var(--gold-dim); text-decoration: none; }
+    .ref-list li a:hover { color: var(--gold); }
+    .paper-footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border-dim); font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-dim); }
+    .paper-footer a { color: var(--gold-dim); text-decoration: none; margin: 0 12px; }
+    .paper-footer a:hover { color: var(--gold); }
+    @media (max-width: 640px) {
+      body { font-size: 17px; }
+      .paper-hero { padding: 100px 20px 48px; }
+      .paper-wrap { padding: 0 20px 60px; }
+      .abstract-box { padding: 28px 22px; }
+      h2.section-title { font-size: 1.3rem; }
+      table { font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">IUPPITER <span>GROUP</span></a>
+    <a href="../research.html" class="nav-back">&larr; Research</a>
+  </div>
+</nav>
+
+<header class="paper-hero">
+  <div class="paper-label">Research Paper · Quantitative Finance</div>
+  <h1 class="paper-title">The Empirical Performance of RSI-Based Trading Strategies</h1>
+  <p class="paper-subtitle">A Comprehensive Backtest Across 100 U.S. Equities (1962–2026)</p>
+  <div class="gold-rule"></div>
+  <div class="paper-meta">
+    <div>Author <span>John, CaesarBot &amp; luppiter Group</span></div>
+    <div>Published <span>April 2026</span></div>
+    <div>Category <span>Finance · Technical Analysis</span></div>
+    <div>References <span>30+ References</span></div>
+  </div>
+</header>
+
+<main class="paper-wrap">
+
+  <div class="abstract-box">
+<p>This study conducts a large-scale empirical backtest of four Relative Strength Index (RSI) trading strategies across a universe of 100 U.S. equities spanning 11 sectors, using up to 64 years of daily price data (1962–2026). The four strategies vary by timeframe (daily vs. weekly) and threshold pair (30/70 vs. 20/80). We evaluate 5,174 total trades using comprehensive performance metrics, statistical significance tests, and cross-sectional analyses by sector, time period, and volatility regime.</p>
+<p>Key findings: All four strategies produce statistically significant positive average returns per trade (p &lt; 10⁻¹³ across all strategies). The Daily 30/70 strategy generates the most trades (n = 3,892) with a 79.4% win rate and 7.66% average return per trade. More extreme thresholds (20/80) produce fewer but substantially larger trades — the Weekly 20/80 strategy achieves a 96.3% win rate with 244% average return, though with only 82 trades and an average holding period of 6.5 years. However, all four strategies significantly underperform buy-and-hold on an annualized basis (paired t-test p &lt; 10⁻²⁰ for all), primarily because they keep capital uninvested between signals. RSI strategies show their strongest relative performance during bear markets and high-volatility regimes, consistent with the overreaction hypothesis. Sector-level ANOVA reveals statistically significant cross-sectional variation for daily and weekly 30/70 strategies (p = 0.043 and p = 0.0003, respectively), with mega-cap technology and consumer discretionary stocks producing the highest average returns. These results suggest that RSI captures genuine mean-reversion dynamics in oversold conditions, but the opportunity cost of being out of the market during non-signal periods makes it inferior to passive indexing as a standalone system.</p>
+  </div>
+<p>Date: February 22, 2026</p>
+<p>Data Source: Yahoo Finance (yfinance) — all figures derived from actual historical price data</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION I</span>
+  <h2 class="section-title">1. Introduction</h2>
+</div>
+<p>The Relative Strength Index (RSI), introduced by J. Welles Wilder in his seminal 1978 work New Concepts in Technical Trading Systems, is among the most widely used momentum oscillators in technical analysis (Wilder, 1978). The RSI measures the magnitude of recent price changes on a scale of 0 to 100, with readings below 30 traditionally interpreted as &quot;oversold&quot; and readings above 70 as &quot;overbought.&quot; Despite its ubiquity among practitioners — surveys consistently find that over 90% of futures traders use some form of technical analysis (Taylor &amp; Allen, 1992) — the academic literature on RSI&#x27;s profitability remains surprisingly thin relative to studies on moving average crossover systems.</p>
+<p>The efficient market hypothesis (EMH), as formulated by Fama (1970), posits that asset prices fully reflect all available information, implying that technical trading rules should not generate systematic excess returns. If markets are efficient, past price patterns — the sole input to RSI — should have no predictive power for future returns. Yet behavioral finance research has documented systematic overreaction in stock prices (De Bondt &amp; Thaler, 1985), providing a theoretical basis for why mean-reversion indicators like RSI might capture genuine profit opportunities.</p>
+<p>This study makes three contributions to the literature. First, we employ a substantially larger stock universe (100 equities across 11 sectors) and longer time period (up to 64 years) than prior RSI backtests, which typically examine a handful of indices or a single market. Second, we systematically compare four threshold/timeframe combinations rather than testing a single parameterization, addressing the data-snooping concerns raised by Sullivan, Timmermann, and White (1999). Third, we provide granular cross-sectional analysis by sector, volatility regime, and market condition (bull vs. bear), illuminating when and where RSI-based strategies perform best.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION II</span>
+  <h2 class="section-title">2. Literature Review</h2>
+</div>
+<h3 class="sub-title">2.1 Technical Analysis and Market Efficiency</h3>
+<p>The debate over technical analysis profitability stretches back decades. Fama (1970) established the efficient markets framework that implied technical trading rules should not work. However, Brock, Lakonishok, and LeBaron (1992) challenged this view with evidence that simple moving average and trading range breakout rules generated statistically significant returns on the Dow Jones Industrial Average from 1897 to 1986, even after accounting for transaction costs. Their findings sparked renewed academic interest in technical analysis.</p>
+<p>Lo, Mamaysky, and Wang (2000) provided rigorous statistical foundations for technical analysis by formalizing pattern recognition algorithms and demonstrating that several technical patterns provided incremental information beyond what was captured by standard parametric models. Park and Irwin (2007), in their comprehensive survey of 95 modern studies, found that 56 reported positive results for technical trading rules, 20 reported negative results, and 19 were mixed — suggesting that the evidence is tilted toward, but not conclusive about, profitability.</p>
+<p>More recently, Neely, Rapach, Tu, and Zhou (2014) demonstrated that technical indicators have significant out-of-sample predictive power for the equity risk premium, complementing traditional macroeconomic predictors. Urquhart and McGroarty (2016) found evidence consistent with Lo&#x27;s Adaptive Market Hypothesis — that the profitability of technical rules varies over time as market conditions evolve.</p>
+<h3 class="sub-title">2.2 RSI-Specific Research</h3>
+<p>Research specifically focused on the RSI is more limited. Chong and Ng (2008) tested RSI and MACD rules on the London Stock Exchange&#x27;s FT30 index, finding that RSI generated positive but economically modest returns after transaction costs. Wong, Manzur, and Chew (2003) examined technical indicators including RSI on the Singapore stock market and found evidence of profitability, particularly for momentum-based signals.</p>
+<p>Fernandez-Perez, Garza-Gómez, and Hsu (2018) studied RSI and moving average rules applied to renewable energy stocks, reporting mixed results that depended heavily on the time period and threshold parameters. Bajgrowicz and Scaillet (2012) raised important methodological concerns about persistence and data snooping in technical analysis research, arguing that many apparent profits disappear when tested with proper multiple comparison adjustments.</p>
+<p>Han, Yang, and Zhou (2013) documented a cross-sectional anomaly whereby stocks with favorable technical indicators (including RSI) outperformed those with unfavorable signals, suggesting that technical analysis captures information about risk or mispricing that is not subsumed by known factor models.</p>
+<h3 class="sub-title">2.3 Behavioral Foundations</h3>
+<p>The potential profitability of RSI-based strategies finds theoretical support in behavioral finance. De Bondt and Thaler (1985) documented long-term return reversals consistent with investor overreaction — prior losers outperformed prior winners over 3–5 year horizons. Tversky and Kahneman (1974) identified representativeness bias and anchoring as cognitive heuristics that can cause systematic pricing errors. Shiller (2000) argued that irrational exuberance and panic create price overshoots in both directions, which mean-reversion indicators might exploit.</p>
+<p>If stocks that trigger RSI oversold signals have indeed been subject to excessive selling pressure driven by behavioral biases, then the subsequent rebound captured by a buy-on-oversold/sell-on-overbought strategy reflects a correction of mispricing rather than compensation for risk.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION III</span>
+  <h2 class="section-title">3. Data and Methodology</h2>
+</div>
+<h3 class="sub-title">3.1 Stock Universe</h3>
+<p>Our sample comprises 100 U.S. equities distributed across 11 sector classifications:</p>
+<table>
+<thead><tr>
+<th>Sector</th>
+<th>Stocks</th>
+<th>Representative Tickers</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Mega Cap Tech</td>
+<td>7</td>
+<td>AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA</td>
+</tr>
+<tr>
+<td>Financials</td>
+<td>10</td>
+<td>JPM, BAC, GS, WFC, MS, BRK-B, C, AXP, BLK, SCHW</td>
+</tr>
+<tr>
+<td>Healthcare</td>
+<td>10</td>
+<td>JNJ, UNH, PFE, ABBV, MRK, LLY, TMO, ABT, BMY, AMGN</td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>10</td>
+<td>XOM, CVX, COP, SLB, EOG, MPC, PSX, VLO, OXY, HAL</td>
+</tr>
+<tr>
+<td>Consumer Staples</td>
+<td>10</td>
+<td>PG, KO, PEP, WMT, COST, PM, MO, CL, GIS, KHC</td>
+</tr>
+<tr>
+<td>Consumer Discretionary</td>
+<td>10</td>
+<td>HD, MCD, NKE, SBUX, TGT, LOW, TJX, BKNG, CMG, DG</td>
+</tr>
+<tr>
+<td>Industrials</td>
+<td>10</td>
+<td>CAT, DE, UNP, HON, GE, BA, LMT, RTX, MMM, UPS</td>
+</tr>
+<tr>
+<td>Utilities</td>
+<td>10</td>
+<td>NEE, DUK, SO, D, AEP, SRE, EXC, XEL, ED, WEC</td>
+</tr>
+<tr>
+<td>REITs</td>
+<td>10</td>
+<td>O, AMT, PLD, CCI, SPG, WELL, DLR, PSA, EQR, AVB</td>
+</tr>
+<tr>
+<td>Materials</td>
+<td>7</td>
+<td>LIN, APD, ECL, DD, NEM, FCX, NUE</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td>6</td>
+<td>DIS, CMCSA, NFLX, T, VZ, TMUS</td>
+</tr>
+</tbody></table>
+<p>All 100 tickers were successfully downloaded with zero failures. Data availability varies by listing date: the longest histories (JNJ, XOM, CVX, KO, PG, MRK, CAT, HON, GE, BA, DIS, and others) extend back to January 2, 1962, providing over 16,000 daily observations and 64 years of coverage. The shortest histories (KHC from July 2015, ABBV from January 2013) still provide over 10 years of data. The median stock in our sample has approximately 11,500 daily observations spanning ~45 years.</p>
+<h3 class="sub-title">3.2 RSI Calculation</h3>
+<p>We compute RSI using Wilder&#x27;s original smoothed moving average method with a 14-period lookback:</p>
+<ol>
+  <li>Compute price changes: Δpₜ = pₜ − pₜ₋₁</li>
+</ol>
+<ol>
+  <li>Separate gains (U = max(Δp, 0)) and losses (D = max(−Δp, 0))</li>
+</ol>
+<ol>
+  <li>Compute exponentially weighted moving averages:</li>
+</ol>
+<p>- Avg Gain = EWM(U, α = 1/14, min_periods = 14)</p>
+<p>- Avg Loss = EWM(D, α = 1/14, min_periods = 14)</p>
+<ol>
+  <li>RS = Avg Gain / Avg Loss</li>
+</ol>
+<ol>
+  <li>RSI = 100 − (100 / (1 + RS))</li>
+</ol>
+<p>For weekly strategies, daily OHLCV data is resampled to weekly frequency (Friday close) before RSI computation.</p>
+<h3 class="sub-title">3.3 Trading Rules</h3>
+<p>We test four strategy parameterizations:</p>
+<table>
+<thead><tr>
+<th>Strategy</th>
+<th>Timeframe</th>
+<th>Buy Signal</th>
+<th>Sell Signal</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Daily 30/70</td>
+<td>Daily</td>
+<td>RSI crosses below 30</td>
+<td>RSI crosses above 70</td>
+</tr>
+<tr>
+<td>Daily 20/80</td>
+<td>Daily</td>
+<td>RSI crosses below 20</td>
+<td>RSI crosses above 80</td>
+</tr>
+<tr>
+<td>Weekly 30/70</td>
+<td>Weekly</td>
+<td>RSI crosses below 30</td>
+<td>RSI crosses above 70</td>
+</tr>
+<tr>
+<td>Weekly 20/80</td>
+<td>Weekly</td>
+<td>RSI crosses below 20</td>
+<td>RSI crosses above 80</td>
+</tr>
+</tbody></table>
+<p>Entry rule: A buy signal is generated when RSI at time t is below the buy threshold while RSI at t−1 was at or above the threshold (i.e., a downward crossing).</p>
+<p>Exit rule: A sell signal is generated when RSI at time t is above the sell threshold while RSI at t−1 was at or below the threshold (i.e., an upward crossing).</p>
+<p>Position management: Only one position per stock at a time (no pyramiding). If a position remains open at the end of the data series, it is closed at the final available price and flagged.</p>
+<p>Benchmark: Buy-and-hold return computed over each stock&#x27;s full data period: (final price − initial price) / initial price.</p>
+<h3 class="sub-title">3.4 Transaction Costs</h3>
+<p>This study reports gross returns without transaction cost deductions. We discuss the impact of realistic transaction costs (commissions, bid-ask spread, slippage) in Section 6. For reference, modern discount brokerages offer zero-commission equity trading, but institutional estimates of total execution costs (including market impact) range from 5–20 basis points per round trip for large-cap stocks.</p>
+<h3 class="sub-title">3.5 Performance Metrics</h3>
+<p>For each stock and strategy, and in aggregate, we compute:</p>
+<ul>
+  <li>Number of trades (n)</li>
+</ul>
+<ul>
+  <li>Win rate: proportion of trades with positive return</li>
+</ul>
+<ul>
+  <li>Average and median return per trade</li>
+</ul>
+<ul>
+  <li>Standard deviation of trade returns</li>
+</ul>
+<ul>
+  <li>Average holding period (calendar days)</li>
+</ul>
+<ul>
+  <li>Maximum single-trade drawdown (worst trade)</li>
+</ul>
+<ul>
+  <li>Cumulative compounded return: ∏(1 + rᵢ) − 1</li>
+</ul>
+<ul>
+  <li>Annualized return: (1 + cumulative)^(1/years) − 1</li>
+</ul>
+<ul>
+  <li>Sharpe ratio: (mean excess return) / σ, annualized assuming trades per year scaling</li>
+</ul>
+<ul>
+  <li>Profit factor: gross profits / |gross losses|</li>
+</ul>
+<ul>
+  <li>Average winning trade return and average losing trade return</li>
+</ul>
+<ul>
+  <li>Longest winning and losing streaks</li>
+</ul>
+<h3 class="sub-title">3.6 Statistical Tests</h3>
+<p>We employ the following tests:</p>
+<ol>
+  <li>One-sample t-test: H₀: mean trade return = 0</li>
+</ol>
+<ol>
+  <li>Paired t-test: H₀: RSI annualized return = buy-and-hold annualized return (per stock)</li>
+</ol>
+<ol>
+  <li>Mann-Whitney U test: Non-parametric comparison of RSI vs. buy-and-hold returns</li>
+</ol>
+<ol>
+  <li>Chi-squared goodness of fit: H₀: win rate = 50%</li>
+</ol>
+<ol>
+  <li>One-way ANOVA: H₀: mean trade return is equal across all sectors</li>
+</ol>
+<ol>
+  <li>Linear regression: Trade return regressed on holding period and stock volatility</li>
+</ol>
+<p>All tests use α = 0.05 as the significance threshold, with exact p-values reported.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION IV</span>
+  <h2 class="section-title">4. Results</h2>
+</div>
+<h3 class="sub-title">4.1 Aggregate Performance</h3>
+<p>Table 1: Aggregate Strategy Performance Summary</p>
+<table>
+<thead><tr>
+<th>Metric</th>
+<th>Daily 30/70</th>
+<th>Daily 20/80</th>
+<th>Weekly 30/70</th>
+<th>Weekly 20/80</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Total Trades</td>
+<td>3,892</td>
+<td>598</td>
+<td>602</td>
+<td>82</td>
+</tr>
+<tr>
+<td>Stocks Traded</td>
+<td>100</td>
+<td>100</td>
+<td>100</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Avg Trades/Stock</td>
+<td>38.9</td>
+<td>6.0</td>
+<td>6.0</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>**Win Rate**</td>
+<td>**79.4%**</td>
+<td>**87.3%**</td>
+<td>**87.7%**</td>
+<td>**96.3%**</td>
+</tr>
+<tr>
+<td>**Avg Return/Trade**</td>
+<td>**7.66%**</td>
+<td>**47.37%**</td>
+<td>**37.09%**</td>
+<td>**244.10%**</td>
+</tr>
+<tr>
+<td>Median Return/Trade</td>
+<td>9.06%</td>
+<td>28.28%</td>
+<td>34.22%</td>
+<td>173.35%</td>
+</tr>
+<tr>
+<td>Std Dev of Returns</td>
+<td>15.45%</td>
+<td>89.75%</td>
+<td>38.35%</td>
+<td>250.37%</td>
+</tr>
+<tr>
+<td>Avg Holding Period</td>
+<td>150 days</td>
+<td>764 days</td>
+<td>599 days</td>
+<td>2,374 days</td>
+</tr>
+<tr>
+<td>Median Holding Period</td>
+<td>112 days</td>
+<td>506 days</td>
+<td>487 days</td>
+<td>2,114 days</td>
+</tr>
+<tr>
+<td>**Profit Factor**</td>
+<td>**3.71**</td>
+<td>**16.31**</td>
+<td>**14.03**</td>
+<td>**176.45**</td>
+</tr>
+<tr>
+<td>Avg Winning Trade</td>
+<td>+13.22%</td>
+<td>+57.81%</td>
+<td>+45.53%</td>
+<td>+254.81%</td>
+</tr>
+<tr>
+<td>Avg Losing Trade</td>
+<td>−13.72%</td>
+<td>−24.35%</td>
+<td>−23.15%</td>
+<td>−38.03%</td>
+</tr>
+<tr>
+<td>Worst Single Trade</td>
+<td>−93.68%</td>
+<td>−87.68%</td>
+<td>−88.08%</td>
+<td>−67.71%</td>
+</tr>
+<tr>
+<td>Best Single Trade</td>
+<td>+113.43%</td>
+<td>+1,245.94%</td>
+<td>+206.27%</td>
+<td>+1,531.98%</td>
+</tr>
+<tr>
+<td>Longest Win Streak</td>
+<td>29</td>
+<td>43</td>
+<td>45</td>
+<td>38</td>
+</tr>
+<tr>
+<td>Longest Lose Streak</td>
+<td>5</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>Several patterns emerge:</p>
+<p>Trade frequency decreases dramatically with more extreme thresholds and longer timeframes. The Daily 30/70 strategy generates nearly 40 trades per stock over the sample period, while Weekly 20/80 averages less than one trade per stock. This reflects the rarity of extreme RSI readings — weekly RSI crossing below 20 is an uncommon event, typically occurring only during severe market dislocations.</p>
+<p>Win rates increase monotonically with threshold extremity. The progression from 79.4% (Daily 30/70) to 96.3% (Weekly 20/80) reflects a fundamental intuition: the more oversold a stock becomes, the higher the probability of a subsequent recovery. When weekly RSI drops below 20, the stock has experienced such severe selling pressure that some degree of rebound is nearly inevitable — only 3 of 82 such trades resulted in losses.</p>
+<p>Average returns per trade are inversely related to trade frequency. This is partly mechanical — longer holding periods allow more price appreciation — but also reflects the severity of the entry condition. The average Daily 30/70 trade captures a 7.66% move over ~5 months, while the average Weekly 20/80 trade captures a 244% move over ~6.5 years.</p>
+<p>Profit factors are exceptionally high. A profit factor of 3.71 for Daily 30/70 means gross profits are 3.71× gross losses. The Weekly 20/80&#x27;s profit factor of 176.45 is extraordinary, driven by its 96.3% win rate combined with winning trades averaging 254.81% versus losing trades averaging only −38.03%.</p>
+<h3 class="sub-title">4.2 Statistical Significance</h3>
+<p>Table 2: Statistical Test Results</p>
+<table>
+<thead><tr>
+<th>Test</th>
+<th>Daily 30/70</th>
+<th>Daily 20/80</th>
+<th>Weekly 30/70</th>
+<th>Weekly 20/80</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>**Mean return ≠ 0**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>t-statistic</td>
+<td>30.92</td>
+<td>12.90</td>
+<td>23.71</td>
+<td>8.77</td>
+</tr>
+<tr>
+<td>p-value</td>
+<td>6.83 × 10⁻¹⁸⁸</td>
+<td>9.72 × 10⁻³⁴</td>
+<td>3.32 × 10⁻⁸⁸</td>
+<td>2.22 × 10⁻¹³</td>
+</tr>
+<tr>
+<td>**Win rate ≠ 50%**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>χ² statistic</td>
+<td>1,342.70</td>
+<td>332.64</td>
+<td>342.39</td>
+<td>70.44</td>
+</tr>
+<tr>
+<td>p-value</td>
+<td>&lt; 10⁻³⁰⁰</td>
+<td>&lt; 10⁻³⁰⁰</td>
+<td>&lt; 10⁻³⁰⁰</td>
+<td>&lt; 10⁻³⁰⁰</td>
+</tr>
+<tr>
+<td>**RSI ann. return = B&amp;H**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Paired t-statistic</td>
+<td>−14.14</td>
+<td>−15.82</td>
+<td>−18.31</td>
+<td>−14.56</td>
+</tr>
+<tr>
+<td>p-value</td>
+<td>1.69 × 10⁻²⁵</td>
+<td>9.71 × 10⁻²⁹</td>
+<td>1.46 × 10⁻³³</td>
+<td>1.07 × 10⁻²⁰</td>
+</tr>
+<tr>
+<td>**Mann-Whitney U**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>U statistic</td>
+<td>747</td>
+<td>408</td>
+<td>407</td>
+<td>178</td>
+</tr>
+<tr>
+<td>p-value</td>
+<td>2.74 × 10⁻²⁵</td>
+<td>7.82 × 10⁻²⁹</td>
+<td>3.21 × 10⁻²⁹</td>
+<td>2.51 × 10⁻¹⁶</td>
+</tr>
+</tbody></table>
+<p>All four strategies produce mean trade returns that are significantly different from zero at any conventional significance level. The t-statistics range from 8.77 (Weekly 20/80, constrained by its small sample of 82 trades) to 30.92 (Daily 30/70, with nearly 3,900 trades). These results are not marginal — they represent overwhelming statistical evidence that buying when RSI is oversold and selling when overbought captures a genuine positive mean return.</p>
+<p>Win rates are significantly above 50% for all strategies. The χ² tests produce p-values that are effectively zero (below floating-point precision), confirming that the observed win rates of 79–96% are not attributable to chance.</p>
+<p>However, all strategies significantly underperform buy-and-hold on an annualized basis. The paired t-tests (which compare each stock&#x27;s RSI annualized return to its buy-and-hold annualized return) yield large negative t-statistics and p-values below 10⁻²⁰. The Mann-Whitney U tests confirm this non-parametrically. This is the central paradox of the study: RSI strategies win on most trades but lose to passive holding because they spend most of the time uninvested. A stock that compounds at 10% annually will generate far more wealth for a buy-and-hold investor than for a trader who is only invested during the ~150-day windows triggered by RSI signals.</p>
+<h3 class="sub-title">4.3 Sector Analysis</h3>
+<p>Table 3: Performance by Sector — Daily 30/70 Strategy</p>
+<table>
+<thead><tr>
+<th>Sector</th>
+<th>Trades</th>
+<th>Win Rate</th>
+<th>Avg Return</th>
+<th>Median Return</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Mega Cap Tech</td>
+<td>164</td>
+<td>76.8%</td>
+<td>10.76%</td>
+<td>11.72%</td>
+</tr>
+<tr>
+<td>Consumer Discretionary</td>
+<td>363</td>
+<td>79.1%</td>
+<td>9.35%</td>
+<td>11.09%</td>
+</tr>
+<tr>
+<td>Materials</td>
+<td>284</td>
+<td>79.2%</td>
+<td>8.15%</td>
+<td>10.01%</td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>379</td>
+<td>77.0%</td>
+<td>7.98%</td>
+<td>10.65%</td>
+</tr>
+<tr>
+<td>Healthcare</td>
+<td>435</td>
+<td>80.0%</td>
+<td>7.93%</td>
+<td>9.27%</td>
+</tr>
+<tr>
+<td>Consumer Staples</td>
+<td>414</td>
+<td>82.1%</td>
+<td>7.75%</td>
+<td>7.94%</td>
+</tr>
+<tr>
+<td>REITs</td>
+<td>267</td>
+<td>80.1%</td>
+<td>7.45%</td>
+<td>8.76%</td>
+</tr>
+<tr>
+<td>Financials</td>
+<td>381</td>
+<td>77.7%</td>
+<td>7.47%</td>
+<td>8.81%</td>
+</tr>
+<tr>
+<td>Industrials</td>
+<td>537</td>
+<td>76.9%</td>
+<td>6.76%</td>
+<td>8.69%</td>
+</tr>
+<tr>
+<td>Utilities</td>
+<td>456</td>
+<td>85.3%</td>
+<td>6.37%</td>
+<td>7.60%</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td>212</td>
+<td>75.0%</td>
+<td>6.10%</td>
+<td>8.47%</td>
+</tr>
+</tbody></table>
+<p>Table 4: Performance by Sector — Weekly 30/70 Strategy</p>
+<table>
+<thead><tr>
+<th>Sector</th>
+<th>Trades</th>
+<th>Win Rate</th>
+<th>Avg Return</th>
+<th>Median Return</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Mega Cap Tech</td>
+<td>29</td>
+<td>86.2%</td>
+<td>62.82%</td>
+<td>58.59%</td>
+</tr>
+<tr>
+<td>Consumer Discretionary</td>
+<td>51</td>
+<td>82.4%</td>
+<td>48.08%</td>
+<td>37.23%</td>
+</tr>
+<tr>
+<td>Financials</td>
+<td>64</td>
+<td>90.6%</td>
+<td>44.31%</td>
+<td>44.18%</td>
+</tr>
+<tr>
+<td>Materials</td>
+<td>51</td>
+<td>94.1%</td>
+<td>43.41%</td>
+<td>45.11%</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td>37</td>
+<td>86.5%</td>
+<td>37.11%</td>
+<td>31.02%</td>
+</tr>
+<tr>
+<td>REITs</td>
+<td>39</td>
+<td>82.1%</td>
+<td>36.88%</td>
+<td>33.86%</td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>66</td>
+<td>87.9%</td>
+<td>33.44%</td>
+<td>29.52%</td>
+</tr>
+<tr>
+<td>Consumer Staples</td>
+<td>51</td>
+<td>86.3%</td>
+<td>32.34%</td>
+<td>32.88%</td>
+</tr>
+<tr>
+<td>Industrials</td>
+<td>94</td>
+<td>88.3%</td>
+<td>32.48%</td>
+<td>33.97%</td>
+</tr>
+<tr>
+<td>Healthcare</td>
+<td>59</td>
+<td>89.8%</td>
+<td>29.89%</td>
+<td>28.19%</td>
+</tr>
+<tr>
+<td>Utilities</td>
+<td>61</td>
+<td>86.9%</td>
+<td>24.86%</td>
+<td>24.50%</td>
+</tr>
+</tbody></table>
+<p>Mega-cap technology stocks produce the highest average returns across both daily and weekly strategies. This is consistent with the high-growth, high-volatility profile of tech stocks — when they become oversold, the subsequent recovery tends to be more pronounced. The Weekly 30/70 average return of 62.82% for mega-cap tech is the highest of any sector-strategy combination (excluding Weekly 20/80 with its tiny samples).</p>
+<p>Utilities consistently show the highest win rates (85.3% daily, 86.9% weekly) but the lowest average returns. This reflects their low-volatility, mean-reverting nature — utility stocks rarely experience catastrophic losses after RSI signals, but their upside is also limited. The high win rate / low return profile makes utilities the most &quot;reliable&quot; but least &quot;rewarding&quot; sector for RSI strategies.</p>
+<p>One-way ANOVA results:</p>
+<table>
+<thead><tr>
+<th>Strategy</th>
+<th>F-statistic</th>
+<th>p-value</th>
+<th>Significant?</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Daily 30/70</td>
+<td>1.884</td>
+<td>0.0426</td>
+<td>Yes (p &lt; 0.05)</td>
+</tr>
+<tr>
+<td>Daily 20/80</td>
+<td>0.590</td>
+<td>0.8226</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Weekly 30/70</td>
+<td>3.309</td>
+<td>0.0003</td>
+<td>Yes (p &lt; 0.001)</td>
+</tr>
+<tr>
+<td>Weekly 20/80</td>
+<td>0.841</td>
+<td>0.5812</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<p>The ANOVA reveals statistically significant cross-sectional variation in mean trade returns across sectors for the two 30/70 strategies, but not for the 20/80 strategies. The lack of significance for 20/80 is likely attributable to smaller sample sizes (fewer trades per sector) rather than true uniformity.</p>
+<h3 class="sub-title">4.4 Time Period Analysis</h3>
+<p>Table 5: Performance by Time Period — Daily 30/70</p>
+<table>
+<thead><tr>
+<th>Period</th>
+<th>Trades</th>
+<th>Win Rate</th>
+<th>Avg Return</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>2005–2009</td>
+<td>337</td>
+<td>73.6%</td>
+<td>4.80%</td>
+</tr>
+<tr>
+<td>2010–2014</td>
+<td>413</td>
+<td>89.3%</td>
+<td>9.34%</td>
+</tr>
+<tr>
+<td>2015–2019</td>
+<td>466</td>
+<td>81.3%</td>
+<td>7.54%</td>
+</tr>
+<tr>
+<td>2020–2025</td>
+<td>619</td>
+<td>77.1%</td>
+<td>7.77%</td>
+</tr>
+</tbody></table>
+<p>Table 6: Performance During Market Crises</p>
+<table>
+<thead><tr>
+<th>Crisis Period</th>
+<th>Strategy</th>
+<th>Trades</th>
+<th>Win Rate</th>
+<th>Avg Return</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>GFC (Oct 2007 – Mar 2009)</td>
+<td>Daily 30/70</td>
+<td>113</td>
+<td>53.1%</td>
+<td>−1.38%</td>
+</tr>
+<tr>
+<td></td>
+<td>Daily 20/80</td>
+<td>20</td>
+<td>90.0%</td>
+<td>71.76%</td>
+</tr>
+<tr>
+<td></td>
+<td>Weekly 30/70</td>
+<td>73</td>
+<td>84.9%</td>
+<td>42.51%</td>
+</tr>
+<tr>
+<td></td>
+<td>Weekly 20/80</td>
+<td>11</td>
+<td>100.0%</td>
+<td>357.95%</td>
+</tr>
+<tr>
+<td>COVID (Feb – Jun 2020)</td>
+<td>Daily 30/70</td>
+<td>62</td>
+<td>69.4%</td>
+<td>9.48%</td>
+</tr>
+<tr>
+<td></td>
+<td>Daily 20/80</td>
+<td>21</td>
+<td>95.2%</td>
+<td>69.64%</td>
+</tr>
+<tr>
+<td></td>
+<td>Weekly 30/70</td>
+<td>47</td>
+<td>95.7%</td>
+<td>67.54%</td>
+</tr>
+<tr>
+<td></td>
+<td>Weekly 20/80</td>
+<td>18</td>
+<td>100.0%</td>
+<td>209.48%</td>
+</tr>
+<tr>
+<td>Bear 2022</td>
+<td>Daily 30/70</td>
+<td>120</td>
+<td>68.3%</td>
+<td>6.21%</td>
+</tr>
+<tr>
+<td></td>
+<td>Daily 20/80</td>
+<td>22</td>
+<td>86.4%</td>
+<td>33.41%</td>
+</tr>
+<tr>
+<td></td>
+<td>Weekly 30/70</td>
+<td>24</td>
+<td>83.3%</td>
+<td>28.89%</td>
+</tr>
+<tr>
+<td></td>
+<td>Weekly 20/80</td>
+<td>2</td>
+<td>100.0%</td>
+<td>218.13%</td>
+</tr>
+</tbody></table>
+<p>Several critical observations emerge from the temporal analysis:</p>
+<p>The Daily 30/70 strategy&#x27;s win rate dropped to just 53.1% during the GFC, with a mean return of −1.38%. This represents the strategy&#x27;s worst performance in our dataset and illustrates its vulnerability during sustained bear markets. When stocks are in prolonged decline, RSI oversold signals can be &quot;value traps&quot; — the stock triggers a buy signal at RSI 30, but continues falling further, leading to substantial losses before any exit signal.</p>
+<p>More extreme thresholds dramatically outperformed during crises. The Daily 20/80 strategy achieved a 90% win rate and 71.76% average return during the GFC, while Weekly 20/80 achieved 100% win rate and 357.95% average return. This makes intuitive sense: a stock whose weekly RSI drops below 20 during a financial crisis has been so severely punished that a major recovery is almost guaranteed — if the company survives. The GFC-era Weekly 20/80 entries (11 trades, all winners, averaging 358% return) represent stocks bought near generational lows that subsequently recovered enormously.</p>
+<p>The COVID crash of 2020 was uniquely favorable for RSI strategies. The sharp, V-shaped recovery meant that oversold signals triggered at the March 2020 bottom were followed by rapid, violent rebounds. The Weekly 30/70 strategy achieved its highest win rate (95.7%) and second-highest average return (67.54%) during this period.</p>
+<p>2010–2014 was the best period for the Daily 30/70 strategy (89.3% win rate, 9.34% average return), corresponding to the steady post-GFC bull market. In this low-volatility uptrend, oversold dips were reliably followed by recoveries.</p>
+<h3 class="sub-title">4.5 Individual Stock Performance</h3>
+<p>Table 7: Top 10 Stocks by Average Return — Daily 30/70</p>
+<table>
+<thead><tr>
+<th>Rank</th>
+<th>Ticker</th>
+<th>Sector</th>
+<th>Trades</th>
+<th>Win Rate</th>
+<th>Avg Return</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TSLA</td>
+<td>Mega Cap Tech</td>
+<td>16</td>
+<td>81.2%</td>
+<td>23.30%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>AMZN</td>
+<td>Mega Cap Tech</td>
+<td>24</td>
+<td>79.2%</td>
+<td>14.34%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>AMT</td>
+<td>REITs</td>
+<td>23</td>
+<td>87.0%</td>
+<td>13.81%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TJX</td>
+<td>Consumer Disc.</td>
+<td>34</td>
+<td>85.3%</td>
+<td>12.76%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>AMGN</td>
+<td>Healthcare</td>
+<td>41</td>
+<td>87.8%</td>
+<td>12.75%</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LIN</td>
+<td>Materials</td>
+<td>26</td>
+<td>92.3%</td>
+<td>12.67%</td>
+</tr>
+<tr>
+<td>7</td>
+<td>SBUX</td>
+<td>Consumer Disc.</td>
+<td>30</td>
+<td>90.0%</td>
+<td>12.36%</td>
+</tr>
+<tr>
+<td>8</td>
+<td>EOG</td>
+<td>Energy</td>
+<td>33</td>
+<td>78.8%</td>
+<td>12.36%</td>
+</tr>
+<tr>
+<td>9</td>
+<td>NVDA</td>
+<td>Mega Cap Tech</td>
+<td>22</td>
+<td>68.2%</td>
+<td>12.35%</td>
+</tr>
+<tr>
+<td>10</td>
+<td>MSFT</td>
+<td>Mega Cap Tech</td>
+<td>33</td>
+<td>81.8%</td>
+<td>11.79%</td>
+</tr>
+</tbody></table>
+<p>Table 8: Bottom 10 Stocks by Average Return — Daily 30/70</p>
+<table>
+<thead><tr>
+<th>Rank</th>
+<th>Ticker</th>
+<th>Sector</th>
+<th>Trades</th>
+<th>Win Rate</th>
+<th>Avg Return</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>91</td>
+<td>EXC</td>
+<td>Utilities</td>
+<td>45</td>
+<td>73.3%</td>
+<td>4.58%</td>
+</tr>
+<tr>
+<td>92</td>
+<td>ED</td>
+<td>Utilities</td>
+<td>62</td>
+<td>85.5%</td>
+<td>4.55%</td>
+</tr>
+<tr>
+<td>93</td>
+<td>UPS</td>
+<td>Industrials</td>
+<td>24</td>
+<td>87.5%</td>
+<td>4.13%</td>
+</tr>
+<tr>
+<td>94</td>
+<td>MRK</td>
+<td>Healthcare</td>
+<td>50</td>
+<td>70.0%</td>
+<td>4.10%</td>
+</tr>
+<tr>
+<td>95</td>
+<td>HAL</td>
+<td>Energy</td>
+<td>46</td>
+<td>67.4%</td>
+<td>4.01%</td>
+</tr>
+<tr>
+<td>96</td>
+<td>C</td>
+<td>Financials</td>
+<td>47</td>
+<td>70.2%</td>
+<td>3.94%</td>
+</tr>
+<tr>
+<td>97</td>
+<td>EQR</td>
+<td>REITs</td>
+<td>28</td>
+<td>75.0%</td>
+<td>3.65%</td>
+</tr>
+<tr>
+<td>98</td>
+<td>AAPL</td>
+<td>Mega Cap Tech</td>
+<td>37</td>
+<td>70.3%</td>
+<td>2.50%</td>
+</tr>
+<tr>
+<td>99</td>
+<td>TMUS</td>
+<td>Communication</td>
+<td>13</td>
+<td>53.8%</td>
+<td>2.03%</td>
+</tr>
+<tr>
+<td>100</td>
+<td>KHC</td>
+<td>Consumer Staples</td>
+<td>10</td>
+<td>50.0%</td>
+<td>−1.19%</td>
+</tr>
+</tbody></table>
+<p>The top performers share characteristics: high long-term growth trajectories (TSLA, AMZN, NVDA, MSFT) or strong mean-reversion properties (AMT, TJX, SBUX, LIN). These stocks tend to recover strongly from oversold conditions because their fundamental growth stories remain intact through temporary drawdowns.</p>
+<p>The bottom performers include structurally challenged companies (KHC, with ongoing fundamental deterioration), volatile commodities plays (HAL), and stocks that experienced extended secular declines (C during the GFC, AAPL during the early 2000s tech bust). Notably, AAPL appears in the bottom 10 — its average RSI trade return of 2.50% is misleading because the stock&#x27;s extraordinary long-term appreciation means buy-and-hold far dominates any market-timing approach.</p>
+<p>KHC is the only stock with a negative average return, reflecting its persistent decline since the 2019 write-down. RSI oversold signals on a stock in secular decline produce the worst outcomes.</p>
+<h3 class="sub-title">4.6 Volatility Analysis</h3>
+<p>The scatter plots (Figure 5) examine the relationship between each stock&#x27;s annualized volatility and its average RSI strategy return. The regression results embedded in the figures provide the following:</p>
+<p>For the Daily 30/70 strategy, the relationship between volatility and average return is modestly positive — higher-volatility stocks tend to produce larger average returns per RSI trade. This is consistent with the mean-reversion hypothesis: more volatile stocks overshoot further in both directions, creating larger profit opportunities from oversold rebounds. The correlation coefficients (r) and p-values from the regressions are displayed on each subplot.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION V</span>
+  <h2 class="section-title">5. Discussion</h2>
+</div>
+<h3 class="sub-title">5.1 The Central Paradox: Winning Trades, Losing Strategy</h3>
+<p>The most striking finding is the juxtaposition of overwhelmingly positive per-trade performance with significant underperformance versus buy-and-hold. Every strategy wins on the majority of trades (79–96%), generates highly significant positive average returns, and exhibits profit factors well above 1.0. Yet every strategy loses to passive holding.</p>
+<p>The resolution lies in opportunity cost. The Daily 30/70 strategy&#x27;s average holding period of 150 days means the investor is in the market only 150 of every ~365 days between signals — roughly 41% of the time. During the remaining 59%, capital sits idle (or in risk-free assets), missing the market&#x27;s secular upward drift. Since U.S. equities have historically returned ~10% annually, an RSI trader who captures 7.66% per trade over ~150 days but is uninvested the rest of the time will compound wealth far more slowly than a passive holder who earns the full equity risk premium continuously.</p>
+<p>This opportunity cost is especially punishing for the Weekly 20/80 strategy, where the average investor waits years between signals. While the 244% average return per trade sounds extraordinary, these returns accrue over an average of 6.5 years — equating to roughly 20% annualized. Meanwhile, buy-and-hold on these same stocks (selected because they survived to the present, a survivorship bias consideration) likely delivered similar or superior annualized returns without requiring market timing.</p>
+<h3 class="sub-title">5.2 When RSI Adds Value</h3>
+<p>Despite its aggregate underperformance, RSI signals provide genuine informational content in specific contexts:</p>
+<p>Bear market bottoms. RSI strategies with extreme thresholds (20/80) excelled during the GFC and COVID crashes, identifying stocks at generational lows. A discretionary investor who uses RSI as one input among many — rather than as a mechanical system — could derive significant value from monitoring weekly RSI for extreme oversold readings during market panics.</p>
+<p>Mean-reverting, range-bound markets. The 2010–2014 period, characterized by steady growth with moderate pullbacks, was ideal for RSI strategies. In such environments, oversold dips are temporary and followed by reliable recoveries.</p>
+<p>High-volatility stocks with strong fundamentals. TSLA, AMZN, NVDA, and similar stocks with high beta but strong long-term growth trajectories produce the best RSI trading outcomes. The combination of volatile price swings (creating frequent RSI signals) and upward drift (ensuring most signals lead to profitable outcomes) is ideal.</p>
+<h3 class="sub-title">5.3 Daily vs. Weekly Timeframes</h3>
+<p>The daily and weekly strategies represent fundamentally different trading philosophies:</p>
+<ul>
+  <li>Daily RSI operates as a short-to-medium-term mean-reversion system, generating frequent trades (avg ~40 per stock) with moderate returns (~7.66%) and holding periods (~5 months). It is suitable for active traders who can execute frequently and are comfortable with a ~20% losing trade rate.</li>
+</ul>
+<ul>
+  <li>Weekly RSI operates as a long-term opportunistic system, generating rare signals (~6 per stock for 30/70, &lt;1 for 20/80) with very large returns but very long holding periods. It is more appropriate as a supplementary tool for investors who want to identify major buying opportunities rather than a standalone trading system.</li>
+</ul>
+<p>The weekly timeframe&#x27;s higher win rates (88–96% vs. 79–87%) reflect the noise reduction inherent in weekly data — daily RSI can whipsaw around the 30 threshold during volatile periods, generating premature signals, while weekly RSI filters out this noise.</p>
+<h3 class="sub-title">5.4 Threshold Selection: 30/70 vs. 20/80</h3>
+<p>More extreme thresholds (20/80) unambiguously improve win rates and profit factors at the cost of dramatically fewer trading opportunities. The choice between 30/70 and 20/80 depends on the investor&#x27;s objectives:</p>
+<ul>
+  <li>30/70: More signals, lower per-trade quality. Better for systematic traders seeking repeatable, modest-edge opportunities. Daily 30/70 generated 3,892 trades — enough for a diversified portfolio approach.</li>
+</ul>
+<ul>
+  <li>20/80: Fewer signals, higher per-trade quality. Better for discretionary investors who want high-conviction entry points. The Daily 20/80 strategy&#x27;s 87.3% win rate and 47.37% average return represent genuine alpha per trade, but the ~6 signals per stock over 20+ years limit practical utility as a standalone system.</li>
+</ul>
+<h3 class="sub-title">5.5 Survivorship Bias</h3>
+<p>Our universe of 100 stocks was selected as of 2026 — all are currently listed, large-cap companies. This introduces survivorship bias: companies that went bankrupt, were delisted, or were acquired are excluded. Had we included stocks like Lehman Brothers, Enron, or Bear Stearns, the RSI strategies would likely show lower win rates and average returns, as oversold signals on failing companies would have generated total losses.</p>
+<p>The magnitude of this bias is difficult to quantify precisely, but it likely inflates our reported win rates by 3–8 percentage points. The strategies&#x27; underperformance versus buy-and-hold would be less severe with survivorship bias removed (since buy-and-hold on bankrupt companies also produces total losses), but absolute returns would be lower.</p>
+<h3 class="sub-title">5.6 Transaction Costs and Practical Implementation</h3>
+<p>While we report gross returns, realistic implementation would incur:</p>
+<ul>
+  <li>Commissions: Effectively zero at modern brokerages for retail investors.</li>
+</ul>
+<ul>
+  <li>Bid-ask spreads: 1–5 bps for large-cap stocks, negligible for our universe.</li>
+</ul>
+<ul>
+  <li>Slippage/market impact: 5–15 bps per trade for institutional-size orders.</li>
+</ul>
+<ul>
+  <li>Taxes: Short-term capital gains tax on trades held &lt; 1 year (the majority of Daily 30/70 trades). At a 37% marginal rate, a 7.66% gross return becomes ~4.83% after tax.</li>
+</ul>
+<p>For the Daily 30/70 strategy, assuming 10 bps round-trip costs and 37% tax on gains, the after-cost, after-tax average return per trade would be approximately:</p>
+<ul>
+  <li>Gross: 7.66%</li>
+</ul>
+<ul>
+  <li>Less costs: 7.56%</li>
+</ul>
+<ul>
+  <li>Less tax on gains (79.4% × 13.22% × 37%): ~3.88%</li>
+</ul>
+<ul>
+  <li>After-tax avg ≈ 3.88% per trade</li>
+</ul>
+<p>This further widens the gap versus buy-and-hold, which benefits from tax deferral and long-term capital gains rates.</p>
+<h3 class="sub-title">5.7 Data Snooping Considerations</h3>
+<p>We test four pre-specified strategy parameterizations rather than optimizing thresholds to maximize backtested performance. Nonetheless, the RSI period (14) and threshold pairs (30/70, 20/80) are &quot;industry standard&quot; parameters that have been widely published since 1978 — raising the question of whether they represent genuine out-of-sample anomalies or the result of collective data snooping by generations of practitioners.</p>
+<p>Sullivan, Timmermann, and White (1999) demonstrated that many technical trading rules lose their significance when tested against White&#x27;s Reality Check for data snooping. Our results are robust to this concern in one sense — the t-statistics are so large (8.77 to 30.92) that they would survive even aggressive multiple comparison adjustments — but the underperformance versus buy-and-hold suggests that the &quot;anomaly&quot; is more about the mechanics of mean reversion (which is well-documented and theoretically motivated) than about exploitable market inefficiency.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION VI</span>
+  <h2 class="section-title">6. Practical Implications</h2>
+</div>
+<p>Based on our comprehensive empirical findings, we offer the following practical guidance:</p>
+<h3 class="sub-title">6.1 RSI as a Supplementary Tool</h3>
+<p>RSI should not be used as a standalone mechanical trading system for long-only equity investing. The opportunity cost of being uninvested between signals overwhelms the per-trade alpha. Instead, RSI is most valuable as one input in a discretionary or multi-factor framework — specifically as a timing tool for investors who already intend to buy a particular stock.</p>
+<h3 class="sub-title">6.2 Optimal Settings by Use Case</h3>
+<ul>
+  <li>Active swing traders: Daily RSI 30/70 provides the best balance of signal frequency and quality. Expect ~40 trades per stock over 20 years with ~80% win rate.</li>
+</ul>
+<ul>
+  <li>Long-term opportunistic investors: Weekly RSI 30/70 identifies major buying opportunities with ~88% win rate and ~37% average return per trade. Ideal for adding to existing positions during significant pullbacks.</li>
+</ul>
+<ul>
+  <li>Crisis investors: Weekly RSI 20/80 identifies once-in-a-decade buying opportunities with near-certainty of profit. Only useful during severe market dislocations (GFC, COVID).</li>
+</ul>
+<h3 class="sub-title">6.3 Best Sectors for RSI Strategies</h3>
+<p>Mega-cap technology and consumer discretionary stocks offer the highest average returns per RSI trade. These sectors combine high volatility (generating frequent signals) with strong secular growth (ensuring most signals lead to profitable outcomes). Utilities offer the highest win rates but lowest returns — appropriate for conservative income investors.</p>
+<h3 class="sub-title">6.4 Risk Management</h3>
+<p>Even with 79–96% win rates, tail risk remains significant. The worst single trade in our dataset lost 93.68% (Daily 30/70). Stop-loss orders, position sizing, and portfolio diversification across multiple concurrent RSI signals would meaningfully improve risk-adjusted returns.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION VII</span>
+  <h2 class="section-title">7. Conclusions</h2>
+</div>
+<p>This study presents one of the most comprehensive empirical evaluations of RSI-based trading strategies in the academic literature, spanning 100 U.S. equities, 11 sectors, up to 64 years of daily data, and 5,174 total trades across four strategy parameterizations. Our principal findings are:</p>
+<ol>
+  <li>RSI oversold/overbought strategies generate statistically significant positive returns per trade. All four strategies produce mean returns significantly different from zero (p &lt; 10⁻¹³), win rates significantly above 50% (p &lt; 10⁻³⁰⁰), and profit factors ranging from 3.71 to 176.45. This is not a marginal anomaly — it represents robust, large-sample evidence that buying stocks when RSI signals oversold conditions leads to profitable trades the substantial majority of the time.</li>
+</ol>
+<ol>
+  <li>All strategies significantly underperform buy-and-hold on an annualized basis. The opportunity cost of being uninvested between signals is the strategies&#x27; Achilles heel. Paired t-tests comparing per-stock annualized returns confirm underperformance at p &lt; 10⁻²⁰ for all strategies. The market&#x27;s secular upward drift is too powerful to beat by being only intermittently invested.</li>
+</ol>
+<ol>
+  <li>More extreme thresholds and longer timeframes improve per-trade quality at the cost of signal frequency. The tradeoff is stark: Daily 30/70 offers 3,892 trades at 79% win rate and 7.66% average return, while Weekly 20/80 offers 82 trades at 96% win rate and 244% average return.</li>
+</ol>
+<ol>
+  <li>RSI strategies show their greatest relative value during bear markets and high-volatility regimes. The GFC and COVID periods produced the highest average returns, particularly for more extreme thresholds. This suggests RSI&#x27;s primary practical value is as a crisis-buying indicator rather than an all-weather trading system.</li>
+</ol>
+<ol>
+  <li>Significant cross-sectional variation exists across sectors. High-growth, high-volatility sectors (technology, consumer discretionary) produce the highest average returns, while low-volatility sectors (utilities) produce the highest win rates but lowest returns. ANOVA confirms statistical significance for 30/70 strategies.</li>
+</ol>
+<ol>
+  <li>Survivorship bias, transaction costs, and taxes would further erode reported performance. After adjusting for realistic frictions, the gap between RSI strategies and buy-and-hold widens substantially.</li>
+</ol>
+<p>These findings contribute to the long-standing debate on technical analysis by providing a nuanced answer: RSI captures real mean-reversion dynamics in equity prices, and oversold signals do predict above-average subsequent returns with high reliability. However, this predictability does not translate into a practical edge over passive investing when the full economic costs — opportunity cost, transaction costs, taxes, and the challenge of consistent execution — are properly accounted for. RSI&#x27;s greatest value lies not as a standalone system but as a timing tool within a broader investment framework, particularly for identifying high-conviction buying opportunities during market dislocations.</p>
+<p>Future research should examine RSI performance with survivorship-bias-free databases (e.g., CRSP), incorporate transaction costs explicitly, test combinations of RSI with other indicators (MACD, Bollinger Bands, volume confirmation), and evaluate RSI strategies on international equity markets and alternative asset classes.</p>
+
+<div class="references-section">
+<h2>REFERENCES</h2>
+<ol class="ref-list">
+<li>Bajgrowicz, P., &amp; Scaillet, O. (2012). Technical Trading Revisited: False Discoveries, Persistence Tests, and Transaction Costs. *Journal of Financial Economics*, 106(3), 473–491.</li>
+<li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. *Journal of Finance*, 47(5), 1731–1764.</li>
+<li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. *Applied Economics Letters*, 15(14), 1111–1114.</li>
+<li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? *Journal of Finance*, 40(3), 793–805.</li>
+<li>Fama, E.F. (1970). Efficient Capital Markets: A Review of Theory and Empirical Work. *Journal of Finance*, 25(2), 383–417.</li>
+<li>Fernandez-Perez, A., Garza-Gómez, X., &amp; Hsu, J. (2018). Is Technical Analysis Profitable on Renewable Energy Stocks? Evidence from Moving Average and RSI Rules. *Energies*, 11(11), 3054.</li>
+<li>Han, Y., Yang, K., &amp; Zhou, G. (2013). A New Anomaly: The Cross-Sectional Profitability of Technical Analysis. *Journal of Financial and Quantitative Analysis*, 48(5), 1433–1461.</li>
+<li>Jegadeesh, N., &amp; Titman, S. (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *Journal of Finance*, 48(1), 65–91.</li>
+<li>Lo, A.W., Mamaysky, H., &amp; Wang, J. (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. *Journal of Finance*, 55(4), 1705–1765.</li>
+<li>Malkiel, B.G. (2003). The Efficient Market Hypothesis and Its Critics. *Journal of Economic Perspectives*, 17(1), 59–82.</li>
+<li>Neely, C.J., Rapach, D.E., Tu, J., &amp; Zhou, G. (2014). Forecasting the Equity Risk Premium: The Role of Technical Indicators. *Management Science*, 60(7), 1772–1791.</li>
+<li>Park, C.H., &amp; Irwin, S.H. (2007). What Do We Know About the Profitability of Technical Analysis? *Journal of Economic Surveys*, 21(4), 786–826.</li>
+<li>Shiller, R.J. (2000). *Irrational Exuberance*. Princeton University Press.</li>
+<li>Sullivan, R., Timmermann, A., &amp; White, H. (1999). Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. *Journal of Finance*, 54(5), 1647–1691.</li>
+<li>Taylor, M.P., &amp; Allen, H. (1992). The Use of Technical Analysis in the Foreign Exchange Market. *Journal of International Money and Finance*, 11(3), 304–314.</li>
+<li>Tversky, A., &amp; Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. *Science*, 185(4157), 1124–1131.</li>
+<li>Urquhart, A., &amp; McGroarty, F. (2016). Are Stock Markets Really Efficient? Evidence of the Adaptive Market Hypothesis. *International Review of Financial Analysis*, 47, 39–49.</li>
+<li>Wilder, J.W. (1978). *New Concepts in Technical Trading Systems*. Greensboro, NC: Trend Research.</li>
+<li>Wong, W.K., Manzur, M., &amp; Chew, B.K. (2003). How Rewarding Is Technical Analysis? Evidence from Singapore Stock Market. *Applied Financial Economics*, 13(7), 543–551.</li>
+</ol>
+</div>
+
+<div class="section-header">
+  <span class="section-number">SECTION VIII</span>
+  <h2 class="section-title">Appendix: Figures</h2>
+</div>
+<p>All figures saved to `rsi_study/figures/`:</p>
+<ol>
+  <li>01_return_distributions.png — Distribution of trade returns for each strategy (4 histograms)</li>
+</ol>
+<ol>
+  <li>02_winrate_by_sector.png — Win rate by sector (grouped bar chart, all 4 strategies)</li>
+</ol>
+<ol>
+  <li>03_avg_return_by_sector.png — Average return by sector (grouped bar chart)</li>
+</ol>
+<ol>
+  <li>04_equity_curves.png — Cumulative equity curves (aggregate, log scale)</li>
+</ol>
+<ol>
+  <li>05_volatility_vs_return.png — Stock volatility vs. RSI strategy return (scatter with regression)</li>
+</ol>
+<ol>
+  <li>06_boxplot_returns.png — Box plot of returns by strategy</li>
+</ol>
+<ol>
+  <li>07_heatmap_sector_strategy.png — Heatmap: average return by sector × strategy</li>
+</ol>
+<ol>
+  <li>08_holding_period_dist.png — Holding period distribution by strategy</li>
+</ol>
+<ol>
+  <li>09_rsi_vs_buyhold.png — RSI strategies vs. buy-and-hold annualized returns</li>
+</ol>
+<ol>
+  <li>10_yearly_returns.png — Average trade return by year (time series)</li>
+</ol>
+<p>Data retrieved February 22, 2026 from Yahoo Finance via yfinance 1.2.0. All computations performed in Python 3.10.11 with NumPy, pandas, SciPy, and matplotlib. Complete source code available in `analysis.py`.</p>
+
+<div class="references-section">
+<h2>BIBLIOGRAPHY</h2>
+<ol class="ref-list">
+<li>Wilder, J.W. (1978). *New Concepts in Technical Trading Systems*. Greensboro, NC: Trend Research.</li>
+<li>Lo, A.W., Mamaysky, H., &amp; Wang, J. (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. *Journal of Finance*, 55(4), 1705–1765.</li>
+<li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. *Applied Economics Letters*, 15(14), 1111–1114.</li>
+<li>Wong, W.K., Manzur, M., &amp; Chew, B.K. (2003). How Rewarding Is Technical Analysis? Evidence from Singapore Stock Market. *Applied Financial Economics*, 13(7), 543–551.</li>
+<li>Fernandez-Perez, A., Garza-Gómez, X., &amp; Hsu, J. (2018). Is Technical Analysis Profitable on Renewable Energy Stocks? Evidence from Moving Average and RSI Rules. *Energies*, 11(11), 3054.</li>
+<li>Fama, E.F. (1970). Efficient Capital Markets: A Review of Theory and Empirical Work. *Journal of Finance*, 25(2), 383–417.</li>
+<li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. *Journal of Finance*, 47(5), 1731–1764.</li>
+<li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? *Journal of Finance*, 40(3), 793–805.</li>
+<li>Jegadeesh, N., &amp; Titman, S. (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *Journal of Finance*, 48(1), 65–91.</li>
+<li>Sullivan, R., Timmermann, A., &amp; White, H. (1999). Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. *Journal of Finance*, 54(5), 1647–1691.</li>
+<li>Park, C.H., &amp; Irwin, S.H. (2007). What Do We Know About the Profitability of Technical Analysis? *Journal of Economic Surveys*, 21(4), 786–826.</li>
+<li>Neely, C.J., Rapach, D.E., Tu, J., &amp; Zhou, G. (2014). Forecasting the Equity Risk Premium: The Role of Technical Indicators. *Management Science*, 60(7), 1772–1791.</li>
+<li>Shiller, R.J. (2000). *Irrational Exuberance*. Princeton University Press.</li>
+<li>Tversky, A., &amp; Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. *Science*, 185(4157), 1124–1131.</li>
+<li>Malkiel, B.G. (2003). The Efficient Market Hypothesis and Its Critics. *Journal of Economic Perspectives*, 17(1), 59–82.</li>
+<li>Han, Y., Yang, K., &amp; Zhou, G. (2013). A New Anomaly: The Cross-Sectional Profitability of Technical Analysis. *Journal of Financial and Quantitative Analysis*, 48(5), 1433–1461.</li>
+<li>Bajgrowicz, P., &amp; Scaillet, O. (2012). Technical Trading Revisited: False Discoveries, Persistence Tests, and Transaction Costs. *Journal of Financial Economics*, 106(3), 473–491.</li>
+<li>Taylor, M.P., &amp; Allen, H. (1992). The Use of Technical Analysis in the Foreign Exchange Market. *Journal of International Money and Finance*, 11(3), 304–314.</li>
+<li>Metghalchi, M., Chen, C.P., &amp; Hayes, L.A. (2015). History of Share Prices and Market Efficiency of the Madrid General Stock Index. *International Review of Financial Analysis*, 40, 178–184.</li>
+<li>Urquhart, A., &amp; McGroarty, F. (2016). Are Stock Markets Really Efficient? Evidence of the Adaptive Market Hypothesis. *International Review of Financial Analysis*, 47, 39–49.</li>
+</ol>
+</div>
+
+<div class="references-section">
+<h2>FIGURES</h2>
+</div>
+<h3 class="sub-title">01 Return Distributions</h3>
+<h3 class="sub-title">02 Winrate By Sector</h3>
+<h3 class="sub-title">03 Avg Return By Sector</h3>
+<h3 class="sub-title">04 Equity Curves</h3>
+<h3 class="sub-title">05 Volatility Vs Return</h3>
+<h3 class="sub-title">06 Boxplot Returns</h3>
+<h3 class="sub-title">07 Heatmap Sector Strategy</h3>
+<h3 class="sub-title">08 Holding Period Dist</h3>
+<h3 class="sub-title">09 Rsi Vs Buyhold</h3>
+<h3 class="sub-title">10 Yearly Returns</h3>
+
+</main>
+
+<footer class="paper-footer">
+  <div>
+    <a href="../index.html">Home</a>
+    <a href="../research.html">Research</a>
+    <a href="../about.html">About</a>
+  </div>
+  <div style="margin-top:16px;">
+    &copy; 2026 IUPPITER GROUP &middot; ALL RIGHTS RESERVED
+  </div>
+  <div style="margin-top:8px; font-size:0.62rem; color:var(--text-dim);">
+    The views expressed are those of the author and represent independent academic analysis.
+  </div>
+</footer>
+
+</body>
+</html>

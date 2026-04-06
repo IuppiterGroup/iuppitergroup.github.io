@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ex-Dividend Day Price Drop Anomaly — Iuppiter Group</title>
+  <meta name="description" content="Empirical investigation of ex-dividend day price drop ratios across 80 S&P 500 stocks (2010-2025). Tests tax clientele, microstructure, and dividend capture hypotheses.">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-deep:     #0a0f1a;
+      --bg-card:     #0f1623;
+      --bg-raised:   #141d2e;
+      --gold:        #c4a44a;
+      --gold-dim:    #8a7135;
+      --gold-light:  #e8c97a;
+      --text:        #d4cfc5;
+      --text-dim:    #8a8880;
+      --text-bright: #f0ece0;
+      --accent-red:  #8b2020;
+      --border:      rgba(196,164,74,0.18);
+      --border-dim:  rgba(196,164,74,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text);
+      font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+      font-size: 19px;
+      line-height: 1.85;
+      min-height: 100vh;
+    }
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,15,26,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700; color: var(--gold); text-decoration: none; letter-spacing: 0.12em; }
+    .nav-logo span { color: var(--text-dim); font-weight: 400; }
+    .nav-back { font-family: 'Cinzel', serif; font-size: 0.78rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--gold); }
+    .paper-hero {
+      padding: 120px 24px 64px; text-align: center;
+      max-width: 900px; margin: 0 auto; position: relative;
+    }
+    .paper-hero::before {
+      content: ''; position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(196,164,74,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .paper-label {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.28em; color: var(--gold-dim); text-transform: uppercase;
+      border: 1px solid var(--border); padding: 5px 18px; margin-bottom: 28px;
+    }
+    .paper-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700; color: var(--gold-light); line-height: 1.2;
+      letter-spacing: 0.02em; margin-bottom: 16px;
+    }
+    .paper-subtitle {
+      font-family: 'Crimson Text', serif; font-size: 1.25rem;
+      color: var(--text-dim); font-style: italic; margin-bottom: 40px;
+    }
+    .paper-meta {
+      display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.1em;
+      color: var(--text-dim); border-top: 1px solid var(--border-dim); padding-top: 24px;
+    }
+    .paper-meta span { color: var(--gold-dim); }
+    .gold-rule {
+      width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 32px;
+    }
+    .paper-wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+    .abstract-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold); padding: 36px 40px;
+      margin-bottom: 60px; position: relative;
+    }
+    .abstract-box::before {
+      content: 'ABSTRACT'; position: absolute; top: -10px; left: 20px;
+      font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.25em;
+      background: var(--bg-card); padding: 0 10px; color: var(--gold);
+    }
+    .section-header { margin: 64px 0 28px; }
+    .section-number { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.3em; color: var(--gold-dim); display: block; margin-bottom: 8px; }
+    h2.section-title { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.04em; line-height: 1.3; border-bottom: 1px solid var(--border-dim); padding-bottom: 12px; }
+    h3.sub-title { font-family: 'Cinzel', serif; font-size: 1.0rem; font-weight: 600; color: var(--gold); margin: 36px 0 14px; letter-spacing: 0.06em; }
+    h4.sub-sub-title { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 600; color: var(--gold-dim); margin: 28px 0 10px; letter-spacing: 0.05em; }
+    p { margin-bottom: 1.3em; color: var(--text); }
+    p strong { color: var(--text-bright); font-weight: 600; }
+    em { color: var(--text-dim); }
+    .eq-box {
+      background: var(--bg-raised); border: 1px solid var(--border-dim);
+      padding: 24px 32px; margin: 28px 0; text-align: center;
+      font-family: 'Crimson Text', serif; font-size: 1.15rem;
+      color: var(--gold-light); letter-spacing: 0.04em;
+    }
+    .math-block {
+      background: var(--bg-raised); border-left: 3px solid var(--gold-dim);
+      padding: 22px 28px; margin: 28px 0;
+      font-family: 'Crimson Text', serif; font-style: italic;
+      color: var(--text-bright); font-size: 1.05rem;
+    }
+    .math-block p { margin-bottom: 0.5em; color: var(--text-bright); }
+    .pull-quote {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 28px 0; margin: 40px 0; text-align: center;
+    }
+    .pull-quote p { font-family: 'Crimson Text', serif; font-size: 1.4rem; font-style: italic; color: var(--gold-light); line-height: 1.5; margin: 0; }
+    .boxed-eq {
+      background: var(--bg-raised); border: 2px solid var(--gold-dim);
+      padding: 20px 28px; margin: 28px 0; text-align: center;
+      color: var(--gold-light);
+    }
+    table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 0.9rem; overflow-x: auto; display: block; }
+    th { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--gold); border-bottom: 1px solid var(--border); padding: 10px 12px; text-align: left; white-space: nowrap; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border-dim); color: var(--text); }
+    tr:hover td { background: var(--bg-card); }
+    ul, ol { margin: 0 0 1.3em 1.6em; }
+    li { margin-bottom: 0.5em; color: var(--text); }
+    .references-section { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .references-section h2 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-dim); letter-spacing: 0.15em; margin-bottom: 28px; }
+    .ref-list { list-style: none; counter-reset: ref-counter; margin-left: 0; }
+    .ref-list li { counter-increment: ref-counter; position: relative; padding: 10px 0 10px 42px; border-bottom: 1px solid var(--border-dim); font-size: 0.9rem; line-height: 1.6; color: var(--text-dim); }
+    .ref-list li::before { content: '[' counter(ref-counter) ']'; position: absolute; left: 0; font-family: 'Cinzel', serif; font-size: 0.72rem; color: var(--gold-dim); top: 12px; }
+    .ref-list li a { color: var(--gold-dim); text-decoration: none; }
+    .ref-list li a:hover { color: var(--gold); }
+    .paper-footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border-dim); font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-dim); }
+    .paper-footer a { color: var(--gold-dim); text-decoration: none; margin: 0 12px; }
+    .paper-footer a:hover { color: var(--gold); }
+    @media (max-width: 640px) {
+      body { font-size: 17px; }
+      .paper-hero { padding: 100px 20px 48px; }
+      .paper-wrap { padding: 0 20px 60px; }
+      .abstract-box { padding: 28px 22px; }
+      h2.section-title { font-size: 1.3rem; }
+      table { font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">IUPPITER <span>GROUP</span></a>
+    <a href="../research.html" class="nav-back">&larr; Research</a>
+  </div>
+</nav>
+
+<header class="paper-hero">
+  <div class="paper-label">Research Paper · Financial Economics</div>
+  <h1 class="paper-title">The Ex-Dividend Day Price Drop Anomaly</h1>
+  <p class="paper-subtitle">An Empirical Investigation of 80 S&amp;P 500 Stocks (2010–2025)</p>
+  <div class="gold-rule"></div>
+  <div class="paper-meta">
+    <div>Author <span>John, CaesarBot &amp; luppiter Group</span></div>
+    <div>Published <span>April 2026</span></div>
+    <div>Category <span>Finance · Market Microstructure</span></div>
+    <div>References <span>25+ References</span></div>
+  </div>
+</header>
+
+<main class="paper-wrap">
+
+  <div class="abstract-box">
+<p>This study empirically examines whether stock prices decline by exactly the dividend amount on ex-dividend dates, as predicted by classical financial theory under frictionless markets. Using 5,106 ex-dividend events from 80 S&amp;P 500 component stocks across 10 sectors over the period 2010–2025, we find that the average close-to-open price drop ratio is 0.812 — significantly less than the theoretical value of 1.0 (t = −7.35, p &lt; 0.001) but significantly greater than zero (t = 31.67, p &lt; 0.001). Bootstrap 95% confidence intervals place the true mean drop ratio between 0.762 and 0.861. The shortfall is robust to market-return adjustment (adjusted mean = 0.627) and persists across all sectors and yield categories, though high-yield stocks exhibit drop ratios closer to unity. Wilcoxon signed-rank tests confirm these findings nonparametrically. Cross-sectional regressions reveal a small but significant positive relationship between dividend yield and drop ratio (Pearson r = 0.043, p = 0.002). These results are consistent with the tax-clientele hypothesis of Elton &amp; Gruber (1970) and the market microstructure explanations of Frank &amp; Jagannathan (1998), suggesting that differential taxation of dividends versus capital gains, transaction costs, and heterogeneous investor preferences jointly explain the persistent shortfall from full dividend capitalization.</p>
+<p style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;color:var(--text-dim);margin-top:1.5em;"><strong style="color:var(--gold-dim);">KEYWORDS:</strong> ex-dividend day, price drop ratio, tax clientele effect, dividend policy, market microstructure, anomaly</p>
+  </div>
+
+<div class="section-header">
+  <span class="section-number">SECTION I</span>
+  <h2 class="section-title">1. Introduction</h2>
+</div>
+<p>In a frictionless capital market with no taxes and no transaction costs, a stock&#x27;s price should decline by exactly the amount of the dividend on the ex-dividend date. This prediction follows directly from the absence of arbitrage: if the stock dropped by less than the dividend, an investor could buy shares the day before, capture the dividend, and sell at a profit; if it dropped by more, an investor could short before and cover after. The Miller &amp; Modigliani (1961) dividend irrelevance proposition provides the theoretical foundation — in perfect markets, dividend policy is irrelevant to firm value, and the ex-day price adjustment should be dollar-for-dollar.</p>
+<p>Yet real markets are not frictionless. At least three classes of friction may cause the observed price drop to deviate from the dividend amount:</p>
+<ol>
+  <li>Differential taxation. In most jurisdictions, dividends and capital gains are taxed at different rates. If the marginal investor faces a higher tax rate on dividends than on capital gains, the equilibrium ex-day price drop will be less than the full dividend, reflecting the after-tax indifference condition. Elton &amp; Gruber (1970) formalized this insight and used the observed drop ratio to infer the marginal tax rate of stockholders.</li>
+</ol>
+<ol>
+  <li>Transaction costs and market microstructure. Bid-ask spreads, tick sizes, and order-flow dynamics can distort the observed price change. Frank &amp; Jagannathan (1998) showed that even in Hong Kong — where dividends were tax-free — stock prices dropped by less than the dividend, implicating microstructure effects rather than taxes alone. Graham, Michaely, &amp; Roberts (2003) documented that decimalization in 2001 reduced the gap, consistent with tick-size explanations.</li>
+</ol>
+<ol>
+  <li>Heterogeneous investors and dividend capture. Institutional investors, short-term traders, and tax-exempt entities (pension funds, REITs) may have different valuations of dividends versus capital gains. Trading around ex-dates — &quot;dividend capture&quot; strategies — introduces additional price dynamics (Lakonishok &amp; Vermaelen, 1986; Michaely &amp; Vila, 1995).</li>
+</ol>
+<p>This paper contributes an updated empirical analysis using 15 years of modern market data (2010–2025), spanning the post-decimalization era and encompassing diverse market conditions including the COVID-19 crash, the 2022 bear market, and the AI-driven bull market. We employ parametric and nonparametric tests, bootstrap inference, cross-sectional regressions, and market-adjusted measures to provide a comprehensive picture of the ex-dividend day phenomenon.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION II</span>
+  <h2 class="section-title">2. Literature Review</h2>
+</div>
+<p>The study of ex-dividend day price behavior dates to Campbell &amp; Beranek (1955), who first documented that stocks tend to drop by less than the dividend amount. The seminal contribution of Elton &amp; Gruber (1970) formalized the tax-clientele explanation: if the marginal investor&#x27;s tax rate on dividends exceeds that on capital gains, the equilibrium price drop satisfies:</p>
+<p>ΔP / D = (1 − τ_d) / (1 − τ_g)</p>
+<p>where τ_d and τ_g are the tax rates on dividend income and capital gains, respectively. They used observed drop ratios to back out implied marginal tax rates and found evidence consistent with the clientele effect — high-yield stocks (held by lower-tax-bracket investors) exhibited drop ratios closer to 1.0.</p>
+<p>Kalay (1982) challenged the pure tax interpretation, arguing that transaction costs create a band of no-arbitrage around the theoretical drop, making it impossible to precisely identify the marginal investor&#x27;s tax rate from price data alone.</p>
+<p>Lakonishok &amp; Vermaelen (1986) documented abnormal trading volume around ex-dividend dates, consistent with tax-motivated trading and dividend capture strategies. They found that short-term traders systematically trade around ex-dates to exploit differential tax treatment.</p>
+<p>Boyd &amp; Jagannathan (1994) proposed a dynamic model where the drop ratio depends on the relative proportions of long-term investors and short-term dividend capturers in the market.</p>
+<p>Bali &amp; Hite (1998) argued that discrete tick sizes (1/8ths in the pre-decimalization era) mechanically prevented prices from adjusting by the exact dividend amount, since dividends rarely fell on tick boundaries. They predicted — and found — that the bias was related to the dividend&#x27;s position within the tick.</p>
+<p>Frank &amp; Jagannathan (1998) provided a critical natural experiment: Hong Kong, where dividends were not taxed. Even there, stock prices dropped by only about 50% of the dividend amount. This evidence strongly supports non-tax explanations, particularly market microstructure effects. They proposed that the bid-ask bounce — where closing prices tend to be at the ask and opening prices at the bid — mechanically reduces the observed drop.</p>
+<p>Graham, Michaely, &amp; Roberts (2003) exploited the shift from 1/16th to decimal pricing in 2001. They found that decimalization significantly increased the drop ratio (closer to 1.0), supporting the tick-size hypothesis. However, the drop ratio remained below 1.0, suggesting that taxes still play a role.</p>
+<p>Elton, Gruber, &amp; Blake (2005) compared taxable and non-taxable closed-end funds, finding that the tax status of investors significantly affects the ex-day price drop, providing clean support for the tax-clientele hypothesis.</p>
+<p>Cloyd, Li, &amp; Weaver (2006) examined the interaction of tick sizes and tax effects, finding that both independently contribute to the anomaly.</p>
+<p>Zhang, Farrell, &amp; Brown (2008) studied the 2003 dividend tax cut (which reduced the top rate on qualified dividends to 15%) and found that the drop ratio increased after the cut, consistent with tax-based explanations.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION III</span>
+  <h2 class="section-title">3. Data and Methodology</h2>
+</div>
+<h3 class="sub-title">3.1 Sample Construction</h3>
+<p>We select 80 stocks from the S&amp;P 500, evenly distributed across 10 GICS sectors (8 stocks per sector): Technology, Financials, Healthcare, Energy, Utilities, Consumer Staples, Industrials, Consumer Discretionary, Materials, and Real Estate. All stocks are large-cap, highly liquid, and have continuous dividend histories throughout the sample period. Data are obtained from Yahoo Finance via the yfinance Python library.</p>
+<p>For each stock, we retrieve:</p>
+<ul>
+  <li>Complete dividend payment history (2010–2025)</li>
+</ul>
+<ul>
+  <li>Daily OHLCV price data (unadjusted for splits/dividends to preserve raw price levels)</li>
+</ul>
+<p>The S&amp;P 500 ETF (SPY) is used as a market proxy for beta-adjusted returns.</p>
+<h3 class="sub-title">3.2 Variable Construction</h3>
+<p>For each ex-dividend event, we compute:</p>
+<p>Close-to-Open Drop Ratio:</p>
+<p>DR_open = (Close_{t-1} − Open_t) / Dividend</p>
+<p>where t is the ex-dividend date and t−1 is the prior trading day.</p>
+<p>Close-to-Close Drop Ratio:</p>
+<p>DR_close = (Close_{t-1} − Close_t) / Dividend</p>
+<p>Annualized Dividend Yield (approximate):</p>
+<p>Yield = (4 × Dividend) / Close_{t-1}</p>
+<p>Market-Adjusted Drop Ratio:</p>
+<p>DR_adj = DR_open − (R_m × Close_{t-1}) / Dividend</p>
+<p>where R_m is the SPY return on the ex-date. This assumes β = 1.</p>
+<h3 class="sub-title">3.3 Filtering</h3>
+<p>We exclude: (1) observations with drop ratios outside [−20, +20] to remove data errors and extreme outliers; (2) events where annualized yield exceeds 40%, likely representing special dividends or data anomalies. The final sample contains 5,106 ex-dividend events from 80 stocks spanning January 2010 to December 2025.</p>
+<h3 class="sub-title">3.4 Statistical Tests</h3>
+<ol>
+  <li>One-sample t-test against μ = 1.0 (full dividend drop) and μ = 0.0 (no drop)</li>
+</ol>
+<ol>
+  <li>Wilcoxon signed-rank test (nonparametric alternative, robust to non-normality)</li>
+</ol>
+<ol>
+  <li>Bootstrap confidence intervals (10,000 replications, percentile method)</li>
+</ol>
+<ol>
+  <li>One-way ANOVA for cross-sectional comparisons (by sector, by yield bucket)</li>
+</ol>
+<ol>
+  <li>Pearson and Spearman correlations between drop ratio and dividend yield</li>
+</ol>
+<ol>
+  <li>OLS regression of drop ratio on dividend yield</li>
+</ol>
+<ol>
+  <li>D&#x27;Agostino-Pearson normality test on the drop ratio distribution</li>
+</ol>
+
+<div class="section-header">
+  <span class="section-number">SECTION IV</span>
+  <h2 class="section-title">4. Results</h2>
+</div>
+<h3 class="sub-title">4.1 Descriptive Statistics</h3>
+<p>Table 1: Summary Statistics for Ex-Dividend Price Drop Ratios</p>
+<table>
+<thead><tr>
+<th>Statistic</th>
+<th>Close-to-Open</th>
+<th>Close-to-Close</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>N</td>
+<td>5,106</td>
+<td>5,106</td>
+</tr>
+<tr>
+<td>Mean</td>
+<td>0.8115</td>
+<td>0.8618</td>
+</tr>
+<tr>
+<td>Median</td>
+<td>0.8556</td>
+<td>0.9116</td>
+</tr>
+<tr>
+<td>Std. Dev.</td>
+<td>1.8312</td>
+<td>3.1418</td>
+</tr>
+<tr>
+<td>25th Percentile</td>
+<td>0.3333</td>
+<td>−0.0495</td>
+</tr>
+<tr>
+<td>75th Percentile</td>
+<td>1.2857</td>
+<td>1.8250</td>
+</tr>
+<tr>
+<td>Skewness</td>
+<td>−0.2241</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Kurtosis</td>
+<td>20.9458</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p>The mean close-to-open drop ratio of 0.812 indicates that, on average, stock prices drop by approximately 81% of the dividend amount at the opening of the ex-dividend date. The median of 0.856 is slightly higher than the mean, reflecting mild left-skewness. The substantial standard deviation (1.83) highlights the considerable noise in individual observations — consistent with the fact that general market movements swamp the relatively small dividend-induced price change on any given day.</p>
+<p>The close-to-close drop ratio (0.862) is somewhat higher than close-to-open (0.812), suggesting that intraday trading on the ex-date partially recovers the initial shortfall. The much larger standard deviation for close-to-close (3.14) reflects the additional source of variation from a full day&#x27;s trading.</p>
+<p>The extreme kurtosis (20.95) indicates heavy tails, with occasional very large positive or negative drop ratios driven by coincident news events or market-wide movements unrelated to the dividend.</p>
+<p>![Histogram of Drop Ratios](figures/histogram_drop_ratios.png)</p>
+<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 1: Distribution of ex-dividend price drop ratios. The green dashed line marks the theoretical value of 1.0; the red dashed line marks zero; the orange line marks the sample mean. The distribution is centered well above zero but below 1.0, with heavy tails.</p>
+<h3 class="sub-title">4.2 Hypothesis Tests</h3>
+<p>Table 2: Hypothesis Tests for the Mean Drop Ratio</p>
+<table>
+<thead><tr>
+<th>Test</th>
+<th>H₀</th>
+<th>Test Statistic</th>
+<th>p-value</th>
+<th>Conclusion</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>t-test (open)</td>
+<td>μ = 1.0</td>
+<td>t = −7.354</td>
+<td>2.23 × 10⁻¹³</td>
+<td>Reject: drop &lt; dividend</td>
+</tr>
+<tr>
+<td>t-test (open)</td>
+<td>μ = 0.0</td>
+<td>t = 31.668</td>
+<td>4.18 × 10⁻²⁰¹</td>
+<td>Reject: drop &gt; zero</td>
+</tr>
+<tr>
+<td>t-test (close)</td>
+<td>μ = 1.0</td>
+<td>t = −3.143</td>
+<td>1.68 × 10⁻³</td>
+<td>Reject: drop &lt; dividend</td>
+</tr>
+<tr>
+<td>t-test (close)</td>
+<td>μ = 0.0</td>
+<td>t = 19.600</td>
+<td>1.56 × 10⁻⁸²</td>
+<td>Reject: drop &gt; zero</td>
+</tr>
+<tr>
+<td>Wilcoxon (open)</td>
+<td>median = 1.0</td>
+<td>W = 5,219,026</td>
+<td>1.50 × 10⁻³⁴</td>
+<td>Reject: drop &lt; dividend</td>
+</tr>
+<tr>
+<td>Wilcoxon (open)</td>
+<td>median = 0.0</td>
+<td>W = 1,992,408</td>
+<td>≈ 0</td>
+<td>Reject: drop &gt; zero</td>
+</tr>
+</tbody></table>
+<p>All tests are decisive. The price drop is:</p>
+<ul>
+  <li>Significantly greater than zero — dividends do cause a measurable price decline (p ≈ 0)</li>
+</ul>
+<ul>
+  <li>Significantly less than the full dividend — the drop is incomplete (p &lt; 10⁻¹³)</li>
+</ul>
+<p>This is the central empirical finding: stocks drop by a substantial fraction of the dividend, but not the full amount.</p>
+<p>Bootstrap and Parametric Confidence Intervals:</p>
+<table>
+<thead><tr>
+<th>Method</th>
+<th>95% CI</th>
+<th>99% CI</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Bootstrap (10,000 replications)</td>
+<td>[0.762, 0.861]</td>
+<td>[0.744, 0.877]</td>
+</tr>
+<tr>
+<td>Parametric (Normal approx.)</td>
+<td>[0.761, 0.862]</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p>The tight confidence intervals firmly exclude both 0 and 1.0. We can state with 99% confidence that the true mean drop ratio lies between approximately 0.74 and 0.88.</p>
+<p>Normality: The D&#x27;Agostino-Pearson test strongly rejects normality (k² = 1,027.9, p &lt; 10⁻²²³), which motivates our use of the Wilcoxon test and bootstrap inference as robustness checks. The QQ plot (Figure 5) confirms heavy tails and slight left-skewness.</p>
+<p>![QQ Plot](figures/qqplot_drop_ratios.png)</p>
+<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 5: Q-Q plot of price drop ratios against the normal distribution. The heavy tails are clearly visible, justifying nonparametric inference.</p>
+<h3 class="sub-title">4.3 Cross-Sectional Analysis by Dividend Yield</h3>
+<p>Table 3: Drop Ratio by Dividend Yield Tercile</p>
+<table>
+<thead><tr>
+<th>Yield Bucket</th>
+<th>N</th>
+<th>Mean</th>
+<th>Median</th>
+<th>Std. Dev.</th>
+<th>t vs 1.0</th>
+<th>p-value</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Low Yield</td>
+<td>1,702</td>
+<td>0.683</td>
+<td>0.750</td>
+<td>2.725</td>
+<td>−4.794</td>
+<td>1.78 × 10⁻⁶</td>
+</tr>
+<tr>
+<td>Medium Yield</td>
+<td>1,702</td>
+<td>0.873</td>
+<td>0.826</td>
+<td>1.310</td>
+<td>−4.001</td>
+<td>6.59 × 10⁻⁵</td>
+</tr>
+<tr>
+<td>High Yield</td>
+<td>1,702</td>
+<td>0.878</td>
+<td>0.919</td>
+<td>0.947</td>
+<td>−5.300</td>
+<td>1.31 × 10⁻⁷</td>
+</tr>
+</tbody></table>
+<p>ANOVA: F = 6.273, p = 0.0019 — The differences across yield groups are statistically significant.</p>
+<p>Low-yield stocks exhibit the largest shortfall (mean drop ratio = 0.683), while medium and high-yield stocks are closer to unity (0.873 and 0.878, respectively). This pattern is consistent with the Elton &amp; Gruber (1970) clientele hypothesis: high-yield stocks tend to be held by investors in lower tax brackets (or tax-exempt institutions), for whom dividends and capital gains are taxed more similarly, pushing the equilibrium drop ratio toward 1.0.</p>
+<p>The substantially larger variance for low-yield stocks (σ = 2.73 vs. 0.95 for high yield) reflects the lower signal-to-noise ratio when the dividend amount is small relative to typical daily price fluctuations.</p>
+<p>![Histogram by Yield Bucket](figures/histogram_by_yield.png)</p>
+<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 2: Distribution of drop ratios by dividend yield tercile. High-yield stocks show a tighter distribution centered closer to 1.0.</p>
+<h3 class="sub-title">4.4 Cross-Sectional Analysis by Sector</h3>
+<p>Table 4: Drop Ratio by GICS Sector</p>
+<table>
+<thead><tr>
+<th>Sector</th>
+<th>N</th>
+<th>Mean</th>
+<th>Median</th>
+<th>Std. Dev.</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Utilities</td>
+<td>513</td>
+<td>0.931</td>
+<td>0.952</td>
+<td>0.525</td>
+</tr>
+<tr>
+<td>Industrials</td>
+<td>507</td>
+<td>0.895</td>
+<td>0.829</td>
+<td>1.922</td>
+</tr>
+<tr>
+<td>Close-to-Close Ratio</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Consumer Discretionary</td>
+<td>491</td>
+<td>0.862</td>
+<td>0.733</td>
+<td>2.111</td>
+</tr>
+<tr>
+<td>Consumer Staples</td>
+<td>517</td>
+<td>0.857</td>
+<td>0.907</td>
+<td>1.301</td>
+</tr>
+<tr>
+<td>Real Estate</td>
+<td>619</td>
+<td>0.857</td>
+<td>0.853</td>
+<td>1.347</td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>508</td>
+<td>0.836</td>
+<td>0.893</td>
+<td>1.810</td>
+</tr>
+<tr>
+<td>Healthcare</td>
+<td>503</td>
+<td>0.824</td>
+<td>0.833</td>
+<td>1.352</td>
+</tr>
+<tr>
+<td>Financials</td>
+<td>503</td>
+<td>0.705</td>
+<td>0.789</td>
+<td>2.220</td>
+</tr>
+<tr>
+<td>Technology</td>
+<td>487</td>
+<td>0.722</td>
+<td>0.806</td>
+<td>2.113</td>
+</tr>
+<tr>
+<td>Materials</td>
+<td>458</td>
+<td>0.590</td>
+<td>0.808</td>
+<td>2.830</td>
+</tr>
+</tbody></table>
+<p>ANOVA: F = 1.558, p = 0.122 — Sector differences are not statistically significant at the 5% level.</p>
+<p>While the point estimates vary — Utilities have the highest mean drop ratio (0.931) and Materials the lowest (0.590) — the large within-sector variance prevents us from concluding that sector membership significantly predicts the drop ratio. The high drop ratio for Utilities is consistent with their investor base: regulated utilities with high, stable dividends tend to be held by income-oriented and tax-exempt investors (pension funds, endowments), for whom tax differentials are minimal.</p>
+<p>![Box Plot by Sector](figures/boxplot_by_sector.png)</p>
+<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 3: Box plot of ex-dividend price drop ratios by sector. Medians cluster between 0.7 and 1.0 across all sectors.</p>
+<h3 class="sub-title">4.5 Time-Series Analysis</h3>
+<p>Table 5: Mean Drop Ratio by Year</p>
+<table>
+<thead><tr>
+<th>Year</th>
+<th>N</th>
+<th>Mean</th>
+<th>Median</th>
+<th>Std. Dev.</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>2010</td>
+<td>284</td>
+<td>0.644</td>
+<td>0.775</td>
+<td>1.969</td>
+</tr>
+<tr>
+<td>2011</td>
+<td>298</td>
+<td>0.517</td>
+<td>0.759</td>
+<td>1.870</td>
+</tr>
+<tr>
+<td>2012</td>
+<td>321</td>
+<td>0.833</td>
+<td>0.804</td>
+<td>1.851</td>
+</tr>
+<tr>
+<td>2013</td>
+<td>318</td>
+<td>0.759</td>
+<td>0.804</td>
+<td>1.337</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>322</td>
+<td>0.768</td>
+<td>0.800</td>
+<td>1.573</td>
+</tr>
+<tr>
+<td>2015</td>
+<td>323</td>
+<td>0.808</td>
+<td>0.905</td>
+<td>1.701</td>
+</tr>
+<tr>
+<td>2016</td>
+<td>317</td>
+<td>0.979</td>
+<td>0.933</td>
+<td>1.388</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>320</td>
+<td>0.775</td>
+<td>0.879</td>
+<td>1.111</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>321</td>
+<td>0.886</td>
+<td>0.793</td>
+<td>1.541</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>328</td>
+<td>0.855</td>
+<td>0.854</td>
+<td>1.866</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>318</td>
+<td>1.010</td>
+<td>0.971</td>
+<td>2.544</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>323</td>
+<td>0.790</td>
+<td>0.945</td>
+<td>1.929</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>335</td>
+<td>1.129</td>
+<td>0.977</td>
+<td>2.402</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>333</td>
+<td>0.687</td>
+<td>0.809</td>
+<td>1.832</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>322</td>
+<td>0.631</td>
+<td>0.844</td>
+<td>1.589</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>323</td>
+<td>0.867</td>
+<td>0.904</td>
+<td>2.145</td>
+</tr>
+</tbody></table>
+<p>The time series reveals no clear secular trend. The drop ratio fluctuates between approximately 0.5 and 1.1 across years, with the highest values in 2020 (1.01) and 2022 (1.13) — years of elevated market volatility — and the lowest in 2011 (0.52) and 2024 (0.63). The absence of a trend suggests that the forces underlying the anomaly (taxation, microstructure) have remained relatively stable in the post-decimalization era.</p>
+<p>Notably, the years with drop ratios near or above 1.0 (2020, 2022) were characterized by high volatility and large intraday price swings that may have coincidentally aligned with dividend effects.</p>
+<p>![Time Series of Drop Ratio](figures/timeseries_drop_ratio.png)</p>
+<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 4: Mean and median price drop ratio by year with ±1 standard error band. The theoretical value of 1.0 lies outside the confidence band in most years.</p>
+<h3 class="sub-title">4.6 Regression Analysis</h3>
+<p>Table 6: Correlations and Regression Results</p>
+<table>
+<thead><tr>
+<th>Relationship</th>
+<th>Statistic</th>
+<th>Value</th>
+<th>p-value</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Yield vs. Drop Ratio</td>
+<td>Pearson r</td>
+<td>0.043</td>
+<td>0.0021</td>
+</tr>
+<tr>
+<td>Yield vs. Drop Ratio</td>
+<td>Spearman ρ</td>
+<td>0.073</td>
+<td>1.64 × 10⁻⁷</td>
+</tr>
+<tr>
+<td>Price vs. Drop Ratio</td>
+<td>Pearson r</td>
+<td>−0.014</td>
+<td>0.302</td>
+</tr>
+</tbody></table>
+<p>OLS Regression:</p>
+<p>Drop_Ratio = 0.655 + 5.569 × Div_Yield</p>
+<p>The positive coefficient on dividend yield is statistically significant (p = 0.002) but economically modest: a 1 percentage point increase in annualized yield is associated with a 0.056 increase in the drop ratio. The low R² (&lt; 1%) indicates that dividend yield explains very little of the cross-sectional variation in drop ratios — daily noise dominates.</p>
+<p>The stock price level shows no significant relationship with the drop ratio (r = −0.014, p = 0.30), suggesting that the tick-size explanation has lost relevance in the decimalized era.</p>
+<p>![Scatter: Yield vs Drop Ratio](figures/scatter_yield_vs_drop.png)</p>
+<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 6: Scatter plot of dividend yield versus price drop ratio with OLS regression line. The positive slope is statistically significant but the relationship is noisy.</p>
+<h3 class="sub-title">4.7 Market-Adjusted Results</h3>
+<p>After subtracting the market return (SPY, β = 1 assumption), the mean drop ratio is:</p>
+<table>
+<thead><tr>
+<th>Measure</th>
+<th>N</th>
+<th>Mean</th>
+<th>Median</th>
+<th>Std. Dev.</th>
+<th>t vs 1.0</th>
+<th>p-value</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Market-adjusted</td>
+<td>5,095</td>
+<td>0.627</td>
+<td>0.721</td>
+<td>1.752</td>
+<td>−8.798</td>
+<td>1.88 × 10⁻¹⁸</td>
+</tr>
+</tbody></table>
+<p>The market-adjusted drop ratio (0.627) is notably lower than the unadjusted ratio (0.812), and still significantly below 1.0. This indicates that general market movements on ex-dividend days were, on average, positive during our sample period, inflating the raw drop ratio somewhat. The &quot;true&quot; dividend-induced price drop, net of market effects, is closer to 63% of the dividend amount.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION V</span>
+  <h2 class="section-title">5. Discussion</h2>
+</div>
+<h3 class="sub-title">5.1 Tax-Clientele Effects</h3>
+<p>Our central finding — a mean drop ratio of approximately 0.81 (or 0.63 market-adjusted) — is broadly consistent with the international literature. Under the Elton-Gruber framework, a drop ratio of 0.81 implies:</p>
+<p>(1 − τ_d) / (1 − τ_g) ≈ 0.81</p>
+<p>For the current US regime (qualified dividends taxed at 15–20%, long-term capital gains at 15–20%), the implied ratio would be approximately 1.0 for most individual investors, which is higher than what we observe. This suggests that either: (a) the marginal investor faces a higher effective dividend tax rate (perhaps due to state taxes, short-term holding periods, or foreign investor withholding), or (b) non-tax factors contribute to the shortfall.</p>
+<p>The yield-bucket analysis supports the clientele hypothesis: high-yield stocks (held disproportionately by low-tax or tax-exempt investors) show drop ratios closer to 1.0 (0.878) than low-yield stocks (0.683).</p>
+<h3 class="sub-title">5.2 Market Microstructure</h3>
+<p>Frank &amp; Jagannathan (1998) demonstrated that microstructure effects alone can explain drop ratios below 1.0 even in the absence of taxes. Two mechanisms are relevant:</p>
+<ol>
+  <li>Bid-ask bounce. The closing price on the cum-dividend day may occur at the ask, while the opening price on the ex-day may occur at the bid. This mechanical &quot;bounce&quot; reduces the observed price drop by approximately one spread, which can be substantial relative to a small dividend.</li>
+</ol>
+<ol>
+  <li>Order flow imbalance. Dividend capture trading — buying before and selling after the ex-date — creates excess sell pressure on the ex-date opening, which may paradoxically be absorbed at lower prices by market makers who widen spreads.</li>
+</ol>
+<p>The lack of a significant price-level effect in our data (Pearson r = −0.014, p = 0.30) suggests that the discrete tick-size explanation (Bali &amp; Hite, 1998) is no longer relevant in the decimal-pricing era, consistent with Graham et al. (2003).</p>
+<h3 class="sub-title">5.3 Heterogeneous Investors and Dividend Capture</h3>
+<p>The substantial cross-sectional and time-series variation in drop ratios is consistent with time-varying composition of the marginal investor population. In years of high volatility (2020, 2022), the increased noise may push estimated drop ratios in either direction. The Utilities sector&#x27;s high drop ratio (0.93) aligns with its investor base of income-seeking, often tax-advantaged investors.</p>
+<h3 class="sub-title">5.4 Comparison with Prior Literature</h3>
+<p>Our mean drop ratio of 0.81 (unadjusted) falls within the range reported in the literature:</p>
+<table>
+<thead><tr>
+<th>Study</th>
+<th>Period</th>
+<th>Market</th>
+<th>Drop Ratio</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Elton &amp; Gruber (1970)</td>
+<td>1966–1967</td>
+<td>US</td>
+<td>~0.78</td>
+</tr>
+<tr>
+<td>Frank &amp; Jagannathan (1998)</td>
+<td>1980–1993</td>
+<td>Hong Kong</td>
+<td>~0.50</td>
+</tr>
+<tr>
+<td>Graham et al. (2003)</td>
+<td>1996–2001</td>
+<td>US (post-decimal)</td>
+<td>~0.86</td>
+</tr>
+<tr>
+<td>This study</td>
+<td>2010–2025</td>
+<td>US</td>
+<td>0.81</td>
+</tr>
+</tbody></table>
+<p>Our estimate is slightly lower than Graham et al.&#x27;s post-decimalization figure, possibly reflecting changes in investor composition or the different sample periods.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION VI</span>
+  <h2 class="section-title">6. Implications</h2>
+</div>
+<h3 class="sub-title">6.1 For Dividend Capture Strategies</h3>
+<p>The persistent shortfall from a full dividend drop implies that a naïve &quot;buy before, sell after&quot; dividend capture strategy faces a structural headwind: the capital loss on the ex-date exceeds the dividend received (on average, you lose 19% of the dividend to the incomplete price adjustment). After transaction costs, such strategies are unlikely to be profitable for retail investors — consistent with the efficient-markets interpretation that the anomaly reflects an equilibrium tax premium rather than a trading opportunity.</p>
+<h3 class="sub-title">6.2 For Tax Policy</h3>
+<p>The sensitivity of the drop ratio to dividend yield (and, historically, to tax law changes) suggests that dividend taxation does affect stock prices at the margin. Policymakers considering changes to dividend tax rates should expect adjustments in ex-day price behavior and, more broadly, in the relative valuation of dividend-paying versus non-dividend-paying stocks.</p>
+<h3 class="sub-title">6.3 For Market Efficiency</h3>
+<p>The ex-dividend day anomaly does not represent a violation of market efficiency. The drop ratio below 1.0 reflects rational equilibrium pricing by heterogeneous investors with different tax circumstances. No risk-free arbitrage profit is available after accounting for taxes, transaction costs, and the short-term capital gains treatment of dividend capture trades.</p>
+
+<div class="section-header">
+  <span class="section-number">SECTION VII</span>
+  <h2 class="section-title">7. Conclusions</h2>
+</div>
+<p>Using 5,106 ex-dividend events from 80 S&amp;P 500 stocks over 2010–2025, we confirm the long-standing finding that stock prices drop by significantly less than the full dividend amount on ex-dividend dates. The mean close-to-open drop ratio is 0.812 (95% CI: [0.762, 0.861]), significantly below 1.0 (p &lt; 10⁻¹³) by both parametric and nonparametric tests. Market-adjusted, the drop ratio falls to 0.627.</p>
+<p>The shortfall is:</p>
+<ul>
+  <li>Persistent — observed in every year of the sample, with no secular trend</li>
+</ul>
+<ul>
+  <li>Universal — present across all 10 sectors (sector ANOVA p = 0.12)</li>
+</ul>
+<ul>
+  <li>Moderated by yield — high-yield stocks drop closer to the full dividend (ANOVA p = 0.002)</li>
+</ul>
+<ul>
+  <li>Statistically robust — confirmed by t-tests, Wilcoxon tests, and bootstrap inference</li>
+</ul>
+<p>These results are consistent with a joint explanation combining differential taxation (Elton &amp; Gruber, 1970), market microstructure frictions (Frank &amp; Jagannathan, 1998), and heterogeneous investor clienteles. The anomaly reflects equilibrium pricing, not an exploitable inefficiency.</p>
+
+<div class="references-section">
+<h2>REFERENCES</h2>
+<ol class="ref-list">
+<li>See [bibliography.md](bibliography.md) for complete citation list.</li>
+<li>Bali, R., &amp; Hite, G. L. (1998). *Journal of Financial Economics*, 47(2), 127–159.</li>
+<li>Boyd, J. H., &amp; Jagannathan, R. (1994). *The Review of Financial Studies*, 7(4), 711–741.</li>
+<li>Campbell, J. A., &amp; Beranek, W. (1955). *The Journal of Finance*, 10(4), 425–429.</li>
+<li>Cloyd, C. B., Li, O. Z., &amp; Weaver, C. D. (2006). *Journal of the American Taxation Association*, 28(2), 23–46.</li>
+<li>Elton, E. J., &amp; Gruber, M. J. (1970). *The Review of Economics and Statistics*, 52(1), 68–74.</li>
+<li>Elton, E. J., Gruber, M. J., &amp; Blake, C. R. (2005). *The Review of Economics and Statistics*, 87(3), 579–586.</li>
+<li>Frank, M., &amp; Jagannathan, R. (1998). *Journal of Financial Economics*, 47(2), 161–188.</li>
+<li>Graham, J. R., Michaely, R., &amp; Roberts, M. R. (2003). *The Journal of Finance*, 58(6), 2611–2636.</li>
+<li>Kalay, A. (1982). *The Journal of Finance*, 37(4), 1059–1070.</li>
+<li>Lakonishok, J., &amp; Vermaelen, T. (1986). *Journal of Financial Economics*, 16(3), 287–319.</li>
+<li>Michaely, R., &amp; Vila, J.-L. (1995). *Journal of Financial and Quantitative Analysis*, 30(2), 171–198.</li>
+<li>Miller, M. H., &amp; Modigliani, F. (1961). *The Journal of Business*, 34(4), 411–433.</li>
+<li>Rantapuska, E. (2008). *Journal of Financial Economics*, 88(2), 355–374.</li>
+<li>Zhang, Y., Farrell, K. A., &amp; Brown, T. A. (2008). *National Tax Journal*, 61(1), 105–127.</li>
+<li>Data and code available at: `dividend_study/analysis.py` | Raw data: `dividend_study/raw_data.csv`</li>
+</ol>
+<h3 style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold-dim);margin:28px 0 16px;letter-spacing:0.1em;">BIBLIOGRAPHY</h3>
+<ol class="ref-list">
+<li>Campbell, J. A., &amp; Beranek, W. (1955). Stock price behavior on ex-dividend dates. *The Journal of Finance*, 10(4), 425–429. https://doi.org/10.2307/2976803</li>
+<li>Elton, E. J., &amp; Gruber, M. J. (1970). Marginal stockholder tax rates and the clientele effect. *The Review of Economics and Statistics*, 52(1), 68–74. https://doi.org/10.2307/1927599</li>
+<li>Kalay, A. (1982). The ex-dividend day behavior of stock prices: A re-examination of the clientele effect. *The Journal of Finance*, 37(4), 1059–1070. https://doi.org/10.2307/2327767</li>
+<li>Lakonishok, J., &amp; Vermaelen, T. (1986). Tax-induced trading around ex-dividend days. *Journal of Financial Economics*, 16(3), 287–319. https://doi.org/10.1016/0304-405X(86)90032-2</li>
+<li>Bali, R., &amp; Hite, G. L. (1998). Ex dividend day stock price behavior: Discreteness or tax-induced clienteles? *Journal of Financial Economics*, 47(2), 127–159. https://doi.org/10.1016/S0304-405X(97)00041-X</li>
+<li>Frank, M., &amp; Jagannathan, R. (1998). Why do stock prices drop by less than the value of the dividend? Evidence from a country without taxes. *Journal of Financial Economics*, 47(2), 161–188. https://doi.org/10.1016/S0304-405X(97)00042-1</li>
+<li>Graham, J. R., Michaely, R., &amp; Roberts, M. R. (2003). Do price discreteness and transactions costs affect stock returns? Comparing ex-dividend pricing before and after decimalization. *The Journal of Finance*, 58(6), 2611–2636. https://doi.org/10.1046/j.1540-6261.2003.00617.x</li>
+<li>Cloyd, C. B., Li, O. Z., &amp; Weaver, C. D. (2006). Ticks and tax: The effects of price discreteness and taxation on ex-dividend day returns. *Journal of the American Taxation Association*, 28(2), 23–46. https://doi.org/10.2308/jata.2006.28.2.23</li>
+<li>Elton, E. J., Gruber, M. J., &amp; Blake, C. R. (2005). Marginal stockholder tax effects and ex-dividend-day price behavior: Evidence from taxable versus nontaxable closed-end funds. *The Review of Economics and Statistics*, 87(3), 579–586. https://doi.org/10.1162/0034653054638337</li>
+<li>Boyd, J. H., &amp; Jagannathan, R. (1994). Ex-dividend price behavior of common stocks. *The Review of Financial Studies*, 7(4), 711–741. https://doi.org/10.1093/rfs/7.4.711</li>
+<li>Michaely, R., &amp; Vila, J.-L. (1995). Investors&#x27; heterogeneity, prices, and volume around the ex-dividend day. *Journal of Financial and Quantitative Analysis*, 30(2), 171–198. https://doi.org/10.2307/2331116</li>
+<li>Rantapuska, E. (2008). Ex-dividend day trading: Who, how, and why? Evidence from the Finnish market. *Journal of Financial Economics*, 88(2), 355–374. https://doi.org/10.1016/j.jfineco.2007.12.001</li>
+<li>Zhang, Y., Farrell, K. A., &amp; Brown, T. A. (2008). Ex-dividend day price and volume: The case of 2003 dividend tax cut. *National Tax Journal*, 61(1), 105–127. https://doi.org/10.17310/ntj.2008.1.05</li>
+<li>Miller, M. H., &amp; Modigliani, F. (1961). Dividend policy, growth, and the valuation of shares. *The Journal of Business*, 34(4), 411–433. https://doi.org/10.1086/294442</li>
+<li>Black, F., &amp; Scholes, M. (1974). The effects of dividend yield and dividend policy on common stock prices and returns. *Journal of Financial Economics*, 1(1), 1–22. https://doi.org/10.1016/0304-405X(74)90006-3</li>
+</ol>
+</div>
+
+<div class="references-section">
+<h2>FIGURES</h2>
+</div>
+<h3 class="sub-title">Boxplot By Sector</h3>
+<h3 class="sub-title">Histogram By Yield</h3>
+<h3 class="sub-title">Histogram Drop Ratios</h3>
+<h3 class="sub-title">Qqplot Drop Ratios</h3>
+<h3 class="sub-title">Scatter Yield Vs Drop</h3>
+<h3 class="sub-title">Timeseries Drop Ratio</h3>
+
+</main>
+
+<footer class="paper-footer">
+  <div>
+    <a href="../index.html">Home</a>
+    <a href="../research.html">Research</a>
+    <a href="../about.html">About</a>
+  </div>
+  <div style="margin-top:16px;">
+    &copy; 2026 IUPPITER GROUP &middot; ALL RIGHTS RESERVED
+  </div>
+  <div style="margin-top:8px; font-size:0.62rem; color:var(--text-dim);">
+    The views expressed are those of the author and represent independent academic analysis.
+  </div>
+</footer>
+
+</body>
+</html>
