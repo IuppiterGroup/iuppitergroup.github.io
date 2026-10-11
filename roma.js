@@ -117,10 +117,13 @@
   }
   function fitAuc() {
     var w = aucEl.parentNode.clientWidth || 280;
-    var size = Math.min(window.innerWidth < 600 ? 52 : 70, w / (Math.max(aucLen, 3) * 0.78));
-    aucEl.style.fontSize = Math.max(26, size).toFixed(1) + 'px';
+    var size = window.innerWidth < 600 ? 56 : 72;
+    aucEl.style.fontSize = size + 'px';
+    var sw = aucEl.scrollWidth;
+    if (sw > w) { size = Math.max(24, Math.floor(size * w / sw * 0.98)); aucEl.style.fontSize = size + 'px'; }
   }
   window.addEventListener('resize', function () { if (aucEl) fitAuc(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (aucEl) fitAuc(); });
   var hashTimer;
   function setYear(y, opts) {
     opts = opts || {};

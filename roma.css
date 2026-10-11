@@ -53,7 +53,7 @@ body.roma {
   font-family: var(--r-display); font-weight: 700;
   font-size: clamp(2.4rem, 5.2vw, 4.4rem); line-height: 1;
   letter-spacing: 0.04em; color: var(--r-marble);
-  margin: 0 0 10px; word-break: break-word;
+  margin: 0 0 10px; white-space: nowrap; display: inline-block; max-width: 100%;
   text-shadow: 0 1px 0 #000, 0 0 24px rgba(201,168,76,0.12);
 }
 .insc-year { margin: 0; font-size: 1.2rem; line-height: 1.35; }
