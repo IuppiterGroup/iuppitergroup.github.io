@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Finance Tools | luppiter Group</title>
+  <meta name="description" content="Free finance calculators from luppiter Group: cash-secured put returns, ex-dividend drop estimates, an RSI study explorer and backtester, and the DCF Modeler. No accounts; everything runs in your browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tools.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta name="referrer" content="no-referrer">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="chrome-extensions.html">Extensions</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="roma.html">Roma</a></li>
+      <li><a href="quotes.html">Wisdom</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header tools-header">
+  <div class="container">
+    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
+    <h1>Tools</h1>
+    <p class="tools-intro">Free finance tools. No accounts, no sign-ups, and nothing to install: everything runs in your browser, and your numbers never leave your device.</p>
+    <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn btn-solid" target="_blank" rel="noopener">Support our work</a>
+    <nav class="tool-jump" aria-label="Jump to a tool">
+      <a href="#put-calculator">Put Calculator</a>
+      <a href="#ex-dividend">Ex-Dividend Drop</a>
+      <a href="#rsi-study">RSI Study</a>
+      <a href="#rsi-backtest">RSI Backtest</a>
+      <a href="#dcf-modeler">DCF Modeler</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="container">
+
+    <!-- ═══════════ 1. CASH-SECURED PUT ═══════════ -->
+    <article class="tool-card" id="put-calculator" aria-labelledby="put-title">
+      <div class="tool-kicker">Options income</div>
+      <h2 class="tool-title" id="put-title">Cash-Secured Put Calculator</h2>
+      <p class="tool-lede">Collateral, premium, period and annualized return, breakeven, and cost basis if assigned for a cash-secured put, including what the parked cash can earn in T-bills or a money-market fund.</p>
+
+      <div class="tool-grid">
+        <form id="put-form" novalidate>
+          <div class="fields">
+            <div class="field">
+              <label for="put-price">Stock price ($)</label>
+              <input id="put-price" type="number" inputmode="decimal" step="any" min="0" value="52.00" required>
+            </div>
+            <div class="field">
+              <label for="put-strike">Strike price ($)</label>
+              <input id="put-strike" type="number" inputmode="decimal" step="any" min="0" value="50.00" required>
+            </div>
+            <div class="field">
+              <label for="put-premium">Premium per share ($)</label>
+              <input id="put-premium" type="number" inputmode="decimal" step="any" min="0" value="1.00" required>
+            </div>
+            <div class="field">
+              <label for="put-days">Days to expiration</label>
+              <input id="put-days" type="number" inputmode="numeric" step="1" min="1" value="30" required>
+            </div>
+            <div class="field">
+              <label for="put-contracts">Contracts</label>
+              <input id="put-contracts" type="number" inputmode="numeric" step="1" min="1" value="1" required aria-describedby="put-contracts-hint">
+              <span class="hint" id="put-contracts-hint">1 contract covers 100 shares.</span>
+            </div>
+            <div class="field">
+              <label for="put-yield">T-bill / money-market yield (%) <span class="opt">optional</span></label>
+              <input id="put-yield" type="number" inputmode="decimal" step="any" min="0" placeholder="e.g. 4.00" aria-describedby="put-yield-hint">
+              <span class="hint" id="put-yield-hint">Annual yield earned on the collateral while the put is open.</span>
+            </div>
+            <div class="field">
+              <label for="put-comm">Commission per contract ($) <span class="opt">optional</span></label>
+              <input id="put-comm" type="number" inputmode="decimal" step="any" min="0" placeholder="e.g. 0.65">
+            </div>
+          </div>
+          <div class="form-errors" id="put-errors" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="results" id="put-results">
+          <div class="result-hero">
+            <div class="rh-label">Annualized return on collateral</div>
+            <div class="rh-value" id="put-out-annual">n/a</div>
+            <div class="rh-sub" id="put-out-annual-sub">&nbsp;</div>
+          </div>
+          <ul class="result-list">
+            <li><span class="rl-label">Collateral required</span><span class="rl-value" id="put-out-collateral">n/a</span></li>
+            <li><span class="rl-label">Premium collected (net of commissions)<small id="put-out-premium-sub"></small></span><span class="rl-value" id="put-out-premium">n/a</span></li>
+            <li><span class="rl-label">Return on collateral for the period<small id="put-out-period-sub"></small></span><span class="rl-value" id="put-out-period">n/a</span></li>
+            <li><span class="rl-label">Annualized premium return</span><span class="rl-value" id="put-out-annual2">n/a</span></li>
+            <li><span class="rl-label">Total annualized incl. T-bill yield<small id="put-out-total-sub"></small></span><span class="rl-value" id="put-out-total">n/a</span></li>
+            <li><span class="rl-label">Breakeven at expiration</span><span class="rl-value" id="put-out-breakeven">n/a</span></li>
+            <li><span class="rl-label">Downside cushion<small>Distance from the stock price to breakeven</small></span><span class="rl-value" id="put-out-cushion">n/a</span></li>
+            <li><span class="rl-label">Effective cost basis if assigned<small id="put-out-basis-sub"></small></span><span class="rl-value" id="put-out-basis">n/a</span></li>
+          </ul>
+          <div class="formula">
+            <h4>Formulas</h4>
+            <p><code>Collateral = strike × 100 × contracts</code></p>
+            <p><code>Net premium = premium × 100 × contracts − commission × contracts</code></p>
+            <p><code>Period return = net premium ÷ collateral</code></p>
+            <p><code>Annualized = net premium per contract ÷ (strike × 100) × 365 ÷ days</code></p>
+            <p><code>Total annualized = annualized premium return + T-bill yield</code></p>
+            <p><code>Breakeven = cost basis if assigned = strike − net premium per share</code></p>
+            <p><code>Downside cushion = (stock price − breakeven) ÷ stock price</code></p>
+          </div>
+          <p class="caveat">Simple (non-compounded) annualization on a 365-day year. Assumes the put is held to expiration; ignores early assignment, assignment fees, and taxes.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ═══════════ 2. EX-DIVIDEND DROP ═══════════ -->
+    <article class="tool-card" id="ex-dividend" aria-labelledby="div-title">
+      <div class="tool-kicker">Dividends</div>
+      <h2 class="tool-title" id="div-title">Ex-Dividend Drop Estimator</h2>
+      <p class="tool-lede">Estimates the ex-day opening price using our <a href="papers/dividend-study.html">Ex-Dividend Day Price Drop study</a>: across 5,106 ex-dividend events in 80 S&amp;P 500 stocks (2010–2025), shares opened lower by an average of 0.812 times the dividend (95% CI 0.762 to 0.861), not the full dividend that frictionless theory predicts.</p>
+
+      <div class="tool-grid">
+        <form id="div-form" novalidate>
+          <div class="fields">
+            <div class="field">
+              <label for="div-price">Share price, prior close ($)</label>
+              <input id="div-price" type="number" inputmode="decimal" step="any" min="0" value="100.00" required>
+            </div>
+            <div class="field">
+              <label for="div-amount">Dividend per share ($)</label>
+              <input id="div-amount" type="number" inputmode="decimal" step="any" min="0" value="0.75" required>
+            </div>
+            <div class="field">
+              <label for="div-freq">Payments per year</label>
+              <select id="div-freq" aria-describedby="div-freq-hint">
+                <option value="1">1 (annual)</option>
+                <option value="2">2 (semiannual)</option>
+                <option value="4" selected>4 (quarterly)</option>
+                <option value="12">12 (monthly)</option>
+              </select>
+              <span class="hint" id="div-freq-hint">Used to annualize the yield.</span>
+            </div>
+            <div class="field">
+              <label for="div-yield">Annualized yield (computed)</label>
+              <input id="div-yield" type="text" readonly value="">
+            </div>
+            <div class="field span-2">
+              <label for="div-basis">Drop ratio basis (from the paper)</label>
+              <select id="div-basis" aria-describedby="div-basis-hint"></select>
+              <span class="hint" id="div-basis-hint">The paper sorts events into equal-count yield terciles but does not publish the cutoffs, so pick the bucket yourself using the computed yield as a guide. Sector differences were not statistically significant (ANOVA p = 0.122); yield differences were (p = 0.0019).</span>
+            </div>
+          </div>
+          <div class="form-errors" id="div-errors" role="status" aria-live="polite"></div>
+          <div class="form-warn" id="div-warn" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="results" id="div-results">
+          <div class="result-hero">
+            <div class="rh-label">Expected drop at the open</div>
+            <div class="rh-value" id="div-out-drop">n/a</div>
+            <div class="rh-sub" id="div-out-drop-sub">&nbsp;</div>
+          </div>
+          <ul class="result-list">
+            <li><span class="rl-label">Drop ratio used<small id="div-out-ratio-sub"></small></span><span class="rl-value" id="div-out-ratio">n/a</span></li>
+            <li><span class="rl-label">Expected ex-day open price</span><span class="rl-value" id="div-out-open">n/a</span></li>
+            <li><span class="rl-label">Expected open, range<small id="div-out-range-sub"></small></span><span class="rl-value" id="div-out-range">n/a</span></li>
+            <li><span class="rl-label">Theoretical full-drop price<small>Prior close minus the full dividend</small></span><span class="rl-value" id="div-out-full">n/a</span></li>
+            <li><span class="rl-label">Shortfall vs. a full drop</span><span class="rl-value" id="div-out-shortfall">n/a</span></li>
+          </ul>
+          <div class="formula">
+            <h4>Formulas</h4>
+            <p><code>Expected drop = dividend × drop ratio</code></p>
+            <p><code>Expected open = prior close − expected drop</code></p>
+            <p><code>Full-drop price = prior close − dividend</code></p>
+            <p><code>Yield = dividend × payments per year ÷ price</code></p>
+            <p><code>Drop ratio (paper) = (prior close − ex-day open) ÷ dividend</code></p>
+          </div>
+          <p class="caveat"><strong>Historical average; individual events vary widely.</strong> The drop ratio's standard deviation across events was 1.83, so a single stock's open can land far from this estimate. The range reflects uncertainty in the average ratio, not the spread of individual events. Market-adjusted, the paper's average falls to 0.627. <a href="papers/dividend-study.html">Read the paper</a>.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ═══════════ 3a. RSI STUDY EXPLORER ═══════════ -->
+    <article class="tool-card" id="rsi-study" aria-labelledby="rsi-title">
+      <div class="tool-kicker">Technical analysis research</div>
+      <h2 class="tool-title" id="rsi-title">RSI Study Explorer</h2>
+      <p class="tool-lede">Interactive results from our <a href="papers/rsi-study.html">RSI study</a>: four Wilder RSI(14) strategies backtested across 100 U.S. stocks in 11 sectors with up to 64 years of daily data (1962–2026), 5,174 trades in total. Buy when RSI crosses below the lower threshold, sell when it crosses above the upper threshold.</p>
+
+      <div class="callout" role="note">
+        <strong>Read with care.</strong> The 100-stock universe consists only of companies that survived to 2026 (delisted, bankrupt, and acquired firms are excluded), which biases win rates and average returns upward; the paper estimates win rates are inflated by roughly 3 to 8 percentage points, most of all for long-hold strategies such as Weekly 20/80. And every strategy underperformed buy-and-hold on an annualized basis (paired t-test p &lt; 10⁻²⁰ for all four), mainly because capital sits idle between signals.
+      </div>
+
+      <h3 class="tool-sub">Strategy results</h3>
+      <p class="tool-subnote">Table 1 and Table 2 of the paper. Toggle strategies and pick a metric.</p>
+      <fieldset class="chip-row" id="rsi-toggles">
+        <legend class="sr-only">Strategies to show</legend>
+      </fieldset>
+      <div class="ctrl-row">
+        <div class="field">
+          <label for="rsi-metric">Metric</label>
+          <select id="rsi-metric"></select>
+        </div>
+      </div>
+      <div class="chart" id="rsi-chart-main"></div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Strategy results table">
+        <table class="data" id="rsi-table-main"></table>
+      </div>
+
+      <h3 class="tool-sub">By sector</h3>
+      <p class="tool-subnote">Tables 3 and 4. The paper publishes sector tables for the two 30/70 strategies only; for the 20/80 strategies, sector differences were not statistically significant (ANOVA p = 0.8226 daily, 0.5812 weekly).</p>
+      <div class="ctrl-row">
+        <div class="field">
+          <label for="rsi-sector-strat">Strategy</label>
+          <select id="rsi-sector-strat">
+            <option value="d3070">Daily 30/70</option>
+            <option value="w3070">Weekly 30/70</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rsi-sector-metric">Metric</label>
+          <select id="rsi-sector-metric">
+            <option value="avg">Average return per trade</option>
+            <option value="med">Median return per trade</option>
+            <option value="win">Win rate</option>
+            <option value="trades">Trades</option>
+          </select>
+        </div>
+      </div>
+      <p class="tool-subnote" id="rsi-anova"></p>
+      <div class="chart" id="rsi-chart-sector"></div>
+      <details>
+        <summary class="tool-subnote" style="cursor:pointer;">Show sector table</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Sector table">
+          <table class="data" id="rsi-table-sector"></table>
+        </div>
+      </details>
+
+      <h3 class="tool-sub">Market regimes</h3>
+      <p class="tool-subnote">Table 6: performance during market crises, filtered by the strategy toggles above. Some cells rest on very few trades (Weekly 20/80 had 2 trades in the 2022 bear market).</p>
+      <div class="ctrl-row">
+        <div class="field">
+          <label for="rsi-regime-metric">Metric</label>
+          <select id="rsi-regime-metric">
+            <option value="avg">Average return per trade</option>
+            <option value="win">Win rate</option>
+            <option value="trades">Trades</option>
+          </select>
+        </div>
+      </div>
+      <div class="chart" id="rsi-chart-regime"></div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Daily 30/70 by time period">
+        <table class="data" id="rsi-table-period"></table>
+      </div>
+      <p class="caveat">Gross returns before costs and taxes. Source: <a href="papers/rsi-study.html">The Empirical Performance of RSI-Based Trading Strategies</a> (luppiter Group, 2026).</p>
+    </article>
+
+    <!-- ═══════════ 3b. BACKTEST YOUR OWN ═══════════ -->
+    <article class="tool-card" id="rsi-backtest" aria-labelledby="bt-title">
+      <div class="tool-kicker">Technical analysis</div>
+      <h2 class="tool-title" id="bt-title">RSI Backtester: Test Your Own Stock</h2>
+      <p class="tool-lede">Run the paper's exact entry and exit rules on any daily price history. Upload or paste a CSV with a Date column and a Close or Adj Close column, such as a Yahoo Finance historical-data download. The file is read in your browser and never uploaded.</p>
+
+      <div class="tool-grid">
+        <div>
+          <div class="fields">
+            <div class="field span-2">
+              <label for="bt-file">Upload CSV <span class="opt">optional</span></label>
+              <input id="bt-file" type="file" accept=".csv,text/csv,text/plain">
+            </div>
+            <div class="field span-2">
+              <label for="bt-csv">Or paste CSV</label>
+              <textarea id="bt-csv" spellcheck="false" aria-describedby="bt-csv-hint"></textarea>
+              <span class="hint" id="bt-csv-hint">First row must be headers. Dates as YYYY-MM-DD or MM/DD/YYYY; any row order.</span>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="btn btn-solid" id="bt-run">Run backtest</button>
+            <button type="button" class="btn btn-ghost" id="bt-demo">Load synthetic demo data</button>
+          </div>
+          <p class="data-status" id="bt-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <form id="bt-form" novalidate>
+          <div class="fields">
+            <div class="field">
+              <label for="bt-col">Price column</label>
+              <select id="bt-col"></select>
+            </div>
+            <div class="field">
+              <label for="bt-tf">Timeframe</label>
+              <select id="bt-tf" aria-describedby="bt-tf-hint">
+                <option value="daily" selected>Daily</option>
+                <option value="weekly">Weekly</option>
+              </select>
+              <span class="hint" id="bt-tf-hint">Weekly uses the last close of each week ending Friday.</span>
+            </div>
+            <div class="field">
+              <label for="bt-period">RSI period</label>
+              <input id="bt-period" type="number" inputmode="numeric" step="1" min="2" max="250" value="14" required>
+            </div>
+            <div class="field">
+              <label for="bt-lower">Buy threshold (lower)</label>
+              <input id="bt-lower" type="number" inputmode="decimal" step="any" min="1" max="99" value="30" required>
+            </div>
+            <div class="field">
+              <label for="bt-upper">Sell threshold (upper)</label>
+              <input id="bt-upper" type="number" inputmode="decimal" step="any" min="1" max="99" value="70" required>
+            </div>
+          </div>
+          <div class="form-errors" id="bt-errors" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="stat-grid" id="bt-stats">
+        <div class="stat-tile"><div class="st-label">Trades</div><div class="st-value" id="bt-out-trades">n/a</div></div>
+        <div class="stat-tile"><div class="st-label">Win rate</div><div class="st-value" id="bt-out-win">n/a</div></div>
+        <div class="stat-tile"><div class="st-label">Avg return / trade</div><div class="st-value" id="bt-out-avg">n/a</div></div>
+        <div class="stat-tile"><div class="st-label">Avg holding (days)</div><div class="st-value" id="bt-out-hold">n/a</div></div>
+        <div class="stat-tile"><div class="st-label">Strategy return (compounded)</div><div class="st-value" id="bt-out-strat">n/a</div></div>
+        <div class="stat-tile"><div class="st-label">Buy-and-hold return</div><div class="st-value" id="bt-out-bh">n/a</div></div>
+        <div class="stat-tile"><div class="st-label">Time in market</div><div class="st-value" id="bt-out-tim">n/a</div></div>
+        <div class="stat-tile"><div class="st-label">Span (years)</div><div class="st-value" id="bt-out-span">n/a</div></div>
+      </div>
+      <p class="tool-subnote" id="bt-summary"></p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Backtest trades">
+        <table class="data" id="bt-trades"></table>
+      </div>
+      <div class="formula">
+        <h4>Rules (matching the paper's methodology)</h4>
+        <p>RSI uses Wilder's smoothing: average gain and loss are seeded with a simple average of the first N changes, then updated as (previous × (N − 1) + current) ÷ N. The paper's implementation (an exponential average with α = 1/N) converges to the same values after a short warm-up, so the two can disagree only on signals near the start of a series.</p>
+        <p><strong>Entry:</strong> buy at the close when RSI is below the lower threshold and the prior bar's RSI was at or above it (a downward cross). <strong>Exit:</strong> sell at the close when RSI is above the upper threshold and the prior bar's RSI was at or below it (an upward cross). One position at a time; a position still open at the end is closed at the last price and flagged.</p>
+        <p>Returns are gross (no commissions, slippage, or taxes). Buy-and-hold runs from the first to the last close of the same series; time in market is calendar days held divided by calendar days in the span.</p>
+      </div>
+    </article>
+
+    <!-- ═══════════ 4. DCF MODELER ═══════════ -->
+    <article class="tool-card" id="dcf-modeler" aria-labelledby="dcf-title">
+      <div class="tool-kicker">Financial modeling</div>
+      <h2 class="tool-title" id="dcf-title">DCF Modeler <span class="free-badge">Now free</span></h2>
+      <p class="tool-lede">A per-share discounted cash flow model with Bear, Base, and Bull scenarios, share buyback modeling, a sensitivity grid, and a Monte Carlo simulation, all in one HTML file.</p>
+
+      <div class="dcf-body">
+        <div>
+          <p class="dcf-desc">Start from a company's free cash flow (total or per share) or its EPS. The modeler projects that figure forward with a year-one growth rate that decays each year, shrinks the share count by your buyback rate, discounts each year's per-share value at your discount rate (WACC), and adds a terminal value from an exit multiple on the final year.</p>
+          <p class="dcf-desc">Bear and Bull cases are offset from the Base case by adjustable growth, multiple, WACC, and buyback deltas, so you see the range at a glance and how each sits against today's price. It is a single self-contained HTML file with no external scripts: open it in any browser, online or off.</p>
+        </div>
+        <ul class="feat-list">
+          <li>Metric basis: total FCF, FCF per share, or EPS, valued per share</li>
+          <li>Bear, Base, and Bull scenarios with adjustable offsets</li>
+          <li>Year-one growth with annual growth decay over a 3 to 20 year projection</li>
+          <li>Discount rate (WACC) and exit-multiple terminal value</li>
+          <li>Share buyback modeling: an annual buyback rate lowers the share count and lifts per-share value</li>
+          <li>Sensitivity table: a 5 × 5 grid of growth rate vs. exit multiple, shaded against the current price</li>
+          <li>Monte Carlo simulation: 2,000 runs randomizing growth, WACC, exit multiple, and buyback, with a histogram and 5th to 95th percentile values</li>
+          <li>Year-by-year projection table and a copyable step-by-step valuation equation</li>
+          <li>CSV export of all three scenarios and the base-case projections</li>
+          <li>Single HTML file; works offline</li>
+        </ul>
+      </div>
+
+      <div class="dcf-actions">
+        <a href="dist/DCF_Modeler.html" class="btn btn-solid" target="_blank" rel="noopener">Open DCF Modeler</a>
+        <a href="dist/DCF_Modeler.html" class="btn" download="DCF_Modeler.html">Download</a>
+        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn btn-ghost" target="_blank" rel="noopener">Support our work</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="tools.html">Tools</a>
+      <a href="chrome-extensions.html">Extensions</a>
+      <a href="games.html">Games</a>
+      <a href="roma.html">Roma</a>
+      <a href="quotes.html">Wisdom</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+    <p class="footer-disclaimer">Educational tools. Not financial advice.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="tools.js"></script>
+</body>
+</html>

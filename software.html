@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Software — luppiter Group</title>
-  <meta name="description" content="Professional-grade tools from luppiter Group. DCF Modeler, Vox Codex audiobook generator, Portfolio Tracker, and more.">
+  <meta name="description" content="Professional-grade tools from luppiter Group. DCF Modeler, Vox Codex audiobook maker, Portfolio Tracker, and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -210,9 +210,10 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="software.html" class="active">Software</a></li>
-      <li><a href="writer.html">Writer</a></li>
+      <li><a href="tools.html">Tools</a></li>
       <li><a href="chrome-extensions.html">Extensions</a></li>
       <li><a href="games.html">Games</a></li>
+      <li><a href="roma.html">Roma</a></li>
       <li><a href="quotes.html">Wisdom</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -224,7 +225,7 @@
   <div class="container">
     <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
     <h1>Software</h1>
-    <p>Professional-grade tools for analysts, writers, and serious users</p>
+    <p>Free tools for analysts, writers, and serious users. If they help you, consider <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" target="_blank" rel="noopener">supporting our work</a>.</p>
   </div>
 </header>
 
@@ -239,51 +240,52 @@
         <div class="product-card-title-group">
           <div class="product-card-category">Financial Modeling</div>
           <h2 class="product-card-name">DCF Modeler</h2>
-          <p class="product-card-tagline">Build institutional-grade discounted cash-flow models in a browser. Bear, Base, Bull scenarios. Monte Carlo simulation. No Excel required.</p>
+          <p class="product-card-tagline">Value a stock on EPS or free cash flow per share, with Bear, Base, and Bull scenarios and a Monte Carlo range. Runs in your browser. No Excel required.</p>
         </div>
         <div class="product-card-price-group">
-          <div class="product-card-price">$15</div>
-          <div style="font-size:0.75rem; color:var(--text-dim);">one-time</div>
+          <div class="product-card-price free">Free</div>
         </div>
       </div>
 
       <div class="product-card-body">
         <div>
           <p class="product-card-desc">
-            DCF Modeler is a self-contained HTML application — no install, no accounts, no cloud. Open it in any browser and you have a full discounted cash-flow modeling environment. Build three scenario models (Bear, Base, Bull) with customizable revenue growth assumptions, operating margin evolution, capex and working capital dynamics, and terminal value calculations.
+            DCF Modeler is a single self-contained HTML file: no install, no accounts, no cloud. Enter a ticker, price, shares outstanding, and the current EPS or FCF per share, then set growth, growth decay, discount rate, exit multiple, and buyback assumptions. It projects per-share earnings or cash flow, discounts them, adds an exit-multiple terminal value, and shows Bear, Base, and Bull values side by side.
           </p>
           <p class="product-card-desc" style="margin-top:14px;">
-            The integrated Monte Carlo simulation engine runs thousands of randomized trials across your assumption ranges to produce probability-weighted valuation distributions. See not just a point estimate but the full range of outcomes — and the likelihood of each.
+            A 2,000-run Monte Carlo varies growth, discount rate, exit multiple, and buybacks around your base case to show the range of outcomes, and a sensitivity table shows how value moves with the key inputs. It's free. If it helps you, consider supporting our work.
           </p>
           <div class="use-cases">
             <span class="use-case-chip">Equity research</span>
-            <span class="use-case-chip">Buy-side analysis</span>
+            <span class="use-case-chip">Personal investing</span>
             <span class="use-case-chip">Student modeling</span>
-            <span class="use-case-chip">Due diligence</span>
             <span class="use-case-chip">Earnings previews</span>
           </div>
         </div>
         <ul class="feature-list">
-          <li>Bear, Base, and Bull scenario models with independent assumption sets</li>
-          <li>Revenue growth, operating margin, D&amp;A, capex, and working capital inputs</li>
-          <li>WACC calculator with customizable cost of equity and debt components</li>
-          <li>Terminal value via Gordon Growth Model or Exit Multiple</li>
-          <li>Monte Carlo simulation — probability-weighted valuation ranges</li>
-          <li>Sensitivity analysis tables (WACC × terminal growth rate)</li>
-          <li>Visual charts: revenue bridge, EBITDA waterfall, valuation distribution</li>
-          <li>Export to PDF via browser print</li>
-          <li>Runs entirely in the browser — no install, no server, no accounts</li>
-          <li>Works offline after download</li>
+          <li>Bear, Base, and Bull scenarios with adjustable spreads</li>
+          <li>EPS or FCF per share basis</li>
+          <li>Growth rate with annual decay, plus optional margin expansion</li>
+          <li>Discount rate (WACC) input</li>
+          <li>Exit-multiple terminal value</li>
+          <li>Share buyback modeling</li>
+          <li>Sensitivity table</li>
+          <li>2,000-run Monte Carlo with probability ranges</li>
+          <li>Full projection table and step-by-step formula breakdown</li>
+          <li>CSV export</li>
+          <li>Runs entirely in the browser and works offline</li>
         </ul>
       </div>
 
       <div class="product-card-actions">
-        <a href="https://buy.stripe.com/8wMcPA8AagE07kYdQQ" class="btn btn-solid">Buy Now — $15</a>
+        <a href="dist/DCF_Modeler.html" class="btn btn-solid" target="_blank" rel="noopener">Open DCF Modeler</a>
+        <a href="dist/DCF_Modeler.html" class="btn" download="DCF_Modeler.html">Download (.html)</a>
+        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn" target="_blank" rel="noopener">Donate</a>
+        <span class="product-badge free">Free</span>
         <span class="product-badge">Single HTML file</span>
-        <span class="product-badge">No install needed</span>
         <p class="tos-warning" style="width:100%; margin-top:8px;">
-          NO REFUNDS OR RE-DISTRIBUTION. NOT FINANCIAL ADVICE — JUST A TOOL.&nbsp;
-          <a href="tos.html">Terms of Service</a> before purchase.
+          FREE. NO WARRANTY. NOT FINANCIAL ADVICE, JUST A TOOL.&nbsp;
+          <a href="tos.html">Terms of Service</a>
         </p>
       </div>
     </div>
@@ -296,50 +298,48 @@
         <div class="product-card-title-group">
           <div class="product-card-category">Audio Production</div>
           <h2 class="product-card-name">Vox Codex</h2>
-          <p class="product-card-tagline">Transform any text into a professional audiobook in minutes. AI-powered narration, chapter detection, MP3 export. Paste your manuscript and press go.</p>
+          <p class="product-card-tagline">Turn a PDF into a narrated audiobook. Automatic chapter detection, 15 natural-sounding voices, and MP3 export.</p>
         </div>
         <div class="product-card-price-group">
-          <div class="product-card-price">$25</div>
-          <div style="font-size:0.75rem; color:var(--text-dim);">one-time</div>
+          <div class="product-card-price free">Free</div>
         </div>
       </div>
 
       <div class="product-card-body">
         <div>
           <p class="product-card-desc">
-            Vox Codex is a Windows desktop application that converts written text into fully narrated audio using AI text-to-speech. Paste your manuscript, article, report, or script — pick from multiple narrator voices — and Vox Codex handles the rest. It automatically detects chapter breaks, paces the narration naturally, and exports to MP3.
+            Vox Codex is a Windows desktop app that turns PDFs into narrated audio. Open a PDF and it extracts the text and detects chapters, which you can review and edit. Pick one of 15 English neural voices (US, UK, Australian, and Irish), adjust rate and pitch, preview a sample, and export each chapter as an MP3 plus one combined audiobook file.
           </p>
           <p class="product-card-desc" style="margin-top:14px;">
-            There are no subscription fees, no per-minute charges, and no cloud uploads. Your content stays on your machine. The program takes a moment to initialize on first launch as the TTS engine loads — this is normal.
+            Narration uses Microsoft's Edge neural voices through the free edge-tts service, so it needs an internet connection and your text is sent to Microsoft to generate the audio. No API key, account, or subscription is needed. The program takes a moment to initialize on first launch.
           </p>
           <div class="use-cases">
-            <span class="use-case-chip">Self-publishing</span>
-            <span class="use-case-chip">Content creators</span>
-            <span class="use-case-chip">Newsletter narration</span>
+            <span class="use-case-chip">Self-publishing drafts</span>
+            <span class="use-case-chip">Listening to papers</span>
             <span class="use-case-chip">Research reports</span>
             <span class="use-case-chip">Accessibility</span>
           </div>
         </div>
         <ul class="feature-list">
-          <li>AI-powered text-to-speech with multiple narrator voices</li>
-          <li>Automatic chapter detection from headings and structure</li>
-          <li>Natural pacing and pause logic between sections</li>
-          <li>MP3 export — one file per chapter or one full audiobook</li>
-          <li>Supports plain text, markdown, and structured documents</li>
-          <li>Adjustable narration speed</li>
-          <li>No subscription, no per-minute charges, no cloud uploads</li>
-          <li>All processing is local — your content never leaves your machine</li>
-          <li>Windows only (see requirements)</li>
-          <li>One-time payment — use it as long as you want</li>
+          <li>PDF import with automatic text extraction</li>
+          <li>Automatic chapter detection, editable before export</li>
+          <li>15 neural voices: US, UK, Australian, and Irish English</li>
+          <li>Adjustable rate and pitch, with preview</li>
+          <li>MP3 per chapter plus a combined Full Audiobook file</li>
+          <li>No account, API key, or subscription</li>
+          <li>Requires Windows 10/11 and an internet connection</li>
         </ul>
       </div>
 
       <div class="product-card-actions">
-        <a href="https://buy.stripe.com/7sYcN7d3c1DZgPQ0IH14401" class="btn btn-solid">Buy Now — $25</a>
+        <a href="audiobook-download/" class="btn btn-solid">Download Free</a>
+        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn" target="_blank" rel="noopener">Donate</a>
+        <span class="product-badge free">Free</span>
         <span class="product-badge">Windows only</span>
+        <span class="product-badge">Internet required</span>
         <p class="tos-warning" style="width:100%; margin-top:8px;">
-          NO REFUNDS OR RE-DISTRIBUTION. WINDOWS ONLY. Note: program takes a moment to initialize on first launch.&nbsp;
-          <a href="tos.html">Terms of Service</a> before purchase.
+          FREE. NO WARRANTY. WINDOWS ONLY. VOICES COME FROM MICROSOFT'S ONLINE TEXT-TO-SPEECH SERVICE: CHECK MICROSOFT'S TERMS BEFORE USING GENERATED AUDIO COMMERCIALLY.&nbsp;
+          <a href="tos.html">Terms of Service</a>
         </p>
       </div>
     </div>
@@ -403,6 +403,29 @@
     </div>
 
     <!-- ════════════════════════════════════════════════════════════════
+         LUPPITER WRITER
+    ════════════════════════════════════════════════════════════════ -->
+    <div class="product-card" id="writer">
+      <div class="product-card-header">
+        <div class="product-card-title-group">
+          <div class="product-card-category">Writing · Free</div>
+          <h2 class="product-card-name"><span class="l-as-i">l</span>uppiter Writer</h2>
+          <p class="product-card-tagline">A lightweight desktop editor that opens, edits, and saves everyday .docx files. No subscription, no account, no cloud.</p>
+        </div>
+        <div class="product-card-price-group">
+          <div class="product-card-price free">Free</div>
+        </div>
+      </div>
+      <div class="product-card-actions">
+        <a href="writer.html" class="btn btn-solid">Learn More</a>
+        <a href="writer-download.html" class="btn">Download Free</a>
+        <span class="product-badge free">Free</span>
+        <span class="product-badge">Beta</span>
+        <span class="product-badge">Windows · Mac · Linux</span>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════
          COMING SOON — SEC FILING ANALYZER
     ════════════════════════════════════════════════════════════════ -->
     <div class="section-divider">&#x2726; &#x2726; &#x2726;</div>
@@ -420,7 +443,7 @@
         <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
           Automated parsing of SEC filings — 10-K, 10-Q, 8-K, and proxy statements. Extracts key financial metrics, flags material changes year-over-year, and generates summary reports in seconds. Stop reading 200-page filings manually.
         </p>
-        <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:16px;">Planned price: <strong style="color:var(--gold);">$25</strong></div>
+        <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:16px;">Planned: <strong style="color:var(--gold);">Free</strong></div>
         <div class="coming-soon-badge">Coming Soon</div>
       </div>
 
@@ -430,52 +453,16 @@
         <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
           Backtest any trading strategy against historical data with configurable signal logic, position sizing rules, and full performance analytics. Sharpe ratio, max drawdown, win rate, and equity curve visualization. Build it, test it, trust it.
         </p>
-        <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:16px;">Planned price: <strong style="color:var(--gold);">$20</strong></div>
+        <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:16px;">Planned: <strong style="color:var(--gold);">Free</strong></div>
         <div class="coming-soon-badge">Coming Soon</div>
       </div>
 
     </div>
 
-    <!-- ════════════════════════════════════════════════════════════════
-         GAMES SECTION
-    ════════════════════════════════════════════════════════════════ -->
     <div class="section-divider">&#x2726; &#x2726; &#x2726;</div>
-
-    <h2 class="section-title" style="font-size:1.5rem; margin-bottom:8px;">Games</h2>
-    <p class="section-subtitle" style="font-size:0.88rem; color:var(--text-dim); margin-bottom:40px;">
-      Narrative and strategy games in development. Ambitious projects — built at our own pace.
+    <p class="section-subtitle" style="font-size:0.95rem; color:var(--text-dim); text-align:center;">
+      Looking for our games? They live on the <a href="games.html">Games page</a>.
     </p>
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:24px;">
-
-      <div class="product-card coming-soon">
-        <div class="product-card-category">Strategy · Roguelike</div>
-        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">Descent of Rome</h3>
-        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
-          An Isaac-style roguelike set in the fall of the Roman Empire. 7 playable characters, 100+ items, 44 synergies, 48+ enemy types, 12+ bosses, active items, trinkets, omens, and Greed Mode. Handcrafted — no procedurally generated filler.
-        </p>
-        <div class="coming-soon-badge">Coming Soon</div>
-      </div>
-
-      <div class="product-card coming-soon">
-        <div class="product-card-category">Narrative · Interactive Fiction</div>
-        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">Disconnected</h3>
-        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
-          A story told through screens. An Emily is Away-style narrative game about social media, isolation, and the relationships we build and break online. Multiple acts, branching choices, and endings shaped by how you treat the people in your feed.
-        </p>
-        <div class="coming-soon-badge">Coming Soon</div>
-      </div>
-
-      <div class="product-card coming-soon">
-        <div class="product-card-category">Grand Strategy</div>
-        <h3 style="font-family:var(--font-heading); font-size:1.25rem; color:var(--cream); margin-bottom:10px;">Untitled Empire Builder</h3>
-        <p style="font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:16px;">
-          A mobile strategy game in the tradition of Rise of Kingdoms. Build from a single settlement to continental dominance. Designed for the patient and the ambitious. Freemium model with no pay-to-win mechanics.
-        </p>
-        <div class="coming-soon-badge">In Development</div>
-      </div>
-
-    </div>
 
   </div>
 </section>
@@ -485,9 +472,10 @@
     <div class="footer-links">
       <a href="research.html">Research</a>
       <a href="software.html">Software</a>
-      <a href="writer.html">Writer</a>
+      <a href="tools.html">Tools</a>
       <a href="chrome-extensions.html">Extensions</a>
       <a href="games.html">Games</a>
+      <a href="roma.html">Roma</a>
       <a href="quotes.html">Wisdom</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>

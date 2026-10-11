@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chrome Extensions — luppiter Group</title>
-  <meta name="description" content="Free Chrome extensions from luppiter Group. Hush silences cookie popups. Tab Manager controls memory. Mail Tracker shows reply status. Bookmarks Manager replaces Chrome's default. Clipboard Manager tracks copy history. Dashboard replaces new tab. Session Saver saves tab sessions. Volume Control boosts per-tab audio. Notepad for quick notes. Calendar with events and reminders.">
+  <meta name="description" content="Free Chrome extensions from luppiter Group. Hush auto-declines cookie popups. Tab Manager shows JavaScript memory per tab. Bookmarks Manager replaces Chrome's default. Clipboard Manager tracks copy history. Dashboard replaces new tab. Session Saver saves tab sessions. Volume Control boosts per-tab audio. Notepad for quick notes. Calendar with events and reminders.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -388,9 +388,10 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="software.html">Software</a></li>
-      <li><a href="writer.html">Writer</a></li>
+      <li><a href="tools.html">Tools</a></li>
       <li><a href="chrome-extensions.html" class="active">Extensions</a></li>
       <li><a href="games.html">Games</a></li>
+      <li><a href="roma.html">Roma</a></li>
       <li><a href="quotes.html">Wisdom</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -422,7 +423,6 @@
     <div class="ext-index">
       <a href="#hush">🤫 Hush</a>
       <a href="#tab-manager">🗂️ Tab Manager</a>
-      <a href="#mail-tracker">✉️ Mail Tracker</a>
       <a href="#bookmarks">📌 Bookmarks</a>
       <a href="#clipboard">📋 Clipboard</a>
       <a href="#dashboard">⊞ Dashboard</a>
@@ -442,7 +442,7 @@
         <div class="ext-meta">
           <div class="ext-category">Privacy · Browser Utility</div>
           <h2 class="ext-name">Hush</h2>
-          <p class="ext-tagline">Cookie banners, GDPR popups, newsletter nags — silenced automatically on every site you visit.</p>
+          <p class="ext-tagline">Cookie banners and consent popups declined automatically on every site you visit. Hush never clicks Accept.</p>
         </div>
       </div>
 
@@ -451,8 +451,10 @@
           <p class="ext-desc">
             Hush detects and dismisses the endless parade of consent dialogs, cookie banners,
             and overlay nags that modern websites throw at you — automatically, before you ever see them.
-            It recognizes all major consent management platforms plus hundreds of generic patterns,
-            clicks "Accept" on your behalf, or hides banners that don't respond to clicks.
+            It recognizes the major consent platforms plus generic patterns and always picks the
+            privacy-friendly answer: it clicks "Reject all" or "Necessary only", opens the settings panel and
+            switches off every optional toggle when there's no reject button, and as a last resort hides the
+            banner without agreeing to anything.
           </p>
           <br>
           <p class="ext-desc">
@@ -462,13 +464,14 @@
           </p>
         </div>
         <ul class="ext-features">
-          <li>Blocks 50+ consent frameworks — OneTrust, CookieBot, Quantcast, TrustArc, Didomi, Osano, Complianz, iubenda, Klaro, and more</li>
-          <li>Auto-clicks "Accept" or hides the banner when no button is found</li>
+          <li>Declines on OneTrust, Cookiebot, Quantcast, TrustArc, Didomi, Osano, Complianz, iubenda, Klaro, Usercentrics, CookieYes, Sourcepoint, and more</li>
+          <li>Never clicks Accept: rejects, saves with optional cookies off, or hides the banner</li>
+          <li>Works inside consent iframes and shadow DOM</li>
           <li>Supports English, German, French, Spanish, and Italian consent text</li>
-          <li>Per-site whitelist — keep popups on sites you trust</li>
-          <li>Live counter: blocked today &amp; all-time</li>
+          <li>Per-site whitelist: keep popups on sites you trust</li>
+          <li>Live counter: silenced today and all-time</li>
           <li>One-click pause / resume from the toolbar</li>
-          <li>MutationObserver — catches dynamically loaded banners</li>
+          <li>Catches banners that load late</li>
           <li>Zero data collection · Zero analytics · Fully offline</li>
         </ul>
       </div>
@@ -477,7 +480,7 @@
         <a href="downloads/hush-extension.zip" class="btn btn-solid" download>↓ Download Hush (.zip)</a>
         <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn-donate" target="_blank" rel="noopener">Donate</a>
         <span class="ext-badge free">Free · Open Source</span>
-        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">v1.1.0</span>
         <span class="ext-badge">Manifest V3</span>
       </div>
 
@@ -496,34 +499,34 @@
         <div class="ext-meta">
           <div class="ext-category">Performance · Memory Management</div>
           <h2 class="ext-name">Tab Manager</h2>
-          <p class="ext-tagline">Real-time memory usage for every open tab. Find the hogs, suspend the sluggards, reclaim your RAM.</p>
+          <p class="ext-tagline">See how much JavaScript memory each tab is using. Find the hogs, suspend them, and reclaim your RAM.</p>
         </div>
       </div>
 
       <div class="ext-body">
         <div>
           <p class="ext-desc">
-            Modern browsers are memory hogs. <span class="l-as-i">l</span>uppiter Tab Manager gives you full visibility into
-            which tabs are responsible, sorted by memory usage in real time. When Chrome is
-            consuming 6 GB of RAM and your system is starting to slow, you want to know
-            which three tabs are responsible — and close them in one click.
+            Modern browsers are memory hogs. <span class="l-as-i">l</span>uppiter Tab Manager measures each tab's JavaScript
+            heap (the memory the page's own scripts are using, as reported by Chrome) and sorts your tabs
+            by it, so the heaviest web apps rise to the top and you can suspend or close them in one click.
+            It's a real measurement, not an estimate: tabs it can't read, like chrome:// pages, simply show n/a.
           </p>
           <br>
           <p class="ext-desc">
             Suspend individual tabs or bulk-close everything above a threshold you set.
             Group tabs by domain to see which sites are cumulatively draining your resources.
-            An alert badge appears on the toolbar icon when total memory exceeds your limit.
+            An alert badge appears on the toolbar icon when total JavaScript memory exceeds your limit.
             Optional auto-suspend runs silently in the background.
           </p>
         </div>
         <ul class="ext-features">
-          <li>Real-time memory usage per tab — MB or GB, color-coded by severity</li>
-          <li>Sort all open tabs by memory, highest first</li>
+          <li>JavaScript heap per tab, measured live and color-coded by severity</li>
+          <li>Sort all open tabs by JS memory, highest first</li>
           <li>Suspend individual tabs instantly to free RAM</li>
           <li>Bulk close: kill every tab over X MB with one click</li>
-          <li>Group view — see total memory consumption by domain</li>
+          <li>Group view: total JS memory by domain</li>
           <li>Search / filter across all open tabs by title or domain</li>
-          <li>Configurable alert threshold — toolbar badge turns red when exceeded</li>
+          <li>Configurable alert threshold: toolbar badge turns red when exceeded</li>
           <li>Optional auto-suspend for background tabs over your limit</li>
           <li>Adjustable refresh interval (5–300 seconds)</li>
           <li>No data transmitted anywhere · All processing is local</li>
@@ -534,7 +537,7 @@
         <a href="downloads/iuppiter-tab-manager.zip" class="btn btn-solid" download>↓ Download Tab Manager (.zip)</a>
         <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn-donate" target="_blank" rel="noopener">Donate</a>
         <span class="ext-badge free">Free · Open Source</span>
-        <span class="ext-badge">v1.0.0</span>
+        <span class="ext-badge">v1.1.0</span>
         <span class="ext-badge">Manifest V3</span>
       </div>
 
@@ -544,69 +547,6 @@
     </div>
     <!-- /ext-card#tab-manager -->
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         EXTENSION 3 — MAIL TRACKER
-    ════════════════════════════════════════════════════════════════════ -->
-    <div class="ext-card" id="mail-tracker">
-      <div class="ext-card-header">
-        <div class="ext-icon">✉️</div>
-        <div class="ext-meta">
-          <div class="ext-category">Productivity · Gmail Integration</div>
-          <h2 class="ext-name">Mail Tracker</h2>
-          <p class="ext-tagline">WhatsApp-style ✓✓ status indicators for Gmail. Know the moment your email gets a reply — no server required.</p>
-        </div>
-      </div>
-
-      <div class="ext-body">
-        <div>
-          <p class="ext-desc">
-            Ever sent an email and had no idea if it was ever read? <span class="l-as-i">l</span>uppiter Mail Tracker brings
-            WhatsApp-style ✓ / ✓✓ status indicators directly into Gmail's sent view. It polls your
-            sent threads via the Gmail API and updates each email's status automatically — no
-            server, no subscription, no third-party service.
-          </p>
-          <br>
-          <p class="ext-desc">
-            The popup dashboard shows your full tracking history: total tracked, reply rate,
-            and per-email status. Filter by All / Replied / Pending. Desktop notifications
-            fire the moment a reply comes in. You can pause tracking on any email individually,
-            or export all your data as JSON. Everything runs in your browser and Chrome's local storage.
-          </p>
-
-          <div class="ext-note">
-            <p><strong>Note:</strong> This extension requires a free Gmail API OAuth credential (Client ID) to function.
-            Setup takes ~5 minutes — see the included README.md for step-by-step instructions.
-            No data is shared with us or any third party.</p>
-          </div>
-        </div>
-        <ul class="ext-features">
-          <li>✓ / ✓✓ status badges injected directly into Gmail's sent view</li>
-          <li>Reply detection — gold ✓✓ when recipient replies to your thread</li>
-          <li>Read receipt detection — blue ✓✓ when Gmail read receipt is confirmed</li>
-          <li>Dashboard popup with stats: total tracked, replied, read count, reply rate %</li>
-          <li>Filter by status — All / Replied / Pending / Read Receipt</li>
-          <li>Desktop notifications the moment a reply arrives</li>
-          <li>Per-email toggle — pause tracking for individual sent messages</li>
-          <li>Export all tracking data as JSON</li>
-          <li>Auto-polls every 5 minutes in the background</li>
-          <li>100% local — all data in chrome.storage.local, no external servers</li>
-          <li>Gmail read-only OAuth scope — never modifies your email</li>
-        </ul>
-      </div>
-
-      <div class="ext-actions">
-        <a href="downloads/iuppiter-mail-tracker.zip" class="btn btn-solid" download>↓ Download Mail Tracker (.zip)</a>
-        <a href="https://donate.stripe.com/8x24gB2oy0zV1UW0IH14402" class="btn-donate" target="_blank" rel="noopener">Donate</a>
-        <span class="ext-badge free">Free · Open Source</span>
-        <span class="ext-badge">v1.0.0</span>
-        <span class="ext-badge">Manifest V3</span>
-      </div>
-
-      <div class="bug-banner">
-        <p>Found a bug? Email us at <a href="mailto:Caesar192038@proton.me" style="color:#c4a44a;">Caesar192038@proton.me</a></p>
-      </div>
-    </div>
-    <!-- /ext-card#mail-tracker -->
 
     <!-- ═══════════════════════════════════════════════════════════════════
          EXTENSION 4 — BOOKMARKS MANAGER
@@ -1103,7 +1043,6 @@
           <li><strong>Storage stays on your device.</strong> Preferences (whitelist entries, settings) are saved in Chrome's local storage and never leave your machine.</li>
           <li><strong>No third-party SDKs.</strong> Extensions contain no embedded third-party code that could collect data.</li>
           <li><strong>Permissions explained:</strong> Extensions request only the permissions required for their stated function. See each extension's manifest for the complete list.</li>
-          <li><strong>Mail Tracker exception:</strong> Uses Gmail read-only OAuth to access your own sent mail. No email content is stored, transmitted, or shared. OAuth tokens are managed by Chrome and never leave your browser.</li>
           <li><strong>Dashboard widget data:</strong> Weather and stock widgets fetch from public APIs (wttr.in, Yahoo Finance) on your behalf. No identifying information is sent — only the city name or ticker symbols you configure.</li>
         </ul>
       </div>
@@ -1132,9 +1071,10 @@
     <div class="footer-links">
       <a href="research.html">Research</a>
       <a href="software.html">Software</a>
-      <a href="writer.html">Writer</a>
+      <a href="tools.html">Tools</a>
       <a href="chrome-extensions.html">Extensions</a>
       <a href="games.html">Games</a>
+      <a href="roma.html">Roma</a>
       <a href="quotes.html">Wisdom</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
