@@ -123,6 +123,10 @@ body.roma {
 .scrub-controls .primary { background: var(--r-porph); border-color: var(--r-porph-hi); }
 .scrub-controls .primary:hover { background: var(--r-porph-hi); color: var(--r-marble); }
 
+/* ------------------------------------------------------------ support band */
+.roma-support { padding: 40px 0 0; }
+.roma-support .donate-banner { margin-bottom: 0; }
+
 /* ------------------------------------------------------------ chronicle */
 .chronicle { padding: 64px 0 40px; font-family: var(--r-text); }
 .chron-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start; }
