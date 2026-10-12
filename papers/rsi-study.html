@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Empirical Performance of RSI-Based Trading Strategies — Iuppiter Group</title>
+  <title>The Empirical Performance of RSI-Based Trading Strategies — luppiter Group</title>
   <meta name="description" content="Comprehensive backtest of RSI-based trading strategies across 100 U.S. equities from 1962 to 2026. Evaluates daily and weekly timeframes with 30/70 and 20/80 thresholds.">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
@@ -160,13 +160,14 @@
       h2.section-title { font-size: 1.3rem; }
       table { font-size: 0.78rem; }
     }
-  </style>
+    .brand-l { font-family: Arial, Helvetica, sans-serif; font-style: normal; letter-spacing: inherit; }
+</style>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="../index.html" class="nav-logo">IUPPITER <span>GROUP</span></a>
+    <a href="../index.html" class="nav-logo"><span class="brand-l">l</span>UPPITER <span>GROUP</span></a>
     <a href="../research.html" class="nav-back">&larr; Research</a>
   </div>
 </nav>
@@ -180,7 +181,7 @@
     <div>Author <span>John, CaesarBot &amp; luppiter Group</span></div>
     <div>Published <span>April 2026</span></div>
     <div>Category <span>Finance · Technical Analysis</span></div>
-    <div>References <span>30+ References</span></div>
+    <div>References <span>21 References</span></div>
   </div>
 </header>
 
@@ -188,7 +189,7 @@
 
   <div class="abstract-box">
 <p>This study conducts a large-scale empirical backtest of four Relative Strength Index (RSI) trading strategies across a universe of 100 U.S. equities spanning 11 sectors, using up to 64 years of daily price data (1962–2026). The four strategies vary by timeframe (daily vs. weekly) and threshold pair (30/70 vs. 20/80). We evaluate 5,174 total trades using comprehensive performance metrics, statistical significance tests, and cross-sectional analyses by sector, time period, and volatility regime.</p>
-<p>Key findings: All four strategies produce statistically significant positive average returns per trade (p &lt; 10⁻¹³ across all strategies). The Daily 30/70 strategy generates the most trades (n = 3,892) with a 79.4% win rate and 7.66% average return per trade. More extreme thresholds (20/80) produce fewer but substantially larger trades — the Weekly 20/80 strategy achieves a 96.3% win rate with 244% average return, though with only 82 trades and an average holding period of 6.5 years. However, all four strategies significantly underperform buy-and-hold on an annualized basis (paired t-test p &lt; 10⁻²⁰ for all), primarily because they keep capital uninvested between signals. RSI strategies show their strongest relative performance during bear markets and high-volatility regimes, consistent with the overreaction hypothesis. Sector-level ANOVA reveals statistically significant cross-sectional variation for daily and weekly 30/70 strategies (p = 0.043 and p = 0.0003, respectively), with mega-cap technology and consumer discretionary stocks producing the highest average returns. These results suggest that RSI captures genuine mean-reversion dynamics in oversold conditions, but the opportunity cost of being out of the market during non-signal periods makes it inferior to passive indexing as a standalone system.</p>
+<p>Key findings: All four strategies produce statistically significant positive average returns per trade (p &lt; 10⁻¹³ across all strategies). The Daily 30/70 strategy generates the most trades (n = 3,892) with a 79.4% win rate and 7.66% average return per trade. More extreme thresholds (20/80) produce fewer but substantially larger trades — the Weekly 20/80 strategy achieves a 96.3% win rate with 244% average return, though with only 82 trades and an average holding period of 6.5 years. However, all four strategies significantly underperform buy-and-hold on an annualized basis (paired t-test p &lt; 10⁻²⁰ for all), primarily because they keep capital uninvested between signals. RSI strategies show their strongest relative performance during bear markets and high-volatility regimes, consistent with the overreaction hypothesis. Sector-level ANOVA reveals statistically significant cross-sectional variation for daily and weekly 30/70 strategies (p = 0.043 and p = 0.0003, respectively), with mega-cap technology and consumer discretionary stocks producing the highest average returns. These results suggest that RSI captures genuine mean-reversion dynamics in oversold conditions, but the opportunity cost of being out of the market during non-signal periods makes it inferior to passive indexing as a standalone system. Because the universe consists only of companies that survived to 2026 (delisted, bankrupt, and acquired firms are excluded), these results are subject to survivorship bias and should be read as an upper bound, particularly for long-hold strategies such as Weekly 20/80.</p>
   </div>
 <p>Date: February 22, 2026</p>
 <p>Data Source: Yahoo Finance (yfinance) — all figures derived from actual historical price data</p>
@@ -211,7 +212,7 @@
 <p>More recently, Neely, Rapach, Tu, and Zhou (2014) demonstrated that technical indicators have significant out-of-sample predictive power for the equity risk premium, complementing traditional macroeconomic predictors. Urquhart and McGroarty (2016) found evidence consistent with Lo&#x27;s Adaptive Market Hypothesis — that the profitability of technical rules varies over time as market conditions evolve.</p>
 <h3 class="sub-title">2.2 RSI-Specific Research</h3>
 <p>Research specifically focused on the RSI is more limited. Chong and Ng (2008) tested RSI and MACD rules on the London Stock Exchange&#x27;s FT30 index, finding that RSI generated positive but economically modest returns after transaction costs. Wong, Manzur, and Chew (2003) examined technical indicators including RSI on the Singapore stock market and found evidence of profitability, particularly for momentum-based signals.</p>
-<p>Fernandez-Perez, Garza-Gómez, and Hsu (2018) studied RSI and moving average rules applied to renewable energy stocks, reporting mixed results that depended heavily on the time period and threshold parameters. Bajgrowicz and Scaillet (2012) raised important methodological concerns about persistence and data snooping in technical analysis research, arguing that many apparent profits disappear when tested with proper multiple comparison adjustments.</p>
+<p>Chong, Ng, and Liew (2014) revisited the FT30 findings on five other OECD stock markets and found that RSI profitability depended on both the market and the parameterization: an RSI(21, 50) rule generated significant abnormal returns on the Milan Comit General and S&amp;P/TSX Composite indices, while the conventional RSI(14) 30/70 rule was profitable on the Dow Jones Industrial Average. Metghalchi, Chen, and Hayes (2015) tested moving average, RSI, MACD, and trading breakout rules on the Madrid General Stock Index from 1975 to 2012 and reported predictive power that was statistically significant in all three of their sub-periods. Bajgrowicz and Scaillet (2012) raised important methodological concerns about persistence and data snooping in technical analysis research, arguing that many apparent profits disappear when tested with proper multiple comparison adjustments.</p>
 <p>Han, Yang, and Zhou (2013) documented a cross-sectional anomaly whereby stocks with favorable technical indicators (including RSI) outperformed those with unfavorable signals, suggesting that technical analysis captures information about risk or mispricing that is not subsumed by known factor models.</p>
 <h3 class="sub-title">2.3 Behavioral Foundations</h3>
 <p>The potential profitability of RSI-based strategies finds theoretical support in behavioral finance. De Bondt and Thaler (1985) documented long-term return reversals consistent with investor overreaction — prior losers outperformed prior winners over 3–5 year horizons. Tversky and Kahneman (1974) identified representativeness bias and anchoring as cognitive heuristics that can cause systematic pricing errors. Shiller (2000) argued that irrational exuberance and panic create price overshoots in both directions, which mean-reversion indicators might exploit.</p>
@@ -286,7 +287,7 @@
 <td>DIS, CMCSA, NFLX, T, VZ, TMUS</td>
 </tr>
 </tbody></table>
-<p>All 100 tickers were successfully downloaded with zero failures. Data availability varies by listing date: the longest histories (JNJ, XOM, CVX, KO, PG, MRK, CAT, HON, GE, BA, DIS, and others) extend back to January 2, 1962, providing over 16,000 daily observations and 64 years of coverage. The shortest histories (KHC from July 2015, ABBV from January 2013) still provide over 10 years of data. The median stock in our sample has approximately 11,500 daily observations spanning ~45 years.</p>
+<p>All 100 tickers were successfully downloaded with zero failures. Data availability varies by listing date: the longest histories (JNJ, XOM, CVX, KO, PG, MRK, CAT, HON, GE, BA, DIS, and others) extend back to January 2, 1962, providing over 16,000 daily observations and 64 years of coverage. The shortest histories (KHC from July 2015, ABBV from January 2013) still provide over 10 years of data. The median stock in our sample has approximately 11,500 daily observations spanning ~45 years. The universe was selected from companies still listed as of 2026, so firms that were delisted, went bankrupt, or were acquired during the sample period are not represented; Section 5.5 discusses the resulting survivorship bias.</p>
 <h3 class="sub-title">3.2 RSI Calculation</h3>
 <p>We compute RSI using Wilder&#x27;s original smoothed moving average method with a 14-period lookback:</p>
 <ol>
@@ -1213,7 +1214,8 @@
 </ul>
 <h3 class="sub-title">5.5 Survivorship Bias</h3>
 <p>Our universe of 100 stocks was selected as of 2026 — all are currently listed, large-cap companies. This introduces survivorship bias: companies that went bankrupt, were delisted, or were acquired are excluded. Had we included stocks like Lehman Brothers, Enron, or Bear Stearns, the RSI strategies would likely show lower win rates and average returns, as oversold signals on failing companies would have generated total losses.</p>
-<p>The magnitude of this bias is difficult to quantify precisely, but it likely inflates our reported win rates by 3–8 percentage points. The strategies&#x27; underperformance versus buy-and-hold would be less severe with survivorship bias removed (since buy-and-hold on bankrupt companies also produces total losses), but absolute returns would be lower.</p>
+<p>The magnitude of this bias is difficult to quantify without a point-in-time universe, and we do not estimate it here; it is likely largest for the long-hold weekly strategies. The strategies&#x27; underperformance versus buy-and-hold would be less severe with survivorship bias removed (since buy-and-hold on bankrupt companies also produces total losses), but absolute returns would be lower.</p>
+<p>Because this bias bears most heavily on our strongest results, it warrants emphasis. The universe was assembled from companies that survived to 2026: every stock in the sample is still listed, and firms that were delisted, went bankrupt, or were acquired at any point during 1962–2026 are excluded by construction. Conditioning a sample on survival is a well-documented source of bias in performance studies (Brown, Goetzmann, Ibbotson, &amp; Ross, 1992), and here it biases the results upward because the excluded failures are precisely the cases in which an oversold entry would have ended in a large or total loss. The distortion is greatest for long-hold strategies such as Weekly 20/80 (82 trades, average holding period of roughly 6.5 years): a stock known to have survived to 2026 that is bought at an extreme oversold reading almost always recovers eventually, so its 96.3% win rate and 244% average return partly reflect how the sample was constructed rather than the signal alone. All reported win rates and average returns, especially for the weekly and 20/80 strategies, should therefore be read as an upper bound on what these rules would have earned on a point-in-time universe that included subsequently failed firms.</p>
 <h3 class="sub-title">5.6 Transaction Costs and Practical Implementation</h3>
 <p>While we report gross returns, realistic implementation would incur:</p>
 <ul>
@@ -1299,14 +1301,16 @@
 <ol class="ref-list">
 <li>Bajgrowicz, P., &amp; Scaillet, O. (2012). Technical Trading Revisited: False Discoveries, Persistence Tests, and Transaction Costs. *Journal of Financial Economics*, 106(3), 473–491.</li>
 <li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. *Journal of Finance*, 47(5), 1731–1764.</li>
+<li>Brown, S.J., Goetzmann, W., Ibbotson, R.G., &amp; Ross, S.A. (1992). Survivorship Bias in Performance Studies. *Review of Financial Studies*, 5(4), 553–580.</li>
 <li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. *Applied Economics Letters*, 15(14), 1111–1114.</li>
+<li>Chong, T.T.L., Ng, W.K., &amp; Liew, V.K.S. (2014). Revisiting the Performance of MACD and RSI Oscillators. *Journal of Risk and Financial Management*, 7(1), 1–12.</li>
 <li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? *Journal of Finance*, 40(3), 793–805.</li>
 <li>Fama, E.F. (1970). Efficient Capital Markets: A Review of Theory and Empirical Work. *Journal of Finance*, 25(2), 383–417.</li>
-<li>Fernandez-Perez, A., Garza-Gómez, X., &amp; Hsu, J. (2018). Is Technical Analysis Profitable on Renewable Energy Stocks? Evidence from Moving Average and RSI Rules. *Energies*, 11(11), 3054.</li>
 <li>Han, Y., Yang, K., &amp; Zhou, G. (2013). A New Anomaly: The Cross-Sectional Profitability of Technical Analysis. *Journal of Financial and Quantitative Analysis*, 48(5), 1433–1461.</li>
 <li>Jegadeesh, N., &amp; Titman, S. (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *Journal of Finance*, 48(1), 65–91.</li>
 <li>Lo, A.W., Mamaysky, H., &amp; Wang, J. (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. *Journal of Finance*, 55(4), 1705–1765.</li>
 <li>Malkiel, B.G. (2003). The Efficient Market Hypothesis and Its Critics. *Journal of Economic Perspectives*, 17(1), 59–82.</li>
+<li>Metghalchi, M., Chen, C.P., &amp; Hayes, L.A. (2015). History of Share Prices and Market Efficiency of the Madrid General Stock Index. *International Review of Financial Analysis*, 40, 178–184.</li>
 <li>Neely, C.J., Rapach, D.E., Tu, J., &amp; Zhou, G. (2014). Forecasting the Equity Risk Premium: The Role of Technical Indicators. *Management Science*, 60(7), 1772–1791.</li>
 <li>Park, C.H., &amp; Irwin, S.H. (2007). What Do We Know About the Profitability of Technical Analysis? *Journal of Economic Surveys*, 21(4), 786–826.</li>
 <li>Shiller, R.J. (2000). *Irrational Exuberance*. Princeton University Press.</li>
@@ -1363,7 +1367,7 @@
 <li>Lo, A.W., Mamaysky, H., &amp; Wang, J. (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. *Journal of Finance*, 55(4), 1705–1765.</li>
 <li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. *Applied Economics Letters*, 15(14), 1111–1114.</li>
 <li>Wong, W.K., Manzur, M., &amp; Chew, B.K. (2003). How Rewarding Is Technical Analysis? Evidence from Singapore Stock Market. *Applied Financial Economics*, 13(7), 543–551.</li>
-<li>Fernandez-Perez, A., Garza-Gómez, X., &amp; Hsu, J. (2018). Is Technical Analysis Profitable on Renewable Energy Stocks? Evidence from Moving Average and RSI Rules. *Energies*, 11(11), 3054.</li>
+<li>Chong, T.T.L., Ng, W.K., &amp; Liew, V.K.S. (2014). Revisiting the Performance of MACD and RSI Oscillators. *Journal of Risk and Financial Management*, 7(1), 1–12.</li>
 <li>Fama, E.F. (1970). Efficient Capital Markets: A Review of Theory and Empirical Work. *Journal of Finance*, 25(2), 383–417.</li>
 <li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. *Journal of Finance*, 47(5), 1731–1764.</li>
 <li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? *Journal of Finance*, 40(3), 793–805.</li>
@@ -1379,6 +1383,7 @@
 <li>Taylor, M.P., &amp; Allen, H. (1992). The Use of Technical Analysis in the Foreign Exchange Market. *Journal of International Money and Finance*, 11(3), 304–314.</li>
 <li>Metghalchi, M., Chen, C.P., &amp; Hayes, L.A. (2015). History of Share Prices and Market Efficiency of the Madrid General Stock Index. *International Review of Financial Analysis*, 40, 178–184.</li>
 <li>Urquhart, A., &amp; McGroarty, F. (2016). Are Stock Markets Really Efficient? Evidence of the Adaptive Market Hypothesis. *International Review of Financial Analysis*, 47, 39–49.</li>
+<li>Brown, S.J., Goetzmann, W., Ibbotson, R.G., &amp; Ross, S.A. (1992). Survivorship Bias in Performance Studies. *Review of Financial Studies*, 5(4), 553–580.</li>
 </ol>
 </div>
 
@@ -1405,7 +1410,7 @@
     <a href="../about.html">About</a>
   </div>
   <div style="margin-top:16px;">
-    &copy; 2026 IUPPITER GROUP &middot; ALL RIGHTS RESERVED
+    &copy; 2026 <span class="brand-l">l</span>UPPITER GROUP &middot; ALL RIGHTS RESERVED
   </div>
   <div style="margin-top:8px; font-size:0.62rem; color:var(--text-dim);">
     The views expressed are those of the author and represent independent academic analysis.

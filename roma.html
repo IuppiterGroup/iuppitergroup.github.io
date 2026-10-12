@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roma: Ab Urbe Condita | luppiter Group</title>
+  <meta name="description" content="Walk all of Roman history, from Romulus in 753 BC to the last stand at Constantinople in 1453: a living map of Roman rule, the great Romans, and a cursus honorum to climb.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="roma.css">
+</head>
+<body class="roma">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="chrome-extensions.html">Extensions</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="roma.html" class="active">Roma</a></li>
+      <li><a href="quotes.html">Wisdom</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section class="stage" aria-labelledby="stageTitle">
+  <div class="stage-inner">
+    <div class="insc insc-head">
+      <h1 class="insc-title" id="stageTitle">Ab urbe condita</h1>
+      <p class="insc-sub">From the founding of the City, 753 BC, to the fall of Constantinople, AD 1453</p>
+      <p class="insc-auc" id="aucNum" aria-hidden="true">I</p>
+      <p class="insc-year" aria-live="polite"><span id="yearText">753 BC</span><span class="insc-auctext" id="aucText">the 1st year of the City</span></p>
+      <p class="insc-era"><a href="#chronicle" id="eraLink">The Kingdom</a></p>
+    </div>
+    <div class="insc insc-side">
+      <dl class="insc-facts">
+        <div><dt>Seat of empire</dt><dd id="capText">Roma</dd></div>
+        <div><dt>Lands under Roman rule</dt><dd id="landText">Latium</dd></div>
+      </dl>
+      <button class="insc-now" id="nowEvent" type="button"></button>
+    </div>
+    <figure class="map-wrap">
+      <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Map of Roman territory</title></svg>
+      <figcaption class="map-key"><span class="key-rome"></span>Roman rule <span class="key-cap"></span>Seat of empire <span class="key-ev"></span>Events of this age</figcaption>
+    </figure>
+    <div class="scrub">
+      <div class="bands" id="bands" role="group" aria-label="Ages of Rome"></div>
+      <label class="visually-hidden" for="year">Year</label>
+      <input type="range" id="year" min="-753" max="1453" step="1" value="-753">
+      <div class="scrub-ends" aria-hidden="true"><span>753 BC</span><span>AD 1453</span></div>
+      <div class="scrub-controls">
+        <button type="button" id="prevEv">Previous event</button>
+        <button type="button" id="play" class="primary" aria-pressed="false">March through history</button>
+        <button type="button" id="nextEv">Next event</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="chronicle" id="chronicle" aria-labelledby="eraName">
+  <div class="roma-container chron-grid">
+    <header class="era-head">
+      <p class="era-count" id="eraCount"></p>
+      <h2 id="eraName"></h2>
+      <p class="era-latin" id="eraLatin"></p>
+      <blockquote class="era-motto" id="eraMotto"></blockquote>
+      <p class="era-summary" id="eraSummary"></p>
+      <div class="era-nav">
+        <button type="button" id="eraPrev">Previous age</button>
+        <button type="button" id="eraNext">Next age</button>
+      </div>
+    </header>
+    <div class="events-col">
+      <h3 class="col-title">The chronicle of this age</h3>
+      <ol class="events" id="eventList"></ol>
+    </div>
+  </div>
+</section>
+
+<section class="romans" aria-labelledby="romansTitle">
+  <div class="roma-container">
+    <h2 class="sec-title" id="romansTitle">The great Romans of this age</h2>
+    <div class="fig-list" id="figList"></div>
+  </div>
+</section>
+
+<section class="cursus" id="cursus" aria-labelledby="cursusTitle">
+  <div class="roma-container">
+    <h2 class="sec-title" id="cursusTitle">Cursus honorum</h2>
+    <p class="cursus-intro">Every age ends in a trial of six questions. Answer four correctly to pass it and rise one rank, from citizen to Father of the Fatherland. Your rank is kept in this browser.</p>
+    <ol class="ranks" id="ranks"></ol>
+    <div class="trial" id="trial" aria-live="polite"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="tools.html">Tools</a>
+      <a href="chrome-extensions.html">Extensions</a>
+      <a href="games.html">Games</a>
+      <a href="roma.html">Roma</a>
+      <a href="quotes.html">Wisdom</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="roma-data.js"></script>
+<script src="main.js"></script>
+<script src="roma.js"></script>
+</body>
+</html>
