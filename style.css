@@ -442,6 +442,27 @@ section + section { border-top: 1px solid var(--border); }
   font-size: 1rem;
 }
 
+/* ---- DONATE BANNER (shared) ---- */
+.btn-donate {
+  display: inline-block; padding: 12px 36px;
+  background: #c4a44a; color: #0a0a0f;
+  font-size: 0.88rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  font-family: var(--font-body); border: 2px solid #e2c97e; border-radius: 2px;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.btn-donate:hover { background: #e2c97e; color: #0a0a0f; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(196,164,74,0.4); }
+.btn-donate::before { content: "\2665  "; font-size: 0.9em; }
+.donate-banner {
+  background: linear-gradient(135deg, rgba(196,164,74,0.12) 0%, rgba(196,164,74,0.04) 100%);
+  border: 1px solid rgba(196,164,74,0.35); border-radius: 4px;
+  padding: 20px 28px; display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap; margin-bottom: 48px;
+}
+.donate-banner-text { font-size: 0.95rem; color: var(--cream-dim); line-height: 1.5; flex: 1 1 320px; }
+.donate-banner-text strong { color: var(--gold); }
+@media (max-width: 600px) { .donate-banner { padding: 18px 16px; } .btn-donate { width: 100%; text-align: center; } }
+
 /* ---- RESPONSIVE ---- */
 @media (max-width: 1180px) {
   .nav-links { gap: 14px; }
