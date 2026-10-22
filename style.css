@@ -468,7 +468,7 @@ section + section { border-top: 1px solid var(--border); }
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 0.78rem; letter-spacing: 0.4px; }
 }
-@media (max-width: 1020px) {
+@media (max-width: 1080px) {
   .nav-links { display: none; }
   .nav-links.open {
     display: flex; flex-direction: column;

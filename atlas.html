@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+  <title>Orbis Terrarum | luppiter Group</title>
+  <meta name="description" content="An atlas of the world's history: an engraved, hand-colored map that pulls back from the first cities of Egypt and Sumer to the whole world as you scrub the centuries.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="atlas.css">
+</head>
+<body class="atlas">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="software.html">Software</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="chrome-extensions.html">Extensions</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="roma.html">Roma</a></li>
+      <li><a href="atlas.html" class="active">Atlas</a></li>
+      <li><a href="quotes.html">Wisdom</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+      <div class="snap" id="snap">Borders c. A.D. 100</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+    </div>
+    <div class="sect">
+      <h3>The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle</h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders step between dated snapshots for now; the finished atlas will carry its own borders at ten-year intervals.
+    Coastlines, rivers, and mountains from Natural Earth (public domain). Historical borders from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik, GNU GPL v3.
+  </footer>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="software.html">Software</a>
+      <a href="tools.html">Tools</a>
+      <a href="chrome-extensions.html">Extensions</a>
+      <a href="games.html">Games</a>
+      <a href="roma.html">Roma</a>
+      <a href="atlas.html">Atlas</a>
+      <a href="quotes.html">Wisdom</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="atlas/vendor/d3.min.js"></script>
+<script src="atlas/vendor/topojson-client.min.js"></script>
+<script src="atlas-data.js"></script>
+<script src="main.js"></script>
+<script src="atlas.js"></script>
+</body>
+</html>
