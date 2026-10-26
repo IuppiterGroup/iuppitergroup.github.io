@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Historical Filter · luppiter Group</title>
+  <meta name="description" content="Why technological civilization may be rare because history is. A convergence test on human history, the gates of Rome, the arithmetic of solitude, and the infinite limit. Working draft.">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep:     #0a0f1a;
+      --bg-card:     #0f1623;
+      --bg-raised:   #141d2e;
+      --gold:        #c4a44a;
+      --gold-dim:    #8a7135;
+      --gold-light:  #e8c97a;
+      --text:        #d4cfc5;
+      --text-dim:    #8a8880;
+      --text-bright: #f0ece0;
+      --accent-red:  #8b2020;
+      --red-bright:  #c9503f;
+      --border:      rgba(196,164,74,0.18);
+      --border-dim:  rgba(196,164,74,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text);
+      font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+      font-size: 19px;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: var(--gold); }
+    .brand-l { font-family: Arial, Helvetica, sans-serif; font-style: normal; letter-spacing: inherit; }
+
+    /* Navigation */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,15,26,0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700;
+      color: var(--gold); text-decoration: none; letter-spacing: 0.12em;
+    }
+    .nav-logo span:not(.brand-l) { color: var(--text-dim); font-weight: 400; }
+    .nav-back {
+      font-family: 'Cinzel', serif; font-size: 0.78rem; color: var(--text-dim);
+      text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .progress {
+      position: fixed; top: 56px; left: 0; height: 2px; width: 0; z-index: 101;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+      box-shadow: 0 0 8px rgba(232,201,122,0.5);
+    }
+
+    /* Hero: the silent sky */
+    .paper-hero {
+      position: relative; overflow: hidden;
+      padding: 140px 24px 72px; text-align: center;
+      background: radial-gradient(ellipse at 50% 120%, #17213a 0%, var(--bg-deep) 60%);
+      border-bottom: 1px solid var(--border-dim);
+    }
+    #sky { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .hero-inner { position: relative; max-width: 900px; margin: 0 auto; }
+    .paper-label {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.28em; color: var(--gold-dim); text-transform: uppercase;
+      border: 1px solid var(--border); padding: 5px 18px; margin-bottom: 28px;
+      background: rgba(10,15,26,0.6);
+    }
+    .paper-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 700;
+      color: var(--gold-light); line-height: 1.12; letter-spacing: 0.03em; margin-bottom: 18px;
+      text-shadow: 0 0 40px rgba(232,201,122,0.18);
+    }
+    .paper-subtitle {
+      font-size: 1.3rem; color: var(--text-dim); font-style: italic;
+      max-width: 680px; margin: 0 auto 36px; line-height: 1.5;
+    }
+    .hero-line {
+      font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.22em;
+      color: var(--text); text-transform: uppercase; margin-bottom: 36px;
+    }
+    .gold-rule {
+      width: 80px; height: 1px; margin: 0 auto 32px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .paper-meta {
+      display: flex; gap: 14px 32px; justify-content: center; flex-wrap: wrap;
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.1em;
+      color: var(--text-dim); border-top: 1px solid var(--border-dim); padding-top: 24px;
+    }
+    .paper-meta span { color: var(--gold-dim); }
+    .wip {
+      display: inline-flex; align-items: center; gap: 12px; margin-top: 30px;
+      padding: 10px 20px; border: 1px solid rgba(232,201,122,0.35);
+      background: rgba(20,29,46,0.85); font-size: 0.98rem; color: var(--text);
+      text-align: left; line-height: 1.45;
+    }
+    .wip b { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold-light); font-weight: 600; }
+    .wip-dot {
+      flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--gold-light);
+      box-shadow: 0 0 0 0 rgba(232,201,122,0.6); animation: pulse 2.4s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(232,201,122,0.55); }
+      70% { box-shadow: 0 0 0 10px rgba(232,201,122,0); }
+      100% { box-shadow: 0 0 0 0 rgba(232,201,122,0); }
+    }
+
+    /* Layout */
+    .paper-layout { max-width: 1180px; margin: 0 auto; padding: 56px 24px 80px; }
+    .paper-wrap { max-width: 780px; margin: 0 auto; min-width: 0; }
+    .toc { margin: 0 auto 40px; max-width: 780px; }
+    .toc details { border: 1px solid var(--border); background: var(--bg-card); padding: 14px 20px; }
+    .toc summary {
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.25em;
+      color: var(--gold); cursor: pointer; list-style: none;
+    }
+    .toc summary::-webkit-details-marker { display: none; }
+    .toc summary::after { content: ' +'; color: var(--gold-dim); }
+    .toc details[open] summary::after { content: ' \2212'; }
+    .toc ol { list-style: none; margin-top: 10px; }
+    .toc li a {
+      display: flex; gap: 12px; padding: 5px 0 5px 10px; text-decoration: none;
+      color: var(--text-dim); font-size: 0.95rem; line-height: 1.35;
+      border-left: 1px solid var(--border-dim); transition: color .2s, border-color .2s;
+    }
+    .toc li a .n { font-family: 'Cinzel', serif; font-size: 0.68rem; color: var(--gold-dim); min-width: 26px; padding-top: 3px; }
+    .toc li a:hover { color: var(--text-bright); }
+    .toc li a.active { color: var(--gold-light); border-left: 2px solid var(--gold); }
+    @media (min-width: 1100px) {
+      .paper-layout { display: grid; grid-template-columns: 230px minmax(0, 780px); gap: 64px; justify-content: center; }
+      .paper-wrap { margin: 0; }
+      .toc { margin: 0; }
+      .toc details { position: sticky; top: 84px; background: transparent; border: none; padding: 0; }
+      .toc summary { pointer-events: none; }
+      .toc summary::after { content: ''; }
+      .toc details[open] summary::after { content: ''; }
+    }
+
+    /* Abstract */
+    .abstract-box {
+      background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold);
+      padding: 36px 40px 22px; margin-bottom: 56px; position: relative;
+    }
+    .abstract-box::before {
+      content: 'ABSTRACT'; position: absolute; top: -10px; left: 20px;
+      font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.25em;
+      background: var(--bg-card); padding: 0 10px; color: var(--gold);
+    }
+
+    /* Sections */
+    section { scroll-margin-top: 80px; }
+    .section-header { margin: 72px 0 28px; }
+    .section-number {
+      font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.3em;
+      color: var(--gold-dim); display: block; margin-bottom: 8px;
+    }
+    h2.section-title {
+      font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-light);
+      letter-spacing: 0.04em; line-height: 1.3; border-bottom: 1px solid var(--border-dim); padding-bottom: 12px;
+    }
+    h3.sub-title {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 600; color: var(--gold);
+      margin: 40px 0 14px; letter-spacing: 0.06em; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+    }
+    h3.sub-title .when { font-size: 0.68rem; letter-spacing: 0.22em; color: var(--gold-dim); font-weight: 400; }
+    p { margin-bottom: 1.3em; }
+    p strong, li strong { color: var(--text-bright); font-weight: 600; }
+    .lead { font-size: 1.12em; color: var(--text-bright); }
+    .lead::first-letter {
+      font-family: 'Cinzel', serif; float: left; font-size: 3.4em; line-height: 0.9;
+      padding: 6px 10px 0 0; color: var(--gold-light);
+    }
+    ol.contrib { margin: 0 0 1.4em 1.3em; }
+    ol.contrib li { margin-bottom: 0.6em; padding-left: 6px; }
+    ol.contrib li::marker { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.85em; }
+    sub, sup { font-size: 0.7em; line-height: 0; }
+    .muted { color: var(--text-dim); font-size: 0.9em; }
+
+    /* Background cards */
+    .bg-grid { display: grid; gap: 16px; margin: 8px 0 12px; }
+    .bg-card { background: var(--bg-card); border: 1px solid var(--border-dim); border-left: 2px solid var(--gold-dim); padding: 20px 24px 6px; }
+    .bg-card h4 { font-family: 'Cinzel', serif; font-size: 0.86rem; letter-spacing: 0.08em; color: var(--gold-light); margin-bottom: 6px; font-weight: 600; }
+    .bg-card p { font-size: 0.97rem; line-height: 1.7; }
+
+    /* Convergence chart */
+    .figure { margin: 34px 0 40px; }
+    .figure-title { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.24em; color: var(--gold-dim); margin-bottom: 14px; }
+    .conv { border-top: 1px solid var(--border); }
+    .conv-row {
+      display: grid; grid-template-columns: 220px 1fr 74px; gap: 18px; align-items: center;
+      padding: 16px 4px; border-bottom: 1px solid var(--border-dim);
+    }
+    .conv-name { display: block; font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--text-bright); letter-spacing: 0.03em; line-height: 1.3; }
+    .conv-where { display: block; font-size: 0.86rem; color: var(--text-dim); line-height: 1.4; margin-top: 3px; }
+    .dots { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+    .dot { width: 15px; height: 15px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px rgba(196,164,74,0.35); }
+    .dot.hollow { background: transparent; border: 1.5px solid var(--gold-dim); box-shadow: none; }
+    .dots .more { font-family: 'Cinzel', serif; color: var(--gold-dim); font-size: 0.85rem; }
+    .conv-count { font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--gold); text-align: right; letter-spacing: 0.05em; }
+    .conv-row.once { background: linear-gradient(90deg, rgba(139,32,32,0.16), transparent 70%); }
+    .conv-row.once .dot { background: var(--red-bright); box-shadow: 0 0 14px rgba(201,80,63,0.7); width: 18px; height: 18px; }
+    .conv-row.once .conv-count { color: var(--red-bright); }
+    .once-tag { font-family: 'Cinzel', serif; font-size: 0.66rem; letter-spacing: 0.2em; color: var(--red-bright); margin-left: 6px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; font-size: 0.86rem; color: var(--text-dim); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend .dot { width: 11px; height: 11px; }
+    .legend .dot.red { background: var(--red-bright); box-shadow: none; }
+
+    /* Pull quote */
+    .pull-quote { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; margin: 44px 0; text-align: center; }
+    .pull-quote p { font-size: 1.45rem; font-style: italic; color: var(--gold-light); line-height: 1.5; margin: 0; }
+
+    /* Timeline */
+    .timeline { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 30px 0 40px; padding-top: 26px; }
+    .timeline::before { content: ''; position: absolute; top: 31px; left: 4%; right: 4%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold-dim), transparent); }
+    .tl-item { position: relative; text-align: center; padding-top: 20px; }
+    .tl-item::before { content: ''; position: absolute; top: 0; left: 50%; width: 11px; height: 11px; margin-left: -5.5px; border-radius: 50%; background: var(--bg-deep); border: 2px solid var(--gold); }
+    .tl-item.key::before { background: var(--gold-light); box-shadow: 0 0 12px rgba(232,201,122,0.6); }
+    .tl-year { display: block; font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); }
+    .tl-what { display: block; font-size: 0.88rem; color: var(--text-dim); line-height: 1.35; margin-top: 4px; }
+
+    /* Equation and tables */
+    .eq-box {
+      background: var(--bg-raised); border: 1px solid var(--border-dim); padding: 24px 32px; margin: 28px 0;
+      text-align: center; font-size: 1.45rem; color: var(--gold-light); letter-spacing: 0.04em;
+    }
+    .eq-box .eq-label { display: block; font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--text-dim); margin-bottom: 10px; }
+    .eq-box i { font-style: italic; }
+    .table-wrap { overflow-x: auto; margin: 26px 0 32px; }
+    table.paper-table { width: 100%; border-collapse: collapse; font-size: 0.98rem; line-height: 1.5; }
+    .paper-table th {
+      font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.14em; font-weight: 600;
+      color: var(--gold); text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); white-space: nowrap;
+    }
+    .paper-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-dim); vertical-align: top; }
+    .paper-table td.num { font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.05rem; }
+    .paper-table tr:hover td { background: rgba(196,164,74,0.03); }
+
+    /* Calculator */
+    .calc { background: var(--bg-card); border: 1px solid var(--border); padding: 28px 30px 26px; margin: 34px 0 40px; position: relative; }
+    .calc::before {
+      content: 'TRY THE ARITHMETIC'; position: absolute; top: -10px; left: 20px; font-family: 'Cinzel', serif;
+      font-size: 0.65rem; letter-spacing: 0.25em; background: var(--bg-card); padding: 0 10px; color: var(--gold);
+    }
+    .calc-controls { display: grid; gap: 18px; }
+    .ctrl label { display: flex; justify-content: space-between; gap: 12px; font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+    .ctrl output { font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 0.85rem; letter-spacing: 0.04em; white-space: nowrap; }
+    input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer; }
+    input[type=range]::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--gold-dim), var(--border)); }
+    input[type=range]::-moz-range-track { height: 2px; background: var(--border); }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--gold-light); margin-top: -7px; box-shadow: 0 0 10px rgba(232,201,122,0.5); }
+    input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: none; border-radius: 50%; background: var(--gold-light); }
+    input[type=range]:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+    .seg { display: inline-flex; border: 1px solid var(--border); }
+    .seg button {
+      background: none; border: none; color: var(--text-dim); font-family: 'Cinzel', serif; font-size: 0.75rem;
+      padding: 6px 14px; cursor: pointer; letter-spacing: 0.06em;
+    }
+    .seg button + button { border-left: 1px solid var(--border); }
+    .seg button.on { background: rgba(196,164,74,0.14); color: var(--gold-light); }
+    .calc-result { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; }
+    .res { background: var(--bg-raised); border: 1px solid var(--border-dim); padding: 16px 18px; }
+    .res .k { display: block; font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--text-dim); margin-bottom: 4px; }
+    .res .v { font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--gold-light); line-height: 1.2; }
+    .res .v sup { font-size: 0.55em; line-height: 0; }
+    .verdict { margin-top: 18px; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.2em; text-align: center; padding: 10px; border: 1px solid var(--border); }
+    .verdict.alone { color: var(--gold-light); border-color: rgba(232,201,122,0.45); background: rgba(196,164,74,0.08); }
+    .verdict.crowded { color: var(--text-dim); }
+    .meter { position: relative; height: 34px; margin-top: 22px; }
+    .meter-bar { position: absolute; top: 15px; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3a4560, var(--gold-dim) 50%, var(--gold-light)); }
+    .meter-mid { position: absolute; top: 8px; left: 50%; width: 1px; height: 18px; background: var(--text-dim); }
+    .meter-mark { position: absolute; top: 9px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--text-bright); box-shadow: 0 0 10px rgba(240,236,224,0.6); transition: left .25s ease; }
+    .meter-labels { display: flex; justify-content: space-between; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--text-dim); margin-top: 2px; }
+    .calc-note { font-size: 0.86rem; color: var(--text-dim); margin: 14px 0 0; line-height: 1.5; }
+
+    /* Tiers */
+    .numline { margin: 30px 0 8px; }
+    .numline svg { width: 100%; height: auto; display: block; }
+    .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0 40px; }
+    .tier { background: var(--bg-card); border: 1px solid var(--border-dim); border-top: 3px solid var(--gold-dim); padding: 20px 20px 14px; }
+    .tier.t2 { border-top-color: var(--gold-light); }
+    .tier.t3 { border-top-color: var(--red-bright); }
+    .tier .tn { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.24em; color: var(--text-dim); }
+    .tier h4 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-light); margin: 2px 0 8px; }
+    .tier.t3 h4 { color: var(--red-bright); }
+    .tier .def { font-size: 0.95rem; font-style: italic; color: var(--text); line-height: 1.45; margin-bottom: 12px; }
+    .tier dl { font-size: 0.9rem; line-height: 1.45; }
+    .tier dt { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--gold-dim); margin-top: 8px; }
+    .tier dd { color: var(--text-bright); }
+
+    /* Objections */
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 10px 0 20px; }
+    .obj { background: var(--bg-card); border: 1px solid var(--border-dim); padding: 20px 22px 8px; }
+    .obj h4 { font-family: 'Cinzel', serif; font-size: 0.84rem; letter-spacing: 0.06em; color: var(--gold-light); margin-bottom: 8px; font-weight: 600; line-height: 1.4; }
+    .obj h4::before { content: '\201C'; color: var(--gold-dim); margin-right: 2px; }
+    .obj h4::after { content: '\201D'; color: var(--gold-dim); margin-left: 1px; }
+    .obj p { font-size: 0.95rem; line-height: 1.65; }
+
+    /* Predictions */
+    .predictions { list-style: none; margin: 18px 0 28px; counter-reset: pred; }
+    .predictions li { counter-increment: pred; position: relative; padding: 18px 0 14px 70px; border-bottom: 1px solid var(--border-dim); }
+    .predictions li::before {
+      content: counter(pred, upper-roman); position: absolute; left: 0; top: 14px; width: 50px; text-align: center;
+      font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); line-height: 1.2;
+    }
+    .predictions li p { margin: 0; }
+
+    /* Notes and tags */
+    .note-box { background: var(--bg-raised); border: 1px solid var(--border-dim); border-left: 3px solid var(--gold-dim); padding: 22px 26px 8px; margin: 10px 0 24px; }
+    .tag { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.66rem; letter-spacing: 0.12em; padding: 3px 10px; border: 1px solid; white-space: nowrap; }
+    .tag.no { color: var(--red-bright); border-color: rgba(201,80,63,0.5); background: rgba(139,32,32,0.15); }
+    .tag.yes { color: var(--gold-light); border-color: rgba(232,201,122,0.45); background: rgba(196,164,74,0.1); }
+    .tag.out { color: var(--text-dim); border-color: var(--border); }
+
+    /* References */
+    .references-section { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .references-section h2 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-dim); letter-spacing: 0.15em; margin-bottom: 20px; }
+    .references-section h3 { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.22em; color: var(--gold); margin: 28px 0 8px; }
+    .ref-list { list-style: none; }
+    .ref-list li { padding: 9px 0 9px 28px; text-indent: -28px; border-bottom: 1px solid var(--border-dim); font-size: 0.92rem; line-height: 1.6; color: var(--text-dim); }
+    .ref-list li em { color: var(--text); }
+    .ref-list li a { color: var(--gold-dim); text-decoration: none; }
+    .ref-list li a:hover { color: var(--gold); }
+
+    /* Footer */
+    .paper-footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border-dim); font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-dim); }
+    .paper-footer a { color: var(--gold-dim); text-decoration: none; margin: 0 12px; }
+    .paper-footer a:hover { color: var(--gold); }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 760px) {
+      body { font-size: 17.5px; }
+      .paper-hero { padding: 108px 18px 52px; }
+      .paper-layout { padding: 36px 18px 60px; }
+      .abstract-box { padding: 30px 22px 14px; }
+      h2.section-title { font-size: 1.32rem; }
+      .conv-row { grid-template-columns: 1fr auto; gap: 8px 14px; }
+      .conv-row .dots { grid-column: 1 / -1; grid-row: 2; }
+      .conv-count { grid-row: 1; grid-column: 2; }
+      .timeline { grid-template-columns: 1fr; gap: 0; padding: 0 0 0 26px; }
+      .timeline::before { top: 6px; bottom: 6px; left: 5px; right: auto; width: 1px; height: auto; background: linear-gradient(180deg, transparent, var(--gold-dim), var(--gold-dim), transparent); }
+      .tl-item { text-align: left; padding: 0 0 16px; }
+      .tl-item::before { left: -26px; top: 6px; margin-left: 0; }
+      .calc { padding: 26px 18px 20px; }
+      .calc-result { grid-template-columns: 1fr; }
+      .tiers, .obj-grid { grid-template-columns: 1fr; }
+      .predictions li { padding-left: 54px; }
+      .predictions li::before { width: 40px; font-size: 1.3rem; }
+      .wip { font-size: 0.92rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .wip-dot { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><span class="brand-l">l</span>UPPITER <span>GROUP</span></a>
+    <a href="../research.html" class="nav-back">&larr; Research</a>
+  </div>
+</nav>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="paper-hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="paper-label">Working Paper &middot; Cosmology &amp; History</div>
+    <h1 class="paper-title">The Historical Filter</h1>
+    <p class="paper-subtitle">Contingency, Infinitesimal Probability, and the Solitude of Technological Civilization</p>
+    <p class="hero-line">The silence is not a paradox. It is what history predicts.</p>
+    <div class="gold-rule"></div>
+    <div class="paper-meta">
+      <div>Author <span>John &amp; <span class="brand-l">l</span>uppiter Group</span></div>
+      <div>Draft <span>October 2026</span></div>
+      <div>Status <span>Work in progress &middot; not peer reviewed</span></div>
+      <div>References <span>28</span></div>
+    </div>
+    <div class="wip"><span class="wip-dot"></span><span><b>WORKING DRAFT</b><br>The argument, figures, and references are still being revised.</span></div>
+  </div>
+</header>
+
+<div class="paper-layout">
+
+  <aside class="toc" aria-label="Contents">
+    <details id="toc" open>
+      <summary>CONTENTS</summary>
+      <ol>
+        <li><a href="#abstract"><span class="n">&#x2726;</span>Abstract</a></li>
+        <li><a href="#s1"><span class="n">I</span>Introduction</a></li>
+        <li><a href="#s2"><span class="n">II</span>Background</a></li>
+        <li><a href="#s3"><span class="n">III</span>The Convergence Test</a></li>
+        <li><a href="#s4"><span class="n">IV</span>The Gates of Rome</a></li>
+        <li><a href="#s5"><span class="n">V</span>The Arithmetic of Solitude</a></li>
+        <li><a href="#s6"><span class="n">VI</span>The Infinite Limit</a></li>
+        <li><a href="#s7"><span class="n">VII</span>Objections and Replies</a></li>
+        <li><a href="#s8"><span class="n">VIII</span>Predictions and Implications</a></li>
+        <li><a href="#s9"><span class="n">IX</span>Non-Natural Events</a></li>
+        <li><a href="#s10"><span class="n">X</span>Unidentified Anomalous Phenomena</a></li>
+        <li><a href="#s11"><span class="n">XI</span>Conclusion</a></li>
+        <li><a href="#refs"><span class="n">&#x2726;</span>References</a></li>
+      </ol>
+    </details>
+  </aside>
+
+  <main class="paper-wrap">
+
+    <section id="abstract" class="abstract-box">
+      <p>Technological civilization may be rare not because life or intelligence is rare, but because history is. This paper proposes a historical hard step: a filter that operates after intelligence arises, inside the history of a species.</p>
+      <p>The evidence is a convergence test. Human societies independently invented agriculture, cities, and writing many times, but produced a scientific revolution and an industrial revolution only once, despite thousands of years of separate trials across the Americas, Eurasia, and Africa. Case studies from Roman history (Hannibal in 211 BC, Attila in 452) and the rise of Christianity show how large, improbable branch points decide which trajectories survive.</p>
+      <p>A counting argument shows that about 80 independent even-odds forks are enough to outweigh every star in the observable universe. Taken to its limit, the argument separates three tiers of improbability: small, infinitesimal, and zero. Under countable additivity, a probability-zero step leaves even an infinite universe almost surely empty of other civilizations. The silence of the sky is the expected result if the decisive filter is historical. The theory predicts that biosignatures will eventually be found while technosignatures will not.</p>
+    </section>
+
+    <!-- I -->
+    <section id="s1">
+      <div class="section-header">
+        <span class="section-number">SECTION I</span>
+        <h2 class="section-title">Introduction</h2>
+      </div>
+      <p class="lead">The sky is silent. Since Project Ozma in 1960, decades of searching have found no confirmed technosignature. The Fermi paradox asks why, given billions of stars older than the Sun.</p>
+      <p>Most proposed answers place the filter in astrophysics, chemistry, or biology: habitable planets are rare, the origin of life is rare, or complex cells are rare (Ward and Brownlee 2000; Carter 1983). Others place it in the future, in civilizations that destroy themselves (Hanson 1998). Few treat the stretch between intelligence and technology as a filter in its own right. In the Drake equation it hides inside a single term: the fraction of intelligent species that develop detectable technology.</p>
+      <p>This paper argues that this stretch may be the hardest step of all. It makes four contributions:</p>
+      <ol class="contrib">
+        <li><strong>A historical hard step, defined and tested.</strong> The test is convergence: a development a species is bound to reach should arise independently many times, while a hard step arises once.</li>
+        <li><strong>Case studies</strong> showing how historical branch points work, and why deflationary readings of them fail.</li>
+        <li><strong>A counting argument</strong> showing how quickly independent contingencies outrun a finite universe.</li>
+        <li><strong>An analysis of the infinite limit:</strong> what follows if the improbability is infinitesimal or exactly zero, and why the boundary between countable and uncountable infinity decides the question.</li>
+      </ol>
+      <p>The claim concerns technological civilization, not life. Simple life may be common, and intelligent animals may be too. The thesis is that the road from intelligence to industry is narrow enough that we should expect to be alone in the observable universe.</p>
+    </section>
+
+    <!-- II -->
+    <section id="s2">
+      <div class="section-header">
+        <span class="section-number">SECTION II</span>
+        <h2 class="section-title">Background</h2>
+      </div>
+      <div class="bg-grid">
+        <div class="bg-card reveal">
+          <h4>The Drake equation and its uncertainty</h4>
+          <p>The Drake equation multiplies the rate of star formation by a chain of fractions: stars with planets, planets that are habitable, habitable planets with life, life that becomes intelligent, intelligence that becomes technological, and the lifetime of a technological civilization. Sandberg, Drexler, and Ord (2018) showed that once the biological terms carry their real uncertainty, which spans many orders of magnitude, the probability that we are alone becomes substantial. Much of the paradox dissolves under honest uncertainty.</p>
+        </div>
+        <div class="bg-card reveal">
+          <h4>Hard steps</h4>
+          <p>Carter (1983) noted that intelligence appeared late in Earth's habitable window. He argued this is what we should expect if the path to intelligence required a few intrinsically improbable steps, each with an expected waiting time longer than a typical planet's habitable lifetime. Later work extended the model and concluded that intelligent life is likely rare (Snyder-Beattie et al. 2021).</p>
+        </div>
+        <div class="bg-card reveal">
+          <h4>The Great Filter</h4>
+          <p>Hanson (1998) framed the problem as a filter: somewhere between dead matter and a visible, expanding civilization lies at least one step so improbable that almost nothing passes it. The question is where it sits. A filter behind us is good news for our future; a filter ahead of us is not.</p>
+        </div>
+        <div class="bg-card reveal">
+          <h4>Contingency versus convergence</h4>
+          <p>Gould (1989) argued that if the tape of life were replayed, nothing like humans would emerge, because evolution turns on contingent events. Conway Morris (2003) replied that convergent evolution, the repeated independent arrival at eyes, flight, and complex brains, shows that life is funneled toward similar solutions. This paper takes Gould's side and moves the debate from biology into history, where the evidence is richer and better dated.</p>
+        </div>
+        <div class="bg-card reveal">
+          <h4>The geobiological critique</h4>
+          <p>Mills, Macalady, Frank, and Wright (2025) propose a model with no hard steps at all. They argue that Earth's evolutionary singularities can be explained by the timing of planetary and environmental change rather than by intrinsic improbability. Their critique targets biology and does not reach the stretch after intelligence. If they are right, the burden of explaining the silence shifts onto history.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- III -->
+    <section id="s3">
+      <div class="section-header">
+        <span class="section-number">SECTION III</span>
+        <h2 class="section-title">The Convergence Test</h2>
+      </div>
+      <p>A step that a species is bound to reach should be reached more than once when separate populations face similar conditions. A hard step should be reached once, or not at all. Human history is the only dataset we have, and it is lopsided.</p>
+
+      <figure class="figure reveal" aria-label="Independent origins of major developments in human history">
+        <div class="figure-title">FIGURE 1 &middot; INDEPENDENT ORIGINS IN HUMAN HISTORY</div>
+        <div class="conv">
+          <div class="conv-row">
+            <div><span class="conv-name">Agriculture</span><span class="conv-where">Fertile Crescent, China, New Guinea, Mesoamerica, the Andes, eastern North America, the Sahel</span></div>
+            <div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot hollow"></i><i class="dot hollow"></i><i class="dot hollow"></i><i class="dot hollow"></i><i class="dot hollow"></i><span class="more">+</span></div>
+            <div class="conv-count">7 to 12+</div>
+          </div>
+          <div class="conv-row">
+            <div><span class="conv-name">Cities and states</span><span class="conv-where">Mesopotamia, Egypt, the Indus Valley, China, Mesoamerica, the Andes</span></div>
+            <div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="more">+</span></div>
+            <div class="conv-count">6+</div>
+          </div>
+          <div class="conv-row">
+            <div><span class="conv-name">Writing</span><span class="conv-where">Mesopotamia, China, Mesoamerica, probably Egypt</span></div>
+            <div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot hollow"></i></div>
+            <div class="conv-count">3 or 4</div>
+          </div>
+          <div class="conv-row">
+            <div><span class="conv-name">Astronomy and calendars</span><span class="conv-where">Babylon, China, the Maya</span></div>
+            <div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="more">+</span></div>
+            <div class="conv-count">Several</div>
+          </div>
+          <div class="conv-row once">
+            <div><span class="conv-name">Scientific revolution<span class="once-tag">ONCE</span></span><span class="conv-where">Western Europe, 16th and 17th centuries</span></div>
+            <div class="dots"><i class="dot"></i></div>
+            <div class="conv-count">1</div>
+          </div>
+          <div class="conv-row once">
+            <div><span class="conv-name">Industrial revolution<span class="once-tag">ONCE</span></span><span class="conv-where">Britain, from about 1760</span></div>
+            <div class="dots"><i class="dot"></i></div>
+            <div class="conv-count">1</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span><i class="dot"></i>Documented independent origin</span>
+          <span><i class="dot hollow"></i>Upper estimate</span>
+          <span><i class="dot red"></i>Singular origin</span>
+        </div>
+        <p class="calc-note">Sources: Diamond (1997) on agriculture; Houston (2004) on writing.</p>
+      </figure>
+
+      <p>This is the signature of a hard step. Agriculture, cities, and writing are convergent: peoples on different continents, with no contact, arrived at them again and again. Systematic experimental science and industrial production are not. They happened once, and everything since has spread from that single origin.</p>
+      <p><strong>Time was not the constraint.</strong> Homo sapiens has existed for roughly 300,000 years (Hublin et al. 2017). Agriculture began about 12,000 years ago. For more than 95 percent of our species' existence, people with modern brains lived without farming, cities, or writing.</p>
+      <p><strong>The near misses make the case sharper.</strong> Hellenistic engineers built a geared astronomical computer, the Antikythera mechanism, and Hero of Alexandria described a working steam device, the aeolipile, in the first century AD. Song China produced iron on a scale Europe would not reach for centuries, along with printing, gunpowder, and the compass, yet later Chinese economies stalled in what Elvin (1973) called a high-level equilibrium trap. The Abbasid world preserved and extended Greek science. Mesoamerica, cut off from Eurasia for more than 15,000 years, built cities, a positional number system with a zero, and a calendar of great precision. Each had ingredients. None crossed into self-sustaining technological growth.</p>
+      <p><strong>The cause matters less than the count.</strong> Why it happened once is a live debate. Mokyr (2016) points to a culture of growth and a competitive market for ideas in early modern Europe; Pomeranz (2000) stresses coal and the resources of the New World. Whatever the mechanism, no other society in the record reached it independently. The obvious objection, that diffusion after 1800 hides later independent origins, is answered in Section VII.</p>
+
+      <div class="pull-quote reveal"><p>Convergent things happen again and again. Hard steps happen once.</p></div>
+    </section>
+
+    <!-- IV -->
+    <section id="s4">
+      <div class="section-header">
+        <span class="section-number">SECTION IV</span>
+        <h2 class="section-title">The Gates of Rome</h2>
+      </div>
+      <p>The convergence test shows that the outcome is rare. This section shows the mechanism: history branches, the branches are large, and the trajectory that produced modern science passed through several of them on their improbable side.</p>
+
+      <div class="timeline reveal" aria-label="Timeline of the branch points discussed">
+        <div class="tl-item"><span class="tl-year">216 BC</span><span class="tl-what">Cannae; Hannibal does not march on Rome</span></div>
+        <div class="tl-item"><span class="tl-year">211 BC</span><span class="tl-what">Hannibal before the walls, then gone</span></div>
+        <div class="tl-item"><span class="tl-year">AD 6 to 135</span><span class="tl-what">Judea's messianic claimants</span></div>
+        <div class="tl-item key"><span class="tl-year">AD 452</span><span class="tl-what">Attila meets Leo on the Mincio</span></div>
+        <div class="tl-item"><span class="tl-year">AD 455</span><span class="tl-what">Vandal sack; Leo again intercedes</span></div>
+      </div>
+
+      <p><strong>Path improbability versus class improbability.</strong> Every exact history is improbable if described finely enough, including dull ones. The improbability of a specific path proves nothing by itself. What matters is whether the outcome class, any route at all to technological civilization, depends on branches like these. The cases below are branch points of that kind: had they gone the other way, the institutions, learning, and religion that shaped early modern Europe would have been different or absent.</p>
+
+      <h3 class="sub-title">Attila <span class="when">AD 452</span></h3>
+      <p>In 452 Attila invaded Italy. He took Aquileia after a siege, then sacked Milan and the cities of the Po valley. An embassy led by Pope Leo I, with the senators Avienus and Trygetius, met him on the Mincio near Mantua, and Attila withdrew. He died the following year. Prosper of Aquitaine, a contemporary, credits Leo.</p>
+      <p>The standard deflationary reading, drawn from Hydatius, attributes the withdrawal to famine, disease, and an Eastern Roman strike across the Danube. This reading asks a great deal of very little. Attila faced a western field army too weak to meet him in the open, and the road to an exposed Rome lay open. His army had already proven it could take fortified cities, at Naissus in the early 440s and at Aquileia itself, so walls offer no structural explanation.</p>
+      <p>Hunger and sickness were constants of premodern campaigning, not novel shocks. For a semi-nomadic confederation whose wealth and power moved with the army, a raid on the Pannonian heartland was a reason to hurry, not to abandon a campaign on the verge of its greatest prize. Even Hydatius, the source the deflationists lean on, calls the disasters heaven-sent. The contemporaries who watched it happen did not find it ordinary, and neither should we.</p>
+      <p>A second objection is that Rome fell anyway: Alaric's Goths sacked it in 410, and Gaiseric's Vandals sacked it again in 455. But Goths and Vandals were peoples seeking a place inside the Roman world, and they left its institutions standing; Leo again persuaded Gaiseric to spare the city from burning and massacre. A Hunnic conquest of Italy at the height of Attila's power would have been a different branch. Leo's success in 452 also gave the bishop of Rome new standing as the city's protector, an early step toward the papacy that anchored Latin learning through the medieval centuries.</p>
+
+      <h3 class="sub-title">Hannibal <span class="when">216 AND 211 BC</span></h3>
+      <p>After Cannae in 216 BC destroyed Rome's field army, Hannibal did not march on the city; Livy has his cavalry commander Maharbal tell him he knows how to win a victory but not how to use one. In 211 BC Hannibal finally camped within sight of Rome's walls, then marched away. Livy records storms breaking up the battle lines on two successive days.</p>
+      <p>The case cuts both ways. Hannibal lacked a siege train, so his failure to take Rome is partly structural, while Attila had no such limit. Hannibal is an echo of the pattern, not a second proof. A Carthaginian victory would have ended the Roman Republic before it united the Mediterranean, closing the channel through which Greek science, Roman law, and Latin learning later reached medieval Europe.</p>
+
+      <h3 class="sub-title">The messianic lottery <span class="when">AD 6 TO 135</span></h3>
+      <p>First-century Judea produced a crowd of would-be messiahs and prophets. Josephus records Judas the Galilean, who led a revolt in AD 6; Theudas, who promised to part the Jordan around AD 45; and an Egyptian prophet who gathered followers on the Mount of Olives in the 50s. Simon bar Kokhba led the last great revolt from 132 to 135.</p>
+      <p>Each movement was crushed or faded. One, centered on an executed Galilean preacher, became the largest religion on Earth and the institutional spine of the medieval West. Its monasteries copied the classical texts, and its cathedral schools grew into some of the first universities.</p>
+      <p>This is a lottery structure. Messianic movements were close to certain to appear; the success of any particular one was close to zero. That is exactly why path improbability alone settles nothing, since most lotteries have a winner. These cases show that historical branching is real and large. The convergence test (Section III) shows that the branch leading to technology was drawn once.</p>
+    </section>
+
+    <!-- V -->
+    <section id="s5">
+      <div class="section-header">
+        <span class="section-number">SECTION V</span>
+        <h2 class="section-title">The Arithmetic of Solitude</h2>
+      </div>
+      <p>About 80 independent even-odds forks in history are enough, on their own, to outweigh every star in the observable universe. The expected number of other technological civilizations is the number of stars times the probability that a star produces one:</p>
+      <div class="eq-box">
+        <span class="eq-label">EXPECTED CIVILIZATIONS</span>
+        <i>E</i>[<i>N</i>] = <i>N</i><sub>*</sub> &middot; <i>p</i><sub>bio</sub> &middot; <i>p</i><sub>hist</sub>
+      </div>
+      <p>Here <i>N</i><sub>*</sub> is between 10<sup>22</sup> and 10<sup>24</sup> stars, <i>p</i><sub>bio</sub> covers everything from a habitable planet to an intelligent species, and <i>p</i><sub>hist</sub> is the probability that an intelligent species reaches technology. We are alone in expectation when <i>E</i>[<i>N</i>] is one or less, which at the upper estimate requires <i>p</i><sub>bio</sub> &times; <i>p</i><sub>hist</sub> to be no more than 10<sup>&minus;24</sup>.</p>
+      <p>Suppose the historical path depends on <i>k</i> independent branch points, each going the right way with probability <i>q</i>. Then <i>p</i><sub>hist</sub> = <i>q</i><sup><i>k</i></sup>, which falls exponentially in <i>k</i> while the star count stays fixed. The table shows how many forks bring the expected count to one or fewer, with no help from biology at all.</p>
+
+      <div class="table-wrap reveal">
+        <table class="paper-table">
+          <thead><tr><th>Odds at each fork (q)</th><th>Forks needed, 10<sup>22</sup> stars</th><th>Forks needed, 10<sup>24</sup> stars</th></tr></thead>
+          <tbody>
+            <tr><td>1 in 2</td><td class="num">74</td><td class="num">80</td></tr>
+            <tr><td>1 in 10</td><td class="num">22</td><td class="num">24</td></tr>
+            <tr><td>1 in 100</td><td class="num">11</td><td class="num">12</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc reveal" id="calc">
+        <div class="calc-controls">
+          <div class="ctrl">
+            <label for="c-odds"><span>Odds a fork goes the right way</span> <output id="o-odds">1 in 2</output></label>
+            <input type="range" id="c-odds" min="0" max="8" step="1" value="0">
+          </div>
+          <div class="ctrl">
+            <label for="c-k"><span>Independent forks in history</span> <output id="o-k">80</output></label>
+            <input type="range" id="c-k" min="0" max="120" step="1" value="80">
+          </div>
+          <div class="ctrl">
+            <label for="c-bio"><span>Biological filter, <i>p</i><sub>bio</sub></span> <output id="o-bio">1</output></label>
+            <input type="range" id="c-bio" min="-30" max="0" step="1" value="0">
+          </div>
+          <div class="ctrl">
+            <label>Stars in the observable universe</label>
+            <div class="seg" role="group" aria-label="Stars in the observable universe">
+              <button type="button" data-s="22">10<sup>22</sup></button>
+              <button type="button" data-s="23">10<sup>23</sup></button>
+              <button type="button" data-s="24" class="on">10<sup>24</sup></button>
+            </div>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="res"><span class="k">EXPECTED OTHER CIVILIZATIONS</span><span class="v" id="r-e">&nbsp;</span></div>
+          <div class="res"><span class="k">FORKS NEEDED TO BE ALONE</span><span class="v" id="r-need">&nbsp;</span></div>
+        </div>
+        <div class="meter" aria-hidden="true">
+          <div class="meter-bar"></div><div class="meter-mid"></div><div class="meter-mark" id="r-mark"></div>
+        </div>
+        <div class="meter-labels" aria-hidden="true"><span>10<sup>24</sup></span><span>ONE</span><span>10<sup>&minus;24</sup></span></div>
+        <div class="verdict" id="r-verdict" aria-live="polite">&nbsp;</div>
+        <p class="calc-note">Expected count = stars &times; <i>p</i><sub>bio</sub> &times; <i>q</i><sup><i>k</i></sup>. Set the biological filter to 1 to see what history must do alone.</p>
+      </div>
+
+      <p><strong>Only genuine forks count.</strong> The forks must be independent, and the outcome class must depend on each of them. History is full of correlated events and self-correcting tendencies, so many dramatic episodes wash out. The relevant quantity is the effective number of independent forks, <i>k</i><sub>eff</sub>, which is smaller than any count of famous episodes.</p>
+      <p><strong>The bar is low.</strong> The span from the first modern humans to the steam engine covers some 300,000 years and thousands of separate societies. A few dozen genuine forks across that span are enough.</p>
+      <p><strong>Biology lowers it further.</strong> Any biological hard steps multiply into the same product. Carter-style models with even two or three improbable biological steps leave history far less work to do.</p>
+    </section>
+
+    <!-- VI -->
+    <section id="s6">
+      <div class="section-header">
+        <span class="section-number">SECTION VI</span>
+        <h2 class="section-title">The Infinite Limit</h2>
+      </div>
+      <p>If a required step is infinitesimally improbable, no finite universe is enough; if it is exactly zero, no countable universe is enough, including an infinite one. A historian looking at the gates of Rome may object that some branch points were not merely unlikely but miraculous in the ordinary sense, too improbable for any finite number to capture. Probability theory can make that intuition precise. It distinguishes three tiers.</p>
+
+      <div class="numline reveal" aria-hidden="true">
+        <svg viewBox="0 0 760 92" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="halo" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stop-color="#e8c97a" stop-opacity="0.55"/>
+              <stop offset="1" stop-color="#e8c97a" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="70" y1="46" x2="740" y2="46" stroke="#8a7135" stroke-width="1.5"/>
+          <polygon points="740,41 750,46 740,51" fill="#8a7135"/>
+          <rect x="72" y="38" width="70" height="16" fill="url(#halo)"/>
+          <circle cx="70" cy="46" r="7" fill="#c9503f"/>
+          <text x="70" y="78" fill="#c9503f" font-family="Cinzel, serif" font-size="12" text-anchor="middle" letter-spacing="2">ZERO</text>
+          <text x="128" y="26" fill="#e8c97a" font-family="Cinzel, serif" font-size="11" text-anchor="middle" letter-spacing="2">INFINITESIMAL</text>
+          <circle cx="240" cy="46" r="4" fill="#c4a44a"/>
+          <circle cx="380" cy="46" r="4" fill="#c4a44a"/>
+          <circle cx="560" cy="46" r="4" fill="#c4a44a"/>
+          <text x="240" y="78" fill="#8a8880" font-family="Crimson Text, Georgia, serif" font-size="15" text-anchor="middle">10<tspan dy="-7" font-size="10">&#8722;100</tspan></text>
+          <text x="380" y="78" fill="#8a8880" font-family="Crimson Text, Georgia, serif" font-size="15" text-anchor="middle">10<tspan dy="-7" font-size="10">&#8722;24</tspan></text>
+          <text x="560" y="78" fill="#8a8880" font-family="Crimson Text, Georgia, serif" font-size="15" text-anchor="middle">1 in a billion</text>
+          <text x="420" y="26" fill="#c4a44a" font-family="Cinzel, serif" font-size="11" text-anchor="middle" letter-spacing="2">SMALL: ANY POSITIVE REAL</text>
+        </svg>
+      </div>
+
+      <div class="tiers">
+        <div class="tier t1 reveal">
+          <span class="tn">TIER 1</span>
+          <h4>Small</h4>
+          <p class="def">A positive real number, however tiny</p>
+          <dl><dt>FINITE UNIVERSE</dt><dd>Enough stars eventually beat it</dd><dt>INFINITE UNIVERSE</dt><dd>Infinitely many civilizations, almost surely</dd></dl>
+        </div>
+        <div class="tier t2 reveal">
+          <span class="tn">TIER 2</span>
+          <h4>Infinitesimal</h4>
+          <p class="def">Above zero but below every positive real</p>
+          <dl><dt>FINITE UNIVERSE</dt><dd>No finite number of stars beats it</dd><dt>INFINITE UNIVERSE</dt><dd>Depends on how the infinite is modeled</dd></dl>
+        </div>
+        <div class="tier t3 reveal">
+          <span class="tn">TIER 3</span>
+          <h4>Zero</h4>
+          <p class="def">Exactly 0</p>
+          <dl><dt>FINITE UNIVERSE</dt><dd>None, almost surely</dd><dt>INFINITE UNIVERSE</dt><dd>None, almost surely</dd></dl>
+        </div>
+      </div>
+
+      <p><strong>Tier 1: small.</strong> This is where standard hard-steps models live. If <i>p</i> is any positive real number, a large enough universe beats it. In an infinite universe with independent trials, the second Borel&ndash;Cantelli lemma gives infinitely many civilizations with probability one. Standard probability therefore leaves an infinite universe only two options: <i>p</i> above zero and infinitely many civilizations, or <i>p</i> equal to zero and none.</p>
+      <p><strong>Tier 2: infinitesimal.</strong> Non-standard analysis (Robinson 1966) admits infinitesimals: numbers greater than zero but smaller than every positive real. Non-Archimedean probability uses them to give events a nonzero probability where standard theory must assign zero (Benci, Horsten, and Wenmackers 2013). If a required step has infinitesimal probability &epsilon;, then for any finite number of stars <i>n</i>, the product <i>n</i>&epsilon; is still infinitesimal, and so less than one.</p>
+      <p>No finite universe, however large, is expected to produce a second civilization. This is the precise version of the claim that no number of planets is enough. It also matches the historian's distinction between infinitely unlikely and impossible.</p>
+      <p>The strongest objection is Williamson (2007), who argues that infinitesimals cannot consistently measure an infinite sequence of fair coin tosses all landing heads. His argument depends on the symmetry of an infinite sequence of identical, independent trials. A historical path is a finite chain of heterogeneous events, and the infinitesimal here is an idealization for improbabilities smaller than any real number we could defend.</p>
+      <p><strong>Tier 3: zero.</strong> Standard probability is countably additive (Kolmogorov 1933): the probability of a countable union of events is at most the sum of their probabilities. If each of countably many events has probability zero, so does their union. Stars are discrete objects, and any universe is a countable union of bounded regions, each holding finitely many stars, so even an infinite universe holds only countably many.</p>
+      <p>It follows that if a required step has probability exactly zero, the chance that any other star produces a civilization is zero, even in an infinite universe. This is where the cardinality intuition behind this paper turns out to be right, at a different boundary than first supposed. What matters is not a high order of infinity but the line between countable and uncountable. An uncountable union of probability-zero events can carry positive probability, as the points of a line segment do; a countable union cannot, and the stars sit on the countable side.</p>
+
+      <div class="pull-quote reveal"><p>An uncountable union of zeros can carry weight. A countable one cannot, and the stars are countable.</p></div>
+
+      <p><strong>The price of zero.</strong> Probability zero does not mean impossible. A dart has zero probability of hitting any exact point, yet it always hits one. The zero tier therefore implies that Earth itself was a probability-zero event that happened anyway.</p>
+      <p>That is coherent. It is the strongest form of the observation-selection effect: we see the one draw that came up because only that draw produces observers (Carter 1983; Bostrom 2002). But conditioning on a probability-zero event is a known weak point, since the Borel&ndash;Kolmogorov paradox shows such conditional probabilities depend on how the event is described. The infinitesimal tier avoids the problem, because conditioning on an infinitesimal is well defined. The main claim of this paper is therefore the infinitesimal tier, with zero as its limiting case.</p>
+      <p><strong>What the tiers do not settle.</strong> No historical record can tell an infinitesimal probability from a merely tiny one, so the choice of tier is a modeling decision. The empirical claim rests on Sections III and V: history alone can plausibly push the probability below one in 10<sup>24</sup>. The tiers show what follows when contingency is taken to its limit, and why at that limit no universe of any size is enough.</p>
+    </section>
+
+    <!-- VII -->
+    <section id="s7">
+      <div class="section-header">
+        <span class="section-number">SECTION VII</span>
+        <h2 class="section-title">Objections and Replies</h2>
+      </div>
+      <div class="obj-grid">
+        <div class="obj reveal"><h4>Technology is an attractor</h4><p>Conway Morris argues that evolution converges, and one could argue the same of societies: given intelligence and time, industry is inevitable. The convergence test is how to check that claim, and the record fails it. Agriculture, cities, and writing pass as attractors; science and industry do not.</p></div>
+        <div class="obj reveal"><h4>Diffusion hides independent origins</h4><p>Once Britain industrialized, no other society could do it independently. That is true after 1800 and irrelevant before it. For thousands of years the Americas, Eurasia, and Africa ran separate experiments, and several had the time and the ingredients without crossing (Section III).</p></div>
+        <div class="obj reveal"><h4>History corrects itself</h4><p>Many branch points wash out; had Attila sacked Rome, something like modern Europe might have emerged anyway. Some washing out is certain, which is why the argument counts only effective, independent forks. Section V shows how few are needed, and the burden falls on the attractor view to show that nearly all of them wash out.</p></div>
+        <div class="obj reveal"><h4>One sample</h4><p>All the evidence comes from one species on one planet. That is true of every argument about the Fermi paradox, including the optimistic ones. Within that sample, history offers thousands of separate societies, which is more data than biology provides on any single hard step.</p></div>
+        <div class="obj reveal"><h4>Alien histories may differ</h4><p>Another species might be less contingent: more uniform, longer-lived, or organized differently. But any technological species must accumulate knowledge across generations and sustain institutions that build on it, which is the step humans reached once. Nothing suggests it is easier for anyone else, and the only evidence we have says it is hard.</p></div>
+        <div class="obj reveal"><h4>Biology has no hard steps</h4><p>Mills et al. (2025) argue the biological transitions were paced by environment, not luck. Their argument does not reach history. If they are right, the case for a historical filter gets stronger, since something must still explain the silence.</p></div>
+        <div class="obj reveal"><h4>The argument proves too much</h4><p>Every specific history is improbable, including our own, so improbability cannot mean absence. The argument rests on class improbability, measured by the convergence test, not on the improbability of any single path (Section IV).</p></div>
+        <div class="obj reveal"><h4>Each episode has a mundane cause</h4><p>Any branch point can be given an ordinary explanation after the fact, as Hydatius offers famine and disease for Attila. An explanation after the fact does not make an event probable before it, and Section IV shows these readings fail on their own terms.</p></div>
+        <div class="obj reveal"><h4>The universe may be infinite</h4><p>If space is infinite, any positive probability yields infinitely many civilizations. That holds for the small tier and possibly the infinitesimal one, which is why the main claim is scoped to the observable universe. Only the zero tier extends beyond it (Section VI).</p></div>
+      </div>
+    </section>
+
+    <!-- VIII -->
+    <section id="s8">
+      <div class="section-header">
+        <span class="section-number">SECTION VIII</span>
+        <h2 class="section-title">Predictions and Implications</h2>
+      </div>
+      <p>The theory predicts living planets without transmitters. It makes four testable claims:</p>
+      <ol class="predictions">
+        <li class="reveal"><p><strong>Biosignatures, yes; technosignatures, no.</strong> If the filter is historical, simple life and perhaps intelligent animals may be common, but technology is not. Future telescopes, such as the proposed Habitable Worlds Observatory, may detect atmospheric signs of life; the theory predicts SETI stays silent even if they do. A galaxy of living worlds with no one broadcasting is what a late filter looks like.</p></li>
+        <li class="reveal"><p><strong>More near misses.</strong> Historical research should keep finding societies that assembled the ingredients of industry and stalled. Rigorous evidence that several premodern economies were on independent paths to industrialization would count against the theory.</p></li>
+        <li class="reveal"><p><strong>Singularity holds.</strong> No second independent origin of systematic experimental science will turn up in the archaeological or historical record.</p></li>
+        <li class="reveal"><p><strong>No visitors from this universe.</strong> Whatever UAP prove to be, they will not be craft from another civilization in this universe (Section X).</p></li>
+      </ol>
+      <p><strong>Implication for us.</strong> Hanson's filter has a corollary. If the hard step lies behind us, in history, then it has already been passed, and the silence of the sky says little about our own future. On this view, the transition that began in early modern Europe may be the rarest event in the observable universe.</p>
+    </section>
+
+    <!-- IX -->
+    <section id="s9">
+      <div class="section-header">
+        <span class="section-number">SECTION IX</span>
+        <h2 class="section-title">A Note on Non-Natural Events</h2>
+      </div>
+      <div class="note-box">
+        <p>Some episodes above have been read as miracles, and the founding events of Christianity are claimed as such. This paper takes no position on that. The model covers natural probabilities only: if any step on the path to technology was non-natural, it falls outside probability altogether (Hume 1748), and the frequency of technological civilization stops being a statistical question. That is a separate argument.</p>
+      </div>
+    </section>
+
+    <!-- X -->
+    <section id="s10">
+      <div class="section-header">
+        <span class="section-number">SECTION X</span>
+        <h2 class="section-title">A Note on Unidentified Anomalous Phenomena</h2>
+      </div>
+      <p>If any unidentified anomalous phenomena (UAP) prove to be technology beyond human capability, this theory says they are very unlikely to be visitors from other civilizations in this universe.</p>
+      <p>The reports deserve to be taken seriously. Military pilots and sensor systems have recorded objects they could not identify, and the Pentagon's All-Domain Anomaly Resolution Office has catalogued more than 1,600 cases, a residue of which it cannot explain. Former officials have testified under oath before Congress that the United States has recovered craft of non-human origin (U.S. House Oversight 2023).</p>
+      <p>That office reports no verified evidence of extraterrestrial technology, and found no verifiable support for claims of a program reverse-engineering recovered craft (AARO 2024a, 2024b). The testimony has not been publicly corroborated. The question remains open, and the framework sorts the possible answers cleanly:</p>
+
+      <div class="table-wrap reveal">
+        <table class="paper-table">
+          <thead><tr><th>Explanation</th><th>Fits the theory?</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Visitors from another civilization in this universe</td><td><span class="tag no">NO</span></td><td>The theory puts the expected number of such civilizations below one</td></tr>
+            <tr><td>Human technology: classified or breakaway programs, or future humans traveling back in time</td><td><span class="tag yes">YES</span></td><td>The one technological civilization the theory allows is ours</td></tr>
+            <tr><td>A source outside this universe: another dimension or another universe</td><td><span class="tag out">OUTSIDE SCOPE</span></td><td>The model counts the stars of this universe only</td></tr>
+            <tr><td>A non-natural source</td><td><span class="tag out">OUTSIDE SCOPE</span></td><td>The model covers natural probabilities only (Section IX)</td></tr>
+            <tr><td>Ordinary objects or sensor artifacts</td><td><span class="tag yes">YES</span></td><td>Most resolved cases fall here</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>This turns UAP into a test of the theory. A verified craft of extraterrestrial origin from within this universe would count heavily against it. Every other outcome, from a hidden program to a phenomenon physics cannot yet place, is consistent with it.</p>
+      <p>Time travel and breakaway programs fit the theory exactly. If UAP are human technology, from our own future or from programs hidden today, they show that the one technological lineage in the observable universe is our own.</p>
+    </section>
+
+    <!-- XI -->
+    <section id="s11">
+      <div class="section-header">
+        <span class="section-number">SECTION XI</span>
+        <h2 class="section-title">Conclusion</h2>
+      </div>
+      <p>The search for a Great Filter has looked mostly at the sky and at the cell; it should also look at the archive. Human societies converged on farming, cities, and writing again and again, and reached systematic science and industry once. The branch points along the way were large, and the winning draws improbable.</p>
+      <p>A few dozen genuine forks are enough to outweigh every star in the observable universe. At the infinite limit, no universe of any size is enough. The silence is not a paradox; it is what history predicts.</p>
+    </section>
+
+    <section id="refs" class="references-section">
+      <h2>REFERENCES</h2>
+      <h3>ANCIENT SOURCES</h3>
+      <ul class="ref-list">
+        <li>Hydatius. <em>Chronicle</em>. Ed. and trans. R. W. Burgess, <em>The Chronicle of Hydatius and the Consularia Constantinopolitana</em>. Oxford University Press, 1993.</li>
+        <li>Josephus. <em>Jewish Antiquities</em>; <em>The Jewish War</em>.</li>
+        <li>Livy. <em>Ab Urbe Condita</em>, Books 22 and 26.</li>
+        <li>Priscus. <em>Fragments</em>. In R. C. Blockley, <em>The Fragmentary Classicising Historians of the Later Roman Empire</em>, vol. 2. Francis Cairns, 1983.</li>
+        <li>Prosper of Aquitaine. <em>Epitoma Chronicon</em>.</li>
+      </ul>
+      <h3>MODERN WORKS</h3>
+      <ul class="ref-list">
+        <li>All-Domain Anomaly Resolution Office [AARO] (2024a). <em>Report on the Historical Record of U.S. Government Involvement with Unidentified Anomalous Phenomena</em>, Volume I. U.S. Department of Defense.</li>
+        <li>All-Domain Anomaly Resolution Office [AARO] (2024b). <em>Fiscal Year 2024 Consolidated Annual Report on Unidentified Anomalous Phenomena</em>. U.S. Department of Defense.</li>
+        <li>Benci, V., Horsten, L., and Wenmackers, S. (2013). Non-Archimedean probability. <em>Milan Journal of Mathematics</em> 81, 121&ndash;151.</li>
+        <li>Bostrom, N. (2002). <em>Anthropic Bias: Observation Selection Effects in Science and Philosophy</em>. Routledge.</li>
+        <li>Carter, B. (1983). The anthropic principle and its implications for biological evolution. <em>Philosophical Transactions of the Royal Society A</em> 310, 347&ndash;363.</li>
+        <li>Conway Morris, S. (2003). <em>Life's Solution: Inevitable Humans in a Lonely Universe</em>. Cambridge University Press.</li>
+        <li>Diamond, J. (1997). <em>Guns, Germs, and Steel</em>. W. W. Norton.</li>
+        <li>Elvin, M. (1973). <em>The Pattern of the Chinese Past</em>. Stanford University Press.</li>
+        <li>Gould, S. J. (1989). <em>Wonderful Life: The Burgess Shale and the Nature of History</em>. W. W. Norton.</li>
+        <li>Hanson, R. (1998). The Great Filter: are we almost past it? Unpublished essay.</li>
+        <li>Houston, S. D., ed. (2004). <em>The First Writing: Script Invention as History and Process</em>. Cambridge University Press.</li>
+        <li>Hublin, J.-J., et al. (2017). New fossils from Jebel Irhoud, Morocco and the pan-African origin of Homo sapiens. <em>Nature</em> 546, 289&ndash;292.</li>
+        <li>Hume, D. (1748). Of miracles. <em>An Enquiry Concerning Human Understanding</em>, Section X.</li>
+        <li>Kolmogorov, A. N. (1933). <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em>. Springer.</li>
+        <li>Mills, D. B., Macalady, J. L., Frank, A., and Wright, J. T. (2025). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11827626/" target="_blank" rel="noopener">A reassessment of the "hard-steps" model for the evolution of intelligent life</a>. <em>Science Advances</em> 11.</li>
+        <li>Mokyr, J. (2016). <em>A Culture of Growth: The Origins of the Modern Economy</em>. Princeton University Press.</li>
+        <li>Pomeranz, K. (2000). <em>The Great Divergence: China, Europe, and the Making of the Modern World Economy</em>. Princeton University Press.</li>
+        <li>Robinson, A. (1966). <em>Non-standard Analysis</em>. North-Holland.</li>
+        <li>Sandberg, A., Drexler, E., and Ord, T. (2018). <a href="https://arxiv.org/abs/1806.02404" target="_blank" rel="noopener">Dissolving the Fermi paradox</a>. arXiv:1806.02404.</li>
+        <li>Snyder-Beattie, A. E., Sandberg, A., Drexler, K. E., and Bonsall, M. B. (2021). The timing of evolutionary transitions suggests intelligent life is rare. <em>Astrobiology</em> 21(3), 265&ndash;278.</li>
+        <li>U.S. House Committee on Oversight and Accountability (2023). <em>Unidentified Anomalous Phenomena: Implications on National Security, Public Safety, and Government Transparency</em>. Hearing, July 26, 2023.</li>
+        <li>Ward, P. D., and Brownlee, D. (2000). <em>Rare Earth: Why Complex Life Is Uncommon in the Universe</em>. Copernicus.</li>
+        <li>Williamson, T. (2007). How probable is an infinite sequence of heads? <em>Analysis</em> 67(3), 173&ndash;180.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer class="paper-footer">
+  <div>
+    <a href="../index.html">Home</a>
+    <a href="../research.html">Research</a>
+    <a href="../about.html">About</a>
+  </div>
+  <div style="margin-top:16px;">&copy; 2026 <span class="brand-l">l</span>UPPITER GROUP &middot; CC BY-NC-ND 4.0</div>
+  <div style="margin-top:8px; font-size:0.62rem;">Working draft. Independent preprint, not peer reviewed. The views expressed are those of the author.</div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Silent sky: a field of stars and one gold light */
+  var c = document.getElementById('sky');
+  if (c && c.getContext) {
+    var ctx = c.getContext('2d'), stars = [], w = 0, h = 0, running = false, visible = true;
+    function init() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = c.clientWidth; h = c.clientHeight;
+      c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.round(w * h / 1700); stars = [];
+      for (var i = 0; i < n; i++) {
+        var big = Math.random() > 0.93;
+        stars.push({ x: Math.random() * w, y: Math.random() * h,
+          r: big ? 0.9 + Math.random() * 0.9 : 0.25 + Math.random() * 0.75,
+          a: 0.15 + Math.random() * 0.6, p: Math.random() * 6.283, s: 0.3 + Math.random() * 0.9 });
+      }
+    }
+    function draw(t) {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#e9e4d6';
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        ctx.globalAlpha = reduce ? s.a : s.a * (0.6 + 0.4 * Math.sin(s.p + t * 0.0012 * s.s));
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
+      }
+      var narrow = w < 700;
+      var ex = narrow ? w * 0.86 : w * 0.83, ey = narrow ? 64 : h * 0.3;
+      var pulse = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * 0.0018);
+      var g = ctx.createRadialGradient(ex, ey, 0, ex, ey, 26);
+      g.addColorStop(0, 'rgba(232,201,122,' + (0.5 * pulse) + ')');
+      g.addColorStop(1, 'rgba(232,201,122,0)');
+      ctx.globalAlpha = 1; ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(ex, ey, 26, 0, 6.283); ctx.fill();
+      ctx.fillStyle = '#f3d98c';
+      ctx.beginPath(); ctx.arc(ex, ey, 2.6, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = 0.75; ctx.font = '600 10px Cinzel, serif'; ctx.textAlign = 'center';
+      ctx.fillText('U S', ex, ey + 22);
+      ctx.globalAlpha = 1;
+      if (!reduce && visible) { requestAnimationFrame(draw); } else { running = false; }
+    }
+    function start() { if (!running) { running = true; requestAnimationFrame(draw); } }
+    init(); start();
+    window.addEventListener('resize', function () { init(); if (reduce) draw(0); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible && !reduce) start(); }).observe(c);
+    }
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { if (reduce) draw(0); }); }
+  }
+
+  /* Reading progress */
+  var bar = document.getElementById('progress');
+  function prog() {
+    var d = document.documentElement, max = d.scrollHeight - d.clientHeight;
+    bar.style.width = (max > 0 ? (d.scrollTop || document.body.scrollTop) / max * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', prog, { passive: true }); prog();
+
+  /* Contents: open on wide screens, collapsed on phones, highlight the current section */
+  var toc = document.getElementById('toc');
+  function tocMode() { toc.open = window.innerWidth >= 1100; }
+  tocMode();
+  var lastWide = window.innerWidth >= 1100;
+  window.addEventListener('resize', function () { var wide = window.innerWidth >= 1100; if (wide !== lastWide) { lastWide = wide; tocMode(); } });
+  toc.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { if (window.innerWidth < 1100) toc.open = false; });
+  });
+  var links = {}; toc.querySelectorAll('a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var secs = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  function spy() {
+    var cur = secs[0].id;
+    secs.forEach(function (s) { if (s.getBoundingClientRect().top <= 120) cur = s.id; });
+    Object.keys(links).forEach(function (k) { links[k].classList.toggle('active', k === cur); });
+  }
+  window.addEventListener('scroll', spy, { passive: true }); spy();
+
+  /* Reveal on scroll */
+  var rev = document.querySelectorAll('.reveal');
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    rev.forEach(function (el) { io.observe(el); });
+  } else { rev.forEach(function (el) { el.classList.add('in'); }); }
+
+  /* Arithmetic of solitude */
+  var ODDS = [2, 3, 4, 5, 10, 20, 50, 100, 1000];
+  var oddsEl = document.getElementById('c-odds'), kEl = document.getElementById('c-k'), bioEl = document.getElementById('c-bio');
+  var starsExp = 24;
+  function pow10(x) {
+    var r = Math.round(x);
+    return '10<sup>' + (r < 0 ? '&minus;' + (-r) : r) + '</sup>';
+  }
+  function fmt(x) {
+    if (x >= 3 || x <= -3) return '&asymp; ' + pow10(x);
+    var v = Math.pow(10, x);
+    return '&asymp; ' + (v >= 10 ? Math.round(v).toLocaleString() : Number(v.toPrecision(2)).toString());
+  }
+  function calc() {
+    var odds = ODDS[+oddsEl.value], k = +kEl.value, b = +bioEl.value;
+    document.getElementById('o-odds').textContent = '1 in ' + odds.toLocaleString();
+    document.getElementById('o-k').textContent = k;
+    document.getElementById('o-bio').innerHTML = b === 0 ? '1 (no help)' : pow10(b);
+    var logE = starsExp + b - k * Math.log10(odds);
+    document.getElementById('r-e').innerHTML = fmt(logE);
+    var need = Math.max(0, Math.ceil((starsExp + b) / Math.log10(odds) - 1e-9));
+    document.getElementById('r-need').textContent = need;
+    var pos = Math.min(1, Math.max(0, (24 - logE) / 48));
+    document.getElementById('r-mark').style.left = (pos * 100) + '%';
+    var v = document.getElementById('r-verdict');
+    if (logE <= 1e-9) { v.textContent = 'ALONE IN EXPECTATION'; v.className = 'verdict alone'; }
+    else { v.textContent = 'OTHERS EXPECTED'; v.className = 'verdict crowded'; }
+  }
+  [oddsEl, kEl, bioEl].forEach(function (el) { el.addEventListener('input', calc); });
+  document.querySelectorAll('.seg button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.seg button').forEach(function (b) { b.classList.remove('on'); });
+      btn.classList.add('on'); starsExp = +btn.dataset.s; calc();
+    });
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
