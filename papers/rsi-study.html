@@ -180,42 +180,44 @@
   <div class="paper-meta">
     <div>Author <span>John, CaesarBot &amp; luppiter Group</span></div>
     <div>Published <span>April 2026</span></div>
+    <div>Revised <span>October 2026</span></div>
     <div>Category <span>Finance · Technical Analysis</span></div>
-    <div>References <span>21 References</span></div>
+    <div>References <span>23 References</span></div>
   </div>
 </header>
 
 <main class="paper-wrap">
 
   <div class="abstract-box">
-<p>This study conducts a large-scale empirical backtest of four Relative Strength Index (RSI) trading strategies across a universe of 100 U.S. equities spanning 11 sectors, using up to 64 years of daily price data (1962–2026). The four strategies vary by timeframe (daily vs. weekly) and threshold pair (30/70 vs. 20/80). We evaluate 5,174 total trades using comprehensive performance metrics, statistical significance tests, and cross-sectional analyses by sector, time period, and volatility regime.</p>
-<p>Key findings: All four strategies produce statistically significant positive average returns per trade (p &lt; 10⁻¹³ across all strategies). The Daily 30/70 strategy generates the most trades (n = 3,892) with a 79.4% win rate and 7.66% average return per trade. More extreme thresholds (20/80) produce fewer but substantially larger trades — the Weekly 20/80 strategy achieves a 96.3% win rate with 244% average return, though with only 82 trades and an average holding period of 6.5 years. However, all four strategies significantly underperform buy-and-hold on an annualized basis (paired t-test p &lt; 10⁻²⁰ for all), primarily because they keep capital uninvested between signals. RSI strategies show their strongest relative performance during bear markets and high-volatility regimes, consistent with the overreaction hypothesis. Sector-level ANOVA reveals statistically significant cross-sectional variation for daily and weekly 30/70 strategies (p = 0.043 and p = 0.0003, respectively), with mega-cap technology and consumer discretionary stocks producing the highest average returns. These results suggest that RSI captures genuine mean-reversion dynamics in oversold conditions, but the opportunity cost of being out of the market during non-signal periods makes it inferior to passive indexing as a standalone system. Because the universe consists only of companies that survived to 2026 (delisted, bankrupt, and acquired firms are excluded), these results are subject to survivorship bias and should be read as an upper bound, particularly for long-hold strategies such as Weekly 20/80.</p>
+<p>This study conducts a large-scale empirical backtest of four Relative Strength Index (RSI) trading strategies across a universe of 100 U.S. equities spanning 11 sectors, using up to 64 years of daily price data (1962–2026). The four strategies vary by timeframe (daily vs. weekly) and threshold pair (30/70 vs. 20/80). We evaluate 5,174 total trades using per-trade performance metrics, statistical significance tests, and breakdowns by sector, time period, and crisis window.</p>
+<p>Key findings: All four strategies produce positive average returns per trade that differ significantly from zero under tests that treat each trade as independent (p &lt; 10⁻¹² for every strategy). The Daily 30/70 strategy generates the most trades (n = 3,892) with a 79.4% win rate and 7.66% average return per trade. More extreme thresholds (20/80) produce fewer but substantially larger trades: the Weekly 20/80 strategy has a 96.3% win rate and a 244% average return, though with only 82 trades and an average holding period of 6.5 years. Because the tests compare returns with zero rather than with random entries, and because the trades cluster in time, they show positive average trades on this universe of surviving stocks but cannot separate RSI timing from the stocks&#x27; upward drift. In a per-stock comparison in which idle cash earns nothing, every strategy&#x27;s annualized return falls short of buying and holding the same stock (paired t-test p &lt; 10⁻¹⁹ for every strategy), largely because capital sits uninvested between signals; no index or portfolio-level comparison is tested. Trades entered during the 2007 to 2009 financial crisis and the 2020 COVID crash had high win rates and large average returns for the 20/80 and weekly strategies, while Daily 30/70 trades from the financial crisis averaged a loss. Sector-level ANOVA finds cross-sectional variation for the daily and weekly 30/70 strategies (p = 0.043 and p = 0.0003, respectively), but only the weekly result survives a Bonferroni correction for four strategies, and the top-ranked Mega Cap Tech group consists of stocks chosen as mega-caps in 2026. Because the universe consists only of companies that survived to 2026 (delisted, bankrupt, and acquired firms are excluded), these results are subject to survivorship bias and should be read as an upper bound, particularly for long-hold strategies such as Weekly 20/80.</p>
   </div>
 <p>Date: February 22, 2026</p>
 <p>Data Source: Yahoo Finance (yfinance) — all figures derived from actual historical price data</p>
+<p><strong>Disclaimer.</strong> All results in this paper come from hypothetical backtests. They are not investment advice or a recommendation to buy or sell any security, and past performance does not guarantee future results. This paper is published by luppiter Group, which is not a registered investment adviser.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION I</span>
   <h2 class="section-title">1. Introduction</h2>
 </div>
-<p>The Relative Strength Index (RSI), introduced by J. Welles Wilder in his seminal 1978 work New Concepts in Technical Trading Systems, is among the most widely used momentum oscillators in technical analysis (Wilder, 1978). The RSI measures the magnitude of recent price changes on a scale of 0 to 100, with readings below 30 traditionally interpreted as &quot;oversold&quot; and readings above 70 as &quot;overbought.&quot; Despite its ubiquity among practitioners — surveys consistently find that over 90% of futures traders use some form of technical analysis (Taylor &amp; Allen, 1992) — the academic literature on RSI&#x27;s profitability remains surprisingly thin relative to studies on moving average crossover systems.</p>
+<p>The Relative Strength Index (RSI), introduced by J. Welles Wilder in his seminal 1978 work New Concepts in Technical Trading Systems, is among the most widely used momentum oscillators in technical analysis (Wilder, 1978). The RSI measures the magnitude of recent price changes on a scale of 0 to 100, with readings below 30 traditionally interpreted as &quot;oversold&quot; and readings above 70 as &quot;overbought.&quot; Technical analysis is widely used by practitioners: in a Bank of England survey of chief foreign exchange dealers in London, about 90% of respondents said they used some chart analysis in forming exchange rate expectations at short horizons (Taylor &amp; Allen, 1992). Even so, the academic literature on RSI&#x27;s profitability remains surprisingly thin relative to studies on moving average crossover systems.</p>
 <p>The efficient market hypothesis (EMH), as formulated by Fama (1970), posits that asset prices fully reflect all available information, implying that technical trading rules should not generate systematic excess returns. If markets are efficient, past price patterns — the sole input to RSI — should have no predictive power for future returns. Yet behavioral finance research has documented systematic overreaction in stock prices (De Bondt &amp; Thaler, 1985), providing a theoretical basis for why mean-reversion indicators like RSI might capture genuine profit opportunities.</p>
-<p>This study makes three contributions to the literature. First, we employ a substantially larger stock universe (100 equities across 11 sectors) and longer time period (up to 64 years) than prior RSI backtests, which typically examine a handful of indices or a single market. Second, we systematically compare four threshold/timeframe combinations rather than testing a single parameterization, addressing the data-snooping concerns raised by Sullivan, Timmermann, and White (1999). Third, we provide granular cross-sectional analysis by sector, volatility regime, and market condition (bull vs. bear), illuminating when and where RSI-based strategies perform best.</p>
+<p>This study makes three contributions to the literature. First, we employ a substantially larger stock universe (100 equities across 11 sectors) and longer time period (up to 64 years) than prior RSI backtests, which typically examine a handful of indices or a single market. Second, we systematically compare four threshold/timeframe combinations rather than testing a single parameterization; reporting all four limits selective reporting, though it does not by itself resolve the data-snooping concerns raised by Sullivan, Timmermann, and White (1999) (see Section 5.7). Third, we break results down by sector, by time period from 2005 to 2025, and by three crisis windows, showing where per-trade results were strongest.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION II</span>
   <h2 class="section-title">2. Literature Review</h2>
 </div>
 <h3 class="sub-title">2.1 Technical Analysis and Market Efficiency</h3>
-<p>The debate over technical analysis profitability stretches back decades. Fama (1970) established the efficient markets framework that implied technical trading rules should not work. However, Brock, Lakonishok, and LeBaron (1992) challenged this view with evidence that simple moving average and trading range breakout rules generated statistically significant returns on the Dow Jones Industrial Average from 1897 to 1986, even after accounting for transaction costs. Their findings sparked renewed academic interest in technical analysis.</p>
-<p>Lo, Mamaysky, and Wang (2000) provided rigorous statistical foundations for technical analysis by formalizing pattern recognition algorithms and demonstrating that several technical patterns provided incremental information beyond what was captured by standard parametric models. Park and Irwin (2007), in their comprehensive survey of 95 modern studies, found that 56 reported positive results for technical trading rules, 20 reported negative results, and 19 were mixed — suggesting that the evidence is tilted toward, but not conclusive about, profitability.</p>
-<p>More recently, Neely, Rapach, Tu, and Zhou (2014) demonstrated that technical indicators have significant out-of-sample predictive power for the equity risk premium, complementing traditional macroeconomic predictors. Urquhart and McGroarty (2016) found evidence consistent with Lo&#x27;s Adaptive Market Hypothesis — that the profitability of technical rules varies over time as market conditions evolve.</p>
+<p>The debate over technical analysis profitability stretches back decades. Fama (1970) established the efficient markets framework that implied technical trading rules should not work. However, Brock, Lakonishok, and LeBaron (1992) challenged this view with evidence that simple moving average and trading range breakout rules generated statistically significant returns on the Dow Jones Industrial Average from 1897 to 1986; those returns are reported before transaction costs. Their findings sparked renewed academic interest in technical analysis.</p>
+<p>Lo, Mamaysky, and Wang (2000) provided rigorous statistical foundations for technical analysis by formalizing pattern recognition algorithms and demonstrating that several technical patterns provided incremental information beyond what was captured by standard parametric models. Park and Irwin (2007), in their comprehensive survey of 95 modern studies, found that 56 reported positive results for technical trading rules, 20 reported negative results, and 19 were mixed — suggesting that the evidence is tilted toward, but not conclusive about, profitability. Malkiel (2003), surveying the behavioral and statistical challenges to the efficient market hypothesis, concluded that stock markets are more efficient and less predictable than many academic papers of the time suggested.</p>
+<p>More recently, Neely, Rapach, Tu, and Zhou (2014) demonstrated that technical indicators have significant out-of-sample predictive power for the equity risk premium, complementing traditional macroeconomic predictors. Urquhart and McGroarty (2016) tested return predictability in the S&amp;P 500, FTSE 100, Nikkei 225, and EURO STOXX 50 from 1990 to 2014 and found periods of significant predictability alternating with periods of none, consistent with the Adaptive Markets Hypothesis (Lo, 2004); their tests measure statistical predictability rather than the profitability of technical trading rules.</p>
 <h3 class="sub-title">2.2 RSI-Specific Research</h3>
-<p>Research specifically focused on the RSI is more limited. Chong and Ng (2008) tested RSI and MACD rules on the London Stock Exchange&#x27;s FT30 index, finding that RSI generated positive but economically modest returns after transaction costs. Wong, Manzur, and Chew (2003) examined technical indicators including RSI on the Singapore stock market and found evidence of profitability, particularly for momentum-based signals.</p>
-<p>Chong, Ng, and Liew (2014) revisited the FT30 findings on five other OECD stock markets and found that RSI profitability depended on both the market and the parameterization: an RSI(21, 50) rule generated significant abnormal returns on the Milan Comit General and S&amp;P/TSX Composite indices, while the conventional RSI(14) 30/70 rule was profitable on the Dow Jones Industrial Average. Metghalchi, Chen, and Hayes (2015) tested moving average, RSI, MACD, and trading breakout rules on the Madrid General Stock Index from 1975 to 2012 and reported predictive power that was statistically significant in all three of their sub-periods. Bajgrowicz and Scaillet (2012) raised important methodological concerns about persistence and data snooping in technical analysis research, arguing that many apparent profits disappear when tested with proper multiple comparison adjustments.</p>
-<p>Han, Yang, and Zhou (2013) documented a cross-sectional anomaly whereby stocks with favorable technical indicators (including RSI) outperformed those with unfavorable signals, suggesting that technical analysis captures information about risk or mispricing that is not subsumed by known factor models.</p>
+<p>Research specifically focused on the RSI is more limited. Chong and Ng (2008) tested RSI and MACD rules on 60 years of data for the London Stock Exchange&#x27;s FT30 index and found that both could generate returns higher than buy-and-hold in most cases. Wong, Manzur, and Chew (2003) tested the moving average, a trend-following indicator, and the RSI, a counter-trend indicator, on Singapore data and found that both could generate significantly positive returns.</p>
+<p>Chong, Ng, and Liew (2014) revisited the FT30 findings on five other OECD stock markets and found that RSI profitability depended on both the market and the parameterization: an RSI(21, 50) rule generated significant abnormal returns on the Milan Comit General and S&amp;P/TSX Composite indices, while the conventional RSI(14) 30/70 rule was profitable on the Dow Jones Industrial Average. Metghalchi, Chen, and Hayes (2015) tested moving average, RSI, MACD, and trading breakout rules on the Madrid General Stock Index from 1975 to 2012 and reported predictive power that was statistically significant in all three of their sub-periods, along with strategies that may outperform buy-and-hold after transaction costs and risk. Like Chong and Ng (2008), these index-level results cut against this paper&#x27;s finding that every rule lagged buy-and-hold stock by stock; the studies differ in market, period, and rule design, and this paper does not test which difference accounts for the gap. Bajgrowicz and Scaillet (2012), applying a false discovery rate approach to daily Dow Jones Industrial Average data from 1897 to 2011, found that investors could not have reliably selected the best rules in advance and that in-sample profits disappear once even low transaction costs are included.</p>
+<p>Han, Yang, and Zhou (2013) applied a moving average timing rule to portfolios sorted by volatility and found that the timed portfolios beat buy-and-hold, with abnormal returns for high-volatility portfolios that the CAPM and the Fama-French three-factor model do not explain. Their study tests moving averages, not the RSI, but it documents cross-sectional differences in the payoff to a technical rule.</p>
 <h3 class="sub-title">2.3 Behavioral Foundations</h3>
-<p>The potential profitability of RSI-based strategies finds theoretical support in behavioral finance. De Bondt and Thaler (1985) documented long-term return reversals consistent with investor overreaction — prior losers outperformed prior winners over 3–5 year horizons. Tversky and Kahneman (1974) identified representativeness bias and anchoring as cognitive heuristics that can cause systematic pricing errors. Shiller (2000) argued that irrational exuberance and panic create price overshoots in both directions, which mean-reversion indicators might exploit.</p>
+<p>The potential profitability of RSI-based strategies finds theoretical support in behavioral finance. De Bondt and Thaler (1985) documented long-term return reversals consistent with investor overreaction — prior losers outperformed prior winners over 3–5 year horizons. Over shorter horizons the pattern runs the other way: Jegadeesh and Titman (1993) found that buying past winners and selling past losers earned significant positive returns over 3- to 12-month holding periods, a range that includes the typical Daily 30/70 holding period in this study. Tversky and Kahneman (1974) identified representativeness bias and anchoring as cognitive heuristics that can cause systematic pricing errors. Shiller (2000) argued that irrational exuberance and panic create price overshoots in both directions, which mean-reversion indicators might exploit.</p>
 <p>If stocks that trigger RSI oversold signals have indeed been subject to excessive selling pressure driven by behavioral biases, then the subsequent rebound captured by a buy-on-oversold/sell-on-overbought strategy reflects a correction of mispricing rather than compensation for risk.</p>
 
 <div class="section-header">
@@ -287,24 +289,19 @@
 <td>DIS, CMCSA, NFLX, T, VZ, TMUS</td>
 </tr>
 </tbody></table>
-<p>All 100 tickers were successfully downloaded with zero failures. Data availability varies by listing date: the longest histories (JNJ, XOM, CVX, KO, PG, MRK, CAT, HON, GE, BA, DIS, and others) extend back to January 2, 1962, providing over 16,000 daily observations and 64 years of coverage. The shortest histories (KHC from July 2015, ABBV from January 2013) still provide over 10 years of data. The median stock in our sample has approximately 11,500 daily observations spanning ~45 years. The universe was selected from companies still listed as of 2026, so firms that were delisted, went bankrupt, or were acquired during the sample period are not represented; Section 5.5 discusses the resulting survivorship bias.</p>
+<p>All 100 tickers were successfully downloaded with zero failures. Data availability varies by listing date: the longest histories (JNJ, XOM, CVX, KO, PG, MRK, CAT, HON, GE, BA, DIS, and others) extend back to January 2, 1962, providing over 16,000 daily observations and 64 years of coverage. The shortest histories (KHC from July 2015, ABBV from January 2013) still provide over 10 years of data. The median stock in our sample has approximately 11,500 daily observations spanning ~45 years. The universe was selected from companies still listed as of 2026, so firms that were delisted, went bankrupt, or were acquired during the sample period are not represented; Section 5.5 discusses the resulting survivorship bias. The paper does not specify whether prices were adjusted for splits and dividends, so it is unclear whether trade and buy-and-hold returns include dividends.</p>
 <h3 class="sub-title">3.2 RSI Calculation</h3>
 <p>We compute RSI using Wilder&#x27;s original smoothed moving average method with a 14-period lookback:</p>
 <ol>
   <li>Compute price changes: Δpₜ = pₜ − pₜ₋₁</li>
-</ol>
-<ol>
   <li>Separate gains (U = max(Δp, 0)) and losses (D = max(−Δp, 0))</li>
-</ol>
-<ol>
-  <li>Compute exponentially weighted moving averages:</li>
-</ol>
-<p>- Avg Gain = EWM(U, α = 1/14, min_periods = 14)</p>
-<p>- Avg Loss = EWM(D, α = 1/14, min_periods = 14)</p>
-<ol>
+  <li>Compute exponentially weighted moving averages:
+    <ul>
+      <li>Avg Gain = EWM(U, α = 1/14, min_periods = 14)</li>
+      <li>Avg Loss = EWM(D, α = 1/14, min_periods = 14)</li>
+    </ul>
+  </li>
   <li>RS = Avg Gain / Avg Loss</li>
-</ol>
-<ol>
   <li>RSI = 100 − (100 / (1 + RS))</li>
 </ol>
 <p>For weekly strategies, daily OHLCV data is resampled to weekly frequency (Friday close) before RSI computation.</p>
@@ -345,10 +342,11 @@
 </tbody></table>
 <p>Entry rule: A buy signal is generated when RSI at time t is below the buy threshold while RSI at t−1 was at or above the threshold (i.e., a downward crossing).</p>
 <p>Exit rule: A sell signal is generated when RSI at time t is above the sell threshold while RSI at t−1 was at or below the threshold (i.e., an upward crossing).</p>
-<p>Position management: Only one position per stock at a time (no pyramiding). If a position remains open at the end of the data series, it is closed at the final available price and flagged.</p>
-<p>Benchmark: Buy-and-hold return computed over each stock&#x27;s full data period: (final price − initial price) / initial price.</p>
+<p>Execution: As specified, entries and exits fill at the closing price of the bar on which the signal occurs (the daily close, or the Friday close for weekly strategies). Because the signal is known only once that close prints, this assumes same-bar execution that a trader could not achieve exactly.</p>
+<p>Position management: Only one position per stock at a time (no pyramiding). If a position remains open at the end of the data series, it is closed at the final available price and flagged; the number of positions closed this way is not reported. Trades are long-only and use no stop-loss, so a position ends only with an upward RSI crossing or the end of the data.</p>
+<p>Benchmark: Buy-and-hold return computed over each stock&#x27;s full data period: (final price − initial price) / initial price. The comparison is made one stock at a time. Capital not committed to a trade earns 0%, not a Treasury bill rate; no index benchmark is tested; and the per-stock annualized strategy and buy-and-hold returns behind the comparison are not reported.</p>
 <h3 class="sub-title">3.4 Transaction Costs</h3>
-<p>This study reports gross returns without transaction cost deductions. We discuss the impact of realistic transaction costs (commissions, bid-ask spread, slippage) in Section 6. For reference, modern discount brokerages offer zero-commission equity trading, but institutional estimates of total execution costs (including market impact) range from 5–20 basis points per round trip for large-cap stocks.</p>
+<p>This study reports gross returns without transaction cost deductions. We discuss the impact of realistic transaction costs (commissions, bid-ask spread, slippage) in Section 5.6. For reference, modern discount brokerages offer zero-commission equity trading, but institutional estimates of total execution costs (including market impact) range from 5–20 basis points per round trip for large-cap stocks. A flat modern cost assumption likely understates trading costs for the early decades of the sample, when fixed public commission rates applied to U.S. exchange transactions; the SEC eliminated them after May 1975 under Rule 19b-3.</p>
 <h3 class="sub-title">3.5 Performance Metrics</h3>
 <p>For each stock and strategy, and in aggregate, we compute:</p>
 <ul>
@@ -373,10 +371,7 @@
   <li>Cumulative compounded return: ∏(1 + rᵢ) − 1</li>
 </ul>
 <ul>
-  <li>Annualized return: (1 + cumulative)^(1/years) − 1</li>
-</ul>
-<ul>
-  <li>Sharpe ratio: (mean excess return) / σ, annualized assuming trades per year scaling</li>
+  <li>Annualized return: (1 + cumulative)^(1/years) − 1 (cumulative and annualized returns feed the per-stock comparison in Table 2 but are not reported)</li>
 </ul>
 <ul>
   <li>Profit factor: gross profits / |gross losses|</li>
@@ -391,23 +386,13 @@
 <p>We employ the following tests:</p>
 <ol>
   <li>One-sample t-test: H₀: mean trade return = 0</li>
-</ol>
-<ol>
   <li>Paired t-test: H₀: RSI annualized return = buy-and-hold annualized return (per stock)</li>
-</ol>
-<ol>
   <li>Mann-Whitney U test: Non-parametric comparison of RSI vs. buy-and-hold returns</li>
-</ol>
-<ol>
   <li>Chi-squared goodness of fit: H₀: win rate = 50%</li>
-</ol>
-<ol>
   <li>One-way ANOVA: H₀: mean trade return is equal across all sectors</li>
 </ol>
-<ol>
-  <li>Linear regression: Trade return regressed on holding period and stock volatility</li>
-</ol>
 <p>All tests use α = 0.05 as the significance threshold, with exact p-values reported.</p>
+<p>Each test treats every trade (or every stock) as an independent observation. Trades on different stocks that are open over the same weeks share the same market moves, and entries bunch up around market declines, so the reported p-values overstate the strength of the evidence (Sections 4.2 and 5.8). The trade tests also compare returns with zero and win rates with 50%, not with a random-entry benchmark. Because four strategies are tested, the sector ANOVA is also judged against a Bonferroni-adjusted threshold of 0.05 / 4 = 0.0125.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION IV</span>
@@ -436,7 +421,7 @@
 <td>100</td>
 <td>100</td>
 <td>100</td>
-<td>100</td>
+<td>Not reported (at most 82)</td>
 </tr>
 <tr>
 <td>Avg Trades/Stock</td>
@@ -446,18 +431,18 @@
 <td>0.8</td>
 </tr>
 <tr>
-<td>**Win Rate**</td>
-<td>**79.4%**</td>
-<td>**87.3%**</td>
-<td>**87.7%**</td>
-<td>**96.3%**</td>
+<td><strong>Win Rate</strong></td>
+<td><strong>79.4%</strong></td>
+<td><strong>87.3%</strong></td>
+<td><strong>87.7%</strong></td>
+<td><strong>96.3%</strong></td>
 </tr>
 <tr>
-<td>**Avg Return/Trade**</td>
-<td>**7.66%**</td>
-<td>**47.37%**</td>
-<td>**37.09%**</td>
-<td>**244.10%**</td>
+<td><strong>Avg Return/Trade</strong></td>
+<td><strong>7.66%</strong></td>
+<td><strong>47.37%</strong></td>
+<td><strong>37.09%</strong></td>
+<td><strong>244.10%</strong></td>
 </tr>
 <tr>
 <td>Median Return/Trade</td>
@@ -488,11 +473,11 @@
 <td>2,114 days</td>
 </tr>
 <tr>
-<td>**Profit Factor**</td>
-<td>**3.71**</td>
-<td>**16.31**</td>
-<td>**14.03**</td>
-<td>**176.45**</td>
+<td><strong>Profit Factor</strong></td>
+<td><strong>3.71</strong></td>
+<td><strong>16.31</strong></td>
+<td><strong>14.03</strong></td>
+<td><strong>176.45</strong></td>
 </tr>
 <tr>
 <td>Avg Winning Trade</td>
@@ -537,10 +522,11 @@
 <td>1</td>
 </tr>
 </tbody></table>
+<p>Note to Table 1: Avg Trades/Stock divides total trades by the 100 stocks in the universe. The number of stocks with at least one Weekly 20/80 trade is not reported; with 82 trades it can be at most 82, and the Table 2 test statistics imply 57 (see the note to Table 2).</p>
 <p>Several patterns emerge:</p>
 <p>Trade frequency decreases dramatically with more extreme thresholds and longer timeframes. The Daily 30/70 strategy generates nearly 40 trades per stock over the sample period, while Weekly 20/80 averages less than one trade per stock. This reflects the rarity of extreme RSI readings — weekly RSI crossing below 20 is an uncommon event, typically occurring only during severe market dislocations.</p>
-<p>Win rates increase monotonically with threshold extremity. The progression from 79.4% (Daily 30/70) to 96.3% (Weekly 20/80) reflects a fundamental intuition: the more oversold a stock becomes, the higher the probability of a subsequent recovery. When weekly RSI drops below 20, the stock has experienced such severe selling pressure that some degree of rebound is nearly inevitable — only 3 of 82 such trades resulted in losses.</p>
-<p>Average returns per trade are inversely related to trade frequency. This is partly mechanical — longer holding periods allow more price appreciation — but also reflects the severity of the entry condition. The average Daily 30/70 trade captures a 7.66% move over ~5 months, while the average Weekly 20/80 trade captures a 244% move over ~6.5 years.</p>
+<p>Win rates increase monotonically with threshold extremity, from 79.4% (Daily 30/70) to 96.3% (Weekly 20/80). This fits the intuition that deeper oversold readings are followed by recoveries more often, but it is also what longer holds on stocks known to have survived would produce: the stricter rules hold positions far longer (about 1.6 to 6.5 years on average), with no stop, until RSI recovers. Only 3 of the 82 Weekly 20/80 trades lost money, a figure that partly reflects how the sample was built (Section 5.5).</p>
+<p>Average returns per trade are inversely related to trade frequency. This is partly mechanical, since longer holding periods allow more price appreciation; whether the severity of the entry condition adds anything beyond the longer hold cannot be determined without a random-entry benchmark (Section 5.8). The average Daily 30/70 trade captures a 7.66% move over ~5 months, while the average Weekly 20/80 trade captures a 244% move over ~6.5 years.</p>
 <p>Profit factors are exceptionally high. A profit factor of 3.71 for Daily 30/70 means gross profits are 3.71× gross losses. The Weekly 20/80&#x27;s profit factor of 176.45 is extraordinary, driven by its 96.3% win rate combined with winning trades averaging 254.81% versus losing trades averaging only −38.03%.</p>
 <h3 class="sub-title">4.2 Statistical Significance</h3>
 <p>Table 2: Statistical Test Results</p>
@@ -554,7 +540,7 @@
 </tr></thead>
 <tbody>
 <tr>
-<td>**Mean return ≠ 0**</td>
+<td><strong>Mean return ≠ 0</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -575,7 +561,7 @@
 <td>2.22 × 10⁻¹³</td>
 </tr>
 <tr>
-<td>**Win rate ≠ 50%**</td>
+<td><strong>Win rate ≠ 50%</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -590,13 +576,13 @@
 </tr>
 <tr>
 <td>p-value</td>
-<td>&lt; 10⁻³⁰⁰</td>
-<td>&lt; 10⁻³⁰⁰</td>
-<td>&lt; 10⁻³⁰⁰</td>
-<td>&lt; 10⁻³⁰⁰</td>
+<td>5.94 × 10⁻²⁹⁴</td>
+<td>2.56 × 10⁻⁷⁴</td>
+<td>1.92 × 10⁻⁷⁶</td>
+<td>4.74 × 10⁻¹⁷</td>
 </tr>
 <tr>
-<td>**RSI ann. return = B&amp;H**</td>
+<td><strong>RSI ann. return = B&amp;H</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -617,7 +603,7 @@
 <td>1.07 × 10⁻²⁰</td>
 </tr>
 <tr>
-<td>**Mann-Whitney U**</td>
+<td><strong>Mann-Whitney U</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -638,9 +624,10 @@
 <td>2.51 × 10⁻¹⁶</td>
 </tr>
 </tbody></table>
-<p>All four strategies produce mean trade returns that are significantly different from zero at any conventional significance level. The t-statistics range from 8.77 (Weekly 20/80, constrained by its small sample of 82 trades) to 30.92 (Daily 30/70, with nearly 3,900 trades). These results are not marginal — they represent overwhelming statistical evidence that buying when RSI is oversold and selling when overbought captures a genuine positive mean return.</p>
-<p>Win rates are significantly above 50% for all strategies. The χ² tests produce p-values that are effectively zero (below floating-point precision), confirming that the observed win rates of 79–96% are not attributable to chance.</p>
-<p>However, all strategies significantly underperform buy-and-hold on an annualized basis. The paired t-tests (which compare each stock&#x27;s RSI annualized return to its buy-and-hold annualized return) yield large negative t-statistics and p-values below 10⁻²⁰. The Mann-Whitney U tests confirm this non-parametrically. This is the central paradox of the study: RSI strategies win on most trades but lose to passive holding because they spend most of the time uninvested. A stock that compounds at 10% annually will generate far more wealth for a buy-and-hold investor than for a trader who is only invested during the ~150-day windows triggered by RSI signals.</p>
+<p>Note to Table 2: All p-values assume independent observations (Section 3.6). The paired t-test and Mann-Whitney statistics imply comparisons over 100 stocks for Daily 30/70 and Weekly 30/70, 99 for Daily 20/80, and 57 for Weekly 20/80, which suggests stocks with no trades were left out of the buy-and-hold comparison; the paper does not state this directly.</p>
+<p>All four strategies produce mean trade returns that are significantly different from zero at any conventional significance level. The t-statistics range from 8.77 (Weekly 20/80, constrained by its small sample of 82 trades) to 30.92 (Daily 30/70, with nearly 3,900 trades). These tests show that the average trade was positive on this universe; they do not show that RSI timing produced it. They compare trade returns with zero, not with a benchmark. The trades are long-only, with no stop, on stocks chosen because they survived and grew to 2026, and each position is held until RSI rises back above the exit threshold; random entries held for similar periods on the same stocks might well have gained most of the time too, but that was not tested. The tests also treat trades as independent, although trades on different stocks are often opened in the same weeks and share the same market moves: Table 6 shows 113 Daily 30/70 trades in the October 2007 to March 2009 window, and 29 of the 82 Weekly 20/80 trades fall in the GFC and COVID windows, which together span less than two years. The reported p-values therefore overstate the evidence. Separating RSI timing from the stocks&#x27; upward drift requires a random-entry benchmark with matched holding periods and standard errors clustered by date (Section 5.8).</p>
+<p>Win rates are significantly above 50% for all strategies under the same independence assumption, with χ² p-values ranging from about 6 × 10⁻²⁹⁴ (Daily 30/70) to 5 × 10⁻¹⁷ (Weekly 20/80). A 50% win rate is a weak null for long holds on rising stocks, however, so these tests do not show that the win rates exceed what random entries would achieve.</p>
+<p>On an annualized basis, every strategy falls short of buying and holding the same stock. The paired t-tests, which compare each stock&#x27;s RSI annualized return with its own buy-and-hold annualized return, yield large negative t-statistics (p-values from 1.46 × 10⁻³³ to 1.07 × 10⁻²⁰), and the Mann-Whitney U tests point the same way. The comparison is narrow: it runs one stock at a time, capital between trades earns 0% rather than a Treasury bill rate, no index or portfolio is tested, and the annualized returns behind the tests are not reported. The likely mechanism is time out of the market rather than weak trades. Annualizing each strategy&#x27;s average return over its average holding period in Table 1 gives roughly 20% to 21% a year while invested (a rough figure, since it combines two averages), but capital sits idle between signals. These results support a per-stock statement about these surviving stocks, not a conclusion about RSI versus passive indexing.</p>
 <h3 class="sub-title">4.3 Sector Analysis</h3>
 <p>Table 3: Performance by Sector — Daily 30/70 Strategy</p>
 <table>
@@ -695,18 +682,18 @@
 <td>7.94%</td>
 </tr>
 <tr>
-<td>REITs</td>
-<td>267</td>
-<td>80.1%</td>
-<td>7.45%</td>
-<td>8.76%</td>
-</tr>
-<tr>
 <td>Financials</td>
 <td>381</td>
 <td>77.7%</td>
 <td>7.47%</td>
 <td>8.81%</td>
+</tr>
+<tr>
+<td>REITs</td>
+<td>267</td>
+<td>80.1%</td>
+<td>7.45%</td>
+<td>8.76%</td>
 </tr>
 <tr>
 <td>Industrials</td>
@@ -790,18 +777,18 @@
 <td>29.52%</td>
 </tr>
 <tr>
-<td>Consumer Staples</td>
-<td>51</td>
-<td>86.3%</td>
-<td>32.34%</td>
-<td>32.88%</td>
-</tr>
-<tr>
 <td>Industrials</td>
 <td>94</td>
 <td>88.3%</td>
 <td>32.48%</td>
 <td>33.97%</td>
+</tr>
+<tr>
+<td>Consumer Staples</td>
+<td>51</td>
+<td>86.3%</td>
+<td>32.34%</td>
+<td>32.88%</td>
 </tr>
 <tr>
 <td>Healthcare</td>
@@ -818,8 +805,8 @@
 <td>24.50%</td>
 </tr>
 </tbody></table>
-<p>Mega-cap technology stocks produce the highest average returns across both daily and weekly strategies. This is consistent with the high-growth, high-volatility profile of tech stocks — when they become oversold, the subsequent recovery tends to be more pronounced. The Weekly 30/70 average return of 62.82% for mega-cap tech is the highest of any sector-strategy combination (excluding Weekly 20/80 with its tiny samples).</p>
-<p>Utilities consistently show the highest win rates (85.3% daily, 86.9% weekly) but the lowest average returns. This reflects their low-volatility, mean-reverting nature — utility stocks rarely experience catastrophic losses after RSI signals, but their upside is also limited. The high win rate / low return profile makes utilities the most &quot;reliable&quot; but least &quot;rewarding&quot; sector for RSI strategies.</p>
+<p>Mega-cap technology stocks produce the highest average returns across both daily and weekly strategies. This ranking carries hindsight: the seven Mega Cap Tech names (AAPL, MSFT, GOOGL, AMZN, NVDA, META, and TSLA) were selected as mega-caps as of 2026, so their decades of growth are built into the sample, and the strong recoveries after their oversold readings partly reflect how they were chosen. The Weekly 30/70 average return of 62.82% for mega-cap tech is the highest of any sector-strategy combination (excluding Weekly 20/80 with its tiny samples).</p>
+<p>Utilities have the highest Daily 30/70 win rate (85.3%) and the lowest Weekly 30/70 average return (24.86%); their Daily 30/70 average return (6.37%) is second lowest, above Communication (6.10%), and their Weekly 30/70 win rate (86.9%) is mid-range. This pattern is consistent with the sector&#x27;s low-volatility profile.</p>
 <p>One-way ANOVA results:</p>
 <table>
 <thead><tr>
@@ -833,7 +820,7 @@
 <td>Daily 30/70</td>
 <td>1.884</td>
 <td>0.0426</td>
-<td>Yes (p &lt; 0.05)</td>
+<td>At 0.05 only; not after Bonferroni (0.0125)</td>
 </tr>
 <tr>
 <td>Daily 20/80</td>
@@ -845,7 +832,7 @@
 <td>Weekly 30/70</td>
 <td>3.309</td>
 <td>0.0003</td>
-<td>Yes (p &lt; 0.001)</td>
+<td>Yes; also after Bonferroni (0.0125)</td>
 </tr>
 <tr>
 <td>Weekly 20/80</td>
@@ -854,9 +841,9 @@
 <td>No</td>
 </tr>
 </tbody></table>
-<p>The ANOVA reveals statistically significant cross-sectional variation in mean trade returns across sectors for the two 30/70 strategies, but not for the 20/80 strategies. The lack of significance for 20/80 is likely attributable to smaller sample sizes (fewer trades per sector) rather than true uniformity.</p>
+<p>The ANOVA rejects equal sector means at the 0.05 level for the two 30/70 strategies, but not for the 20/80 strategies. With four strategies tested, the Bonferroni-adjusted threshold is 0.0125: the Weekly 30/70 result (p = 0.0003) meets it, while the Daily 30/70 result (p = 0.0426) does not. Both tests also assume independent trades, which the time clustering noted in Section 4.2 undermines. The lack of significance for 20/80 is likely attributable to smaller sample sizes (fewer trades per sector) rather than true uniformity.</p>
 <h3 class="sub-title">4.4 Time Period Analysis</h3>
-<p>Table 5: Performance by Time Period — Daily 30/70</p>
+<p>Table 5: Performance by Time Period, Daily 30/70 (2005 to 2025 only: 1,835 of the 3,892 trades; earlier trades are not broken out)</p>
 <table>
 <thead><tr>
 <th>Period</th>
@@ -986,10 +973,10 @@
 </tr>
 </tbody></table>
 <p>Several critical observations emerge from the temporal analysis:</p>
-<p>The Daily 30/70 strategy&#x27;s win rate dropped to just 53.1% during the GFC, with a mean return of −1.38%. This represents the strategy&#x27;s worst performance in our dataset and illustrates its vulnerability during sustained bear markets. When stocks are in prolonged decline, RSI oversold signals can be &quot;value traps&quot; — the stock triggers a buy signal at RSI 30, but continues falling further, leading to substantial losses before any exit signal.</p>
-<p>More extreme thresholds dramatically outperformed during crises. The Daily 20/80 strategy achieved a 90% win rate and 71.76% average return during the GFC, while Weekly 20/80 achieved 100% win rate and 357.95% average return. This makes intuitive sense: a stock whose weekly RSI drops below 20 during a financial crisis has been so severely punished that a major recovery is almost guaranteed — if the company survives. The GFC-era Weekly 20/80 entries (11 trades, all winners, averaging 358% return) represent stocks bought near generational lows that subsequently recovered enormously.</p>
-<p>The COVID crash of 2020 was uniquely favorable for RSI strategies. The sharp, V-shaped recovery meant that oversold signals triggered at the March 2020 bottom were followed by rapid, violent rebounds. The Weekly 30/70 strategy achieved its highest win rate (95.7%) and second-highest average return (67.54%) during this period.</p>
-<p>2010–2014 was the best period for the Daily 30/70 strategy (89.3% win rate, 9.34% average return), corresponding to the steady post-GFC bull market. In this low-volatility uptrend, oversold dips were reliably followed by recoveries.</p>
+<p>The Daily 30/70 strategy&#x27;s win rate dropped to just 53.1% during the GFC, with a mean return of −1.38%. This is the strategy&#x27;s worst result among the periods reported and illustrates its vulnerability during sustained bear markets. When stocks are in prolonged decline, RSI oversold signals can be &quot;value traps&quot; — the stock triggers a buy signal at RSI 30, but continues falling further, leading to substantial losses before any exit signal.</p>
+<p>Trades with more extreme thresholds posted much larger average returns during the GFC window than in the full sample. Daily 20/80 GFC trades had a 90% win rate and a 71.76% average return, against 47.37% for the full sample, and all 11 Weekly 20/80 GFC trades were winners, averaging 357.95% against 244.10%. These samples are small, the entries fall within weeks of one another, and every stock in the universe is known to have survived the crisis, so they show how survivors bought near crisis lows performed, not how the signal would have fared on a universe that included the firms that failed (Section 5.5).</p>
+<p>The COVID crash of 2020 was uniquely favorable for RSI strategies. The sharp, V-shaped recovery meant that oversold signals triggered at the March 2020 bottom were followed by rapid, violent rebounds. Weekly 30/70 trades had their highest win rate (95.7%) and highest average return (67.54%) of the three crisis windows during this period.</p>
+<p>2010–2014 was the best of the four periods in Table 5 for the Daily 30/70 strategy (89.3% win rate, 9.34% average return), corresponding to the steady post-GFC bull market. In this low-volatility uptrend, oversold dips were reliably followed by recoveries.</p>
 <h3 class="sub-title">4.5 Individual Stock Performance</h3>
 <p>Table 7: Top 10 Stocks by Average Return — Daily 30/70</p>
 <table>
@@ -1175,42 +1162,39 @@
 <td>−1.19%</td>
 </tr>
 </tbody></table>
-<p>The top performers share characteristics: high long-term growth trajectories (TSLA, AMZN, NVDA, MSFT) or strong mean-reversion properties (AMT, TJX, SBUX, LIN). These stocks tend to recover strongly from oversold conditions because their fundamental growth stories remain intact through temporary drawdowns.</p>
+<p>The top performers share characteristics: high long-term growth trajectories (TSLA, AMZN, NVDA, MSFT) or strong mean-reversion properties (AMT, TJX, SBUX, LIN). Their strong recoveries from oversold readings partly reflect hindsight selection: these companies are in the sample because their growth carried them to 2026, the same survivorship effect discussed in Section 5.5.</p>
 <p>The bottom performers include structurally challenged companies (KHC, with ongoing fundamental deterioration), volatile commodities plays (HAL), and stocks that experienced extended secular declines (C during the GFC, AAPL during the early 2000s tech bust). Notably, AAPL appears in the bottom 10 — its average RSI trade return of 2.50% is misleading because the stock&#x27;s extraordinary long-term appreciation means buy-and-hold far dominates any market-timing approach.</p>
 <p>KHC is the only stock with a negative average return, reflecting its persistent decline since the 2019 write-down. RSI oversold signals on a stock in secular decline produce the worst outcomes.</p>
-<h3 class="sub-title">4.6 Volatility Analysis</h3>
-<p>The scatter plots (Figure 5) examine the relationship between each stock&#x27;s annualized volatility and its average RSI strategy return. The regression results embedded in the figures provide the following:</p>
-<p>For the Daily 30/70 strategy, the relationship between volatility and average return is modestly positive — higher-volatility stocks tend to produce larger average returns per RSI trade. This is consistent with the mean-reversion hypothesis: more volatile stocks overshoot further in both directions, creating larger profit opportunities from oversold rebounds. The correlation coefficients (r) and p-values from the regressions are displayed on each subplot.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION V</span>
   <h2 class="section-title">5. Discussion</h2>
 </div>
 <h3 class="sub-title">5.1 The Central Paradox: Winning Trades, Losing Strategy</h3>
-<p>The most striking finding is the juxtaposition of overwhelmingly positive per-trade performance with significant underperformance versus buy-and-hold. Every strategy wins on the majority of trades (79–96%), generates highly significant positive average returns, and exhibits profit factors well above 1.0. Yet every strategy loses to passive holding.</p>
-<p>The resolution lies in opportunity cost. The Daily 30/70 strategy&#x27;s average holding period of 150 days means the investor is in the market only 150 of every ~365 days between signals — roughly 41% of the time. During the remaining 59%, capital sits idle (or in risk-free assets), missing the market&#x27;s secular upward drift. Since U.S. equities have historically returned ~10% annually, an RSI trader who captures 7.66% per trade over ~150 days but is uninvested the rest of the time will compound wealth far more slowly than a passive holder who earns the full equity risk premium continuously.</p>
-<p>This opportunity cost is especially punishing for the Weekly 20/80 strategy, where the average investor waits years between signals. While the 244% average return per trade sounds extraordinary, these returns accrue over an average of 6.5 years — equating to roughly 20% annualized. Meanwhile, buy-and-hold on these same stocks (selected because they survived to the present, a survivorship bias consideration) likely delivered similar or superior annualized returns without requiring market timing.</p>
-<h3 class="sub-title">5.2 When RSI Adds Value</h3>
-<p>Despite its aggregate underperformance, RSI signals provide genuine informational content in specific contexts:</p>
-<p>Bear market bottoms. RSI strategies with extreme thresholds (20/80) excelled during the GFC and COVID crashes, identifying stocks at generational lows. A discretionary investor who uses RSI as one input among many — rather than as a mechanical system — could derive significant value from monitoring weekly RSI for extreme oversold readings during market panics.</p>
-<p>Mean-reverting, range-bound markets. The 2010–2014 period, characterized by steady growth with moderate pullbacks, was ideal for RSI strategies. In such environments, oversold dips are temporary and followed by reliable recoveries.</p>
-<p>High-volatility stocks with strong fundamentals. TSLA, AMZN, NVDA, and similar stocks with high beta but strong long-term growth trajectories produce the best RSI trading outcomes. The combination of volatile price swings (creating frequent RSI signals) and upward drift (ensuring most signals lead to profitable outcomes) is ideal.</p>
+<p>The most striking finding is the juxtaposition of overwhelmingly positive per-trade performance with significant underperformance versus buy-and-hold. Every strategy wins on the majority of trades (79–96%), has a positive average return, and exhibits profit factors well above 1.0. Yet, stock by stock, every strategy lags buying and holding the same stock.</p>
+<p>The resolution lies in opportunity cost. The paper does not report time in the market directly, but a rough figure is available for Daily 30/70: 38.9 trades per stock at an average of 150 days each comes to about 16 years invested per stock, against a median history of about 45 years, so the typical stock is held on the order of a third of the time. For the rest, capital earns 0% in this backtest, while the stocks themselves keep drifting upward. Earning roughly 20% a year for about a third of the time, and nothing otherwise, compounds far more slowly than holding the stock continuously, which is consistent with the per-stock shortfall in Table 2.</p>
+<p>This opportunity cost is especially punishing for the Weekly 20/80 strategy, where signals are years apart and the test statistics imply that only 57 of the 100 stocks traded at all (see the note to Table 2). The 244% average return per trade accrues over an average of 6.5 years, roughly 21% a year while invested (about 19% using the median return and median holding period). That is a high rate, so the shortfall versus buy-and-hold most likely comes from time out of the market rather than from weak trades. Because buy-and-hold annualized returns are not reported, the paper cannot say whether buy-and-hold on these stocks would have matched that rate over the same holding periods.</p>
+<h3 class="sub-title">5.2 Where Per-Trade Results Were Strongest</h3>
+<p>Per-trade results were strongest in three settings, though the caveats in Sections 4.2 and 5.5 apply to each:</p>
+<p>Crisis entries. Trades entered with extreme thresholds (20/80) during the GFC and COVID windows had win rates of 90% to 100% and large average returns (Table 6). The samples are small, the entries cluster within weeks, and every stock is a known survivor, so these results show how surviving stocks bought near crisis lows performed. Whether RSI adds value as one input in a discretionary process was not tested.</p>
+<p>Steady uptrends. The 2010–2014 period, a steady post-GFC bull market with moderate pullbacks, was the best of the four periods in Table 5 for Daily 30/70, with an 89.3% win rate. In that environment, oversold dips were usually followed by recoveries.</p>
+<p>Mega-cap growth stocks. TSLA, AMZN, NVDA, and MSFT were among the top ten Daily 30/70 performers (Table 7). These names were selected as mega-caps in 2026, so the upward drift that made most of their signals profitable is known only in hindsight; the result describes the sample rather than a way to pick stocks in advance.</p>
 <h3 class="sub-title">5.3 Daily vs. Weekly Timeframes</h3>
 <p>The daily and weekly strategies represent fundamentally different trading philosophies:</p>
 <ul>
-  <li>Daily RSI operates as a short-to-medium-term mean-reversion system, generating frequent trades (avg ~40 per stock) with moderate returns (~7.66%) and holding periods (~5 months). It is suitable for active traders who can execute frequently and are comfortable with a ~20% losing trade rate.</li>
+  <li>Daily RSI operates as a short-to-medium-term mean-reversion system, generating frequent trades (avg ~40 per stock) with moderate returns (~7.66%) and holding periods (~5 months). About 20% of its trades lose money.</li>
 </ul>
 <ul>
-  <li>Weekly RSI operates as a long-term opportunistic system, generating rare signals (~6 per stock for 30/70, &lt;1 for 20/80) with very large returns but very long holding periods. It is more appropriate as a supplementary tool for investors who want to identify major buying opportunities rather than a standalone trading system.</li>
+  <li>Weekly RSI operates as a long-term opportunistic system, generating rare signals (~6 per stock for 30/70, &lt;1 for 20/80) with very large returns but very long holding periods. Many of its signals fall in major market declines (Table 6).</li>
 </ul>
-<p>The weekly timeframe&#x27;s higher win rates (88–96% vs. 79–87%) reflect the noise reduction inherent in weekly data — daily RSI can whipsaw around the 30 threshold during volatile periods, generating premature signals, while weekly RSI filters out this noise.</p>
+<p>The weekly timeframe&#x27;s higher win rates (88–96% vs. 79–87%) reflect the noise reduction inherent in weekly data — daily RSI can whipsaw around the 30 threshold during volatile periods, generating premature signals, while weekly RSI filters out this noise. Longer holding periods on rising stocks would also raise win rates, and the backtest cannot separate the two effects.</p>
 <h3 class="sub-title">5.4 Threshold Selection: 30/70 vs. 20/80</h3>
-<p>More extreme thresholds (20/80) unambiguously improve win rates and profit factors at the cost of dramatically fewer trading opportunities. The choice between 30/70 and 20/80 depends on the investor&#x27;s objectives:</p>
+<p>In this sample, more extreme thresholds (20/80) produced higher win rates and profit factors at the cost of dramatically fewer trades:</p>
 <ul>
-  <li>30/70: More signals, lower per-trade quality. Better for systematic traders seeking repeatable, modest-edge opportunities. Daily 30/70 generated 3,892 trades — enough for a diversified portfolio approach.</li>
+  <li>30/70: More signals, smaller per-trade gains. Daily 30/70 generated 3,892 trades, enough in principle for a portfolio-level test, which this paper does not run.</li>
 </ul>
 <ul>
-  <li>20/80: Fewer signals, higher per-trade quality. Better for discretionary investors who want high-conviction entry points. The Daily 20/80 strategy&#x27;s 87.3% win rate and 47.37% average return represent genuine alpha per trade, but the ~6 signals per stock over 20+ years limit practical utility as a standalone system.</li>
+  <li>20/80: Fewer signals, larger per-trade gains. The Daily 20/80 strategy&#x27;s 87.3% win rate and 47.37% average return are positive raw returns per trade, not risk-adjusted alpha, and its roughly 6 signals per stock over each stock&#x27;s full history (a median of about 45 years) leave long stretches with no position.</li>
 </ul>
 <h3 class="sub-title">5.5 Survivorship Bias</h3>
 <p>Our universe of 100 stocks was selected as of 2026 — all are currently listed, large-cap companies. This introduces survivorship bias: companies that went bankrupt, were delisted, or were acquired are excluded. Had we included stocks like Lehman Brothers, Enron, or Bear Stearns, the RSI strategies would likely show lower win rates and average returns, as oversold signals on failing companies would have generated total losses.</p>
@@ -1228,9 +1212,9 @@
   <li>Slippage/market impact: 5–15 bps per trade for institutional-size orders.</li>
 </ul>
 <ul>
-  <li>Taxes: Short-term capital gains tax on trades held &lt; 1 year (the majority of Daily 30/70 trades). At a 37% marginal rate, a 7.66% gross return becomes ~4.83% after tax.</li>
+  <li>Taxes: Short-term capital gains tax on trades held &lt; 1 year (the majority of Daily 30/70 trades). At a 37% marginal rate, a 7.66% gross return becomes ~4.83% after tax if losses fully offset gains.</li>
 </ul>
-<p>For the Daily 30/70 strategy, assuming 10 bps round-trip costs and 37% tax on gains, the after-cost, after-tax average return per trade would be approximately:</p>
+<p>For the Daily 30/70 strategy, assuming 10 bps round-trip costs (a modern figure that likely understates costs in the sample&#x27;s early decades; see Section 3.4) and 37% tax on gains, the after-cost, after-tax average return per trade would be approximately:</p>
 <ul>
   <li>Gross: 7.66%</li>
 </ul>
@@ -1238,168 +1222,94 @@
   <li>Less costs: 7.56%</li>
 </ul>
 <ul>
-  <li>Less tax on gains (79.4% × 13.22% × 37%): ~3.88%</li>
+  <li>Less tax on winning trades only (79.4% × 13.22% × 37%): ~3.88%</li>
 </ul>
 <ul>
-  <li>After-tax avg ≈ 3.88% per trade</li>
+  <li>After-cost, after-tax avg ≈ 7.56% − 3.88% ≈ 3.68% per trade</li>
 </ul>
+<p>The 3.68% figure taxes winning trades and gives no credit for losses, so it is a lower bound. If losses fully offset gains, the same 37% rate applied to the 7.56% after-cost average gives about 4.76%, in line with the ~4.83% pre-cost figure above. At a 37% rate, the after-cost, after-tax average therefore lies between about 3.7% and 4.8% per trade, somewhat higher if the minority of trades held over a year are taxed at long-term rates.</p>
 <p>This further widens the gap versus buy-and-hold, which benefits from tax deferral and long-term capital gains rates.</p>
 <h3 class="sub-title">5.7 Data Snooping Considerations</h3>
 <p>We test four pre-specified strategy parameterizations rather than optimizing thresholds to maximize backtested performance. Nonetheless, the RSI period (14) and threshold pairs (30/70, 20/80) are &quot;industry standard&quot; parameters that have been widely published since 1978 — raising the question of whether they represent genuine out-of-sample anomalies or the result of collective data snooping by generations of practitioners.</p>
-<p>Sullivan, Timmermann, and White (1999) demonstrated that many technical trading rules lose their significance when tested against White&#x27;s Reality Check for data snooping. Our results are robust to this concern in one sense — the t-statistics are so large (8.77 to 30.92) that they would survive even aggressive multiple comparison adjustments — but the underperformance versus buy-and-hold suggests that the &quot;anomaly&quot; is more about the mechanics of mean reversion (which is well-documented and theoretically motivated) than about exploitable market inefficiency.</p>
+<p>Sullivan, Timmermann, and White (1999) applied White&#x27;s Reality Check (White, 2000) to 7,846 technical rules on the Dow Jones Industrial Average and found that the best rule remained significant in sample but was not statistically significant in the 1987 to 1996 out-of-sample period. Reporting four variants limits selective reporting, but it does not address that concern, and this paper applies no Reality Check or similar correction. The large t-statistics (8.77 to 30.92) would ordinarily survive a multiple-comparison adjustment across four tests, but they rest on the independence assumption discussed in Section 4.2 and test returns against zero rather than against a benchmark, so they cannot settle the question. The per-stock shortfall versus buy-and-hold also gives little sign of an exploitable market inefficiency.</p>
+<h3 class="sub-title">5.8 Limitations and Analysis Still Needed</h3>
+<p>The backtest could not be rerun for this revision, so the following analysis is still needed before the results can support stronger claims. First, a random-entry benchmark is needed: entries on the same stocks with holding periods matched to each strategy, with standard errors clustered by date (or a block bootstrap), to test whether RSI timing beats the stocks&#x27; own drift. Second, a portfolio-level backtest against the S&amp;P 500 is needed, with Treasury bill returns on idle cash and reported annualized returns, volatility, Sharpe ratios, and drawdowns, before any conclusion can be drawn about RSI versus passive indexing. Third, a point-in-time universe such as CRSP, including delisted, bankrupt, and acquired firms, is needed to measure the survivorship bias described in Section 5.5.</p>
+<p>Several method details are also missing or limiting. The paper does not specify whether prices were adjusted for splits and dividends. Entries and exits fill at the close of the signal bar, which a trader could not achieve exactly; next-bar execution would be more realistic. The number of positions force-closed at the end of the data is not reported, so it is unclear how much of the long-hold results rests on open positions marked at the last price. The 10 bp cost assumption reflects modern markets and likely understates costs before May 1975, when fixed commissions applied. The rules are long-only with no stop-loss. The sector ANOVA treats trades as independent, and its Daily 30/70 result does not survive a Bonferroni correction for four strategies. Finally, the original analysis plan called for Sharpe ratios, a regression of trade returns on holding period and stock volatility, and ten figures; none of these is reported here, so no conclusion in this paper rests on them.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION VI</span>
   <h2 class="section-title">6. Practical Implications</h2>
 </div>
-<p>Based on our comprehensive empirical findings, we offer the following practical guidance:</p>
-<h3 class="sub-title">6.1 RSI as a Supplementary Tool</h3>
-<p>RSI should not be used as a standalone mechanical trading system for long-only equity investing. The opportunity cost of being uninvested between signals overwhelms the per-trade alpha. Instead, RSI is most valuable as one input in a discretionary or multi-factor framework — specifically as a timing tool for investors who already intend to buy a particular stock.</p>
-<h3 class="sub-title">6.2 Optimal Settings by Use Case</h3>
+<p>This section summarizes what the hypothetical backtest shows for different settings. It describes findings, not recommendations, and the caveats in Sections 5.5 and 5.8 apply throughout.</p>
+<h3 class="sub-title">6.1 Standalone Rules Versus Buy-and-Hold</h3>
+<p>As standalone, long-only rules, none of the four RSI strategies matched buying and holding the same stock in this backtest, because time out of the market outweighed positive raw returns per trade. Whether RSI adds value as one input in a broader process, such as timing purchases an investor already plans to make, was not tested here.</p>
+<h3 class="sub-title">6.2 Observed Results by Setting</h3>
 <ul>
-  <li>Active swing traders: Daily RSI 30/70 provides the best balance of signal frequency and quality. Expect ~40 trades per stock over 20 years with ~80% win rate.</li>
+  <li>Daily RSI 30/70: The most frequent signals, averaging 38.9 trades per stock over each stock&#x27;s full history (a median of about 45 years), with a 79.4% win rate and a 7.66% average return per trade.</li>
 </ul>
 <ul>
-  <li>Long-term opportunistic investors: Weekly RSI 30/70 identifies major buying opportunities with ~88% win rate and ~37% average return per trade. Ideal for adding to existing positions during significant pullbacks.</li>
+  <li>Weekly RSI 30/70: About 6 trades per stock, with an 87.7% win rate and a 37.09% average return per trade over an average hold of about 1.6 years.</li>
 </ul>
 <ul>
-  <li>Crisis investors: Weekly RSI 20/80 identifies once-in-a-decade buying opportunities with near-certainty of profit. Only useful during severe market dislocations (GFC, COVID).</li>
+  <li>Weekly RSI 20/80: 82 trades in total, 29 of them in the GFC and COVID windows, with a 96.3% win rate on a universe of known survivors; Section 5.5 explains why that win rate should be read as an upper bound.</li>
 </ul>
-<h3 class="sub-title">6.3 Best Sectors for RSI Strategies</h3>
-<p>Mega-cap technology and consumer discretionary stocks offer the highest average returns per RSI trade. These sectors combine high volatility (generating frequent signals) with strong secular growth (ensuring most signals lead to profitable outcomes). Utilities offer the highest win rates but lowest returns — appropriate for conservative income investors.</p>
+<h3 class="sub-title">6.3 Sector Results</h3>
+<p>Mega Cap Tech and Consumer Discretionary stocks had the highest average returns per RSI trade in this sample, although the Mega Cap Tech group was selected from companies that were mega-caps in 2026, so its ranking reflects hindsight selection. Utilities had the highest Daily 30/70 win rate and among the lowest average returns.</p>
 <h3 class="sub-title">6.4 Risk Management</h3>
-<p>Even with 79–96% win rates, tail risk remains significant. The worst single trade in our dataset lost 93.68% (Daily 30/70). Stop-loss orders, position sizing, and portfolio diversification across multiple concurrent RSI signals would meaningfully improve risk-adjusted returns.</p>
+<p>Even with 79–96% win rates, tail risk remains significant. The worst single trade in our dataset lost 93.68% (Daily 30/70). The rules tested here use no stop-loss or position sizing, and risk-adjusted returns are not reported; how stops, sizing, or diversification across concurrent signals would change the results was not tested.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION VII</span>
   <h2 class="section-title">7. Conclusions</h2>
 </div>
-<p>This study presents one of the most comprehensive empirical evaluations of RSI-based trading strategies in the academic literature, spanning 100 U.S. equities, 11 sectors, up to 64 years of daily data, and 5,174 total trades across four strategy parameterizations. Our principal findings are:</p>
+<p>This study backtests four RSI-based trading strategies across 100 U.S. equities, 11 sectors, up to 64 years of daily data, and 5,174 total trades. Our principal findings are:</p>
 <ol>
-  <li>RSI oversold/overbought strategies generate statistically significant positive returns per trade. All four strategies produce mean returns significantly different from zero (p &lt; 10⁻¹³), win rates significantly above 50% (p &lt; 10⁻³⁰⁰), and profit factors ranging from 3.71 to 176.45. This is not a marginal anomaly — it represents robust, large-sample evidence that buying stocks when RSI signals oversold conditions leads to profitable trades the substantial majority of the time.</li>
-</ol>
-<ol>
-  <li>All strategies significantly underperform buy-and-hold on an annualized basis. The opportunity cost of being uninvested between signals is the strategies&#x27; Achilles heel. Paired t-tests comparing per-stock annualized returns confirm underperformance at p &lt; 10⁻²⁰ for all strategies. The market&#x27;s secular upward drift is too powerful to beat by being only intermittently invested.</li>
-</ol>
-<ol>
+  <li>RSI oversold/overbought strategies produce positive average returns per trade on this universe. All four strategies produce mean returns significantly different from zero (p &lt; 10⁻¹²) and win rates significantly above 50% (χ² p-values from about 6 × 10⁻²⁹⁴ to 5 × 10⁻¹⁷), with profit factors from 3.71 to 176.45. These tests treat clustered trades as independent and compare returns with zero rather than with random entries on the same stocks, so they cannot separate RSI timing from the upward drift of stocks that survived to 2026.</li>
+  <li>Stock by stock, every strategy&#x27;s annualized return falls short of buying and holding the same stock. Paired t-tests show the shortfall for all four strategies (p &lt; 10⁻¹⁹). The likely cause is time out of the market: the strategies earn roughly 20% to 21% a year while invested, but idle cash earns 0% in this backtest. No index or portfolio-level comparison was run, so these results do not show that RSI is inferior to passive indexing.</li>
   <li>More extreme thresholds and longer timeframes improve per-trade quality at the cost of signal frequency. The tradeoff is stark: Daily 30/70 offers 3,892 trades at 79% win rate and 7.66% average return, while Weekly 20/80 offers 82 trades at 96% win rate and 244% average return.</li>
+  <li>Trades entered during crisis windows did well for the stricter rules. GFC and COVID entries for the 20/80 and weekly strategies had win rates of 85% to 100% and large average returns, while Daily 30/70 entries during the GFC averaged −1.38%. These samples are small, clustered in time, and drawn from known survivors, and the paper does not analyze volatility regimes.</li>
+  <li>Sector results vary, but the evidence is modest. Mega Cap Tech and Consumer Discretionary produce the highest average returns, and Utilities the highest Daily 30/70 win rate. ANOVA rejects equal sector means at the 0.05 level for both 30/70 strategies, but only the Weekly 30/70 result survives a Bonferroni correction for four strategies, and the Mega Cap Tech ranking reflects hindsight selection of companies that were mega-caps in 2026.</li>
+  <li>Survivorship bias, transaction costs, and taxes would all lower the reported absolute returns, but they affect the comparison with buy-and-hold differently. Costs and taxes would widen the gap, because the strategies trade far more often than buy-and-hold; removing survivorship bias would likely narrow it, because buy-and-hold on failed firms also ends in large losses (Section 5.5).</li>
 </ol>
-<ol>
-  <li>RSI strategies show their greatest relative value during bear markets and high-volatility regimes. The GFC and COVID periods produced the highest average returns, particularly for more extreme thresholds. This suggests RSI&#x27;s primary practical value is as a crisis-buying indicator rather than an all-weather trading system.</li>
-</ol>
-<ol>
-  <li>Significant cross-sectional variation exists across sectors. High-growth, high-volatility sectors (technology, consumer discretionary) produce the highest average returns, while low-volatility sectors (utilities) produce the highest win rates but lowest returns. ANOVA confirms statistical significance for 30/70 strategies.</li>
-</ol>
-<ol>
-  <li>Survivorship bias, transaction costs, and taxes would further erode reported performance. After adjusting for realistic frictions, the gap between RSI strategies and buy-and-hold widens substantially.</li>
-</ol>
-<p>These findings contribute to the long-standing debate on technical analysis by providing a nuanced answer: RSI captures real mean-reversion dynamics in equity prices, and oversold signals do predict above-average subsequent returns with high reliability. However, this predictability does not translate into a practical edge over passive investing when the full economic costs — opportunity cost, transaction costs, taxes, and the challenge of consistent execution — are properly accounted for. RSI&#x27;s greatest value lies not as a standalone system but as a timing tool within a broader investment framework, particularly for identifying high-conviction buying opportunities during market dislocations.</p>
+<p>These findings give a qualified answer to the long-standing debate on technical analysis. On 100 stocks that survived to 2026, buying at RSI oversold readings and selling at overbought readings produced positive average trades, but the tests used here cannot show that the signal predicts returns beyond the stocks&#x27; own upward drift. Stock by stock, the standalone rules lagged buy-and-hold, mainly because capital sat idle between signals, and transaction costs and taxes would widen that gap. Whether RSI adds value as a timing input within a broader process, or against an index with Treasury bill returns on idle cash, remains untested.</p>
 <p>Future research should examine RSI performance with survivorship-bias-free databases (e.g., CRSP), incorporate transaction costs explicitly, test combinations of RSI with other indicators (MACD, Bollinger Bands, volume confirmation), and evaluate RSI strategies on international equity markets and alternative asset classes.</p>
+<p><strong>Revision note, October 2026.</strong> This revision corrects the win-rate p-values, the after-tax arithmetic, the trade-count and sector statements that conflicted with the paper&#x27;s own tables, the sort order of Tables 3 and 4, and the descriptions of several cited studies, and it adds references for Lo (2004) and White (2000). It restates the significance tests and the buy-and-hold comparison to what the existing numbers support, qualifies the conclusions for survivorship bias and hindsight selection, and removes unsupported volatility, Sharpe ratio, and figure material. It also adds a disclaimer and a Limitations section (5.8) listing the analysis still needed; the backtest itself was not rerun.</p>
 
 <div class="references-section">
 <h2>REFERENCES</h2>
 <ol class="ref-list">
-<li>Bajgrowicz, P., &amp; Scaillet, O. (2012). Technical Trading Revisited: False Discoveries, Persistence Tests, and Transaction Costs. *Journal of Financial Economics*, 106(3), 473–491.</li>
-<li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. *Journal of Finance*, 47(5), 1731–1764.</li>
-<li>Brown, S.J., Goetzmann, W., Ibbotson, R.G., &amp; Ross, S.A. (1992). Survivorship Bias in Performance Studies. *Review of Financial Studies*, 5(4), 553–580.</li>
-<li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. *Applied Economics Letters*, 15(14), 1111–1114.</li>
-<li>Chong, T.T.L., Ng, W.K., &amp; Liew, V.K.S. (2014). Revisiting the Performance of MACD and RSI Oscillators. *Journal of Risk and Financial Management*, 7(1), 1–12.</li>
-<li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? *Journal of Finance*, 40(3), 793–805.</li>
-<li>Fama, E.F. (1970). Efficient Capital Markets: A Review of Theory and Empirical Work. *Journal of Finance*, 25(2), 383–417.</li>
-<li>Han, Y., Yang, K., &amp; Zhou, G. (2013). A New Anomaly: The Cross-Sectional Profitability of Technical Analysis. *Journal of Financial and Quantitative Analysis*, 48(5), 1433–1461.</li>
-<li>Jegadeesh, N., &amp; Titman, S. (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *Journal of Finance*, 48(1), 65–91.</li>
-<li>Lo, A.W., Mamaysky, H., &amp; Wang, J. (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. *Journal of Finance*, 55(4), 1705–1765.</li>
-<li>Malkiel, B.G. (2003). The Efficient Market Hypothesis and Its Critics. *Journal of Economic Perspectives*, 17(1), 59–82.</li>
-<li>Metghalchi, M., Chen, C.P., &amp; Hayes, L.A. (2015). History of Share Prices and Market Efficiency of the Madrid General Stock Index. *International Review of Financial Analysis*, 40, 178–184.</li>
-<li>Neely, C.J., Rapach, D.E., Tu, J., &amp; Zhou, G. (2014). Forecasting the Equity Risk Premium: The Role of Technical Indicators. *Management Science*, 60(7), 1772–1791.</li>
-<li>Park, C.H., &amp; Irwin, S.H. (2007). What Do We Know About the Profitability of Technical Analysis? *Journal of Economic Surveys*, 21(4), 786–826.</li>
-<li>Shiller, R.J. (2000). *Irrational Exuberance*. Princeton University Press.</li>
-<li>Sullivan, R., Timmermann, A., &amp; White, H. (1999). Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. *Journal of Finance*, 54(5), 1647–1691.</li>
-<li>Taylor, M.P., &amp; Allen, H. (1992). The Use of Technical Analysis in the Foreign Exchange Market. *Journal of International Money and Finance*, 11(3), 304–314.</li>
-<li>Tversky, A., &amp; Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. *Science*, 185(4157), 1124–1131.</li>
-<li>Urquhart, A., &amp; McGroarty, F. (2016). Are Stock Markets Really Efficient? Evidence of the Adaptive Market Hypothesis. *International Review of Financial Analysis*, 47, 39–49.</li>
-<li>Wilder, J.W. (1978). *New Concepts in Technical Trading Systems*. Greensboro, NC: Trend Research.</li>
-<li>Wong, W.K., Manzur, M., &amp; Chew, B.K. (2003). How Rewarding Is Technical Analysis? Evidence from Singapore Stock Market. *Applied Financial Economics*, 13(7), 543–551.</li>
+<li>Bajgrowicz, P., &amp; Scaillet, O. (2012). Technical Trading Revisited: False Discoveries, Persistence Tests, and Transaction Costs. <em>Journal of Financial Economics</em>, 106(3), 473–491.</li>
+<li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. <em>Journal of Finance</em>, 47(5), 1731–1764.</li>
+<li>Brown, S.J., Goetzmann, W., Ibbotson, R.G., &amp; Ross, S.A. (1992). Survivorship Bias in Performance Studies. <em>Review of Financial Studies</em>, 5(4), 553–580.</li>
+<li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. <em>Applied Economics Letters</em>, 15(14), 1111–1114.</li>
+<li>Chong, T.T.L., Ng, W.K., &amp; Liew, V.K.S. (2014). Revisiting the Performance of MACD and RSI Oscillators. <em>Journal of Risk and Financial Management</em>, 7(1), 1–12.</li>
+<li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? <em>Journal of Finance</em>, 40(3), 793–805.</li>
+<li>Fama, E.F. (1970). Efficient Capital Markets: A Review of Theory and Empirical Work. <em>Journal of Finance</em>, 25(2), 383–417.</li>
+<li>Han, Y., Yang, K., &amp; Zhou, G. (2013). A New Anomaly: The Cross-Sectional Profitability of Technical Analysis. <em>Journal of Financial and Quantitative Analysis</em>, 48(5), 1433–1461.</li>
+<li>Jegadeesh, N., &amp; Titman, S. (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. <em>Journal of Finance</em>, 48(1), 65–91.</li>
+<li>Lo, A.W. (2004). The Adaptive Markets Hypothesis: Market Efficiency from an Evolutionary Perspective. <em>Journal of Portfolio Management</em>, 30(5), 15–29.</li>
+<li>Lo, A.W., Mamaysky, H., &amp; Wang, J. (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. <em>Journal of Finance</em>, 55(4), 1705–1765.</li>
+<li>Malkiel, B.G. (2003). The Efficient Market Hypothesis and Its Critics. <em>Journal of Economic Perspectives</em>, 17(1), 59–82.</li>
+<li>Metghalchi, M., Chen, C.P., &amp; Hayes, L.A. (2015). History of Share Prices and Market Efficiency of the Madrid General Stock Index. <em>International Review of Financial Analysis</em>, 40, 178–184.</li>
+<li>Neely, C.J., Rapach, D.E., Tu, J., &amp; Zhou, G. (2014). Forecasting the Equity Risk Premium: The Role of Technical Indicators. <em>Management Science</em>, 60(7), 1772–1791.</li>
+<li>Park, C.H., &amp; Irwin, S.H. (2007). What Do We Know About the Profitability of Technical Analysis? <em>Journal of Economic Surveys</em>, 21(4), 786–826.</li>
+<li>Shiller, R.J. (2000). <em>Irrational Exuberance</em>. Princeton University Press.</li>
+<li>Sullivan, R., Timmermann, A., &amp; White, H. (1999). Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. <em>Journal of Finance</em>, 54(5), 1647–1691.</li>
+<li>Taylor, M.P., &amp; Allen, H. (1992). The Use of Technical Analysis in the Foreign Exchange Market. <em>Journal of International Money and Finance</em>, 11(3), 304–314.</li>
+<li>Tversky, A., &amp; Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. <em>Science</em>, 185(4157), 1124–1131.</li>
+<li>Urquhart, A., &amp; McGroarty, F. (2016). Are Stock Markets Really Efficient? Evidence of the Adaptive Market Hypothesis. <em>International Review of Financial Analysis</em>, 47, 39–49.</li>
+<li>White, H. (2000). A Reality Check for Data Snooping. <em>Econometrica</em>, 68(5), 1097–1126.</li>
+<li>Wilder, J.W. (1978). <em>New Concepts in Technical Trading Systems</em>. Greensboro, NC: Trend Research.</li>
+<li>Wong, W.K., Manzur, M., &amp; Chew, B.K. (2003). How Rewarding Is Technical Analysis? Evidence from Singapore Stock Market. <em>Applied Financial Economics</em>, 13(7), 543–551.</li>
 </ol>
 </div>
 
 <div class="section-header">
   <span class="section-number">SECTION VIII</span>
-  <h2 class="section-title">Appendix: Figures</h2>
+  <h2 class="section-title">Appendix: Data and Software</h2>
 </div>
-<p>All figures saved to `rsi_study/figures/`:</p>
-<ol>
-  <li>01_return_distributions.png — Distribution of trade returns for each strategy (4 histograms)</li>
-</ol>
-<ol>
-  <li>02_winrate_by_sector.png — Win rate by sector (grouped bar chart, all 4 strategies)</li>
-</ol>
-<ol>
-  <li>03_avg_return_by_sector.png — Average return by sector (grouped bar chart)</li>
-</ol>
-<ol>
-  <li>04_equity_curves.png — Cumulative equity curves (aggregate, log scale)</li>
-</ol>
-<ol>
-  <li>05_volatility_vs_return.png — Stock volatility vs. RSI strategy return (scatter with regression)</li>
-</ol>
-<ol>
-  <li>06_boxplot_returns.png — Box plot of returns by strategy</li>
-</ol>
-<ol>
-  <li>07_heatmap_sector_strategy.png — Heatmap: average return by sector × strategy</li>
-</ol>
-<ol>
-  <li>08_holding_period_dist.png — Holding period distribution by strategy</li>
-</ol>
-<ol>
-  <li>09_rsi_vs_buyhold.png — RSI strategies vs. buy-and-hold annualized returns</li>
-</ol>
-<ol>
-  <li>10_yearly_returns.png — Average trade return by year (time series)</li>
-</ol>
-<p>Data retrieved February 22, 2026 from Yahoo Finance via yfinance 1.2.0. All computations performed in Python 3.10.11 with NumPy, pandas, SciPy, and matplotlib. Complete source code available in `analysis.py`.</p>
-
-<div class="references-section">
-<h2>BIBLIOGRAPHY</h2>
-<ol class="ref-list">
-<li>Wilder, J.W. (1978). *New Concepts in Technical Trading Systems*. Greensboro, NC: Trend Research.</li>
-<li>Lo, A.W., Mamaysky, H., &amp; Wang, J. (2000). Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation. *Journal of Finance*, 55(4), 1705–1765.</li>
-<li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. *Applied Economics Letters*, 15(14), 1111–1114.</li>
-<li>Wong, W.K., Manzur, M., &amp; Chew, B.K. (2003). How Rewarding Is Technical Analysis? Evidence from Singapore Stock Market. *Applied Financial Economics*, 13(7), 543–551.</li>
-<li>Chong, T.T.L., Ng, W.K., &amp; Liew, V.K.S. (2014). Revisiting the Performance of MACD and RSI Oscillators. *Journal of Risk and Financial Management*, 7(1), 1–12.</li>
-<li>Fama, E.F. (1970). Efficient Capital Markets: A Review of Theory and Empirical Work. *Journal of Finance*, 25(2), 383–417.</li>
-<li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. *Journal of Finance*, 47(5), 1731–1764.</li>
-<li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? *Journal of Finance*, 40(3), 793–805.</li>
-<li>Jegadeesh, N., &amp; Titman, S. (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. *Journal of Finance*, 48(1), 65–91.</li>
-<li>Sullivan, R., Timmermann, A., &amp; White, H. (1999). Data-Snooping, Technical Trading Rule Performance, and the Bootstrap. *Journal of Finance*, 54(5), 1647–1691.</li>
-<li>Park, C.H., &amp; Irwin, S.H. (2007). What Do We Know About the Profitability of Technical Analysis? *Journal of Economic Surveys*, 21(4), 786–826.</li>
-<li>Neely, C.J., Rapach, D.E., Tu, J., &amp; Zhou, G. (2014). Forecasting the Equity Risk Premium: The Role of Technical Indicators. *Management Science*, 60(7), 1772–1791.</li>
-<li>Shiller, R.J. (2000). *Irrational Exuberance*. Princeton University Press.</li>
-<li>Tversky, A., &amp; Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. *Science*, 185(4157), 1124–1131.</li>
-<li>Malkiel, B.G. (2003). The Efficient Market Hypothesis and Its Critics. *Journal of Economic Perspectives*, 17(1), 59–82.</li>
-<li>Han, Y., Yang, K., &amp; Zhou, G. (2013). A New Anomaly: The Cross-Sectional Profitability of Technical Analysis. *Journal of Financial and Quantitative Analysis*, 48(5), 1433–1461.</li>
-<li>Bajgrowicz, P., &amp; Scaillet, O. (2012). Technical Trading Revisited: False Discoveries, Persistence Tests, and Transaction Costs. *Journal of Financial Economics*, 106(3), 473–491.</li>
-<li>Taylor, M.P., &amp; Allen, H. (1992). The Use of Technical Analysis in the Foreign Exchange Market. *Journal of International Money and Finance*, 11(3), 304–314.</li>
-<li>Metghalchi, M., Chen, C.P., &amp; Hayes, L.A. (2015). History of Share Prices and Market Efficiency of the Madrid General Stock Index. *International Review of Financial Analysis*, 40, 178–184.</li>
-<li>Urquhart, A., &amp; McGroarty, F. (2016). Are Stock Markets Really Efficient? Evidence of the Adaptive Market Hypothesis. *International Review of Financial Analysis*, 47, 39–49.</li>
-<li>Brown, S.J., Goetzmann, W., Ibbotson, R.G., &amp; Ross, S.A. (1992). Survivorship Bias in Performance Studies. *Review of Financial Studies*, 5(4), 553–580.</li>
-</ol>
-</div>
-
-<div class="references-section">
-<h2>FIGURES</h2>
-</div>
-<h3 class="sub-title">01 Return Distributions</h3>
-<h3 class="sub-title">02 Winrate By Sector</h3>
-<h3 class="sub-title">03 Avg Return By Sector</h3>
-<h3 class="sub-title">04 Equity Curves</h3>
-<h3 class="sub-title">05 Volatility Vs Return</h3>
-<h3 class="sub-title">06 Boxplot Returns</h3>
-<h3 class="sub-title">07 Heatmap Sector Strategy</h3>
-<h3 class="sub-title">08 Holding Period Dist</h3>
-<h3 class="sub-title">09 Rsi Vs Buyhold</h3>
-<h3 class="sub-title">10 Yearly Returns</h3>
+<p>The original analysis also produced ten figures (return distributions, sector win rates and returns, equity curves, volatility scatter plots, box plots, a sector heatmap, holding-period distributions, RSI versus buy-and-hold returns, and yearly returns). They are not reproduced on this page, and no conclusion in this revision depends on them.</p>
+<p>Data retrieved February 22, 2026 from Yahoo Finance via yfinance 1.2.0. All computations performed in Python 3.10.11 with NumPy, pandas, SciPy, and matplotlib. The analysis script (analysis.py) is not included with this page.</p>
 
 </main>
 
