@@ -60,6 +60,7 @@
     .nav-back { font-family: 'Cinzel', serif; font-size: 0.78rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
     .nav-back:hover { color: var(--gold); }
     .paper-hero {
+      overflow: hidden;
       padding: 120px 24px 64px; text-align: center;
       max-width: 900px; margin: 0 auto; position: relative;
     }
@@ -183,7 +184,7 @@
     <div>Revised <span>October 2026</span></div>
     <div>Status <span>Preprint, not peer reviewed</span></div>
     <div>Category <span>Physics · Astrophysics · Energy</span></div>
-    <div>References <span>50 References</span></div>
+    <div>References <span>54 References</span></div>
   </div>
 </header>
 
@@ -208,7 +209,7 @@
 <h3 class="sub-title">1.2 Why This Matters</h3>
 <p>The motivation for this investigation is threefold:</p>
 <p>Terrestrial energy diversification. Tidal energy represents one of the most predictable renewable energy sources available. Unlike solar and wind, tidal flows are deterministic over century timescales. Understanding the fundamental gravitational mechanics behind tidal energy informs the upper theoretical limits of this resource.</p>
-<p>Space-based power systems. As humanity extends its presence beyond low Earth orbit — to cislunar space, Mars, and eventually the outer solar system — the availability of solar power diminishes with the inverse square of heliocentric distance. At Jupiter&#x27;s orbit (5.2 AU), solar flux is only ~50 W/m², roughly 3.7% of the value at Earth. Nuclear systems (radioisotope thermoelectric generators and fission reactors) are the current alternative. Gravitational energy extraction is sometimes proposed as a fundamentally different, fuel-free paradigm, and this report tests that idea.</p>
+<p>Space-based power systems. As humanity extends its presence beyond low Earth orbit (to cislunar space, Mars, and eventually the outer solar system), the availability of solar power diminishes with the inverse square of heliocentric distance. At Jupiter&#x27;s orbit (5.2 AU), solar flux is only ~50 W/m², roughly 3.7% of the value at Earth. Nuclear systems (radioisotope thermoelectric generators and fission reactors) are the current alternative. Gravitational energy extraction is sometimes proposed as a fundamentally different, fuel-free paradigm, and this report tests that idea.</p>
 <p>Fundamental physics understanding. The question forces a rigorous accounting of where energy comes from in gravitational systems. The common misconception that gravity provides &quot;free energy&quot; must be confronted with careful thermodynamic analysis. Energy extracted from tidal interactions comes at the cost of orbital angular momentum — the Moon recedes, the Earth slows. Quantifying these trade-offs illuminates deep connections between celestial mechanics and energy physics.</p>
 <h3 class="sub-title">1.3 Scope and Approach</h3>
 <p>We proceed with mathematical rigor throughout. Every major claim is supported by a derivation from first principles and accompanied by numerical examples using real physical parameters. We employ SI units throughout unless otherwise noted. Our analysis covers:</p>
@@ -404,7 +405,7 @@
 <p>The timescale for tidal locking of a satellite is approximately (Gladman et al., 1996):</p>
 <p>t_lock ≈ (ω₀·a⁶·I·Q) / (3G·M_p²·k₂·R_s⁵)</p>
 <p>where ω₀ is the initial spin rate, a is the orbital semi-major axis, I is the moment of inertia, Q is the tidal quality factor (describing how efficiently tidal energy is dissipated — lower Q means more dissipation), k₂ is the Love number (describing tidal deformability), and R_s is the satellite radius.</p>
-<p>The tidal quality factor Q is critical. For the Earth&#x27;s oceans, Q ≈ 12 (highly dissipative). For the solid Earth, Q ≈ 280. For the Moon, Q ≈ 27. For Jupiter, Q ≈ 10⁵–10⁶.</p>
+<p>The tidal quality factor Q is critical. For the Earth&#x27;s oceans, Q ≈ 12 (highly dissipative). For the solid Earth, Q ≈ 280. For the Moon, Q ≈ 33 to 37 at the monthly tidal period (Williams et al., 2001, 2004). For Jupiter, Q ≈ 10⁵–10⁶.</p>
 <h3 class="sub-title">2.6 The Earth-Moon Tidal Energy Budget</h3>
 <p>The rate at which tidal interactions dissipate energy in the Earth-Moon system has been measured with extraordinary precision using lunar laser ranging (LLR), which tracks the Moon&#x27;s distance to millimeter accuracy.</p>
 <p>The total tidal dissipation rate is:</p>
@@ -417,7 +418,7 @@
   <li>~0.1 TW is dissipated in the solid Earth</li>
 </ul>
 <ul>
-  <li>~0.02 TW is dissipated in the Moon</li>
+  <li>~0.001 TW (about 1 GW) is dissipated in the Moon (§7.4)</li>
 </ul>
 <p>Derivation of tidal dissipation power from orbital recession:</p>
 <p>The Moon&#x27;s orbital energy is:</p>
@@ -532,15 +533,15 @@
   <li>Tidal current velocity: up to 5 m/s in the Pentland Firth</li>
 </ul>
 <ul>
-  <li>Rotor diameter: 16–18 m</li>
+  <li>Rotor diameter: 18 m (all four turbines)</li>
 </ul>
-<p>(MeyGen Ltd., 2016, 2017)</p>
+<p>(MeyGen Ltd., 2016, 2017; Tethys, n.d.)</p>
 <p>Power calculation for one MeyGen turbine:</p>
-<p>A = π × (8)² = 201 m²</p>
-<p>P = 0.5 × 1025 × 201 × 5³ × 0.40</p>
-<p>= 0.5 × 1025 × 201 × 125 × 0.40</p>
-<p>= 5.17 × 10⁶ W ≈ 5.2 MW</p>
-<p>At peak current (5 m/s) with C_p = 0.40, the flow through each rotor carries enough power for ~5.2 MW, but the turbine never delivers it: the 1.5 MW rating is an output cap, and above its rated current speed the turbine sheds the excess.</p>
+<p>A = π × (9)² = 254 m²</p>
+<p>P = 0.5 × 1025 × 254 × 5³ × 0.40</p>
+<p>= 0.5 × 1025 × 254 × 125 × 0.40</p>
+<p>= 6.52 × 10⁶ W ≈ 6.5 MW</p>
+<p>At peak current (5 m/s) with C_p = 0.40, the flow through each rotor carries enough power for ~6.5 MW, but the turbine never delivers it: the 1.5 MW rating is an output cap, and above its rated current speed the turbine sheds the excess. The rating is reached at about 3 m/s (Tethys, n.d.), where the same formula gives 0.5 × 1025 × 254 × 3³ × 0.40 ≈ 1.4 MW, consistent with the 1.5 MW cap.</p>
 <h3 class="sub-title">3.4 Global Tidal Energy Resource</h3>
 <p>A site-by-site review of tidal stream resources puts the aggregated theoretical resource of 262 assessed sites in six countries at about 115 GW of continuous power, and the quasi-practical resource of 90 sites at about 110 TWh per year (Coles et al., 2025).</p>
 <p>The total installed tidal power capacity worldwide as of 2025 is approximately 521 MW — a tiny fraction of the available resource.</p>
@@ -1028,7 +1029,7 @@
 <p>What fraction could realistically be extracted?</p>
 <p>Estimates vary. Garrett &amp; Cummins (2005) showed that for a tidal channel, the maximum extractable power is a fraction of the natural dissipation, given approximately by:</p>
 <p>P_extract,max ≈ 0.22 × ρ·g·a_0·Q_max</p>
-<p>where Q_max is the peak undisturbed volume flux through the channel and a_0 is the amplitude of the tidal head driving the flow; the coefficient lies between 0.20 and 0.24. They find that for many channels, extracting more than ~20-30% of the natural dissipation causes the tidal flow to be significantly reduced, limiting further extraction.</p>
+<p>where Q_max is the peak undisturbed volume flux through the channel and a_0 is the amplitude of the tidal head driving the flow; the coefficient lies between 0.20 and 0.24. They also show that this maximum is typically well below the average kinetic energy flux through the most constricted cross-section of the undisturbed channel, because adding turbines beyond the optimum merely blocks the flow and reduces the power generated.</p>
 <p>Global estimates suggest 100-800 GW of total extractable tidal power (Charlier &amp; Finkl, 2009), which is 3-22% of the total tidal dissipation.</p>
 <h3 class="sub-title">7.3 Beyond Barrages: Extracting Tidal Deceleration Energy Directly</h3>
 <p>Could we extract energy from Earth&#x27;s rotational deceleration more directly than through tidal flows?</p>
@@ -1071,7 +1072,7 @@
   <li>Earth-Moon Lagrange point installation: A structure at L1 (between Earth and Moon) experiences the gravity gradient between the two bodies. We analyze this in §8.</li>
 </ol>
 <ol>
-  <li>Tidal generators on the Moon: The Moon experiences solid-body tides from Earth of approximately 10 cm amplitude. The tidal dissipation in the Moon is ~0.02 TW. Piezoelectric or other solid-state energy harvesters embedded in the lunar surface could theoretically tap this, but the energy density is extremely low (~530 μW/m², i.e., 0.02 TW spread over the Moon&#x27;s 3.8 × 10⁷ km² surface).</li>
+  <li>Tidal generators on the Moon: The Moon experiences solid-body tides from Earth of approximately 10 cm amplitude. Lunar laser ranging gives the Moon&#x27;s tidal response: k₂ ≈ 0.0227 and a monthly Q ≈ 33 (Williams et al., 2004), so k₂/Q ≈ 6.9 × 10⁻⁴. The power dissipated in the Moon is drawn from the lunar orbit, which shrinks at ȧ = −515·(k₂/Q) mm/yr ≈ −0.35 mm/yr; each mm/yr corresponds to about 3.1 GW (Williams et al., 2001). The tidal dissipation in the Moon is therefore about 1.1 GW, or ~0.001 TW. Piezoelectric or other solid-state energy harvesters embedded in the lunar surface could theoretically tap this, but the energy density is extremely low (~30 μW/m², i.e., 1.1 GW spread over the Moon&#x27;s 3.8 × 10⁷ km² surface).</li>
 </ol>
 <h3 class="sub-title">7.5 Quantitative Analysis: How Much Energy Is Available Over Human Timescales?</h3>
 <p>The total energy available from Earth&#x27;s rotational deceleration over 1000 years:</p>
@@ -1182,10 +1183,7 @@
 <p>where k₂ is the Love number, Q is the tidal quality factor, n is the orbital mean motion, R_s is the satellite radius, and e is the orbital eccentricity.</p>
 <p>For Io:</p>
 <ul>
-  <li>k₂ ≈ 0.015 (for a partially molten interior; models vary: 0.01–0.035)</li>
-</ul>
-<ul>
-  <li>Q ≈ 36 (derived from observed heat flux)</li>
+  <li>k₂/Q = 0.015 ± 0.003 (measured from astrometry of the Galilean moons; Lainey et al., 2009)</li>
 </ul>
 <ul>
   <li>n = 2π / (1.769 days) = 2π / (1.528 × 10⁵ s) = 4.11 × 10⁻⁵ rad/s</li>
@@ -1207,25 +1205,14 @@
 <p>1.822⁵ = 1.822² × 1.822² × 1.822 = 3.32 × 3.32 × 1.822 = 11.02 × 1.822 = 20.08</p>
 <p>R_Io⁵ = 2.008 × 10³¹</p>
 <p>e² = (0.0041)² = 1.681 × 10⁻⁵</p>
-<p>k₂/Q = 0.015/36 = 4.167 × 10⁻⁴</p>
-<p>Now:</p>
-<p>Ė_tidal = (21/2) × 4.167 × 10⁻⁴ × 1.173 × 10⁻²² × 2.008 × 10³¹ × 1.681 × 10⁻⁵ / (6.674 × 10⁻¹¹)</p>
-<p>Numerator of the product: 4.167 × 10⁻⁴ × 1.173 × 10⁻²² × 2.008 × 10³¹ × 1.681 × 10⁻⁵</p>
-<p>= 4.167 × 1.173 × 2.008 × 1.681 × 10⁻⁴⁻²²⁺³¹⁻⁵</p>
-<p>= 4.167 × 1.173 × 2.008 × 1.681 × 10⁰</p>
-<p>= 4.167 × 1.173 = 4.888</p>
-<p>× 2.008 = 9.815</p>
-<p>× 1.681 = 16.50</p>
-<p>Divide by G: 16.50 / 6.674 × 10⁻¹¹ = 2.472 × 10¹¹</p>
-<p>Multiply by 21/2 = 10.5:</p>
-<p>Ė_tidal = 10.5 × 2.472 × 10¹¹ = 2.60 × 10¹² W ≈ 2.6 TW</p>
-<p>This gives only 2.6 TW with k₂/Q = 4.2 × 10⁻⁴. The observed ~100 TW requires k₂/Q ≈ 0.015 (much higher), which implies either a higher k₂ (~0.5, appropriate for a body with a global magma ocean) or lower Q (~1-3), or both.</p>
-<p>Using k₂/Q = 0.015 (as inferred from the observed heat flux):</p>
-<p>Ė_tidal = 10.5 × (0.015/4.167 × 10⁻⁴) × 2.472 × 10¹¹</p>
-<p>= 10.5 × 36 × 2.472 × 10¹¹</p>
-<p>= 10.5 × 8.899 × 10¹²</p>
+<p>Now, first evaluating everything except k₂/Q:</p>
+<p>n⁵ × R_Io⁵ × e² / G = 1.173 × 10⁻²² × 2.008 × 10³¹ × 1.681 × 10⁻⁵ / (6.674 × 10⁻¹¹)</p>
+<p>= 3.959 × 10⁴ / 6.674 × 10⁻¹¹</p>
+<p>= 5.93 × 10¹⁴ W</p>
+<p>Multiply by 21/2 = 10.5 and by the measured k₂/Q = 0.015:</p>
+<p>Ė_tidal = 10.5 × 0.015 × 5.93 × 10¹⁴</p>
 <p>= 9.34 × 10¹³ W ≈ 93 TW</p>
-<p>This is consistent with the observed ~100 TW, given uncertainties.</p>
+<p>The ±0.003 uncertainty in k₂/Q gives a range of about 75 to 112 TW. Lainey et al. (2009) note that this rate of dissipation agrees well with Io&#x27;s observed surface heat flow.</p>
 <h3 class="sub-title">9.2 Could Tidal Energy Be Harvested on Io?</h3>
 <p>Io&#x27;s surface experiences tidal displacement of approximately 100 m (compared to Earth&#x27;s ~0.5 m equilibrium ocean tide and ~0.3 m solid-body tide). This enormous flexing is what drives Io&#x27;s volcanism.</p>
 <p>Tidal strain on Io&#x27;s surface:</p>
@@ -1801,6 +1788,7 @@
 <li>Hughes, P. C. (1986). Spacecraft Attitude Dynamics. John Wiley &amp; Sons, New York. ISBN 0-471-81842-9.</li>
 <li>Kaplan, M. H. (1976). Modern Spacecraft Dynamics and Control. John Wiley &amp; Sons, New York.</li>
 <li>Kim, K.-H., Shin, B., Seo, J., &amp; Pyun, C.-K. (2018). &quot;Hydraulic Investigations for the Environmental Impacts due to Tidal Energy Development.&quot; Coastal Engineering Proceedings, 36 (36th International Conference on Coastal Engineering, Baltimore). doi:10.9753/icce.v36.risk.16.</li>
+<li>Lainey, V., Arlot, J.-E., Karatekin, Ö., et al. (2009). &quot;Strong Tidal Dissipation in Io and Jupiter from Astrometric Observations.&quot; Nature, 459(7249), 957–959. doi:10.1038/nature08108.</li>
 <li>Lorenzini, E. C., Cosmo, M. L., Kaiser, M., Bangham, M. E., Vonderwell, D. J., &amp; Johnson, L. (2000). &quot;Mission Analysis of Spinning Systems for Transfers from Low Orbits to Geostationary.&quot; Journal of Spacecraft and Rockets, 37(2), 165–172. doi:10.2514/2.3562.</li>
 <li>MeyGen Ltd. (2016). &quot;MeyGen Tidal Energy Project Phase 1 Environmental Monitoring Programme.&quot; Technical Report. Atlantis Resources Ltd., Edinburgh.</li>
 <li>MeyGen Ltd. (2017). &quot;Lessons Learnt from MeyGen Phase 1a: Design Phase.&quot; Report MEY-1A-70-REP-010-F, prepared for the UK Department for Business, Energy and Industrial Strategy. Available: https://tethys.pnnl.gov/publications/lessons-learnt-meygen-phase-1a-design-phase</li>
@@ -1816,10 +1804,13 @@
 <li>Stephenson, F. R., &amp; Morrison, L. V. (1995). &quot;Long-Term Fluctuations in the Earth&#x27;s Rotation: 700 BC to AD 1990.&quot; Philosophical Transactions of the Royal Society of London A, 351(1695), 165–202.</li>
 <li>Stone, N. H., &amp; Bonifazi, C. (1998). &quot;The TSS-1R Mission: Overview and Scientific Context.&quot; Geophysical Research Letters, 25(4), 409–412. doi:10.1029/97GL02980.</li>
 <li>Szalai, K. J., Bonifazi, C., Joyce, P. M., et al. (1996). &quot;TSS-1R Mission Failure Investigation Board Final Report.&quot; NASA Technical Memorandum TM-112426, May 31, 1996.</li>
+<li>Tethys (n.d.). &quot;MeyGen Tidal Energy Project Phase I.&quot; Project site record, Pacific Northwest National Laboratory (accessed October 2026). Available: https://tethys.pnnl.gov/project-sites/meygen-tidal-energy-project-phase-i</li>
 <li>Thompson, D. C., Bonifazi, C., Gilchrist, B. E., et al. (1998). &quot;The Current-Voltage Characteristics of a Large Probe in Low Earth Orbit: TSS-1R Results.&quot; Geophysical Research Letters, 25(4), 413–416. doi:10.1029/97GL02958.</li>
 <li>Tyler, R. H. (2008). &quot;Strong Ocean Tidal Flow and Heating on Moons of the Outer Planets.&quot; Nature, 456(7223), 770–772.</li>
 <li>Veeder, G. J., Matson, D. L., Johnson, T. V., Blaney, D. L., &amp; Goguen, J. D. (1994). &quot;Io&#x27;s Heat Flow from Infrared Radiometry: 1983–1993.&quot; Journal of Geophysical Research: Planets, 99(E8), 17095–17162.</li>
 <li>Wie, B. (2008). Space Vehicle Dynamics and Control. 2nd Edition. AIAA Education Series, Reston, VA. ISBN 978-1-56347-953-3.</li>
+<li>Williams, J. G., Boggs, D. H., Yoder, C. F., Ratcliff, J. T., &amp; Dickey, J. O. (2001). &quot;Lunar Rotational Dissipation in Solid Body and Molten Core.&quot; Journal of Geophysical Research, 106(E11), 27933–27968.</li>
+<li>Williams, J. G., Turyshev, S. G., Boggs, D. H., &amp; Ratcliff, J. T. (2004). &quot;Lunar Laser Ranging Science: Gravitational Physics and Lunar Interior and Geodesy.&quot; 35th COSPAR Scientific Assembly, Paris. arXiv:gr-qc/0412049.</li>
 <li>Zahn, J.-P. (1977). &quot;Tidal Friction in Close Binary Stars.&quot; Astronomy &amp; Astrophysics, 57, 383–394.</li>
 </ol>
 <h3 style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold-dim);margin:28px 0 16px;letter-spacing:0.1em;">SUPPLEMENTARY REFERENCES</h3>
