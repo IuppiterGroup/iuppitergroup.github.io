@@ -60,6 +60,7 @@
     .nav-back { font-family: 'Cinzel', serif; font-size: 0.78rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
     .nav-back:hover { color: var(--gold); }
     .paper-hero {
+      overflow: hidden;
       padding: 120px 24px 64px; text-align: center;
       max-width: 900px; margin: 0 auto; position: relative;
     }
@@ -180,15 +181,16 @@
   <div class="paper-meta">
     <div>Author <span>John, CaesarBot &amp; luppiter Group</span></div>
     <div>Published <span>April 2026</span></div>
+    <div>Revised <span>October 2026</span></div>
     <div>Category <span>Finance · Market Microstructure</span></div>
-    <div>References <span>15 References</span></div>
+    <div>References <span>16 References</span></div>
   </div>
 </header>
 
 <main class="paper-wrap">
 
   <div class="abstract-box">
-<p>This study empirically examines whether stock prices decline by exactly the dividend amount on ex-dividend dates, as predicted by classical financial theory under frictionless markets. Using 5,106 ex-dividend events from 80 S&amp;P 500 component stocks across 10 sectors over the period 2010–2025, we find that the average close-to-open price drop ratio is 0.812 — significantly less than the theoretical value of 1.0 (t = −7.35, p &lt; 0.001) but significantly greater than zero (t = 31.67, p &lt; 0.001). Bootstrap 95% confidence intervals place the true mean drop ratio between 0.762 and 0.861. The shortfall is robust to market-return adjustment (adjusted mean = 0.627) and persists across all sectors and yield categories, though high-yield stocks exhibit drop ratios closer to unity. Wilcoxon signed-rank tests confirm these findings nonparametrically. Cross-sectional regressions reveal a small but significant positive relationship between dividend yield and drop ratio (Pearson r = 0.043, p = 0.002). These results are consistent with the tax-clientele hypothesis of Elton &amp; Gruber (1970) and the market microstructure explanations of Frank &amp; Jagannathan (1998), suggesting that differential taxation of dividends versus capital gains, transaction costs, and heterogeneous investor preferences jointly explain the persistent shortfall from full dividend capitalization.</p>
+<p>This study examines whether stock prices decline by the full dividend amount on ex-dividend dates, as predicted by classical financial theory under frictionless markets. Using 5,106 ex-dividend events from 80 S&amp;P 500 component stocks across 10 sectors over the period 2010–2025, we find that the raw close-to-open price drop averages 0.812 of the dividend (bootstrap 95% CI 0.762 to 0.861), below the theoretical value of 1.0 under conventional tests that treat each event as independent (t = −7.35). That shortfall does not survive a correctly signed market adjustment. Market returns on ex-dividend dates were positive on average, which lifts the ex-day open and shrinks the measured drop; adding the market term back, rather than subtracting it as the original version of this paper did, raises the mean drop ratio to approximately 1.0, the frictionless benchmark. This corrected figure is derived from the paper&#x27;s own reported means, and its standard error cannot be recomputed without the underlying data. Raw drop ratios are higher for medium- and high-yield stocks than for low-yield stocks, and dividend yield is weakly correlated with the drop ratio (Pearson r = 0.043), but the market term weighs most heavily on low-yield stocks, so this pattern may partly reflect the uncorrected market move. Because qualified dividends are taxed at the same reduced rates as long-term capital gains, the tax-clientele model of Elton &amp; Gruber (1970) predicts a ratio near 1.0 for most individual investors, which fits the corrected estimate better than the raw one. Sample selection, the market adjustment, and the inference all carry limitations, set out in Section 5.5, that a rerun on the underlying data must address.</p>
 <p style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;color:var(--text-dim);margin-top:1.5em;"><strong style="color:var(--gold-dim);">KEYWORDS:</strong> ex-dividend day, price drop ratio, tax clientele effect, dividend policy, market microstructure, anomaly</p>
   </div>
 
@@ -200,12 +202,8 @@
 <p>Yet real markets are not frictionless. At least three classes of friction may cause the observed price drop to deviate from the dividend amount:</p>
 <ol>
   <li>Differential taxation. In most jurisdictions, dividends and capital gains are taxed at different rates. If the marginal investor faces a higher tax rate on dividends than on capital gains, the equilibrium ex-day price drop will be less than the full dividend, reflecting the after-tax indifference condition. Elton &amp; Gruber (1970) formalized this insight and used the observed drop ratio to infer the marginal tax rate of stockholders.</li>
-</ol>
-<ol>
-  <li>Transaction costs and market microstructure. Bid-ask spreads, tick sizes, and order-flow dynamics can distort the observed price change. Frank &amp; Jagannathan (1998) showed that even in Hong Kong — where dividends were tax-free — stock prices dropped by less than the dividend, implicating microstructure effects rather than taxes alone. Graham, Michaely, &amp; Roberts (2003) documented that decimalization in 2001 reduced the gap, consistent with tick-size explanations.</li>
-</ol>
-<ol>
-  <li>Heterogeneous investors and dividend capture. Institutional investors, short-term traders, and tax-exempt entities (pension funds, REITs) may have different valuations of dividends versus capital gains. Trading around ex-dates — &quot;dividend capture&quot; strategies — introduces additional price dynamics (Lakonishok &amp; Vermaelen, 1986; Michaely &amp; Vila, 1995).</li>
+  <li>Transaction costs and market microstructure. Bid-ask spreads, tick sizes, and order-flow dynamics can distort the observed price change. Frank &amp; Jagannathan (1998) showed that even in Hong Kong, where dividends were tax-free, stock prices dropped by less than the dividend, implicating microstructure effects rather than taxes alone. Graham, Michaely, &amp; Roberts (2003), however, found that as U.S. tick sizes shrank from eighths to sixteenths and then to decimals in 2001, ex-day abnormal returns rose and the median drop ratio fell, which they judged inconsistent with microstructure explanations.</li>
+  <li>Heterogeneous investors and dividend capture. Institutional investors, short-term traders, and tax-exempt or tax-deferred investors (pension funds and retirement accounts) may have different valuations of dividends versus capital gains. Trading around ex-dates (&quot;dividend capture&quot; strategies) introduces additional price dynamics (Lakonishok &amp; Vermaelen, 1986; Michaely &amp; Vila, 1995).</li>
 </ol>
 <p>This paper contributes an updated empirical analysis using 15 years of modern market data (2010–2025), spanning the post-decimalization era and encompassing diverse market conditions including the COVID-19 crash, the 2022 bear market, and the AI-driven bull market. We employ parametric and nonparametric tests, bootstrap inference, cross-sectional regressions, and market-adjusted measures to provide a comprehensive picture of the ex-dividend day phenomenon.</p>
 
@@ -214,68 +212,60 @@
   <h2 class="section-title">2. Literature Review</h2>
 </div>
 <p>The study of ex-dividend day price behavior dates to Campbell &amp; Beranek (1955), who first documented that stocks tend to drop by less than the dividend amount. The seminal contribution of Elton &amp; Gruber (1970) formalized the tax-clientele explanation: if the marginal investor&#x27;s tax rate on dividends exceeds that on capital gains, the equilibrium price drop satisfies:</p>
-<p>ΔP / D = (1 − τ_d) / (1 − τ_g)</p>
-<p>where τ_d and τ_g are the tax rates on dividend income and capital gains, respectively. They used observed drop ratios to back out implied marginal tax rates and found evidence consistent with the clientele effect — high-yield stocks (held by lower-tax-bracket investors) exhibited drop ratios closer to 1.0.</p>
+<p>ΔP / D = (1 − τ<sub>d</sub>) / (1 − τ<sub>g</sub>)</p>
+<p>where τ<sub>d</sub> and τ<sub>g</sub> are the tax rates on dividend income and capital gains, respectively. They used observed drop ratios to back out implied marginal tax rates and found evidence consistent with the clientele effect: high-yield stocks (held by lower-tax-bracket investors) exhibited drop ratios closer to 1.0.</p>
+<p>Black &amp; Scholes (1974) approached the question from the return side. They concluded that, using the best available empirical methods, it is not possible to show that expected returns on high-yield stocks differ from those on low-yield stocks, either before or after taxes, and therefore that the effect of a change in dividend policy on a firm&#x27;s stock price cannot be determined from the data.</p>
 <p>Kalay (1982) challenged the pure tax interpretation, arguing that transaction costs create a band of no-arbitrage around the theoretical drop, making it impossible to precisely identify the marginal investor&#x27;s tax rate from price data alone.</p>
 <p>Lakonishok &amp; Vermaelen (1986) documented abnormal trading volume around ex-dividend dates, consistent with tax-motivated trading and dividend capture strategies. They found that short-term traders systematically trade around ex-dates to exploit differential tax treatment.</p>
 <p>Boyd &amp; Jagannathan (1994) proposed a dynamic model where the drop ratio depends on the relative proportions of long-term investors and short-term dividend capturers in the market.</p>
 <p>Bali &amp; Hite (1998) argued that discrete tick sizes (1/8ths in the pre-decimalization era) mechanically prevented prices from adjusting by the exact dividend amount, since dividends rarely fell on tick boundaries. They predicted — and found — that the bias was related to the dividend&#x27;s position within the tick.</p>
-<p>Frank &amp; Jagannathan (1998) provided a critical natural experiment: Hong Kong, where dividends were not taxed. Even there, stock prices dropped by only about 50% of the dividend amount. This evidence strongly supports non-tax explanations, particularly market microstructure effects. They proposed that the bid-ask bounce — where closing prices tend to be at the ask and opening prices at the bid — mechanically reduces the observed drop.</p>
-<p>Graham, Michaely, &amp; Roberts (2003) exploited the shift from 1/16th to decimal pricing in 2001. They found that decimalization significantly increased the drop ratio (closer to 1.0), supporting the tick-size hypothesis. However, the drop ratio remained below 1.0, suggesting that taxes still play a role.</p>
+<p>Frank &amp; Jagannathan (1998) provided a critical natural experiment: Hong Kong, where dividends were not taxed. Even there, stock prices dropped by only about 50% of the dividend amount. This evidence strongly supports non-tax explanations, particularly market microstructure effects. They proposed a bid-ask explanation: because market makers have a cost advantage in collecting dividends, they tend to buy cum-dividend at the bid and sell after the ex-date at the ask, so cum-day trades cluster at the bid and ex-day trades at the ask, which mechanically reduces the observed drop.</p>
+<p>Graham, Michaely, &amp; Roberts (2003) exploited the NYSE&#x27;s move from eighths to sixteenths and then to decimal pricing, completed in January 2001. The median drop ratio fell from 0.893 in the eighths era to 0.833 in the sixteenths era and 0.750 in the decimal era, and ex-day abnormal returns rose, the opposite of what tick-size explanations predict. They concluded that their results are inconsistent with microstructure explanations and consistent with the tax explanation, which attributes the shortfall to the preferential taxation of capital gains relative to dividend income.</p>
 <p>Elton, Gruber, &amp; Blake (2005) compared taxable and non-taxable closed-end funds, finding that the tax status of investors significantly affects the ex-day price drop, providing clean support for the tax-clientele hypothesis.</p>
 <p>Cloyd, Li, &amp; Weaver (2006) examined the interaction of tick sizes and tax effects, finding that both independently contribute to the anomaly.</p>
 <p>Zhang, Farrell, &amp; Brown (2008) studied the 2003 dividend tax cut (which reduced the top rate on qualified dividends to 15%) and found that the drop ratio increased after the cut, consistent with tax-based explanations.</p>
+<p>Rantapuska (2008), using trading data on all investors in the Finnish stock market, found that investors who prefer dividend income buy cum-dividend and sell ex-dividend while investors with the opposite preference do the reverse, and that transaction costs and dividend yield jointly determine whether any short-term ex-day trading occurs.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION III</span>
   <h2 class="section-title">3. Data and Methodology</h2>
 </div>
 <h3 class="sub-title">3.1 Sample Construction</h3>
-<p>We select 80 stocks from the S&amp;P 500, evenly distributed across 10 GICS sectors (8 stocks per sector): Technology, Financials, Healthcare, Energy, Utilities, Consumer Staples, Industrials, Consumer Discretionary, Materials, and Real Estate. All stocks are large-cap, highly liquid, and have continuous dividend histories throughout the sample period. Data are obtained from Yahoo Finance via the yfinance Python library.</p>
+<p>We select 80 stocks from the S&amp;P 500, evenly distributed across 10 GICS sectors (8 stocks per sector): Technology, Financials, Healthcare, Energy, Utilities, Consumer Staples, Industrials, Consumer Discretionary, Materials, and Real Estate. All stocks are large-cap and highly liquid. They were selected with hindsight, on the basis of their dividend records, rather than from index membership as it stood at each date, and the paper does not list them; this selection introduces survivorship and look-ahead bias (Section 5.5). Not every stock paid dividends throughout the sample period: the sample has 284 events in 2010 and 298 in 2011, against roughly 320 a year from 2012 on (Table 5). Data are obtained from Yahoo Finance via the yfinance Python library.</p>
 <p>For each stock, we retrieve:</p>
 <ul>
   <li>Complete dividend payment history (2010–2025)</li>
 </ul>
 <ul>
-  <li>Daily OHLCV price data (unadjusted for splits/dividends to preserve raw price levels)</li>
+  <li>Daily OHLCV price data. Yahoo Finance&#x27;s daily Close is adjusted for stock splits but not for dividends, so the ex-day drop is preserved, but price levels before any later split are back-adjusted rather than the nominal prices that traded at the time. The separately reported Adjusted Close, which also removes dividends, is not used.</li>
 </ul>
 <p>The S&amp;P 500 ETF (SPY) is used as a market proxy for beta-adjusted returns.</p>
 <h3 class="sub-title">3.2 Variable Construction</h3>
 <p>For each ex-dividend event, we compute:</p>
 <p>Close-to-Open Drop Ratio:</p>
-<p>DR_open = (Close_{t-1} − Open_t) / Dividend</p>
+<p>DR<sub>open</sub> = (Close<sub>t−1</sub> − Open<sub>t</sub>) / Dividend</p>
 <p>where t is the ex-dividend date and t−1 is the prior trading day.</p>
 <p>Close-to-Close Drop Ratio:</p>
-<p>DR_close = (Close_{t-1} − Close_t) / Dividend</p>
+<p>DR<sub>close</sub> = (Close<sub>t−1</sub> − Close<sub>t</sub>) / Dividend</p>
 <p>Annualized Dividend Yield (approximate):</p>
-<p>Yield = (4 × Dividend) / Close_{t-1}</p>
+<p>Yield = (4 × Dividend) / Close<sub>t−1</sub></p>
+<p>This annualization assumes quarterly payment. It understates the yield of monthly payers by a factor of three, which matters for Real Estate: its 619 events exceed the 512 that eight quarterly payers could generate over 16 years, so some of its stocks pay more often than quarterly and are misclassified in the yield terciles (Table 3), the regression (Table 6), and the 40% yield screen (Section 3.3).</p>
 <p>Market-Adjusted Drop Ratio:</p>
-<p>DR_adj = DR_open − (R_m × Close_{t-1}) / Dividend</p>
-<p>where R_m is the SPY return on the ex-date. This assumes β = 1.</p>
+<p>DR<sub>adj</sub> = DR<sub>open</sub> + (R<sub>m</sub> × Close<sub>t−1</sub>) / Dividend</p>
+<p>where R<sub>m</sub> is the SPY close-to-close return on the ex-date. A rising market lifts the ex-day open and shrinks the measured drop, so the market term is added back; the original version of this paper subtracted it, which reversed the adjustment. This assumes β = 1, and it applies a full-day market return to a close-to-open drop, a timing mismatch discussed in Section 4.7.</p>
 <h3 class="sub-title">3.3 Filtering</h3>
-<p>We exclude: (1) observations with drop ratios outside [−20, +20] to remove data errors and extreme outliers; (2) events where annualized yield exceeds 40%, likely representing special dividends or data anomalies. The final sample contains 5,106 ex-dividend events from 80 stocks spanning January 2010 to December 2025.</p>
+<p>We exclude: (1) observations with drop ratios outside [−20, +20] to remove data errors and extreme outliers; (2) events where annualized yield exceeds 40%, likely representing special dividends or data anomalies. The final sample contains 5,106 ex-dividend events from 80 stocks spanning January 2010 to December 2025. The number of events removed by the ±20 trim is not reported. Because the trim is applied to the outcome variable itself, it can shift the mean, and its effect has not been tested.</p>
 <h3 class="sub-title">3.4 Statistical Tests</h3>
 <ol>
   <li>One-sample t-test against μ = 1.0 (full dividend drop) and μ = 0.0 (no drop)</li>
-</ol>
-<ol>
   <li>Wilcoxon signed-rank test (nonparametric alternative, robust to non-normality)</li>
-</ol>
-<ol>
   <li>Bootstrap confidence intervals (10,000 replications, percentile method)</li>
-</ol>
-<ol>
   <li>One-way ANOVA for cross-sectional comparisons (by sector, by yield bucket)</li>
-</ol>
-<ol>
   <li>Pearson and Spearman correlations between drop ratio and dividend yield</li>
-</ol>
-<ol>
   <li>OLS regression of drop ratio on dividend yield</li>
-</ol>
-<ol>
   <li>D&#x27;Agostino-Pearson normality test on the drop ratio distribution</li>
 </ol>
+<p>Each of these tests, including the bootstrap, treats every event as an independent observation. Events that share an ex-date share the same market shock, and events from the same firm share firm characteristics, so the reported standard errors and p-values overstate precision (Petersen, 2009; see Section 5.5).</p>
 
 <div class="section-header">
   <span class="section-number">SECTION IV</span>
@@ -331,11 +321,9 @@
 <td>—</td>
 </tr>
 </tbody></table>
-<p>The mean close-to-open drop ratio of 0.812 indicates that, on average, stock prices drop by approximately 81% of the dividend amount at the opening of the ex-dividend date. The median of 0.856 is slightly higher than the mean, reflecting mild left-skewness. The substantial standard deviation (1.83) highlights the considerable noise in individual observations — consistent with the fact that general market movements swamp the relatively small dividend-induced price change on any given day.</p>
-<p>The close-to-close drop ratio (0.862) is somewhat higher than close-to-open (0.812), suggesting that intraday trading on the ex-date partially recovers the initial shortfall. The much larger standard deviation for close-to-close (3.14) reflects the additional source of variation from a full day&#x27;s trading.</p>
+<p>The mean close-to-open drop ratio of 0.812 indicates that, on average and before any market adjustment, stock prices drop by approximately 81% of the dividend amount at the opening of the ex-dividend date. The median of 0.856 is slightly higher than the mean, reflecting mild left-skewness. The substantial standard deviation (1.83) highlights the considerable noise in individual observations, consistent with the fact that general market movements swamp the relatively small dividend-induced price change on any given day.</p>
+<p>The close-to-close drop ratio (0.862) is somewhat higher than close-to-open (0.812), but the gap of 0.050 is only about one standard error of the close-to-close mean (0.044) and was not formally tested, so it is not evidence that intraday trading on the ex-date recovers part of the shortfall. The much larger standard deviation for close-to-close (3.14) reflects the additional source of variation from a full day&#x27;s trading.</p>
 <p>The extreme kurtosis (20.95) indicates heavy tails, with occasional very large positive or negative drop ratios driven by coincident news events or market-wide movements unrelated to the dividend.</p>
-<p>![Histogram of Drop Ratios](figures/histogram_drop_ratios.png)</p>
-<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 1: Distribution of ex-dividend price drop ratios. The green dashed line marks the theoretical value of 1.0; the red dashed line marks zero; the orange line marks the sample mean. The distribution is centered well above zero but below 1.0, with heavy tails.</p>
 <h3 class="sub-title">4.2 Hypothesis Tests</h3>
 <p>Table 2: Hypothesis Tests for the Mean Drop Ratio</p>
 <table>
@@ -390,14 +378,14 @@
 <td>Reject: drop &gt; zero</td>
 </tr>
 </tbody></table>
-<p>All tests are decisive. The price drop is:</p>
+<p>For the raw series, all tests reject both null hypotheses, though each treats events as independent (Section 3.4). The raw price drop is:</p>
 <ul>
   <li>Significantly greater than zero — dividends do cause a measurable price decline (p ≈ 0)</li>
 </ul>
 <ul>
-  <li>Significantly less than the full dividend — the drop is incomplete (p &lt; 10⁻¹³)</li>
+  <li>Below the full dividend under these tests (p &lt; 10⁻¹³), a result that does not survive the corrected market adjustment in Section 4.7</li>
 </ul>
-<p>This is the central empirical finding: stocks drop by a substantial fraction of the dividend, but not the full amount.</p>
+<p>In raw terms, stocks drop by a substantial fraction of the dividend but not the full amount. Section 4.7 shows that this shortfall disappears once the market return on the ex-date is added back with the correct sign.</p>
 <p>Bootstrap and Parametric Confidence Intervals:</p>
 <table>
 <thead><tr>
@@ -417,10 +405,8 @@
 <td>—</td>
 </tr>
 </tbody></table>
-<p>The tight confidence intervals firmly exclude both 0 and 1.0. We can state with 99% confidence that the true mean drop ratio lies between approximately 0.74 and 0.88.</p>
-<p>Normality: The D&#x27;Agostino-Pearson test strongly rejects normality (k² = 1,027.9, p &lt; 10⁻²²³), which motivates our use of the Wilcoxon test and bootstrap inference as robustness checks. The QQ plot (Figure 5) confirms heavy tails and slight left-skewness.</p>
-<p>![QQ Plot](figures/qqplot_drop_ratios.png)</p>
-<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 5: Q-Q plot of price drop ratios against the normal distribution. The heavy tails are clearly visible, justifying nonparametric inference.</p>
+<p>For the raw series, both intervals exclude 0 and 1.0. Because the bootstrap resamples individual events, it shares the independence assumption of the t-tests, so the true uncertainty is wider than these intervals show; they also describe the raw ratio, not the market-adjusted one.</p>
+<p>Normality: The D&#x27;Agostino-Pearson test strongly rejects normality (k² = 1,027.9, p &lt; 10⁻²²³), which motivates our use of the Wilcoxon test and bootstrap inference as robustness checks. The skewness (−0.22) and kurtosis (20.95) in Table 1 point the same way: heavy tails and slight left-skewness.</p>
 <h3 class="sub-title">4.3 Cross-Sectional Analysis by Dividend Yield</h3>
 <p>Table 3: Drop Ratio by Dividend Yield Tercile</p>
 <table>
@@ -465,8 +451,7 @@
 <p>ANOVA: F = 6.273, p = 0.0019 — The differences across yield groups are statistically significant.</p>
 <p>Low-yield stocks exhibit the largest shortfall (mean drop ratio = 0.683), while medium and high-yield stocks are closer to unity (0.873 and 0.878, respectively). This pattern is consistent with the Elton &amp; Gruber (1970) clientele hypothesis: high-yield stocks tend to be held by investors in lower tax brackets (or tax-exempt institutions), for whom dividends and capital gains are taxed more similarly, pushing the equilibrium drop ratio toward 1.0.</p>
 <p>The substantially larger variance for low-yield stocks (σ = 2.73 vs. 0.95 for high yield) reflects the lower signal-to-noise ratio when the dividend amount is small relative to typical daily price fluctuations.</p>
-<p>![Histogram by Yield Bucket](figures/histogram_by_yield.png)</p>
-<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 2: Distribution of drop ratios by dividend yield tercile. High-yield stocks show a tighter distribution centered closer to 1.0.</p>
+<p>These are raw ratios. As Section 5.1 explains, the uncorrected market term weighs most heavily on low-yield stocks, and the yield measure misclassifies monthly payers (Section 3.2), so this pattern is provisional until it is rerun on correctly adjusted ratios.</p>
 <h3 class="sub-title">4.4 Cross-Sectional Analysis by Sector</h3>
 <p>Table 4: Drop Ratio by GICS Sector</p>
 <table>
@@ -491,13 +476,6 @@
 <td>0.895</td>
 <td>0.829</td>
 <td>1.922</td>
-</tr>
-<tr>
-<td>Close-to-Close Ratio</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
 </tr>
 <tr>
 <td>Consumer Discretionary</td>
@@ -558,8 +536,7 @@
 </tbody></table>
 <p>ANOVA: F = 1.558, p = 0.122 — Sector differences are not statistically significant at the 5% level.</p>
 <p>While the point estimates vary — Utilities have the highest mean drop ratio (0.931) and Materials the lowest (0.590) — the large within-sector variance prevents us from concluding that sector membership significantly predicts the drop ratio. The high drop ratio for Utilities is consistent with their investor base: regulated utilities with high, stable dividends tend to be held by income-oriented and tax-exempt investors (pension funds, endowments), for whom tax differentials are minimal.</p>
-<p>![Box Plot by Sector](figures/boxplot_by_sector.png)</p>
-<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 3: Box plot of ex-dividend price drop ratios by sector. Medians cluster between 0.7 and 1.0 across all sectors.</p>
+<p>Every sector&#x27;s point estimate is below 1.0, but not every sector is significantly below it. Using the means, standard deviations, and counts in Table 4, eight of the ten sector means are below 1.0 at the 5% level under the independence assumption, while Industrials (t = −1.23) and Consumer Discretionary (t = −1.45) are not.</p>
 <h3 class="sub-title">4.5 Time-Series Analysis</h3>
 <p>Table 5: Mean Drop Ratio by Year</p>
 <table>
@@ -686,8 +663,7 @@
 </tbody></table>
 <p>The time series reveals no clear secular trend. The drop ratio fluctuates between approximately 0.5 and 1.1 across years, with the highest values in 2020 (1.01) and 2022 (1.13) — years of elevated market volatility — and the lowest in 2011 (0.52) and 2024 (0.63). The absence of a trend suggests that the forces underlying the anomaly (taxation, microstructure) have remained relatively stable in the post-decimalization era.</p>
 <p>Notably, the years with drop ratios near or above 1.0 (2020, 2022) were characterized by high volatility and large intraday price swings that may have coincidentally aligned with dividend effects.</p>
-<p>![Time Series of Drop Ratio](figures/timeseries_drop_ratio.png)</p>
-<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 4: Mean and median price drop ratio by year with ±1 standard error band. The theoretical value of 1.0 lies outside the confidence band in most years.</p>
+<p>The raw shortfall is not present in every year. Using the means, standard deviations, and counts in Table 5, eight of the sixteen annual 95% confidence intervals include 1.0 (2012, 2016, 2018, 2019, 2020, 2021, 2022, and 2025). Because these annual figures are not market-adjusted, years with weak markets on ex-dates would show larger raw drops; the highest annual mean, 1.129, falls in 2022, a bear-market year.</p>
 <h3 class="sub-title">4.6 Regression Analysis</h3>
 <p>Table 6: Correlations and Regression Results</p>
 <table>
@@ -720,52 +696,56 @@
 <p>OLS Regression:</p>
 <p>Drop_Ratio = 0.655 + 5.569 × Div_Yield</p>
 <p>The positive coefficient on dividend yield is statistically significant (p = 0.002) but economically modest: a 1 percentage point increase in annualized yield is associated with a 0.056 increase in the drop ratio. The low R² (&lt; 1%) indicates that dividend yield explains very little of the cross-sectional variation in drop ratios — daily noise dominates.</p>
-<p>The stock price level shows no significant relationship with the drop ratio (r = −0.014, p = 0.30), suggesting that the tick-size explanation has lost relevance in the decimalized era.</p>
-<p>![Scatter: Yield vs Drop Ratio](figures/scatter_yield_vs_drop.png)</p>
-<p style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--text-dim);text-align:center;margin:8px 0 28px;">Figure 6: Scatter plot of dividend yield versus price drop ratio with OLS regression line. The positive slope is statistically significant but the relationship is noisy.</p>
+<p>As with Table 3, the ratios here are not market-adjusted and the yield measure misclassifies monthly payers, so the slope is provisional.</p>
+<p>The stock price level shows no significant relationship with the drop ratio (r = −0.014, p = 0.30). This test is not informative about tick size, however: it runs on split-adjusted prices (Section 3.1), so historical price levels for stocks that later split are understated, and it should not be read as evidence for or against the tick-size explanation.</p>
 <h3 class="sub-title">4.7 Market-Adjusted Results</h3>
-<p>After subtracting the market return (SPY, β = 1 assumption), the mean drop ratio is:</p>
+<p>The original version of this paper subtracted the market term, (R<sub>m</sub> × Close<sub>t−1</sub>) / Dividend, from the raw drop ratio and reported a market-adjusted mean of 0.627 (N = 5,095). That sign was backwards: a rising market lifts the ex-day open and shrinks the measured drop, so the market term must be added. The paper&#x27;s own figures imply the corrected mean:</p>
 <table>
 <thead><tr>
 <th>Measure</th>
 <th>N</th>
 <th>Mean</th>
-<th>Median</th>
-<th>Std. Dev.</th>
-<th>t vs 1.0</th>
-<th>p-value</th>
+<th>Basis</th>
 </tr></thead>
 <tbody>
 <tr>
-<td>Market-adjusted</td>
+<td>Raw close-to-open drop ratio</td>
+<td>5,106</td>
+<td>0.812</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Mean market term</td>
 <td>5,095</td>
-<td>0.627</td>
-<td>0.721</td>
-<td>1.752</td>
-<td>−8.798</td>
-<td>1.88 × 10⁻¹⁸</td>
+<td>≈ 0.185</td>
+<td>0.812 − 0.627, implied by the original subtraction</td>
+</tr>
+<tr>
+<td>Market-adjusted, corrected sign</td>
+<td>5,095</td>
+<td>≈ 1.00</td>
+<td>0.812 + 0.185</td>
 </tr>
 </tbody></table>
-<p>The market-adjusted drop ratio (0.627) is notably lower than the unadjusted ratio (0.812), and still significantly below 1.0. This indicates that general market movements on ex-dividend days were, on average, positive during our sample period, inflating the raw drop ratio somewhat. The &quot;true&quot; dividend-induced price drop, net of market effects, is closer to 63% of the dividend amount.</p>
+<p>The corrected figure is approximate, since it combines means from two samples that differ by 11 events. Its median, standard deviation, standard error, and test against 1.0 cannot be recomputed without the underlying data, because the dispersion of the corrected series depends on the covariance between the raw ratio and the market term, which the paper does not report. The original table&#x27;s t-statistic for the subtracted series (−8.798) has been removed; it was also inconsistent with its own mean, standard deviation, and N, which imply a t of about −15.2.</p>
+<p>Market returns on ex-dividend days were, on average, positive during the sample period, which depressed the raw drop ratio rather than inflating it. Once that effect is added back, the point estimate of the dividend-induced drop is about 1.0, the full dividend. The evidence for a shortfall in this sample therefore does not survive a correctly signed market adjustment. One mismatch remains: the adjustment uses SPY&#x27;s full-day return, from the prior close to the ex-day close, against a drop measured from the prior close to the ex-day open, so it includes market moves during the ex-day session that cannot affect the opening price. A clean adjustment would use SPY&#x27;s close-to-open return on the ex-date, ideally with estimated betas rather than β = 1.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION V</span>
   <h2 class="section-title">5. Discussion</h2>
 </div>
 <h3 class="sub-title">5.1 Tax-Clientele Effects</h3>
-<p>Our central finding — a mean drop ratio of approximately 0.81 (or 0.63 market-adjusted) — is broadly consistent with the international literature. Under the Elton-Gruber framework, a drop ratio of 0.81 implies:</p>
-<p>(1 − τ_d) / (1 − τ_g) ≈ 0.81</p>
-<p>For the current US regime (qualified dividends taxed at 15–20%, long-term capital gains at 15–20%), the implied ratio would be approximately 1.0 for most individual investors, which is higher than what we observe. This suggests that either: (a) the marginal investor faces a higher effective dividend tax rate (perhaps due to state taxes, short-term holding periods, or foreign investor withholding), or (b) non-tax factors contribute to the shortfall.</p>
-<p>The yield-bucket analysis supports the clientele hypothesis: high-yield stocks (held disproportionately by low-tax or tax-exempt investors) show drop ratios closer to 1.0 (0.878) than low-yield stocks (0.683).</p>
+<p>Our raw close-to-open mean of approximately 0.81 is broadly in line with the earlier literature (Section 5.4). Taken at face value under the Elton-Gruber framework, a drop ratio of 0.81 would imply:</p>
+<p>(1 − τ<sub>d</sub>) / (1 − τ<sub>g</sub>) ≈ 0.81</p>
+<p>For the current US regime (qualified dividends taxed at 15–20%, long-term capital gains at 15–20%), the implied ratio would be approximately 1.0 for most individual investors. That is higher than the raw ratio but in line with the corrected market-adjusted mean of about 1.0 (Section 4.7), so the raw shortfall does not require a tax explanation. Only if a shortfall were confirmed after a correctly signed and correctly timed market adjustment would it point to either: (a) a marginal investor facing a higher effective dividend tax rate (perhaps due to state taxes, short-term holding periods, or foreign investor withholding), or (b) non-tax factors.</p>
+<p>In raw terms, the yield-bucket analysis is consistent with the clientele hypothesis: high-yield stocks (held disproportionately by low-tax or tax-exempt investors) show drop ratios closer to 1.0 (0.878) than low-yield stocks (0.683). The pattern also has a mechanical reading, however. The market term in Section 3.2 scales with Close<sub>t−1</sub> / Dividend, the inverse of the per-payment yield, so the positive average market return on ex-dates depresses raw ratios most for low-yield stocks. Until the yield buckets are rerun on correctly adjusted ratios, the pattern cannot be attributed to tax clienteles.</p>
 <h3 class="sub-title">5.2 Market Microstructure</h3>
 <p>Frank &amp; Jagannathan (1998) demonstrated that microstructure effects alone can explain drop ratios below 1.0 even in the absence of taxes. Two mechanisms are relevant:</p>
 <ol>
-  <li>Bid-ask bounce. The closing price on the cum-dividend day may occur at the ask, while the opening price on the ex-day may occur at the bid. This mechanical &quot;bounce&quot; reduces the observed price drop by approximately one spread, which can be substantial relative to a small dividend.</li>
+  <li>Bid-ask bounce. The closing price on the cum-dividend day may occur at the bid, while the opening price on the ex-day may occur at the ask. This mechanical &quot;bounce&quot; reduces the observed price drop by approximately one spread, which can be substantial relative to a small dividend.</li>
+  <li>Order flow imbalance. Dividend capture trading, buying before and selling after the ex-date, creates excess sell pressure at the ex-date opening. On its own that pressure would push the open lower and enlarge the measured drop, so order flow can explain a shortfall only if the opposite trade dominates: holders who prefer to avoid the dividend selling before the ex-date and buying back after, as Rantapuska (2008) documents for investors with that preference.</li>
 </ol>
-<ol>
-  <li>Order flow imbalance. Dividend capture trading — buying before and selling after the ex-date — creates excess sell pressure on the ex-date opening, which may paradoxically be absorbed at lower prices by market makers who widen spreads.</li>
-</ol>
-<p>The lack of a significant price-level effect in our data (Pearson r = −0.014, p = 0.30) suggests that the discrete tick-size explanation (Bali &amp; Hite, 1998) is no longer relevant in the decimal-pricing era, consistent with Graham et al. (2003).</p>
+<p>Our price-level test (Pearson r = −0.014, p = 0.30) cannot speak to the discrete tick-size explanation (Bali &amp; Hite, 1998), because it runs on split-adjusted prices (Section 4.6). The more direct evidence comes from Graham et al. (2003): the median drop ratio fell, rather than rose, as tick sizes shrank to decimals, which they found inconsistent with microstructure explanations.</p>
 <h3 class="sub-title">5.3 Heterogeneous Investors and Dividend Capture</h3>
 <p>The substantial cross-sectional and time-series variation in drop ratios is consistent with time-varying composition of the marginal investor population. In years of high volatility (2020, 2022), the increased noise may push estimated drop ratios in either direction. The Utilities sector&#x27;s high drop ratio (0.93) aligns with its investor base of income-seeking, often tax-advantaged investors.</p>
 <h3 class="sub-title">5.4 Comparison with Prior Literature</h3>
@@ -792,99 +772,95 @@
 </tr>
 <tr>
 <td>Graham et al. (2003)</td>
-<td>1996–2001</td>
-<td>US (post-decimal)</td>
-<td>~0.86</td>
+<td>2001</td>
+<td>US (decimal era)</td>
+<td>0.75 (median)</td>
 </tr>
 <tr>
 <td>This study</td>
 <td>2010–2025</td>
 <td>US</td>
-<td>0.81</td>
+<td>0.81 (raw mean, close-to-open)</td>
 </tr>
 </tbody></table>
-<p>Our estimate is slightly lower than Graham et al.&#x27;s post-decimalization figure, possibly reflecting changes in investor composition or the different sample periods.</p>
+<p>The comparison is loose. Graham et al. (2003) compute the ratio from daily closing prices, which they describe as the standard methodology in prior research, so the benchmarks here should be read as close-to-close measures, while this study&#x27;s 0.81 is close-to-open; this study&#x27;s own close-to-close figures (mean 0.862, median 0.912) are the closer like-for-like comparison. Graham et al.&#x27;s decimal-era median of 0.750 also follows medians of 0.893 and 0.833 in the eighths and sixteenths eras, and their ratio is not market-adjusted.</p>
+<h3 class="sub-title">5.5 Limitations</h3>
+<p>Several limitations qualify these results. The 80 stocks are unnamed and were selected with hindsight for dividend histories spanning the sample period, rather than from index membership as it stood at each date, which introduces survivorship and look-ahead bias; the lower event counts in 2010 and 2011 show that the histories were not in fact continuous. The yield measure annualizes each dividend as if it were paid quarterly, which misclassifies monthly payers, evidently including part of the Real Estate sample (Section 3.2). The ±20 trim is applied to the outcome variable, and the number of events it removed is not reported. Every test treats events as independent, although events on the same date share the market shock and events from the same firm share firm characteristics; standard errors that ignore this kind of correlation can be biased (Petersen, 2009), so the very small p-values reported here likely overstate the evidence. The price data are split-adjusted, which invalidates the price-level test, and the paper does not verify that the price and dividend series share the same split basis. Finally, the corrected market-adjusted mean is derived arithmetically from reported means, and the adjustment itself pairs a full-day market return with a close-to-open drop and assumes β = 1.</p>
+<p>This revision could not rerun the analysis, because the underlying data were not available to it. Still needed: (1) recompute the market-adjusted ratio with the correct sign, using SPY&#x27;s close-to-open return on the ex-date and estimated betas, and report its standard error and test against 1.0; (2) rerun the yield, sector, year, and regression results on that corrected ratio; (3) rebuild the sample from point-in-time S&amp;P 500 membership and publish the constituent list; (4) annualize yields from trailing twelve-month dividends; (5) report the number of trimmed events and show results with and without the trim; (6) cluster standard errors by date and by firm; and (7) rerun the price-level test on nominal, unadjusted prices.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION VI</span>
   <h2 class="section-title">6. Implications</h2>
 </div>
 <h3 class="sub-title">6.1 For Dividend Capture Strategies</h3>
-<p>The persistent shortfall from a full dividend drop implies that a naïve &quot;buy before, sell after&quot; dividend capture strategy faces a structural headwind: the capital loss on the ex-date exceeds the dividend received (on average, you lose 19% of the dividend to the incomplete price adjustment). After transaction costs, such strategies are unlikely to be profitable for retail investors — consistent with the efficient-markets interpretation that the anomaly reflects an equilibrium tax premium rather than a trading opportunity.</p>
+<p>A raw drop of 0.81 times the dividend is smaller than the dividend, not larger. Before taxes and trading costs, a naïve &quot;buy at the prior close, sell at the ex-day open&quot; capture trade would therefore have collected the full dividend while losing only 0.81 of it in price, a gain of about 19% of the dividend on average. Once the market return is added back with the correct sign (Section 4.7), the dividend-specific part of that gain is roughly zero, which suggests the raw gain reflects market exposure on ex-dates rather than mispricing. For a taxable U.S. investor, a dividend on shares held this briefly is not a qualified dividend, since that treatment requires holding the shares at least 61 days during the 121-day period that begins 60 days before the ex-dividend date. Bid-ask spreads and commissions also come out of any margin. We have not tested a capture strategy directly, so these results neither establish nor rule out a profitable one.</p>
 <h3 class="sub-title">6.2 For Tax Policy</h3>
-<p>The sensitivity of the drop ratio to dividend yield (and, historically, to tax law changes) suggests that dividend taxation does affect stock prices at the margin. Policymakers considering changes to dividend tax rates should expect adjustments in ex-day price behavior and, more broadly, in the relative valuation of dividend-paying versus non-dividend-paying stocks.</p>
+<p>The historical sensitivity of the drop ratio to tax law changes (Graham et al., 2003; Zhang, Farrell, &amp; Brown, 2008) suggests that dividend taxation can affect stock prices at the margin; the raw yield pattern in this study is weaker evidence, since it may partly reflect the uncorrected market term. Policymakers considering changes to dividend tax rates should expect adjustments in ex-day price behavior and, more broadly, in the relative valuation of dividend-paying versus non-dividend-paying stocks.</p>
 <h3 class="sub-title">6.3 For Market Efficiency</h3>
-<p>The ex-dividend day anomaly does not represent a violation of market efficiency. The drop ratio below 1.0 reflects rational equilibrium pricing by heterogeneous investors with different tax circumstances. No risk-free arbitrage profit is available after accounting for taxes, transaction costs, and the short-term capital gains treatment of dividend capture trades.</p>
+<p>These results do not show a violation of market efficiency. The raw drop ratio below 1.0 is small relative to the noise in individual events, and the correctly signed market adjustment brings the mean to about 1.0, which is what frictionless pricing predicts. Whether any arbitrage profit remains after taxes, transaction costs, and the short-term capital gains treatment of dividend capture trades has not been tested here, so we make no claim either way.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION VII</span>
   <h2 class="section-title">7. Conclusions</h2>
 </div>
-<p>Using 5,106 ex-dividend events from 80 S&amp;P 500 stocks over 2010–2025, we confirm the long-standing finding that stock prices drop by significantly less than the full dividend amount on ex-dividend dates. The mean close-to-open drop ratio is 0.812 (95% CI: [0.762, 0.861]), significantly below 1.0 (p &lt; 10⁻¹³) by both parametric and nonparametric tests. Market-adjusted, the drop ratio falls to 0.627.</p>
-<p>The shortfall is:</p>
+<p>Using 5,106 ex-dividend events from 80 S&amp;P 500 stocks over 2010–2025, we find that the raw close-to-open price drop averages 0.812 of the dividend (95% CI: [0.762, 0.861]), below 1.0 under conventional parametric and nonparametric tests that treat events as independent. That shortfall does not survive a correctly signed market adjustment: adding back the market return on the ex-date, which the original version of this paper subtracted, raises the mean to approximately 1.0, although its standard error and test cannot be recomputed without the underlying data.</p>
+<p>In raw terms, the shortfall is:</p>
 <ul>
-  <li>Persistent — observed in every year of the sample, with no secular trend</li>
+  <li>Present in most years but not all: annual means range from 0.517 (2011) to 1.129 (2022) with no secular trend, and 8 of the 16 annual 95% confidence intervals include 1.0</li>
 </ul>
 <ul>
-  <li>Universal — present across all 10 sectors (sector ANOVA p = 0.12)</li>
+  <li>Widespread but not uniform across sectors: every sector mean is below 1.0, but Industrials and Consumer Discretionary are not significantly below it, and the sector ANOVA finds no significant differences (p = 0.12)</li>
 </ul>
 <ul>
-  <li>Moderated by yield — high-yield stocks drop closer to the full dividend (ANOVA p = 0.002)</li>
+  <li>Smaller for higher-yield stocks (ANOVA p = 0.002), a pattern that may partly reflect the uncorrected market term</li>
 </ul>
 <ul>
-  <li>Statistically robust — confirmed by t-tests, Wilcoxon tests, and bootstrap inference</li>
+  <li>Significant under t-tests, Wilcoxon tests, and bootstrap inference, none of which accounts for clustering by date or firm</li>
 </ul>
-<p>These results are consistent with a joint explanation combining differential taxation (Elton &amp; Gruber, 1970), market microstructure frictions (Frank &amp; Jagannathan, 1998), and heterogeneous investor clienteles. The anomaly reflects equilibrium pricing, not an exploitable inefficiency.</p>
+<p>The raw shortfall is in line with earlier studies, and differential taxation (Elton &amp; Gruber, 1970), market microstructure frictions (Frank &amp; Jagannathan, 1998), and heterogeneous investor clienteles remain candidate explanations for it. On this paper&#x27;s own figures, however, the shortfall appears to reflect positive market returns on ex-dates, and a rerun with a correctly signed and correctly timed market adjustment, clustered standard errors, and a point-in-time sample (Section 5.5) is needed before drawing conclusions about taxes, microstructure, or market efficiency.</p>
+<p style="font-size:0.95rem;color:var(--text-dim);border-top:1px solid var(--border-dim);padding-top:1.2em;margin-top:2em;"><strong>Revision note, October 2026.</strong> This revision corrects the sign of the market adjustment, which the original version subtracted rather than added; the corrected mean drop ratio is about 1.0, not 0.627, so the claimed shortfall does not survive the adjustment. It also fixes the descriptions of Graham, Michaely, &amp; Roberts (2003) and Frank &amp; Jagannathan (1998), the dividend capture arithmetic, and the price data description; conclusions that went beyond the tables have been softened. Missing figures were removed, and the sample, yield, trimming, and inference limitations are now disclosed in Section 5.5.</p>
 
 <div class="references-section">
 <h2>REFERENCES</h2>
 <ol class="ref-list">
-<li>Bali, R., &amp; Hite, G. L. (1998). Ex dividend day stock price behavior: Discreteness or tax-induced clienteles? *Journal of Financial Economics*, 47(2), 127–159.</li>
-<li>Black, F., &amp; Scholes, M. (1974). The effects of dividend yield and dividend policy on common stock prices and returns. *Journal of Financial Economics*, 1(1), 1–22.</li>
-<li>Boyd, J. H., &amp; Jagannathan, R. (1994). Ex-dividend price behavior of common stocks. *The Review of Financial Studies*, 7(4), 711–741.</li>
-<li>Campbell, J. A., &amp; Beranek, W. (1955). Stock price behavior on ex-dividend dates. *The Journal of Finance*, 10(4), 425–429.</li>
-<li>Cloyd, C. B., Li, O. Z., &amp; Weaver, C. D. (2006). Ticks and tax: The effects of price discreteness and taxation on ex-dividend day returns. *Journal of the American Taxation Association*, 28(2), 23–46.</li>
-<li>Elton, E. J., &amp; Gruber, M. J. (1970). Marginal stockholder tax rates and the clientele effect. *The Review of Economics and Statistics*, 52(1), 68–74.</li>
-<li>Elton, E. J., Gruber, M. J., &amp; Blake, C. R. (2005). Marginal stockholder tax effects and ex-dividend-day price behavior: Evidence from taxable versus nontaxable closed-end funds. *The Review of Economics and Statistics*, 87(3), 579–586.</li>
-<li>Frank, M., &amp; Jagannathan, R. (1998). Why do stock prices drop by less than the value of the dividend? Evidence from a country without taxes. *Journal of Financial Economics*, 47(2), 161–188.</li>
-<li>Graham, J. R., Michaely, R., &amp; Roberts, M. R. (2003). Do price discreteness and transactions costs affect stock returns? Comparing ex-dividend pricing before and after decimalization. *The Journal of Finance*, 58(6), 2611–2636.</li>
-<li>Kalay, A. (1982). The ex-dividend day behavior of stock prices: A re-examination of the clientele effect. *The Journal of Finance*, 37(4), 1059–1070.</li>
-<li>Lakonishok, J., &amp; Vermaelen, T. (1986). Tax-induced trading around ex-dividend days. *Journal of Financial Economics*, 16(3), 287–319.</li>
-<li>Michaely, R., &amp; Vila, J.-L. (1995). Investors&#x27; heterogeneity, prices, and volume around the ex-dividend day. *Journal of Financial and Quantitative Analysis*, 30(2), 171–198.</li>
-<li>Miller, M. H., &amp; Modigliani, F. (1961). Dividend policy, growth, and the valuation of shares. *The Journal of Business*, 34(4), 411–433.</li>
-<li>Rantapuska, E. (2008). Ex-dividend day trading: Who, how, and why? Evidence from the Finnish market. *Journal of Financial Economics*, 88(2), 355–374.</li>
-<li>Zhang, Y., Farrell, K. A., &amp; Brown, T. A. (2008). Ex-dividend day price and volume: The case of 2003 dividend tax cut. *National Tax Journal*, 61(1), 105–127.</li>
+<li>Bali, R., &amp; Hite, G. L. (1998). Ex dividend day stock price behavior: Discreteness or tax-induced clienteles? <em>Journal of Financial Economics</em>, 47(2), 127–159.</li>
+<li>Black, F., &amp; Scholes, M. (1974). The effects of dividend yield and dividend policy on common stock prices and returns. <em>Journal of Financial Economics</em>, 1(1), 1–22.</li>
+<li>Boyd, J. H., &amp; Jagannathan, R. (1994). Ex-dividend price behavior of common stocks. <em>The Review of Financial Studies</em>, 7(4), 711–741.</li>
+<li>Campbell, J. A., &amp; Beranek, W. (1955). Stock price behavior on ex-dividend dates. <em>The Journal of Finance</em>, 10(4), 425–429.</li>
+<li>Cloyd, C. B., Li, O. Z., &amp; Weaver, C. D. (2006). Ticks and tax: The effects of price discreteness and taxation on ex-dividend day returns. <em>Journal of the American Taxation Association</em>, 28(2), 23–46.</li>
+<li>Elton, E. J., &amp; Gruber, M. J. (1970). Marginal stockholder tax rates and the clientele effect. <em>The Review of Economics and Statistics</em>, 52(1), 68–74.</li>
+<li>Elton, E. J., Gruber, M. J., &amp; Blake, C. R. (2005). Marginal stockholder tax effects and ex-dividend-day price behavior: Evidence from taxable versus nontaxable closed-end funds. <em>The Review of Economics and Statistics</em>, 87(3), 579–586.</li>
+<li>Frank, M., &amp; Jagannathan, R. (1998). Why do stock prices drop by less than the value of the dividend? Evidence from a country without taxes. <em>Journal of Financial Economics</em>, 47(2), 161–188.</li>
+<li>Graham, J. R., Michaely, R., &amp; Roberts, M. R. (2003). Do price discreteness and transactions costs affect stock returns? Comparing ex-dividend pricing before and after decimalization. <em>The Journal of Finance</em>, 58(6), 2611–2636.</li>
+<li>Kalay, A. (1982). The ex-dividend day behavior of stock prices: A re-examination of the clientele effect. <em>The Journal of Finance</em>, 37(4), 1059–1070.</li>
+<li>Lakonishok, J., &amp; Vermaelen, T. (1986). Tax-induced trading around ex-dividend days. <em>Journal of Financial Economics</em>, 16(3), 287–319.</li>
+<li>Michaely, R., &amp; Vila, J.-L. (1995). Investors&#x27; heterogeneity, prices, and volume around the ex-dividend day. <em>Journal of Financial and Quantitative Analysis</em>, 30(2), 171–198.</li>
+<li>Miller, M. H., &amp; Modigliani, F. (1961). Dividend policy, growth, and the valuation of shares. <em>The Journal of Business</em>, 34(4), 411–433.</li>
+<li>Petersen, M. A. (2009). Estimating standard errors in finance panel data sets: Comparing approaches. <em>The Review of Financial Studies</em>, 22(1), 435–480.</li>
+<li>Rantapuska, E. (2008). Ex-dividend day trading: Who, how, and why? Evidence from the Finnish market. <em>Journal of Financial Economics</em>, 88(2), 355–374.</li>
+<li>Zhang, Y., Farrell, K. A., &amp; Brown, T. A. (2008). Ex-dividend day price and volume: The case of 2003 dividend tax cut. <em>National Tax Journal</em>, 61(1), 105–127.</li>
 <li>Data and analysis code are available from the author on request.</li>
 </ol>
 <h3 style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold-dim);margin:28px 0 16px;letter-spacing:0.1em;">BIBLIOGRAPHY</h3>
 <ol class="ref-list">
-<li>Campbell, J. A., &amp; Beranek, W. (1955). Stock price behavior on ex-dividend dates. *The Journal of Finance*, 10(4), 425–429. https://doi.org/10.1111/j.1540-6261.1955.tb01295.x</li>
-<li>Elton, E. J., &amp; Gruber, M. J. (1970). Marginal stockholder tax rates and the clientele effect. *The Review of Economics and Statistics*, 52(1), 68–74. https://doi.org/10.2307/1927599</li>
-<li>Kalay, A. (1982). The ex-dividend day behavior of stock prices: A re-examination of the clientele effect. *The Journal of Finance*, 37(4), 1059–1070. https://doi.org/10.2307/2327767</li>
-<li>Lakonishok, J., &amp; Vermaelen, T. (1986). Tax-induced trading around ex-dividend days. *Journal of Financial Economics*, 16(3), 287–319. https://doi.org/10.1016/0304-405X(86)90032-2</li>
-<li>Bali, R., &amp; Hite, G. L. (1998). Ex dividend day stock price behavior: Discreteness or tax-induced clienteles? *Journal of Financial Economics*, 47(2), 127–159. https://doi.org/10.1016/S0304-405X(97)00041-X</li>
-<li>Frank, M., &amp; Jagannathan, R. (1998). Why do stock prices drop by less than the value of the dividend? Evidence from a country without taxes. *Journal of Financial Economics*, 47(2), 161–188. https://doi.org/10.1016/S0304-405X(97)80053-0</li>
-<li>Graham, J. R., Michaely, R., &amp; Roberts, M. R. (2003). Do price discreteness and transactions costs affect stock returns? Comparing ex-dividend pricing before and after decimalization. *The Journal of Finance*, 58(6), 2611–2636. https://doi.org/10.1046/j.1540-6261.2003.00617.x</li>
-<li>Cloyd, C. B., Li, O. Z., &amp; Weaver, C. D. (2006). Ticks and tax: The effects of price discreteness and taxation on ex-dividend day returns. *Journal of the American Taxation Association*, 28(2), 23–46. https://doi.org/10.2308/jata.2006.28.2.23</li>
-<li>Elton, E. J., Gruber, M. J., &amp; Blake, C. R. (2005). Marginal stockholder tax effects and ex-dividend-day price behavior: Evidence from taxable versus nontaxable closed-end funds. *The Review of Economics and Statistics*, 87(3), 579–586. https://doi.org/10.1162/0034653054638337</li>
-<li>Boyd, J. H., &amp; Jagannathan, R. (1994). Ex-dividend price behavior of common stocks. *The Review of Financial Studies*, 7(4), 711–741. https://doi.org/10.1093/rfs/7.4.711</li>
-<li>Michaely, R., &amp; Vila, J.-L. (1995). Investors&#x27; heterogeneity, prices, and volume around the ex-dividend day. *Journal of Financial and Quantitative Analysis*, 30(2), 171–198. https://doi.org/10.2307/2331116</li>
-<li>Rantapuska, E. (2008). Ex-dividend day trading: Who, how, and why? Evidence from the Finnish market. *Journal of Financial Economics*, 88(2), 355–374. https://doi.org/10.1016/j.jfineco.2007.12.001</li>
-<li>Zhang, Y., Farrell, K. A., &amp; Brown, T. A. (2008). Ex-dividend day price and volume: The case of 2003 dividend tax cut. *National Tax Journal*, 61(1), 105–127. https://doi.org/10.17310/ntj.2008.1.05</li>
-<li>Miller, M. H., &amp; Modigliani, F. (1961). Dividend policy, growth, and the valuation of shares. *The Journal of Business*, 34(4), 411–433. https://doi.org/10.1086/294442</li>
-<li>Black, F., &amp; Scholes, M. (1974). The effects of dividend yield and dividend policy on common stock prices and returns. *Journal of Financial Economics*, 1(1), 1–22. https://doi.org/10.1016/0304-405X(74)90006-3</li>
+<li>Campbell, J. A., &amp; Beranek, W. (1955). Stock price behavior on ex-dividend dates. <em>The Journal of Finance</em>, 10(4), 425–429. https://doi.org/10.1111/j.1540-6261.1955.tb01295.x</li>
+<li>Elton, E. J., &amp; Gruber, M. J. (1970). Marginal stockholder tax rates and the clientele effect. <em>The Review of Economics and Statistics</em>, 52(1), 68–74. https://doi.org/10.2307/1927599</li>
+<li>Kalay, A. (1982). The ex-dividend day behavior of stock prices: A re-examination of the clientele effect. <em>The Journal of Finance</em>, 37(4), 1059–1070. https://doi.org/10.2307/2327767</li>
+<li>Lakonishok, J., &amp; Vermaelen, T. (1986). Tax-induced trading around ex-dividend days. <em>Journal of Financial Economics</em>, 16(3), 287–319. https://doi.org/10.1016/0304-405X(86)90032-2</li>
+<li>Bali, R., &amp; Hite, G. L. (1998). Ex dividend day stock price behavior: Discreteness or tax-induced clienteles? <em>Journal of Financial Economics</em>, 47(2), 127–159. https://doi.org/10.1016/S0304-405X(97)00041-X</li>
+<li>Frank, M., &amp; Jagannathan, R. (1998). Why do stock prices drop by less than the value of the dividend? Evidence from a country without taxes. <em>Journal of Financial Economics</em>, 47(2), 161–188. https://doi.org/10.1016/S0304-405X(97)80053-0</li>
+<li>Graham, J. R., Michaely, R., &amp; Roberts, M. R. (2003). Do price discreteness and transactions costs affect stock returns? Comparing ex-dividend pricing before and after decimalization. <em>The Journal of Finance</em>, 58(6), 2611–2636. https://doi.org/10.1046/j.1540-6261.2003.00617.x</li>
+<li>Cloyd, C. B., Li, O. Z., &amp; Weaver, C. D. (2006). Ticks and tax: The effects of price discreteness and taxation on ex-dividend day returns. <em>Journal of the American Taxation Association</em>, 28(2), 23–46. https://doi.org/10.2308/jata.2006.28.2.23</li>
+<li>Elton, E. J., Gruber, M. J., &amp; Blake, C. R. (2005). Marginal stockholder tax effects and ex-dividend-day price behavior: Evidence from taxable versus nontaxable closed-end funds. <em>The Review of Economics and Statistics</em>, 87(3), 579–586. https://doi.org/10.1162/0034653054638337</li>
+<li>Boyd, J. H., &amp; Jagannathan, R. (1994). Ex-dividend price behavior of common stocks. <em>The Review of Financial Studies</em>, 7(4), 711–741. https://doi.org/10.1093/rfs/7.4.711</li>
+<li>Michaely, R., &amp; Vila, J.-L. (1995). Investors&#x27; heterogeneity, prices, and volume around the ex-dividend day. <em>Journal of Financial and Quantitative Analysis</em>, 30(2), 171–198. https://doi.org/10.2307/2331116</li>
+<li>Rantapuska, E. (2008). Ex-dividend day trading: Who, how, and why? Evidence from the Finnish market. <em>Journal of Financial Economics</em>, 88(2), 355–374. https://doi.org/10.1016/j.jfineco.2007.12.001</li>
+<li>Zhang, Y., Farrell, K. A., &amp; Brown, T. A. (2008). Ex-dividend day price and volume: The case of 2003 dividend tax cut. <em>National Tax Journal</em>, 61(1), 105–127. https://doi.org/10.17310/ntj.2008.1.05</li>
+<li>Miller, M. H., &amp; Modigliani, F. (1961). Dividend policy, growth, and the valuation of shares. <em>The Journal of Business</em>, 34(4), 411–433. https://doi.org/10.1086/294442</li>
+<li>Black, F., &amp; Scholes, M. (1974). The effects of dividend yield and dividend policy on common stock prices and returns. <em>Journal of Financial Economics</em>, 1(1), 1–22. https://doi.org/10.1016/0304-405X(74)90006-3</li>
+<li>Petersen, M. A. (2009). Estimating standard errors in finance panel data sets: Comparing approaches. <em>The Review of Financial Studies</em>, 22(1), 435–480. https://doi.org/10.1093/rfs/hhn053</li>
 </ol>
 </div>
-
-<div class="references-section">
-<h2>FIGURES</h2>
-</div>
-<h3 class="sub-title">Boxplot By Sector</h3>
-<h3 class="sub-title">Histogram By Yield</h3>
-<h3 class="sub-title">Histogram Drop Ratios</h3>
-<h3 class="sub-title">Qqplot Drop Ratios</h3>
-<h3 class="sub-title">Scatter Yield Vs Drop</h3>
-<h3 class="sub-title">Timeseries Drop Ratio</h3>
 
 </main>
 

@@ -132,7 +132,7 @@
     <article class="tool-card" id="ex-dividend" aria-labelledby="div-title">
       <div class="tool-kicker">Dividends</div>
       <h2 class="tool-title" id="div-title">Ex-Dividend Drop Estimator</h2>
-      <p class="tool-lede">Estimates the ex-day opening price using our <a href="papers/dividend-study.html">Ex-Dividend Day Price Drop study</a>: across 5,106 ex-dividend events in 80 S&amp;P 500 stocks (2010–2025), shares opened lower by an average of 0.812 times the dividend (95% CI 0.762 to 0.861), not the full dividend that frictionless theory predicts.</p>
+      <p class="tool-lede">Estimates the ex-day opening price using our <a href="papers/dividend-study.html">Ex-Dividend Day Price Drop study</a>: across 5,106 ex-dividend events in 80 S&amp;P 500 stocks (2010–2025), shares opened lower by an average of 0.812 times the dividend (95% CI 0.762 to 0.861) before adjusting for market moves. Once the market's own move is correctly backed out, the paper finds the average drop is roughly the full dividend, so these raw ratios partly reflect the market's direction on those days.</p>
 
       <div class="tool-grid">
         <form id="div-form" novalidate>
@@ -160,9 +160,9 @@
               <input id="div-yield" type="text" readonly value="">
             </div>
             <div class="field span-2">
-              <label for="div-basis">Drop ratio basis (from the paper)</label>
+              <label for="div-basis">Drop ratio basis (raw figures from the paper)</label>
               <select id="div-basis" aria-describedby="div-basis-hint"></select>
-              <span class="hint" id="div-basis-hint">The paper sorts events into equal-count yield terciles but does not publish the cutoffs, so pick the bucket yourself using the computed yield as a guide. Sector differences were not statistically significant (ANOVA p = 0.122); yield differences were (p = 0.0019).</span>
+              <span class="hint" id="div-basis-hint">The paper sorts events into equal-count yield terciles but does not publish the cutoffs, so pick the bucket yourself using the computed yield as a guide. Sector differences were not statistically significant (ANOVA p = 0.122); yield differences were (p = 0.0019), though the paper notes the yield pattern may be partly mechanical.</span>
             </div>
           </div>
           <div class="form-errors" id="div-errors" role="status" aria-live="polite"></div>
@@ -190,7 +190,7 @@
             <p><code>Yield = dividend × payments per year ÷ price</code></p>
             <p><code>Drop ratio (paper) = (prior close − ex-day open) ÷ dividend</code></p>
           </div>
-          <p class="caveat"><strong>Historical average; individual events vary widely.</strong> The drop ratio's standard deviation across events was 1.83, so a single stock's open can land far from this estimate. The range reflects uncertainty in the average ratio, not the spread of individual events. Market-adjusted, the paper's average falls to 0.627. <a href="papers/dividend-study.html">Read the paper</a>.</p>
+          <p class="caveat"><strong>Historical average; individual events vary widely.</strong> The drop ratio's standard deviation across events was 1.83, so a single stock's open can land far from this estimate. The range reflects uncertainty in the average ratio, not the spread of individual events. Adjusted for market moves, the paper's average rises to about 1.0, the full dividend. <a href="papers/dividend-study.html">Read the paper</a>.</p>
         </div>
       </div>
     </article>
@@ -202,7 +202,7 @@
       <p class="tool-lede">Interactive results from our <a href="papers/rsi-study.html">RSI study</a>: four Wilder RSI(14) strategies backtested across 100 U.S. stocks in 11 sectors with up to 64 years of daily data (1962–2026), 5,174 trades in total. Buy when RSI crosses below the lower threshold, sell when it crosses above the upper threshold.</p>
 
       <div class="callout" role="note">
-        <strong>Read with care.</strong> The 100-stock universe consists only of companies that survived to 2026 (delisted, bankrupt, and acquired firms are excluded), which biases win rates and average returns upward; the paper estimates win rates are inflated by roughly 3 to 8 percentage points, most of all for long-hold strategies such as Weekly 20/80. And every strategy underperformed buy-and-hold on an annualized basis (paired t-test p &lt; 10⁻²⁰ for all four), mainly because capital sits idle between signals.
+        <strong>Read with care.</strong> The 100-stock universe consists only of companies that survived to 2026 (delisted, bankrupt, and acquired firms are excluded), which biases win rates and average returns upward; the paper does not estimate the size of this bias, which is likely largest for long-hold strategies such as Weekly 20/80. The tests cannot separate RSI timing from the upward drift of these surviving stocks. Stock by stock, every strategy lagged buy-and-hold on an annualized basis (paired t-test p &lt; 10⁻¹⁹ for all four), mainly because capital sat idle between signals; that comparison uses single stocks with no return on idle cash, not a portfolio or an index. These are hypothetical backtest results, not investment advice.
       </div>
 
       <h3 class="tool-sub">Strategy results</h3>
@@ -222,7 +222,7 @@
       </div>
 
       <h3 class="tool-sub">By sector</h3>
-      <p class="tool-subnote">Tables 3 and 4. The paper publishes sector tables for the two 30/70 strategies only; for the 20/80 strategies, sector differences were not statistically significant (ANOVA p = 0.8226 daily, 0.5812 weekly).</p>
+      <p class="tool-subnote">Tables 3 and 4. The paper publishes sector tables for the two 30/70 strategies only, and the rankings reflect today's surviving winners; for the 20/80 strategies, sector differences were not statistically significant (ANOVA p = 0.8226 daily, 0.5812 weekly).</p>
       <div class="ctrl-row">
         <div class="field">
           <label for="rsi-sector-strat">Strategy</label>
