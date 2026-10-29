@@ -367,18 +367,16 @@
 <p>The equilibrium tidal displacement (height of the tidal bulge, assuming a fluid body responding to this potential) is:</p>
 <p>h(θ) = −Φ_tidal(R, θ) / g = (M / M_body) × (R⁴ / D³) × (3cos²θ − 1)/2</p>
 <p>For the Moon&#x27;s tide on Earth:</p>
-<p>h_max = (M_M / M_E) × (R_E⁴ / a_M³) × 1    [at θ = 0, where 3cos²θ − 1 = 2, so the factor is 1 after the /2]</p>
-<p>Wait — let me be more careful. The equilibrium tide height is:</p>
-<p>h(θ) = (3/2) × (M/M_body) × (R/D)³ × R × P₂(cos θ)</p>
-<p>At the sub-lunar point (θ = 0), P₂(1) = 1:</p>
-<p>h_0 = (3/2) × (M_M / M_E) × (R_E / a_M)³ × R_E</p>
-<p>h_0 = (3/2) × (7.342 × 10²² / 5.972 × 10²⁴) × (6.371 × 10⁶ / 3.844 × 10⁸)³ × 6.371 × 10⁶</p>
-<p>h_0 = 1.5 × (1.229 × 10⁻²) × (1.657 × 10⁻²)³ × 6.371 × 10⁶</p>
-<p>h_0 = 1.5 × 1.229 × 10⁻² × 4.554 × 10⁻⁶ × 6.371 × 10⁶</p>
-<p>h_0 = 1.5 × 1.229 × 10⁻² × 29.02</p>
-<p>h_0 = 1.5 × 0.3566</p>
-<p>h_0 = 0.535 m</p>
-<p>This ~0.54 m is the &quot;equilibrium tide&quot; — the theoretical tidal bulge on a uniform ocean covering a rigid Earth. Actual ocean tides are amplified by resonance effects in ocean basins, reaching several meters in favorable geometries (Bay of Fundy: up to 16 m).</p>
+<p>Equivalently, h(θ) = (M/M_body) × (R/D)³ × R × P₂(cos θ). At the sub-lunar point (θ = 0), P₂(1) = 1:</p>
+<p>h_0 = (M_M / M_E) × (R_E / a_M)³ × R_E</p>
+<p>h_0 = (7.342 × 10²² / 5.972 × 10²⁴) × (6.371 × 10⁶ / 3.844 × 10⁸)³ × 6.371 × 10⁶</p>
+<p>h_0 = (1.229 × 10⁻²) × (1.657 × 10⁻²)³ × 6.371 × 10⁶</p>
+<p>h_0 = 1.229 × 10⁻² × 4.554 × 10⁻⁶ × 6.371 × 10⁶</p>
+<p>h_0 = 1.229 × 10⁻² × 29.02</p>
+<p>h_0 = 0.357 m</p>
+<p>At θ = 90°, P₂(0) = −1/2, so the surface there lies h_0/2 = 0.178 m below the undisturbed level. The equilibrium range from high water to low water is therefore:</p>
+<p>H_eq = (3/2) × h_0 = 1.5 × 0.3566 = 0.535 m</p>
+<p>This ~0.54 m range, produced by a bulge about 0.36 m high, is the &quot;equilibrium tide&quot;: the theoretical response of a uniform ocean covering a rigid Earth. Actual ocean tides are amplified by resonance effects in ocean basins, reaching several meters in favorable geometries (Bay of Fundy: up to 16 m).</p>
 <h3 class="sub-title">2.4 Roche Limit</h3>
 <p>The Roche limit defines the distance within which a body held together only by self-gravity will be tidally disrupted by a larger body. When tidal forces across a satellite exceed its self-gravitational binding, it disintegrates.</p>
 <p>For a rigid satellite of density ρ_s orbiting a primary of mass M and density ρ_p:</p>
@@ -434,7 +432,7 @@
 <p>Denominator of first fraction: 2 × (3.844 × 10⁸)² = 2 × 1.478 × 10¹⁷ = 2.956 × 10¹⁷</p>
 <p>First fraction: 2.924 × 10³⁷ / 2.956 × 10¹⁷ = 9.89 × 10¹⁹</p>
 <p>dE_orbit/dt = 9.89 × 10¹⁹ × 1.21 × 10⁻⁹ = 1.20 × 10¹¹ W = 0.12 TW</p>
-<p>But wait — this accounts only for the energy going into the Moon&#x27;s orbit. The total dissipation must also account for the loss of Earth&#x27;s rotational kinetic energy. The Earth&#x27;s rotation slows at a rate of about 2.3 ms per century (Stephenson &amp; Morrison, 1995), which corresponds to:</p>
+<p>This accounts only for the energy going into the Moon&#x27;s orbit. The total dissipation must also account for the loss of Earth&#x27;s rotational kinetic energy. The Earth&#x27;s rotation slows at a rate of about 2.3 ms per century (Stephenson &amp; Morrison, 1995), which corresponds to:</p>
 <p>dΩ_E/dt ≈ −6.1 × 10⁻²² rad/s²</p>
 <p>The rotational kinetic energy of the Earth:</p>
 <p>E_rot = (1/2)·I_E·Ω_E²</p>
@@ -487,18 +485,18 @@
   <li>Mean tidal range: 8.0 m</li>
 </ul>
 <ul>
-  <li>Annual generation: ~540 GWh</li>
+  <li>Annual generation: ~500 GWh</li>
 </ul>
 <ul>
-  <li>Capacity factor: ~26%</li>
+  <li>Capacity factor: ~24%</li>
 </ul>
-<p>(Frau, 1993; André, 1976)</p>
+<p>(Frau, 1993; André, 1976; EDF, 2026)</p>
 <p>Theoretical power at La Rance:</p>
 <p>P = 1025 × 9.81 × 22.5 × 10⁶ × 8.0² / (2 × 44712)</p>
 <p>= 1025 × 9.81 × 22.5 × 10⁶ × 64 / 89424</p>
 <p>= 1.449 × 10¹³ / 89424</p>
 <p>= 1.62 × 10⁸ W = 162 MW (average)</p>
-<p>The rated capacity of 240 MW is the peak power; the average power of ~62 MW (from 540 GWh / 8760 h) reflects the intermittency of tidal cycles and non-ideal conversion.</p>
+<p>The rated capacity of 240 MW is the peak power; the average power of ~57 MW (from 500 GWh / 8760 h) reflects the intermittency of tidal cycles and non-ideal conversion.</p>
 <p>Sihwa Lake Tidal Power Station (South Korea):</p>
 <ul>
   <li>Operational since 2011</li>
@@ -507,7 +505,7 @@
   <li>Capacity: 254 MW (world&#x27;s largest tidal barrage)</li>
 </ul>
 <ul>
-  <li>Basin area: 12.7 km²</li>
+  <li>Basin area: ~30 km²</li>
 </ul>
 <ul>
   <li>Mean tidal range: 5.6 m</li>
@@ -515,7 +513,7 @@
 <ul>
   <li>Annual generation: ~550 GWh</li>
 </ul>
-<p>(Bae et al., 2010)</p>
+<p>(Bae et al., 2010; Kim et al., 2018)</p>
 <h3 class="sub-title">3.3 Tidal Stream Systems</h3>
 <p>Tidal stream generators extract kinetic energy from tidal currents, analogous to underwater wind turbines. The power available from a tidal stream is:</p>
 <p>P = (1/2)·ρ·A·v³·C_p</p>
@@ -536,15 +534,15 @@
 <ul>
   <li>Rotor diameter: 16–18 m</li>
 </ul>
-<p>(MeyGen Ltd., 2016; Coles et al., 2017)</p>
+<p>(MeyGen Ltd., 2016, 2017)</p>
 <p>Power calculation for one MeyGen turbine:</p>
 <p>A = π × (8)² = 201 m²</p>
 <p>P = 0.5 × 1025 × 201 × 5³ × 0.40</p>
 <p>= 0.5 × 1025 × 201 × 125 × 0.40</p>
 <p>= 5.17 × 10⁶ W ≈ 5.2 MW</p>
-<p>At peak current (5 m/s) with C_p = 0.40, each turbine could theoretically generate ~5.2 MW, though the rated capacity of 1.5 MW reflects the average conditions and engineering constraints.</p>
+<p>At peak current (5 m/s) with C_p = 0.40, the flow through each rotor carries enough power for ~5.2 MW, but the turbine never delivers it: the 1.5 MW rating is an output cap, and above its rated current speed the turbine sheds the excess.</p>
 <h3 class="sub-title">3.4 Global Tidal Energy Resource</h3>
-<p>The global technically extractable tidal energy resource has been estimated at approximately 1 TW by Munk &amp; Wunsch (1998), while a site-by-site review of tidal stream resources puts the aggregated theoretical resource of 262 assessed sites in six countries at about 115 GW of continuous power (Coles et al., 2025).</p>
+<p>A site-by-site review of tidal stream resources puts the aggregated theoretical resource of 262 assessed sites in six countries at about 115 GW of continuous power, and the quasi-practical resource of 90 sites at about 110 TWh per year (Coles et al., 2025).</p>
 <p>The total installed tidal power capacity worldwide as of 2025 is approximately 521 MW — a tiny fraction of the available resource.</p>
 <h3 class="sub-title">3.5 Relevance to Our Central Question</h3>
 <p>Tidal power demonstrates unequivocally that gravitational-orbital energy can be converted to electricity. The mechanism is indirect: gravity creates tidal flows → flowing water spins turbines → turbines drive generators → electricity. Our question is whether more direct mechanisms — particularly centrifugal systems driven by gravitational gradients or orbital mechanics — could bypass the intermediary of ocean water.</p>
@@ -659,7 +657,7 @@
 <p>|R̂ + s/R|⁻³ ≈ 1 − 3(R̂·s)/R + ...</p>
 <p>So:</p>
 <p>dF ≈ −(G·M·dm/R³)·[R + s − 3(R̂·s)·R̂ + ...]</p>
-<p>Wait — let me redo this more carefully. We write r_i = R + s_i for mass element i. Then:</p>
+<p>Treating the body as a set of discrete mass elements, we write r_i = R + s_i for element i. Then:</p>
 <p>F_i = −G·M·m_i·(R + s_i) / |R + s_i|³</p>
 <p>We need the torque about the center of mass:</p>
 <p>τ = Σ_i s_i × F_i</p>
@@ -699,6 +697,9 @@
 </ol>
 <p>τ_gg,z = (3n²/2)·(I_y − I_x)·sin(2θ)</p>
 <p>This form is most commonly used in spacecraft engineering.</p>
+<p>One property of this torque governs everything that follows. It derives from the potential U₂(θ) of §13.2 (τ_z = −dU₂/dθ), so it is conservative: over any closed cycle of orientations it does zero net work. The most it can ever deliver is the one-time energy released as the body swings from the unstable horizontal orientation (θ = 90°) to the stable vertical one (θ = 0):</p>
+<p>ΔU = ∫₀^(π/2) |τ_gg,z| dθ = (3n²/2)·|I_y − I_x|</p>
+<p>Numerically, ΔU in joules equals the peak torque in N·m. The examples below therefore quote both the peak torque and this one-time energy. Multiplying the torque by the orbital rate, P = τ × n, does not give an available power (§5.4).</p>
 <h3 class="sub-title">5.3 Numerical Examples</h3>
 <p>Example 1: Small satellite (CubeSat-scale)</p>
 <p>Consider a 6U CubeSat: mass = 12 kg, dimensions 10 × 20 × 30 cm.</p>
@@ -717,15 +718,15 @@
 <p>= 1.5 × 1.286 × 10⁻⁶ × 0.05</p>
 <p>= 9.6 × 10⁻⁸ N·m ≈ 96 nN·m</p>
 <p>This is an extraordinarily small torque — far too small for power generation but sufficient for attitude stabilization of small spacecraft.</p>
-<p>If this torque drove a generator at the orbital angular velocity n:</p>
-<p>P = τ × n = 9.6 × 10⁻⁸ × 1.134 × 10⁻³ = 1.09 × 10⁻¹⁰ W ≈ 0.1 nW</p>
+<p>The one-time energy available as the CubeSat settles to the vertical:</p>
+<p>ΔU = (3/2)·n²·|I_y − I_x| = 9.6 × 10⁻⁸ J</p>
 <p>Completely negligible.</p>
 <p>Example 2: Large space station (ISS-scale)</p>
 <p>ISS: mass ≈ 420,000 kg, longest dimension ~109 m.</p>
 <p>Approximate the ISS as a rod of length L = 109 m and mass M = 420,000 kg along the y-axis:</p>
 <p>I_y ≈ 0 (about its own long axis — thin)</p>
 <p>I_x = I_z ≈ (1/12)·M·L² = (1/12) × 420000 × 109² = (1/12) × 420000 × 11881 = 4.16 × 10⁸ kg·m²</p>
-<p>Actually, the ISS is complex. Let&#x27;s use published values. The ISS has I approximately:</p>
+<p>The rod model overstates the inertia, because much of the station&#x27;s mass sits near its center. Published values are approximately:</p>
 <p>I_x ≈ 1.28 × 10⁸ kg·m² (roll)</p>
 <p>I_y ≈ 1.07 × 10⁸ kg·m² (pitch)</p>
 <p>I_z ≈ 2.01 × 10⁸ kg·m² (yaw)</p>
@@ -735,19 +736,19 @@
 <p>|τ_gg,max| = (3/2) × 1.286 × 10⁻⁶ × 2.1 × 10⁷ × 1</p>
 <p>= 4.05 × 10¹ N·m ≈ 40.5 N·m</p>
 <p>This is a modest but real torque — comparable to what a human could exert on a wrench.</p>
-<p>Power if driving a generator:</p>
-<p>P = 40.5 × 1.134 × 10⁻³ ≈ 0.046 W ≈ 46 mW</p>
-<p>Still far too small for practical power generation. The ISS solar arrays generate ~240 kW — the gravity gradient torque power is about 5 million times smaller.</p>
+<p>One-time energy if this torque drove a generator while the station settled:</p>
+<p>ΔU ≈ 40.5 J</p>
+<p>Still far too small for practical power generation. The ISS solar arrays generate ~240 kW, so they deliver 40.5 J in less than a millisecond.</p>
 <p>Example 3: Hypothetical large orbiting structure</p>
 <p>What if we built a very long, massive structure specifically to exploit gravity gradient torque? Consider a tether/beam of length L = 100 km (10⁵ m) and mass M = 10⁶ kg (1000 tonnes):</p>
 <p>I_x = (1/12)·M·L² = (1/12) × 10⁶ × (10⁵)² = (1/12) × 10¹⁶ = 8.33 × 10¹⁴ kg·m²</p>
 <p>If the smallest moment of inertia I_y ≈ 0 (thin tether):</p>
 <p>τ_gg,max = (3/2) × 1.286 × 10⁻⁶ × 8.33 × 10¹⁴</p>
 <p>= 1.607 × 10⁹ N·m ≈ 1.6 GN·m</p>
-<p>Now this is a substantial torque! But the angular velocity at which it operates is still just the orbital rate:</p>
-<p>P = 1.607 × 10⁹ × 1.134 × 10⁻³ ≈ 1.82 × 10⁶ W ≈ 1.82 MW</p>
-<p>1.82 MW from a 100-km, 1000-tonne structure. This is finally in the range of practical power generation — comparable to a large wind turbine. But the structure is enormously large and expensive.</p>
-<p>Power density: 1.82 MW / 10⁶ kg = 1.82 W/kg. For comparison, solar panels generate ~200 W/kg (at 1 AU). Gravity gradient power is roughly 100× less power-dense than solar.</p>
+<p>This is a substantial torque, but it is conservative. The energy the beam can give up is:</p>
+<p>ΔU = (3/2)·n²·ΔI = (3/2) × 1.286 × 10⁻⁶ × 8.33 × 10¹⁴ ≈ 1.6 × 10⁹ J ≈ 1.6 GJ ≈ 450 kWh</p>
+<p>It is released once, as the beam settles from horizontal to vertical. The beam&#x27;s small-amplitude pitch libration period is 2π/(√3·n) ≈ 3,200 s, or about 53 minutes, so even a generator that captured all of this energy within one libration would average about 0.5 MW for under an hour. After that the beam hangs along the local vertical, the torque is zero, and the output is nothing.</p>
+<p>Specific energy: 1.6 GJ / 10⁶ kg ≈ 1.6 kJ/kg (about 0.45 Wh/kg), available once. A solar panel producing ~200 W/kg at 1 AU delivers that much energy per kilogram in about 8 seconds, and keeps producing.</p>
 <h3 class="sub-title">5.4 The Fundamental Problem: Low Angular Velocity</h3>
 <p>The gravity gradient torque equation reveals why this approach struggles. The maximum torque is:</p>
 <p>τ_max = (3/2)·n²·ΔI</p>

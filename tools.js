@@ -164,12 +164,12 @@
 
   function buildDivBasis() {
     var sel = $('div-basis');
-    var h = '<optgroup label="Overall"><option value="overall" selected>All events: 0.812 (N = 5,106)</option></optgroup>';
-    h += '<optgroup label="By sector (Table 4)">';
+    var h = '<optgroup label="Overall"><option value="overall" selected>All events (raw): 0.812 (N = 5,106)</option></optgroup>';
+    h += '<optgroup label="By sector, raw (Table 4)">';
     DIV.sectors.forEach(function (s, i) { h += '<option value="sector:' + i + '">' + esc(s.name) + ': ' + s.mean.toFixed(3) + ' (N = ' + intf(s.n) + ')</option>'; });
-    h += '</optgroup><optgroup label="By yield tercile (Table 3)">';
+    h += '</optgroup><optgroup label="By yield tercile, raw (Table 3)">';
     DIV.yields.forEach(function (s, i) { h += '<option value="yield:' + i + '">' + s.name + ' yield: ' + s.mean.toFixed(3) + ' (N = ' + intf(s.n) + ')</option>'; });
-    h += '</optgroup><optgroup label="By yield regression (Table 6)">';
+    h += '</optgroup><optgroup label="By yield regression, raw (Table 6)">';
     h += '<option value="reg">Regression: 0.655 + 5.569 × yield</option></optgroup>';
     sel.innerHTML = h;
   }
