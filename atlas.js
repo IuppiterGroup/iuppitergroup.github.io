@@ -1,32 +1,38 @@
-/* Orbis Terrarum: map engine. Content lives in atlas-data.js; geometry in atlas/data/. */
+/* Orbis Terrarum: map engine. Content lives in atlas-data.js; geometry in atlas/data/.
+   Borders come from dated shapes: every realm row carries the first and last year it held,
+   so the map shows exactly the realms in force in the chosen year. */
 (() => {
 'use strict';
 const $ = s => document.querySelector(s);
-const START = -3100, END = 2010, DATA = 'atlas/data/';
+const START = -3100, END = 2024, DATA = 'atlas/data/';
 
 EVENTS.forEach((e, i) => e.id = i);
 
 /* ---------- Time scale ---------- */
-const SEG = [[-3100, -1000, 0, .22], [-1000, 500, .22, .53], [500, 1500, .53, .78], [1500, 2010, .78, 1]];
+const SEG = [[-3100, -1000, 0, .22], [-1000, 500, .22, .53], [500, 1500, .53, .78], [1500, 2024, .78, 1]];
 const y2t = y => { for (const [a, b, ta, tb] of SEG) if (y <= b) return ta + (Math.max(y, a) - a) / (b - a) * (tb - ta); return 1; };
 const t2y = t => { for (const [a, b, ta, tb] of SEG) if (t <= tb) return a + (Math.max(t, ta) - ta) / (tb - ta) * (b - a); return END; };
 const fmtYear = y => { y = Math.round(y); if (y === 0) y = 1; return y < 0 ? `${-y} B.C.` : `A.D. ${y}`; };
+const fmtSpan = y => { y = Math.round(y); if (y === 0) y = 1; return y < 0 ? `${-y} B.C.` : `${y}`; };
 const auc = y => { y = Math.round(y); if (y === 0) y = -1; if (y < -753 || y > 1453) return ''; return 'A.U.C. ' + (y < 0 ? 754 + y : 753 + y); };
 const eraOf = y => (ERAS.find(e => y < e[1]) || ERAS[ERAS.length - 1])[2];
+// Step sizes follow how finely the borders are recorded in each age.
+const stepFor = y => y < -1200 ? 100 : y < -500 ? 25 : y < 1500 ? 10 : 5;
+const snapYear = y => { const s = stepFor(y); let r = Math.round(y / s) * s; if (r === 0) r = y < 0 ? -1 : 1; return Math.max(START, Math.min(END, r)); };
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- Colors ---------- */
 const PALETTE = ['#b8643f', '#5d7ea8', '#7a9850', '#b48a2c', '#87699f', '#3f8782', '#ad5a6c', '#6c7d3b', '#a3714a', '#4e6d98', '#97573a', '#5a8968', '#a9855a', '#78598a', '#3a789a', '#a6698a', '#8a7a3a', '#6a8aa6'];
 const OVERRIDES = [
-  [/holy roman/i, '#c09a2c'], [/\broman\b|\brome\b|byzant/i, '#a8302a'],
-  [/\bqin\b|\bhan\b|\btang\b|\bsong\b|\bming\b|\bqing\b|\bsui\b|jin empire|\bzhou\b|\bshang\b|\bxia\b|sinic|chinese/i, '#d4aa35'],
-  [/achaemenid|parthia|sasan|sassan|persia|safavid|qajar|afsharid|\bzand\b/i, '#b8662a'],
-  [/mongol|golden horde|ilkhan|chagatai|\byuan\b|white horde/i, '#5d6c84'],
-  [/caliphate|umayyad|abbasid|fatimid|rashidun|ayyubid|mamluk/i, '#4a7843'], [/ottoman/i, '#3b6c66'],
-  [/brit|united kingdom|england|anglo-egypt/i, '#d77a8c'], [/franc|french|frank|carolingian/i, '#5265a2'],
+  [/holy roman/i, '#b08326'], [/\broman\b|\brome\b|byzant/i, '#a8302a'],
+  [/\bqin\b|\bhan\b|\btang\b|\bsong\b|\bming\b|\bqing\b|\bsui\b|\bjin\b|jin empire|\bzhou\b|\bshang\b|\bxia\b|sinic|chinese|china\b|warring states|spring and autumn/i, '#d4aa35'],
+  [/achaemenid|parthia|sasan|sassan|persia|safavid|qajar|afsharid|\bzand\b|pahlavi|\biran\b/i, '#b8662a'],
+  [/mongol|golden horde|ilkhan|chagatai|\byuan\b|white horde|blue horde/i, '#5d6c84'],
+  [/caliphate|umayyad|abbasid|fatimid|rashidun|ayyubid|mamluk/i, '#4a7843'], [/ottoman|turkey/i, '#3b6c66'],
+  [/brit|united kingdom|england|anglo-egypt/i, '#d77a8c'], [/franc|french|frank|carolingian|merovingian/i, '#5265a2'],
   [/egypt|ptolem/i, '#8b993c'], [/spain|spanish|castil|new spain|viceroyalty of (peru|new granada|the r)/i, '#d08b52'],
   [/portug/i, '#5e9b88'], [/russia|muscov|moscow|novgorod|soviet/i, '#6e8e4d'], [/german|prussia/i, '#777d8e'],
-  [/austria|habsburg/i, '#cbb44a'], [/netherland|dutch|holland/i, '#de8838'], [/united states/i, '#8a6aa8'],
+  [/austria|habsburg/i, '#c9a8b8'], [/netherland|dutch|holland|batavia/i, '#de8838'], [/united states/i, '#8a6aa8'],
   [/japan/i, '#c25858'], [/carthag/i, '#6a5898'], [/alexander|macedon|seleucid|greek|athen|sparta|hellen/i, '#4e7eae'],
   [/assyria/i, '#7a5135'], [/babylon/i, '#a1673a'], [/akkad|\bur\b|sumer|city-states/i, '#9a7848'], [/hittite/i, '#8a597a'],
   [/maurya|gupta|mughal|maratha|delhi/i, '#994e85'], [/\binca\b/i, '#ae6f2e'], [/aztec|mexica/i, '#2f7e8e']
@@ -42,10 +48,11 @@ function colorFor(name) {
 const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
 const rgba = (hex, a) => { const [r, g, b] = rgb(hex); return `rgba(${r},${g},${b},${a})`; };
 const shade = (hex, f) => { const [r, g, b] = rgb(hex).map(v => Math.round(v * (1 - f))); return `rgb(${r},${g},${b})`; };
+const bare = n => n.replace(/^\(|\)$/g, '');
 
 const C = {
   margin: '#e4d8bb', ocean: '#c9d8d2', ripple: '58,92,98', land: '#efe5c8', coast: '#4d4334', grat: 'rgba(70,90,92,.16)',
-  river: '#5d8394', lake: '#c3d4cf', mount: '#8d6c48', border: 'rgba(72,48,30,.75)', people: 'rgba(110,84,54,.42)',
+  river: '#5d8394', lake: '#c3d4cf', mount: '#8d6c48', border: 'rgba(72,48,30,.75)', inner: 'rgba(72,48,30,.28)', people: 'rgba(110,84,54,.42)',
   halo: 'rgba(240,231,205,.88)', peopleText: '#6a5640', sea: '#4c6b74', city: '#2f241a'
 };
 
@@ -119,59 +126,160 @@ function camBoxFor(y) {
 }
 const screenX = px => W / 2 + (px - cam.cx) * cam.k, screenY = py => H / 2 + (py - cam.cy) * cam.k;
 
-/* ---------- State ---------- */
+/* ---------- Data ---------- */
 let year = 117, playing = false, selected = null, userPicked = false;
-let index = [], snaps = new Map(), cur = null, prev = null, fadeStart = 0, wantIdx = -1;
+let windows = [], peopleIdx = [], RELATIONS = {}, REALMS = {};
+const winCache = new Map(), peopleCache = new Map();
+let cur = null, prev = null, fadeStart = 0, wanted = '';
 const FADE = 380;
+// Composites never painted as one realm from afar: colonial empires (their members carry clearer names, such as British Raj
+// or French Africa) and modern unions where one color would mislead.
+const NO_UNIFY = new Set(['(British Empire)', '(Spanish Empire)', '(Portuguese Empire)', '(Netherlands)', '(Dutch Republic)', '(Batavian Republic)',
+  '(French First Republic)', '(French Directory)', '(French Consulate)', '(First French Empire)', '(Bourbon Kingdom of France)', '(French Second Republic)',
+  '(Second French Empire)', '(French Third Republic)', '(Vichy France)', '(French Fourth Republic)', '(Russian Federation)', '(Commonwealth of Nations)',
+  '(July Monarchy)', '(Kingdom of Holland)']);
 
-function snapIndexFor(y) { let i = 0; for (let j = 0; j < index.length; j++) if (index[j].y <= y) i = j; return i; }
-function loadSnap(i) {
-  if (!snaps.has(i)) snaps.set(i, fetch(`${DATA}snap_${index[i].y}.json`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(t => buildSnap(i, t)));
-  return snaps.get(i);
+const getJSON = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.json(); });
+function prepFeature(f) {
+  const p = f.properties, lp = proj(p.l) || [0, 0], bb = boxPlanar(p.b);
+  return { id: p.i, n: p.n, k: p.k, f: p.f, t: p.t, m: p.m ? p.m.split(';').map(s => s.trim()).filter(Boolean) : [], o: p.o || null,
+    a: p.a, lx: lp[0], ly: lp[1], bw: bb[2] - bb[0], bh: bb[3] - bb[1], box: p.b, geo: f, path: null };
 }
-function buildSnap(i, topo) {
-  const fc = topojson.feature(topo, topo.objects.p);
-  const groups = new Map(), vgroups = new Map(), stateB = new Path2D(), peopleB = new Path2D(), feats = [];
-  for (const f of fc.features) {
-    const p = f.properties, path = toPath(f); p.n = NAME_FIX[p.n] || p.n;
-    const color = p.c === 's' ? colorFor(p.n) : null;
-    if (p.c === 's') {
-      const g = p.v ? vgroups : groups, key = p.v ? colorFor(p.v) : color;
-      if (!g.has(key)) g.set(key, new Path2D()); g.get(key).addPath(path); stateB.addPath(path);
-    } else peopleB.addPath(path);
-    const lp = proj(p.l) || [0, 0]; const bb = boxPlanar(p.b);
-    feats.push({ n: p.n, c: p.c, v: p.v, a: p.a, path, color: p.v ? colorFor(p.v) : color, lx: lp[0], ly: lp[1], bw: bb[2] - bb[0], bh: bb[3] - bb[1], box: p.b });
+const pathOf = f => f.path || (f.path = toPath(f.geo));
+function windowIndexFor(y) { let lo = 0, hi = windows.length - 1; while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (windows[mid][0] <= y) lo = mid; else hi = mid - 1; } return lo; }
+function loadWindow(i) {
+  if (!winCache.has(i)) winCache.set(i, getJSON(DATA + windows[i][2]).then(t => topojson.feature(t, t.objects.s).features.map(prepFeature)));
+  return winCache.get(i);
+}
+function peopleIndexFor(y) { let k = 0; for (let j = 0; j < peopleIdx.length; j++) if (peopleIdx[j][0] <= y) k = j; return k; }
+function loadPeople(i) {
+  if (!peopleCache.has(i)) peopleCache.set(i, getJSON(DATA + peopleIdx[i][1]).then(t => {
+    const feats = topojson.feature(t, t.objects.p).features.map(f => { const x = prepFeature(f); x.n = NAME_FIX[x.n] || x.n; return x; });
+    const all = new Path2D(); for (const f of feats) all.addPath(pathOf(f));
+    return { i, feats, all };
+  }));
+  return peopleCache.get(i);
+}
+function relationsAt(y) {
+  const vassal = new Map(), union = new Map();
+  for (const [name, r] of Object.entries(RELATIONS)) {
+    if (!r.y.some(([a, b]) => a <= y && y <= b)) continue;
+    if (r.k === 'v') vassal.set(r.a, r.b);
+    else if (r.k === 'u') { union.set(r.a, r.b); union.set(r.b, r.a); }
   }
-  feats.sort((a, b) => b.a - a.a);
-  return { i, y: index[i].y, feats, stateB, peopleB, groups: [...groups].map(([c, path]) => ({ c, path, fill: rgba(c, .17), band: rgba(c, .55) })), vgroups: [...vgroups].map(([c, path]) => ({ c, path, band: rgba(c, .35) })) };
+  return { vassal, union };
 }
-function setSnapFor(y) {
-  const i = snapIndexFor(y);
-  if (cur && cur.i === i) return;
-  wantIdx = i;
-  loadSnap(i).then(s => {
-    if (wantIdx !== i) return;
-    prev = cur; cur = s; fadeStart = performance.now(); updatePanel(); kick();
-    [i - 1, i + 1].forEach(j => { if (j >= 0 && j < index.length) loadSnap(j).catch(() => {}); });
-  }).catch(() => { $('#snap').textContent = 'Borders unavailable for this age'; });
+
+// A scene is everything in force in one year: realms, composites, overlords, and peoples.
+function buildScene(feats, people, y) {
+  const act = feats.filter(f => f.f <= y && y <= f.t);
+  const comps = new Map();
+  for (const f of act) if (f.k === 'c' && !NO_UNIFY.has(f.n) && (!comps.has(f.n) || comps.get(f.n).a < f.a)) comps.set(f.n, f);
+  const { vassal, union } = relationsAt(y);
+  const plain = act.filter(f => f.k === 'p').sort((a, b) => b.a - a.a);
+  for (const f of plain) {
+    f.cs = f.m.filter(n => comps.has(n)).map(n => comps.get(n)).sort((a, b) => b.a - a.a);
+    f.ov = f.o || vassal.get(f.n) || null;
+    f.un = union.get(f.n) || null;
+  }
+  // a composite nested inside a larger active composite
+  for (const c of comps.values()) c.parent = null;
+  for (const f of plain) for (let i = 1; i < f.cs.length; i++) if (!f.cs[i].parent && f.cs[i] !== f.cs[0]) f.cs[i].parent = f.cs[0];
+  const key = act.map(f => f.id).sort((a, b) => a - b).join(',') + '|' + (people ? people.i : '');
+  return { y, key, plain, comps, people, cache: new Map() };
+}
+
+// Which composites are seen up close (members shown on their own) at the current zoom.
+function revealSet(S) {
+  const lim = .6 * Math.min(W, H), out = new Set();
+  for (const c of S.comps.values()) if (c.bw * cam.k > lim) out.add(c.n);
+  return out;
+}
+// How every realm is painted for a given set of revealed composites.
+function paintPlan(S, rev) {
+  const rk = [...rev].sort().join(';');
+  if (S.cache.has(rk)) return S.cache.get(rk);
+  const fills = new Map(), unified = new Map(), hatch = new Map(), borders = new Path2D(), inner = new Path2D();
+  const add = (m, key, path) => { if (!m.has(key)) m.set(key, new Path2D()); m.get(key).addPath(path); };
+  const outlines = [], seenOut = new Set(), labels = [];
+  for (const f of S.plain) {
+    const path = pathOf(f);
+    const top = f.cs.find(c => !rev.has(c.n));
+    if (top) {
+      add(unified, colorFor(bare(top.n)), path); inner.addPath(path);
+      if (!seenOut.has(top.n)) { seenOut.add(top.n); outlines.push({ c: top, open: false }); }
+    } else {
+      if (f.ov) add(hatch, colorFor(bare(f.ov)), path);
+      else add(fills, colorFor(f.n), path);
+      borders.addPath(path);
+      for (const c of f.cs) if (!seenOut.has(c.n)) { seenOut.add(c.n); outlines.push({ c, open: true }); }
+    }
+  }
+  // labels: unified composites and realms shown on their own, largest first, one per name
+  const seen = new Set();
+  for (const o of outlines) if (!o.open && !seen.has(o.c.n)) { seen.add(o.c.n); labels.push({ n: bare(o.c.n), s: true, color: colorFor(bare(o.c.n)), lx: o.c.lx, ly: o.c.ly, bw: o.c.bw, bh: o.c.bh, a: o.c.a }); }
+  for (const f of S.plain) {
+    if (f.cs.some(c => !rev.has(c.n)) || seen.has(f.n)) continue;
+    seen.add(f.n);
+    const elector = f.cs.some(c => c.n === '(Holy Roman Empire)') && /^(Electorate of|Electoral Palatinate$|Brandenburg-Prussia$|Kingdom of Bohemia$|Archbishopric of (Mainz|Trier|Cologne))/.test(f.n);
+    labels.push({ n: f.n, s: true, color: colorFor(f.ov ? bare(f.ov) : f.n), lx: f.lx, ly: f.ly, bw: f.bw, bh: f.bh, a: f.a, crown: elector, minor: /minor states$/i.test(f.n) });
+  }
+  if (S.people) for (const f of S.people.feats) labels.push({ n: f.n, s: false, lx: f.lx, ly: f.ly, bw: f.bw, bh: f.bh, a: f.a });
+  labels.sort((a, b) => b.a - a.a);
+  const plan = {
+    fills: [...fills].map(([c, path]) => ({ c, path, fill: rgba(c, .17), band: rgba(c, .55) })),
+    unified: [...unified].map(([c, path]) => ({ c, path, fill: rgba(c, .19) })),
+    hatch: [...hatch].map(([c, path]) => ({ c, path, band: rgba(c, .35) })),
+    outlines, borders, inner, labels
+  };
+  S.cache.set(rk, plan);
+  return plan;
+}
+
+function setSceneFor(y) {
+  if (!windows.length) return;
+  const wi = windowIndexFor(y), pi = peopleIdx.length ? peopleIndexFor(y) : -1;
+  const want = `${wi}|${pi}|${y}`; wanted = want;
+  Promise.all([loadWindow(wi), pi >= 0 ? loadPeople(pi) : null]).then(([feats, people]) => {
+    if (wanted !== want) return;
+    const S = buildScene(feats, people, y);
+    if (cur && cur.key === S.key) { cur.y = y; return; }
+    prev = cur; cur = S; fadeStart = performance.now(); updatePanel(); kick();
+    [wi - 1, wi + 1].forEach(j => { if (j >= 0 && j < windows.length) loadWindow(j).catch(() => {}); });
+  }).catch(err => { console.error(err); });
 }
 
 /* ---------- Drawing ---------- */
 function drawPolitics(S, alpha, k) {
   if (!S || alpha <= 0) return;
+  const plan = paintPlan(S, revealSet(S));
   ctx.globalAlpha = alpha;
   const band = Math.max(2.4, Math.min(7, 2.4 * Math.sqrt(k / kWorld))) / k;
-  for (const g of S.groups) {
+  for (const g of plan.unified) { ctx.fillStyle = g.fill; ctx.fill(g.path); }
+  for (const g of plan.fills) {
     ctx.fillStyle = g.fill; ctx.fill(g.path);
     ctx.save(); ctx.clip(g.path); ctx.lineWidth = band * 2; ctx.strokeStyle = g.band; ctx.stroke(g.path); ctx.restore();
   }
-  for (const g of S.vgroups) {
+  for (const g of plan.hatch) {
     const pat = patternFor(rgba(g.c, .55), 'hatch'); pat.setTransform(new DOMMatrix().scale(1 / (k * dpr)));
     ctx.fillStyle = pat; ctx.fill(g.path);
     ctx.save(); ctx.clip(g.path); ctx.lineWidth = band * 1.4; ctx.strokeStyle = g.band; ctx.stroke(g.path); ctx.restore();
   }
-  ctx.setLineDash([1 / k, 2.2 / k]); ctx.lineWidth = .7 / k; ctx.strokeStyle = C.people; ctx.stroke(S.peopleB);
-  ctx.setLineDash([5 / k, 1.6 / k, 1.2 / k, 1.6 / k]); ctx.lineWidth = .9 / k; ctx.strokeStyle = C.border; ctx.stroke(S.stateB);
+  // members of a composite seen from afar: faint inner lines, then one band around the whole
+  ctx.lineWidth = .6 / k; ctx.strokeStyle = C.inner; ctx.stroke(plan.inner);
+  for (const o of plan.outlines) {
+    const col = colorFor(bare(o.c.n)), path = pathOf(o.c);
+    if (!o.open) { ctx.save(); ctx.clip(path); ctx.lineWidth = band * 2; ctx.strokeStyle = rgba(col, .6); ctx.stroke(path); ctx.restore(); }
+  }
+  if (S.people) { ctx.setLineDash([1 / k, 2.2 / k]); ctx.lineWidth = .7 / k; ctx.strokeStyle = C.people; ctx.stroke(S.people.all); }
+  ctx.setLineDash([5 / k, 1.6 / k, 1.2 / k, 1.6 / k]); ctx.lineWidth = .9 / k; ctx.strokeStyle = C.border; ctx.stroke(plan.borders);
+  // a composite seen up close keeps a broad outline in its own color
+  ctx.setLineDash([]);
+  for (const o of plan.outlines) if (o.open) {
+    const col = colorFor(bare(o.c.n)), path = pathOf(o.c);
+    ctx.lineWidth = band * 1.5; ctx.strokeStyle = rgba(col, .28); ctx.stroke(path);
+    ctx.lineWidth = 1.6 / k; ctx.strokeStyle = shade(col, .3); ctx.stroke(path);
+  }
   ctx.setLineDash([]); ctx.globalAlpha = 1;
 }
 
@@ -179,19 +287,28 @@ const labelRects = [];
 const hit = (r) => { for (const q of labelRects) if (r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1]) return true; return false; };
 function spaced(text, em) {
   if (hasLS) { ctx.letterSpacing = em ? `${em}px` : '0px'; return text; }
-  return em ? text.split('').join(' ') : text;
+  return em ? text.split('').join(' ') : text;
 }
-function drawText(lines, x, y, fs, font, color, em, alpha = 1, nudge = false) {
+function drawCrown(x, y, s, color) {
+  ctx.save(); ctx.translate(x, y); ctx.beginPath();
+  ctx.moveTo(-s, s * .45); ctx.lineTo(-s, -s * .25); ctx.lineTo(-s * .5, s * .1); ctx.lineTo(0, -s * .55); ctx.lineTo(s * .5, s * .1); ctx.lineTo(s, -s * .25); ctx.lineTo(s, s * .45); ctx.closePath();
+  ctx.fillStyle = color; ctx.strokeStyle = C.halo; ctx.lineWidth = 2; ctx.stroke(); ctx.fill(); ctx.restore();
+}
+function drawText(lines, x, y, fs, font, color, em, alpha = 1, nudge = false, crown = false) {
   ctx.font = font(fs); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   const lh = fs * 1.05, shown = lines.map(l => spaced(l, em));
   const ws = shown.map(s => ctx.measureText(s).width), w = Math.max(...ws), h = lh * lines.length;
-  if (nudge && x > 0 && x < W) { const lo = w / 2 + 6, hi = W - w / 2 - 6; const nx = Math.min(hi, Math.max(lo, x)); if (Math.abs(nx - x) < w * .4) x = nx; }
-  const r = [x - w / 2 - 2, y - h / 2 - 1, x + w / 2 + 2, y + h / 2 + 1];
+  const cw = crown ? fs * 1.1 : 0;
+  if (nudge && x > 0 && x < W) { const lo = (w + cw) / 2 + 6, hi = W - (w + cw) / 2 - 6; const nx = Math.min(hi, Math.max(lo, x)); if (Math.abs(nx - x) < w * .4) x = nx; }
+  const r = [x - (w + cw) / 2 - 2, y - h / 2 - 1, x + (w + cw) / 2 + 2, y + h / 2 + 1];
   if (r[0] < 3 || r[2] > W - 3 || r[1] < 3 || r[3] > H - 3 || hit(r)) { if (hasLS) ctx.letterSpacing = '0px'; return false; }
   labelRects.push(r);
+  const tx = x + cw / 2;
   ctx.globalAlpha = alpha; ctx.lineJoin = 'round'; ctx.lineWidth = Math.max(2.5, fs * .22); ctx.strokeStyle = C.halo; ctx.fillStyle = color;
-  shown.forEach((s, i) => { const yy = y - h / 2 + lh * (i + .5); ctx.strokeText(s, x, yy); ctx.fillText(s, x, yy); });
-  ctx.globalAlpha = 1; if (hasLS) ctx.letterSpacing = '0px';
+  shown.forEach((s, i) => { const yy = y - h / 2 + lh * (i + .5); ctx.strokeText(s, tx, yy); ctx.fillText(s, tx, yy); });
+  if (hasLS) ctx.letterSpacing = '0px';
+  if (crown) drawCrown(tx - w / 2 - fs * .6, y - h / 2 + lh * .5, fs * .38, color);
+  ctx.globalAlpha = 1;
   return true;
 }
 function splitTwo(name) {
@@ -206,7 +323,7 @@ function drawLabels(S) {
   labelRects.length = 0;
   const wr = wrap.getBoundingClientRect();
   const reserve = [...overlays, ...markerEls.values()]; if (flagEl && !flagEl.hidden) reserve.push(flagEl);
-  for (const el of reserve) { const q = el.getBoundingClientRect(); labelRects.push([q.left - wr.left - 4, q.top - wr.top - 4, q.right - wr.left + 4, q.bottom - wr.top + 4]); }
+  for (const el of reserve) { if (el.hidden) continue; const q = el.getBoundingClientRect(); labelRects.push([q.left - wr.left - 4, q.top - wr.top - 4, q.right - wr.left + 4, q.bottom - wr.top + 4]); }
   const zoom = cam.k / kWorld;
   // cities (dots first so labels avoid them)
   const cityRank = zoom > 4.5 ? 3 : zoom > 2.2 ? 2 : 1, cityLbl = [];
@@ -222,20 +339,27 @@ function drawLabels(S) {
   }
   // realms
   let n = 0;
-  if (S) for (const f of S.feats) {
-    if (n > 70) break;
+  if (S) for (const f of paintPlan(S, revealSet(S)).labels) {
+    if (n > 80) break;
     const sw = f.bw * cam.k, sh = f.bh * cam.k; if (sw < 26 || sh < 10) continue;
     const x = screenX(f.lx), y = screenY(f.ly);
-    if (f.c === 's') {
-      const name = f.n.toUpperCase();
+    if (f.s) {
+      if (f.minor && zoom < 3) continue;
+      const name = f.minor ? 'Imperial minor states' : f.n.toUpperCase();
+      if (f.minor) { if (drawText([name], x, y, 11, FONT_IT, shade(f.color, .45), 0, .85)) n++; continue; }
       let lines = [name], fs = Math.min(30, sw / (name.length * .78), sh * .42);
       const two = splitTwo(name);
       if (two.length === 2) { const fs2 = Math.min(30, sw / (Math.max(two[0].length, two[1].length) * .78), sh * .3); if (fs2 > fs * 1.25) { lines = two; fs = fs2; } }
       if (fs < 9) continue;
+      // shrink in place before moving, and never move far, so a name stays on its own land
       let done = false;
-      for (const m of [1, .8, .64]) {
+      for (const m of [1, .8, .64, .5]) {
         if (fs * m < 9 || done) break;
-        for (const dy of [0, 1.25, -1.25]) { if (drawText(lines, x, y + dy * fs * m * lines.length, fs * m, FONT_SC, shade(f.color, .5), fs * m * .12, 1, true)) { n++; done = true; break; } }
+        if (drawText(lines, x, y, fs * m, FONT_SC, shade(f.color, .5), fs * m * .12, 1, true, f.crown)) { n++; done = true; }
+      }
+      if (!done) {
+        const m = Math.max(9 / fs, .5);
+        for (const dy of [.6, -.6]) { if (drawText(lines, x, y + dy * fs * m * lines.length, fs * m, FONT_SC, shade(f.color, .5), fs * m * .12, 1, true, f.crown)) { n++; break; } }
       }
     } else if (zoom > 1.3 || f.a > 2e6) {
       let lines = [f.n], fs = Math.min(15, sw / (f.n.length * .55), sh * .4);
@@ -248,7 +372,6 @@ function drawLabels(S) {
   // seas
   for (const s of SEAS) {
     if (s[3] > (zoom > 4 ? 3 : zoom > 1.8 ? 2 : 1)) continue;
-    if (s[4] && (year < s[5] || year > s[6])) { /* plain name outside the Latin era */ }
     const p = proj([s[1], s[2]]); if (!p) continue;
     const fs = Math.max(10, Math.min(16, 9 + zoom * 1.2));
     const lines = [s[0].toUpperCase()]; const latin = s[4] && year >= s[5] && year <= s[6];
@@ -314,7 +437,7 @@ function render(now) {
   let busy = false;
   if (fading) busy = drawWorld(ctx, W, H, cam.k, cam.cx, cam.cy, now);
   else {
-    const key = cur ? 's' + cur.i : 'none';
+    const key = cur ? cur.key + '#' + [...revealSet(cur)].sort().join(';') : 'none';
     if (!plateFits(key)) {
       plate.w = Math.round(W * 1.5); plate.h = Math.round(H * 1.5); plate.k = cam.k; plate.cx = cam.cx; plate.cy = cam.cy; plate.key = key;
       plate.cv.width = Math.round(plate.w * dpr); plate.cv.height = Math.round(plate.h * dpr);
@@ -338,7 +461,7 @@ function render(now) {
 
 /* ---------- Markers ---------- */
 const markersEl = $('#markers'), markerEls = new Map(); let flagEl = null;
-const persist = y => y < -1000 ? 260 : y < 0 ? 120 : y < 1500 ? 60 : 30;
+const persist = y => y < -1000 ? 150 : y < 0 ? 50 : y < 1500 ? 25 : y < 1800 ? 12 : 4;
 const liveEvents = () => EVENTS.filter(e => year >= e.y && year - e.y <= persist(e.y));
 function placeMarkers() {
   const live = new Set(liveEvents().map(e => e.id));
@@ -392,26 +515,39 @@ const zoomer = d3.zoom().clickDistance(5).on('zoom', ev => {
   const t = ev.transform; cam.k = t.k; cam.cx = (W / 2 - t.x) / t.k; cam.cy = (H / 2 - t.y) / t.k;
   Object.assign(target, cam); setFollow(false); $('#tip').hidden = true; kick();
 });
-const sel = d3.select(canvas).call(zoomer);
+d3.select(canvas).call(zoomer);
 function syncZoom() { canvas.__zoom = d3.zoomIdentity.translate(W / 2 - cam.cx * cam.k, H / 2 - cam.cy * cam.k).scale(cam.k); }
 function setFollow(on) { follow = on; $('#follow').setAttribute('aria-pressed', String(on)); if (on) kick(); }
 $('#follow').addEventListener('click', () => setFollow(!follow));
 $('#zin').addEventListener('click', () => { setFollow(false); target.k = Math.min(kWorld * 40, target.k * 1.7); kick(); });
 $('#zout').addEventListener('click', () => { setFollow(false); target.k = Math.max(kWorld * .8, target.k / 1.7); kick(); });
 
+const fmtArea = a => a >= 1e6 ? `About ${(a / 1e6).toFixed(a >= 1e7 ? 0 : 1)} million sq. km` : a >= 1e4 ? `About ${Math.round(a / 1e3).toLocaleString()} thousand sq. km` : `About ${Math.round(a / 100) * 100 || a} sq. km`;
+function realmSpan(n) { const r = REALMS[n]; return r ? `${fmtSpan(r.f)} to ${r.t >= 2024 ? 'today' : fmtSpan(r.t)}` : ''; }
 canvas.addEventListener('click', ev => {
   const tip = $('#tip'); if (!cur) return;
   const r = canvas.getBoundingClientRect(), sx = ev.clientX - r.left, sy = ev.clientY - r.top;
   const px = (sx - W / 2) / cam.k + cam.cx, py = (sy - H / 2) / cam.k + cam.cy;
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   let found = null;
-  for (let i = cur.feats.length - 1; i >= 0; i--) { const f = cur.feats[i]; if (f.c === 's' && ctx.isPointInPath(f.path, px, py)) { found = f; break; } }
-  if (!found) for (let i = cur.feats.length - 1; i >= 0; i--) { const f = cur.feats[i]; if (f.c === 'p' && ctx.isPointInPath(f.path, px, py)) { found = f; break; } }
-  if (!found) { tip.hidden = true; return; }
+  for (let i = cur.plain.length - 1; i >= 0; i--) { const f = cur.plain[i]; if (ctx.isPointInPath(pathOf(f), px, py)) { found = f; break; } }
+  let people = null;
+  if (!found && cur.people) for (const f of cur.people.feats) if (ctx.isPointInPath(pathOf(f), px, py)) { people = f; break; }
+  if (!found && !people) { tip.hidden = true; return; }
   tip.innerHTML = '';
-  const b = document.createElement('b'); b.textContent = found.n; tip.appendChild(b);
-  const s = document.createElement('span'); s.textContent = found.v ? `Client of ${found.v}` : found.c === 'p' ? 'Peoples without a state' : `About ${Math.round(found.a / 1000).toLocaleString()} thousand sq. km`;
-  tip.appendChild(s); tip.hidden = false;
+  const line = (tag, text) => { const el = document.createElement(tag); el.textContent = text; tip.appendChild(el); };
+  if (found) {
+    line('b', found.n);
+    const span = realmSpan(found.n); if (span) line('span', span);
+    const rel = [];
+    if (found.cs.length) rel.push(`Part of the ${bare(found.cs[0].n)}`);
+    if (found.ov) rel.push(`Under ${found.ov}`);
+    if (found.un) rel.push(`In personal union with ${found.un}`);
+    for (const t of rel) line('span', t);
+    line('span', fmtArea(found.a));
+  } else { line('b', people.n); line('span', 'Peoples without a state'); }
+  tip.querySelectorAll('span').forEach(s => s.style.display = 'block');
+  tip.hidden = false;
   const tw = tip.offsetWidth, th = tip.offsetHeight;
   tip.style.left = Math.min(W - tw - 8, Math.max(8, sx + 12)) + 'px'; tip.style.top = Math.min(H - th - 8, Math.max(8, sy + 12)) + 'px';
 });
@@ -433,7 +569,7 @@ function buildTimeline() {
   for (const y of [-3000, -2000, -1000, -500, 1, 500, 1000, 1500, 2000]) {
     const s = document.createElement('span'); s.style.left = (y2t(y) * 100) + '%'; s.textContent = y < 0 ? `${-y} BC` : y === 1 ? 'AD 1' : `${y}`;
     if ([-2000, -500, 500, 1500].includes(y)) s.className = 'minor';
-    if (y === -3000) s.style.transform = 'translateX(-20%)'; if (y === 2000) s.style.transform = 'translateX(-85%)'; sc.appendChild(s);
+    if (y === -3000) s.style.transform = 'translateX(-20%)'; if (y === 2000) s.style.transform = 'translateX(-70%)'; sc.appendChild(s);
   }
 }
 function fitEraLabels() {
@@ -447,32 +583,32 @@ new ResizeObserver(fitEraLabels).observe(track);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitEraLabels);
 function setYear(y, fromPlay) {
   year = Math.max(START, Math.min(END, y));
-  const shown = fromPlay ? Math.round(year / 10) * 10 || 1 : Math.round(year);
+  const shown = fromPlay ? snapYear(year) : Math.round(year) || 1;
   $('#yr').textContent = fmtYear(shown); $('#ageYear').textContent = fmtYear(shown); $('#auc').textContent = auc(shown);
   $('#eraName').textContent = eraOf(year);
   thumb.style.left = (y2t(year) * 100) + '%';
   track.setAttribute('aria-valuenow', String(Math.round(year))); track.setAttribute('aria-valuetext', fmtYear(shown));
-  setSnapFor(year);
+  setSceneFor(fromPlay ? shown : Math.round(year) || 1);
   if (!userPicked || (selected && !(year >= selected.y && year - selected.y <= persist(selected.y)))) {
     userPicked = false; const live = liveEvents(); const nsel = live.length ? live[live.length - 1] : null;
     if (nsel !== selected) { selected = nsel; renderChron(); }
   }
-  if (cur) $('#snap').textContent = `Borders c. ${fmtYear(cur.y === -1 ? -1 : cur.y)}`;
   updatePanelThrottled(); kick();
 }
 let dragging = false;
-function yearFromPointer(ev) { const r = track.getBoundingClientRect(); return Math.round(t2y(Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width))) / 10) * 10 || 1; }
+function yearFromPointer(ev) { const r = track.getBoundingClientRect(); return snapYear(t2y(Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)))); }
 track.addEventListener('pointerdown', ev => { dragging = true; track.setPointerCapture(ev.pointerId); stopPlay(); setYear(yearFromPointer(ev)); });
 track.addEventListener('pointermove', ev => { if (dragging) setYear(yearFromPointer(ev)); });
 track.addEventListener('pointerup', () => { dragging = false; renderChron(); });
+const stepBack = () => { const y = Math.round(year) || 1; let n = snapYear(y - stepFor(y - 1)); if (n >= y) n = snapYear(y - 2 * stepFor(y - 1)); return n; };
+const stepFwd = () => { const y = Math.round(year) || 1; let n = snapYear(y + stepFor(y)); if (n <= y) n = snapYear(y + 2 * stepFor(y)); return n; };
 track.addEventListener('keydown', ev => {
-  const step = ev.shiftKey ? 100 : 10;
-  if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') { stopPlay(); setYear(year + step); ev.preventDefault(); }
-  else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') { stopPlay(); setYear(year - step); ev.preventDefault(); }
+  if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') { stopPlay(); setYear(ev.shiftKey ? snapYear(year + 10 * stepFor(year)) : stepFwd()); ev.preventDefault(); }
+  else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') { stopPlay(); setYear(ev.shiftKey ? snapYear(year - 10 * stepFor(year - 1)) : stepBack()); ev.preventDefault(); }
   else if (ev.key === ' ') { togglePlay(); ev.preventDefault(); }
 });
-$('#back').addEventListener('click', () => { stopPlay(); setYear(Math.round((year - 10) / 10) * 10 || -1); renderChron(); });
-$('#fwd').addEventListener('click', () => { stopPlay(); setYear(Math.round((year + 10) / 10) * 10 || 1); renderChron(); });
+$('#back').addEventListener('click', () => { stopPlay(); setYear(stepBack()); renderChron(); });
+$('#fwd').addEventListener('click', () => { stopPlay(); setYear(stepFwd()); renderChron(); });
 function setPlayIcon() { $('#playIcon').innerHTML = playing ? '<path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/>' : '<path d="M4 2.5v11l9-5.5z"/>'; $('#play').setAttribute('aria-label', playing ? 'Pause' : 'Play'); }
 function stopPlay() { if (playing) { playing = false; setPlayIcon(); } }
 function togglePlay() { playing = !playing; if (playing) { if (year >= END) setYear(START); userPicked = false; setFollow(true); } setPlayIcon(); kick(); }
@@ -513,14 +649,21 @@ function updatePanelThrottled() { if (!panelTimer) panelTimer = setTimeout(() =>
 let lastRealmKey = '';
 function updatePanel() {
   if (!cur) return;
-  $('#snap').textContent = `Borders c. ${fmtYear(cur.y)}`;
-  const realms = cur.feats.filter(f => f.c === 's' && !f.v && !/states$|minor|^\s*$/i.test(f.n)).slice(0, 7);
-  const key = cur.i + ':' + realms.map(r => r.n).join('|'); if (key === lastRealmKey) return; lastRealmKey = key;
+  // the great realms of the age, counting a composite as one realm
+  const seen = new Map();
+  for (const f of cur.plain) {
+    const top = f.cs[0];
+    const ent = top ? { n: bare(top.n), a: top.a, box: top.box } : { n: f.n, a: f.a, box: f.box };
+    if (/minor states|tribes|peoples|-occupied/i.test(ent.n)) continue;
+    if (!seen.has(ent.n) || seen.get(ent.n).a < ent.a) seen.set(ent.n, ent);
+  }
+  const realms = [...seen.values()].sort((a, b) => b.a - a.a).slice(0, 7);
+  const key = realms.map(r => r.n).join('|'); if (key === lastRealmKey) return; lastRealmKey = key;
   const ul = $('#realms'); ul.innerHTML = '';
   for (const f of realms) {
-    const li = document.createElement('li'), b = document.createElement('button');
+    const li = document.createElement('li'), b = document.createElement('button'), col = colorFor(f.n);
     b.innerHTML = '<span class="sw"></span><span></span>';
-    b.firstChild.style.background = f.color; b.firstChild.style.borderColor = shade(f.color, .3); b.lastChild.textContent = f.n;
+    b.firstChild.style.background = col; b.firstChild.style.borderColor = shade(col, .3); b.lastChild.textContent = f.n;
     b.addEventListener('click', () => { setFollow(false); Object.assign(target, fitBox(f.box, .8)); kick(); });
     li.appendChild(b); ul.appendChild(li);
   }
@@ -541,8 +684,8 @@ new ResizeObserver(resize).observe(wrap);
 async function boot() {
   buildTimeline();
   try {
-    const [idx, base] = await Promise.all([fetch(DATA + 'index.json').then(r => r.json()), fetch(DATA + 'base.json').then(r => r.json())]);
-    index = idx;
+    const [win, ppl, rel, realms, base] = await Promise.all(['windows.json', 'peoples.json', 'relations.json', 'realms.json', 'base.json'].map(f => getJSON(DATA + f)));
+    windows = win; peopleIdx = ppl; RELATIONS = rel; REALMS = realms;
     const land = topojson.feature(base, base.objects.land);
     P.land = toPath(land); P.lakes = toPath(topojson.feature(base, base.objects.lakes)); P.mount = toPath(topojson.feature(base, base.objects.mountains));
     const rv = topojson.feature(base, base.objects.rivers).features;
@@ -551,7 +694,9 @@ async function boot() {
     P.riv3 = toPath({ type: 'FeatureCollection', features: rv.filter(f => f.properties.r > 4) });
     P.sphere = toPath({ type: 'Sphere' }); P.grat = toPath(d3.geoGraticule10());
     resize(); Object.assign(cam, target);
-    await loadSnap(snapIndexFor(year)).then(s => { cur = s; });
+    const wi = windowIndexFor(year), pi = peopleIndexFor(year);
+    const [feats, people] = await Promise.all([loadWindow(wi), loadPeople(pi)]);
+    cur = buildScene(feats, people, year);
     if (document.fonts && document.fonts.load) await Promise.race([Promise.all([document.fonts.load(FONT_SC(20)), document.fonts.load(FONT_IT(20))]), new Promise(r => setTimeout(r, 2500))]);
     $('#loading').hidden = true;
     selected = EVENTS.find(e => e.y === 117); setYear(117); renderChron(); updatePanel(); kick();
@@ -560,5 +705,6 @@ async function boot() {
     $('#loading').textContent = 'The map data did not load. Reload the page to try again.';
   }
 }
+window.__atlas = { setYear: y => { stopPlay(); setYear(y); renderChron(); }, scene: () => cur, view: box => { setFollow(false); Object.assign(target, fitBox(box, .95)); kick(); }, follow: () => setFollow(true) };
 boot();
 })();

@@ -104,7 +104,7 @@ const SEAS = [
   ['Baltic Sea', 19.4, 57.6, 2], ['Bay of Bengal', 89.0, 15.0, 2], ['South China Sea', 114.0, 14.0, 2], ['Caspian Sea', 50.8, 42.3, 2],
   ['Gulf of Mexico', -90.0, 25.0, 2], ['Caribbean Sea', -75.0, 15.0, 2], ['Sea of Japan', 134.5, 40.5, 3], ['Yellow Sea', 123.5, 35.5, 3]
 ];
-const ERAS = [[-3100, -1200, 'Bronze Age'], [-1200, -500, 'Iron Age'], [-500, 476, 'Classical Antiquity'], [476, 1453, 'Middle Ages'], [1453, 1789, 'Early Modern'], [1789, 2010, 'Modern Age']];
+const ERAS = [[-3100, -1200, 'Bronze Age'], [-1200, -500, 'Iron Age'], [-500, 476, 'Classical Antiquity'], [476, 1453, 'Middle Ages'], [1453, 1789, 'Early Modern'], [1789, 2024, 'Modern Age']];
 // Camera keyframes: year -> [west, south, east, north]
 // Camera keyframes: year -> [west, south, east, north] for wide screens, then a tighter core for tall phone screens
 const CAM = [
@@ -112,7 +112,7 @@ const CAM = [
   [-1450, [6, 12, 122, 49], [12, 18, 78, 46]], [-1000, [-12, 6, 124, 54], [4, 20, 72, 48]], [-500, [-14, 4, 128, 56], [-6, 22, 66, 50]],
   [1, [-14, 0, 132, 58], [-10, 22, 60, 55]], [600, [-16, -4, 138, 60], [-10, 16, 68, 58]], [1000, [-22, -18, 148, 64], [-12, 10, 80, 60]],
   [1300, [-24, -30, 150, 66], [-14, 0, 118, 62]], [1460, [-30, -36, 152, 68], [-20, -6, 124, 62]], [1525, [-128, -50, 162, 72], [-110, -40, 40, 62]],
-  [2010, [-168, -56, 180, 78], [-130, -45, 150, 70]]
+  [2024, [-168, -56, 180, 78], [-130, -45, 150, 70]]
 ];
 
 
