@@ -1,0 +1,2652 @@
+{
+ "_about": "Corrections applied to Cliopatria v0.2.1 before the atlas is built. Years are inclusive; negative years are B.C. Each rule is applied in the order listed: drop, rename, fill, cut, subtract, occupy, contest. Then the automatic passes run (postwar overlaps, nested realms, coastal gaps).",
+ "drop": [
+  {
+   "name": "Brandenburg-Prussia",
+   "from": 1702,
+   "to": 1720,
+   "why": "Duplicate of the Kingdom of Prussia after the coronation of 1701"
+  },
+  {
+   "name": "British Cape Colony",
+   "from": 1803,
+   "to": 1805,
+   "why": "The Cape was returned to the Batavian Republic 1803-1806"
+  },
+  {
+   "name": "Han Dynasty",
+   "from": 6,
+   "to": 13,
+   "why": "Zero-area fragment overlapping the Xin Dynasty"
+  },
+  {
+   "name": "Grand Duchy of Berg",
+   "from": 1814,
+   "to": 1827,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Sultanate of Zanzibar",
+   "from": 1964,
+   "to": 1966,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "German Africa",
+   "from": 1871,
+   "to": 1883,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Weimar Republic",
+   "from": 1933,
+   "to": 1935,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Golden Horde",
+   "from": 1503,
+   "to": 1695,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Sultanate of Aceh",
+   "from": 1904,
+   "to": 1959,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Maynila",
+   "from": 1572,
+   "to": 1599,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Portuguese Ceylon",
+   "from": 1659,
+   "to": 1686,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Saadi Sultanate",
+   "from": 1660,
+   "to": 1740,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "English Colonial Empire",
+   "from": 1707,
+   "to": 1779,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Sultanate of Palembang",
+   "from": -9999,
+   "to": 1658,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Talpur Dynasty",
+   "from": 1844,
+   "to": 1894,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Regency of Algiers",
+   "from": 1831,
+   "to": 1845,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Byzantine Empire",
+   "from": 1454,
+   "to": 1474,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Latin Empire",
+   "from": 1262,
+   "to": 1278,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Hamdanid Emirates",
+   "from": 1005,
+   "to": 1259,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Ziyadid dynasty",
+   "from": 1019,
+   "to": 1138,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Han Dynasty",
+   "from": 221,
+   "to": 237,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Hunnic Empire",
+   "from": 470,
+   "to": 673,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Twenty-sixth Dynasty of Egypt",
+   "from": -524,
+   "to": -501,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Shang Dynasty",
+   "from": -1045,
+   "to": -1001,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Zhou Dynasty",
+   "from": -770,
+   "to": -751,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Roman Kingdom",
+   "from": -508,
+   "to": -481,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Kamerun",
+   "from": 1868,
+   "to": 1870,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Estado Novo",
+   "from": 1979,
+   "to": 2024,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Saint Kitts",
+   "from": -9999,
+   "to": 9999,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  },
+  {
+   "name": "Viking settlements",
+   "from": 1067,
+   "to": 1332,
+   "why": "Outside the realm's actual years or a mislabeled shape",
+   "source": "independent review"
+  }
+ ],
+ "rename": [
+  {
+   "name": "Kingdom of Great Britain",
+   "from": 1801,
+   "to": 1921,
+   "new": "United Kingdom of Great Britain and Ireland",
+   "why": "Acts of Union 1800"
+  },
+  {
+   "name": "Kingdom of Great Britain",
+   "from": 1922,
+   "to": 2024,
+   "new": "United Kingdom",
+   "why": "Irish Free State 1922"
+  },
+  {
+   "name": "First Hellenic Republic",
+   "from": 1832,
+   "to": 1923,
+   "new": "Kingdom of Greece",
+   "why": "Monarchy from 1832"
+  },
+  {
+   "name": "First Hellenic Republic",
+   "from": 1924,
+   "to": 1935,
+   "new": "Second Hellenic Republic",
+   "why": "Republic 1924-1935"
+  },
+  {
+   "name": "First Hellenic Republic",
+   "from": 1936,
+   "to": 1940,
+   "new": "Kingdom of Greece",
+   "why": "Monarchy restored 1935"
+  },
+  {
+   "name": "Federated Republic of Germany",
+   "from": -9999,
+   "to": 9999,
+   "new": "Federal Republic of Germany",
+   "why": "Correct name"
+  },
+  {
+   "name": "Kuomintang",
+   "from": 1917,
+   "to": 1923,
+   "new": "Republic of China",
+   "why": "These shapes are all of China, the internationally recognized Republic"
+  },
+  {
+   "name": "Kuomintang",
+   "from": 1924,
+   "to": 1927,
+   "new": "Nationalist Government",
+   "why": "The Kuomintang government in the south before the Northern Expedition ended"
+  },
+  {
+   "name": "Kuomintang",
+   "from": 1928,
+   "to": 1929,
+   "new": "Republic of China",
+   "why": "China reunified under the Nationalists in 1928"
+  },
+  {
+   "name": "Communist Party of China",
+   "from": 1932,
+   "to": 1935,
+   "new": "Chinese Soviet Republic",
+   "why": "A state, not a party"
+  },
+  {
+   "name": "Communist Party of China",
+   "from": 1936,
+   "to": 1948,
+   "new": "Communist-held China",
+   "why": "Base areas"
+  },
+  {
+   "name": "Communist Party of China",
+   "from": 1949,
+   "to": 1949,
+   "new": "People's Republic of China",
+   "why": "Proclaimed 1 October 1949"
+  },
+  {
+   "name": "Estado Novo",
+   "from": 1926,
+   "to": 1932,
+   "new": "Portuguese Republic",
+   "why": "Estado Novo began 1933"
+  },
+  {
+   "name": "Kingdom of Naples (Napoleonic)",
+   "from": -9999,
+   "to": 1805,
+   "new": "Kingdom of Naples",
+   "why": "The Napoleonic kingdom existed only 1806-1815"
+  },
+  {
+   "name": "Sultanate of Malacca",
+   "from": 1512,
+   "to": 1861,
+   "new": "Johor Sultanate",
+   "why": "Malacca fell to Portugal in 1511; its heirs ruled from Johor"
+  },
+  {
+   "name": "Assyrian Egypt",
+   "from": -655,
+   "to": -616,
+   "new": "Twenty-sixth Dynasty of Egypt",
+   "why": "Psamtik I threw off Assyrian rule by 656 B.C."
+  },
+  {
+   "name": "Confederation of the Rhine",
+   "from": 1809,
+   "to": 1814,
+   "new": "Kingdom of Prussia",
+   "why": "This shape is the post-Tilsit Kingdom of Prussia (Berlin to East Prussia, sample point near Berlin); Prussia was never a member of the Confederation of the Rhine.",
+   "source": "independent review"
+  },
+  {
+   "name": "German Confederation",
+   "from": 1815,
+   "to": 1867,
+   "new": "Kingdom of Prussia",
+   "why": "This shape is Prussia (Rhineland to East Prussia, sample point east of Berlin), while the Kingdom of Prussia entry shows only tiny enclaves after 1807; East Prussia was not even inside the German Conf",
+   "source": "independent review"
+  },
+  {
+   "name": "Denmark-Norway",
+   "from": 1814,
+   "to": 1940,
+   "new": "Kingdom of Denmark",
+   "why": "Denmark-Norway ended in 1814 (Treaty of Kiel); from 1814 the shape is Denmark with Iceland, the Faroes and Greenland only.",
+   "source": "independent review"
+  },
+  {
+   "name": "Swedish Empire",
+   "from": 1721,
+   "to": 1814,
+   "new": "Kingdom of Sweden",
+   "why": "The 'Swedish Empire' (great-power era) ended in 1721 with the Treaty of Nystad; afterwards it is simply the Kingdom of Sweden.",
+   "source": "independent review"
+  },
+  {
+   "name": "Republic of Florence",
+   "from": 1532,
+   "to": 1568,
+   "new": "Duchy of Florence",
+   "why": "The Republic of Florence ended in 1532 when Alessandro de' Medici became duke.",
+   "source": "independent review"
+  },
+  {
+   "name": "Republic of Florence",
+   "from": 1569,
+   "to": 1737,
+   "new": "Grand Duchy of Tuscany",
+   "why": "From 1569 Florence was the Grand Duchy of Tuscany, not a republic.",
+   "source": "independent review"
+  },
+  {
+   "name": "County of Savoy",
+   "from": 1416,
+   "to": 1539,
+   "new": "Duchy of Savoy",
+   "why": "Savoy was raised to a duchy in 1416.",
+   "source": "independent review"
+  },
+  {
+   "name": "House of Savoy",
+   "from": 1564,
+   "to": 1720,
+   "new": "Duchy of Savoy",
+   "why": "A dynasty name is used for the state; the polity in 1564-1720 was the Duchy of Savoy (Piedmont-Savoy).",
+   "source": "independent review"
+  },
+  {
+   "name": "Bourbon Kingdom of France",
+   "from": 1830,
+   "to": 1847,
+   "new": "July Monarchy",
+   "why": "The Bourbon Restoration ended with the July Revolution of 1830; 1830-1848 is the Orléanist July Monarchy.",
+   "source": "independent review"
+  },
+  {
+   "name": "(Bourbon Kingdom of France)",
+   "from": 1830,
+   "to": 1848,
+   "new": "(July Monarchy)",
+   "why": "Same composite after 1830 is the July Monarchy, not the Bourbon kingdom.",
+   "source": "independent review"
+  },
+  {
+   "name": "Batavian Republic",
+   "from": 1806,
+   "to": 1810,
+   "new": "Kingdom of Holland",
+   "why": "The Batavian Republic became the Kingdom of Holland under Louis Bonaparte in 1806.",
+   "source": "independent review"
+  },
+  {
+   "name": "(Batavian Republic)",
+   "from": 1806,
+   "to": 1810,
+   "new": "(Kingdom of Holland)",
+   "why": "Same change for the composite.",
+   "source": "independent review"
+  },
+  {
+   "name": "Italian Republic",
+   "from": 1805,
+   "to": 1813,
+   "new": "Kingdom of Italy (Napoleonic)",
+   "why": "The Italian Republic became the Napoleonic Kingdom of Italy in March 1805.",
+   "source": "independent review"
+  },
+  {
+   "name": "Cispadane Republic",
+   "from": 1800,
+   "to": 1802,
+   "new": "Cisalpine Republic",
+   "why": "The Cispadane Republic existed only 1796-1797 before merging into the Cisalpine Republic, which was restored in 1800-1802.",
+   "source": "independent review"
+  },
+  {
+   "name": "Helvetic Republic",
+   "from": 1803,
+   "to": 1814,
+   "new": "Swiss Confederation",
+   "why": "The Act of Mediation replaced the Helvetic Republic with the Swiss Confederation in 1803.",
+   "source": "independent review"
+  },
+  {
+   "name": "Septinsular Republic",
+   "from": 1815,
+   "to": 1819,
+   "new": "United States of the Ionian Islands",
+   "why": "After 1815 the islands were the British-protected United States of the Ionian Islands.",
+   "source": "independent review"
+  },
+  {
+   "name": "Septinsular Republic",
+   "from": 1807,
+   "to": 1814,
+   "new": "French Ionian Islands",
+   "why": "The Septinsular Republic ended in 1807 when the islands passed to France (Tilsit).",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Hanover",
+   "from": 1803,
+   "to": 1804,
+   "new": "Electorate of Hanover",
+   "why": "The Kingdom of Hanover was created only in 1814; in 1803-1804 it was the (French-occupied) Electorate.",
+   "source": "independent review"
+  },
+  {
+   "name": "Empire of Haiti",
+   "from": 1807,
+   "to": 1848,
+   "new": "Republic of Haiti",
+   "why": "The First Empire ended in 1806; Haiti was then a republic (south) and State/Kingdom of Haiti (north) until unification as the Republic in 1820.",
+   "source": "independent review"
+  },
+  {
+   "name": "Empire of Haiti",
+   "from": 1860,
+   "to": 1915,
+   "new": "Republic of Haiti",
+   "why": "The Second Empire ended in 1859; 1860-1915 is the Republic of Haiti.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Monaco",
+   "from": 1815,
+   "to": 1939,
+   "new": "Principality of Monaco",
+   "why": "Monaco was never a kingdom; it is a principality and duplicates the 'Principality of Monaco' entry.",
+   "source": "independent review"
+  },
+  {
+   "name": "United Principalities of Moldavia and Wallachia",
+   "from": 1881,
+   "to": 1916,
+   "new": "Kingdom of Romania",
+   "why": "Romania became a kingdom in 1881.",
+   "source": "independent review"
+  },
+  {
+   "name": "United Principalities of Moldavia and Wallachia",
+   "from": 1866,
+   "to": 1880,
+   "new": "Principality of Romania",
+   "why": "From the 1866 constitution the state was officially Romania (Principality of Romania).",
+   "source": "independent review"
+  },
+  {
+   "name": "Principality of Bulgaria",
+   "from": 1908,
+   "to": 1944,
+   "new": "Tsardom of Bulgaria",
+   "why": "Bulgaria declared independence as a tsardom (kingdom) in 1908.",
+   "source": "independent review"
+  },
+  {
+   "name": "Serbs",
+   "from": 1805,
+   "to": 1813,
+   "new": "Revolutionary Serbia",
+   "why": "An ethnic name is used for a state; 1804-1813 is the First Serbian Uprising state.",
+   "source": "independent review"
+  },
+  {
+   "name": "Serbs",
+   "from": 1815,
+   "to": 1881,
+   "new": "Principality of Serbia",
+   "why": "The state 1815-1882 was the Principality of Serbia.",
+   "source": "independent review"
+  },
+  {
+   "name": "Serbs",
+   "from": 1882,
+   "to": 1915,
+   "new": "Kingdom of Serbia",
+   "why": "Serbia became a kingdom in 1882.",
+   "source": "independent review"
+  },
+  {
+   "name": "Natalia Republic",
+   "from": 1843,
+   "to": 1910,
+   "new": "Colony of Natal",
+   "why": "The Boer Natalia Republic was annexed by Britain in 1843; afterwards it is the Colony of Natal.",
+   "source": "independent review"
+  },
+  {
+   "name": "Argentine Confederation",
+   "from": 1861,
+   "to": 1929,
+   "new": "Argentine Republic",
+   "why": "The Argentine Confederation ended in 1861 (Pavón); the state was the Argentine Republic thereafter.",
+   "source": "independent review"
+  },
+  {
+   "name": "Republic of Colombia",
+   "from": 1866,
+   "to": 1885,
+   "new": "United States of Colombia",
+   "why": "Colombia was the United States of Colombia 1863-1886; the Republic dates from 1886.",
+   "source": "independent review"
+  },
+  {
+   "name": "People's Republic of Zanzibar",
+   "from": 1856,
+   "to": 1889,
+   "new": "Sultanate of Zanzibar",
+   "why": "The 1856-1889 rows are the Sultanate of Zanzibar; the People's Republic existed only in 1964.",
+   "source": "independent review"
+  },
+  {
+   "name": "Omani Slave Coast",
+   "from": 1814,
+   "to": 1855,
+   "new": "Omani East Africa",
+   "why": "'Slave Coast' is the West African Bight of Benin; these are the Omani sultanate's Swahili-coast possessions.",
+   "source": "independent review"
+  },
+  {
+   "name": "Belgian Congo",
+   "from": 1890,
+   "to": 1907,
+   "new": "Congo Free State",
+   "why": "Before 1908 the territory was Leopold II's Congo Free State.",
+   "source": "independent review"
+  },
+  {
+   "name": "Belgian Congo",
+   "from": 1960,
+   "to": 1962,
+   "new": "Ruanda-Urundi",
+   "why": "The 1960-1962 rows are a small shape in Rwanda/Burundi (Belgian trust territory), not the Congo.",
+   "source": "independent review"
+  },
+  {
+   "name": "British Gold Coast",
+   "from": 1900,
+   "to": 1960,
+   "new": "British West Africa",
+   "why": "From c.1900 the shape includes Nigeria (sample point in Nigeria, area ~1.2M km2 vs Gold Coast ~240k); in 1958-1960 it is Nigeria alone after Ghana's independence.",
+   "source": "independent review"
+  },
+  {
+   "name": "British East Africa",
+   "from": 1961,
+   "to": 1972,
+   "new": "British Africa",
+   "why": "The 1961-1968 shape is centred on the Rhodesias and spans southern/west Africa (sample point in Zambia/Zimbabwe), and keeps Kenya and Uganda after independence.",
+   "source": "independent review"
+  },
+  {
+   "name": "Mali Federation",
+   "from": 1961,
+   "to": 2024,
+   "new": "Republic of Mali",
+   "why": "The Mali Federation lasted only 1959-1960; after Senegal left it was the Republic of Mali.",
+   "source": "independent review"
+  },
+  {
+   "name": "Burkina Faso",
+   "from": 1961,
+   "to": 1983,
+   "new": "Republic of Upper Volta",
+   "why": "The country was Upper Volta until 1984.",
+   "source": "independent review"
+  },
+  {
+   "name": "Republic of Benin",
+   "from": 1961,
+   "to": 1974,
+   "new": "Republic of Dahomey",
+   "why": "The country was Dahomey until 1975.",
+   "source": "independent review"
+  },
+  {
+   "name": "Tanzania",
+   "from": 1961,
+   "to": 1963,
+   "new": "Tanganyika",
+   "why": "Tanzania formed from Tanganyika and Zanzibar only in Apr 1964.",
+   "source": "independent review"
+  },
+  {
+   "name": "Hungarian Republic",
+   "from": 1920,
+   "to": 1943,
+   "new": "Kingdom of Hungary",
+   "why": "Interwar Hungary was a kingdom under Regent Horthy, not a republic.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Lithuania",
+   "from": 1919,
+   "to": 1939,
+   "new": "Republic of Lithuania",
+   "why": "The Kingdom of Lithuania existed only on paper in 1918; interwar Lithuania was a republic.",
+   "source": "independent review"
+  },
+  {
+   "name": "Republic of Poland",
+   "from": 1953,
+   "to": 1989,
+   "new": "Polish People's Republic",
+   "why": "Poland was the Polish People's Republic until the end of 1989.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Cambodia",
+   "from": 1970,
+   "to": 1975,
+   "new": "Khmer Republic",
+   "why": "Cambodia was the Khmer Republic Oct 1970-Apr 1975.",
+   "source": "independent review"
+  },
+  {
+   "name": "Khmer Rouge",
+   "from": 1976,
+   "to": 1978,
+   "new": "Democratic Kampuchea",
+   "why": "The Khmer Rouge is the movement; the state was Democratic Kampuchea.",
+   "source": "independent review"
+  },
+  {
+   "name": "People's Republic of Kampuchea",
+   "from": 1993,
+   "to": 1995,
+   "new": "Kingdom of Cambodia",
+   "why": "The monarchy was restored in 1993 (and 1989-1992 was the State of Cambodia).",
+   "source": "independent review"
+  },
+  {
+   "name": "Papua New Guinea",
+   "from": 1946,
+   "to": 1975,
+   "new": "Territory of Papua and New Guinea",
+   "why": "Papua New Guinea became independent only in 1975; before that it was Australian-administered.",
+   "source": "independent review"
+  },
+  {
+   "name": "Qatar Protectorate",
+   "from": 1947,
+   "to": 1955,
+   "new": "Sultanate of Muscat and Oman",
+   "why": "This shape is Oman (sample point at 57.1E 20.9N, 308k km2), not Qatar.",
+   "source": "independent review"
+  },
+  {
+   "name": "Sri Lanka",
+   "from": 1948,
+   "to": 1971,
+   "new": "Dominion of Ceylon",
+   "why": "The island was the Dominion of Ceylon until it became Sri Lanka in 1972.",
+   "source": "independent review"
+  },
+  {
+   "name": "Islamic Republic of Pakistan",
+   "from": 1947,
+   "to": 1955,
+   "new": "Dominion of Pakistan",
+   "why": "Pakistan was a dominion until the 1956 constitution created the Islamic Republic.",
+   "source": "independent review"
+  },
+  {
+   "name": "Republic of India",
+   "from": 1947,
+   "to": 1949,
+   "new": "Dominion of India",
+   "why": "India was a dominion until the constitution took effect on 26 Jan 1950.",
+   "source": "independent review"
+  },
+  {
+   "name": "Zimbabwe Rhodesia",
+   "from": 1980,
+   "to": 1982,
+   "new": "Republic of Zimbabwe",
+   "why": "Zimbabwe Rhodesia lasted June-Dec 1979; Zimbabwe became independent in April 1980.",
+   "source": "independent review"
+  },
+  {
+   "name": "Serbia-Montenegro",
+   "from": 1992,
+   "to": 2002,
+   "new": "Federal Republic of Yugoslavia",
+   "why": "The state was the Federal Republic of Yugoslavia until it was renamed Serbia and Montenegro in 2003.",
+   "source": "independent review"
+  },
+  {
+   "name": "Federated Republic of Brazil",
+   "from": 1967,
+   "to": 1986,
+   "new": "Federative Republic of Brazil",
+   "why": "The official name from 1967 was República Federativa do Brasil (Federative Republic).",
+   "source": "independent review"
+  },
+  {
+   "name": "Libyan Arab Republic",
+   "from": 1977,
+   "to": 2011,
+   "new": "Libyan Arab Jamahiriya",
+   "why": "Libya was renamed the (Great Socialist People's) Libyan Arab Jamahiriya in 1977; after 2011 it is the State of Libya.",
+   "source": "independent review"
+  },
+  {
+   "name": "Eswatini",
+   "from": 1969,
+   "to": 2017,
+   "new": "Kingdom of Swaziland",
+   "why": "The country was renamed Eswatini only in 2018.",
+   "source": "independent review"
+  },
+  {
+   "name": "Socialist Republic of Romania",
+   "from": 1948,
+   "to": 1964,
+   "new": "People's Republic of Romania",
+   "why": "Romania was the People's Republic until 1965.",
+   "source": "independent review"
+  },
+  {
+   "name": "People's Republic of Angola",
+   "from": 1992,
+   "to": 2024,
+   "new": "Republic of Angola",
+   "why": "Angola dropped 'People's' in 1992.",
+   "source": "independent review"
+  },
+  {
+   "name": "Former Yugoslav Republic of Macedonia",
+   "from": 2019,
+   "to": 2024,
+   "new": "North Macedonia",
+   "why": "Renamed North Macedonia in Feb 2019.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Bahrain",
+   "from": 1973,
+   "to": 2001,
+   "new": "State of Bahrain",
+   "why": "Bahrain became a kingdom only in 2002.",
+   "source": "independent review"
+  },
+  {
+   "name": "Guayaquil Junta",
+   "from": 1812,
+   "to": 1813,
+   "new": "State of Quito",
+   "why": "The shape is highland Ecuador around Quito; Guayaquil stayed royalist until 1820, and the 1811-1812 insurgent polity was the State of Quito.",
+   "source": "independent review"
+  },
+  {
+   "name": "Netherlands Antilles",
+   "from": 1815,
+   "to": 1953,
+   "new": "Dutch West Indies",
+   "why": "The Netherlands Antilles was created in 1954; before that the shape (which includes Suriname) was the colonies of Surinam and Curaçao.",
+   "source": "independent review"
+  },
+  {
+   "name": "Poles",
+   "from": 1830,
+   "to": 1833,
+   "new": "Kingdom of Poland (November Uprising)",
+   "why": "An ethnic name is used for the insurgent state of 1830-1831 (Congress Poland in revolt).",
+   "source": "independent review"
+  },
+  {
+   "name": "Khmer Empire",
+   "from": 1431,
+   "to": 1867,
+   "new": "Kingdom of Cambodia",
+   "why": "The Khmer Empire ended with the abandonment of Angkor c.1431; later rows are the post-Angkor Kingdom of Cambodia.",
+   "source": "independent review"
+  },
+  {
+   "name": "Astrakhan Khanate",
+   "from": 1642,
+   "to": 1768,
+   "new": "Don Cossacks",
+   "why": "The Astrakhan Khanate was annexed by Russia in 1556; the 1642-1768 rows are the Don Cossack Host shape (same as the 'Don Cossacks' entry).",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Pajana",
+   "from": 1572,
+   "to": 1587,
+   "new": "Sultanate of Pajang",
+   "why": "Misspelling; the central Javanese state of 1568-1586 is Pajang.",
+   "source": "independent review"
+  },
+  {
+   "name": "First Toungoo Empire",
+   "from": 1599,
+   "to": 1752,
+   "new": "Restored Toungoo dynasty",
+   "why": "The First Toungoo Empire collapsed in 1599; 1599-1752 is the Restored Toungoo (Nyaungyan) dynasty.",
+   "source": "independent review"
+  },
+  {
+   "name": "Konbaung Dynasty",
+   "from": 1741,
+   "to": 1751,
+   "new": "Restored Hanthawaddy Kingdom",
+   "why": "Konbaung was founded in 1752 in Upper Burma; the 1741-1751 shape is Pegu (Lower Burma), the Restored Hanthawaddy Kingdom.",
+   "source": "independent review"
+  },
+  {
+   "name": "Maratha Empire",
+   "from": 1819,
+   "to": 1845,
+   "new": "Gwalior State",
+   "why": "The Maratha Confederacy ended in 1818; the 1820-1845 shape around Gwalior/Malwa is the Scindia princely state.",
+   "source": "independent review"
+  },
+  {
+   "name": "Sur Empire",
+   "from": 1564,
+   "to": 1594,
+   "new": "Karrani Sultanate",
+   "why": "The Sur Empire fell in 1556; the later shapes are Bengal and Odisha under the Karrani Afghans (1564-1576) and their remnants.",
+   "source": "independent review"
+  },
+  {
+   "name": "New France",
+   "from": 1763,
+   "to": 1791,
+   "new": "French West Indies",
+   "why": "Same rows need a label for the French West Indies and Guiana.",
+   "source": "independent review"
+  },
+  {
+   "name": "New Netherland",
+   "from": 1665,
+   "to": 1802,
+   "new": "Dutch Guiana",
+   "why": "Post-1664 shapes are Suriname, Berbice and Essequibo plus Dutch Caribbean posts.",
+   "source": "independent review"
+  },
+  {
+   "name": "Hashemite Arab Federation",
+   "from": 1415,
+   "to": 1432,
+   "new": "Jalayirid Sultanate",
+   "why": "'Hashemite Arab Federation' is the 1958 Iraq-Jordan union; this 15th-century lower-Iraq shape matches the Jalayirid rump state (Hillah, Wasit, Basra), destroyed by the Qara Qoyunlu in 1432.",
+   "source": "independent review"
+  },
+  {
+   "name": "East Turkestan",
+   "from": 1463,
+   "to": 1474,
+   "new": "Eastern Moghulistan",
+   "why": "'East Turkestan' is a modern regional term; in 1462-1474 the Tarim region was the eastern part of divided Moghulistan.",
+   "source": "independent review"
+  },
+  {
+   "name": "Livonian Conference",
+   "from": 1422,
+   "to": 1563,
+   "new": "Livonian Confederation",
+   "why": "Garbled name; the polity is the Livonian Confederation.",
+   "source": "independent review"
+  },
+  {
+   "name": "Gorkha Kingdom",
+   "from": 1768,
+   "to": 1787,
+   "new": "Kingdom of Nepal",
+   "why": "After Prithvi Narayan Shah took Kathmandu in 1768 Gorkha became the Kingdom of Nepal; the dataset's Nepal entry overlaps it 1775-1787.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Bhutan",
+   "from": 1636,
+   "to": 1906,
+   "new": "Bhutan",
+   "why": "The hereditary Kingdom of Bhutan dates from 1907; earlier it was the Zhabdrung theocratic state.",
+   "source": "independent review"
+  },
+  {
+   "name": "Small Horde",
+   "from": 1564,
+   "to": 1737,
+   "new": "Lesser Nogai Horde",
+   "why": "The polity is the Lesser (Kichi) Nogai Horde; 'Small Horde' normally means the Kazakh Junior Zhuz.",
+   "source": "independent review"
+  },
+  {
+   "name": "Đại Việt",
+   "from": 1683,
+   "to": 1833,
+   "new": "Champa (Panduranga)",
+   "why": "These rows are a tiny shape at Phan Rang (108.9E 11.8N), the last Cham principality (Thuận Thành), not Đại Việt; Champa itself wrongly ends in 1652.",
+   "source": "independent review"
+  },
+  {
+   "name": "Napoleonic Batavia Republic",
+   "from": 1803,
+   "to": 1805,
+   "new": "Cape Colony (Batavian Republic)",
+   "why": "Garbled label for the Cape under Batavian rule 1803-1806.",
+   "source": "independent review"
+  },
+  {
+   "name": "Nicaean Empire",
+   "from": 1261,
+   "to": 1278,
+   "new": "Byzantine Empire",
+   "why": "After retaking Constantinople in 1261 the Nicaean state was the restored Byzantine Empire.",
+   "source": "independent review"
+  },
+  {
+   "name": "Caliphate of Córdoba",
+   "from": 1031,
+   "to": 1071,
+   "new": "Taifa of Córdoba",
+   "why": "The Caliphate was abolished in 1031; the small Córdoba-only rows after that are the Jahwarid taifa.",
+   "source": "independent review"
+  },
+  {
+   "name": "County of Ribagorza",
+   "from": 866,
+   "to": 1084,
+   "new": "Kingdom of Pamplona",
+   "why": "The shape sits around Pamplona (1.9W 42.9N) and in 1034-1039 covers Sancho III's realm (172k km2); Ribagorza was a small Pyrenean county.",
+   "source": "independent review"
+  },
+  {
+   "name": "County of Urgell",
+   "from": 1279,
+   "to": 1808,
+   "new": "Andorra",
+   "why": "The 1279-1808 rows are a ~400 km2 shape at Andorra (1.6E 42.5N); Urgell was annexed by Aragon in 1413, while Andorra dates from the 1278 paréage.",
+   "source": "independent review"
+  },
+  {
+   "name": "Mahdids",
+   "from": 1169,
+   "to": 1506,
+   "new": "Nabhani dynasty",
+   "why": "Labels are swapped: this shape is in Oman, ruled by the Nabhani dynasty; the Mahdids ruled Zabid in Yemen.",
+   "source": "independent review"
+  },
+  {
+   "name": "Nabhani Dynasty",
+   "from": 1169,
+   "to": 1176,
+   "new": "Mahdids",
+   "why": "Labels are swapped: this Yemen shape (continuing the Najahid shape) is the Mahdid state of Zabid (1159-1174).",
+   "source": "independent review"
+  },
+  {
+   "name": "Almohad Caliphate",
+   "from": 1260,
+   "to": 1343,
+   "new": "Marinid Sultanate",
+   "why": "The Almohads lost Marrakesh to the Marinids in 1269; the 1260-1343 Morocco shape is identical to the Marinid shape, which has a gap in exactly these years.",
+   "source": "independent review"
+  },
+  {
+   "name": "Ngô Dynasty",
+   "from": 966,
+   "to": 979,
+   "new": "Đinh dynasty",
+   "why": "The Ngô dynasty ended in 965; Đinh Bộ Lĩnh founded Đại Cồ Việt in 968.",
+   "source": "independent review"
+  },
+  {
+   "name": "Ngô Dynasty",
+   "from": 980,
+   "to": 1009,
+   "new": "Early Lê dynasty",
+   "why": "Vietnam was ruled by the Early Lê 980-1009.",
+   "source": "independent review"
+  },
+  {
+   "name": "Ngô Dynasty",
+   "from": 1010,
+   "to": 1225,
+   "new": "Lý dynasty",
+   "why": "Vietnam (Đại Việt) was ruled by the Lý 1009-1225.",
+   "source": "independent review"
+  },
+  {
+   "name": "Ngô Dynasty",
+   "from": 1226,
+   "to": 1399,
+   "new": "Trần dynasty",
+   "why": "Đại Việt was ruled by the Trần 1225-1400.",
+   "source": "independent review"
+  },
+  {
+   "name": "Ngô Dynasty",
+   "from": 1400,
+   "to": 1406,
+   "new": "Hồ dynasty",
+   "why": "Hồ Quý Ly's Đại Ngu 1400-1407.",
+   "source": "independent review"
+  },
+  {
+   "name": "Chámpa",
+   "from": 207,
+   "to": 1652,
+   "new": "Champa",
+   "why": "Garbled spelling with a stray accent.",
+   "source": "independent review"
+  },
+  {
+   "name": "Serbian Empire",
+   "from": 1371,
+   "to": 1401,
+   "new": "Moravian Serbia",
+   "why": "The Serbian Empire dissolved in 1371; the 1375-1401 shape is Prince Lazar's Moravian Serbia.",
+   "source": "independent review"
+  },
+  {
+   "name": "Serbian Empire",
+   "from": 1402,
+   "to": 1458,
+   "new": "Serbian Despotate",
+   "why": "1402-1459 is the Serbian Despotate.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Serbia",
+   "from": 1188,
+   "to": 1216,
+   "new": "Grand Principality of Serbia",
+   "why": "Serbia became a kingdom with Stefan's coronation in 1217.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Georgia",
+   "from": 1490,
+   "to": 1762,
+   "new": "Kingdom of Kartli",
+   "why": "The united Georgian kingdom split in 1490; these rows (43-46E around Tbilisi) are Kartli, and the 'Kingdom of Kartli' entry fills the gaps.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Georgia",
+   "from": 1762,
+   "to": 1802,
+   "new": "Kingdom of Kartli-Kakheti",
+   "why": "1762-1801 is the Kingdom of Kartli-Kakheti.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Bosnia",
+   "from": 1463,
+   "to": 1481,
+   "new": "Duchy of Saint Sava",
+   "why": "Bosnia fell to the Ottomans in 1463; the 1463-1481 shape is Herzegovina (Duchy of Saint Sava), which fell in 1482.",
+   "source": "independent review"
+  },
+  {
+   "name": "Electorate of Trier",
+   "from": 1333,
+   "to": 1618,
+   "new": "Electoral Palatinate",
+   "why": "The shape covers the Rhenish and Upper Palatinate (7.0-13.0E, sample point near Amberg) and excludes Trier itself (6.6E).",
+   "source": "independent review"
+  },
+  {
+   "name": "Duchy of Styria",
+   "from": 1272,
+   "to": 1501,
+   "new": "County of Gorizia",
+   "why": "The shape is a small territory at Gorizia (13.4E 46.1N), whose counts died out in 1500; Styria lies at 13.6-16.2E.",
+   "source": "independent review"
+  },
+  {
+   "name": "Duchy of Styria",
+   "from": 1260,
+   "to": 1271,
+   "new": "County of Tyrol",
+   "why": "The 1260-1271 shape is Tyrol (10.1-13.6E, sample point near Innsbruck).",
+   "source": "independent review"
+  },
+  {
+   "name": "County of Brabant",
+   "from": 1260,
+   "to": 1430,
+   "new": "Duchy of Brabant",
+   "why": "Brabant was a duchy from 1183.",
+   "source": "independent review"
+  },
+  {
+   "name": "County of Blôis",
+   "from": 990,
+   "to": 1401,
+   "new": "County of Blois",
+   "why": "Misspelling.",
+   "source": "independent review"
+  },
+  {
+   "name": "Principality of Polotsky",
+   "from": 1056,
+   "to": 1249,
+   "new": "Principality of Polotsk",
+   "why": "Garbled (adjectival) form of Polotsk.",
+   "source": "independent review"
+  },
+  {
+   "name": "Halych-Volhynia occupation",
+   "from": 1056,
+   "to": 1240,
+   "new": "Cumania",
+   "why": "The shape is the Pontic steppe (22-39E, 44-50N) held by the Cumans until the Mongol invasion; Galicia-Volhynia formed only in 1199 and lay further north.",
+   "source": "independent review"
+  },
+  {
+   "name": "Barghawata Conference",
+   "from": 793,
+   "to": 1065,
+   "new": "Barghawata Confederation",
+   "why": "Garbled name.",
+   "source": "independent review"
+  },
+  {
+   "name": "Jaemtland",
+   "from": 947,
+   "to": 1187,
+   "new": "Jämtland",
+   "why": "Garbled spelling.",
+   "source": "independent review"
+  },
+  {
+   "name": "Chüzan",
+   "from": 1314,
+   "to": 1428,
+   "new": "Chūzan",
+   "why": "Wrong diacritic (macron, not umlaut).",
+   "source": "independent review"
+  },
+  {
+   "name": "Sind-Habbari Dynasty",
+   "from": 1026,
+   "to": 1201,
+   "new": "Soomra dynasty",
+   "why": "The Habbari emirate ended with Mahmud of Ghazni's conquest c.1026; later Sindh rows are the Soomra period.",
+   "source": "independent review"
+  },
+  {
+   "name": "(Holy Roman Empire)",
+   "from": 922,
+   "to": 961,
+   "new": "(Kingdom of Germany)",
+   "why": "The Holy Roman Empire dates from Otto I's coronation in 962; the 922-961 composite contains only the Kingdom of Germany.",
+   "source": "independent review"
+  },
+  {
+   "name": "Holy Roman Empire",
+   "from": 1619,
+   "to": 1621,
+   "new": "Bohemian Confederation",
+   "why": "The 1619-1621 plain row covers Bohemia, Silesia and the Palatinate, Frederick V's realm during the Bohemian Revolt, not the Empire.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Castile",
+   "from": 961,
+   "to": 1035,
+   "new": "County of Castile",
+   "why": "Castile was a county until Ferdinand I took the royal title.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Poland",
+   "from": 962,
+   "to": 1024,
+   "new": "Duchy of Poland",
+   "why": "Poland became a kingdom with Bolesław I's coronation in 1025.",
+   "source": "independent review"
+  },
+  {
+   "name": "Novgorod Republic",
+   "from": 1056,
+   "to": 1135,
+   "new": "Principality of Novgorod",
+   "why": "The Novgorod Republic is conventionally dated from the expulsion of Prince Vsevolod in 1136.",
+   "source": "independent review"
+  },
+  {
+   "name": "House of Jagiellon",
+   "from": 1450,
+   "to": 1571,
+   "new": "Poland-Lithuania",
+   "why": "A dynasty name stands in for the Polish-Lithuanian union, so Poland and Lithuania vanish as named states 1450-1571.",
+   "source": "independent review"
+  },
+  {
+   "name": "Lower Burgundy",
+   "from": 860,
+   "to": 869,
+   "new": "Middle Franks",
+   "why": "The 860-869 shape runs from Provence to Frisia (Lotharingia plus Provence), the Middle Frankish kingdoms, not Lower Burgundy.",
+   "source": "independent review"
+  },
+  {
+   "name": "Western Jin",
+   "from": 317,
+   "to": 425,
+   "new": "Eastern Jin",
+   "why": "Western Jin ended in 316; the southern state 317-420 is Eastern Jin.",
+   "source": "independent review"
+  },
+  {
+   "name": "Later Jin",
+   "from": 911,
+   "to": 921,
+   "new": "Jin",
+   "why": "Later Jin was 936-947; the 911-921 shape in northern Shanxi is Li Cunxu's Jin, the Later Tang precursor (the dataset's 'Former Jin').",
+   "source": "independent review"
+  },
+  {
+   "name": "Later Han",
+   "from": 951,
+   "to": 959,
+   "new": "Later Zhou",
+   "why": "Later Han fell to Later Zhou in 951.",
+   "source": "independent review"
+  },
+  {
+   "name": "Southern Wu",
+   "from": 937,
+   "to": 959,
+   "new": "Southern Tang",
+   "why": "Wu was replaced by Southern Tang in 937.",
+   "source": "independent review"
+  },
+  {
+   "name": "Later Jin Dynasty",
+   "from": 1636,
+   "to": 1644,
+   "new": "Qing Dynasty",
+   "why": "Hong Taiji renamed Later Jin as Qing in 1636.",
+   "source": "independent review"
+  },
+  {
+   "name": "Georgia",
+   "from": 778,
+   "to": 1009,
+   "new": "Kingdom of Abkhazia",
+   "why": "Before unification in 1008 this western Georgian shape is the Kingdom of Abkhazia.",
+   "source": "independent review"
+  },
+  {
+   "name": "Georgia",
+   "from": 724,
+   "to": 777,
+   "new": "Principality of Abkhazia",
+   "why": "The 724-777 shape is coastal Abkhazia (40.5E 43.4N), a Byzantine-allied principality.",
+   "source": "independent review"
+  },
+  {
+   "name": "Georgia",
+   "from": 638,
+   "to": 646,
+   "new": "Principality of Iberia",
+   "why": "The 638-646 shape is Kartli (Iberia).",
+   "source": "independent review"
+  },
+  {
+   "name": "Georgia",
+   "from": 567,
+   "to": 576,
+   "new": "Lazica",
+   "why": "The 567-576 shape is western Georgia, i.e. Lazica.",
+   "source": "independent review"
+  },
+  {
+   "name": "Frisia Kingdom",
+   "from": 612,
+   "to": 717,
+   "new": "Duchy of Alamannia",
+   "why": "The shape is in Swabia/Alsace (sample point 8.9E 48.6N), identical to the later 'Kingdom of Alamannia' shape; Frisia lies 500 km north.",
+   "source": "independent review"
+  },
+  {
+   "name": "Türgesh",
+   "from": 692,
+   "to": 749,
+   "new": "Second Turkic Khaganate",
+   "why": "The 4M km2 Mongolia-centred shape (sample point 94.3E 44.9N) is the Second Turkic Khaganate; the Türgesh were in Zhetysu.",
+   "source": "independent review"
+  },
+  {
+   "name": "Turks",
+   "from": 692,
+   "to": 756,
+   "new": "Türgesh",
+   "why": "This Zhetysu/Talas shape (72.9E 41.7N) matches the Türgesh khaganate (699-766).",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Armenia",
+   "from": 429,
+   "to": 489,
+   "new": "Marzpanate of Armenia",
+   "why": "The Arsacid kingdom was abolished in 428; afterwards Armenia was a Sasanian marzpanate.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Armenia",
+   "from": 638,
+   "to": 646,
+   "new": "Principality of Armenia",
+   "why": "The 638-646 rows are the early Arab-period Principality of Armenia.",
+   "source": "independent review"
+  },
+  {
+   "name": "Himyarite Kingdom",
+   "from": 570,
+   "to": 601,
+   "new": "Sasanian Yemen",
+   "why": "Himyar fell to Aksum in 525 and Yemen was Sasanian from c.570.",
+   "source": "independent review"
+  },
+  {
+   "name": "Wihtgar",
+   "from": 523,
+   "to": 691,
+   "new": "Wihtwara",
+   "why": "Wihtgar is a legendary king; the polity is the Wihtwara kingdom.",
+   "source": "independent review"
+  },
+  {
+   "name": "Kingdom of Italy",
+   "from": 587,
+   "to": 774,
+   "new": "Kingdom of the Lombards",
+   "why": "The 587-774 rows are the Lombard kingdom; the medieval Kingdom of Italy begins after Charlemagne's conquest of 774.",
+   "source": "independent review"
+  },
+  {
+   "name": "Duchy of Benevento",
+   "from": 774,
+   "to": 1084,
+   "new": "Principality of Benevento",
+   "why": "Arechis II made Benevento a principality in 774.",
+   "source": "independent review"
+  },
+  {
+   "name": "Protectorate of the Western Regions",
+   "from": 387,
+   "to": 601,
+   "new": "Tarim Basin city-states",
+   "why": "The Han protectorate (and Jin chief officials) were long gone by the 5th-6th centuries, when the Tarim states answered to the Rouran, Hephthalites and Turks.",
+   "source": "independent review"
+  },
+  {
+   "name": "Byeonhan",
+   "from": 300,
+   "to": 566,
+   "new": "Gaya confederacy",
+   "why": "Byeonhan developed into the Gaya confederacy by the 3rd-4th century; Gaya fell to Silla in 562.",
+   "source": "independent review"
+  },
+  {
+   "name": "Duchy of Bavaria",
+   "from": 1623,
+   "to": 1805,
+   "new": "Electorate of Bavaria",
+   "why": "Bavaria received the electoral dignity in 1623.",
+   "source": "independent review"
+  },
+  {
+   "name": "Later Zhou",
+   "from": -750,
+   "to": -257,
+   "new": "Eastern Zhou",
+   "why": "The -750 to -257 rows are the Eastern Zhou royal domain at Luoyang; Later Zhou was a Five Dynasties state of 951-960.",
+   "source": "independent review"
+  },
+  {
+   "name": "Zhai",
+   "from": -208,
+   "to": -207,
+   "new": "Qin Dynasty",
+   "why": "The -208/-207 row is a 1.6M km2 shape covering most of China, i.e. the collapsing Qin dynasty; Zhai was a small Shaanxi kingdom (its 1-row 26k km2 shape follows).",
+   "source": "independent review"
+  },
+  {
+   "name": "Great Yuan",
+   "from": -110,
+   "to": 50,
+   "new": "Dayuan",
+   "why": "The Fergana state is known as Dayuan; 'Great Yuan' collides with the Yuan dynasty (and the wiki link points to it).",
+   "source": "independent review"
+  },
+  {
+   "name": "New Kingdom of Egypt",
+   "from": -1000,
+   "to": -801,
+   "new": "Third Intermediate Period of Egypt",
+   "why": "The New Kingdom ended c.1070 BC; -1000 to -801 is the Third Intermediate Period (21st/22nd Dynasties).",
+   "source": "independent review"
+  },
+  {
+   "name": "Hyksos",
+   "from": -1500,
+   "to": -1401,
+   "new": "Canaanite city-states",
+   "why": "The Hyksos were expelled c.1550 BC; this Levant-only shape is the Canaanite city-states under Egyptian hegemony.",
+   "source": "independent review"
+  },
+  {
+   "name": "Ptolemaic Kingdom",
+   "from": -331,
+   "to": -324,
+   "new": "Macedonian Empire",
+   "why": "These rows are Alexander's empire (the -326/-324 row reaches the Indus, sample point in Iran), while 'Macedonian Empire' shows only Macedon; the Ptolemaic kingdom dates from 305 BC.",
+   "source": "independent review"
+  },
+  {
+   "name": "Sacred Band of Thebes",
+   "from": -366,
+   "to": -351,
+   "new": "Thebes (Boeotian League)",
+   "why": "The Sacred Band was a military unit, not a state.",
+   "source": "independent review"
+  },
+  {
+   "name": "Italian City-States",
+   "from": -91,
+   "to": -88,
+   "new": "Italic Confederation (Social War)",
+   "why": "The label suggests medieval Italy; these are the Italian allies in revolt against Rome, 91-88 BC.",
+   "source": "independent review"
+  },
+  {
+   "name": "(Phoenician Empire)",
+   "from": -1150,
+   "to": -501,
+   "new": "(Phoenician city-states)",
+   "why": "There was no Phoenician empire; Phoenicia was a set of independent city-states.",
+   "source": "independent review"
+  },
+  {
+   "name": "Mahajanapadas",
+   "from": -480,
+   "to": -451,
+   "new": "Janapada of Vajji",
+   "why": "A period name is used for one row that continues the Vajji shape at the same spot.",
+   "source": "independent review"
+  },
+  {
+   "name": "Estado Novo",
+   "from": 1975,
+   "to": 1978,
+   "new": "Portugal",
+   "why": "Carnation Revolution 1974"
+  },
+  {
+   "name": "Kingdom of England",
+   "from": 1707,
+   "to": 1708,
+   "new": "Kingdom of Great Britain",
+   "why": "Acts of Union 1707"
+  },
+  {
+   "name": "Taliban",
+   "from": 2002,
+   "to": 2005,
+   "new": "Islamic Republic of Afghanistan",
+   "why": "The Taliban fell in late 2001"
+  },
+  {
+   "name": "Mujahideen",
+   "from": 1987,
+   "to": 1991,
+   "new": "Republic of Afghanistan",
+   "why": "Najibullah's government held Kabul until April 1992"
+  },
+  {
+   "name": "Mujahideen",
+   "from": 1992,
+   "to": 1995,
+   "new": "Islamic State of Afghanistan",
+   "why": "The mujahideen government 1992-1996"
+  },
+  {
+   "name": "Mujahideen",
+   "from": 2014,
+   "to": 2024,
+   "new": "Non-government-held Syria",
+   "why": "These rows are eastern and northern Syria outside government control, unrelated to the Afghan mujahideen"
+  },
+  {
+   "name": "Russian Republic",
+   "from": 1918,
+   "to": 1919,
+   "new": "Russian SFSR",
+   "why": "The Russian Republic ended in January 1918"
+  },
+  {
+   "name": "New Caledonia",
+   "from": 1856,
+   "to": 1859,
+   "new": "French colonial empire",
+   "why": "The shape spans French possessions from Reunion to Cochinchina"
+  },
+  {
+   "name": "Mughal Empire",
+   "from": 1772,
+   "to": 1856,
+   "new": "Rajput states",
+   "why": "These late shapes lie over Rajputana; the Mughal emperor held little beyond Delhi"
+  },
+  {
+   "name": "Netherlands Antilles",
+   "from": 2011,
+   "to": 2024,
+   "new": "Dutch Caribbean",
+   "why": "The Netherlands Antilles dissolved in 2010"
+  },
+  {
+   "name": "(Carolingian Empire)",
+   "from": 888,
+   "to": 989,
+   "new": "(West Francia)",
+   "why": "The Carolingian Empire broke up in 887-888"
+  },
+  {
+   "name": "South Africa",
+   "from": 1932,
+   "to": 1960,
+   "new": "Union of South Africa",
+   "why": "Republic from 1961"
+  },
+  {
+   "name": "Éire",
+   "from": 1949,
+   "to": 2024,
+   "new": "Republic of Ireland",
+   "why": "Republic of Ireland Act 1949"
+  },
+  {
+   "name": "Hungarian Nationalists",
+   "from": 1956,
+   "to": 1957,
+   "new": "Hungarian People's Republic",
+   "why": "The 1956 revolution lasted weeks; the state remained the Hungarian People's Republic"
+  },
+  {
+   "name": "Hungarian Nationalists",
+   "from": 1848,
+   "to": 1850,
+   "new": "Hungarian State",
+   "why": "The revolutionary Hungarian State of 1849"
+  },
+  {
+   "name": "Communist Cuba",
+   "from": -9999,
+   "to": 9999,
+   "new": "Republic of Cuba",
+   "why": "Official name"
+  },
+  {
+   "name": "People's Socialist Republic of Albania",
+   "from": 1946,
+   "to": 1975,
+   "new": "People's Republic of Albania",
+   "why": "Renamed in 1976"
+  },
+  {
+   "name": "Socialist Federal Republic of Yugoslavia",
+   "from": 1946,
+   "to": 1962,
+   "new": "Federal People's Republic of Yugoslavia",
+   "why": "Renamed in 1963"
+  },
+  {
+   "name": "Kingdom of Bulgaria",
+   "from": 1947,
+   "to": 1947,
+   "new": "People's Republic of Bulgaria",
+   "why": "The monarchy was abolished in September 1946"
+  }
+ ],
+ "fill": [
+  {
+   "name": "Mexico",
+   "from": 1913,
+   "to": 1919,
+   "copy_year": 1912,
+   "why": "Gap during the Mexican Revolution"
+  },
+  {
+   "name": "Republic of China",
+   "from": 1924,
+   "to": 1927,
+   "copy_year": 1914,
+   "minus": [
+    "Nationalist Government"
+   ],
+   "why": "The Beiyang government held the north while the Nationalists held the south"
+  }
+ ],
+ "cut": [
+  {
+   "name": "Kingdom of Spain",
+   "from": 1714,
+   "to": 1716,
+   "bbox": [
+    6,
+    36,
+    19,
+    47.5
+   ],
+   "why": "Spain lost its Italian lands at Utrecht"
+  },
+  {
+   "name": "Kingdom of Spain",
+   "from": 1721,
+   "to": 1800,
+   "bbox": [
+    6,
+    36,
+    19,
+    47.5
+   ],
+   "why": "Spain lost its Italian lands at Utrecht; Naples and Sicily were a separate Bourbon kingdom from 1734"
+  },
+  {
+   "name": "Spanish Empire",
+   "from": 1714,
+   "to": 1716,
+   "bbox": [
+    6,
+    36,
+    19,
+    47.5
+   ],
+   "why": "As above"
+  },
+  {
+   "name": "Spanish Empire",
+   "from": 1721,
+   "to": 1800,
+   "bbox": [
+    6,
+    36,
+    19,
+    47.5
+   ],
+   "why": "As above"
+  },
+  {
+   "name": "Communist-held China",
+   "from": 1938,
+   "to": 1945,
+   "region": {
+    "name": "People's Republic of China",
+    "year": 1960,
+    "bbox": [
+     73,
+     34,
+     96.5,
+     50
+    ]
+   },
+   "give_to": "Republic of China",
+   "give_to_years": [
+    1938,
+    1942
+   ],
+   "why": "Xinjiang was never held by the Communists; it was a Nationalist province under Sheng Shicai"
+  },
+  {
+   "name": "Union of Soviet Socialist Republics",
+   "from": 1930,
+   "to": 1949,
+   "region": {
+    "name": "People's Republic of China",
+    "year": 1960,
+    "bbox": [
+     73,
+     34,
+     96.5,
+     50
+    ]
+   },
+   "why": "Xinjiang was Chinese"
+  },
+  {
+   "name": "Union of Soviet Socialist Republics",
+   "from": 1947,
+   "to": 1949,
+   "region": {
+    "name": "Republic of China",
+    "year": 1946,
+    "bbox": [
+     118,
+     38,
+     135.5,
+     54
+    ]
+   },
+   "why": "Soviet forces left Manchuria in 1946"
+  },
+  {
+   "name": "Johor Sultanate",
+   "from": 1512,
+   "to": 1861,
+   "bbox": [
+    105,
+    -9,
+    116,
+    -5.5
+   ],
+   "why": "Johor never held Java"
+  },
+  {
+   "name": "Republic of China",
+   "from": 1950,
+   "to": 2024,
+   "bbox": [
+    108,
+    17.5,
+    111.5,
+    20.5
+   ],
+   "why": "Hainan fell to the People's Republic in 1950"
+  },
+  {
+   "name": "French Fourth Republic",
+   "from": 1950,
+   "to": 1958,
+   "region": {
+    "name": "Federal Republic of Germany",
+    "year": 2000
+   },
+   "why": "Occupation ended with the founding of the two German states"
+  },
+  {
+   "name": "French Fifth Republic",
+   "from": 1959,
+   "to": 2024,
+   "region": {
+    "name": "Federal Republic of Germany",
+    "year": 2000
+   },
+   "why": "Leftover French sector shapes inside Germany"
+  },
+  {
+   "name": "Neo-Assyrian Empire",
+   "from": -655,
+   "to": -601,
+   "bbox": [
+    24,
+    21,
+    35.2,
+    32.2
+   ],
+   "why": "Egypt was independent under the Saite kings from 656 B.C."
+  },
+  {
+   "name": "Twenty-sixth Dynasty of Egypt",
+   "from": -655,
+   "to": -616,
+   "keep_bbox": [
+    24,
+    21,
+    35.2,
+    32.2
+   ],
+   "why": "Keep only Egypt from the shape that also covered Assyria"
+  },
+  {
+   "name": "United States of America",
+   "from": 1950,
+   "to": 2024,
+   "region": {
+    "name": "Federal Republic of Germany",
+    "year": 2000
+   },
+   "why": "Leftover occupation shapes inside Germany, including the American sector of Berlin"
+  },
+  {
+   "name": "United Kingdom",
+   "from": 1950,
+   "to": 2024,
+   "region": {
+    "name": "Federal Republic of Germany",
+    "year": 2000
+   },
+   "why": "Leftover occupation shapes inside Germany"
+  },
+  {
+   "name": "Union of Soviet Socialist Republics",
+   "from": 1950,
+   "to": 1991,
+   "region": {
+    "name": "Federal Republic of Germany",
+    "year": 2000
+   },
+   "why": "Leftover occupation shapes inside Germany"
+  },
+  {
+   "name": "Kingdom of Naples (Napoleonic)",
+   "from": 1806,
+   "to": 1815,
+   "bbox": [
+    12.3,
+    36.5,
+    15.7,
+    38.4
+   ],
+   "give_to": "Kingdom of Sicily",
+   "give_to_years": [
+    1806,
+    1815
+   ],
+   "why": "Sicily stayed under the Bourbon king with British protection"
+  },
+  {
+   "name": "Kingdom of Spain",
+   "from": 1529,
+   "to": 1555,
+   "bbox": [
+    9.5,
+    46.3,
+    25,
+    51.5
+   ],
+   "give_to": "Habsburg Monarchy",
+   "give_to_years": [
+    1529,
+    1555
+   ],
+   "why": "Austria, Bohemia and Royal Hungary belonged to Ferdinand I"
+  },
+  {
+   "name": "Kingdom of Spain",
+   "from": 1529,
+   "to": 1555,
+   "bbox": [
+    12.5,
+    44.5,
+    25,
+    46.3
+   ],
+   "give_to": "Habsburg Monarchy",
+   "give_to_years": [
+    1529,
+    1555
+   ],
+   "why": "Inner Austria and Croatia belonged to Ferdinand I"
+  },
+  {
+   "name": "Austrian Empire",
+   "from": 1815,
+   "to": 1859,
+   "bbox": [
+    9.6,
+    42.2,
+    12.4,
+    44.5
+   ],
+   "give_to": "Grand Duchy of Tuscany",
+   "give_to_years": [
+    1815,
+    1859
+   ],
+   "why": "Tuscany was a separate grand duchy"
+  },
+  {
+   "name": "Habsburg Monarchy",
+   "from": 1738,
+   "to": 1799,
+   "bbox": [
+    9.6,
+    42.2,
+    12.4,
+    44.5
+   ],
+   "give_to": "Grand Duchy of Tuscany",
+   "give_to_years": [
+    1738,
+    1799
+   ],
+   "why": "Tuscany was a separate grand duchy under a Habsburg-Lorraine cadet line"
+  },
+  {
+   "name": "United States of America",
+   "from": 1822,
+   "to": 1847,
+   "bbox": [
+    -11.6,
+    4.3,
+    -7.3,
+    8.6
+   ],
+   "give_to": "Liberia",
+   "give_to_years": [
+    1822,
+    1847
+   ],
+   "why": "Liberia was never US territory"
+  },
+  {
+   "name": "Qajar Dynasty",
+   "from": 1895,
+   "to": 1897,
+   "bbox": [
+    90,
+    -11,
+    142,
+    8
+   ],
+   "why": "Mislabeled Dutch East Indies shape"
+  },
+  {
+   "name": "Dutch Gold Coast",
+   "from": 1861,
+   "to": 1872,
+   "bbox": [
+    2.7,
+    6.2,
+    4.5,
+    7.0
+   ],
+   "why": "Lagos was British from 1861"
+  },
+  {
+   "name": "Sultanate of Brunei",
+   "from": 1512,
+   "to": 1581,
+   "bbox": [
+    121.8,
+    5,
+    127,
+    10
+   ],
+   "why": "Mindanao was never Bruneian"
+  },
+  {
+   "name": "Kingdom of Axum",
+   "from": 571,
+   "to": 601,
+   "bbox": [
+    42.5,
+    12.4,
+    54.5,
+    19.5
+   ],
+   "why": "Aksumite rule in Yemen ended c. 570"
+  }
+ ],
+ "subtract": [
+  {
+   "name": "Kingdom of Axum",
+   "from": 290,
+   "to": 524,
+   "minus": [
+    "Himyarite Kingdom"
+   ],
+   "why": "Aksum conquered Himyar only in 525"
+  },
+  {
+   "name": "Chola Empire",
+   "from": 1070,
+   "to": 1100,
+   "minus": [
+    "Kingdom of Polonnaruwa"
+   ],
+   "why": "The Cholas were driven from Sri Lanka in 1070"
+  },
+  {
+   "name": "Spanish Empire",
+   "from": 1865,
+   "to": 1870,
+   "minus": [
+    "Dominican Republic"
+   ],
+   "why": "Spain left Santo Domingo in 1865"
+  },
+  {
+   "name": "Papal States",
+   "from": 1809,
+   "to": 1814,
+   "minus": [
+    "First French Empire"
+   ],
+   "why": "Rome was annexed to France in 1809"
+  },
+  {
+   "name": "Kingdom of Sardinia",
+   "from": 1802,
+   "to": 1814,
+   "minus": [
+    "First French Empire",
+    "French Consulate"
+   ],
+   "why": "Piedmont was annexed to France in 1802"
+  },
+  {
+   "name": "Republic of China",
+   "from": 1950,
+   "to": 2024,
+   "minus": [
+    "People's Republic of China"
+   ],
+   "why": "Mainland territory lost in 1949-1950"
+  }
+ ],
+ "occupy": [
+  {
+   "occupiers": [
+    "Nazi Germany"
+   ],
+   "from": 1939,
+   "to": 1945,
+   "outside": {
+    "name": "Nazi Germany",
+    "year": 1938
+   },
+   "new": "German-occupied territory",
+   "overlord": "Nazi Germany",
+   "why": "Conquered lands, shown as occupied rather than as Germany"
+  },
+  {
+   "occupiers": [
+    "Empire of Japan"
+   ],
+   "from": 1931,
+   "to": 1945,
+   "outside": {
+    "name": "Empire of Japan",
+    "year": 1930
+   },
+   "new": "Japanese-occupied territory",
+   "overlord": "Empire of Japan",
+   "why": "Manchuria from 1931, China and Southeast Asia later"
+  },
+  {
+   "occupiers": [
+    "United States of America"
+   ],
+   "from": 1945,
+   "to": 1952,
+   "inside": {
+    "name": "Japan",
+    "year": 1980
+   },
+   "new": "Occupied Japan",
+   "overlord": "United States of America",
+   "why": "Allied occupation of Japan 1945-1952"
+  },
+  {
+   "occupiers": [
+    "United States of America"
+   ],
+   "from": 1945,
+   "to": 1948,
+   "inside": {
+    "names": [
+     "Republic of Korea",
+     "Democratic People's Republic of Korea"
+    ],
+    "year": 1980
+   },
+   "new": "US-occupied Korea",
+   "overlord": "United States of America",
+   "why": "1945-1948"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1948,
+   "inside": {
+    "names": [
+     "Republic of Korea",
+     "Democratic People's Republic of Korea"
+    ],
+    "year": 1980
+   },
+   "new": "Soviet-occupied Korea",
+   "overlord": "Union of Soviet Socialist Republics",
+   "why": "1945-1948"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1946,
+   "inside": {
+    "name": "Republic of China",
+    "year": 1946,
+    "bbox": [
+     118,
+     38,
+     135.5,
+     54
+    ]
+   },
+   "new": "Soviet-occupied Manchuria",
+   "overlord": "Union of Soviet Socialist Republics",
+   "why": "August 1945 to May 1946"
+  },
+  {
+   "occupiers": [
+    "United States of America",
+    "United Kingdom",
+    "French Fourth Republic",
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1949,
+   "inside": {
+    "names": [
+     "Federal Republic of Germany",
+     "German Democratic Republic"
+    ],
+    "year": 1960,
+    "add_bbox": [
+     13.05,
+     52.33,
+     13.8,
+     52.7
+    ]
+   },
+   "new": "Allied-occupied Germany",
+   "overlord": null,
+   "why": "The occupation zones in the source data are misassigned, so Germany is shown as one occupied area"
+  },
+  {
+   "occupiers": [
+    "United States of America",
+    "United Kingdom",
+    "French Fourth Republic",
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1955,
+   "inside": {
+    "name": "Second Republic of Austria",
+    "year": 1960
+   },
+   "new": "Second Republic of Austria",
+   "overlord": null,
+   "why": "Austria was restored in 1945, though occupied until 1955"
+  },
+  {
+   "occupiers": [
+    "United Kingdom of Great Britain and Ireland",
+    "United Kingdom",
+    "British Africa",
+    "British Colonial Empire"
+   ],
+   "from": 1918,
+   "to": 1945,
+   "inside": {
+    "bbox": [
+     34,
+     29,
+     39.3,
+     33.4
+    ]
+   },
+   "new": "British Mandates",
+   "overlord": "United Kingdom",
+   "why": "Palestine and Transjordan were League of Nations mandates, not part of British Africa or the United Kingdom"
+  },
+  {
+   "occupiers": [
+    "United Kingdom",
+    "British Africa",
+    "British Colonial Empire"
+   ],
+   "from": 1946,
+   "to": 1948,
+   "inside": {
+    "bbox": [
+     34,
+     29.4,
+     35.6,
+     33.4
+    ]
+   },
+   "new": "British Mandates",
+   "overlord": "United Kingdom",
+   "why": "Mandatory Palestine until May 1948"
+  },
+  {
+   "occupiers": [
+    "United Kingdom of Great Britain and Ireland",
+    "United Kingdom",
+    "British Africa",
+    "British Colonial Empire"
+   ],
+   "from": 1918,
+   "to": 1931,
+   "inside": {
+    "bbox": [
+     38.8,
+     30.1,
+     48.6,
+     37.4
+    ]
+   },
+   "new": "British Mandates",
+   "overlord": "United Kingdom",
+   "why": "Mandatory Iraq 1920-1932"
+  },
+  {
+   "occupiers": [
+    "United Kingdom",
+    "British Africa",
+    "British Colonial Empire"
+   ],
+   "from": 1932,
+   "to": 1958,
+   "inside": {
+    "bbox": [
+     38.8,
+     30.1,
+     48.6,
+     37.4
+    ]
+   },
+   "new": "Kingdom of Iraq",
+   "overlord": null,
+   "why": "Iraq was an independent kingdom from 1932, including during the British occupation of 1941-1947"
+  },
+  {
+   "occupiers": [
+    "Crown of Aragon"
+   ],
+   "from": 1388,
+   "to": 1456,
+   "inside": {
+    "bbox": [
+     22,
+     37.5,
+     24.2,
+     38.7
+    ]
+   },
+   "new": "Duchy of Athens",
+   "overlord": null,
+   "why": "Athens was held by the Florentine Acciaioli dukes from 1388 until the Ottoman conquest of 1456"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1979,
+   "to": 1989,
+   "inside": {
+    "name": "Republic of Afghanistan",
+    "year": 1975
+   },
+   "new": "Democratic Republic of Afghanistan",
+   "overlord": "Union of Soviet Socialist Republics",
+   "why": "Soviet-occupied Afghanistan; the Afghan state continued"
+  },
+  {
+   "occupiers": [
+    "British Colonial Empire"
+   ],
+   "from": 1867,
+   "to": 1869,
+   "inside": {
+    "name": "Canada",
+    "year": 1935,
+    "bbox": [
+     -95.2,
+     41.6,
+     -59.5,
+     62.8
+    ]
+   },
+   "new": "Dominion of Canada",
+   "overlord": null,
+   "why": "Confederation 1867 (Ontario, Quebec, Nova Scotia, New Brunswick)"
+  },
+  {
+   "occupiers": [
+    "British Colonial Empire"
+   ],
+   "from": 1870,
+   "to": 1931,
+   "inside": {
+    "name": "Canada",
+    "year": 1935
+   },
+   "new": "Dominion of Canada",
+   "overlord": null,
+   "why": "A self-governing dominion, not a colony"
+  },
+  {
+   "occupiers": [
+    "British Colonial Empire"
+   ],
+   "from": 1907,
+   "to": 1947,
+   "inside": {
+    "name": "New Zealand",
+    "year": 1955
+   },
+   "new": "New Zealand",
+   "overlord": null,
+   "why": "Dominion of New Zealand from 1907"
+  },
+  {
+   "occupiers": [
+    "British Africa",
+    "British Colonial Empire"
+   ],
+   "from": 1910,
+   "to": 1931,
+   "inside": {
+    "name": "Union of South Africa",
+    "year": 1935
+   },
+   "new": "Union of South Africa",
+   "overlord": null,
+   "why": "Union of South Africa from 1910"
+  },
+  {
+   "occupiers": [
+    "British Africa"
+   ],
+   "from": 1882,
+   "to": 1913,
+   "inside": {
+    "name": "Kingdom of Egypt",
+    "year": 1925
+   },
+   "new": "Khedivate of Egypt",
+   "overlord": "United Kingdom",
+   "why": "Egypt stayed a khedivate under British occupation from 1882"
+  },
+  {
+   "occupiers": [
+    "British Africa"
+   ],
+   "from": 1914,
+   "to": 1921,
+   "inside": {
+    "name": "Kingdom of Egypt",
+    "year": 1925
+   },
+   "new": "Sultanate of Egypt",
+   "overlord": "United Kingdom",
+   "why": "British protectorate 1914-1922"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1951,
+   "inside": {
+    "name": "Polish People's Republic",
+    "year": 1960
+   },
+   "new": "Republic of Poland",
+   "overlord": null,
+   "why": "Poland was restored as a state in 1944-1945, not annexed by the USSR"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1952,
+   "to": 1952,
+   "inside": {
+    "name": "Polish People's Republic",
+    "year": 1960
+   },
+   "new": "Polish People's Republic",
+   "overlord": null,
+   "why": "Polish People's Republic from 1952"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1949,
+   "inside": {
+    "name": "Czechoslovakia",
+    "year": 1960
+   },
+   "new": "Czechoslovakia",
+   "overlord": null,
+   "why": "Czechoslovakia was restored in 1945"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1969,
+   "to": 1990,
+   "inside": {
+    "name": "Czechoslovakia",
+    "year": 1960
+   },
+   "new": "Czechoslovakia",
+   "overlord": null,
+   "why": "After the 1968 invasion Czechoslovakia remained a state, with Soviet troops stationed there"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1946,
+   "inside": {
+    "name": "Hungarian People's Republic",
+    "year": 1960
+   },
+   "new": "Hungary",
+   "overlord": null,
+   "why": "Hungary remained a state under Soviet occupation"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1947,
+   "inside": {
+    "name": "People's Republic of Romania",
+    "year": 1960
+   },
+   "new": "Kingdom of Romania",
+   "overlord": null,
+   "why": "Romania was a kingdom until December 1947"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1945,
+   "to": 1945,
+   "inside": {
+    "name": "People's Republic of Bulgaria",
+    "year": 1960
+   },
+   "new": "Kingdom of Bulgaria",
+   "overlord": null,
+   "why": "Bulgaria was a kingdom until September 1946"
+  },
+  {
+   "occupiers": [
+    "Union of Soviet Socialist Republics"
+   ],
+   "from": 1946,
+   "to": 1947,
+   "inside": {
+    "name": "People's Republic of Bulgaria",
+    "year": 1960
+   },
+   "new": "People's Republic of Bulgaria",
+   "overlord": null,
+   "why": "People's Republic from September 1946"
+  }
+ ],
+ "contest": [
+  {
+   "a": "Russian Federation",
+   "b": "Ukraine",
+   "from": 2014,
+   "to": 2024,
+   "new": "Russian-occupied territories",
+   "overlord": "Russian Federation",
+   "why": "Crimea and the occupied east: Ukrainian territory under Russian occupation"
+  }
+ ],
+ "great_powers_after_1945": {
+  "why": "After 1945 the source keeps several powers' shapes over countries that had become independent (France over Algeria, Britain over the Gulf states, the United States over Japan, Korea, Germany, Vietnam, and Iraq). Any independent country drawn under one of these shapes takes precedence.",
+  "names": [
+   "United States of America",
+   "Union of Soviet Socialist Republics",
+   "Russian Federation",
+   "United Kingdom",
+   "British Colonial Empire",
+   "British Empire",
+   "British East Africa",
+   "French Fourth Republic",
+   "French Fifth Republic",
+   "French Africa",
+   "Estado Novo",
+   "Portuguese Republic",
+   "Netherlands Antilles",
+   "Commonwealth of Australia",
+   "Francoist Spain",
+   "Kingdom of Spain",
+   "United Arab Republic",
+   "Kingdom of the Netherlands"
+  ]
+ },
+ "extend": [
+  {
+   "name": "Kingdom of Scotland",
+   "from": 1609,
+   "to": 1707,
+   "copy_year": 1608,
+   "why": "Scotland stayed a separate kingdom until the Union of 1707"
+  },
+  {
+   "name": "Ryukyu Kingdom",
+   "from": 1521,
+   "to": 1879,
+   "copy_year": 1520,
+   "why": "Ryukyu lasted until Japanese annexation in 1879"
+  },
+  {
+   "name": "Dutch Ceylon",
+   "from": 1658,
+   "to": 1686,
+   "copy_year": 1687,
+   "why": "Dutch rule of coastal Ceylon began by 1658"
+  },
+  {
+   "name": "Nawab of Awadh",
+   "from": 1803,
+   "to": 1856,
+   "copy_year": 1802,
+   "why": "Awadh was annexed only in 1856"
+  },
+  {
+   "name": "Kingdom of Navarre",
+   "from": 1429,
+   "to": 1512,
+   "copy_year": 1428,
+   "why": "Navarre stayed separate until 1512"
+  },
+  {
+   "name": "Late Pallava Empire",
+   "from": 806,
+   "to": 897,
+   "copy_year": 805,
+   "why": "The Pallavas ruled until c. 897"
+  },
+  {
+   "name": "Kingdom of Judah",
+   "from": -700,
+   "to": -587,
+   "copy_year": -701,
+   "why": "Judah fell to Babylon in 587 B.C."
+  },
+  {
+   "name": "Zhou Dynasty",
+   "from": -1046,
+   "to": -1001,
+   "copy_year": -1000,
+   "why": "Zhou overthrew Shang c. 1046 B.C."
+  },
+  {
+   "name": "Illyrian Kingdom",
+   "from": -225,
+   "to": -168,
+   "copy_year": -226,
+   "why": "Rome defeated Gentius in 168 B.C."
+  },
+  {
+   "name": "Roman Republic",
+   "from": -509,
+   "to": -501,
+   "copy_year": -500,
+   "why": "The Republic dates from 509 B.C."
+  }
+ ],
+ "add": [
+  {
+   "name": "Berlin",
+   "from": 1949,
+   "to": 1990,
+   "bbox": [
+    13.08,
+    52.34,
+    13.77,
+    52.68
+   ],
+   "minus": [
+    "German Democratic Republic",
+    "Federal Republic of Germany"
+   ],
+   "why": "Berlin under four-power status, outside both German states"
+  }
+ ]
+}
