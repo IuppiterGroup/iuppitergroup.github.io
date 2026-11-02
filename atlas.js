@@ -351,10 +351,15 @@ function drawLabels(S) {
       const two = splitTwo(name);
       if (two.length === 2) { const fs2 = Math.min(30, sw / (Math.max(two[0].length, two[1].length) * .78), sh * .3); if (fs2 > fs * 1.25) { lines = two; fs = fs2; } }
       if (fs < 9) continue;
+      // shrink in place before moving, and never move far, so a name stays on its own land
       let done = false;
-      for (const m of [1, .8, .64]) {
+      for (const m of [1, .8, .64, .5]) {
         if (fs * m < 9 || done) break;
-        for (const dy of [0, 1.25, -1.25]) { if (drawText(lines, x, y + dy * fs * m * lines.length, fs * m, FONT_SC, shade(f.color, .5), fs * m * .12, 1, true, f.crown)) { n++; done = true; break; } }
+        if (drawText(lines, x, y, fs * m, FONT_SC, shade(f.color, .5), fs * m * .12, 1, true, f.crown)) { n++; done = true; }
+      }
+      if (!done) {
+        const m = Math.max(9 / fs, .5);
+        for (const dy of [.6, -.6]) { if (drawText(lines, x, y + dy * fs * m * lines.length, fs * m, FONT_SC, shade(f.color, .5), fs * m * .12, 1, true, f.crown)) { n++; break; } }
       }
     } else if (zoom > 1.3 || f.a > 2e6) {
       let lines = [f.n], fs = Math.min(15, sw / (f.n.length * .55), sh * .4);
@@ -456,7 +461,7 @@ function render(now) {
 
 /* ---------- Markers ---------- */
 const markersEl = $('#markers'), markerEls = new Map(); let flagEl = null;
-const persist = y => y < -1000 ? 260 : y < 0 ? 120 : y < 1500 ? 60 : 30;
+const persist = y => y < -1000 ? 150 : y < 0 ? 50 : y < 1500 ? 25 : y < 1800 ? 12 : 4;
 const liveEvents = () => EVENTS.filter(e => year >= e.y && year - e.y <= persist(e.y));
 function placeMarkers() {
   const live = new Set(liveEvents().map(e => e.id));

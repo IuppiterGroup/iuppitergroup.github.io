@@ -39,5 +39,14 @@ for i in plain:
         else: keep.append(q)
     if len(keep) < len(parts):
         feats[i]['geometry'] = mapping(unary_union(keep))
+# keep polygons only (a GeometryCollection with stray lines breaks the packer)
+from shapely.validation import make_valid
+for f in fc['features']:
+    if f['geometry'] and f['geometry']['type'] not in ('Polygon', 'MultiPolygon'):
+        g = make_valid(shape(f['geometry']))
+        polys = [p for p in getattr(g, 'geoms', [g]) if p.geom_type in ('Polygon', 'MultiPolygon')]
+        u = unary_union(polys) if polys else None
+        f['geometry'] = mapping(u) if u is not None and not u.is_empty else None
+fc['features'] = [f for f in fc['features'] if f['geometry']]
 json.dump(fc, open(out, 'w'))
 print('specks dropped:', dropped)

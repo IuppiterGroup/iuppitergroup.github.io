@@ -5,7 +5,7 @@ Usage: python3 curate.py <cliopatria.geojson> <land.geojson> <corrections.json> 
 """
 import json, sys, time, math
 from multiprocessing import Pool
-from shapely.geometry import shape, mapping, box, Polygon
+from shapely.geometry import shape, mapping, box, Polygon, Point
 from shapely.ops import unary_union
 from shapely.validation import make_valid
 from shapely.strtree import STRtree
@@ -29,6 +29,8 @@ def sq_km(g):
     return sum(p.area * 12392.0 * math.cos(math.radians(p.centroid.y)) for p in parts)
 
 C = json.load(open(CORR))
+land_all = unary_union([clean(shape(f['geometry'])) for f in json.load(open(LAND))['features'] if f.get('geometry')])
+land_for_grow = land_all
 raw = json.load(open(SRC))['features']
 rows = []
 for f in raw:
@@ -67,13 +69,25 @@ def overlapping(names, f0, t0):
     return [r for r in alive() if r['name'] in names and r['f'] <= t0 and r['t'] >= f0]
 
 def region(spec):
-    if 'name' not in spec and 'names' not in spec: return clean(box(*spec['bbox']))
+    if 'island' in spec:
+        P = Point(*spec['island'])
+        g = next(p for p in (land_all.geoms if land_all.geom_type == 'MultiPolygon' else [land_all]) if p.contains(P))
+        if 'bbox' in spec: g = g.intersection(box(*spec['bbox']))
+        return clean(g)
+    if 'name' not in spec and 'names' not in spec:
+        g = clean(Polygon(spec['poly'])) if 'poly' in spec else clean(box(*spec['bbox']))
+        if 'poly' in spec and 'bbox' in spec: g = clean(g.intersection(box(*spec['bbox'])))
+        return g
     names = spec.get('names') or [spec['name']]
     gs = [r['g'] for r in at(names, spec['year'])]
     if not gs: raise SystemExit(f'region not found: {spec}')
     g = unary_union(gs)
     if 'bbox' in spec: g = g.intersection(box(*spec['bbox']))
+    if 'poly' in spec: g = g.intersection(Polygon(spec['poly']))
     if 'add_bbox' in spec: g = g.union(box(*spec['add_bbox']))
+    if 'minus' in spec:
+        m = [r['g'] for r in at(spec['minus']['name'], spec['minus']['year'])]
+        if m: g = g.difference(unary_union(m))
     return clean(g)
 
 def report(kind, rule, n):
@@ -88,7 +102,10 @@ for r in C.get('drop', []):
 
 for r in C.get('rename', []):
     hit = split(r['name'], r['from'], r['to'])
-    for x in hit: x['name'] = r['new']
+    for x in hit:
+        x['name'] = r['new']
+        if r.get('merge'): x['made'] = True
+        if 'overlord' in r: x['ov'] = r['overlord']
     report('rename', r, len(hit))
 
 for r in C.get('extend', []):
@@ -103,28 +120,55 @@ for r in C.get('extend', []):
     report('extend', r, 1)
 
 for r in C.get('add', []):
-    g = clean(box(*r['bbox']))
-    m = [x['g'] for x in overlapping(r.get('minus', []), r['from'], r['to'])]
-    if m: g = clean(g.difference(unary_union(m)))
-    if g is not None: rows.append({'name': r['name'], 'orig': r['name'], 'f': r['from'], 't': r['to'], 'g': g, 'm': '', 'kind': 'p', 'comp': '', 'ov': None})
-    report('add', r, 1 if g is not None else 0)
+    base = clean(Polygon(r['poly'])) if 'poly' in r else clean(box(*r['bbox']))
+    if r.get('minus_all'):
+        minus_rows = [x for x in alive() if x['kind'] == 'p' and x['f'] <= r['to'] and x['t'] >= r['from'] and x['g'].intersects(base)]
+    else:
+        minus_rows = overlapping(r.get('minus', []), r['from'], r['to'])
+    cuts = sorted({r['from'], r['to'] + 1} | {x['f'] for x in minus_rows if r['from'] < x['f'] <= r['to']} | {x['t'] + 1 for x in minus_rows if r['from'] <= x['t'] < r['to']})
+    n = 0
+    for a, b in zip(cuts, cuts[1:]):
+        m = [x['g'] for x in minus_rows if x['f'] <= b - 1 and x['t'] >= a]
+        g = clean(base.difference(unary_union(m))) if m else base
+        if g is None or sq_km(g) < 50: continue
+        rows.append({'name': r['name'], 'orig': r['name'], 'f': a, 't': b - 1, 'g': g, 'm': '', 'kind': 'p', 'comp': '', 'ov': r.get('overlord'), 'made': True}); n += 1
+    report('add', r, n)
 
 for r in C.get('fill', []):
+    if not at(r['name'], r['copy_year']): report('fill', r, 0); continue
     base = unary_union([x['g'] for x in at(r['name'], r['copy_year'])])
-    minus_rows = overlapping(r.get('minus', []), r['from'], r['to'])
+    if 'bbox' in r: base = clean(base.intersection(box(*r['bbox'])))
+    if base is None: report('fill', r, 0); continue
+    src = at(r['name'], r['copy_year'])[0]
+    nm = r.get('as', r['name'])
+    if r.get('minus_all'):
+        minus_rows = [x for x in alive() if x['kind'] == 'p' and x['f'] <= r['to'] and x['t'] >= r['from'] and x['g'].intersects(base)]
+    else:
+        minus_rows = overlapping(r.get('minus', []), r['from'], r['to'])
     cuts = sorted({r['from'], r['to'] + 1} | {x['f'] for x in minus_rows if r['from'] < x['f'] <= r['to']} | {x['t'] + 1 for x in minus_rows if r['from'] <= x['t'] < r['to']})
     n = 0
     for a, b in zip(cuts, cuts[1:]):
         m = [x['g'] for x in minus_rows if x['f'] <= b - 1 and x['t'] >= a]
         g = clean(base.difference(unary_union(m)) if m else base)
-        if g is None: continue
-        src = at(r['name'], r['copy_year'])[0]
-        rows.append({'name': r['name'], 'orig': src['orig'], 'f': a, 't': b - 1, 'g': g, 'm': src['m'], 'kind': 'p', 'comp': '', 'ov': None}); n += 1
+        if g is None or sq_km(g) < r.get('min_km2', 0): continue
+        rows.append({'name': nm, 'orig': nm if 'as' in r else src['orig'], 'f': a, 't': b - 1, 'g': g, 'm': '' if 'as' in r else src['m'], 'kind': 'p', 'comp': '', 'ov': r.get('overlord'), 'made': True}); n += 1
     report('fill', r, n)
+
+for r in C.get('grow', []):
+    lon, lat = r['point']; k = r['km'] / 111.32
+    disc = Polygon([(lon + k / math.cos(math.radians(lat)) * math.cos(t * math.pi / 24), lat + k * math.sin(t * math.pi / 24)) for t in range(48)])
+    disc = clean(disc.intersection(land_for_grow)) if land_for_grow is not None else disc
+    hit = split(r['name'], r['from'], r['to'])
+    for x in hit: x['g'] = clean(unary_union([x['g'], disc]))
+    others = {o['name'] for o in overlapping([o['name'] for o in alive() if o['kind'] == 'p' and o['name'] != r['name']], r['from'], r['to']) if o['g'].intersects(disc)}
+    for o in split(others, r['from'], r['to']):
+        if o['g'] is not None and o['g'].intersects(disc): o['g'] = clean(o['g'].difference(disc))
+    report('grow', r, len(hit))
 
 for r in C.get('cut', []):
     hit = split(r['name'], r['from'], r['to'])
-    reg = clean(box(*r['bbox'])) if 'bbox' in r else region(r['region']) if 'region' in r else None
+    reg = clean(box(*r['bbox'])) if 'bbox' in r else region(r['region']) if 'region' in r else clean(Polygon(r['poly'])) if 'poly' in r else None
+    if 'outside_bbox' in r: reg = clean(box(-180, -90, 180, 90).difference(box(*r['outside_bbox'])))
     keep = box(*r['keep_bbox']) if 'keep_bbox' in r else None
     for x in hit:
         if reg is not None:
@@ -134,7 +178,7 @@ for r in C.get('cut', []):
                 gy0, gy1 = r['give_to_years']
                 f0, t0 = max(x['f'], gy0), min(x['t'], gy1)
                 if f0 <= t0:
-                    rows.append({'name': r['give_to'], 'orig': r['give_to'], 'f': f0, 't': t0, 'g': piece, 'm': '', 'kind': 'p', 'comp': '', 'ov': None})
+                    rows.append({'name': r['give_to'], 'orig': r['give_to'], 'f': f0, 't': t0, 'g': piece, 'm': '', 'kind': 'p', 'comp': '', 'ov': None, 'made': True})
         if keep is not None and x['g'] is not None:
             x['g'] = clean(x['g'].intersection(keep))
     report('cut', r, len(hit))
@@ -154,9 +198,9 @@ for r in C.get('occupy', []):
     for x in hit:
         if x['g'] is None: continue
         piece = clean(x['g'].intersection(inside)) if inside is not None else clean(x['g'].difference(home))
-        if piece is None or sq_km(piece) < 200: continue
+        if piece is None or sq_km(piece) < r.get('min_km2', 200): continue
         x['g'] = clean(x['g'].difference(piece))
-        rows.append({'name': r['new'], 'orig': r['new'], 'f': x['f'], 't': x['t'], 'g': piece, 'm': '', 'kind': 'p', 'comp': '', 'ov': r.get('overlord')}); n += 1
+        rows.append({'name': r['new'], 'orig': r['new'], 'f': x['f'], 't': x['t'], 'g': piece, 'm': '', 'kind': 'p', 'comp': '', 'ov': r.get('overlord'), 'made': True}); n += 1
     report('occupy', r, n)
 
 for r in C.get('contest', []):
@@ -172,11 +216,39 @@ for r in C.get('contest', []):
             piece = clean(a['g'].intersection(b['g']))
             if piece is None or sq_km(piece) < 200: continue
             a['g'] = clean(a['g'].difference(piece)); b['g'] = clean(b['g'].difference(piece))
-            rows.append({'name': r['new'], 'orig': r['new'], 'f': max(a['f'], b['f']), 't': min(a['t'], b['t']), 'g': piece, 'm': '', 'kind': 'p', 'comp': '', 'ov': r.get('overlord')}); n += 1
+            rows.append({'name': r['new'], 'orig': r['new'], 'f': max(a['f'], b['f']), 't': min(a['t'], b['t']), 'g': piece, 'm': '', 'kind': 'p', 'comp': '', 'ov': r.get('overlord'), 'made': True}); n += 1
     report('contest', r, n)
+
+for r in C.get('unmember', []):
+    n = 0
+    for x in split([r['composite']], r['from'], r['to']):
+        if x['kind'] == 'c':
+            x['comp'] = ';'.join(c for c in x['comp'].split(';') if c.strip() not in r['names']); n += 1
+    for x in split(r['names'], r['from'], r['to']):
+        x['m'] = ';'.join(c for c in x['m'].split(';') if c.strip() != r['composite']); x['no_enroll'] = r['composite']; n += 1
+    report('unmember', r, n)
 
 rows[:] = alive()
 log(len(rows), 'rows after explicit corrections')
+
+# ---------- pieces made by rules join a same-name realm drawn in the same years ----------
+merged = 0
+for name in sorted({r['name'] for r in rows if r.get('made') and r['kind'] == 'p'}):
+    for mr in [r for r in alive() if r['name'] == name and r.get('made') and r['kind'] == 'p']:
+        cands = [o for o in alive() if o['name'] == name and o['kind'] == 'p' and o is not mr and o['f'] <= mr['t'] and o['t'] >= mr['f']]
+        bounds = sorted(b for b in {mr['f'], mr['t'] + 1} | {o['f'] for o in cands} | {o['t'] + 1 for o in cands} if mr['f'] <= b <= mr['t'] + 1)
+        for a, b in zip(bounds, bounds[1:]): split([name], a, b - 1)
+    grp = [r for r in alive() if r['name'] == name and r['kind'] == 'p']
+    buckets = {}
+    for r in grp: buckets.setdefault((r['f'], r['t'], r['ov'] or None), []).append(r)
+    for key, rs in buckets.items():
+        if len(rs) < 2 or not any(r.get('made') for r in rs): continue
+        rs.sort(key=lambda r: (bool(r.get('made')), -sq_km(r['g'])))
+        base = rs[0]
+        base['g'] = clean(unary_union([r['g'] for r in rs]).buffer(0.002).buffer(-0.002))
+        for r in rs[1:]: r['dead'] = True; merged += 1
+rows[:] = alive()
+log('rule-made pieces merged into same-name realms:', merged)
 
 # ---------- postwar overlaps ----------
 GREAT = set(C['great_powers_after_1945']['names'])
@@ -271,6 +343,15 @@ with Pool(2, initializer=init_worker, initargs=(psimple, [(r['f'], r['t']) for r
         if k % 2000 == 0: log(f'  coastal fill {k}/{len(plain)}')
 log('coastal gaps filled on', grown, 'rows')
 
+# small realms can be swallowed by a neighbor's coastal fill; these rules run after it
+for r in C.get('post_subtract', []):
+    hit = split(r['name'], r['from'], r['to'])
+    for x in hit:
+        m = [y['g'] for y in overlapping(r['minus'], x['f'], x['t']) if y is not x]
+        if m: x['g'] = clean(x['g'].difference(unary_union(m)))
+    report('post_subtract', r, len(hit))
+rows[:] = alive()
+
 # ---------- composite outlines rebuilt from members ----------
 by_orig = {}
 for r in rows:
@@ -288,6 +369,9 @@ def members(r, depth=0):
         else:
             out += [x for x in by_orig.get(nm, []) if x['f'] <= r['t'] and x['t'] >= r['f']]
     return out
+plain_rows = [x for x in rows if x['kind'] == 'p']
+ptree = STRtree([x['g'] for x in plain_rows])
+enrolled = 0
 rebuilt = 0
 for r in [x for x in rows if x['kind'] == 'c']:
     ms = members(r)
@@ -299,6 +383,19 @@ for r in [x for x in rows if x['kind'] == 'c']:
     for q in (g.geoms if g.geom_type == 'MultiPolygon' else [g]):
         parts.append(Polygon(q.exterior, [h for h in q.interiors if Polygon(h).area > 0.3]))
     r['g'] = clean(unary_union(parts)); rebuilt += 1
+    # realms fully enclosed by the composite (holes in its outline) belong to it too, such as Saxony inside the Empire
+    filled = clean(unary_union([Polygon(q.exterior) for q in (r['g'].geoms if r['g'].geom_type == 'MultiPolygon' else [r['g']])]))
+    if filled is None: continue
+    mine = {id(m) for m in ms}
+    for k in ptree.query(filled):
+        x = plain_rows[k]
+        if id(x) in mine or x['t'] < r['f'] or x['f'] > r['t'] or r['name'] in x['m'].split(';') or x.get('no_enroll') == r['name']: continue
+        try: inside = x['g'].intersection(filled).area / max(x['g'].area, 1e-9)
+        except Exception: continue
+        if inside >= 0.9:
+            x['m'] = ';'.join(filter(None, [x['m'], r['name']])); enrolled += 1
+    r['g'] = clean(r['g'].union(filled)) or r['g']
+log('realms enrolled in enclosing composites:', enrolled)
 rows[:] = alive()
 log('composites rebuilt:', rebuilt)
 

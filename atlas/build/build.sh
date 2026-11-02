@@ -44,7 +44,8 @@ node peoples_extract.mjs snaps ppl
 
 echo "== Realms (Cliopatria, corrected)"
 python3 "$BUILD/curate.py" "$CLIO" tmp/land.geojson "$BUILD/corrections.json" tmp/curated0.geojson
-python3 "$BUILD/despeckle.py" tmp/curated0.geojson tmp/curated.geojson
+python3 "$BUILD/china_fix.py" tmp/curated0.geojson tmp/curated0b.geojson
+python3 "$BUILD/despeckle.py" tmp/curated0b.geojson tmp/curated.geojson
 python3 "$BUILD/split2.py" tmp/curated.geojson "$CLIO" win
 python3 "$BUILD/peoples_erase.py" tmp/curated.geojson ppl
 

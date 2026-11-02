@@ -11,11 +11,16 @@ spans = [(f['properties']['FromYear'], f['properties']['ToYear']) for f in feats
 tree = STRtree(geoms)
 def sq_km(g): return sum(p.area * 12392.0 * math.cos(math.radians(p.centroid.y)) for p in (g.geoms if g.geom_type == 'MultiPolygon' else [g]))
 idx = json.load(open(f'{pdir}/praw_index.json'))
+# colonies and modern countries that the source lists among peoples; they are not peoples
+NOT_PEOPLES = {'Acadian Peninsula (UK)', 'Antigua and Barbuda', 'Bahamas', 'Barbados (UK)', 'Belize', 'Cayenne', 'Dominica',
+               'Grenada', 'Guadeloupe', 'Jamaica (UK)', 'Luisiana', 'Martinique', "Rupert's Land", 'Saint Lucia',
+               'Saint Vincent and the Grenadines', 'Surinam', 'Trinidad', 'Virgin Islands (Danemark)', 'Virgin Islands (UK)', 'Virginia'}
 out = []
 for y, n in idx:
     fc = json.load(open(f'{pdir}/praw_{y}.geojson'))
     res = []
     for f in fc['features']:
+        if f['properties']['n'] in NOT_PEOPLES: continue
         g = make_valid(shape(f['geometry']))
         cand = [geoms[i] for i in tree.query(g) if spans[i][0] <= y <= spans[i][1]]
         if cand: g = g.difference(unary_union(cand))
