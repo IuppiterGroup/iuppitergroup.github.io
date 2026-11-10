@@ -416,7 +416,7 @@
       h += '<tr><th scope="row">' + esc(r[0]) + '</th>';
       sel.forEach(function (s) {
         var v = r[1](s);
-        var cls = r[0].indexOf('buy-and-hold') > -1 && r[0].indexOf('Annualized') === 0 ? ' class="neg"' : '';
+        var cls = r[0] === 'Annualized return vs. buy-and-hold' ? ' class="neg"' : '';
         h += '<td' + cls + '>' + esc(v) + '</td>';
       });
       h += '</tr>';
