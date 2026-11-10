@@ -141,52 +141,52 @@
 
   /* ───────────── 2. Ex-dividend drop (numbers from papers/dividend-study.html) ───────────── */
   var DIV = {
-    overall: { label: 'All events', n: 5106, mean: 0.812, ci: [0.762, 0.861] },
-    sectors: [ // Table 4: N, mean, median, std. dev.
-      { name: 'Consumer Discretionary', n: 491, mean: 0.862, sd: 2.111 },
-      { name: 'Consumer Staples', n: 517, mean: 0.857, sd: 1.301 },
-      { name: 'Energy', n: 508, mean: 0.836, sd: 1.810 },
-      { name: 'Financials', n: 503, mean: 0.705, sd: 2.220 },
-      { name: 'Healthcare', n: 503, mean: 0.824, sd: 1.352 },
-      { name: 'Industrials', n: 507, mean: 0.895, sd: 1.922 },
-      { name: 'Materials', n: 458, mean: 0.590, sd: 2.830 },
-      { name: 'Real Estate', n: 619, mean: 0.857, sd: 1.347 },
-      { name: 'Technology', n: 487, mean: 0.722, sd: 2.113 },
-      { name: 'Utilities', n: 513, mean: 0.931, sd: 0.525 }
+    overall: { label: 'All events', n: 19218, mean: 0.866, ci: [0.831, 0.901] },
+    sectors: [ // Table 5: N, market-adjusted mean, clustered 95% CI
+      { name: 'Communication Services', n: 401, mean: 0.770, ci: [0.538, 1.002] },
+      { name: 'Consumer Discretionary', n: 1594, mean: 0.787, ci: [0.691, 0.884] },
+      { name: 'Consumer Staples', n: 1641, mean: 0.875, ci: [0.796, 0.954] },
+      { name: 'Energy', n: 1022, mean: 0.907, ci: [0.812, 1.003] },
+      { name: 'Financials', n: 3393, mean: 0.890, ci: [0.801, 0.979] },
+      { name: 'Health Care', n: 1879, mean: 0.856, ci: [0.728, 0.983] },
+      { name: 'Industrials', n: 3315, mean: 0.883, ci: [0.804, 0.961] },
+      { name: 'Information Technology', n: 1777, mean: 0.810, ci: [0.655, 0.966] },
+      { name: 'Materials', n: 1157, mean: 0.845, ci: [0.725, 0.965] },
+      { name: 'Real Estate', n: 1412, mean: 0.886, ci: [0.823, 0.948] },
+      { name: 'Utilities', n: 1627, mean: 0.915, ci: [0.843, 0.987] }
     ],
-    yields: [ // Table 3: yield terciles
-      { name: 'Low', n: 1702, mean: 0.683, sd: 2.725 },
-      { name: 'Medium', n: 1702, mean: 0.873, sd: 1.310 },
-      { name: 'High', n: 1702, mean: 0.878, sd: 0.947 }
+    yields: [ // Table 4: trailing-yield terciles
+      { name: 'Low (under 1.73%)', short: 'Low', n: 6348, mean: 0.798, ci: [0.708, 0.887] },
+      { name: 'Medium (1.73% to 3.05%)', short: 'Medium', n: 6435, mean: 0.868, ci: [0.839, 0.898] },
+      { name: 'High (over 3.05%)', short: 'High', n: 6435, mean: 0.930, ci: [0.903, 0.957] }
     ],
-    reg: { a: 0.655, b: 5.569 } // Table 6 OLS: Drop_Ratio = 0.655 + 5.569 × Div_Yield
+    reg: { a: 0.777, b: 3.411 } // Table 7: ratio = 0.777 + 0.0341 × yield in percent
   };
 
   function buildDivBasis() {
     var sel = $('div-basis');
-    var h = '<optgroup label="Overall"><option value="overall" selected>All events (raw): 0.812 (N = 5,106)</option></optgroup>';
-    h += '<optgroup label="By sector, raw (Table 4)">';
+    var h = '<optgroup label="Overall"><option value="overall" selected>All events: 0.866 (N = 19,218)</option></optgroup>';
+    h += '<optgroup label="By sector (Table 5)">';
     DIV.sectors.forEach(function (s, i) { h += '<option value="sector:' + i + '">' + esc(s.name) + ': ' + s.mean.toFixed(3) + ' (N = ' + intf(s.n) + ')</option>'; });
-    h += '</optgroup><optgroup label="By yield tercile, raw (Table 3)">';
-    DIV.yields.forEach(function (s, i) { h += '<option value="yield:' + i + '">' + s.name + ' yield: ' + s.mean.toFixed(3) + ' (N = ' + intf(s.n) + ')</option>'; });
-    h += '</optgroup><optgroup label="By yield regression, raw (Table 6)">';
-    h += '<option value="reg">Regression: 0.655 + 5.569 × yield</option></optgroup>';
+    h += '</optgroup><optgroup label="By trailing yield (Table 4)">';
+    DIV.yields.forEach(function (s, i) { h += '<option value="yield:' + i + '">' + s.name + ': ' + s.mean.toFixed(3) + ' (N = ' + intf(s.n) + ')</option>'; });
+    h += '</optgroup><optgroup label="By yield regression (Table 7)">';
+    h += '<option value="reg">Regression: 0.777 + 0.034 × yield (%)</option></optgroup>';
     sel.innerHTML = h;
   }
 
   function divRatio(basis, yieldFrac) {
     function grp(g, kind) {
-      var half = 1.96 * g.sd / Math.sqrt(g.n);
       return {
         ratio: g.mean,
-        ci: [Math.round((g.mean - half) * 1000) / 1000, Math.round((g.mean + half) * 1000) / 1000],
+        ci: g.ci.slice(),
         label: kind + ' mean, N = ' + intf(g.n),
-        ciNote: 'approx. 95% CI of the average, computed from the paper’s N and standard deviation'
+        ciNote: '95% CI of the average, clustered by date and firm, from the paper'
       };
     }
-    if (basis === 'overall') return { ratio: DIV.overall.mean, ci: DIV.overall.ci.slice(), label: 'Overall mean, N = 5,106', ciNote: '95% bootstrap CI of the average, as reported in the paper' };
+    if (basis === 'overall') return { ratio: DIV.overall.mean, ci: DIV.overall.ci.slice(), label: 'Overall mean, N = 19,218', ciNote: '95% CI of the average, clustered by date and firm, from the paper' };
     if (basis.indexOf('sector:') === 0) { var s = DIV.sectors[+basis.slice(7)]; return grp(s, s.name); }
-    if (basis.indexOf('yield:') === 0) { var y = DIV.yields[+basis.slice(6)]; return grp(y, y.name + '-yield tercile'); }
+    if (basis.indexOf('yield:') === 0) { var y = DIV.yields[+basis.slice(6)]; return grp(y, y.short + '-yield tercile'); }
     return { ratio: DIV.reg.a + DIV.reg.b * yieldFrac, ci: null, label: 'Regression on yield (R² below 1%)', ciNote: 'not reported for the regression fit' };
   }
 
@@ -230,7 +230,7 @@
     }
     var r = calcDiv({ price: price.value, dividend: dividend.value, freq: +$('div-freq').value, basis: $('div-basis').value });
     $('div-yield').value = pct(r.yieldFrac);
-    setText('div-warn', r.yieldFrac > 0.40 ? 'Note: the paper excluded events with an annualized yield above 40% (likely special dividends), so this input is outside its sample.' : '');
+    setText('div-warn', r.yieldFrac > 0.12 ? 'Note: this yield is above almost every event in the paper’s sample (99.9% of events had a trailing yield under 12%), so the estimate is an extrapolation.' : '');
     setText('div-out-drop', usd(r.drop));
     setText('div-out-drop-sub', fixed(r.ratio * 100, 1) + '% of the ' + usd(dividend.value) + ' dividend');
     setText('div-out-ratio', fixed(r.ratio, 3));
@@ -250,26 +250,26 @@
 
   /* ───────────── 3a. RSI study data (papers/rsi-study.html) ───────────── */
   var STRATS = [
-    { id: 'd3070', name: 'Daily 30/70', color: '#c98500', trades: 3892, perStock: 38.9, win: 79.4, avg: 7.66, med: 9.06, sd: 15.45, hold: 150, medHold: 112, pf: 3.71, avgWin: 13.22, avgLoss: -13.72, best: 113.43, worst: -93.68, winStreak: 29, loseStreak: 5, bhT: -14.14, bhP: '1.69 × 10⁻²⁵', mwP: '2.74 × 10⁻²⁵' },
-    { id: 'd2080', name: 'Daily 20/80', color: '#3987e5', trades: 598, perStock: 6.0, win: 87.3, avg: 47.37, med: 28.28, sd: 89.75, hold: 764, medHold: 506, pf: 16.31, avgWin: 57.81, avgLoss: -24.35, best: 1245.94, worst: -87.68, winStreak: 43, loseStreak: 3, bhT: -15.82, bhP: '9.71 × 10⁻²⁹', mwP: '7.82 × 10⁻²⁹' },
-    { id: 'w3070', name: 'Weekly 30/70', color: '#d95926', trades: 602, perStock: 6.0, win: 87.7, avg: 37.09, med: 34.22, sd: 38.35, hold: 599, medHold: 487, pf: 14.03, avgWin: 45.53, avgLoss: -23.15, best: 206.27, worst: -88.08, winStreak: 45, loseStreak: 3, bhT: -18.31, bhP: '1.46 × 10⁻³³', mwP: '3.21 × 10⁻²⁹' },
-    { id: 'w2080', name: 'Weekly 20/80', color: '#199e70', trades: 82, perStock: 0.8, win: 96.3, avg: 244.10, med: 173.35, sd: 250.37, hold: 2374, medHold: 2114, pf: 176.45, avgWin: 254.81, avgLoss: -38.03, best: 1531.98, worst: -67.71, winStreak: 38, loseStreak: 1, bhT: -14.56, bhP: '1.07 × 10⁻²⁰', mwP: '2.51 × 10⁻¹⁶' }
+    { id: 'd3070', name: 'Daily 30/70', color: '#c98500', trades: 3948, perStock: 39.9, win: 79.9, avg: 7.63, med: 9.06, sd: 15.37, hold: 149, medHold: 112, pf: 3.72, avgWin: 13.04, avgLoss: -13.96, best: 124.63, worst: -93.79, winStreak: 69, loseStreak: 9, randAvg: 6.96, randWin: 64.3, randP: '0.032', stratAnn: 8.2, bhAnn: 13.7, bhT: -9.39, bhP: '2.50 × 10⁻¹⁵', wP: '5.15 × 10⁻¹⁶' },
+    { id: 'd2080', name: 'Daily 20/80', color: '#3987e5', trades: 599, perStock: 6.1, win: 86.6, avg: 46.59, med: 27.56, sd: 88.59, hold: 769, medHold: 525, pf: 15.95, avgWin: 57.37, avgLoss: -23.33, best: 1247.84, worst: -87.64, winStreak: 53, loseStreak: 3, randAvg: 46.98, randWin: 74.9, randP: '0.490', stratAnn: 6.7, bhAnn: 13.7, bhT: -11.26, bhP: '2.30 × 10⁻¹⁹', wP: '4.17 × 10⁻¹⁷' },
+    { id: 'w3070', name: 'Weekly 30/70', color: '#d95926', trades: 600, perStock: 6.1, win: 88.0, avg: 37.07, med: 34.37, sd: 38.64, hold: 603, medHold: 490, pf: 13.78, avgWin: 45.42, avgLoss: -24.17, best: 215.41, worst: -87.47, winStreak: 83, loseStreak: 6, randAvg: 31.35, randWin: 73.8, randP: '0.010', stratAnn: 6.8, bhAnn: 13.7, bhT: -12.19, bhP: '2.37 × 10⁻²¹', wP: '1.08 × 10⁻¹⁷' },
+    { id: 'w2080', name: 'Weekly 20/80', color: '#199e70', trades: 83, perStock: 0.8, win: 95.2, avg: 246.31, med: 169.30, sd: 256.20, hold: 2381, medHold: 2093, pf: 175.05, avgWin: 260.27, avgLoss: -29.37, best: 1544.82, worst: -65.73, winStreak: 51, loseStreak: 2, randAvg: 195.22, randWin: 84.7, randP: '0.081', stratAnn: 5.2, bhAnn: 13.7, bhT: -12.06, bhP: '4.47 × 10⁻²¹', wP: '4.29 × 10⁻¹⁷' }
   ];
   var STRAT_BY_ID = {};
   STRATS.forEach(function (s) { STRAT_BY_ID[s.id] = s; });
 
-  var SECTORS = { // Tables 3 and 4: [sector, trades, win rate %, avg return %, median return %]
-    d3070: [['Mega Cap Tech', 164, 76.8, 10.76, 11.72], ['Consumer Discretionary', 363, 79.1, 9.35, 11.09], ['Materials', 284, 79.2, 8.15, 10.01], ['Energy', 379, 77.0, 7.98, 10.65], ['Healthcare', 435, 80.0, 7.93, 9.27], ['Consumer Staples', 414, 82.1, 7.75, 7.94], ['REITs', 267, 80.1, 7.45, 8.76], ['Financials', 381, 77.7, 7.47, 8.81], ['Industrials', 537, 76.9, 6.76, 8.69], ['Utilities', 456, 85.3, 6.37, 7.60], ['Communication', 212, 75.0, 6.10, 8.47]],
-    w3070: [['Mega Cap Tech', 29, 86.2, 62.82, 58.59], ['Consumer Discretionary', 51, 82.4, 48.08, 37.23], ['Financials', 64, 90.6, 44.31, 44.18], ['Materials', 51, 94.1, 43.41, 45.11], ['Communication', 37, 86.5, 37.11, 31.02], ['REITs', 39, 82.1, 36.88, 33.86], ['Energy', 66, 87.9, 33.44, 29.52], ['Consumer Staples', 51, 86.3, 32.34, 32.88], ['Industrials', 94, 88.3, 32.48, 33.97], ['Healthcare', 59, 89.8, 29.89, 28.19], ['Utilities', 61, 86.9, 24.86, 24.50]]
+  var SECTORS = { // Tables 6 and 7: [sector, trades, win rate %, avg return %, median return %]
+    d3070: [['Mega Cap Tech', 169, 78.1, 10.54, 12.34], ['Consumer Discretionary', 373, 78.8, 8.80, 10.79], ['Materials', 290, 80.7, 8.29, 10.00], ['Energy', 383, 78.9, 8.18, 10.74], ['Healthcare', 442, 80.8, 8.01, 9.40], ['Consumer Staples', 418, 82.3, 7.87, 8.02], ['REITs', 247, 80.2, 7.61, 8.60], ['Financials', 391, 78.0, 7.45, 9.53], ['Industrials', 551, 77.3, 6.77, 8.93], ['Utilities', 465, 86.0, 6.25, 7.53], ['Communication', 219, 74.9, 5.69, 7.70]],
+    w3070: [['Mega Cap Tech', 29, 89.7, 62.48, 60.46], ['Consumer Discretionary', 53, 83.0, 47.17, 36.72], ['Financials', 64, 90.6, 44.01, 44.78], ['Materials', 51, 92.2, 43.17, 43.63], ['REITs', 34, 82.4, 37.49, 31.97], ['Communication', 38, 84.2, 34.81, 32.91], ['Energy', 66, 89.4, 33.48, 28.04], ['Industrials', 94, 88.3, 33.21, 33.16], ['Consumer Staples', 51, 86.3, 32.08, 34.21], ['Healthcare', 59, 89.8, 30.92, 30.01], ['Utilities', 61, 88.5, 24.93, 24.00]]
   };
-  var ANOVA = { d3070: [1.884, '0.0426', 'significant at the 5% level'], w3070: [3.309, '0.0003', 'significant at the 0.1% level'] };
+  var ANOVA = { d3070: [1.866, '0.045', 'significant at the 5% level, but not after a Bonferroni correction for four strategies'], w3070: [3.051, '0.0009', 'significant, also after a Bonferroni correction'] };
 
-  var CRISES = [ // Table 6: [trades, win rate %, avg return %] by strategy
-    { name: 'GFC (Oct 2007 to Mar 2009)', d3070: [113, 53.1, -1.38], d2080: [20, 90.0, 71.76], w3070: [73, 84.9, 42.51], w2080: [11, 100.0, 357.95] },
-    { name: 'COVID (Feb to Jun 2020)', d3070: [62, 69.4, 9.48], d2080: [21, 95.2, 69.64], w3070: [47, 95.7, 67.54], w2080: [18, 100.0, 209.48] },
-    { name: 'Bear market 2022', d3070: [120, 68.3, 6.21], d2080: [22, 86.4, 33.41], w3070: [24, 83.3, 28.89], w2080: [2, 100.0, 218.13] }
+  var CRISES = [ // Table 10: [trades, win rate %, avg return %] by strategy
+    { name: 'GFC (Oct 2007 to Mar 2009)', d3070: [113, 54.9, -1.31], d2080: [20, 85.0, 72.04], w3070: [72, 86.1, 40.22], w2080: [11, 100.0, 352.35] },
+    { name: 'COVID (Feb to Jun 2020)', d3070: [64, 70.3, 9.68], d2080: [22, 95.5, 67.47], w3070: [47, 95.7, 74.75], w2080: [18, 100.0, 239.38] },
+    { name: 'Bear market 2022', d3070: [118, 68.6, 6.01], d2080: [21, 90.5, 36.09], w3070: [24, 83.3, 27.96], w2080: [2, 100.0, 217.48] }
   ];
-  var PERIODS = [['2005–2009', 337, 73.6, 4.80], ['2010–2014', 413, 89.3, 9.34], ['2015–2019', 466, 81.3, 7.54], ['2020–2025', 619, 77.1, 7.77]]; // Table 5, Daily 30/70
+  var PERIODS = [['1962–1969', 156, 74.4, 4.56], ['1970–1979', 348, 72.1, 3.88], ['1980–1989', 586, 82.4, 8.36], ['1990–1999', 630, 81.3, 9.99], ['2000–2009', 657, 76.7, 6.42], ['2010–2019', 871, 84.7, 8.07], ['2020–2026', 700, 78.9, 8.00]]; // Table 9, Daily 30/70 by decade
 
   var METRICS = [
     { key: 'win', label: 'Win rate', fmt: function (v) { return fixed(v, 1) + '%'; } },
@@ -278,6 +278,8 @@
     { key: 'hold', label: 'Average holding period (days)', fmt: function (v) { return intf(v) + ' days'; } },
     { key: 'trades', label: 'Total trades', fmt: function (v) { return intf(v); } },
     { key: 'pf', label: 'Profit factor', fmt: function (v) { return fixed(v, 2); } },
+    { key: 'randAvg', label: 'Average return of random entries (same stocks and holds)', fmt: function (v) { return fixed(v, 2) + '%'; } },
+    { key: 'stratAnn', label: 'Annualized return per stock, T-bills on idle cash', fmt: function (v) { return fixed(v, 1) + '%'; } },
     { key: 'bhT', label: 'Paired t-stat vs. buy-and-hold (negative = underperformed)', fmt: function (v) { return fixed(v, 2); } }
   ];
 
@@ -397,10 +399,15 @@
       ['Best single trade', function (s) { return '+' + fixed(s.best, 2) + '%'; }],
       ['Worst single trade', function (s) { return fixed(s.worst, 2) + '%'; }],
       ['Longest win / lose streak', function (s) { return s.winStreak + ' / ' + s.loseStreak; }],
+      ['Avg return, random entries', function (s) { return fixed(s.randAvg, 2) + '%'; }],
+      ['Win rate, random entries', function (s) { return fixed(s.randWin, 1) + '%'; }],
+      ['p-value, RSI avg vs. random', function (s) { return s.randP; }],
+      ['Annualized per stock, T-bills on idle cash', function (s) { return fixed(s.stratAnn, 1) + '%'; }],
+      ['Annualized per stock, buy-and-hold', function (s) { return fixed(s.bhAnn, 1) + '%'; }],
       ['Annualized return vs. buy-and-hold', function () { return 'Underperformed'; }],
       ['Paired t-stat vs. buy-and-hold', function (s) { return fixed(s.bhT, 2); }],
       ['Paired t-test p-value', function (s) { return s.bhP; }],
-      ['Mann-Whitney U p-value', function (s) { return s.mwP; }]
+      ['Wilcoxon signed-rank p-value', function (s) { return s.wP; }]
     ];
     var h = '<caption>RSI strategy performance (gross, per trade)</caption><thead><tr><th scope="col">Metric</th>';
     sel.forEach(function (s) { h += '<th scope="col"><span class="sw" style="background:' + s.color + '"></span>' + esc(s.name) + '</th>'; });
@@ -458,7 +465,7 @@
   }
 
   function renderRsiPeriods() {
-    var h = '<caption>Daily 30/70 by time period (Table 5)</caption><thead><tr><th scope="col">Period</th><th scope="col">Trades</th><th scope="col">Win rate</th><th scope="col">Avg return</th></tr></thead><tbody>';
+    var h = '<caption>Daily 30/70 by decade of entry (Table 9)</caption><thead><tr><th scope="col">Period</th><th scope="col">Trades</th><th scope="col">Win rate</th><th scope="col">Avg return</th></tr></thead><tbody>';
     PERIODS.forEach(function (r) {
       h += '<tr><th scope="row">' + r[0] + '</th><td>' + intf(r[1]) + '</td><td>' + fixed(r[2], 1) + '%</td><td>' + fixed(r[3], 2) + '%</td></tr>';
     });
