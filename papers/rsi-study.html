@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Empirical Performance of RSI-Based Trading Strategies — luppiter Group</title>
-  <meta name="description" content="Comprehensive backtest of RSI-based trading strategies across 100 U.S. equities from 1962 to 2026. Evaluates daily and weekly timeframes with 30/70 and 20/80 thresholds.">
+  <meta name="description" content="Backtest of four RSI trading strategies on real total-return prices for 99 U.S. stocks, 1962 to 2026, with random-entry, buy-and-hold, and portfolio benchmarks.">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <script>
     MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        inlineMath: [['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         tags: 'ams'
       },
@@ -161,6 +161,13 @@
       h2.section-title { font-size: 1.3rem; }
       table { font-size: 0.78rem; }
     }
+    .figure { background: var(--bg-card); border: 1px solid var(--border-dim); padding: 22px 22px 16px; margin: 36px 0; }
+    .figure .fig-title { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 14px; text-transform: uppercase; }
+    .figure figcaption { font-size: 0.88rem; color: var(--text-dim); margin-top: 12px; line-height: 1.55; }
+    .figure svg text { font-family: 'Crimson Text', Georgia, serif; }
+    td strong { color: var(--text-bright); }
+    th { white-space: normal; vertical-align: bottom; min-width: 64px; }
+    @media (max-width: 640px) { .figure { padding: 14px 10px 10px; margin: 28px -8px; } }
     .brand-l { font-family: Arial, Helvetica, sans-serif; font-style: normal; letter-spacing: inherit; }
 </style>
 </head>
@@ -176,25 +183,24 @@
 <header class="paper-hero">
   <div class="paper-label">Research Paper · Quantitative Finance</div>
   <h1 class="paper-title">The Empirical Performance of RSI-Based Trading Strategies</h1>
-  <p class="paper-subtitle">A Comprehensive Backtest Across 100 U.S. Equities (1962–2026)</p>
+  <p class="paper-subtitle">A Backtest Across 99 U.S. Equities on Real Prices (1962–2026)</p>
   <div class="gold-rule"></div>
   <div class="paper-meta">
     <div>Author <span>John, CaesarBot &amp; luppiter Group</span></div>
     <div>Published <span>April 2026</span></div>
-    <div>Revised <span>October 2026</span></div>
+    <div>Revised <span>November 2026</span></div>
     <div>Category <span>Finance · Technical Analysis</span></div>
-    <div>References <span>23 References</span></div>
+    <div>References <span>24 References</span></div>
   </div>
 </header>
 
 <main class="paper-wrap">
 
   <div class="abstract-box">
-<p>This study conducts a large-scale empirical backtest of four Relative Strength Index (RSI) trading strategies across a universe of 100 U.S. equities spanning 11 sectors, using up to 64 years of daily price data (1962–2026). The four strategies vary by timeframe (daily vs. weekly) and threshold pair (30/70 vs. 20/80). We evaluate 5,174 total trades using per-trade performance metrics, statistical significance tests, and breakdowns by sector, time period, and crisis window.</p>
-<p>Key findings: All four strategies produce positive average returns per trade that differ significantly from zero under tests that treat each trade as independent (p &lt; 10⁻¹² for every strategy). The Daily 30/70 strategy generates the most trades (n = 3,892) with a 79.4% win rate and 7.66% average return per trade. More extreme thresholds (20/80) produce fewer but substantially larger trades: the Weekly 20/80 strategy has a 96.3% win rate and a 244% average return, though with only 82 trades and an average holding period of 6.5 years. Because the tests compare returns with zero rather than with random entries, and because the trades cluster in time, they show positive average trades on this universe of surviving stocks but cannot separate RSI timing from the stocks&#x27; upward drift. In a per-stock comparison in which idle cash earns nothing, every strategy&#x27;s annualized return falls short of buying and holding the same stock (paired t-test p &lt; 10⁻¹⁹ for every strategy), largely because capital sits uninvested between signals; no index or portfolio-level comparison is tested. Trades entered during the 2007 to 2009 financial crisis and the 2020 COVID crash had high win rates and large average returns for the 20/80 and weekly strategies, while Daily 30/70 trades from the financial crisis averaged a loss. Sector-level ANOVA finds cross-sectional variation for the daily and weekly 30/70 strategies (p = 0.043 and p = 0.0003, respectively), but only the weekly result survives a Bonferroni correction for four strategies, and the top-ranked Mega Cap Tech group consists of stocks chosen as mega-caps in 2026. Because the universe consists only of companies that survived to 2026 (delisted, bankrupt, and acquired firms are excluded), these results are subject to survivorship bias and should be read as an upper bound, particularly for long-hold strategies such as Weekly 20/80.</p>
+<p>This study backtests four Relative Strength Index (RSI) trading strategies on real daily prices for 99 large U.S. stocks in 11 sectors, using each stock's full Yahoo Finance history from as early as January 1962 through October 30, 2026. The strategies buy when the 14-day RSI crosses below 30 or 20 and sell when it crosses above 70 or 80, on daily or weekly data, and every trade is executed at the next day's opening price on dividend-adjusted prices. The rerun reproduces the original paper closely: the Daily 30/70 rule made 3,948 trades with a 79.9% win rate and a 7.63% average return, against 3,892, 79.4%, and 7.66% originally.</p>
+<p>The new tests change how those results should be read. Against random entries on the same stocks held for the same lengths of time, RSI entries won far more often (79.9% against 64.3% for Daily 30/70), but their average return was only modestly higher (7.63% against 6.96%, p = 0.032), and for Daily 20/80 it was no higher at all; much of the high win rate comes from the exit rule, which sells only after a rally. Stock by stock, even with Treasury bill interest on idle cash, every strategy trailed buying and holding the same stock (Daily 30/70: 8.2% a year against 13.7%, ahead in only 11 of 99 stocks), because capital sat out of the market about 62% to 88% of the time. As equal-weight portfolios from 1988, the strategies returned 5.5% to 10.3% a year with much lower volatility than the S&amp;P 500 and higher Sharpe ratios than the index (0.65 to 0.80 against 0.51), but below the index's 11.4% return and well below the 18.1% earned by simply holding the same stocks. Because the universe is made of companies that survived to 2026, and holding them returned far more than the index, all absolute results are biased upward; the comparison with holding the same stocks is the fair one, and on that comparison the rules lost.</p>
   </div>
-<p>Date: February 22, 2026</p>
-<p>Data Source: Yahoo Finance (yfinance) — all figures derived from actual historical price data</p>
+<p>Data: Yahoo Finance daily prices, retrieved November 10, 2026. All figures are computed from actual historical prices.</p>
 <p><strong>Disclaimer.</strong> All results in this paper come from hypothetical backtests. They are not investment advice or a recommendation to buy or sell any security, and past performance does not guarantee future results. This paper is published by luppiter Group, which is not a registered investment adviser.</p>
 
 <div class="section-header">
@@ -202,8 +208,8 @@
   <h2 class="section-title">1. Introduction</h2>
 </div>
 <p>The Relative Strength Index (RSI), introduced by J. Welles Wilder in his seminal 1978 work New Concepts in Technical Trading Systems, is among the most widely used momentum oscillators in technical analysis (Wilder, 1978). The RSI measures the magnitude of recent price changes on a scale of 0 to 100, with readings below 30 traditionally interpreted as &quot;oversold&quot; and readings above 70 as &quot;overbought.&quot; Technical analysis is widely used by practitioners: in a Bank of England survey of chief foreign exchange dealers in London, about 90% of respondents said they used some chart analysis in forming exchange rate expectations at short horizons (Taylor &amp; Allen, 1992). Even so, the academic literature on RSI&#x27;s profitability remains surprisingly thin relative to studies on moving average crossover systems.</p>
-<p>The efficient market hypothesis (EMH), as formulated by Fama (1970), posits that asset prices fully reflect all available information, implying that technical trading rules should not generate systematic excess returns. If markets are efficient, past price patterns — the sole input to RSI — should have no predictive power for future returns. Yet behavioral finance research has documented systematic overreaction in stock prices (De Bondt &amp; Thaler, 1985), providing a theoretical basis for why mean-reversion indicators like RSI might capture genuine profit opportunities.</p>
-<p>This study makes three contributions to the literature. First, we employ a substantially larger stock universe (100 equities across 11 sectors) and longer time period (up to 64 years) than prior RSI backtests, which typically examine a handful of indices or a single market. Second, we systematically compare four threshold/timeframe combinations rather than testing a single parameterization; reporting all four limits selective reporting, though it does not by itself resolve the data-snooping concerns raised by Sullivan, Timmermann, and White (1999) (see Section 5.7). Third, we break results down by sector, by time period from 2005 to 2025, and by three crisis windows, showing where per-trade results were strongest.</p>
+<p>The efficient market hypothesis (EMH), as formulated by Fama (1970), posits that asset prices fully reflect all available information, implying that technical trading rules should not generate systematic excess returns. If markets are efficient, past price patterns, the sole input to RSI, should have no predictive power for future returns. Yet behavioral finance research has documented systematic overreaction in stock prices (De Bondt &amp; Thaler, 1985), providing a theoretical basis for why mean-reversion indicators like RSI might capture genuine profit opportunities.</p>
+<p>This study makes three contributions to the literature. First, we employ a substantially larger stock universe (99 equities across 11 sectors) and longer time period (up to 64 years) than prior RSI backtests, which typically examine a handful of indices or a single market. Second, we systematically compare four threshold/timeframe combinations rather than testing a single parameterization; reporting all four limits selective reporting, though it does not by itself resolve the data-snooping concerns raised by Sullivan, Timmermann, and White (1999) (see Section 5.7). Third, we test the trades against random entries on the same stocks, against the S&amp;P 500 over the same dates, and against buying and holding the same stocks, both stock by stock and as portfolios with Treasury bill interest on idle cash, and we break results down by sector, decade, and crisis window.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION II</span>
@@ -221,1060 +227,157 @@
 <p>The potential profitability of RSI-based strategies finds theoretical support in behavioral finance. De Bondt and Thaler (1985) documented long-term return reversals consistent with investor overreaction: prior losers outperformed prior winners over 3–5 year horizons. Over shorter horizons the pattern runs the other way: Jegadeesh and Titman (1993) found that buying past winners and selling past losers earned significant positive returns over 3- to 12-month holding periods, a range that includes the typical Daily 30/70 holding period in this study. Tversky and Kahneman (1974) identified representativeness bias and anchoring as cognitive heuristics that can cause systematic pricing errors. Shiller (2000) argued that irrational exuberance and panic create price overshoots in both directions, which mean-reversion indicators might exploit.</p>
 <p>If stocks that trigger RSI oversold signals have indeed been subject to excessive selling pressure driven by behavioral biases, then the subsequent rebound captured by a buy-on-oversold/sell-on-overbought strategy reflects a correction of mispricing rather than compensation for risk.</p>
 
+
 <div class="section-header">
   <span class="section-number">SECTION III</span>
   <h2 class="section-title">3. Data and Methodology</h2>
 </div>
-<h3 class="sub-title">3.1 Stock Universe</h3>
-<p>Our sample comprises 100 U.S. equities distributed across 11 sector classifications:</p>
-<table>
-<thead><tr>
-<th>Sector</th>
-<th>Stocks</th>
-<th>Representative Tickers</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>Mega Cap Tech</td>
-<td>7</td>
-<td>AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA</td>
-</tr>
-<tr>
-<td>Financials</td>
-<td>10</td>
-<td>JPM, BAC, GS, WFC, MS, BRK-B, C, AXP, BLK, SCHW</td>
-</tr>
-<tr>
-<td>Healthcare</td>
-<td>10</td>
-<td>JNJ, UNH, PFE, ABBV, MRK, LLY, TMO, ABT, BMY, AMGN</td>
-</tr>
-<tr>
-<td>Energy</td>
-<td>10</td>
-<td>XOM, CVX, COP, SLB, EOG, MPC, PSX, VLO, OXY, HAL</td>
-</tr>
-<tr>
-<td>Consumer Staples</td>
-<td>10</td>
-<td>PG, KO, PEP, WMT, COST, PM, MO, CL, GIS, KHC</td>
-</tr>
-<tr>
-<td>Consumer Discretionary</td>
-<td>10</td>
-<td>HD, MCD, NKE, SBUX, TGT, LOW, TJX, BKNG, CMG, DG</td>
-</tr>
-<tr>
-<td>Industrials</td>
-<td>10</td>
-<td>CAT, DE, UNP, HON, GE, BA, LMT, RTX, MMM, UPS</td>
-</tr>
-<tr>
-<td>Utilities</td>
-<td>10</td>
-<td>NEE, DUK, SO, D, AEP, SRE, EXC, XEL, ED, WEC</td>
-</tr>
-<tr>
-<td>REITs</td>
-<td>10</td>
-<td>O, AMT, PLD, CCI, SPG, WELL, DLR, PSA, EQR, AVB</td>
-</tr>
-<tr>
-<td>Materials</td>
-<td>7</td>
-<td>LIN, APD, ECL, DD, NEM, FCX, NUE</td>
-</tr>
-<tr>
-<td>Communication</td>
-<td>6</td>
-<td>DIS, CMCSA, NFLX, T, VZ, TMUS</td>
-</tr>
-</tbody></table>
-<p>All 100 tickers were successfully downloaded with zero failures. Data availability varies by listing date: the longest histories (JNJ, XOM, CVX, KO, PG, MRK, CAT, HON, GE, BA, DIS, and others) extend back to January 2, 1962, providing over 16,000 daily observations and 64 years of coverage. The shortest histories (KHC from July 2015, ABBV from January 2013) still provide over 10 years of data. The median stock in our sample has approximately 11,500 daily observations spanning ~45 years. The universe was selected from companies still listed as of 2026, so firms that were delisted, went bankrupt, or were acquired during the sample period are not represented; Section 5.5 discusses the resulting survivorship bias. The paper does not specify whether prices were adjusted for splits and dividends, so it is unclear whether trade and buy-and-hold returns include dividends.</p>
+<h3 class="sub-title">3.1 Stock Universe and Data</h3>
+<p>The universe is the original paper's list of 100 stocks, chosen as large companies listed in 2026. One of them can no longer be tested: AvalonBay Communities merged into Equity Residential in August 2026, and Yahoo Finance no longer serves AvalonBay's price history, so the rerun covers 99 stocks. Equity Residential continues under the ticker VMRK and keeps its full history. The loss of AvalonBay is a small, live example of the survivorship problem discussed in Section 5.5.</p>
+<p>Table A: Stock Universe</p><table>
+<thead><tr><th>Sector</th><th>Stocks</th><th>Tickers</th></tr></thead>
+<tbody><tr><td>Mega Cap Tech</td><td>7</td><td>AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA</td></tr><tr><td>Financials</td><td>10</td><td>JPM, BAC, GS, WFC, MS, BRK-B, C, AXP, BLK, SCHW</td></tr><tr><td>Healthcare</td><td>10</td><td>JNJ, UNH, PFE, ABBV, MRK, LLY, TMO, ABT, BMY, AMGN</td></tr><tr><td>Energy</td><td>10</td><td>XOM, CVX, COP, SLB, EOG, MPC, PSX, VLO, OXY, HAL</td></tr><tr><td>Consumer Staples</td><td>10</td><td>PG, KO, PEP, WMT, COST, PM, MO, CL, GIS, KHC</td></tr><tr><td>Consumer Discretionary</td><td>10</td><td>HD, MCD, NKE, SBUX, TGT, LOW, TJX, BKNG, CMG, DG</td></tr><tr><td>Industrials</td><td>10</td><td>CAT, DE, UNP, HON, GE, BA, LMT, RTX, MMM, UPS</td></tr><tr><td>Utilities</td><td>10</td><td>NEE, DUK, SO, D, AEP, SRE, EXC, XEL, ED, WEC</td></tr><tr><td>REITs</td><td>9</td><td>O, AMT, PLD, CCI, SPG, WELL, DLR, PSA, EQR (now VMRK)</td></tr><tr><td>Materials</td><td>7</td><td>LIN, APD, ECL, DD, NEM, FCX, NUE</td></tr><tr><td>Communication</td><td>6</td><td>DIS, CMCSA, NFLX, T, VZ, TMUS</td></tr></tbody></table>
+<p>Daily prices come from the Yahoo Finance chart service, retrieved November 10, 2026, the same source the original paper used through the yfinance library. Each stock's history runs from its first available date through October 30, 2026. Sixteen stocks, including Johnson &amp; Johnson, ExxonMobil, Coca-Cola, Procter &amp; Gamble, Boeing, and Disney, start on January 2, 1962; the shortest history, Kraft Heinz, starts in July 2015. The median stock has 46.6 years and 11,750 trading days of data. The original paper did not say whether its prices included dividends. Here every return is a total return: RSI is computed on Yahoo's dividend-adjusted close, and the opening price is adjusted by the same factor, so trade returns and buy-and-hold returns both include reinvested dividends.</p>
 <h3 class="sub-title">3.2 RSI Calculation</h3>
-<p>We compute RSI using Wilder&#x27;s original smoothed moving average method with a 14-period lookback:</p>
-<ol>
-  <li>Compute price changes: Δpₜ = pₜ − pₜ₋₁</li>
-  <li>Separate gains (U = max(Δp, 0)) and losses (D = max(−Δp, 0))</li>
-  <li>Compute exponentially weighted moving averages:
-    <ul>
-      <li>Avg Gain = EWM(U, α = 1/14, min_periods = 14)</li>
-      <li>Avg Loss = EWM(D, α = 1/14, min_periods = 14)</li>
-    </ul>
-  </li>
-  <li>RS = Avg Gain / Avg Loss</li>
-  <li>RSI = 100 − (100 / (1 + RS))</li>
-</ol>
-<p>For weekly strategies, daily OHLCV data is resampled to weekly frequency (Friday close) before RSI computation.</p>
-<h3 class="sub-title">3.3 Trading Rules</h3>
-<p>We test four strategy parameterizations:</p>
+<p>RSI uses Wilder's smoothing with a 14-period lookback: daily (or weekly) price changes are split into gains and losses, each is smoothed with an exponential average with α = 1/14 after at least 14 periods, and RSI = 100 − 100 / (1 + average gain / average loss). For the weekly strategies, the dividend-adjusted close on the last trading day of each week is used before computing RSI.</p>
+<h3 class="sub-title">3.3 Trading Rules and Execution</h3>
 <table>
-<thead><tr>
-<th>Strategy</th>
-<th>Timeframe</th>
-<th>Buy Signal</th>
-<th>Sell Signal</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>Daily 30/70</td>
-<td>Daily</td>
-<td>RSI crosses below 30</td>
-<td>RSI crosses above 70</td>
-</tr>
-<tr>
-<td>Daily 20/80</td>
-<td>Daily</td>
-<td>RSI crosses below 20</td>
-<td>RSI crosses above 80</td>
-</tr>
-<tr>
-<td>Weekly 30/70</td>
-<td>Weekly</td>
-<td>RSI crosses below 30</td>
-<td>RSI crosses above 70</td>
-</tr>
-<tr>
-<td>Weekly 20/80</td>
-<td>Weekly</td>
-<td>RSI crosses below 20</td>
-<td>RSI crosses above 80</td>
-</tr>
-</tbody></table>
-<p>Entry rule: A buy signal is generated when RSI at time t is below the buy threshold while RSI at t−1 was at or above the threshold (i.e., a downward crossing).</p>
-<p>Exit rule: A sell signal is generated when RSI at time t is above the sell threshold while RSI at t−1 was at or below the threshold (i.e., an upward crossing).</p>
-<p>Execution: As specified, entries and exits fill at the closing price of the bar on which the signal occurs (the daily close, or the Friday close for weekly strategies). Because the signal is known only once that close prints, this assumes same-bar execution that a trader could not achieve exactly.</p>
-<p>Position management: Only one position per stock at a time (no pyramiding). If a position remains open at the end of the data series, it is closed at the final available price and flagged; the number of positions closed this way is not reported. Trades are long-only and use no stop-loss, so a position ends only with an upward RSI crossing or the end of the data.</p>
-<p>Benchmark: Buy-and-hold return computed over each stock&#x27;s full data period: (final price − initial price) / initial price. The comparison is made one stock at a time. Capital not committed to a trade earns 0%, not a Treasury bill rate; no index benchmark is tested; and the per-stock annualized strategy and buy-and-hold returns behind the comparison are not reported.</p>
-<h3 class="sub-title">3.4 Transaction Costs</h3>
-<p>This study reports gross returns without transaction cost deductions. We discuss the impact of realistic transaction costs (commissions, bid-ask spread, slippage) in Section 5.6. For reference, modern discount brokerages offer zero-commission equity trading, but institutional estimates of total execution costs (including market impact) range from 5–20 basis points per round trip for large-cap stocks. A flat modern cost assumption likely understates trading costs for the early decades of the sample, when fixed public commission rates applied to U.S. exchange transactions; the SEC eliminated them after May 1975 under Rule 19b-3.</p>
-<h3 class="sub-title">3.5 Performance Metrics</h3>
-<p>For each stock and strategy, and in aggregate, we compute:</p>
-<ul>
-  <li>Number of trades (n)</li>
-</ul>
-<ul>
-  <li>Win rate: proportion of trades with positive return</li>
-</ul>
-<ul>
-  <li>Average and median return per trade</li>
-</ul>
-<ul>
-  <li>Standard deviation of trade returns</li>
-</ul>
-<ul>
-  <li>Average holding period (calendar days)</li>
-</ul>
-<ul>
-  <li>Maximum single-trade drawdown (worst trade)</li>
-</ul>
-<ul>
-  <li>Cumulative compounded return: ∏(1 + rᵢ) − 1</li>
-</ul>
-<ul>
-  <li>Annualized return: (1 + cumulative)^(1/years) − 1 (cumulative and annualized returns feed the per-stock comparison in Table 2 but are not reported)</li>
-</ul>
-<ul>
-  <li>Profit factor: gross profits / |gross losses|</li>
-</ul>
-<ul>
-  <li>Average winning trade return and average losing trade return</li>
-</ul>
-<ul>
-  <li>Longest winning and losing streaks</li>
-</ul>
-<h3 class="sub-title">3.6 Statistical Tests</h3>
-<p>We employ the following tests:</p>
+<thead><tr><th>Strategy</th><th>Timeframe</th><th>Buy signal</th><th>Sell signal</th></tr></thead>
+<tbody><tr><td>Daily 30/70</td><td>Daily</td><td>RSI crosses below 30</td><td>RSI crosses above 70</td></tr><tr><td>Daily 20/80</td><td>Daily</td><td>RSI crosses below 20</td><td>RSI crosses above 80</td></tr><tr><td>Weekly 30/70</td><td>Weekly</td><td>RSI crosses below 30</td><td>RSI crosses above 70</td></tr><tr><td>Weekly 20/80</td><td>Weekly</td><td>RSI crosses below 20</td><td>RSI crosses above 80</td></tr></tbody></table>
+<p>A buy signal occurs when RSI is below the buy threshold after being at or above it on the prior bar; a sell signal occurs when RSI rises above the sell threshold after being at or below it. The original paper filled orders at the close of the signal bar, which a trader could not do exactly, because the signal is known only once that close prints. The rerun fills every order at the <strong>next trading day's open</strong>. Results under the original same-close rule are reported alongside and are nearly identical (Table 1). Positions are long-only, one per stock at a time, with no stop-loss. A position still open on October 30, 2026 is closed at that day's price and counted; Table 1 reports how many.</p>
+<h3 class="sub-title">3.4 Benchmarks</h3>
+<p>The original paper compared trade returns with zero and the strategies with buying and holding each stock while idle cash earned nothing. The rerun adds four benchmarks.</p>
 <ol>
-  <li>One-sample t-test: H₀: mean trade return = 0</li>
-  <li>Paired t-test: H₀: RSI annualized return = buy-and-hold annualized return (per stock)</li>
-  <li>Mann-Whitney U test: Non-parametric comparison of RSI vs. buy-and-hold returns</li>
-  <li>Chi-squared goodness of fit: H₀: win rate = 50%</li>
-  <li>One-way ANOVA: H₀: mean trade return is equal across all sectors</li>
+  <li><strong>Random entries.</strong> For every actual trade, a random entry day is drawn on the same stock and held for the same number of trading days, with the same next-open execution. Repeating this 1,000 times gives the distribution of average returns and win rates that a strategy with no timing ability would have earned on the same stocks with the same holding periods.</li>
+  <li><strong>The market over the same holding period.</strong> For trades entered from January 1988, when Yahoo's S&amp;P 500 total return index begins, each trade's return is compared with the index's return over the same dates.</li>
+  <li><strong>Buy-and-hold with Treasury bill interest.</strong> The per-stock comparison is repeated with idle cash earning the 13-week Treasury bill rate.</li>
+  <li><strong>A portfolio.</strong> Each strategy is run as an equal-weight portfolio across all stocks available on each day, with each stock's slice held in that stock while a position is open and in Treasury bills otherwise. It is compared with an equal-weight buy-and-hold portfolio of the same stocks, the S&amp;P 500 total return index (from 1988), the S&amp;P 500 price index (from 1962), and Treasury bills.</li>
 </ol>
-<p>All tests use α = 0.05 as the significance threshold, with exact p-values reported.</p>
-<p>Each test treats every trade (or every stock) as an independent observation. Trades on different stocks that are open over the same weeks share the same market moves, and entries bunch up around market declines, so the reported p-values overstate the strength of the evidence (Sections 4.2 and 5.8). The trade tests also compare returns with zero and win rates with 50%, not with a random-entry benchmark. Because four strategies are tested, the sector ANOVA is also judged against a Bonferroni-adjusted threshold of 0.05 / 4 = 0.0125.</p>
+<h3 class="sub-title">3.5 Transaction Costs</h3>
+<p>Results are gross unless stated. A 10 basis point round-trip cost is applied in Table 1 for reference. That is a modern figure and likely understates costs in the sample's early decades, when fixed public commission rates applied to U.S. exchange transactions; the SEC eliminated them after May 1975 under Rule 19b-3.</p>
+<h3 class="sub-title">3.6 Statistical Inference</h3>
+<p>Trades on different stocks that are open over the same weeks share the same market moves, and RSI entries bunch up around market declines, so tests that treat trades as independent overstate the evidence. Tests on trade returns here use standard errors clustered two ways, by the month of entry and by stock (Cameron, Gelbach, &amp; Miller, 2011); the conventional independent-trade t-statistic is shown for comparison. Stock-level comparisons with buy-and-hold use paired t-tests and Wilcoxon signed-rank tests across the 99 stocks. Sector differences are tested with one-way ANOVA, as in the original paper, and with a clustered Wald test for the two 30/70 strategies; with four strategies tested, the Bonferroni-adjusted threshold is 0.05 / 4 = 0.0125.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION IV</span>
   <h2 class="section-title">4. Results</h2>
 </div>
 <h3 class="sub-title">4.1 Aggregate Performance</h3>
-<p>Table 1: Aggregate Strategy Performance Summary</p>
-<table>
-<thead><tr>
-<th>Metric</th>
-<th>Daily 30/70</th>
-<th>Daily 20/80</th>
-<th>Weekly 30/70</th>
-<th>Weekly 20/80</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>Total Trades</td>
-<td>3,892</td>
-<td>598</td>
-<td>602</td>
-<td>82</td>
-</tr>
-<tr>
-<td>Stocks Traded</td>
-<td>100</td>
-<td>100</td>
-<td>100</td>
-<td>Not reported (at most 82)</td>
-</tr>
-<tr>
-<td>Avg Trades/Stock</td>
-<td>38.9</td>
-<td>6.0</td>
-<td>6.0</td>
-<td>0.8</td>
-</tr>
-<tr>
-<td><strong>Win Rate</strong></td>
-<td><strong>79.4%</strong></td>
-<td><strong>87.3%</strong></td>
-<td><strong>87.7%</strong></td>
-<td><strong>96.3%</strong></td>
-</tr>
-<tr>
-<td><strong>Avg Return/Trade</strong></td>
-<td><strong>7.66%</strong></td>
-<td><strong>47.37%</strong></td>
-<td><strong>37.09%</strong></td>
-<td><strong>244.10%</strong></td>
-</tr>
-<tr>
-<td>Median Return/Trade</td>
-<td>9.06%</td>
-<td>28.28%</td>
-<td>34.22%</td>
-<td>173.35%</td>
-</tr>
-<tr>
-<td>Std Dev of Returns</td>
-<td>15.45%</td>
-<td>89.75%</td>
-<td>38.35%</td>
-<td>250.37%</td>
-</tr>
-<tr>
-<td>Avg Holding Period</td>
-<td>150 days</td>
-<td>764 days</td>
-<td>599 days</td>
-<td>2,374 days</td>
-</tr>
-<tr>
-<td>Median Holding Period</td>
-<td>112 days</td>
-<td>506 days</td>
-<td>487 days</td>
-<td>2,114 days</td>
-</tr>
-<tr>
-<td><strong>Profit Factor</strong></td>
-<td><strong>3.71</strong></td>
-<td><strong>16.31</strong></td>
-<td><strong>14.03</strong></td>
-<td><strong>176.45</strong></td>
-</tr>
-<tr>
-<td>Avg Winning Trade</td>
-<td>+13.22%</td>
-<td>+57.81%</td>
-<td>+45.53%</td>
-<td>+254.81%</td>
-</tr>
-<tr>
-<td>Avg Losing Trade</td>
-<td>−13.72%</td>
-<td>−24.35%</td>
-<td>−23.15%</td>
-<td>−38.03%</td>
-</tr>
-<tr>
-<td>Worst Single Trade</td>
-<td>−93.68%</td>
-<td>−87.68%</td>
-<td>−88.08%</td>
-<td>−67.71%</td>
-</tr>
-<tr>
-<td>Best Single Trade</td>
-<td>+113.43%</td>
-<td>+1,245.94%</td>
-<td>+206.27%</td>
-<td>+1,531.98%</td>
-</tr>
-<tr>
-<td>Longest Win Streak</td>
-<td>29</td>
-<td>43</td>
-<td>45</td>
-<td>38</td>
-</tr>
-<tr>
-<td>Longest Lose Streak</td>
-<td>5</td>
-<td>3</td>
-<td>3</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>Note to Table 1: Avg Trades/Stock divides total trades by the 100 stocks in the universe. The number of stocks with at least one Weekly 20/80 trade is not reported; with 82 trades it can be at most 82, and the Table 2 test statistics imply 57 (see the note to Table 2).</p>
-<p>Several patterns emerge:</p>
-<p>Trade frequency decreases dramatically with more extreme thresholds and longer timeframes. The Daily 30/70 strategy generates nearly 40 trades per stock over the sample period, while Weekly 20/80 averages less than one trade per stock. This reflects the rarity of extreme RSI readings — weekly RSI crossing below 20 is an uncommon event, typically occurring only during severe market dislocations.</p>
-<p>Win rates increase monotonically with threshold extremity, from 79.4% (Daily 30/70) to 96.3% (Weekly 20/80). This fits the intuition that deeper oversold readings are followed by recoveries more often, but it is also what longer holds on stocks known to have survived would produce: the stricter rules hold positions far longer (about 1.6 to 6.5 years on average), with no stop, until RSI recovers. Only 3 of the 82 Weekly 20/80 trades lost money, a figure that partly reflects how the sample was built (Section 5.5).</p>
-<p>Average returns per trade are inversely related to trade frequency. This is partly mechanical, since longer holding periods allow more price appreciation; whether the severity of the entry condition adds anything beyond the longer hold cannot be determined without a random-entry benchmark (Section 5.8). The average Daily 30/70 trade captures a 7.66% move over ~5 months, while the average Weekly 20/80 trade captures a 244% move over ~6.5 years.</p>
-<p>Profit factors are exceptionally high. A profit factor of 3.71 for Daily 30/70 means gross profits are 3.71× gross losses. The Weekly 20/80&#x27;s profit factor of 176.45 is extraordinary, driven by its 96.3% win rate combined with winning trades averaging 254.81% versus losing trades averaging only −38.03%.</p>
-<h3 class="sub-title">4.2 Statistical Significance</h3>
-<p>Table 2: Statistical Test Results</p>
-<table>
-<thead><tr>
-<th>Test</th>
-<th>Daily 30/70</th>
-<th>Daily 20/80</th>
-<th>Weekly 30/70</th>
-<th>Weekly 20/80</th>
-</tr></thead>
-<tbody>
-<tr>
-<td><strong>Mean return ≠ 0</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>t-statistic</td>
-<td>30.92</td>
-<td>12.90</td>
-<td>23.71</td>
-<td>8.77</td>
-</tr>
-<tr>
-<td>p-value</td>
-<td>6.83 × 10⁻¹⁸⁸</td>
-<td>9.72 × 10⁻³⁴</td>
-<td>3.32 × 10⁻⁸⁸</td>
-<td>2.22 × 10⁻¹³</td>
-</tr>
-<tr>
-<td><strong>Win rate ≠ 50%</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>χ² statistic</td>
-<td>1,342.70</td>
-<td>332.64</td>
-<td>342.39</td>
-<td>70.44</td>
-</tr>
-<tr>
-<td>p-value</td>
-<td>5.94 × 10⁻²⁹⁴</td>
-<td>2.56 × 10⁻⁷⁴</td>
-<td>1.92 × 10⁻⁷⁶</td>
-<td>4.74 × 10⁻¹⁷</td>
-</tr>
-<tr>
-<td><strong>RSI ann. return = B&amp;H</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Paired t-statistic</td>
-<td>−14.14</td>
-<td>−15.82</td>
-<td>−18.31</td>
-<td>−14.56</td>
-</tr>
-<tr>
-<td>p-value</td>
-<td>1.69 × 10⁻²⁵</td>
-<td>9.71 × 10⁻²⁹</td>
-<td>1.46 × 10⁻³³</td>
-<td>1.07 × 10⁻²⁰</td>
-</tr>
-<tr>
-<td><strong>Mann-Whitney U</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>U statistic</td>
-<td>747</td>
-<td>408</td>
-<td>407</td>
-<td>178</td>
-</tr>
-<tr>
-<td>p-value</td>
-<td>2.74 × 10⁻²⁵</td>
-<td>7.82 × 10⁻²⁹</td>
-<td>3.21 × 10⁻²⁹</td>
-<td>2.51 × 10⁻¹⁶</td>
-</tr>
-</tbody></table>
-<p>Note to Table 2: All p-values assume independent observations (Section 3.6). The paired t-test and Mann-Whitney statistics imply comparisons over 100 stocks for Daily 30/70 and Weekly 30/70, 99 for Daily 20/80, and 57 for Weekly 20/80, which suggests stocks with no trades were left out of the buy-and-hold comparison; the paper does not state this directly.</p>
-<p>All four strategies produce mean trade returns that are significantly different from zero at any conventional significance level. The t-statistics range from 8.77 (Weekly 20/80, constrained by its small sample of 82 trades) to 30.92 (Daily 30/70, with nearly 3,900 trades). These tests show that the average trade was positive on this universe; they do not show that RSI timing produced it. They compare trade returns with zero, not with a benchmark. The trades are long-only, with no stop, on stocks chosen because they survived and grew to 2026, and each position is held until RSI rises back above the exit threshold; random entries held for similar periods on the same stocks might well have gained most of the time too, but that was not tested. The tests also treat trades as independent, although trades on different stocks are often opened in the same weeks and share the same market moves: Table 6 shows 113 Daily 30/70 trades in the October 2007 to March 2009 window, and 29 of the 82 Weekly 20/80 trades fall in the GFC and COVID windows, which together span less than two years. The reported p-values therefore overstate the evidence. Separating RSI timing from the stocks&#x27; upward drift requires a random-entry benchmark with matched holding periods and standard errors clustered by date (Section 5.8).</p>
-<p>Win rates are significantly above 50% for all strategies under the same independence assumption, with χ² p-values ranging from about 6 × 10⁻²⁹⁴ (Daily 30/70) to 5 × 10⁻¹⁷ (Weekly 20/80). A 50% win rate is a weak null for long holds on rising stocks, however, so these tests do not show that the win rates exceed what random entries would achieve.</p>
-<p>On an annualized basis, every strategy falls short of buying and holding the same stock. The paired t-tests, which compare each stock&#x27;s RSI annualized return with its own buy-and-hold annualized return, yield large negative t-statistics (p-values from 1.46 × 10⁻³³ to 1.07 × 10⁻²⁰), and the Mann-Whitney U tests point the same way. The comparison is narrow: it runs one stock at a time, capital between trades earns 0% rather than a Treasury bill rate, no index or portfolio is tested, and the annualized returns behind the tests are not reported. The likely mechanism is time out of the market rather than weak trades. Annualizing each strategy&#x27;s average return over its average holding period in Table 1 gives roughly 20% to 21% a year while invested (a rough figure, since it combines two averages), but capital sits idle between signals. These results support a per-stock statement about these surviving stocks, not a conclusion about RSI versus passive indexing.</p>
-<h3 class="sub-title">4.3 Sector Analysis</h3>
-<p>Table 3: Performance by Sector — Daily 30/70 Strategy</p>
-<table>
-<thead><tr>
-<th>Sector</th>
-<th>Trades</th>
-<th>Win Rate</th>
-<th>Avg Return</th>
-<th>Median Return</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>Mega Cap Tech</td>
-<td>164</td>
-<td>76.8%</td>
-<td>10.76%</td>
-<td>11.72%</td>
-</tr>
-<tr>
-<td>Consumer Discretionary</td>
-<td>363</td>
-<td>79.1%</td>
-<td>9.35%</td>
-<td>11.09%</td>
-</tr>
-<tr>
-<td>Materials</td>
-<td>284</td>
-<td>79.2%</td>
-<td>8.15%</td>
-<td>10.01%</td>
-</tr>
-<tr>
-<td>Energy</td>
-<td>379</td>
-<td>77.0%</td>
-<td>7.98%</td>
-<td>10.65%</td>
-</tr>
-<tr>
-<td>Healthcare</td>
-<td>435</td>
-<td>80.0%</td>
-<td>7.93%</td>
-<td>9.27%</td>
-</tr>
-<tr>
-<td>Consumer Staples</td>
-<td>414</td>
-<td>82.1%</td>
-<td>7.75%</td>
-<td>7.94%</td>
-</tr>
-<tr>
-<td>Financials</td>
-<td>381</td>
-<td>77.7%</td>
-<td>7.47%</td>
-<td>8.81%</td>
-</tr>
-<tr>
-<td>REITs</td>
-<td>267</td>
-<td>80.1%</td>
-<td>7.45%</td>
-<td>8.76%</td>
-</tr>
-<tr>
-<td>Industrials</td>
-<td>537</td>
-<td>76.9%</td>
-<td>6.76%</td>
-<td>8.69%</td>
-</tr>
-<tr>
-<td>Utilities</td>
-<td>456</td>
-<td>85.3%</td>
-<td>6.37%</td>
-<td>7.60%</td>
-</tr>
-<tr>
-<td>Communication</td>
-<td>212</td>
-<td>75.0%</td>
-<td>6.10%</td>
-<td>8.47%</td>
-</tr>
-</tbody></table>
-<p>Table 4: Performance by Sector — Weekly 30/70 Strategy</p>
-<table>
-<thead><tr>
-<th>Sector</th>
-<th>Trades</th>
-<th>Win Rate</th>
-<th>Avg Return</th>
-<th>Median Return</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>Mega Cap Tech</td>
-<td>29</td>
-<td>86.2%</td>
-<td>62.82%</td>
-<td>58.59%</td>
-</tr>
-<tr>
-<td>Consumer Discretionary</td>
-<td>51</td>
-<td>82.4%</td>
-<td>48.08%</td>
-<td>37.23%</td>
-</tr>
-<tr>
-<td>Financials</td>
-<td>64</td>
-<td>90.6%</td>
-<td>44.31%</td>
-<td>44.18%</td>
-</tr>
-<tr>
-<td>Materials</td>
-<td>51</td>
-<td>94.1%</td>
-<td>43.41%</td>
-<td>45.11%</td>
-</tr>
-<tr>
-<td>Communication</td>
-<td>37</td>
-<td>86.5%</td>
-<td>37.11%</td>
-<td>31.02%</td>
-</tr>
-<tr>
-<td>REITs</td>
-<td>39</td>
-<td>82.1%</td>
-<td>36.88%</td>
-<td>33.86%</td>
-</tr>
-<tr>
-<td>Energy</td>
-<td>66</td>
-<td>87.9%</td>
-<td>33.44%</td>
-<td>29.52%</td>
-</tr>
-<tr>
-<td>Industrials</td>
-<td>94</td>
-<td>88.3%</td>
-<td>32.48%</td>
-<td>33.97%</td>
-</tr>
-<tr>
-<td>Consumer Staples</td>
-<td>51</td>
-<td>86.3%</td>
-<td>32.34%</td>
-<td>32.88%</td>
-</tr>
-<tr>
-<td>Healthcare</td>
-<td>59</td>
-<td>89.8%</td>
-<td>29.89%</td>
-<td>28.19%</td>
-</tr>
-<tr>
-<td>Utilities</td>
-<td>61</td>
-<td>86.9%</td>
-<td>24.86%</td>
-<td>24.50%</td>
-</tr>
-</tbody></table>
-<p>Mega-cap technology stocks produce the highest average returns across both daily and weekly strategies. This ranking carries hindsight: the seven Mega Cap Tech names (AAPL, MSFT, GOOGL, AMZN, NVDA, META, and TSLA) were selected as mega-caps as of 2026, so their decades of growth are built into the sample, and the strong recoveries after their oversold readings partly reflect how they were chosen. The Weekly 30/70 average return of 62.82% for mega-cap tech is the highest of any sector-strategy combination (excluding Weekly 20/80 with its tiny samples).</p>
-<p>Utilities have the highest Daily 30/70 win rate (85.3%) and the lowest Weekly 30/70 average return (24.86%); their Daily 30/70 average return (6.37%) is second lowest, above Communication (6.10%), and their Weekly 30/70 win rate (86.9%) is mid-range. This pattern is consistent with the sector&#x27;s low-volatility profile.</p>
-<p>One-way ANOVA results:</p>
-<table>
-<thead><tr>
-<th>Strategy</th>
-<th>F-statistic</th>
-<th>p-value</th>
-<th>Significant?</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>Daily 30/70</td>
-<td>1.884</td>
-<td>0.0426</td>
-<td>At 0.05 only; not after Bonferroni (0.0125)</td>
-</tr>
-<tr>
-<td>Daily 20/80</td>
-<td>0.590</td>
-<td>0.8226</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Weekly 30/70</td>
-<td>3.309</td>
-<td>0.0003</td>
-<td>Yes; also after Bonferroni (0.0125)</td>
-</tr>
-<tr>
-<td>Weekly 20/80</td>
-<td>0.841</td>
-<td>0.5812</td>
-<td>No</td>
-</tr>
-</tbody></table>
-<p>The ANOVA rejects equal sector means at the 0.05 level for the two 30/70 strategies, but not for the 20/80 strategies. With four strategies tested, the Bonferroni-adjusted threshold is 0.0125: the Weekly 30/70 result (p = 0.0003) meets it, while the Daily 30/70 result (p = 0.0426) does not. Both tests also assume independent trades, which the time clustering noted in Section 4.2 undermines. The lack of significance for 20/80 is likely attributable to smaller sample sizes (fewer trades per sector) rather than true uniformity.</p>
-<h3 class="sub-title">4.4 Time Period Analysis</h3>
-<p>Table 5: Performance by Time Period, Daily 30/70 (2005 to 2025 only: 1,835 of the 3,892 trades; earlier trades are not broken out)</p>
-<table>
-<thead><tr>
-<th>Period</th>
-<th>Trades</th>
-<th>Win Rate</th>
-<th>Avg Return</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>2005–2009</td>
-<td>337</td>
-<td>73.6%</td>
-<td>4.80%</td>
-</tr>
-<tr>
-<td>2010–2014</td>
-<td>413</td>
-<td>89.3%</td>
-<td>9.34%</td>
-</tr>
-<tr>
-<td>2015–2019</td>
-<td>466</td>
-<td>81.3%</td>
-<td>7.54%</td>
-</tr>
-<tr>
-<td>2020–2025</td>
-<td>619</td>
-<td>77.1%</td>
-<td>7.77%</td>
-</tr>
-</tbody></table>
-<p>Table 6: Performance During Market Crises</p>
-<table>
-<thead><tr>
-<th>Crisis Period</th>
-<th>Strategy</th>
-<th>Trades</th>
-<th>Win Rate</th>
-<th>Avg Return</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>GFC (Oct 2007 – Mar 2009)</td>
-<td>Daily 30/70</td>
-<td>113</td>
-<td>53.1%</td>
-<td>−1.38%</td>
-</tr>
-<tr>
-<td></td>
-<td>Daily 20/80</td>
-<td>20</td>
-<td>90.0%</td>
-<td>71.76%</td>
-</tr>
-<tr>
-<td></td>
-<td>Weekly 30/70</td>
-<td>73</td>
-<td>84.9%</td>
-<td>42.51%</td>
-</tr>
-<tr>
-<td></td>
-<td>Weekly 20/80</td>
-<td>11</td>
-<td>100.0%</td>
-<td>357.95%</td>
-</tr>
-<tr>
-<td>COVID (Feb – Jun 2020)</td>
-<td>Daily 30/70</td>
-<td>62</td>
-<td>69.4%</td>
-<td>9.48%</td>
-</tr>
-<tr>
-<td></td>
-<td>Daily 20/80</td>
-<td>21</td>
-<td>95.2%</td>
-<td>69.64%</td>
-</tr>
-<tr>
-<td></td>
-<td>Weekly 30/70</td>
-<td>47</td>
-<td>95.7%</td>
-<td>67.54%</td>
-</tr>
-<tr>
-<td></td>
-<td>Weekly 20/80</td>
-<td>18</td>
-<td>100.0%</td>
-<td>209.48%</td>
-</tr>
-<tr>
-<td>Bear 2022</td>
-<td>Daily 30/70</td>
-<td>120</td>
-<td>68.3%</td>
-<td>6.21%</td>
-</tr>
-<tr>
-<td></td>
-<td>Daily 20/80</td>
-<td>22</td>
-<td>86.4%</td>
-<td>33.41%</td>
-</tr>
-<tr>
-<td></td>
-<td>Weekly 30/70</td>
-<td>24</td>
-<td>83.3%</td>
-<td>28.89%</td>
-</tr>
-<tr>
-<td></td>
-<td>Weekly 20/80</td>
-<td>2</td>
-<td>100.0%</td>
-<td>218.13%</td>
-</tr>
-</tbody></table>
-<p>Several critical observations emerge from the temporal analysis:</p>
-<p>The Daily 30/70 strategy&#x27;s win rate dropped to just 53.1% during the GFC, with a mean return of −1.38%. This is the strategy&#x27;s worst result among the periods reported and illustrates its vulnerability during sustained bear markets. When stocks are in prolonged decline, RSI oversold signals can be &quot;value traps&quot;: the stock triggers a buy signal at RSI 30, but continues falling further, leading to substantial losses before any exit signal.</p>
-<p>Trades with more extreme thresholds posted much larger average returns during the GFC window than in the full sample. Daily 20/80 GFC trades had a 90% win rate and a 71.76% average return, against 47.37% for the full sample, and all 11 Weekly 20/80 GFC trades were winners, averaging 357.95% against 244.10%. These samples are small, the entries fall within weeks of one another, and every stock in the universe is known to have survived the crisis, so they show how survivors bought near crisis lows performed, not how the signal would have fared on a universe that included the firms that failed (Section 5.5).</p>
-<p>The COVID crash of 2020 was uniquely favorable for RSI strategies. The sharp, V-shaped recovery meant that oversold signals triggered at the March 2020 bottom were followed by rapid, violent rebounds. Weekly 30/70 trades had their highest win rate (95.7%) and highest average return (67.54%) of the three crisis windows during this period.</p>
-<p>2010–2014 was the best of the four periods in Table 5 for the Daily 30/70 strategy (89.3% win rate, 9.34% average return), corresponding to the steady post-GFC bull market. In this low-volatility uptrend, oversold dips were reliably followed by recoveries.</p>
-<h3 class="sub-title">4.5 Individual Stock Performance</h3>
-<p>Table 7: Top 10 Stocks by Average Return — Daily 30/70</p>
-<table>
-<thead><tr>
-<th>Rank</th>
-<th>Ticker</th>
-<th>Sector</th>
-<th>Trades</th>
-<th>Win Rate</th>
-<th>Avg Return</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>TSLA</td>
-<td>Mega Cap Tech</td>
-<td>16</td>
-<td>81.2%</td>
-<td>23.30%</td>
-</tr>
-<tr>
-<td>2</td>
-<td>AMZN</td>
-<td>Mega Cap Tech</td>
-<td>24</td>
-<td>79.2%</td>
-<td>14.34%</td>
-</tr>
-<tr>
-<td>3</td>
-<td>AMT</td>
-<td>REITs</td>
-<td>23</td>
-<td>87.0%</td>
-<td>13.81%</td>
-</tr>
-<tr>
-<td>4</td>
-<td>TJX</td>
-<td>Consumer Disc.</td>
-<td>34</td>
-<td>85.3%</td>
-<td>12.76%</td>
-</tr>
-<tr>
-<td>5</td>
-<td>AMGN</td>
-<td>Healthcare</td>
-<td>41</td>
-<td>87.8%</td>
-<td>12.75%</td>
-</tr>
-<tr>
-<td>6</td>
-<td>LIN</td>
-<td>Materials</td>
-<td>26</td>
-<td>92.3%</td>
-<td>12.67%</td>
-</tr>
-<tr>
-<td>7</td>
-<td>SBUX</td>
-<td>Consumer Disc.</td>
-<td>30</td>
-<td>90.0%</td>
-<td>12.36%</td>
-</tr>
-<tr>
-<td>8</td>
-<td>EOG</td>
-<td>Energy</td>
-<td>33</td>
-<td>78.8%</td>
-<td>12.36%</td>
-</tr>
-<tr>
-<td>9</td>
-<td>NVDA</td>
-<td>Mega Cap Tech</td>
-<td>22</td>
-<td>68.2%</td>
-<td>12.35%</td>
-</tr>
-<tr>
-<td>10</td>
-<td>MSFT</td>
-<td>Mega Cap Tech</td>
-<td>33</td>
-<td>81.8%</td>
-<td>11.79%</td>
-</tr>
-</tbody></table>
-<p>Table 8: Bottom 10 Stocks by Average Return — Daily 30/70</p>
-<table>
-<thead><tr>
-<th>Rank</th>
-<th>Ticker</th>
-<th>Sector</th>
-<th>Trades</th>
-<th>Win Rate</th>
-<th>Avg Return</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>91</td>
-<td>EXC</td>
-<td>Utilities</td>
-<td>45</td>
-<td>73.3%</td>
-<td>4.58%</td>
-</tr>
-<tr>
-<td>92</td>
-<td>ED</td>
-<td>Utilities</td>
-<td>62</td>
-<td>85.5%</td>
-<td>4.55%</td>
-</tr>
-<tr>
-<td>93</td>
-<td>UPS</td>
-<td>Industrials</td>
-<td>24</td>
-<td>87.5%</td>
-<td>4.13%</td>
-</tr>
-<tr>
-<td>94</td>
-<td>MRK</td>
-<td>Healthcare</td>
-<td>50</td>
-<td>70.0%</td>
-<td>4.10%</td>
-</tr>
-<tr>
-<td>95</td>
-<td>HAL</td>
-<td>Energy</td>
-<td>46</td>
-<td>67.4%</td>
-<td>4.01%</td>
-</tr>
-<tr>
-<td>96</td>
-<td>C</td>
-<td>Financials</td>
-<td>47</td>
-<td>70.2%</td>
-<td>3.94%</td>
-</tr>
-<tr>
-<td>97</td>
-<td>EQR</td>
-<td>REITs</td>
-<td>28</td>
-<td>75.0%</td>
-<td>3.65%</td>
-</tr>
-<tr>
-<td>98</td>
-<td>AAPL</td>
-<td>Mega Cap Tech</td>
-<td>37</td>
-<td>70.3%</td>
-<td>2.50%</td>
-</tr>
-<tr>
-<td>99</td>
-<td>TMUS</td>
-<td>Communication</td>
-<td>13</td>
-<td>53.8%</td>
-<td>2.03%</td>
-</tr>
-<tr>
-<td>100</td>
-<td>KHC</td>
-<td>Consumer Staples</td>
-<td>10</td>
-<td>50.0%</td>
-<td>−1.19%</td>
-</tr>
-</tbody></table>
-<p>The top performers share characteristics: high long-term growth trajectories (TSLA, AMZN, NVDA, MSFT) or strong mean-reversion properties (AMT, TJX, SBUX, LIN). Their strong recoveries from oversold readings partly reflect hindsight selection: these companies are in the sample because their growth carried them to 2026, the same survivorship effect discussed in Section 5.5.</p>
-<p>The bottom performers include structurally challenged companies (KHC, with ongoing fundamental deterioration), volatile commodities plays (HAL), and stocks that experienced extended secular declines (C during the GFC, AAPL during the early 2000s tech bust). Notably, AAPL appears in the bottom 10 — its average RSI trade return of 2.50% is misleading because the stock&#x27;s extraordinary long-term appreciation means buy-and-hold far dominates any market-timing approach.</p>
-<p>KHC is the only stock with a negative average return, reflecting its persistent decline since the 2019 write-down. RSI oversold signals on a stock in secular decline produce the worst outcomes.</p>
+<p>Table 1: Aggregate Strategy Performance (next-day open execution, total returns)</p><table>
+<thead><tr><th>Metric</th><th>Daily 30/70</th><th>Daily 20/80</th><th>Weekly 30/70</th><th>Weekly 20/80</th></tr></thead>
+<tbody><tr><td>Total trades</td><td>3,948</td><td>599</td><td>600</td><td>83</td></tr><tr><td>Stocks traded</td><td>99</td><td>98</td><td>99</td><td>57</td></tr><tr><td>Avg trades per stock</td><td>39.9</td><td>6.1</td><td>6.1</td><td>0.8</td></tr><tr><td>Win rate</td><td>79.9%</td><td>86.6%</td><td>88.0%</td><td>95.2%</td></tr><tr><td>Avg return per trade</td><td>7.63%</td><td>46.59%</td><td>37.07%</td><td>246.31%</td></tr><tr><td>Median return per trade</td><td>9.06%</td><td>27.56%</td><td>34.37%</td><td>169.30%</td></tr><tr><td>Std. dev. of returns</td><td>15.37%</td><td>88.59%</td><td>38.64%</td><td>256.20%</td></tr><tr><td>Avg holding period</td><td>149 days</td><td>769 days</td><td>603 days</td><td>2,381 days</td></tr><tr><td>Median holding period</td><td>112 days</td><td>525 days</td><td>490 days</td><td>2,093 days</td></tr><tr><td>Profit factor</td><td>3.72</td><td>15.95</td><td>13.78</td><td>175.05</td></tr><tr><td>Avg winning trade</td><td>+13.04%</td><td>+57.37%</td><td>+45.42%</td><td>+260.27%</td></tr><tr><td>Avg losing trade</td><td>−13.96%</td><td>−23.33%</td><td>−24.17%</td><td>−29.37%</td></tr><tr><td>Worst trade</td><td>−93.79%</td><td>−87.64%</td><td>−87.47%</td><td>−65.73%</td></tr><tr><td>Best trade</td><td>+124.63%</td><td>+1247.84%</td><td>+215.41%</td><td>+1544.82%</td></tr><tr><td>Longest win streak</td><td>69</td><td>53</td><td>83</td><td>51</td></tr><tr><td>Longest losing streak</td><td>9</td><td>3</td><td>6</td><td>2</td></tr><tr><td>Positions open at end of data</td><td>43</td><td>27</td><td>15</td><td>12</td></tr><tr><td>Avg return after 10 bp round trip</td><td>7.52%</td><td>46.44%</td><td>36.93%</td><td>245.96%</td></tr><tr><td>Avg return, same-close execution</td><td>7.69%</td><td>47.59%</td><td>36.94%</td><td>242.50%</td></tr></tbody></table>
+<p>Across the four strategies the rerun produced 5,230 trades. The patterns in the original paper all hold. Trade frequency falls sharply with stricter thresholds and longer timeframes, from about 40 trades per stock for Daily 30/70 to fewer than one for Weekly 20/80, which traded in only 57 of the 99 stocks. Win rates rise from 79.9% to 95.2%, and average returns per trade rise with the holding period, from 7.63% over about five months to 246% over about six and a half years. Executing at the next day's open rather than the signal-day close changes the average return by 1.0 percentage points or less for the first three strategies and by 3.8 points on Weekly 20/80's much larger average.</p>
+<p>Table 1b: Original Paper Against the Rerun</p><table>
+<thead><tr><th></th><th>Daily 30/70</th><th>Daily 20/80</th><th>Weekly 30/70</th><th>Weekly 20/80</th></tr></thead>
+<tbody><tr><td>Trades, original / rerun</td><td>3,892 / 3,948</td><td>598 / 599</td><td>602 / 600</td><td>82 / 83</td></tr><tr><td>Win rate, original / rerun</td><td>79.4% / 79.9%</td><td>87.3% / 86.6%</td><td>87.7% / 88.0%</td><td>96.3% / 95.2%</td></tr><tr><td>Avg return, original / rerun</td><td>7.66% / 7.63%</td><td>47.37% / 46.59%</td><td>37.09% / 37.07%</td><td>244.10% / 246.31%</td></tr></tbody></table>
+<p>The rerun matches the original paper's trade counts within 2% and its win rates and average returns closely, which indicates the original backtest was run on real data much as described; the small differences come from the next-open execution, the total-return prices, the extra eight months of data, and the loss of AvalonBay.</p>
+<h3 class="sub-title">4.2 Does RSI Timing Beat Random Timing?</h3>
+<p>Table 2: Are the Trades Better Than Zero, and Better Than Random Entries?</p><table>
+<thead><tr><th>Strategy</th><th>Avg return</th><th>Naive t</th><th>Clustered t</th><th>p (clustered)</th><th>Random-entry avg</th><th>Random 90% range</th><th>p vs random</th><th>Win rate</th><th>Random win rate</th><th>Median</th><th>Random median</th></tr></thead>
+<tbody><tr><td>Daily 30/70</td><td>7.63%</td><td>31.17</td><td>19.95</td><td><span style="white-space:nowrap">1.4 × 10<sup>−88</sup></span></td><td>6.96%</td><td>6.41% to 7.54%</td><td>0.032</td><td>79.9%</td><td>64.3%</td><td>9.06%</td><td>4.30%</td></tr><tr><td>Daily 20/80</td><td>46.59%</td><td>12.87</td><td>9.86</td><td><span style="white-space:nowrap">6.0 × 10<sup>−23</sup></span></td><td>46.98%</td><td>39.60% to 55.66%</td><td>0.490</td><td>86.6%</td><td>74.9%</td><td>27.56%</td><td>18.49%</td></tr><tr><td>Weekly 30/70</td><td>37.07%</td><td>23.50</td><td>10.10</td><td><span style="white-space:nowrap">5.7 × 10<sup>−24</sup></span></td><td>31.35%</td><td>27.34% to 35.43%</td><td>0.010</td><td>88.0%</td><td>73.8%</td><td>34.37%</td><td>17.78%</td></tr><tr><td>Weekly 20/80</td><td>246.31%</td><td>8.76</td><td>9.43</td><td><span style="white-space:nowrap">4.0 × 10<sup>−21</sup></span></td><td>195.22%</td><td>143.88% to 256.22%</td><td>0.081</td><td>95.2%</td><td>84.7%</td><td>169.30%</td><td>80.89%</td></tr></tbody></table>
+<p>Every strategy's average trade is positive, and with standard errors clustered by entry month and stock the t-statistics fall (for Daily 30/70, from 31.17 to 19.95) but remain very large. That only shows the trades made money on stocks that rose over time. The random-entry benchmark asks the sharper question: would random entries on the same stocks, held for the same lengths of time, have done as well?</p>
+<p>On average return, the answer is nearly. Random entries matched to the Daily 30/70 trades averaged 6.96% against the strategy's 7.63%, a difference of about 0.7 percentage points per trade that random draws exceed only 3% of the time. Weekly 30/70 shows a larger edge (37.07% against 31.35%, p = 0.010), Weekly 20/80 a large but statistically marginal one (p = 0.081), and Daily 20/80 none (46.59% against 46.98%). Because random draws treat entries as independent while real RSI entries cluster in time, these p-values somewhat overstate the evidence.</p>
+<p>On win rate and median return, the RSI trades are far ahead of random entries (Figure 1). Much of that gap is built into the rules rather than earned by the entry signal: a position closes only when RSI climbs above 70 or 80, which happens after a run of gains, so trades end at local highs by construction, while a random window of the same length ends wherever it happens to end. The exit rule lifts the win rate and the median without lifting the average by as much, which is what Table 2 shows.</p>
+<figure class="figure"><div class="fig-title">Figure 1. Win rate, RSI entries against random entries</div><svg viewBox="0 0 800 278" role="img" aria-label="Win rate of RSI entries against random entries" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><line x1="170.0" y1="42.0" x2="170.0" y2="238.0" stroke="#1f2a3d" stroke-width="1"/><text x="170.0" y="256.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">50%</text><line x1="280.0" y1="42.0" x2="280.0" y2="238.0" stroke="#1f2a3d" stroke-width="1"/><text x="280.0" y="256.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">60%</text><line x1="390.0" y1="42.0" x2="390.0" y2="238.0" stroke="#1f2a3d" stroke-width="1"/><text x="390.0" y="256.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">70%</text><line x1="500.0" y1="42.0" x2="500.0" y2="238.0" stroke="#1f2a3d" stroke-width="1"/><text x="500.0" y="256.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">80%</text><line x1="610.0" y1="42.0" x2="610.0" y2="238.0" stroke="#1f2a3d" stroke-width="1"/><text x="610.0" y="256.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">90%</text><line x1="720.0" y1="42.0" x2="720.0" y2="238.0" stroke="#1f2a3d" stroke-width="1"/><text x="720.0" y="256.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">100%</text><circle cx="170" cy="16" r="5" fill="#4a5a75"/><text x="182.0" y="20.5" font-family="'Crimson Text', Georgia, serif" font-size="13" fill="#d4cfc5" text-anchor="start">Random entries, same stocks and holding periods</text><circle cx="510" cy="16" r="5" fill="#c98500"/><text x="522.0" y="20.5" font-family="'Crimson Text', Georgia, serif" font-size="13" fill="#d4cfc5" text-anchor="start">RSI entries</text><text x="156.0" y="77.5" font-family="'Crimson Text', Georgia, serif" font-size="14" fill="#d4cfc5" text-anchor="end">Daily 30/70</text><line x1="326.9" y1="73.0" x2="499.3" y2="73.0" stroke="#3a4560" stroke-width="2"/><g><title>Daily 30/70, random entries: win rate 64.3%</title><circle cx="326.9" cy="73.0" r="11" fill="transparent"/><circle cx="326.9" cy="73.0" r="5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>Daily 30/70, RSI entries: win rate 79.9%</title><circle cx="499.3" cy="73.0" r="12" fill="transparent"/><circle cx="499.3" cy="73.0" r="6" fill="#c98500" stroke="#0f1623" stroke-width="2"/></g><text x="511.3" y="77.5" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#8a8880" text-anchor="start">79.9% vs 64.3%</text><text x="156.0" y="123.5" font-family="'Crimson Text', Georgia, serif" font-size="14" fill="#d4cfc5" text-anchor="end">Daily 20/80</text><line x1="443.8" y1="119.0" x2="573.1" y2="119.0" stroke="#3a4560" stroke-width="2"/><g><title>Daily 20/80, random entries: win rate 74.9%</title><circle cx="443.8" cy="119.0" r="11" fill="transparent"/><circle cx="443.8" cy="119.0" r="5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>Daily 20/80, RSI entries: win rate 86.6%</title><circle cx="573.1" cy="119.0" r="12" fill="transparent"/><circle cx="573.1" cy="119.0" r="6" fill="#c98500" stroke="#0f1623" stroke-width="2"/></g><text x="585.1" y="123.5" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#8a8880" text-anchor="start">86.6% vs 74.9%</text><text x="156.0" y="169.5" font-family="'Crimson Text', Georgia, serif" font-size="14" fill="#d4cfc5" text-anchor="end">Weekly 30/70</text><line x1="432.1" y1="165.0" x2="588.0" y2="165.0" stroke="#3a4560" stroke-width="2"/><g><title>Weekly 30/70, random entries: win rate 73.8%</title><circle cx="432.1" cy="165.0" r="11" fill="transparent"/><circle cx="432.1" cy="165.0" r="5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>Weekly 30/70, RSI entries: win rate 88.0%</title><circle cx="588.0" cy="165.0" r="12" fill="transparent"/><circle cx="588.0" cy="165.0" r="6" fill="#c98500" stroke="#0f1623" stroke-width="2"/></g><text x="600.0" y="169.5" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#8a8880" text-anchor="start">88.0% vs 73.8%</text><text x="156.0" y="215.5" font-family="'Crimson Text', Georgia, serif" font-size="14" fill="#d4cfc5" text-anchor="end">Weekly 20/80</text><line x1="552.1" y1="211.0" x2="667.0" y2="211.0" stroke="#3a4560" stroke-width="2"/><g><title>Weekly 20/80, random entries: win rate 84.7%</title><circle cx="552.1" cy="211.0" r="11" fill="transparent"/><circle cx="552.1" cy="211.0" r="5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>Weekly 20/80, RSI entries: win rate 95.2%</title><circle cx="667.0" cy="211.0" r="12" fill="transparent"/><circle cx="667.0" cy="211.0" r="6" fill="#c98500" stroke="#0f1623" stroke-width="2"/></g><text x="679.0" y="215.5" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#8a8880" text-anchor="start">95.2% vs 84.7%</text></svg><figcaption>Random entries are drawn on the same stocks and held for the same number of trading days as each actual trade, 1,000 times over. RSI trades end after a rally by design, which accounts for much of the gap.</figcaption></figure>
+<p>Table 3: Trade Returns Against the S&amp;P 500 Total Return Over the Same Dates</p><table>
+<thead><tr><th>Strategy</th><th>Trades from 1988</th><th>Avg trade return</th><th>S&amp;P 500 TR, same dates</th><th>Avg excess</th><th>Clustered t</th><th>p-value</th><th>Share beating index</th></tr></thead>
+<tbody><tr><td>Daily 30/70</td><td>2,933</td><td>8.15%</td><td>6.24%</td><td>1.91%</td><td>4.89</td><td><span style="white-space:nowrap">9.9 × 10<sup>−7</sup></span></td><td>63.2%</td></tr><tr><td>Daily 20/80</td><td>388</td><td>51.97%</td><td>38.23%</td><td>13.74%</td><td>2.81</td><td>0.0050</td><td>61.6%</td></tr><tr><td>Weekly 30/70</td><td>450</td><td>38.20%</td><td>27.98%</td><td>10.22%</td><td>3.96</td><td><span style="white-space:nowrap">7.6 × 10<sup>−5</sup></span></td><td>64.7%</td></tr><tr><td>Weekly 20/80</td><td>58</td><td>279.82%</td><td>170.36%</td><td>109.46%</td><td>3.38</td><td>0.0007</td><td>82.8%</td></tr></tbody></table>
+<p>Against the S&amp;P 500 total return over the same dates, the average trade from 1988 on beat the index for every strategy, by 1.91% per trade for Daily 30/70 (clustered t = 4.89). That comparison flatters the strategies, however, because the stocks themselves beat the index by a wide margin over the period: an equal-weight portfolio of the same stocks, simply held, returned 18.1% a year from 1988 against the index's 11.4% (Table 5). Excess returns over the index measure the advantage of owning these survivors at least as much as the advantage of RSI timing; the random-entry test, which holds the stocks fixed, is the cleaner measure of timing.</p>
+<h3 class="sub-title">4.3 Per-Stock Comparison With Buy-and-Hold</h3>
+<p>Table 4: Per-Stock Annualized Returns Against Buying and Holding the Same Stock (averages across 99 stocks)</p><table>
+<thead><tr><th>Strategy</th><th>Time invested</th><th>Annual return, cash at 0%</th><th>Annual return, cash in T-bills</th><th>Buy-and-hold</th><th>Paired t (0%)</th><th>Paired t (T-bills)</th><th>p (T-bills)</th><th>Wilcoxon p (T-bills)</th><th>Stocks where RSI wins (T-bills)</th></tr></thead>
+<tbody><tr><td>Daily 30/70</td><td>38%</td><td>5.9%</td><td>8.2%</td><td>13.7%</td><td>−13.80</td><td>−9.39</td><td><span style="white-space:nowrap">2.5 × 10<sup>−15</sup></span></td><td><span style="white-space:nowrap">5.2 × 10<sup>−16</sup></span></td><td>11 of 99</td></tr><tr><td>Daily 20/80</td><td>28%</td><td>4.1%</td><td>6.7%</td><td>13.7%</td><td>−15.77</td><td>−11.26</td><td><span style="white-space:nowrap">2.3 × 10<sup>−19</sup></span></td><td><span style="white-space:nowrap">4.2 × 10<sup>−17</sup></span></td><td>6 of 99</td></tr><tr><td>Weekly 30/70</td><td>23%</td><td>4.0%</td><td>6.8%</td><td>13.7%</td><td>−17.83</td><td>−12.19</td><td><span style="white-space:nowrap">2.4 × 10<sup>−21</sup></span></td><td><span style="white-space:nowrap">1.1 × 10<sup>−17</sup></span></td><td>3 of 99</td></tr><tr><td>Weekly 20/80</td><td>12%</td><td>2.1%</td><td>5.2%</td><td>13.7%</td><td>−16.87</td><td>−12.06</td><td><span style="white-space:nowrap">4.5 × 10<sup>−21</sup></span></td><td><span style="white-space:nowrap">4.3 × 10<sup>−17</sup></span></td><td>7 of 99</td></tr></tbody></table>
+<p>Stock by stock, every strategy trailed buying and holding the same stock. With idle cash at 0%, as in the original paper, the Daily 30/70 rule returned 5.9% a year on average against 13.7% for buy-and-hold. Giving idle cash the Treasury bill rate narrows the gap but does not close it: 8.2% against 13.7%, with the strategy ahead in only 11 of 99 stocks (paired t = −9.39). The other strategies trail by more, and the Wilcoxon tests agree for all four.</p>
+<figure class="figure"><div class="fig-title">Figure 2. Per-stock annualized return, Daily 30/70 against buy-and-hold</div><svg viewBox="0 0 800 460" role="img" aria-label="Per-stock annualized return, Daily 30/70 against buy-and-hold" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><line x1="70.0" y1="404.0" x2="770.0" y2="404.0" stroke="#1f2a3d" stroke-width="1"/><text x="62.0" y="408.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">-10%</text><line x1="70.0" y1="20.0" x2="70.0" y2="404.0" stroke="#1f2a3d" stroke-width="1"/><text x="70.0" y="424.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">-10%</text><line x1="70.0" y1="334.2" x2="770.0" y2="334.2" stroke="#1f2a3d" stroke-width="1"/><text x="62.0" y="338.2" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">0%</text><line x1="197.3" y1="20.0" x2="197.3" y2="404.0" stroke="#1f2a3d" stroke-width="1"/><text x="197.3" y="424.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">0%</text><line x1="70.0" y1="264.4" x2="770.0" y2="264.4" stroke="#1f2a3d" stroke-width="1"/><text x="62.0" y="268.4" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">10%</text><line x1="324.5" y1="20.0" x2="324.5" y2="404.0" stroke="#1f2a3d" stroke-width="1"/><text x="324.5" y="424.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">10%</text><line x1="70.0" y1="194.5" x2="770.0" y2="194.5" stroke="#1f2a3d" stroke-width="1"/><text x="62.0" y="198.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">20%</text><line x1="451.8" y1="20.0" x2="451.8" y2="404.0" stroke="#1f2a3d" stroke-width="1"/><text x="451.8" y="424.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">20%</text><line x1="70.0" y1="124.7" x2="770.0" y2="124.7" stroke="#1f2a3d" stroke-width="1"/><text x="62.0" y="128.7" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">30%</text><line x1="579.1" y1="20.0" x2="579.1" y2="404.0" stroke="#1f2a3d" stroke-width="1"/><text x="579.1" y="424.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">30%</text><line x1="70.0" y1="54.9" x2="770.0" y2="54.9" stroke="#1f2a3d" stroke-width="1"/><text x="62.0" y="58.9" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">40%</text><line x1="706.4" y1="20.0" x2="706.4" y2="404.0" stroke="#1f2a3d" stroke-width="1"/><text x="706.4" y="424.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">40%</text><line x1="70.0" y1="404.0" x2="770.0" y2="20.0" stroke="#d4cfc5" stroke-width="1" stroke-dasharray="4 4"/><text x="655.5" y="68.9" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="end">equal returns</text><g><title>AAPL: RSI 2.6% a year vs buy-and-hold 19.1% (46 years)</title><circle cx="440.2" cy="316.1" r="9.5" fill="transparent"/><circle cx="440.2" cy="316.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>MSFT: RSI 11.7% a year vs buy-and-hold 25.1% (41 years)</title><circle cx="517.1" cy="252.3" r="9.5" fill="transparent"/><circle cx="517.1" cy="252.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>GOOGL: RSI 7.8% a year vs buy-and-hold 23.7% (22 years)</title><circle cx="498.6" cy="279.7" r="9.5" fill="transparent"/><circle cx="498.6" cy="279.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>AMZN: RSI 9.0% a year vs buy-and-hold 31.5% (29 years)</title><circle cx="597.8" cy="271.6" r="9.5" fill="transparent"/><circle cx="597.8" cy="271.6" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>NVDA: RSI 5.2% a year vs buy-and-hold 36.4% (28 years)</title><circle cx="660.4" cy="297.8" r="9.5" fill="transparent"/><circle cx="660.4" cy="297.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>META: RSI 8.4% a year vs buy-and-hold 24.3% (14 years)</title><circle cx="506.6" cy="275.6" r="9.5" fill="transparent"/><circle cx="506.6" cy="275.6" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>TSLA: RSI 20.9% a year vs buy-and-hold 41.8% (16 years)</title><circle cx="729.6" cy="188.3" r="9.5" fill="transparent"/><circle cx="729.6" cy="188.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>JPM: RSI 9.4% a year vs buy-and-hold 13.0% (47 years)</title><circle cx="363.1" cy="268.7" r="9.5" fill="transparent"/><circle cx="363.1" cy="268.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>BAC: RSI 5.6% a year vs buy-and-hold 6.7% (54 years)</title><circle cx="282.1" cy="295.4" r="9.5" fill="transparent"/><circle cx="282.1" cy="295.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>GS: RSI 12.6% a year vs buy-and-hold 11.6% (27 years)</title><circle cx="344.3" cy="246.5" r="10.5" fill="transparent"/><circle cx="344.3" cy="246.5" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>WFC: RSI 9.0% a year vs buy-and-hold 12.5% (54 years)</title><circle cx="356.4" cy="271.7" r="9.5" fill="transparent"/><circle cx="356.4" cy="271.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>MS: RSI 4.7% a year vs buy-and-hold 12.2% (34 years)</title><circle cx="352.1" cy="301.7" r="9.5" fill="transparent"/><circle cx="352.1" cy="301.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>BRK-B: RSI 8.5% a year vs buy-and-hold 11.4% (30 years)</title><circle cx="342.0" cy="274.8" r="9.5" fill="transparent"/><circle cx="342.0" cy="274.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>C: RSI 2.0% a year vs buy-and-hold 6.1% (50 years)</title><circle cx="274.5" cy="320.3" r="9.5" fill="transparent"/><circle cx="274.5" cy="320.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>AXP: RSI 7.8% a year vs buy-and-hold 10.9% (54 years)</title><circle cx="336.5" cy="279.8" r="9.5" fill="transparent"/><circle cx="336.5" cy="279.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>BLK: RSI 10.2% a year vs buy-and-hold 20.2% (27 years)</title><circle cx="454.6" cy="263.0" r="9.5" fill="transparent"/><circle cx="454.6" cy="263.0" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>SCHW: RSI 10.5% a year vs buy-and-hold 16.7% (39 years)</title><circle cx="409.8" cy="261.1" r="9.5" fill="transparent"/><circle cx="409.8" cy="261.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>JNJ: RSI 9.7% a year vs buy-and-hold 14.0% (65 years)</title><circle cx="375.3" cy="266.2" r="9.5" fill="transparent"/><circle cx="375.3" cy="266.2" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>UNH: RSI 9.5% a year vs buy-and-hold 21.8% (42 years)</title><circle cx="474.6" cy="267.8" r="9.5" fill="transparent"/><circle cx="474.6" cy="267.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>PFE: RSI 8.7% a year vs buy-and-hold 10.3% (54 years)</title><circle cx="328.8" cy="273.6" r="9.5" fill="transparent"/><circle cx="328.8" cy="273.6" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>ABBV: RSI 14.4% a year vs buy-and-hold 20.7% (14 years)</title><circle cx="460.9" cy="233.7" r="9.5" fill="transparent"/><circle cx="460.9" cy="233.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>MRK: RSI 5.5% a year vs buy-and-hold 12.9% (65 years)</title><circle cx="361.4" cy="295.9" r="9.5" fill="transparent"/><circle cx="361.4" cy="295.9" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>LLY: RSI 10.9% a year vs buy-and-hold 14.5% (54 years)</title><circle cx="381.6" cy="258.4" r="9.5" fill="transparent"/><circle cx="381.6" cy="258.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>TMO: RSI 6.3% a year vs buy-and-hold 14.0% (47 years)</title><circle cx="375.0" cy="289.9" r="9.5" fill="transparent"/><circle cx="375.0" cy="289.9" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>ABT: RSI 12.2% a year vs buy-and-hold 14.6% (47 years)</title><circle cx="383.7" cy="249.1" r="9.5" fill="transparent"/><circle cx="383.7" cy="249.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>BMY: RSI 7.6% a year vs buy-and-hold 10.5% (54 years)</title><circle cx="330.6" cy="281.3" r="9.5" fill="transparent"/><circle cx="330.6" cy="281.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>AMGN: RSI 13.2% a year vs buy-and-hold 20.0% (43 years)</title><circle cx="451.7" cy="242.2" r="9.5" fill="transparent"/><circle cx="451.7" cy="242.2" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>XOM: RSI 10.6% a year vs buy-and-hold 12.6% (65 years)</title><circle cx="357.0" cy="260.5" r="9.5" fill="transparent"/><circle cx="357.0" cy="260.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>CVX: RSI 9.8% a year vs buy-and-hold 10.8% (65 years)</title><circle cx="335.3" cy="265.4" r="9.5" fill="transparent"/><circle cx="335.3" cy="265.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>COP: RSI 8.8% a year vs buy-and-hold 12.2% (45 years)</title><circle cx="351.9" cy="272.5" r="9.5" fill="transparent"/><circle cx="351.9" cy="272.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>SLB: RSI 7.6% a year vs buy-and-hold 5.9% (45 years)</title><circle cx="271.7" cy="281.4" r="10.5" fill="transparent"/><circle cx="271.7" cy="281.4" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>EOG: RSI 12.2% a year vs buy-and-hold 13.4% (37 years)</title><circle cx="367.9" cy="248.8" r="9.5" fill="transparent"/><circle cx="367.9" cy="248.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>MPC: RSI 13.8% a year vs buy-and-hold 26.1% (15 years)</title><circle cx="529.8" cy="237.8" r="9.5" fill="transparent"/><circle cx="529.8" cy="237.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>PSX: RSI 7.5% a year vs buy-and-hold 20.1% (14 years)</title><circle cx="453.5" cy="281.7" r="9.5" fill="transparent"/><circle cx="453.5" cy="281.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>VLO: RSI 4.2% a year vs buy-and-hold 13.7% (45 years)</title><circle cx="371.6" cy="305.0" r="9.5" fill="transparent"/><circle cx="371.6" cy="305.0" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>OXY: RSI 9.3% a year vs buy-and-hold 8.7% (45 years)</title><circle cx="307.5" cy="269.3" r="10.5" fill="transparent"/><circle cx="307.5" cy="269.3" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>HAL: RSI 2.7% a year vs buy-and-hold 6.4% (54 years)</title><circle cx="279.2" cy="315.0" r="9.5" fill="transparent"/><circle cx="279.2" cy="315.0" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>PG: RSI 8.5% a year vs buy-and-hold 10.7% (65 years)</title><circle cx="333.7" cy="274.5" r="9.5" fill="transparent"/><circle cx="333.7" cy="274.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>KO: RSI 6.0% a year vs buy-and-hold 12.7% (65 years)</title><circle cx="358.5" cy="292.5" r="9.5" fill="transparent"/><circle cx="358.5" cy="292.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>PEP: RSI 9.4% a year vs buy-and-hold 11.5% (54 years)</title><circle cx="344.2" cy="268.4" r="9.5" fill="transparent"/><circle cx="344.2" cy="268.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>WMT: RSI 13.3% a year vs buy-and-hold 18.8% (54 years)</title><circle cx="436.2" cy="241.6" r="9.5" fill="transparent"/><circle cx="436.2" cy="241.6" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>COST: RSI 9.2% a year vs buy-and-hold 13.2% (40 years)</title><circle cx="365.9" cy="269.7" r="9.5" fill="transparent"/><circle cx="365.9" cy="269.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>PM: RSI 12.2% a year vs buy-and-hold 13.0% (19 years)</title><circle cx="363.0" cy="248.7" r="9.5" fill="transparent"/><circle cx="363.0" cy="248.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>MO: RSI 8.2% a year vs buy-and-hold 17.6% (65 years)</title><circle cx="421.1" cy="277.1" r="9.5" fill="transparent"/><circle cx="421.1" cy="277.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>CL: RSI 12.0% a year vs buy-and-hold 10.8% (53 years)</title><circle cx="334.4" cy="250.5" r="10.5" fill="transparent"/><circle cx="334.4" cy="250.5" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>GIS: RSI 8.6% a year vs buy-and-hold 10.6% (47 years)</title><circle cx="332.7" cy="274.4" r="9.5" fill="transparent"/><circle cx="332.7" cy="274.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>KHC: RSI -0.2% a year vs buy-and-hold -5.5% (11 years)</title><circle cx="127.2" cy="335.5" r="10.5" fill="transparent"/><circle cx="127.2" cy="335.5" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>HD: RSI 9.2% a year vs buy-and-hold 23.8% (45 years)</title><circle cx="500.5" cy="269.9" r="9.5" fill="transparent"/><circle cx="500.5" cy="269.9" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>MCD: RSI 9.3% a year vs buy-and-hold 14.0% (60 years)</title><circle cx="375.1" cy="269.1" r="9.5" fill="transparent"/><circle cx="375.1" cy="269.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>NKE: RSI 6.7% a year vs buy-and-hold 13.8% (46 years)</title><circle cx="373.2" cy="287.5" r="9.5" fill="transparent"/><circle cx="373.2" cy="287.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>SBUX: RSI 10.4% a year vs buy-and-hold 18.4% (34 years)</title><circle cx="431.7" cy="261.4" r="9.5" fill="transparent"/><circle cx="431.7" cy="261.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>TGT: RSI 10.2% a year vs buy-and-hold 13.6% (54 years)</title><circle cx="370.5" cy="263.3" r="9.5" fill="transparent"/><circle cx="370.5" cy="263.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>LOW: RSI 11.5% a year vs buy-and-hold 15.4% (47 years)</title><circle cx="392.8" cy="253.8" r="9.5" fill="transparent"/><circle cx="392.8" cy="253.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>TJX: RSI 12.1% a year vs buy-and-hold 16.1% (39 years)</title><circle cx="402.7" cy="249.5" r="9.5" fill="transparent"/><circle cx="402.7" cy="249.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>BKNG: RSI 1.1% a year vs buy-and-hold 8.1% (28 years)</title><circle cx="300.1" cy="326.3" r="9.5" fill="transparent"/><circle cx="300.1" cy="326.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>CMG: RSI 9.1% a year vs buy-and-hold 19.1% (21 years)</title><circle cx="440.5" cy="270.9" r="9.5" fill="transparent"/><circle cx="440.5" cy="270.9" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>DG: RSI 2.3% a year vs buy-and-hold 11.7% (17 years)</title><circle cx="346.3" cy="318.0" r="9.5" fill="transparent"/><circle cx="346.3" cy="318.0" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>CAT: RSI 8.4% a year vs buy-and-hold 11.6% (65 years)</title><circle cx="345.2" cy="275.5" r="9.5" fill="transparent"/><circle cx="345.2" cy="275.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>DE: RSI 9.9% a year vs buy-and-hold 13.7% (54 years)</title><circle cx="371.4" cy="265.3" r="9.5" fill="transparent"/><circle cx="371.4" cy="265.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>UNP: RSI 8.8% a year vs buy-and-hold 12.9% (47 years)</title><circle cx="361.6" cy="273.1" r="9.5" fill="transparent"/><circle cx="361.6" cy="273.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>HON: RSI 9.3% a year vs buy-and-hold 8.7% (65 years)</title><circle cx="308.6" cy="269.5" r="10.5" fill="transparent"/><circle cx="308.6" cy="269.5" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>GE: RSI 6.1% a year vs buy-and-hold 10.1% (65 years)</title><circle cx="325.7" cy="291.7" r="9.5" fill="transparent"/><circle cx="325.7" cy="291.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>BA: RSI 5.7% a year vs buy-and-hold 11.0% (65 years)</title><circle cx="337.0" cy="294.7" r="9.5" fill="transparent"/><circle cx="337.0" cy="294.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>LMT: RSI 6.7% a year vs buy-and-hold 10.7% (65 years)</title><circle cx="333.4" cy="287.3" r="9.5" fill="transparent"/><circle cx="333.4" cy="287.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>RTX: RSI 8.4% a year vs buy-and-hold 12.7% (65 years)</title><circle cx="359.2" cy="275.5" r="9.5" fill="transparent"/><circle cx="359.2" cy="275.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>MMM: RSI 9.5% a year vs buy-and-hold 9.4% (65 years)</title><circle cx="316.5" cy="267.8" r="10.5" fill="transparent"/><circle cx="316.5" cy="267.8" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>UPS: RSI 5.0% a year vs buy-and-hold 4.8% (27 years)</title><circle cx="258.9" cy="299.3" r="10.5" fill="transparent"/><circle cx="258.9" cy="299.3" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>NEE: RSI 9.7% a year vs buy-and-hold 10.6% (54 years)</title><circle cx="332.0" cy="266.8" r="9.5" fill="transparent"/><circle cx="332.0" cy="266.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>DUK: RSI 7.8% a year vs buy-and-hold 11.5% (47 years)</title><circle cx="343.6" cy="279.7" r="9.5" fill="transparent"/><circle cx="343.6" cy="279.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>SO: RSI 9.3% a year vs buy-and-hold 13.9% (45 years)</title><circle cx="374.4" cy="269.4" r="9.5" fill="transparent"/><circle cx="374.4" cy="269.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>D: RSI 8.8% a year vs buy-and-hold 11.6% (47 years)</title><circle cx="345.5" cy="272.6" r="9.5" fill="transparent"/><circle cx="345.5" cy="272.6" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>AEP: RSI 7.8% a year vs buy-and-hold 8.1% (65 years)</title><circle cx="300.2" cy="279.8" r="9.5" fill="transparent"/><circle cx="300.2" cy="279.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>SRE: RSI 8.9% a year vs buy-and-hold 10.8% (28 years)</title><circle cx="334.3" cy="271.9" r="9.5" fill="transparent"/><circle cx="334.3" cy="271.9" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>EXC: RSI 6.1% a year vs buy-and-hold 10.3% (53 years)</title><circle cx="328.6" cy="291.7" r="9.5" fill="transparent"/><circle cx="328.6" cy="291.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>XEL: RSI 7.4% a year vs buy-and-hold 8.5% (54 years)</title><circle cx="306.0" cy="282.7" r="9.5" fill="transparent"/><circle cx="306.0" cy="282.7" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>ED: RSI 6.6% a year vs buy-and-hold 10.1% (65 years)</title><circle cx="325.7" cy="288.1" r="9.5" fill="transparent"/><circle cx="325.7" cy="288.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>WEC: RSI 9.2% a year vs buy-and-hold 12.4% (47 years)</title><circle cx="354.5" cy="269.9" r="9.5" fill="transparent"/><circle cx="354.5" cy="269.9" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>O: RSI 8.9% a year vs buy-and-hold 13.1% (32 years)</title><circle cx="363.8" cy="272.2" r="9.5" fill="transparent"/><circle cx="363.8" cy="272.2" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>AMT: RSI 3.3% a year vs buy-and-hold 10.0% (29 years)</title><circle cx="325.1" cy="310.9" r="9.5" fill="transparent"/><circle cx="325.1" cy="310.9" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>PLD: RSI 8.7% a year vs buy-and-hold 10.4% (29 years)</title><circle cx="329.1" cy="273.2" r="9.5" fill="transparent"/><circle cx="329.1" cy="273.2" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>CCI: RSI 0.0% a year vs buy-and-hold 10.2% (28 years)</title><circle cx="327.6" cy="334.1" r="9.5" fill="transparent"/><circle cx="327.6" cy="334.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>SPG: RSI 7.0% a year vs buy-and-hold 13.0% (33 years)</title><circle cx="363.3" cy="285.4" r="9.5" fill="transparent"/><circle cx="363.3" cy="285.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>WELL: RSI 6.8% a year vs buy-and-hold 14.8% (47 years)</title><circle cx="385.6" cy="286.5" r="9.5" fill="transparent"/><circle cx="385.6" cy="286.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>DLR: RSI 9.4% a year vs buy-and-hold 17.4% (22 years)</title><circle cx="418.5" cy="268.4" r="9.5" fill="transparent"/><circle cx="418.5" cy="268.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>PSA: RSI 7.3% a year vs buy-and-hold 12.0% (46 years)</title><circle cx="349.9" cy="283.3" r="9.5" fill="transparent"/><circle cx="349.9" cy="283.3" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>EQR: RSI 4.5% a year vs buy-and-hold 10.1% (33 years)</title><circle cx="325.3" cy="303.0" r="9.5" fill="transparent"/><circle cx="325.3" cy="303.0" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>LIN: RSI 11.1% a year vs buy-and-hold 15.3% (34 years)</title><circle cx="391.6" cy="256.8" r="9.5" fill="transparent"/><circle cx="391.6" cy="256.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>APD: RSI 11.0% a year vs buy-and-hold 12.3% (47 years)</title><circle cx="354.4" cy="257.6" r="9.5" fill="transparent"/><circle cx="354.4" cy="257.6" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>ECL: RSI 11.6% a year vs buy-and-hold 10.6% (54 years)</title><circle cx="332.5" cy="253.0" r="10.5" fill="transparent"/><circle cx="332.5" cy="253.0" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>DD: RSI 7.5% a year vs buy-and-hold 8.9% (54 years)</title><circle cx="311.1" cy="281.5" r="9.5" fill="transparent"/><circle cx="311.1" cy="281.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>NEM: RSI 7.9% a year vs buy-and-hold 6.8% (47 years)</title><circle cx="283.4" cy="278.8" r="10.5" fill="transparent"/><circle cx="283.4" cy="278.8" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>FCX: RSI 2.2% a year vs buy-and-hold 7.1% (31 years)</title><circle cx="287.9" cy="318.5" r="9.5" fill="transparent"/><circle cx="287.9" cy="318.5" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>NUE: RSI 9.9% a year vs buy-and-hold 15.3% (47 years)</title><circle cx="392.2" cy="265.1" r="9.5" fill="transparent"/><circle cx="392.2" cy="265.1" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>DIS: RSI 7.2% a year vs buy-and-hold 12.4% (65 years)</title><circle cx="354.5" cy="284.0" r="9.5" fill="transparent"/><circle cx="354.5" cy="284.0" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>CMCSA: RSI 6.6% a year vs buy-and-hold 14.0% (47 years)</title><circle cx="375.2" cy="288.4" r="9.5" fill="transparent"/><circle cx="375.2" cy="288.4" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>NFLX: RSI 1.2% a year vs buy-and-hold 29.8% (24 years)</title><circle cx="576.0" cy="325.8" r="9.5" fill="transparent"/><circle cx="576.0" cy="325.8" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>T: RSI 6.5% a year vs buy-and-hold 11.1% (43 years)</title><circle cx="338.5" cy="288.6" r="9.5" fill="transparent"/><circle cx="338.5" cy="288.6" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><g><title>VZ: RSI 10.3% a year vs buy-and-hold 9.4% (43 years)</title><circle cx="317.4" cy="262.3" r="10.5" fill="transparent"/><circle cx="317.4" cy="262.3" r="4.5" fill="#e8c97a" stroke="#0f1623" stroke-width="2"/></g><g><title>TMUS: RSI -0.5% a year vs buy-and-hold 6.2% (19 years)</title><circle cx="276.0" cy="338.0" r="9.5" fill="transparent"/><circle cx="276.0" cy="338.0" r="3.5" fill="#4a5a75" stroke="#0f1623" stroke-width="2"/></g><text x="721.6" y="192.3" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="end">TSLA</text><text x="652.4" y="301.8" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="end">NVDA</text><text x="135.2" y="339.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">KHC</text><text x="448.2" y="320.1" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">AAPL</text><text x="420.0" y="448.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">Buy-and-hold, annualized total return</text><text x="18.0" y="212.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle" transform="rotate(-90 18 212.0)">Daily 30/70 with T-bills on idle cash</text><circle cx="84" cy="34" r="4.5" fill="#e8c97a"/><text x="94.0" y="38.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">RSI ahead (11 stocks)</text><circle cx="84" cy="54" r="3.5" fill="#4a5a75"/><text x="94.0" y="58.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="start">Buy-and-hold ahead (88 stocks)</text></svg><figcaption>Each dot is one stock, over its full history. The strategy earns Treasury bill interest while out of the market. Points below the dashed line are stocks where holding beat the strategy.</figcaption></figure>
+<p>The shortfall is largest for the stocks that rose most. Tesla, Nvidia, and Amazon returned more than 30% a year held, and RSI captured only a fraction of that; the 11 stocks where RSI came out ahead, such as Kraft Heinz, UPS, and Schlumberger, were all slow growers that returned 12% a year or less held.</p>
+<h3 class="sub-title">4.4 Portfolio-Level Results</h3>
+<p>Table 5: Portfolio Results, January 1988 to October 2026</p><table>
+<thead><tr><th>Portfolio</th><th>Annual return</th><th>Volatility</th><th>Sharpe ratio</th><th>Max drawdown</th><th>$1 grew to</th><th>Avg invested</th></tr></thead>
+<tbody><tr><td>Daily 30/70</td><td>10.3%</td><td>11.1%</td><td>0.67</td><td>−32.3%</td><td>$44.3</td><td>37%</td></tr><tr><td>Daily 20/80</td><td>8.4%</td><td>6.6%</td><td>0.80</td><td>−17.7%</td><td>$22.8</td><td>29%</td></tr><tr><td>Weekly 30/70</td><td>8.2%</td><td>8.0%</td><td>0.65</td><td>−21.2%</td><td>$21.2</td><td>22%</td></tr><tr><td>Weekly 20/80</td><td>5.5%</td><td>3.1%</td><td>0.79</td><td>−6.7%</td><td>$8.0</td><td>11%</td></tr><tr><td>Buy-and-hold, same stocks (equal weight)</td><td>18.1%</td><td>16.8%</td><td>0.90</td><td>−45.0%</td><td>$631</td><td></td></tr><tr><td>S&amp;P 500 total return</td><td>11.4%</td><td>17.5%</td><td>0.51</td><td>−55.3%</td><td>$66.4</td><td></td></tr><tr><td>Treasury bills</td><td>3.1%</td><td>0.1%</td><td>n/a</td><td>−0.0%</td><td>$3.3</td><td></td></tr></tbody></table>
+<p>Run as portfolios, the strategies look different from the per-stock view. From January 1988 the Daily 30/70 portfolio returned 10.3% a year with 11.1% volatility and a worst drawdown of −32.3%, against 11.4%, 17.5%, and −55.3% for the S&amp;P 500 total return index. All four RSI portfolios had higher Sharpe ratios than the index and much smaller drawdowns, because they spent most of their time in Treasury bills and were invested mainly after sharp declines. All four also earned less than the index in absolute terms, and all four trailed the equal-weight buy-and-hold portfolio of the same stocks on return (18.1%) and on Sharpe ratio (0.90).</p>
+<figure class="figure"><div class="fig-title">Figure 3. Growth of $1, January 1988 to October 2026</div><svg viewBox="0 0 800 460" role="img" aria-label="Growth of one dollar, January 1988 to October 2026, log scale" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><line x1="64.0" y1="409.0" x2="600.0" y2="409.0" stroke="#1f2a3d" stroke-width="1"/><text x="56.0" y="413.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">$1</text><line x1="64.0" y1="296.0" x2="600.0" y2="296.0" stroke="#1f2a3d" stroke-width="1"/><text x="56.0" y="300.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">$10</text><line x1="64.0" y1="183.0" x2="600.0" y2="183.0" stroke="#1f2a3d" stroke-width="1"/><text x="56.0" y="187.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">$100</text><line x1="64.0" y1="70.0" x2="600.0" y2="70.0" stroke="#1f2a3d" stroke-width="1"/><text x="56.0" y="74.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="end">$1,000</text><text x="105.2" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">1990</text><text x="173.9" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">1995</text><text x="242.7" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">2000</text><text x="311.4" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">2005</text><text x="380.1" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">2010</text><text x="448.8" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">2015</text><text x="517.5" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">2020</text><text x="586.3" y="440.0" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#8a8880" text-anchor="middle">2025</text><g><title>Buy-and-hold, same stocks: $1 grew to $631.1 by Oct 30, 2026</title><path d="M64.0,409.0 L77.7,400.6 L91.5,382.8 L105.2,380.8 L119.0,361.7 L132.7,354.6 L146.5,347.3 L160.2,344.8 L173.9,328.0 L187.7,316.5 L201.4,301.7 L215.2,290.4 L228.9,282.2 L242.7,272.8 L256.4,269.1 L270.2,272.8 L283.9,255.9 L297.6,246.4 L311.4,238.4 L325.1,227.6 L338.9,219.8 L352.6,235.0 L366.4,218.7 L380.1,208.8 L393.8,205.2 L407.6,196.4 L421.3,181.4 L435.1,174.3 L448.8,171.8 L462.6,163.5 L476.3,153.7 L490.1,155.1 L503.8,142.4 L517.5,134.7 L531.3,121.4 L545.0,122.1 L558.8,115.6 L572.5,108.3 L586.3,100.7 L600.0,92.6" fill="none" stroke="#f0ece0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></g><g><title>S&amp;P 500 total return: $1 grew to $66.4 by Oct 30, 2026</title><path d="M64.0,409.0 L77.7,403.2 L91.5,389.7 L105.2,391.3 L119.0,378.2 L132.7,374.6 L146.5,369.9 L160.2,369.3 L173.9,353.6 L187.7,343.5 L201.4,329.3 L215.2,317.0 L228.9,307.6 L242.7,312.3 L256.4,318.5 L270.2,330.8 L283.9,318.4 L297.6,313.3 L311.4,311.0 L325.1,303.8 L338.9,301.2 L352.6,323.8 L366.4,312.3 L380.1,305.4 L393.8,304.4 L407.6,297.1 L421.3,283.3 L435.1,277.0 L448.8,276.4 L462.6,270.8 L476.3,261.1 L490.1,263.3 L503.8,249.9 L517.5,241.6 L531.3,229.2 L545.0,239.0 L558.8,227.6 L572.5,216.6 L586.3,208.5 L600.0,203.1" fill="none" stroke="#8a8880" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/></g><g><title>Daily 30/70: $1 grew to $44.3 by Oct 30, 2026</title><path d="M64.0,409.0 L77.7,399.7 L91.5,392.8 L105.2,388.9 L119.0,380.7 L132.7,375.9 L146.5,372.0 L160.2,367.9 L173.9,361.6 L187.7,355.8 L201.4,349.5 L215.2,342.2 L228.9,336.6 L242.7,329.5 L256.4,322.5 L270.2,322.5 L283.9,316.8 L297.6,313.1 L311.4,308.6 L325.1,302.5 L338.9,298.9 L352.6,304.2 L366.4,296.6 L380.1,292.7 L393.8,290.6 L407.6,285.0 L421.3,281.9 L435.1,278.2 L448.8,275.1 L462.6,269.8 L476.3,267.0 L490.1,267.3 L503.8,258.4 L517.5,252.4 L531.3,247.0 L545.0,244.4 L558.8,238.6 L572.5,235.3 L586.3,228.3 L600.0,223.0" fill="none" stroke="#c98500" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></g><g><title>Daily 20/80: $1 grew to $22.8 by Oct 30, 2026</title><path d="M64.0,409.0 L77.7,400.3 L91.5,390.0 L105.2,386.5 L119.0,379.1 L132.7,375.7 L146.5,372.4 L160.2,369.6 L173.9,363.6 L187.7,360.1 L201.4,355.2 L215.2,351.8 L228.9,347.9 L242.7,341.8 L256.4,336.2 L270.2,335.8 L283.9,327.0 L297.6,322.5 L311.4,320.2 L325.1,315.5 L338.9,313.0 L352.6,315.9 L366.4,309.0 L380.1,306.3 L393.8,304.0 L407.6,299.5 L421.3,295.7 L435.1,294.1 L448.8,294.5 L462.6,290.7 L476.3,288.8 L490.1,288.3 L503.8,283.1 L517.5,278.8 L531.3,274.2 L545.0,272.4 L558.8,268.0 L572.5,263.7 L586.3,259.2 L600.0,255.7" fill="none" stroke="#3987e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></g><g><title>Weekly 30/70: $1 grew to $21.2 by Oct 30, 2026</title><path d="M64.0,409.0 L77.7,402.0 L91.5,394.7 L105.2,390.9 L119.0,384.1 L132.7,381.6 L146.5,379.4 L160.2,376.3 L173.9,372.3 L187.7,369.4 L201.4,366.5 L215.2,363.2 L228.9,356.8 L242.7,349.7 L256.4,344.2 L270.2,343.3 L283.9,334.5 L297.6,331.9 L311.4,330.1 L325.1,326.3 L338.9,324.3 L352.6,324.3 L366.4,310.1 L380.1,305.9 L393.8,304.8 L407.6,301.9 L421.3,300.5 L435.1,300.5 L448.8,300.8 L462.6,296.2 L476.3,294.8 L490.1,294.1 L503.8,289.7 L517.5,278.9 L531.3,274.3 L545.0,272.9 L558.8,267.8 L572.5,264.4 L586.3,261.5 L600.0,259.2" fill="none" stroke="#d95926" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></g><g><title>Weekly 20/80: $1 grew to $8.0 by Oct 30, 2026</title><path d="M64.0,409.0 L77.7,405.5 L91.5,401.0 L105.2,397.3 L119.0,393.3 L132.7,391.2 L146.5,388.4 L160.2,386.0 L173.9,381.4 L187.7,378.4 L201.4,375.6 L215.2,372.3 L228.9,368.5 L242.7,364.7 L256.4,362.5 L270.2,360.0 L283.9,357.2 L297.6,355.9 L311.4,354.4 L325.1,351.1 L338.9,348.8 L352.6,348.3 L366.4,344.3 L380.1,341.8 L393.8,340.9 L407.6,339.5 L421.3,337.7 L435.1,337.0 L448.8,337.1 L462.6,336.0 L476.3,335.2 L490.1,335.0 L503.8,333.0 L517.5,326.5 L531.3,322.6 L545.0,319.4 L558.8,315.3 L572.5,312.6 L586.3,309.5 L600.0,307.0" fill="none" stroke="#199e70" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></g><g><title>Treasury bills: $1 grew to $3.3 by Oct 30, 2026</title><path d="M64.0,409.0 L77.7,405.7 L91.5,401.6 L105.2,397.8 L119.0,395.0 L132.7,393.3 L146.5,391.8 L160.2,389.6 L173.9,386.8 L187.7,384.3 L201.4,381.7 L215.2,379.3 L228.9,376.9 L242.7,374.0 L256.4,372.3 L270.2,371.5 L283.9,370.9 L297.6,370.2 L311.4,368.7 L325.1,366.3 L338.9,364.1 L352.6,363.4 L366.4,363.3 L380.1,363.2 L393.8,363.2 L407.6,363.2 L421.3,363.2 L435.1,363.1 L448.8,363.1 L462.6,363.0 L476.3,362.5 L490.1,361.5 L503.8,360.5 L517.5,360.3 L531.3,360.3 L545.0,359.3 L558.8,356.7 L572.5,354.2 L586.3,352.2 L600.0,350.6" fill="none" stroke="#5d5b56" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 4"/></g><circle cx="608.0" cy="92.6" r="4" fill="#f0ece0"/><text x="616.0" y="97.1" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#d4cfc5" text-anchor="start">Buy-and-hold, same stocks  $631</text><circle cx="608.0" cy="203.1" r="4" fill="#8a8880"/><text x="616.0" y="207.6" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#d4cfc5" text-anchor="start">S&amp;P 500 total return  $66</text><circle cx="608.0" cy="223.0" r="4" fill="#c98500"/><text x="616.0" y="227.5" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#d4cfc5" text-anchor="start">Daily 30/70  $44</text><circle cx="608.0" cy="255.7" r="4" fill="#3987e5"/><text x="616.0" y="260.2" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#d4cfc5" text-anchor="start">Daily 20/80  $23</text><circle cx="608.0" cy="271.7" r="4" fill="#d95926"/><text x="616.0" y="276.2" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#d4cfc5" text-anchor="start">Weekly 30/70  $21</text><circle cx="608.0" cy="307.0" r="4" fill="#199e70"/><text x="616.0" y="311.5" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#d4cfc5" text-anchor="start">Weekly 20/80  $8.0</text><circle cx="608.0" cy="350.6" r="4" fill="#5d5b56"/><text x="616.0" y="355.1" font-family="'Crimson Text', Georgia, serif" font-size="12.5" fill="#d4cfc5" text-anchor="start">Treasury bills  $3.3</text><line x1="64" y1="14" x2="82" y2="14" stroke="#f0ece0" stroke-width="2"/><text x="87.0" y="18.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">Buy-and-hold, same stocks</text><line x1="254" y1="14" x2="272" y2="14" stroke="#8a8880" stroke-width="2" stroke-dasharray="6 5"/><text x="277.0" y="18.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">S&amp;P 500 total return</text><line x1="424" y1="14" x2="442" y2="14" stroke="#c98500" stroke-width="2"/><text x="447.0" y="18.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">Daily 30/70</text><line x1="64" y1="34" x2="82" y2="34" stroke="#3987e5" stroke-width="2"/><text x="87.0" y="38.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">Daily 20/80</text><line x1="194" y1="34" x2="212" y2="34" stroke="#d95926" stroke-width="2"/><text x="217.0" y="38.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">Weekly 30/70</text><line x1="324" y1="34" x2="342" y2="34" stroke="#199e70" stroke-width="2"/><text x="347.0" y="38.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">Weekly 20/80</text><line x1="464" y1="34" x2="482" y2="34" stroke="#5d5b56" stroke-width="2" stroke-dasharray="2 4"/><text x="487.0" y="38.5" font-family="'Crimson Text', Georgia, serif" font-size="12" fill="#d4cfc5" text-anchor="start">Treasury bills</text></svg><figcaption>Log scale. RSI portfolios hold each stock&#x27;s slice in Treasury bills while out of a position. The buy-and-hold line holds the same 99 stocks in equal weight; its lead over the index reflects survivorship and hindsight in the stock list as much as anything else.</figcaption></figure>
+<p>Table 5b: Portfolio Results, March 1962 to October 2026</p><table>
+<thead><tr><th>Portfolio</th><th>Annual return</th><th>Volatility</th><th>Sharpe ratio</th><th>Max drawdown</th><th>$1 grew to</th><th>Avg invested</th></tr></thead>
+<tbody><tr><td>Daily 30/70</td><td>10.2%</td><td>10.4%</td><td>0.56</td><td>−32.3%</td><td>$524</td><td>38%</td></tr><tr><td>Daily 20/80</td><td>8.6%</td><td>6.8%</td><td>0.60</td><td>−25.9%</td><td>$208</td><td>31%</td></tr><tr><td>Weekly 30/70</td><td>8.6%</td><td>7.3%</td><td>0.56</td><td>−25.7%</td><td>$202</td><td>24%</td></tr><tr><td>Weekly 20/80</td><td>6.5%</td><td>3.4%</td><td>0.57</td><td>−18.2%</td><td>$57.4</td><td>15%</td></tr><tr><td>Buy-and-hold, same stocks (equal weight)</td><td>16.2%</td><td>16.0%</td><td>0.75</td><td>−48.4%</td><td>$16,862</td><td></td></tr><tr><td>S&amp;P 500 price index (no dividends)</td><td>7.5%</td><td>16.2%</td><td>0.24</td><td>−56.8%</td><td>$108</td><td></td></tr><tr><td>Treasury bills</td><td>4.7%</td><td>0.2%</td><td>n/a</td><td>−0.0%</td><td>$19.2</td><td></td></tr></tbody></table>
+<p>Over the full period from 1962 the RSI portfolios again trailed the same stocks held, on return (6.5% to 10.2% a year against 16.2%) and on Sharpe ratio (0.56 to 0.60 against 0.75). The S&amp;P 500 price index omits dividends, so it is not a like-for-like benchmark before 1988 and is shown only for reference. The fair comparison throughout is with the same stocks held, because both the RSI portfolios and the buy-and-hold portfolio are built from the same survivor list: against that benchmark the RSI rules lost on return and on risk-adjusted return in both periods.</p>
+<h3 class="sub-title">4.5 Sector Analysis</h3>
+<p>Table 6: Performance by Sector, Daily 30/70</p><table>
+<thead><tr><th>Sector</th><th>Trades</th><th>Win rate</th><th>Avg return</th><th>Median return</th></tr></thead>
+<tbody><tr><td>Mega Cap Tech</td><td>169</td><td>78.1%</td><td>10.54%</td><td>12.34%</td></tr><tr><td>Consumer Discretionary</td><td>373</td><td>78.8%</td><td>8.80%</td><td>10.79%</td></tr><tr><td>Materials</td><td>290</td><td>80.7%</td><td>8.29%</td><td>10.00%</td></tr><tr><td>Energy</td><td>383</td><td>78.9%</td><td>8.18%</td><td>10.74%</td></tr><tr><td>Healthcare</td><td>442</td><td>80.8%</td><td>8.01%</td><td>9.40%</td></tr><tr><td>Consumer Staples</td><td>418</td><td>82.3%</td><td>7.87%</td><td>8.02%</td></tr><tr><td>REITs</td><td>247</td><td>80.2%</td><td>7.61%</td><td>8.60%</td></tr><tr><td>Financials</td><td>391</td><td>78.0%</td><td>7.45%</td><td>9.53%</td></tr><tr><td>Industrials</td><td>551</td><td>77.3%</td><td>6.77%</td><td>8.93%</td></tr><tr><td>Utilities</td><td>465</td><td>86.0%</td><td>6.25%</td><td>7.53%</td></tr><tr><td>Communication</td><td>219</td><td>74.9%</td><td>5.69%</td><td>7.70%</td></tr></tbody></table>
+<p>Table 7: Performance by Sector, Weekly 30/70</p><table>
+<thead><tr><th>Sector</th><th>Trades</th><th>Win rate</th><th>Avg return</th><th>Median return</th></tr></thead>
+<tbody><tr><td>Mega Cap Tech</td><td>29</td><td>89.7%</td><td>62.48%</td><td>60.46%</td></tr><tr><td>Consumer Discretionary</td><td>53</td><td>83.0%</td><td>47.17%</td><td>36.72%</td></tr><tr><td>Financials</td><td>64</td><td>90.6%</td><td>44.01%</td><td>44.78%</td></tr><tr><td>Materials</td><td>51</td><td>92.2%</td><td>43.17%</td><td>43.63%</td></tr><tr><td>REITs</td><td>34</td><td>82.4%</td><td>37.49%</td><td>31.97%</td></tr><tr><td>Communication</td><td>38</td><td>84.2%</td><td>34.81%</td><td>32.91%</td></tr><tr><td>Energy</td><td>66</td><td>89.4%</td><td>33.48%</td><td>28.04%</td></tr><tr><td>Industrials</td><td>94</td><td>88.3%</td><td>33.21%</td><td>33.16%</td></tr><tr><td>Consumer Staples</td><td>51</td><td>86.3%</td><td>32.08%</td><td>34.21%</td></tr><tr><td>Healthcare</td><td>59</td><td>89.8%</td><td>30.92%</td><td>30.01%</td></tr><tr><td>Utilities</td><td>61</td><td>88.5%</td><td>24.93%</td><td>24.00%</td></tr></tbody></table>
+<p>Table 8: Tests of Equal Sector Means</p><table>
+<thead><tr><th>Strategy</th><th>ANOVA F</th><th>ANOVA p</th><th>Clustered Wald p</th><th>Significant?</th></tr></thead>
+<tbody><tr><td>Daily 30/70</td><td>1.866</td><td>0.045</td><td>0.021</td><td>At 0.05 only; not after Bonferroni (0.0125)</td></tr><tr><td>Daily 20/80</td><td>0.604</td><td>0.811</td><td>0.770</td><td>No</td></tr><tr><td>Weekly 30/70</td><td>3.051</td><td>0.0009</td><td>0.0014</td><td>Yes; also after Bonferroni (0.0125)</td></tr><tr><td>Weekly 20/80</td><td>0.884</td><td>0.552</td><td>not reliable*</td><td>No</td></tr></tbody></table>
+<p>* With only 2 to 15 Weekly 20/80 trades per sector, the clustered Wald test is not reliable and is not used.</p>
+<p>Mega Cap Tech again tops both 30/70 tables, and Utilities again has the highest Daily 30/70 win rate (86.0%) with one of the lowest average returns. As in the original paper, sector means differ significantly for Weekly 30/70 even after a Bonferroni correction, but for Daily 30/70 only at the 5% level, and not at all for the 20/80 strategies. The Mega Cap Tech ranking carries hindsight: its seven names were chosen because they were mega-caps in 2026.</p>
+<h3 class="sub-title">4.6 Time Periods and Crises</h3>
+<p>Table 9: Daily 30/70 by Decade of Entry (all trades)</p><table>
+<thead><tr><th>Period</th><th>Trades</th><th>Win rate</th><th>Avg return</th><th>Avg excess over S&amp;P 500 TR</th></tr></thead>
+<tbody><tr><td>1962 to 1969</td><td>156</td><td>74.4%</td><td>4.56%</td><td>n/a (index starts 1988)</td></tr><tr><td>1970 to 1979</td><td>348</td><td>72.1%</td><td>3.88%</td><td>n/a (index starts 1988)</td></tr><tr><td>1980 to 1989</td><td>586</td><td>82.4%</td><td>8.36%</td><td>2.97%</td></tr><tr><td>1990 to 1999</td><td>630</td><td>81.3%</td><td>9.99%</td><td>1.54%</td></tr><tr><td>2000 to 2009</td><td>657</td><td>76.7%</td><td>6.42%</td><td>6.23%</td></tr><tr><td>2010 to 2019</td><td>871</td><td>84.7%</td><td>8.07%</td><td>0.73%</td></tr><tr><td>2020 to 2026</td><td>700</td><td>78.9%</td><td>8.00%</td><td>−0.43%</td></tr></tbody></table>
+<p>The original paper broke out only 2005 to 2025. Every decade from the 1960s on produced positive average Daily 30/70 trades, with the weakest results in the 1960s and 1970s and the strongest in the 1980s and 1990s. Against the S&amp;P 500 total return over the same dates, the excess return has faded: it was largest in 2000 to 2009 (6.23% per trade), small in 2010 to 2019 (0.73%), and slightly negative since 2020 (−0.43%).</p>
+<p>Table 10: Trades Entered During Market Crises</p><table>
+<thead><tr><th>Window (entry dates)</th><th>Strategy</th><th>Trades</th><th>Win rate</th><th>Avg return</th><th>Avg excess over S&amp;P 500 TR</th></tr></thead>
+<tbody><tr><td>GFC (Oct 2007 to Mar 2009)</td><td>Daily 30/70</td><td>113</td><td>54.9%</td><td>−1.31%</td><td>7.47%</td></tr><tr><td></td><td>Daily 20/80</td><td>20</td><td>85.0%</td><td>72.04%</td><td>24.93%</td></tr><tr><td></td><td>Weekly 30/70</td><td>72</td><td>86.1%</td><td>40.22%</td><td>14.18%</td></tr><tr><td></td><td>Weekly 20/80</td><td>11</td><td>100.0%</td><td>352.35%</td><td>33.68%</td></tr><tr><td>COVID (Feb to Jun 2020)</td><td>Daily 30/70</td><td>64</td><td>70.3%</td><td>9.68%</td><td>−3.27%</td></tr><tr><td></td><td>Daily 20/80</td><td>22</td><td>95.5%</td><td>67.47%</td><td>19.55%</td></tr><tr><td></td><td>Weekly 30/70</td><td>47</td><td>95.7%</td><td>74.75%</td><td>14.76%</td></tr><tr><td></td><td>Weekly 20/80</td><td>18</td><td>100.0%</td><td>239.38%</td><td>90.66%</td></tr><tr><td>2022 bear market</td><td>Daily 30/70</td><td>118</td><td>68.6%</td><td>6.01%</td><td>−0.38%</td></tr><tr><td></td><td>Daily 20/80</td><td>21</td><td>90.5%</td><td>36.09%</td><td>−9.83%</td></tr><tr><td></td><td>Weekly 30/70</td><td>24</td><td>83.3%</td><td>27.96%</td><td>−5.06%</td></tr><tr><td></td><td>Weekly 20/80</td><td>2</td><td>100.0%</td><td>217.48%</td><td>187.01%</td></tr></tbody></table>
+<p>The crisis results match the original paper. Daily 30/70 trades entered during the financial crisis lost money on average (−1.31%, with a 54.9% win rate), because the rule kept buying a market that kept falling, while the stricter and weekly rules, which waited for deeper oversold readings, did very well; all 11 Weekly 20/80 trades from the crisis were winners, averaging 352%. In COVID-era entries every strategy except Daily 30/70 beat the index over the same dates. These windows contain few trades, entered within weeks of each other, in stocks known to have survived, so they describe how survivors bought near crisis lows performed, not how the signal would fare on stocks that failed.</p>
+<h3 class="sub-title">4.7 Individual Stocks</h3>
+<p>Table 11: Top 10 Stocks by Average Return, Daily 30/70</p><table>
+<thead><tr><th>Rank</th><th>Ticker</th><th>Sector</th><th>Trades</th><th>Win rate</th><th>Avg return</th></tr></thead>
+<tbody><tr><td>1</td><td>TSLA</td><td>Mega Cap Tech</td><td>17</td><td>88.2%</td><td>21.81%</td></tr><tr><td>2</td><td>AMZN</td><td>Mega Cap Tech</td><td>24</td><td>83.3%</td><td>15.19%</td></tr><tr><td>3</td><td>AMT</td><td>REITs</td><td>23</td><td>91.3%</td><td>13.73%</td></tr><tr><td>4</td><td>AMGN</td><td>Healthcare</td><td>41</td><td>85.4%</td><td>12.54%</td></tr><tr><td>5</td><td>TJX</td><td>Consumer Discretionary</td><td>36</td><td>86.1%</td><td>12.51%</td></tr><tr><td>6</td><td>EOG</td><td>Energy</td><td>33</td><td>78.8%</td><td>12.42%</td></tr><tr><td>7</td><td>LIN</td><td>Materials</td><td>27</td><td>92.6%</td><td>12.32%</td></tr><tr><td>8</td><td>ABBV</td><td>Healthcare</td><td>16</td><td>87.5%</td><td>12.15%</td></tr><tr><td>9</td><td>SBUX</td><td>Consumer Discretionary</td><td>31</td><td>90.3%</td><td>12.07%</td></tr><tr><td>10</td><td>MSFT</td><td>Mega Cap Tech</td><td>34</td><td>82.4%</td><td>11.81%</td></tr></tbody></table>
+<p>Table 12: Bottom 10 Stocks by Average Return, Daily 30/70</p><table>
+<thead><tr><th>Rank</th><th>Ticker</th><th>Sector</th><th>Trades</th><th>Win rate</th><th>Avg return</th></tr></thead>
+<tbody><tr><td>90</td><td>DG</td><td>Consumer Discretionary</td><td>14</td><td>71.4%</td><td>4.61%</td></tr><tr><td>91</td><td>FCX</td><td>Materials</td><td>30</td><td>73.3%</td><td>4.58%</td></tr><tr><td>92</td><td>ED</td><td>Utilities</td><td>62</td><td>87.1%</td><td>4.40%</td></tr><tr><td>93</td><td>MRK</td><td>Healthcare</td><td>50</td><td>72.0%</td><td>4.23%</td></tr><tr><td>94</td><td>EQR</td><td>REITs</td><td>28</td><td>75.0%</td><td>3.90%</td></tr><tr><td>95</td><td>HAL</td><td>Energy</td><td>47</td><td>68.1%</td><td>3.85%</td></tr><tr><td>96</td><td>C</td><td>Financials</td><td>47</td><td>66.0%</td><td>3.56%</td></tr><tr><td>97</td><td>AAPL</td><td>Mega Cap Tech</td><td>37</td><td>70.3%</td><td>2.23%</td></tr><tr><td>98</td><td>KHC</td><td>Consumer Staples</td><td>11</td><td>54.5%</td><td>0.34%</td></tr><tr><td>99</td><td>TMUS</td><td>Communication</td><td>14</td><td>50.0%</td><td>0.13%</td></tr></tbody></table>
+<p>The best and worst names are largely the same as in the original paper. Tesla, Amazon, American Tower, Amgen, and TJX lead; T-Mobile, Kraft Heinz, Apple, and Citigroup trail. Apple's place near the bottom illustrates the central result: its average RSI trade earned only 2.23%, because the rule sold after every rally and sat out much of the stock's long climb, while holding Apple returned about 19% a year from 1980.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION V</span>
   <h2 class="section-title">5. Discussion</h2>
 </div>
-<h3 class="sub-title">5.1 The Central Paradox: Winning Trades, Losing Strategy</h3>
-<p>The most striking finding is the juxtaposition of overwhelmingly positive per-trade performance with significant underperformance versus buy-and-hold. Every strategy wins on the majority of trades (79–96%), has a positive average return, and exhibits profit factors well above 1.0. Yet, stock by stock, every strategy lags buying and holding the same stock.</p>
-<p>The resolution lies in opportunity cost. The paper does not report time in the market directly, but a rough figure is available for Daily 30/70: 38.9 trades per stock at an average of 150 days each comes to about 16 years invested per stock, against a median history of about 45 years, so the typical stock is held on the order of a third of the time. For the rest, capital earns 0% in this backtest, while the stocks themselves keep drifting upward. Earning roughly 20% a year for about a third of the time, and nothing otherwise, compounds far more slowly than holding the stock continuously, which is consistent with the per-stock shortfall in Table 2.</p>
-<p>This opportunity cost is especially punishing for the Weekly 20/80 strategy, where signals are years apart and the test statistics imply that only 57 of the 100 stocks traded at all (see the note to Table 2). The 244% average return per trade accrues over an average of 6.5 years, roughly 21% a year while invested (about 19% using the median return and median holding period). That is a high rate, so the shortfall versus buy-and-hold most likely comes from time out of the market rather than from weak trades. Because buy-and-hold annualized returns are not reported, the paper cannot say whether buy-and-hold on these stocks would have matched that rate over the same holding periods.</p>
-<h3 class="sub-title">5.2 Where Per-Trade Results Were Strongest</h3>
-<p>Per-trade results were strongest in three settings, though the caveats in Sections 4.2 and 5.5 apply to each:</p>
-<p>Crisis entries. Trades entered with extreme thresholds (20/80) during the GFC and COVID windows had win rates of 90% to 100% and large average returns (Table 6). The samples are small, the entries cluster within weeks, and every stock is a known survivor, so these results show how surviving stocks bought near crisis lows performed. Whether RSI adds value as one input in a discretionary process was not tested.</p>
-<p>Steady uptrends. The 2010–2014 period, a steady post-GFC bull market with moderate pullbacks, was the best of the four periods in Table 5 for Daily 30/70, with an 89.3% win rate. In that environment, oversold dips were usually followed by recoveries.</p>
-<p>Mega-cap growth stocks. TSLA, AMZN, NVDA, and MSFT were among the top ten Daily 30/70 performers (Table 7). These names were selected as mega-caps in 2026, so the upward drift that made most of their signals profitable is known only in hindsight; the result describes the sample rather than a way to pick stocks in advance.</p>
+<h3 class="sub-title">5.1 Winning Trades, Losing Strategy</h3>
+<p>Every strategy wins most of its trades yet trails buy-and-hold, and the rerun now measures why. The Daily 30/70 rule was invested only 38% of the time on average, Weekly 20/80 only 12%. While invested the strategies earned roughly 20% to 21% a year (for example, 7.63% over an average of 149 days for Daily 30/70 annualizes to 19.7%), but for the rest of the time the money sat in Treasury bills while the stocks kept rising. Earning about 20% a year for a third of the time and the bill rate otherwise cannot keep up with stocks that compounded at 13.7% a year on average.</p>
+<h3 class="sub-title">5.2 What the Signal Adds</h3>
+<p>The random-entry test (Table 2) gives the clearest answer the data allow. The entry signal adds a modest edge for the 30/70 rules, about 0.7 percentage points per daily trade and about 6 per weekly trade, and nothing measurable for Daily 20/80. The very high win rates owe much to the exit rule, which only sells into strength. Buying weakness in stocks that kept growing paid off, but mostly because the stocks kept growing.</p>
 <h3 class="sub-title">5.3 Daily vs. Weekly Timeframes</h3>
-<p>The daily and weekly strategies represent fundamentally different trading philosophies:</p>
-<ul>
-  <li>Daily RSI operates as a short-to-medium-term mean-reversion system, generating frequent trades (avg ~40 per stock) with moderate returns (~7.66%) and holding periods (~5 months). About 20% of its trades lose money.</li>
-</ul>
-<ul>
-  <li>Weekly RSI operates as a long-term opportunistic system, generating rare signals (~6 per stock for 30/70, &lt;1 for 20/80) with very large returns but very long holding periods. Many of its signals fall in major market declines (Table 6).</li>
-</ul>
-<p>The weekly timeframe&#x27;s higher win rates (88–96% vs. 79–87%) reflect the noise reduction inherent in weekly data: daily RSI can whipsaw around the 30 threshold during volatile periods, generating premature signals, while weekly RSI filters out this noise. Longer holding periods on rising stocks would also raise win rates, and the backtest cannot separate the two effects.</p>
+<p>Daily RSI behaves like a short-to-medium-term mean-reversion system: about 40 trades per stock, average returns near 7.6%, and holding periods of about five months, with about one trade in five losing money. Weekly RSI behaves like a rare, opportunistic system: about six trades per stock for 30/70 and fewer than one for 20/80, with large returns over holding periods of years, many of them entered in major declines (Table 10).</p>
 <h3 class="sub-title">5.4 Threshold Selection: 30/70 vs. 20/80</h3>
-<p>In this sample, more extreme thresholds (20/80) produced higher win rates and profit factors at the cost of dramatically fewer trades:</p>
-<ul>
-  <li>30/70: More signals, smaller per-trade gains. Daily 30/70 generated 3,892 trades, enough in principle for a portfolio-level test, which this paper does not run.</li>
-</ul>
-<ul>
-  <li>20/80: Fewer signals, larger per-trade gains. The Daily 20/80 strategy&#x27;s 87.3% win rate and 47.37% average return are positive raw returns per trade, not risk-adjusted alpha, and its roughly 6 signals per stock over each stock&#x27;s full history (a median of about 45 years) leave long stretches with no position.</li>
-</ul>
+<p>Stricter thresholds raise win rates and returns per trade but cut the number of signals sharply and lengthen holding periods. They also lower time in the market, which is why the 20/80 portfolios have the lowest volatility and drawdowns in Table 5 and the lowest returns. The Daily 20/80 rule shows no entry edge over random timing at all.</p>
 <h3 class="sub-title">5.5 Survivorship Bias</h3>
-<p>Our universe of 100 stocks was selected as of 2026 — all are currently listed, large-cap companies. This introduces survivorship bias: companies that went bankrupt, were delisted, or were acquired are excluded. Had we included stocks like Lehman Brothers, Enron, or Bear Stearns, the RSI strategies would likely show lower win rates and average returns, as oversold signals on failing companies would have generated total losses.</p>
-<p>The magnitude of this bias is difficult to quantify without a point-in-time universe, and we do not estimate it here; it is likely largest for the long-hold weekly strategies. The strategies&#x27; underperformance versus buy-and-hold would be less severe with survivorship bias removed (since buy-and-hold on bankrupt companies also produces total losses), but absolute returns would be lower.</p>
-<p>Because this bias bears most heavily on our strongest results, it warrants emphasis. The universe was assembled from companies that survived to 2026: every stock in the sample is still listed, and firms that were delisted, went bankrupt, or were acquired at any point during 1962–2026 are excluded by construction. Conditioning a sample on survival is a well-documented source of bias in performance studies (Brown, Goetzmann, Ibbotson, &amp; Ross, 1992), and here it biases the results upward because the excluded failures are precisely the cases in which an oversold entry would have ended in a large or total loss. The distortion is greatest for long-hold strategies such as Weekly 20/80 (82 trades, average holding period of roughly 6.5 years): a stock known to have survived to 2026 that is bought at an extreme oversold reading almost always recovers eventually, so its 96.3% win rate and 244% average return partly reflect how the sample was constructed rather than the signal alone. All reported win rates and average returns, especially for the weekly and 20/80 strategies, should therefore be read as an upper bound on what these rules would have earned on a point-in-time universe that included subsequently failed firms.</p>
-<h3 class="sub-title">5.6 Transaction Costs and Practical Implementation</h3>
-<p>While we report gross returns, realistic implementation would incur:</p>
-<ul>
-  <li>Commissions: Effectively zero at modern brokerages for retail investors.</li>
-</ul>
-<ul>
-  <li>Bid-ask spreads: 1–5 bps for large-cap stocks, negligible for our universe.</li>
-</ul>
-<ul>
-  <li>Slippage/market impact: 5–15 bps per trade for institutional-size orders.</li>
-</ul>
-<ul>
-  <li>Taxes: Short-term capital gains tax on trades held &lt; 1 year (the majority of Daily 30/70 trades). At a 37% marginal rate, a 7.66% gross return becomes ~4.83% after tax if losses fully offset gains.</li>
-</ul>
-<p>For the Daily 30/70 strategy, assuming 10 bps round-trip costs (a modern figure that likely understates costs in the sample&#x27;s early decades; see Section 3.4) and 37% tax on gains, the after-cost, after-tax average return per trade would be approximately:</p>
-<ul>
-  <li>Gross: 7.66%</li>
-</ul>
-<ul>
-  <li>Less costs: 7.56%</li>
-</ul>
-<ul>
-  <li>Less tax on winning trades only (79.4% × 13.22% × 37%): ~3.88%</li>
-</ul>
-<ul>
-  <li>After-cost, after-tax avg ≈ 7.56% − 3.88% ≈ 3.68% per trade</li>
-</ul>
-<p>The 3.68% figure taxes winning trades and gives no credit for losses, so it is a lower bound. If losses fully offset gains, the same 37% rate applied to the 7.56% after-cost average gives about 4.76%, in line with the ~4.83% pre-cost figure above. At a 37% rate, the after-cost, after-tax average therefore lies between about 3.7% and 4.8% per trade, somewhat higher if the minority of trades held over a year are taxed at long-term rates.</p>
-<p>This further widens the gap versus buy-and-hold, which benefits from tax deferral and long-term capital gains rates.</p>
-<h3 class="sub-title">5.7 Data Snooping Considerations</h3>
-<p>We test four pre-specified strategy parameterizations rather than optimizing thresholds to maximize backtested performance. Nonetheless, the RSI period (14) and threshold pairs (30/70, 20/80) are &quot;industry standard&quot; parameters that have been widely published since 1978 — raising the question of whether they represent genuine out-of-sample anomalies or the result of collective data snooping by generations of practitioners.</p>
-<p>Sullivan, Timmermann, and White (1999) applied White&#x27;s Reality Check (White, 2000) to 7,846 technical rules on the Dow Jones Industrial Average and found that the best rule remained significant in sample but was not statistically significant in the 1987 to 1996 out-of-sample period. Reporting four variants limits selective reporting, but it does not address that concern, and this paper applies no Reality Check or similar correction. The large t-statistics (8.77 to 30.92) would ordinarily survive a multiple-comparison adjustment across four tests, but they rest on the independence assumption discussed in Section 4.2 and test returns against zero rather than against a benchmark, so they cannot settle the question. The per-stock shortfall versus buy-and-hold also gives little sign of an exploitable market inefficiency.</p>
-<h3 class="sub-title">5.8 Limitations and Analysis Still Needed</h3>
-<p>The backtest could not be rerun for this revision, so the following analysis is still needed before the results can support stronger claims. First, a random-entry benchmark is needed: entries on the same stocks with holding periods matched to each strategy, with standard errors clustered by date (or a block bootstrap), to test whether RSI timing beats the stocks&#x27; own drift. Second, a portfolio-level backtest against the S&amp;P 500 is needed, with Treasury bill returns on idle cash and reported annualized returns, volatility, Sharpe ratios, and drawdowns, before any conclusion can be drawn about RSI versus passive indexing. Third, a point-in-time universe such as CRSP, including delisted, bankrupt, and acquired firms, is needed to measure the survivorship bias described in Section 5.5.</p>
-<p>Several method details are also missing or limiting. The paper does not specify whether prices were adjusted for splits and dividends. Entries and exits fill at the close of the signal bar, which a trader could not achieve exactly; next-bar execution would be more realistic. The number of positions force-closed at the end of the data is not reported, so it is unclear how much of the long-hold results rests on open positions marked at the last price. The 10 bp cost assumption reflects modern markets and likely understates costs before May 1975, when fixed commissions applied. The rules are long-only with no stop-loss. The sector ANOVA treats trades as independent, and its Daily 30/70 result does not survive a Bonferroni correction for four strategies. Finally, the original analysis plan called for Sharpe ratios, a regression of trade returns on holding period and stock volatility, and ten figures; none of these is reported here, so no conclusion in this paper rests on them.</p>
+<p>The universe was chosen in 2026 from companies that were then large and listed, so firms that failed, were acquired, or shrank out of contention during 1962 to 2026 are absent by construction (Brown, Goetzmann, Ibbotson, &amp; Ross, 1992). The rerun can now show the size of the effect on this list: holding the 99 stocks in equal weight returned 18.1% a year from 1988, against 11.4% for the S&amp;P 500 total return index, and 16.2% a year from 1962. Part of that gap is the equal weighting, but much of it is hindsight in the choice of names. Any strategy that holds these stocks inherits that tailwind, which is why the RSI trades beat the index over the same dates (Table 3) and why the absolute results should be read as an upper bound. The comparisons that hold the stock list fixed, against random entries and against buying and holding the same stocks, are largely immune to this bias, and both point the same way. AvalonBay's disappearance from the data after its 2026 merger is a reminder that the list itself erodes: a point-in-time database that includes delisted firms, such as CRSP, would be needed to remove the bias.</p>
+<h3 class="sub-title">5.6 Transaction Costs and Taxes</h3>
+<p>For Daily 30/70, a 10 basis point round-trip cost lowers the average trade from 7.63% to 7.52%. Most Daily 30/70 trades last less than a year, so gains are taxed at short-term rates. At a 37% rate, taxing winning trades only (79.9% × 13.04% × 37% = 3.86%) gives about 3.66% per trade after costs and taxes, a lower bound; if losses fully offset gains, the same rate applied to the after-cost average gives about 4.74%. Buy-and-hold defers taxes and qualifies for long-term rates, so costs and taxes widen the gap in Table 4.</p>
+<h3 class="sub-title">5.7 Data Snooping</h3>
+<p>The four parameter sets are industry standards published since 1978, not values optimized on this data. Sullivan, Timmermann, and White (1999) applied White's Reality Check (White, 2000) to 7,846 technical rules on the Dow Jones Industrial Average and found that the best rule's in-sample significance did not carry over to their 1987 to 1996 out-of-sample period. This study applies no Reality Check, but its main conclusion does not depend on picking the best rule: none of the four beats holding the same stocks.</p>
+<h3 class="sub-title">5.8 Limitations</h3>
+<p>The universe is survivor-selected (Section 5.5). Yahoo's early-decade data and its dividend adjustments are not audited. The random-entry benchmark draws entries uniformly over each stock's history, so it does not match the calendar timing of RSI entries, and its draws are independent while real entries cluster. The portfolio backtest rebalances to equal weight every day without cost, holds idle cash at the 13-week bill rate, and assumes trades fill at the open with no slippage. The 10 basis point cost reflects modern markets. The rules are long-only, with no stop-loss or position sizing.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION VI</span>
   <h2 class="section-title">6. Practical Implications</h2>
 </div>
-<p>This section summarizes what the hypothetical backtest shows for different settings. It describes findings, not recommendations, and the caveats in Sections 5.5 and 5.8 apply throughout.</p>
+<p>This section summarizes what the hypothetical backtest shows. It describes findings, not recommendations, and the caveats in Sections 5.5 and 5.8 apply throughout.</p>
 <h3 class="sub-title">6.1 Standalone Rules Versus Buy-and-Hold</h3>
-<p>As standalone, long-only rules, none of the four RSI strategies matched buying and holding the same stock in this backtest, because time out of the market outweighed positive raw returns per trade. Whether RSI adds value as one input in a broader process, such as timing purchases an investor already plans to make, was not tested here.</p>
-<h3 class="sub-title">6.2 Observed Results by Setting</h3>
-<ul>
-  <li>Daily RSI 30/70: The most frequent signals, averaging 38.9 trades per stock over each stock&#x27;s full history (a median of about 45 years), with a 79.4% win rate and a 7.66% average return per trade.</li>
-</ul>
-<ul>
-  <li>Weekly RSI 30/70: About 6 trades per stock, with an 87.7% win rate and a 37.09% average return per trade over an average hold of about 1.6 years.</li>
-</ul>
-<ul>
-  <li>Weekly RSI 20/80: 82 trades in total, 29 of them in the GFC and COVID windows, with a 96.3% win rate on a universe of known survivors; Section 5.5 explains why that win rate should be read as an upper bound.</li>
-</ul>
-<h3 class="sub-title">6.3 Sector Results</h3>
-<p>Mega Cap Tech and Consumer Discretionary stocks had the highest average returns per RSI trade in this sample, although the Mega Cap Tech group was selected from companies that were mega-caps in 2026, so its ranking reflects hindsight selection. Utilities had the highest Daily 30/70 win rate and among the lowest average returns.</p>
-<h3 class="sub-title">6.4 Risk Management</h3>
-<p>Even with 79–96% win rates, tail risk remains significant. The worst single trade in our dataset lost 93.68% (Daily 30/70). The rules tested here use no stop-loss or position sizing, and risk-adjusted returns are not reported; how stops, sizing, or diversification across concurrent signals would change the results was not tested.</p>
+<p>As standalone, long-only rules, none of the four strategies matched holding the same stocks, stock by stock or as a portfolio, with or without interest on idle cash. Time out of the market outweighed positive returns per trade.</p>
+<h3 class="sub-title">6.2 Risk</h3>
+<p>Because they sit in Treasury bills most of the time, the RSI portfolios had much lower volatility and drawdowns than the index or buy-and-hold, and higher Sharpe ratios than the index. That smoother ride came with lower returns, and against holding the same stocks it did not translate into a better Sharpe ratio. Individual trades still carried large losses: the worst Daily 30/70 trade lost −93.8%.</p>
+<h3 class="sub-title">6.3 Where RSI Helped Most</h3>
+<p>The entry signal's edge over random timing was clearest for the weekly 30/70 rule and in deep market declines, when stricter rules bought near crisis lows. Whether RSI adds value as one input to a broader process, such as timing purchases an investor already plans to make, was not tested here.</p>
 
 <div class="section-header">
   <span class="section-number">SECTION VII</span>
   <h2 class="section-title">7. Conclusions</h2>
 </div>
-<p>This study backtests four RSI-based trading strategies across 100 U.S. equities, 11 sectors, up to 64 years of daily data, and 5,174 total trades. Our principal findings are:</p>
+<p>This study backtests four RSI strategies on real daily total-return prices for 99 U.S. stocks over up to 64 years, 5,230 trades in all. Our principal findings are:</p>
 <ol>
-  <li>RSI oversold/overbought strategies produce positive average returns per trade on this universe. All four strategies produce mean returns significantly different from zero (p &lt; 10⁻¹²) and win rates significantly above 50% (χ² p-values from about 6 × 10⁻²⁹⁴ to 5 × 10⁻¹⁷), with profit factors from 3.71 to 176.45. These tests treat clustered trades as independent and compare returns with zero rather than with random entries on the same stocks, so they cannot separate RSI timing from the upward drift of stocks that survived to 2026.</li>
-  <li>Stock by stock, every strategy&#x27;s annualized return falls short of buying and holding the same stock. Paired t-tests show the shortfall for all four strategies (p &lt; 10⁻¹⁹). The likely cause is time out of the market: the strategies earn roughly 20% to 21% a year while invested, but idle cash earns 0% in this backtest. No index or portfolio-level comparison was run, so these results do not show that RSI is inferior to passive indexing.</li>
-  <li>More extreme thresholds and longer timeframes improve per-trade quality at the cost of signal frequency. The tradeoff is stark: Daily 30/70 offers 3,892 trades at 79% win rate and 7.66% average return, while Weekly 20/80 offers 82 trades at 96% win rate and 244% average return.</li>
-  <li>Trades entered during crisis windows did well for the stricter rules. GFC and COVID entries for the 20/80 and weekly strategies had win rates of 85% to 100% and large average returns, while Daily 30/70 entries during the GFC averaged −1.38%. These samples are small, clustered in time, and drawn from known survivors, and the paper does not analyze volatility regimes.</li>
-  <li>Sector results vary, but the evidence is modest. Mega Cap Tech and Consumer Discretionary produce the highest average returns, and Utilities the highest Daily 30/70 win rate. ANOVA rejects equal sector means at the 0.05 level for both 30/70 strategies, but only the Weekly 30/70 result survives a Bonferroni correction for four strategies, and the Mega Cap Tech ranking reflects hindsight selection of companies that were mega-caps in 2026.</li>
-  <li>Survivorship bias, transaction costs, and taxes would all lower the reported absolute returns, but they affect the comparison with buy-and-hold differently. Costs and taxes would widen the gap, because the strategies trade far more often than buy-and-hold; removing survivorship bias would likely narrow it, because buy-and-hold on failed firms also ends in large losses (Section 5.5).</li>
+  <li>The rerun reproduces the original results. Daily 30/70 made 3,948 trades with a 79.9% win rate and a 7.63% average return; Weekly 20/80 made 83 trades with a 95.2% win rate and a 246% average return.</li>
+  <li>The trades beat random timing only modestly. Against random entries on the same stocks held for the same periods, average returns were higher for Daily 30/70 (p = 0.032) and Weekly 30/70 (p = 0.010), marginally for Weekly 20/80, and not at all for Daily 20/80. The high win rates come largely from an exit rule that sells only after rallies.</li>
+  <li>Every strategy trailed buying and holding the same stocks: stock by stock, with or without Treasury bill interest on idle cash, and as portfolios since 1962 and since 1988.</li>
+  <li>As portfolios, the strategies had lower volatility, smaller drawdowns, and higher Sharpe ratios than the S&amp;P 500, but lower returns than the index.</li>
+  <li>Sector, decade, and crisis results match the original paper; the excess over the index has faded since 2010.</li>
+  <li>The stock list is survivor-selected, and holding it beat the index by about 7 percentage points a year since 1988, so absolute results are an upper bound; the comparisons that hold the list fixed are the reliable ones.</li>
 </ol>
-<p>These findings give a qualified answer to the long-standing debate on technical analysis. On 100 stocks that survived to 2026, buying at RSI oversold readings and selling at overbought readings produced positive average trades, but the tests used here cannot show that the signal predicts returns beyond the stocks&#x27; own upward drift. Stock by stock, the standalone rules lagged buy-and-hold, mainly because capital sat idle between signals, and transaction costs and taxes would widen that gap. Whether RSI adds value as a timing input within a broader process, or against an index with Treasury bill returns on idle cash, remains untested.</p>
-<p>Future research should examine RSI performance with survivorship-bias-free databases (e.g., CRSP), incorporate transaction costs explicitly, test combinations of RSI with other indicators (MACD, Bollinger Bands, volume confirmation), and evaluate RSI strategies on international equity markets and alternative asset classes.</p>
-<p><strong>Revision note, October 2026.</strong> This revision corrects the win-rate p-values, the after-tax arithmetic, the trade-count and sector statements that conflicted with the paper&#x27;s own tables, the sort order of Tables 3 and 4, and the descriptions of several cited studies, and it adds references for Lo (2004) and White (2000). It restates the significance tests and the buy-and-hold comparison to what the existing numbers support, qualifies the conclusions for survivorship bias and hindsight selection, and removes unsupported volatility, Sharpe ratio, and figure material. It also adds a disclaimer and a Limitations section (5.8) listing the analysis still needed; the backtest itself was not rerun.</p>
+<p>Buying RSI oversold readings and selling overbought readings made money on these stocks, mostly because the stocks rose; the signal itself added a modest edge for the 30/70 rules and little else, and sitting out of the market between signals cost more than the timing earned.</p>
+<p style="font-size:0.95rem;color:var(--text-dim);border-top:1px solid var(--border-dim);padding-top:1.2em;margin-top:2em;"><strong>Revision note, November 2026.</strong> This version reruns the backtest on real Yahoo Finance prices retrieved November 10, 2026, through October 30, 2026. It uses total-return prices and next-day-open execution, reports positions still open at the end, adds a random-entry benchmark, trade returns against the S&amp;P 500 total return index, a buy-and-hold comparison with Treasury bill interest on idle cash, an equal-weight portfolio backtest with Sharpe ratios and drawdowns, clustered standard errors, and a full decade-by-decade breakdown, and it adds three figures. AvalonBay Communities is dropped because its price history is no longer available after its 2026 merger. The October 2026 revision had corrected statistical and descriptive errors and listed this analysis as still needed; the rerun confirms the original paper's trade-level results and replaces the open questions with the results above. Sections 1 and 2 are unchanged apart from minor edits.</p>
 
 <div class="references-section">
 <h2>REFERENCES</h2>
@@ -1282,6 +385,7 @@
 <li>Bajgrowicz, P., &amp; Scaillet, O. (2012). Technical Trading Revisited: False Discoveries, Persistence Tests, and Transaction Costs. <em>Journal of Financial Economics</em>, 106(3), 473–491.</li>
 <li>Brock, W., Lakonishok, J., &amp; LeBaron, B. (1992). Simple Technical Trading Rules and the Stochastic Properties of Stock Returns. <em>Journal of Finance</em>, 47(5), 1731–1764.</li>
 <li>Brown, S.J., Goetzmann, W., Ibbotson, R.G., &amp; Ross, S.A. (1992). Survivorship Bias in Performance Studies. <em>Review of Financial Studies</em>, 5(4), 553–580.</li>
+<li>Cameron, A.C., Gelbach, J.B., &amp; Miller, D.L. (2011). Robust Inference With Multiway Clustering. <em>Journal of Business &amp; Economic Statistics</em>, 29(2), 238–249.</li>
 <li>Chong, T.T.L., &amp; Ng, W.K. (2008). Technical Analysis and the London Stock Exchange: Testing the MACD and RSI Rules Using the FT30. <em>Applied Economics Letters</em>, 15(14), 1111–1114.</li>
 <li>Chong, T.T.L., Ng, W.K., &amp; Liew, V.K.S. (2014). Revisiting the Performance of MACD and RSI Oscillators. <em>Journal of Risk and Financial Management</em>, 7(1), 1–12.</li>
 <li>De Bondt, W.F.M., &amp; Thaler, R. (1985). Does the Stock Market Overreact? <em>Journal of Finance</em>, 40(3), 793–805.</li>
@@ -1305,12 +409,12 @@
 </ol>
 </div>
 
+
 <div class="section-header">
   <span class="section-number">SECTION VIII</span>
   <h2 class="section-title">Appendix: Data and Software</h2>
 </div>
-<p>The original analysis also produced ten figures (return distributions, sector win rates and returns, equity curves, volatility scatter plots, box plots, a sector heatmap, holding-period distributions, RSI versus buy-and-hold returns, and yearly returns). They are not reproduced on this page, and no conclusion in this revision depends on them.</p>
-<p>Data retrieved February 22, 2026 from Yahoo Finance via yfinance 1.2.0. All computations performed in Python 3.10.11 with NumPy, pandas, SciPy, and matplotlib. The analysis script (analysis.py) is not included with this page.</p>
+<p>Prices: Yahoo Finance chart service, daily open, close, and dividend-adjusted close, retrieved November 10, 2026, through October 30, 2026. Treasury bill rate: Yahoo's 13-week Treasury bill yield (^IRX). Benchmarks: S&amp;P 500 total return index (^SP500TR, from January 1988) and S&amp;P 500 price index (^GSPC). Analysis in Python with pandas, NumPy, SciPy, and statsmodels. The random-entry benchmark uses 1,000 draws with a fixed seed. Data and analysis code are available from the author on request.</p>
 
 </main>
 
