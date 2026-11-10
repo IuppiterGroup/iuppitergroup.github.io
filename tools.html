@@ -206,7 +206,7 @@
       </div>
 
       <h3 class="tool-sub">Strategy results</h3>
-      <p class="tool-subnote">Table 1 and Table 2 of the paper. Toggle strategies and pick a metric.</p>
+      <p class="tool-subnote">Tables 1, 2, and 4 of the paper. Toggle strategies and pick a metric.</p>
       <fieldset class="chip-row" id="rsi-toggles">
         <legend class="sr-only">Strategies to show</legend>
       </fieldset>
@@ -341,9 +341,9 @@
         <table class="data" id="bt-trades"></table>
       </div>
       <div class="formula">
-        <h4>Rules (matching the paper's methodology)</h4>
+        <h4>Rules (the paper's signals, filled at the close)</h4>
         <p>RSI uses Wilder's smoothing: average gain and loss are seeded with a simple average of the first N changes, then updated as (previous × (N − 1) + current) ÷ N. The paper's implementation (an exponential average with α = 1/N) converges to the same values after a short warm-up, so the two can disagree only on signals near the start of a series.</p>
-        <p><strong>Entry:</strong> buy at the close when RSI is below the lower threshold and the prior bar's RSI was at or above it (a downward cross). <strong>Exit:</strong> sell at the close when RSI is above the upper threshold and the prior bar's RSI was at or below it (an upward cross). One position at a time; a position still open at the end is closed at the last price and flagged.</p>
+        <p><strong>Entry:</strong> buy at the close when RSI is below the lower threshold and the prior bar's RSI was at or above it (a downward cross). <strong>Exit:</strong> sell at the close when RSI is above the upper threshold and the prior bar's RSI was at or below it (an upward cross). One position at a time; a position still open at the end is closed at the last price and flagged. The paper now fills at the next day's open; on its data the difference is small.</p>
         <p>Returns are gross (no commissions, slippage, or taxes). Buy-and-hold runs from the first to the last close of the same series; time in market is calendar days held divided by calendar days in the span.</p>
       </div>
     </article>
