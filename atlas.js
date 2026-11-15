@@ -6,7 +6,10 @@
 const $ = s => document.querySelector(s);
 const START = -3100, END = 2024, DATA = 'atlas/data/';
 
-EVENTS.forEach((e, i) => e.id = i);
+EVENTS.forEach((e, i) => { e.id = i; e.lvl = e.lvl || 1; });
+// realm cards and the wider chronicle load after the map (atlas/info/)
+const INFO = 'atlas/info/';
+let REALM_INFO = {};
 
 /* ---------- Time scale ---------- */
 const SEG = [[-3100, -1000, 0, .22], [-1000, 500, .22, .53], [500, 1500, .53, .78], [1500, 2024, .78, 1]];
@@ -29,13 +32,18 @@ const OVERRIDES = [
   [/achaemenid|parthia|sasan|sassan|persia|safavid|qajar|afsharid|\bzand\b|pahlavi|\biran\b/i, '#b8662a'],
   [/mongol|golden horde|ilkhan|chagatai|\byuan\b|white horde|blue horde/i, '#5d6c84'],
   [/caliphate|umayyad|abbasid|fatimid|rashidun|ayyubid|mamluk/i, '#4a7843'], [/ottoman|turkey/i, '#3b6c66'],
-  [/brit|united kingdom|england|anglo-egypt/i, '#d77a8c'], [/franc|french|frank|carolingian|merovingian/i, '#5265a2'],
+  [/brit|united kingdom|england|english|anglo-egypt/i, '#d77a8c'], [/franc|french|frank|carolingian|merovingian/i, '#5265a2'],
   [/egypt|ptolem/i, '#8b993c'], [/spain|spanish|castil|new spain|viceroyalty of (peru|new granada|the r)/i, '#d08b52'],
   [/portug/i, '#5e9b88'], [/russia|muscov|moscow|novgorod|soviet/i, '#6e8e4d'], [/german|prussia/i, '#777d8e'],
   [/austria|habsburg/i, '#c9a8b8'], [/netherland|dutch|holland|batavia/i, '#de8838'], [/united states/i, '#8a6aa8'],
   [/japan/i, '#c25858'], [/carthag/i, '#6a5898'], [/alexander|macedon|seleucid|greek|athen|sparta|hellen/i, '#4e7eae'],
   [/assyria/i, '#7a5135'], [/babylon/i, '#a1673a'], [/akkad|\bur\b|sumer|city-states/i, '#9a7848'], [/hittite/i, '#8a597a'],
-  [/maurya|gupta|mughal|maratha|delhi/i, '#994e85'], [/\binca\b/i, '#ae6f2e'], [/aztec|mexica/i, '#2f7e8e']
+  [/maurya|gupta|mughal|maratha|delhi/i, '#994e85'], [/\binca\b/i, '#ae6f2e'], [/aztec|mexica/i, '#2f7e8e'],
+  // de facto powers of recent wars, set apart from the states they divide
+  [/^houthi/i, '#6e8a46'], [/^haftar/i, '#9b6b3a'], [/^rapid support/i, '#a8553a'], [/^resistance-held/i, '#5f8a62'],
+  [/^wa state$/i, '#c2a23e'], [/^rojava$/i, '#c4a23a'], [/^islamic state$/i, '#4a4540'], [/^rebel-held/i, '#5f8a62'],
+  [/^somaliland$/i, '#4f86ac'], [/^kurdistan region$|^iraqi kurdistan$/i, '#b89a3c'], [/^transnistria$/i, '#a0525a'],
+  [/^abkhazia$|^south ossetia$/i, '#8a6a9a'], [/^republic of artsakh$/i, '#b06a4a']
 ];
 const colorCache = new Map();
 function colorFor(name) {
@@ -191,8 +199,13 @@ function buildScene(feats, people, y) {
 
 // Which composites are seen up close (members shown on their own) at the current zoom.
 function revealSet(S) {
-  const lim = .6 * Math.min(W, H), out = new Set();
-  for (const c of S.comps.values()) if (c.bw * cam.k > lim) out.add(c.n);
+  // a composite shows its members when its home is large on screen, or, zoomed in, when its home lies off screen
+  // (New York in 1667 then reads as the English colonies, not as a nameless part of England)
+  const lim = .6 * Math.min(W, H), out = new Set(), local = zoomLvl() > 1;
+  for (const c of S.comps.values()) {
+    if (c.bw * cam.k > lim) { out.add(c.n); continue; }
+    if (local) { const x = screenX(c.lx), y = screenY(c.ly); if (x < 0 || x > W || y < 0 || y > H) out.add(c.n); }
+  }
   return out;
 }
 // How every realm is painted for a given set of revealed composites.
@@ -326,12 +339,12 @@ function drawLabels(S) {
   for (const el of reserve) { if (el.hidden) continue; const q = el.getBoundingClientRect(); labelRects.push([q.left - wr.left - 4, q.top - wr.top - 4, q.right - wr.left + 4, q.bottom - wr.top + 4]); }
   const zoom = cam.k / kWorld;
   // cities (dots first so labels avoid them)
-  const cityRank = zoom > 4.5 ? 3 : zoom > 2.2 ? 2 : 1, cityLbl = [];
+  const cityRank = zoom > 8 ? 4 : zoom > 4.5 ? 3 : zoom > 2.2 ? 2 : 1, cityLbl = [];
   for (const c of CITIES) {
     if (year < c[3] || year > c[4] || c[5] > cityRank) continue;
     const p = proj([c[1], c[2]]); if (!p) continue;
     const x = screenX(p[0]), y = screenY(p[1]); if (x < -20 || x > W + 20 || y < -20 || y > H + 20) continue;
-    const r = c[5] === 1 ? 3.4 : 2.6;
+    const r = c[5] === 1 ? 3.4 : c[5] === 4 ? 2.1 : 2.6;
     ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fillStyle = '#f3ead4'; ctx.fill(); ctx.lineWidth = 1.3; ctx.strokeStyle = C.city; ctx.stroke();
     if (c[5] === 1) { ctx.beginPath(); ctx.arc(x, y, 1.2, 0, Math.PI * 2); ctx.fillStyle = C.city; ctx.fill(); }
     labelRects.push([x - r - 1, y - r - 1, x + r + 1, y + r + 1]);
@@ -380,7 +393,7 @@ function drawLabels(S) {
   }
   // city names last, they give way to realm names
   for (const [c, x, y] of cityLbl) {
-    const fs = c[5] === 1 ? 13 : 12;
+    const fs = c[5] === 1 ? 13 : c[5] === 4 ? 11 : 12;
     ctx.font = FONT_IT(fs); const w = ctx.measureText(c[0]).width;
     for (const [dx, al] of [[6, 'left'], [-6, 'right']]) {
       const x0 = al === 'left' ? x + dx : x + dx - w, r = [x0 - 1, y - fs * .6, x0 + w + 1, y + fs * .6];
@@ -462,7 +475,16 @@ function render(now) {
 /* ---------- Markers ---------- */
 const markersEl = $('#markers'), markerEls = new Map(); let flagEl = null;
 const persist = y => y < -1000 ? 150 : y < 0 ? 50 : y < 1500 ? 25 : y < 1800 ? 12 : 4;
-const liveEvents = () => EVENTS.filter(e => year >= e.y && year - e.y <= persist(e.y));
+// zoomed out the chronicle shows the turning points of world history; zoomed in, the history of what is in view
+const zoomLvl = () => { const z = cam.k / kWorld; return z < 1.7 ? 1 : z < 3.6 ? 2 : 3; };
+function inView(e, pad = 0) {
+  const p = proj(e.ll); if (!p) return false;
+  const x = screenX(p[0]), y = screenY(p[1]); return x >= -pad && x <= W + pad && y >= -pad && y <= H + pad;
+}
+const shown = e => e.lvl <= zoomLvl() && inView(e);
+const MAX_MARKERS = 9;
+const liveEvents = () => EVENTS.filter(e => year >= e.y && year - e.y <= persist(e.y) && shown(e))
+  .sort((a, b) => a.lvl - b.lvl || b.y - a.y).slice(0, MAX_MARKERS).sort((a, b) => a.y - b.y || a.id - b.id);
 function placeMarkers() {
   const live = new Set(liveEvents().map(e => e.id));
   if (selected && !live.has(selected.id) && !playing) live.add(selected.id);
@@ -502,7 +524,7 @@ function frame(now) {
   const a = reduceMotion ? 1 : 1 - Math.exp(-dt / 170);
   const lk = Math.log(cam.k), tk = Math.log(target.k);
   if (Math.abs(lk - tk) > 1e-4 || Math.abs(cam.cx - target.cx) * cam.k > .3 || Math.abs(cam.cy - target.cy) * cam.k > .3) {
-    cam.k = Math.exp(lk + (tk - lk) * a); cam.cx += (target.cx - cam.cx) * a; cam.cy += (target.cy - cam.cy) * a; busy = true;
+    cam.k = Math.exp(lk + (tk - lk) * a); cam.cx += (target.cx - cam.cx) * a; cam.cy += (target.cy - cam.cy) * a; busy = true; updatePanelThrottled();
   }
   syncZoom();
   if (render(now)) busy = true;
@@ -513,7 +535,7 @@ function frame(now) {
 const zoomer = d3.zoom().clickDistance(5).on('zoom', ev => {
   if (!ev.sourceEvent) return;
   const t = ev.transform; cam.k = t.k; cam.cx = (W / 2 - t.x) / t.k; cam.cy = (H / 2 - t.y) / t.k;
-  Object.assign(target, cam); setFollow(false); $('#tip').hidden = true; kick();
+  Object.assign(target, cam); setFollow(false); $('#tip').hidden = true; updatePanelThrottled(); kick();
 });
 d3.select(canvas).call(zoomer);
 function syncZoom() { canvas.__zoom = d3.zoomIdentity.translate(W / 2 - cam.cx * cam.k, H / 2 - cam.cy * cam.k).scale(cam.k); }
@@ -539,8 +561,13 @@ canvas.addEventListener('click', ev => {
   if (found) {
     line('b', found.n);
     const span = realmSpan(found.n); if (span) line('span', span);
+    const c = cardOf(found.n);
+    if (c && c.x) line('p', c.x);
+    const ruler = rulerAt(found.n); if (ruler) line('span', `Ruled by ${ruler}`);
+    const capital = capitalAt(found.n); if (capital) line('span', `Capital: ${capital}`);
+    if (c && (c.gov || c.faith)) line('span', [c.gov, c.faith].filter(Boolean).join('. '));
     const rel = [];
-    if (found.cs.length) rel.push(`Part of the ${bare(found.cs[0].n)}`);
+    if (found.cs.length) { const top = found.cs[0], r2 = rulerAt(top.n); rel.push(`Part of the ${bare(top.n)}${r2 ? `, under ${r2.replace(/ \(.*?\)/g, '')}` : ''}`); }
     if (found.ov) rel.push(`Under ${found.ov}`);
     if (found.un) rel.push(`In personal union with ${found.un}`);
     for (const t of rel) line('span', t);
@@ -624,12 +651,26 @@ function pickEvent(e, fly) {
   }
   renderChron(); kick();
 }
-function renderChron() {
-  const el = $('#chron'); el.innerHTML = '';
-  const past = EVENTS.filter(e => e.y <= year && year - e.y <= 900).slice(-3).reverse();
-  const ahead = EVENTS.find(e => e.y > year);
+const chronWindow = y => y < -1000 ? 500 : y < 0 ? 250 : y < 1500 ? 150 : y < 1800 ? 60 : 30;
+let lastChronKey = '';
+function chronList() {
+  const win = chronWindow(year);
+  if (selected && !userPicked && !shown(selected)) { const live = liveEvents(); selected = live.length ? live[live.length - 1] : null; }
+  const pool = EVENTS.filter(e => Math.abs(e.y - year) <= win * 3 && shown(e));
+  const past = pool.filter(e => e.y <= year && year - e.y <= win).sort((a, b) => b.y - a.y || a.lvl - b.lvl).slice(0, 5);
+  if (selected && selected.y <= year && !past.includes(selected)) { past.unshift(selected); past.length = Math.min(past.length, 5); }
+  const ahead = pool.filter(e => e.y > year).sort((a, b) => a.y - b.y || a.lvl - b.lvl)[0];
   const list = past.map(e => [e, false]); if (ahead) list.push([ahead, true]);
-  if (!list.length) { el.textContent = 'No entries yet for this age.'; return; }
+  return list;
+}
+function renderChron(force) {
+  const list = chronList();
+  const key = list.map(([e]) => e.id).join(',') + '|' + (selected ? selected.id : '') + '|' + zoomLvl();
+  if (!force && key === lastChronKey) return; lastChronKey = key;
+  const scope = $('#chronScope'); if (scope) scope.textContent = zoomLvl() === 1 ? 'The world' : 'In view';
+  const el = $('#chron'); el.innerHTML = '';
+  if (!list.length) { el.textContent = 'Nothing recorded here in these years. Zoom out or move the map.'; return; }
+  const open = selected && list.some(([e]) => e === selected) ? selected : list[0][1] ? null : list[0][0];
   for (const [e, isAhead] of list) {
     const on = selected && selected.id === e.id;
     const card = document.createElement('article'); card.className = 'entry' + (on ? ' on' : '') + (isAhead ? ' ahead' : '');
@@ -637,7 +678,7 @@ function renderChron() {
     hd.innerHTML = `<div class="dt"></div><div class="nm"></div>`;
     hd.querySelector('.dt').textContent = isAhead ? `Ahead · ${e.d}` : e.d; hd.querySelector('.nm').textContent = e.t;
     card.appendChild(hd);
-    if (on || (!selected && e === past[0])) {
+    if (e === open) {
       const p = document.createElement('p'); p.textContent = e.x; card.appendChild(p);
       const pl = document.createElement('div'); pl.className = 'pl'; pl.textContent = e.p; card.appendChild(pl);
     }
@@ -647,26 +688,81 @@ function renderChron() {
 let panelTimer = 0;
 function updatePanelThrottled() { if (!panelTimer) panelTimer = setTimeout(() => { panelTimer = 0; updatePanel(); }, 120); }
 let lastRealmKey = '';
+function viewBounds() {
+  // the lon/lat box on screen, sampled along the edges of the map
+  let x0 = 180, y0 = 90, x1 = -180, y1 = -90;
+  for (let i = 0; i <= 8; i++) for (const [sx, sy] of [[i / 8 * W, 0], [i / 8 * W, H], [0, i / 8 * H], [W, i / 8 * H], [i / 8 * W, H / 2], [W / 2, i / 8 * H]]) {
+    const ll = proj.invert([(sx - W / 2) / cam.k + cam.cx, (sy - H / 2) / cam.k + cam.cy]);
+    if (!ll || !isFinite(ll[0]) || !isFinite(ll[1])) continue;
+    x0 = Math.min(x0, ll[0]); x1 = Math.max(x1, ll[0]); y0 = Math.min(y0, ll[1]); y1 = Math.max(y1, ll[1]);
+  }
+  return x0 < x1 ? [x0, y0, x1, y1] : [-180, -90, 180, 90];
+}
 function updatePanel() {
   if (!cur) return;
-  // the great realms of the age, counting a composite as one realm
+  renderChron();
+  // the great realms of the age (zoomed out) or of the land in view (zoomed in); a composite counts as one realm
+  const local = zoomLvl() > 1, vb = viewBounds(), rev = revealSet(cur);
   const seen = new Map();
   for (const f of cur.plain) {
-    const top = f.cs[0];
+    const top = f.cs.find(c => !rev.has(c.n));
     const ent = top ? { n: bare(top.n), a: top.a, box: top.box } : { n: f.n, a: f.a, box: f.box };
-    if (/minor states|tribes|peoples|-occupied/i.test(ent.n)) continue;
-    if (!seen.has(ent.n) || seen.get(ent.n).a < ent.a) seen.set(ent.n, ent);
+    if (/minor states|tribes|peoples/i.test(ent.n)) continue;
+    let w = ent.a;
+    if (local) {
+      // measure each piece by its own share of the view, and add up the pieces of a composite
+      const b = f.box, ix = Math.min(b[2], vb[2]) - Math.max(b[0], vb[0]), iy = Math.min(b[3], vb[3]) - Math.max(b[1], vb[1]);
+      if (ix <= 0 || iy <= 0) continue;
+      w = f.a * (ix * iy) / Math.max(1e-6, (b[2] - b[0]) * (b[3] - b[1]));
+      if (seen.has(ent.n)) { seen.get(ent.n).w += w; continue; }
+    }
+    if (!seen.has(ent.n) || seen.get(ent.n).w < w) seen.set(ent.n, { ...ent, w });
   }
-  const realms = [...seen.values()].sort((a, b) => b.a - a.a).slice(0, 7);
-  const key = realms.map(r => r.n).join('|'); if (key === lastRealmKey) return; lastRealmKey = key;
+  const realms = [...seen.values()].sort((a, b) => b.w - a.w).slice(0, local ? 9 : 7);
+  $('#realmsTitle').textContent = local ? 'Realms in View' : 'The Great Realms';
+  const key = realms.map(r => r.n).join('|') + Math.round(year); if (key === lastRealmKey) return; lastRealmKey = key;
   const ul = $('#realms'); ul.innerHTML = '';
   for (const f of realms) {
     const li = document.createElement('li'), b = document.createElement('button'), col = colorFor(f.n);
-    b.innerHTML = '<span class="sw"></span><span></span>';
-    b.firstChild.style.background = col; b.firstChild.style.borderColor = shade(col, .3); b.lastChild.textContent = f.n;
+    b.innerHTML = '<span class="sw"></span><span class="rn"><span></span><small></small></span>';
+    b.firstChild.style.background = col; b.firstChild.style.borderColor = shade(col, .3);
+    b.querySelector('.rn > span').textContent = f.n;
+    const who = rulerAt(f.n.startsWith('(') ? f.n : (REALM_INFO[`(${f.n})`] ? `(${f.n})` : f.n));
+    b.querySelector('small').textContent = who;
     b.addEventListener('click', () => { setFollow(false); Object.assign(target, fitBox(f.box, .8)); kick(); });
     li.appendChild(b); ul.appendChild(li);
   }
+}
+const cardOf = n => REALM_INFO[n] || REALM_INFO[bare(n)] || REALM_INFO[`(${n})`];
+function rulerAt(n, y = Math.round(year) || 1) {
+  const c = cardOf(n); if (!c || !c.rulers) return '';
+  const now = c.rulers.filter(r => r[1] <= y && y <= r[2]).sort((a, b) => a[1] - b[1]);
+  if (!now.length) return '';
+  const fmt = r => `${r[0]} (${r[2] >= END ? `from ${fmtSpan(r[1])}` : r[1] === r[2] ? fmtSpan(r[1]) : `${fmtSpan(r[1])} to ${fmtSpan(r[2])}`})`;
+  if (y >= END) {
+    // the last year: a reign that runs to the end may have ended within it, so keep the latest holder of each office
+    const office = r => {
+      const m = r[0].match(/\(([^()]*)\)[^()]*$/), role = (m ? m[1].toLowerCase() : '').split(/\bthen\b/).pop().replace(/^[\s,]+|[\s,]+$/g, '');
+      return /prime minister|chief adviser|premier|chancellor/.test(role) ? 'pm' : /president/.test(role) ? 'pres' : /^rama |^[ivxl]+$/.test(role) ? '' : role;
+    };
+    const at = new Map(c.rulers.map((r, i) => [r, i])), by = new Map();
+    for (const r of now) { const k = office(r), o = by.get(k); if (!o || r[1] > o[1] || (r[1] === o[1] && at.get(r) > at.get(o))) by.set(k, r); }
+    const keep = [...by.values()].sort((a, b) => a[1] - b[1]);
+    if (keep.length === 1 && keep[0][1] === y) {
+      const before = now.filter(r => r !== keep[0] && r[1] < y && office(r) === office(keep[0])).sort((a, b) => b[1] - a[1])[0];
+      if (before) return `${before[0]} (${fmtSpan(before[1])} to ${fmtSpan(y)}), then ${fmt(keep[0])}`;
+    }
+    return keep.slice(0, 2).map(fmt).join(' and ');
+  }
+  // a year in which one reign ended and the next began reads as a succession, not a joint rule
+  const last = now[now.length - 1];
+  const succ = now.length > 1 && y < END && last[1] === y && now.slice(0, -1).every(r => r[2] === y && r[1] < y);
+  if (succ) return now.slice(-2).map(fmt).join(', then ');
+  return now.slice(0, 2).map(fmt).join(' and ');
+}
+function capitalAt(n, y = Math.round(year) || 1) {
+  const c = cardOf(n); if (!c || !c.cap) return '';
+  const now = c.cap.filter(r => r[1] <= y && y <= r[2]); return now.map(r => r[0]).join(' and ');
 }
 
 /* ---------- Resize & boot ---------- */
@@ -681,6 +777,17 @@ function resize() {
 }
 new ResizeObserver(resize).observe(wrap);
 
+async function loadInfo() {
+  try {
+    const [ev, realms, cities] = await Promise.all(['events.json', 'realms.json', 'cities.json'].map(f => getJSON(INFO + f)));
+    REALM_INFO = realms;
+    const have = new Set(EVENTS.map(e => e.y + '|' + e.t));
+    for (const e of ev) if (!have.has(e.y + '|' + e.t)) EVENTS.push(e);
+    EVENTS.sort((a, b) => a.y - b.y || a.lvl - b.lvl); EVENTS.forEach((e, i) => e.id = i);
+    for (const c of cities) CITIES.push(c);
+    lastRealmKey = ''; renderChron(true); updatePanel(); plate.key = ''; kick();
+  } catch (err) { console.error(err); }
+}
 async function boot() {
   buildTimeline();
   try {
@@ -699,7 +806,8 @@ async function boot() {
     cur = buildScene(feats, people, year);
     if (document.fonts && document.fonts.load) await Promise.race([Promise.all([document.fonts.load(FONT_SC(20)), document.fonts.load(FONT_IT(20))]), new Promise(r => setTimeout(r, 2500))]);
     $('#loading').hidden = true;
-    selected = EVENTS.find(e => e.y === 117); setYear(117); renderChron(); updatePanel(); kick();
+    selected = EVENTS.find(e => e.y === 117); setYear(117); renderChron(true); updatePanel(); kick();
+    loadInfo();
   } catch (err) {
     console.error(err);
     $('#loading').textContent = 'The map data did not load. Reload the page to try again.';

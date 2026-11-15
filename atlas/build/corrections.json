@@ -1860,6 +1860,59 @@
    "new": "Weimar Republic",
    "why": "The empire ended in November 1918; the Weimar constitution was adopted in August 1919",
    "merge": true
+  },
+  {
+   "name": "Iraqi Republic",
+   "from": 2005,
+   "to": 2013,
+   "new": "Republic of Iraq",
+   "why": "The 2005 constitution",
+   "merge": true
+  },
+  {
+   "name": "Russian-occupied territories",
+   "from": 1992,
+   "to": 2024,
+   "new": "Transnistria",
+   "why": "Split off from Moldova in 1990 to 1992; held with Russian troops; recognized by no member of the UN"
+  },
+  {
+   "name": "Transnistria",
+   "from": 1992,
+   "to": 2024,
+   "new": "Transnistria",
+   "why": "Russian troops have stayed since 1992",
+   "overlord": "Russian Federation"
+  },
+  {
+   "name": "Chechen Republic",
+   "from": 1991,
+   "to": 1999,
+   "new": "Chechen Republic of Ichkeria",
+   "why": "Name of the breakaway state"
+  },
+  {
+   "name": "Kosovo",
+   "from": 1999,
+   "to": 2007,
+   "new": "UN-administered Kosovo",
+   "why": "Governed by the UN mission from June 1999 until independence in February 2008"
+  },
+  {
+   "name": "Turkish Republic of Northern Cyprus",
+   "from": 1975,
+   "to": 1983,
+   "new": "Turkish Federated State of Cyprus",
+   "why": "The Turkish Republic of Northern Cyprus was proclaimed in November 1983",
+   "merge": true
+  },
+  {
+   "name": "Hashemite Arab Federation",
+   "from": 1400,
+   "to": 1500,
+   "new": "Qara Qoyunlu",
+   "why": "The source's polygon is Arab Iraq under the Qara Qoyunlu princes at Baghdad; the Hashemite Arab Federation was the union of Iraq and Jordan in 1958",
+   "merge": true
   }
  ],
  "fill": [
@@ -2916,6 +2969,23 @@
     1927
    ],
    "why": "The Nationalists held only the Canton base until the Northern Expedition of 1926-1928"
+  },
+  {
+   "name": "Chechen Republic",
+   "from": 2000,
+   "to": 2024,
+   "bbox": [
+    -180,
+    -90,
+    180,
+    90
+   ],
+   "give_to": "Russian Federation",
+   "give_to_years": [
+    2000,
+    2024
+   ],
+   "why": "Retaken by Russia in the second war, 1999 to 2000"
   }
  ],
  "subtract": [
@@ -4586,12 +4656,85 @@
    "why": "The Dutch West India Company's colony in northeast Brazil",
    "inside": {
     "bbox": [
-     -45,
-     -13,
+     -50,
+     -13.5,
      -34,
      -1.5
     ]
    }
+  },
+  {
+   "occupiers": [
+    "New Netherland"
+   ],
+   "from": 1622,
+   "to": 1664,
+   "new": "Dutch Guiana",
+   "why": "Essequibo and Berbice on the Guiana coast were separate West India Company colonies, not New Netherland",
+   "inside": {
+    "bbox": [
+     -62,
+     1,
+     -50,
+     9.5
+    ]
+   },
+   "min_km2": 50
+  },
+  {
+   "occupiers": [
+    "New Netherland",
+    "Dutch Guiana"
+   ],
+   "from": 1622,
+   "to": 1799,
+   "new": "Dutch West Indies",
+   "why": "Curacao, Aruba, Bonaire, Sint Eustatius, Saba, Sint Maarten, and Tobago are Caribbean islands, not Guiana or New Netherland",
+   "inside": {
+    "bbox": [
+     -71,
+     10,
+     -59,
+     19
+    ]
+   },
+   "min_km2": 5
+  },
+  {
+   "occupiers": [
+    "Dutch Guiana"
+   ],
+   "from": 1665,
+   "to": 1669,
+   "new": "English Colonial Empire",
+   "why": "New Netherland surrendered to the English in 1664 and became New York",
+   "inside": {
+    "bbox": [
+     -80,
+     38,
+     -70,
+     46
+    ]
+   },
+   "min_km2": 50
+  },
+  {
+   "occupiers": [
+    "New Netherland"
+   ],
+   "from": 1655,
+   "to": 1658,
+   "new": "Portuguese Empire",
+   "why": "The Dutch surrendered Recife and the last of Dutch Brazil in January 1654",
+   "inside": {
+    "bbox": [
+     -50,
+     -13.5,
+     -34,
+     -1.5
+    ]
+   },
+   "min_km2": 50
   },
   {
    "occupiers": [
@@ -4611,6 +4754,2956 @@
      6
     ]
    }
+  },
+  {
+   "occupiers": [
+    "Republic of Yemen"
+   ],
+   "from": 2015,
+   "to": 2017,
+   "new": "Houthi-held Yemen",
+   "why": "The Houthis took Sanaa in September 2014 and have held the northwest since",
+   "inside": {
+    "poly": [
+     [
+      42.5,
+      16.45
+     ],
+     [
+      43.6,
+      17.35
+     ],
+     [
+      44.6,
+      17.5
+     ],
+     [
+      45.5,
+      17.25
+     ],
+     [
+      45.45,
+      16.4
+     ],
+     [
+      45.05,
+      16.1
+     ],
+     [
+      44.95,
+      15.6
+     ],
+     [
+      45.05,
+      15.3
+     ],
+     [
+      45.3,
+      14.9
+     ],
+     [
+      45.4,
+      14.5
+     ],
+     [
+      45.2,
+      14.1
+     ],
+     [
+      44.9,
+      13.8
+     ],
+     [
+      44.45,
+      13.75
+     ],
+     [
+      44.15,
+      13.6
+     ],
+     [
+      43.9,
+      13.62
+     ],
+     [
+      43.6,
+      13.5
+     ],
+     [
+      43.3,
+      13.4
+     ],
+     [
+      42.5,
+      13.4
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Yemen"
+   ],
+   "from": 2018,
+   "to": 2021,
+   "new": "Houthi-held Yemen",
+   "why": "The Houthis took Sanaa in September 2014 and have held the northwest since",
+   "inside": {
+    "poly": [
+     [
+      42.5,
+      16.45
+     ],
+     [
+      43.6,
+      17.35
+     ],
+     [
+      44.6,
+      17.5
+     ],
+     [
+      45.5,
+      17.25
+     ],
+     [
+      45.45,
+      16.4
+     ],
+     [
+      45.1,
+      16.15
+     ],
+     [
+      44.95,
+      15.6
+     ],
+     [
+      45.05,
+      15.3
+     ],
+     [
+      45.3,
+      14.9
+     ],
+     [
+      45.4,
+      14.5
+     ],
+     [
+      45.2,
+      14.1
+     ],
+     [
+      44.9,
+      13.8
+     ],
+     [
+      44.45,
+      13.75
+     ],
+     [
+      44.15,
+      13.6
+     ],
+     [
+      43.9,
+      13.68
+     ],
+     [
+      43.55,
+      13.85
+     ],
+     [
+      43.42,
+      14.1
+     ],
+     [
+      43.3,
+      14.55
+     ],
+     [
+      43.05,
+      14.75
+     ],
+     [
+      42.5,
+      14.75
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Yemen"
+   ],
+   "from": 2022,
+   "to": 2024,
+   "new": "Houthi-held Yemen",
+   "why": "The Houthis took Sanaa in September 2014 and have held the northwest since",
+   "inside": {
+    "poly": [
+     [
+      42.5,
+      16.45
+     ],
+     [
+      43.6,
+      17.35
+     ],
+     [
+      44.6,
+      17.5
+     ],
+     [
+      45.5,
+      17.25
+     ],
+     [
+      45.6,
+      16.4
+     ],
+     [
+      45.15,
+      16.1
+     ],
+     [
+      45.0,
+      15.65
+     ],
+     [
+      45.15,
+      15.35
+     ],
+     [
+      45.45,
+      14.95
+     ],
+     [
+      45.6,
+      14.55
+     ],
+     [
+      45.35,
+      14.1
+     ],
+     [
+      44.9,
+      13.8
+     ],
+     [
+      44.45,
+      13.75
+     ],
+     [
+      44.15,
+      13.62
+     ],
+     [
+      43.9,
+      13.68
+     ],
+     [
+      43.55,
+      13.85
+     ],
+     [
+      43.25,
+      13.95
+     ],
+     [
+      42.5,
+      13.95
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Federal Republic of Somalia"
+   ],
+   "from": 1991,
+   "to": 2006,
+   "new": "Somaliland",
+   "why": "Declared independent in May 1991 and governed itself since; recognized by no state",
+   "inside": {
+    "poly": [
+     [
+      42.0,
+      12.2
+     ],
+     [
+      48.0,
+      11.45
+     ],
+     [
+      47.6,
+      10.2
+     ],
+     [
+      46.9,
+      9.2
+     ],
+     [
+      46.1,
+      8.65
+     ],
+     [
+      45.6,
+      8.0
+     ],
+     [
+      46.0,
+      6.5
+     ],
+     [
+      43.0,
+      8.0
+     ],
+     [
+      42.0,
+      10.0
+     ],
+     [
+      42.0,
+      12.2
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Federal Republic of Somalia"
+   ],
+   "from": 2007,
+   "to": 2022,
+   "new": "Somaliland",
+   "why": "Somaliland took Las Anod from Puntland in 2007",
+   "inside": {
+    "poly": [
+     [
+      42.0,
+      12.2
+     ],
+     [
+      49.1,
+      11.6
+     ],
+     [
+      48.0,
+      7.95
+     ],
+     [
+      46.0,
+      6.5
+     ],
+     [
+      43.0,
+      8.0
+     ],
+     [
+      42.0,
+      10.0
+     ],
+     [
+      42.0,
+      12.2
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Federal Republic of Somalia"
+   ],
+   "from": 2023,
+   "to": 2024,
+   "new": "Somaliland",
+   "why": "Las Anod and eastern Sool fell to SSC-Khatumo in 2023",
+   "inside": {
+    "poly": [
+     [
+      42.0,
+      12.2
+     ],
+     [
+      48.0,
+      11.45
+     ],
+     [
+      47.6,
+      10.2
+     ],
+     [
+      46.9,
+      9.2
+     ],
+     [
+      46.1,
+      8.65
+     ],
+     [
+      45.6,
+      8.0
+     ],
+     [
+      46.0,
+      6.5
+     ],
+     [
+      43.0,
+      8.0
+     ],
+     [
+      42.0,
+      10.0
+     ],
+     [
+      42.0,
+      12.2
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "State of Libya"
+   ],
+   "from": 2014,
+   "to": 2015,
+   "new": "Haftar's Libya",
+   "why": "The eastern government at Tobruk and Khalifa Haftar's Libyan National Army, at war or in stalemate with Tripoli since 2014",
+   "inside": {
+    "poly": [
+     [
+      20.0,
+      34
+     ],
+     [
+      20.0,
+      19
+     ],
+     [
+      25.6,
+      19
+     ],
+     [
+      25.6,
+      34
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "State of Libya"
+   ],
+   "from": 2016,
+   "to": 2018,
+   "new": "Haftar's Libya",
+   "why": "The eastern government at Tobruk and Khalifa Haftar's Libyan National Army, at war or in stalemate with Tripoli since 2014",
+   "inside": {
+    "poly": [
+     [
+      18.2,
+      34
+     ],
+     [
+      18.0,
+      30.5
+     ],
+     [
+      16.2,
+      29.6
+     ],
+     [
+      17.0,
+      26.0
+     ],
+     [
+      19.5,
+      19
+     ],
+     [
+      25.6,
+      19
+     ],
+     [
+      25.6,
+      34
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "State of Libya"
+   ],
+   "from": 2019,
+   "to": 2019,
+   "new": "Haftar's Libya",
+   "why": "The eastern government at Tobruk and Khalifa Haftar's Libyan National Army, at war or in stalemate with Tripoli since 2014",
+   "inside": {
+    "poly": [
+     [
+      17.2,
+      34
+     ],
+     [
+      17.2,
+      31.0
+     ],
+     [
+      16.0,
+      29.6
+     ],
+     [
+      14.0,
+      29.5
+     ],
+     [
+      12.0,
+      29.0
+     ],
+     [
+      10.5,
+      28.6
+     ],
+     [
+      9.3,
+      28.3
+     ],
+     [
+      9.0,
+      19.0
+     ],
+     [
+      25.6,
+      19
+     ],
+     [
+      25.6,
+      34
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "State of Libya"
+   ],
+   "from": 2020,
+   "to": 2024,
+   "new": "Haftar's Libya",
+   "why": "The eastern government at Tobruk and Khalifa Haftar's Libyan National Army, at war or in stalemate with Tripoli since 2014",
+   "inside": {
+    "poly": [
+     [
+      15.4,
+      34
+     ],
+     [
+      15.4,
+      31.7
+     ],
+     [
+      15.0,
+      30.4
+     ],
+     [
+      13.8,
+      29.6
+     ],
+     [
+      12.0,
+      29.0
+     ],
+     [
+      10.5,
+      28.6
+     ],
+     [
+      9.3,
+      28.3
+     ],
+     [
+      9.0,
+      19.0
+     ],
+     [
+      25.6,
+      19
+     ],
+     [
+      25.6,
+      34
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Sudan"
+   ],
+   "from": 2023,
+   "to": 2024,
+   "new": "Rapid Support Forces",
+   "why": "The RSF went to war with the army in April 2023 and took Darfur, much of Kordofan, Khartoum, and the Gezira",
+   "inside": {
+    "poly": [
+     [
+      21.0,
+      16.0
+     ],
+     [
+      24.5,
+      15.5
+     ],
+     [
+      25.0,
+      14.1
+     ],
+     [
+      25.0,
+      13.45
+     ],
+     [
+      25.75,
+      13.45
+     ],
+     [
+      25.75,
+      14.1
+     ],
+     [
+      26.6,
+      14.7
+     ],
+     [
+      28.5,
+      13.8
+     ],
+     [
+      29.5,
+      13.0
+     ],
+     [
+      29.55,
+      12.3
+     ],
+     [
+      29.3,
+      11.3
+     ],
+     [
+      28.8,
+      10.2
+     ],
+     [
+      28.0,
+      9.4
+     ],
+     [
+      26.0,
+      9.3
+     ],
+     [
+      23.5,
+      8.8
+     ],
+     [
+      21.0,
+      10.5
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Sudan"
+   ],
+   "from": 2023,
+   "to": 2024,
+   "new": "Rapid Support Forces",
+   "why": "Khartoum, Bahri, and the Gezira under the RSF",
+   "inside": {
+    "poly": [
+     [
+      32.42,
+      15.55
+     ],
+     [
+      32.62,
+      15.7
+     ],
+     [
+      32.55,
+      16.3
+     ],
+     [
+      33.0,
+      16.2
+     ],
+     [
+      33.6,
+      15.6
+     ],
+     [
+      34.0,
+      14.6
+     ],
+     [
+      33.85,
+      13.9
+     ],
+     [
+      33.2,
+      13.85
+     ],
+     [
+      32.6,
+      14.3
+     ],
+     [
+      32.45,
+      15.2
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Union of Myanmar"
+   ],
+   "from": 1989,
+   "to": 2024,
+   "new": "Wa State",
+   "why": "The United Wa State Army has governed this land as its own since 1989",
+   "inside": {
+    "poly": [
+     [
+      98.7,
+      22.0
+     ],
+     [
+      98.85,
+      22.6
+     ],
+     [
+      99.05,
+      23.1
+     ],
+     [
+      99.35,
+      23.2
+     ],
+     [
+      99.6,
+      22.9
+     ],
+     [
+      99.65,
+      22.3
+     ],
+     [
+      99.4,
+      21.95
+     ],
+     [
+      99.0,
+      21.85
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Union of Myanmar"
+   ],
+   "from": 1989,
+   "to": 2024,
+   "new": "Wa State",
+   "why": "Southern Wa on the Thai border",
+   "inside": {
+    "poly": [
+     [
+      99.2,
+      20.3
+     ],
+     [
+      99.35,
+      20.9
+     ],
+     [
+      100.15,
+      20.9
+     ],
+     [
+      100.15,
+      20.3
+     ]
+    ]
+   },
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Union of Myanmar"
+   ],
+   "from": 2024,
+   "to": 2024,
+   "new": "Resistance-held Myanmar",
+   "why": "Land taken from the junta by ethnic armies and resistance forces in the civil war after the 2021 coup",
+   "inside": {
+    "poly": [
+     [
+      92.1,
+      21.2
+     ],
+     [
+      92.6,
+      21.95
+     ],
+     [
+      93.2,
+      21.95
+     ],
+     [
+      93.7,
+      21.2
+     ],
+     [
+      94.3,
+      20.2
+     ],
+     [
+      94.4,
+      19.4
+     ],
+     [
+      94.1,
+      18.9
+     ],
+     [
+      93.85,
+      19.6
+     ],
+     [
+      93.6,
+      19.9
+     ],
+     [
+      93.05,
+      20.35
+     ],
+     [
+      92.8,
+      20.45
+     ],
+     [
+      92.4,
+      20.3
+     ],
+     [
+      92.0,
+      20.7
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Union of Myanmar"
+   ],
+   "from": 2024,
+   "to": 2024,
+   "new": "Resistance-held Myanmar",
+   "why": "Land taken from the junta by ethnic armies and resistance forces in the civil war after the 2021 coup",
+   "inside": {
+    "poly": [
+     [
+      93.0,
+      21.0
+     ],
+     [
+      93.1,
+      22.5
+     ],
+     [
+      93.4,
+      23.8
+     ],
+     [
+      93.9,
+      24.0
+     ],
+     [
+      94.2,
+      23.0
+     ],
+     [
+      94.1,
+      21.5
+     ],
+     [
+      93.8,
+      21.0
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Union of Myanmar"
+   ],
+   "from": 2024,
+   "to": 2024,
+   "new": "Resistance-held Myanmar",
+   "why": "Land taken from the junta by ethnic armies and resistance forces in the civil war after the 2021 coup",
+   "inside": {
+    "poly": [
+     [
+      96.4,
+      22.3
+     ],
+     [
+      96.35,
+      23.1
+     ],
+     [
+      97.0,
+      23.7
+     ],
+     [
+      97.9,
+      24.05
+     ],
+     [
+      98.75,
+      24.05
+     ],
+     [
+      98.95,
+      23.4
+     ],
+     [
+      98.7,
+      22.8
+     ],
+     [
+      98.0,
+      22.5
+     ],
+     [
+      97.3,
+      22.3
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Union of Myanmar"
+   ],
+   "from": 2024,
+   "to": 2024,
+   "new": "Resistance-held Myanmar",
+   "why": "Land taken from the junta by ethnic armies and resistance forces in the civil war after the 2021 coup",
+   "inside": {
+    "poly": [
+     [
+      97.35,
+      24.15
+     ],
+     [
+      97.5,
+      24.6
+     ],
+     [
+      97.55,
+      25.6
+     ],
+     [
+      97.8,
+      26.3
+     ],
+     [
+      98.2,
+      27.0
+     ],
+     [
+      98.7,
+      27.7
+     ],
+     [
+      99.0,
+      26.0
+     ],
+     [
+      98.9,
+      24.6
+     ],
+     [
+      98.1,
+      24.1
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Union of Myanmar"
+   ],
+   "from": 2024,
+   "to": 2024,
+   "new": "Resistance-held Myanmar",
+   "why": "Land taken from the junta by ethnic armies and resistance forces in the civil war after the 2021 coup",
+   "inside": {
+    "poly": [
+     [
+      96.85,
+      18.85
+     ],
+     [
+      96.95,
+      19.9
+     ],
+     [
+      97.6,
+      19.95
+     ],
+     [
+      97.85,
+      19.3
+     ],
+     [
+      97.6,
+      18.8
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Non-government-held Syria"
+   ],
+   "from": 2012,
+   "to": 2024,
+   "new": "Syria",
+   "why": "Redrawn below as the separate zones of the civil war",
+   "inside": {
+    "bbox": [
+     -180,
+     -90,
+     180,
+     90
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2016,
+   "to": 2024,
+   "new": "Turkish-occupied Syria",
+   "why": "Operation Euphrates Shield, 2016",
+   "inside": {
+    "poly": [
+     [
+      36.95,
+      36.62
+     ],
+     [
+      37.0,
+      37.2
+     ],
+     [
+      38.05,
+      37.2
+     ],
+     [
+      38.05,
+      36.6
+     ],
+     [
+      37.7,
+      36.42
+     ],
+     [
+      37.45,
+      36.33
+     ],
+     [
+      37.1,
+      36.48
+     ]
+    ]
+   },
+   "overlord": "Republic of Turkey"
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2018,
+   "to": 2024,
+   "new": "Turkish-occupied Syria",
+   "why": "Afrin, taken by Turkey in March 2018",
+   "inside": {
+    "poly": [
+     [
+      36.4,
+      36.95
+     ],
+     [
+      36.95,
+      36.95
+     ],
+     [
+      37.05,
+      36.45
+     ],
+     [
+      36.75,
+      36.28
+     ],
+     [
+      36.5,
+      36.33
+     ]
+    ]
+   },
+   "overlord": "Republic of Turkey"
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2019,
+   "to": 2024,
+   "new": "Turkish-occupied Syria",
+   "why": "Tal Abyad to Ras al-Ain, taken by Turkey in October 2019",
+   "inside": {
+    "poly": [
+     [
+      38.95,
+      37.2
+     ],
+     [
+      40.1,
+      37.2
+     ],
+     [
+      40.1,
+      36.55
+     ],
+     [
+      38.95,
+      36.55
+     ]
+    ]
+   },
+   "overlord": "Republic of Turkey"
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2012,
+   "to": 2017,
+   "new": "Rojava",
+   "why": "Afrin canton, under the Kurdish YPG from 2012",
+   "inside": {
+    "poly": [
+     [
+      36.4,
+      36.95
+     ],
+     [
+      36.95,
+      36.95
+     ],
+     [
+      37.05,
+      36.45
+     ],
+     [
+      36.75,
+      36.28
+     ],
+     [
+      36.5,
+      36.33
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2012,
+   "to": 2014,
+   "new": "Rojava",
+   "why": "Kobani canton",
+   "inside": {
+    "poly": [
+     [
+      38.0,
+      37.2
+     ],
+     [
+      38.75,
+      37.2
+     ],
+     [
+      38.75,
+      36.65
+     ],
+     [
+      38.0,
+      36.7
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2012,
+   "to": 2014,
+   "new": "Rojava",
+   "why": "Jazira canton",
+   "inside": {
+    "poly": [
+     [
+      39.9,
+      37.3
+     ],
+     [
+      42.5,
+      37.4
+     ],
+     [
+      42.5,
+      36.6
+     ],
+     [
+      41.5,
+      36.5
+     ],
+     [
+      40.6,
+      36.6
+     ],
+     [
+      39.9,
+      36.8
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2015,
+   "to": 2015,
+   "new": "Rojava",
+   "why": "Kobani and Jazira joined at Tal Abyad in June 2015",
+   "inside": {
+    "poly": [
+     [
+      38.0,
+      37.3
+     ],
+     [
+      42.5,
+      37.4
+     ],
+     [
+      42.5,
+      36.4
+     ],
+     [
+      41.5,
+      36.2
+     ],
+     [
+      40.6,
+      36.35
+     ],
+     [
+      39.6,
+      36.5
+     ],
+     [
+      38.95,
+      36.55
+     ],
+     [
+      38.5,
+      36.6
+     ],
+     [
+      38.0,
+      36.65
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2016,
+   "to": 2016,
+   "new": "Rojava",
+   "why": "Manbij and Shaddadi taken from the Islamic State in 2016",
+   "inside": {
+    "poly": [
+     [
+      37.75,
+      36.65
+     ],
+     [
+      38.05,
+      36.65
+     ],
+     [
+      38.05,
+      37.3
+     ],
+     [
+      42.5,
+      37.4
+     ],
+     [
+      42.5,
+      36.3
+     ],
+     [
+      41.5,
+      36.0
+     ],
+     [
+      40.7,
+      35.95
+     ],
+     [
+      40.0,
+      36.35
+     ],
+     [
+      39.2,
+      36.5
+     ],
+     [
+      38.6,
+      36.55
+     ],
+     [
+      38.3,
+      36.4
+     ],
+     [
+      38.1,
+      36.35
+     ],
+     [
+      37.75,
+      36.35
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2017,
+   "to": 2024,
+   "new": "Rojava",
+   "why": "Raqqa (October 2017) and the land east of the Euphrates to Baghuz (March 2019)",
+   "inside": {
+    "poly": [
+     [
+      37.75,
+      36.65
+     ],
+     [
+      38.05,
+      36.65
+     ],
+     [
+      38.05,
+      37.3
+     ],
+     [
+      42.5,
+      37.4
+     ],
+     [
+      42.5,
+      36.3
+     ],
+     [
+      41.3,
+      35.5
+     ],
+     [
+      41.0,
+      34.6
+     ],
+     [
+      40.92,
+      34.42
+     ],
+     [
+      40.6,
+      34.8
+     ],
+     [
+      40.3,
+      35.1
+     ],
+     [
+      40.1,
+      35.35
+     ],
+     [
+      39.5,
+      35.85
+     ],
+     [
+      39.0,
+      35.92
+     ],
+     [
+      38.55,
+      35.82
+     ],
+     [
+      38.3,
+      35.95
+     ],
+     [
+      38.1,
+      36.2
+     ],
+     [
+      37.75,
+      36.35
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "United States of America",
+    "Iraqi Republic",
+    "Republic of Iraq"
+   ],
+   "from": 2003,
+   "to": 2024,
+   "new": "Kurdistan Region",
+   "why": "The self-governing Kurdish region, recognized in Iraq's constitution of 2005",
+   "inside": {
+    "poly": [
+     [
+      42.4,
+      37.4
+     ],
+     [
+      44.8,
+      37.35
+     ],
+     [
+      45.8,
+      36.5
+     ],
+     [
+      46.2,
+      35.8
+     ],
+     [
+      45.8,
+      35.0
+     ],
+     [
+      45.3,
+      34.85
+     ],
+     [
+      44.9,
+      35.4
+     ],
+     [
+      44.35,
+      35.85
+     ],
+     [
+      43.7,
+      36.3
+     ],
+     [
+      43.2,
+      36.7
+     ],
+     [
+      42.4,
+      37.0
+     ]
+    ]
+   },
+   "overlord": "Republic of Iraq"
+  },
+  {
+   "occupiers": [
+    "United States of America",
+    "Iraqi Republic"
+   ],
+   "from": 2003,
+   "to": 2004,
+   "new": "Coalition-occupied Iraq",
+   "why": "Occupied by the American-led coalition from April 2003 until the handover of June 2004",
+   "inside": {
+    "name": "Iraqi Republic",
+    "year": 1990
+   },
+   "overlord": "United States of America"
+  },
+  {
+   "occupiers": [
+    "United States of America"
+   ],
+   "from": 2005,
+   "to": 2024,
+   "new": "Republic of Iraq",
+   "why": "Iraq was sovereign from 2004; American troops left in December 2011",
+   "inside": {
+    "name": "Iraqi Republic",
+    "year": 1990
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2014,
+   "to": 2014,
+   "new": "Islamic State",
+   "why": "The Islamic State proclaimed its caliphate in June 2014",
+   "inside": {
+    "poly": [
+     [
+      37.3,
+      36.6
+     ],
+     [
+      38.0,
+      36.85
+     ],
+     [
+      38.0,
+      37.3
+     ],
+     [
+      38.95,
+      37.3
+     ],
+     [
+      39.6,
+      36.9
+     ],
+     [
+      40.6,
+      36.4
+     ],
+     [
+      41.5,
+      36.2
+     ],
+     [
+      42.4,
+      35.9
+     ],
+     [
+      41.0,
+      34.3
+     ],
+     [
+      40.0,
+      34.0
+     ],
+     [
+      39.2,
+      34.6
+     ],
+     [
+      38.6,
+      35.0
+     ],
+     [
+      37.6,
+      35.3
+     ],
+     [
+      37.6,
+      35.8
+     ],
+     [
+      37.8,
+      36.1
+     ],
+     [
+      37.3,
+      36.3
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2015,
+   "to": 2015,
+   "new": "Islamic State",
+   "why": "The Islamic State proclaimed its caliphate in June 2014",
+   "inside": {
+    "poly": [
+     [
+      37.3,
+      36.6
+     ],
+     [
+      38.0,
+      36.85
+     ],
+     [
+      38.0,
+      37.3
+     ],
+     [
+      38.95,
+      37.3
+     ],
+     [
+      39.6,
+      36.9
+     ],
+     [
+      40.6,
+      36.4
+     ],
+     [
+      41.5,
+      36.2
+     ],
+     [
+      42.4,
+      35.9
+     ],
+     [
+      41.0,
+      34.3
+     ],
+     [
+      40.0,
+      34.0
+     ],
+     [
+      38.9,
+      34.2
+     ],
+     [
+      38.1,
+      34.35
+     ],
+     [
+      37.6,
+      34.9
+     ],
+     [
+      37.6,
+      35.8
+     ],
+     [
+      37.8,
+      36.1
+     ],
+     [
+      37.3,
+      36.3
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2016,
+   "to": 2016,
+   "new": "Islamic State",
+   "why": "The Islamic State proclaimed its caliphate in June 2014",
+   "inside": {
+    "poly": [
+     [
+      37.3,
+      36.6
+     ],
+     [
+      38.0,
+      36.85
+     ],
+     [
+      38.0,
+      37.3
+     ],
+     [
+      38.95,
+      37.3
+     ],
+     [
+      39.6,
+      36.9
+     ],
+     [
+      40.6,
+      36.4
+     ],
+     [
+      41.5,
+      36.2
+     ],
+     [
+      42.4,
+      35.9
+     ],
+     [
+      41.0,
+      34.3
+     ],
+     [
+      40.0,
+      34.0
+     ],
+     [
+      39.2,
+      34.6
+     ],
+     [
+      38.6,
+      35.0
+     ],
+     [
+      37.6,
+      35.3
+     ],
+     [
+      37.6,
+      35.8
+     ],
+     [
+      37.8,
+      36.1
+     ],
+     [
+      37.3,
+      36.3
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2017,
+   "to": 2017,
+   "new": "Islamic State",
+   "why": "The Islamic State proclaimed its caliphate in June 2014",
+   "inside": {
+    "poly": [
+     [
+      38.5,
+      36.0
+     ],
+     [
+      39.5,
+      36.0
+     ],
+     [
+      40.5,
+      35.6
+     ],
+     [
+      41.3,
+      35.0
+     ],
+     [
+      41.0,
+      34.3
+     ],
+     [
+      40.0,
+      34.4
+     ],
+     [
+      39.0,
+      34.9
+     ],
+     [
+      38.5,
+      35.4
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Iraq"
+   ],
+   "from": 2014,
+   "to": 2015,
+   "new": "Islamic State",
+   "why": "Mosul fell to the Islamic State in June 2014 and was retaken in July 2017",
+   "inside": {
+    "poly": [
+     [
+      41.0,
+      34.3
+     ],
+     [
+      41.2,
+      36.0
+     ],
+     [
+      41.7,
+      36.4
+     ],
+     [
+      42.3,
+      36.6
+     ],
+     [
+      43.0,
+      36.55
+     ],
+     [
+      43.4,
+      36.4
+     ],
+     [
+      43.6,
+      36.0
+     ],
+     [
+      43.75,
+      35.5
+     ],
+     [
+      44.05,
+      35.2
+     ],
+     [
+      43.9,
+      34.6
+     ],
+     [
+      43.6,
+      34.35
+     ],
+     [
+      44.05,
+      33.5
+     ],
+     [
+      43.85,
+      33.12
+     ],
+     [
+      43.0,
+      33.3
+     ],
+     [
+      42.5,
+      33.9
+     ],
+     [
+      41.6,
+      34.2
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Iraq"
+   ],
+   "from": 2016,
+   "to": 2016,
+   "new": "Islamic State",
+   "why": "Mosul fell to the Islamic State in June 2014 and was retaken in July 2017",
+   "inside": {
+    "poly": [
+     [
+      41.0,
+      34.3
+     ],
+     [
+      41.2,
+      36.0
+     ],
+     [
+      41.6,
+      36.2
+     ],
+     [
+      42.3,
+      36.55
+     ],
+     [
+      43.3,
+      36.4
+     ],
+     [
+      43.5,
+      35.9
+     ],
+     [
+      43.8,
+      35.45
+     ],
+     [
+      43.6,
+      35.1
+     ],
+     [
+      43.2,
+      35.0
+     ],
+     [
+      42.2,
+      34.4
+     ],
+     [
+      41.6,
+      34.2
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Iraq"
+   ],
+   "from": 2017,
+   "to": 2017,
+   "new": "Islamic State",
+   "why": "Mosul fell to the Islamic State in June 2014 and was retaken in July 2017",
+   "inside": {
+    "poly": [
+     [
+      41.0,
+      34.3
+     ],
+     [
+      41.4,
+      34.65
+     ],
+     [
+      42.0,
+      34.45
+     ],
+     [
+      41.6,
+      34.1
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2012,
+   "to": 2012,
+   "new": "Rebel-held Syria",
+   "why": "Held by the rebels, from 2017 chiefly Hay'at Tahrir al-Sham in Idlib",
+   "inside": {
+    "poly": [
+     [
+      36.1,
+      36.3
+     ],
+     [
+      36.6,
+      36.55
+     ],
+     [
+      37.2,
+      36.75
+     ],
+     [
+      37.25,
+      36.15
+     ],
+     [
+      37.0,
+      35.75
+     ],
+     [
+      36.8,
+      35.3
+     ],
+     [
+      36.4,
+      35.3
+     ],
+     [
+      36.2,
+      35.5
+     ],
+     [
+      36.0,
+      35.8
+     ],
+     [
+      35.95,
+      36.0
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2013,
+   "to": 2013,
+   "new": "Rebel-held Syria",
+   "why": "Held by the rebels, from 2017 chiefly Hay'at Tahrir al-Sham in Idlib",
+   "inside": {
+    "poly": [
+     [
+      36.1,
+      36.3
+     ],
+     [
+      36.6,
+      36.55
+     ],
+     [
+      37.2,
+      36.75
+     ],
+     [
+      38.3,
+      36.7
+     ],
+     [
+      39.5,
+      36.4
+     ],
+     [
+      40.2,
+      35.9
+     ],
+     [
+      41.0,
+      34.7
+     ],
+     [
+      40.6,
+      34.5
+     ],
+     [
+      39.4,
+      35.4
+     ],
+     [
+      38.3,
+      35.8
+     ],
+     [
+      37.4,
+      35.9
+     ],
+     [
+      37.0,
+      35.6
+     ],
+     [
+      36.8,
+      35.3
+     ],
+     [
+      36.4,
+      35.3
+     ],
+     [
+      36.2,
+      35.5
+     ],
+     [
+      36.0,
+      35.8
+     ],
+     [
+      35.95,
+      36.0
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2014,
+   "to": 2016,
+   "new": "Rebel-held Syria",
+   "why": "Held by the rebels, from 2017 chiefly Hay'at Tahrir al-Sham in Idlib",
+   "inside": {
+    "poly": [
+     [
+      36.1,
+      36.3
+     ],
+     [
+      36.6,
+      36.55
+     ],
+     [
+      37.2,
+      36.75
+     ],
+     [
+      37.25,
+      36.15
+     ],
+     [
+      37.0,
+      35.75
+     ],
+     [
+      36.8,
+      35.3
+     ],
+     [
+      36.4,
+      35.3
+     ],
+     [
+      36.2,
+      35.5
+     ],
+     [
+      36.0,
+      35.8
+     ],
+     [
+      35.95,
+      36.0
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2017,
+   "to": 2018,
+   "new": "Rebel-held Syria",
+   "why": "Held by the rebels, from 2017 chiefly Hay'at Tahrir al-Sham in Idlib",
+   "inside": {
+    "poly": [
+     [
+      36.1,
+      36.3
+     ],
+     [
+      36.6,
+      36.45
+     ],
+     [
+      37.05,
+      36.35
+     ],
+     [
+      37.05,
+      36.1
+     ],
+     [
+      37.0,
+      35.75
+     ],
+     [
+      36.8,
+      35.3
+     ],
+     [
+      36.4,
+      35.3
+     ],
+     [
+      36.2,
+      35.5
+     ],
+     [
+      36.0,
+      35.8
+     ],
+     [
+      35.95,
+      36.0
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2019,
+   "to": 2019,
+   "new": "Rebel-held Syria",
+   "why": "Held by the rebels, from 2017 chiefly Hay'at Tahrir al-Sham in Idlib",
+   "inside": {
+    "poly": [
+     [
+      36.1,
+      36.3
+     ],
+     [
+      36.6,
+      36.45
+     ],
+     [
+      37.05,
+      36.35
+     ],
+     [
+      37.05,
+      36.1
+     ],
+     [
+      37.0,
+      35.75
+     ],
+     [
+      36.8,
+      35.55
+     ],
+     [
+      36.45,
+      35.55
+     ],
+     [
+      36.2,
+      35.6
+     ],
+     [
+      36.0,
+      35.8
+     ],
+     [
+      35.95,
+      36.0
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2020,
+   "to": 2024,
+   "new": "Rebel-held Syria",
+   "why": "Held by the rebels, from 2017 chiefly Hay'at Tahrir al-Sham in Idlib",
+   "inside": {
+    "poly": [
+     [
+      36.15,
+      35.98
+     ],
+     [
+      36.45,
+      36.25
+     ],
+     [
+      36.67,
+      36.25
+     ],
+     [
+      36.9,
+      36.25
+     ],
+     [
+      36.95,
+      35.95
+     ],
+     [
+      36.75,
+      35.75
+     ],
+     [
+      36.45,
+      35.6
+     ],
+     [
+      36.3,
+      35.62
+     ],
+     [
+      36.12,
+      35.8
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2012,
+   "to": 2018,
+   "new": "Rebel-held Syria",
+   "why": "Daraa and Quneitra, held by rebels until July 2018",
+   "inside": {
+    "poly": [
+     [
+      35.85,
+      33.3
+     ],
+     [
+      36.25,
+      33.25
+     ],
+     [
+      36.55,
+      32.8
+     ],
+     [
+      36.5,
+      32.45
+     ],
+     [
+      35.95,
+      32.65
+     ]
+    ]
+   },
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2012,
+   "to": 2018,
+   "new": "Rebel-held Syria",
+   "why": "Eastern Ghouta, besieged until April 2018",
+   "inside": {
+    "poly": [
+     [
+      36.33,
+      33.5
+     ],
+     [
+      36.36,
+      33.62
+     ],
+     [
+      36.52,
+      33.64
+     ],
+     [
+      36.56,
+      33.52
+     ],
+     [
+      36.45,
+      33.45
+     ]
+    ]
+   },
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Syria"
+   ],
+   "from": 2012,
+   "to": 2018,
+   "new": "Rebel-held Syria",
+   "why": "The Rastan pocket north of Homs, until May 2018",
+   "inside": {
+    "poly": [
+     [
+      36.62,
+      34.84
+     ],
+     [
+      36.62,
+      35.02
+     ],
+     [
+      36.88,
+      35.02
+     ],
+     [
+      36.88,
+      34.84
+     ]
+    ]
+   },
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Iraqi Republic"
+   ],
+   "from": 1991,
+   "to": 2002,
+   "new": "Iraqi Kurdistan",
+   "why": "Self-governing under the Kurdish parties after Saddam's forces withdrew in October 1991",
+   "inside": {
+    "name": "Iraqi Republic",
+    "year": 1990,
+    "poly": [
+     [
+      42.4,
+      37.4
+     ],
+     [
+      44.8,
+      37.35
+     ],
+     [
+      45.8,
+      36.5
+     ],
+     [
+      46.2,
+      35.8
+     ],
+     [
+      45.8,
+      35.0
+     ],
+     [
+      45.3,
+      34.85
+     ],
+     [
+      44.9,
+      35.4
+     ],
+     [
+      44.35,
+      35.85
+     ],
+     [
+      43.7,
+      36.3
+     ],
+     [
+      43.2,
+      36.7
+     ],
+     [
+      42.4,
+      37.0
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Transnistria"
+   ],
+   "from": 1992,
+   "to": 2024,
+   "new": "Republic of Moldova",
+   "why": "Gagauzia is an autonomous region of Moldova, not occupied land",
+   "inside": {
+    "bbox": [
+     28.0,
+     45.4,
+     28.9,
+     46.55
+    ]
+   },
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Transnistria"
+   ],
+   "from": 1992,
+   "to": 2024,
+   "new": "South Ossetia",
+   "why": "The South Ossetian piece of the source's occupied territories",
+   "inside": {
+    "bbox": [
+     43.4,
+     42.0,
+     44.7,
+     42.8
+    ]
+   },
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Georgia"
+   ],
+   "from": 1993,
+   "to": 2007,
+   "new": "Abkhazia",
+   "why": "Broke away from Georgia in the war of 1992 to 1993",
+   "inside": {
+    "poly": [
+     [
+      39.95,
+      43.45
+     ],
+     [
+      40.6,
+      43.62
+     ],
+     [
+      41.5,
+      43.48
+     ],
+     [
+      42.05,
+      43.2
+     ],
+     [
+      42.2,
+      42.95
+     ],
+     [
+      41.95,
+      42.75
+     ],
+     [
+      41.65,
+      42.45
+     ],
+     [
+      41.5,
+      42.3
+     ],
+     [
+      39.9,
+      42.5
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Georgia"
+   ],
+   "from": 2008,
+   "to": 2024,
+   "new": "Abkhazia",
+   "why": "Recognized and garrisoned by Russia since the war of August 2008",
+   "inside": {
+    "poly": [
+     [
+      39.95,
+      43.45
+     ],
+     [
+      40.6,
+      43.62
+     ],
+     [
+      41.5,
+      43.48
+     ],
+     [
+      42.05,
+      43.2
+     ],
+     [
+      42.2,
+      42.95
+     ],
+     [
+      41.95,
+      42.75
+     ],
+     [
+      41.65,
+      42.45
+     ],
+     [
+      41.5,
+      42.3
+     ],
+     [
+      39.9,
+      42.5
+     ]
+    ]
+   },
+   "overlord": "Russian Federation"
+  },
+  {
+   "occupiers": [
+    "Georgia",
+    "South Ossetia"
+   ],
+   "from": 1992,
+   "to": 2007,
+   "new": "South Ossetia",
+   "why": "Broke away from Georgia in 1991 to 1992",
+   "inside": {
+    "poly": [
+     [
+      43.45,
+      42.55
+     ],
+     [
+      43.8,
+      42.72
+     ],
+     [
+      44.3,
+      42.75
+     ],
+     [
+      44.6,
+      42.55
+     ],
+     [
+      44.45,
+      42.25
+     ],
+     [
+      44.1,
+      42.08
+     ],
+     [
+      43.7,
+      42.15
+     ],
+     [
+      43.45,
+      42.3
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Georgia",
+    "South Ossetia"
+   ],
+   "from": 2008,
+   "to": 2024,
+   "new": "South Ossetia",
+   "why": "Recognized and garrisoned by Russia since the war of August 2008",
+   "inside": {
+    "poly": [
+     [
+      43.45,
+      42.55
+     ],
+     [
+      43.8,
+      42.72
+     ],
+     [
+      44.3,
+      42.75
+     ],
+     [
+      44.6,
+      42.55
+     ],
+     [
+      44.45,
+      42.25
+     ],
+     [
+      44.1,
+      42.08
+     ],
+     [
+      43.7,
+      42.15
+     ],
+     [
+      43.45,
+      42.3
+     ]
+    ]
+   },
+   "overlord": "Russian Federation"
+  },
+  {
+   "occupiers": [
+    "Russian Federation"
+   ],
+   "from": 1996,
+   "to": 1999,
+   "new": "Chechen Republic of Ichkeria",
+   "why": "Independent in all but name after the Khasavyurt accord of 1996, until the Russian invasion of 1999",
+   "inside": {
+    "name": "Chechen Republic of Ichkeria",
+    "year": 1993
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Mali"
+   ],
+   "from": 2012,
+   "to": 2012,
+   "new": "Azawad",
+   "why": "The north fell to Tuareg rebels and Islamists in 2012 until the French intervention of January 2013",
+   "inside": {
+    "name": "Republic of Mali",
+    "year": 2010,
+    "poly": [
+     [
+      -6.0,
+      16.0
+     ],
+     [
+      -4.5,
+      15.3
+     ],
+     [
+      -2.5,
+      15.2
+     ],
+     [
+      -1.0,
+      15.0
+     ],
+     [
+      0.5,
+      14.9
+     ],
+     [
+      1.5,
+      15.3
+     ],
+     [
+      4.5,
+      16.0
+     ],
+     [
+      4.5,
+      25.5
+     ],
+     [
+      -6.0,
+      25.5
+     ]
+    ]
+   }
+  },
+  {
+   "occupiers": [
+    "Republic of Cyprus"
+   ],
+   "from": 1974,
+   "to": 1975,
+   "new": "Turkish-occupied Cyprus",
+   "why": "Invaded by Turkey in July and August 1974",
+   "inside": {
+    "poly": [
+     [
+      32.6,
+      35.5
+     ],
+     [
+      32.65,
+      35.17
+     ],
+     [
+      32.85,
+      35.12
+     ],
+     [
+      33.05,
+      35.1
+     ],
+     [
+      33.25,
+      35.13
+     ],
+     [
+      33.36,
+      35.165
+     ],
+     [
+      33.5,
+      35.17
+     ],
+     [
+      33.7,
+      35.1
+     ],
+     [
+      33.9,
+      35.06
+     ],
+     [
+      34.0,
+      35.03
+     ],
+     [
+      34.7,
+      35.75
+     ],
+     [
+      33.0,
+      35.6
+     ]
+    ]
+   },
+   "overlord": "Republic of Turkey",
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Republic of Cyprus"
+   ],
+   "from": 1976,
+   "to": 1983,
+   "new": "Turkish Federated State of Cyprus",
+   "why": "The Green Line of 1974",
+   "inside": {
+    "poly": [
+     [
+      32.6,
+      35.5
+     ],
+     [
+      32.65,
+      35.17
+     ],
+     [
+      32.85,
+      35.12
+     ],
+     [
+      33.05,
+      35.1
+     ],
+     [
+      33.25,
+      35.13
+     ],
+     [
+      33.36,
+      35.165
+     ],
+     [
+      33.5,
+      35.17
+     ],
+     [
+      33.7,
+      35.1
+     ],
+     [
+      33.9,
+      35.06
+     ],
+     [
+      34.0,
+      35.03
+     ],
+     [
+      34.7,
+      35.75
+     ],
+     [
+      33.0,
+      35.6
+     ]
+    ]
+   },
+   "min_km2": 20
+  },
+  {
+   "occupiers": [
+    "Republic of Cyprus"
+   ],
+   "from": 1984,
+   "to": 2024,
+   "new": "Turkish Republic of Northern Cyprus",
+   "why": "The Green Line of 1974; Famagusta lies north of it",
+   "inside": {
+    "poly": [
+     [
+      32.6,
+      35.5
+     ],
+     [
+      32.65,
+      35.17
+     ],
+     [
+      32.85,
+      35.12
+     ],
+     [
+      33.05,
+      35.1
+     ],
+     [
+      33.25,
+      35.13
+     ],
+     [
+      33.36,
+      35.165
+     ],
+     [
+      33.5,
+      35.17
+     ],
+     [
+      33.7,
+      35.1
+     ],
+     [
+      33.9,
+      35.06
+     ],
+     [
+      34.0,
+      35.03
+     ],
+     [
+      34.7,
+      35.75
+     ],
+     [
+      33.0,
+      35.6
+     ]
+    ]
+   },
+   "min_km2": 20
   }
  ],
  "contest": [],
@@ -5274,6 +8367,42 @@
     "Israeli-occupied territory"
    ],
    "why": "Keep the coastal fill from drawing Israel over Gaza"
+  },
+  {
+   "name": "Portugal",
+   "from": 1974,
+   "to": 1980,
+   "minus": [
+    "Republic of Guinea-Bissau"
+   ],
+   "why": "Guinea-Bissau was independent from September 1974"
+  },
+  {
+   "name": "Dutch Caribbean",
+   "from": 1975,
+   "to": 2024,
+   "minus": [
+    "Republic of Suriname"
+   ],
+   "why": "Suriname was independent from 1975"
+  },
+  {
+   "name": "Ukraine",
+   "from": 2014,
+   "to": 2024,
+   "minus": [
+    "Russian-occupied Ukraine"
+   ],
+   "why": "Keep occupied land out of the Ukrainian-held shape"
+  },
+  {
+   "name": "State of Libya",
+   "from": 2014,
+   "to": 2024,
+   "minus": [
+    "Haftar's Libya"
+   ],
+   "why": "Keep the two Libyan zones apart"
   }
  ]
 }
