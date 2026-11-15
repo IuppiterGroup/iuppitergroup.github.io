@@ -32,7 +32,7 @@ const OVERRIDES = [
   [/achaemenid|parthia|sasan|sassan|persia|safavid|qajar|afsharid|\bzand\b|pahlavi|\biran\b/i, '#b8662a'],
   [/mongol|golden horde|ilkhan|chagatai|\byuan\b|white horde|blue horde/i, '#5d6c84'],
   [/caliphate|umayyad|abbasid|fatimid|rashidun|ayyubid|mamluk/i, '#4a7843'], [/ottoman|turkey/i, '#3b6c66'],
-  [/brit|united kingdom|england|anglo-egypt/i, '#d77a8c'], [/franc|french|frank|carolingian|merovingian/i, '#5265a2'],
+  [/brit|united kingdom|england|english|anglo-egypt/i, '#d77a8c'], [/franc|french|frank|carolingian|merovingian/i, '#5265a2'],
   [/egypt|ptolem/i, '#8b993c'], [/spain|spanish|castil|new spain|viceroyalty of (peru|new granada|the r)/i, '#d08b52'],
   [/portug/i, '#5e9b88'], [/russia|muscov|moscow|novgorod|soviet/i, '#6e8e4d'], [/german|prussia/i, '#777d8e'],
   [/austria|habsburg/i, '#c9a8b8'], [/netherland|dutch|holland|batavia/i, '#de8838'], [/united states/i, '#8a6aa8'],
@@ -199,8 +199,13 @@ function buildScene(feats, people, y) {
 
 // Which composites are seen up close (members shown on their own) at the current zoom.
 function revealSet(S) {
-  const lim = .6 * Math.min(W, H), out = new Set();
-  for (const c of S.comps.values()) if (c.bw * cam.k > lim) out.add(c.n);
+  // a composite shows its members when its home is large on screen, or, zoomed in, when its home lies off screen
+  // (New York in 1667 then reads as the English colonies, not as a nameless part of England)
+  const lim = .6 * Math.min(W, H), out = new Set(), local = zoomLvl() > 1;
+  for (const c of S.comps.values()) {
+    if (c.bw * cam.k > lim) { out.add(c.n); continue; }
+    if (local) { const x = screenX(c.lx), y = screenY(c.ly); if (x < 0 || x > W || y < 0 || y > H) out.add(c.n); }
+  }
   return out;
 }
 // How every realm is painted for a given set of revealed composites.
@@ -705,9 +710,11 @@ function updatePanel() {
     if (/minor states|tribes|peoples/i.test(ent.n)) continue;
     let w = ent.a;
     if (local) {
-      const b = (top || f).box, ix = Math.min(b[2], vb[2]) - Math.max(b[0], vb[0]), iy = Math.min(b[3], vb[3]) - Math.max(b[1], vb[1]);
+      // measure each piece by its own share of the view, and add up the pieces of a composite
+      const b = f.box, ix = Math.min(b[2], vb[2]) - Math.max(b[0], vb[0]), iy = Math.min(b[3], vb[3]) - Math.max(b[1], vb[1]);
       if (ix <= 0 || iy <= 0) continue;
-      w = ent.a * (ix * iy) / Math.max(1e-6, (b[2] - b[0]) * (b[3] - b[1]));
+      w = f.a * (ix * iy) / Math.max(1e-6, (b[2] - b[0]) * (b[3] - b[1]));
+      if (seen.has(ent.n)) { seen.get(ent.n).w += w; continue; }
     }
     if (!seen.has(ent.n) || seen.get(ent.n).w < w) seen.set(ent.n, { ...ent, w });
   }
@@ -732,6 +739,21 @@ function rulerAt(n, y = Math.round(year) || 1) {
   const now = c.rulers.filter(r => r[1] <= y && y <= r[2]).sort((a, b) => a[1] - b[1]);
   if (!now.length) return '';
   const fmt = r => `${r[0]} (${r[2] >= END ? `from ${fmtSpan(r[1])}` : r[1] === r[2] ? fmtSpan(r[1]) : `${fmtSpan(r[1])} to ${fmtSpan(r[2])}`})`;
+  if (y >= END) {
+    // the last year: a reign that runs to the end may have ended within it, so keep the latest holder of each office
+    const office = r => {
+      const m = r[0].match(/\(([^()]*)\)[^()]*$/), role = (m ? m[1].toLowerCase() : '').split(/\bthen\b/).pop().replace(/^[\s,]+|[\s,]+$/g, '');
+      return /prime minister|chief adviser|premier|chancellor/.test(role) ? 'pm' : /president/.test(role) ? 'pres' : /^rama |^[ivxl]+$/.test(role) ? '' : role;
+    };
+    const at = new Map(c.rulers.map((r, i) => [r, i])), by = new Map();
+    for (const r of now) { const k = office(r), o = by.get(k); if (!o || r[1] > o[1] || (r[1] === o[1] && at.get(r) > at.get(o))) by.set(k, r); }
+    const keep = [...by.values()].sort((a, b) => a[1] - b[1]);
+    if (keep.length === 1 && keep[0][1] === y) {
+      const before = now.filter(r => r !== keep[0] && r[1] < y && office(r) === office(keep[0])).sort((a, b) => b[1] - a[1])[0];
+      if (before) return `${before[0]} (${fmtSpan(before[1])} to ${fmtSpan(y)}), then ${fmt(keep[0])}`;
+    }
+    return keep.slice(0, 2).map(fmt).join(' and ');
+  }
   // a year in which one reign ended and the next began reads as a succession, not a joint rule
   const last = now[now.length - 1];
   const succ = now.length > 1 && y < END && last[1] === y && now.slice(0, -1).every(r => r[2] === y && r[1] < y);

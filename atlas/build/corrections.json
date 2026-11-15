@@ -4656,12 +4656,85 @@
    "why": "The Dutch West India Company's colony in northeast Brazil",
    "inside": {
     "bbox": [
-     -45,
-     -13,
+     -50,
+     -13.5,
      -34,
      -1.5
     ]
    }
+  },
+  {
+   "occupiers": [
+    "New Netherland"
+   ],
+   "from": 1622,
+   "to": 1664,
+   "new": "Dutch Guiana",
+   "why": "Essequibo and Berbice on the Guiana coast were separate West India Company colonies, not New Netherland",
+   "inside": {
+    "bbox": [
+     -62,
+     1,
+     -50,
+     9.5
+    ]
+   },
+   "min_km2": 50
+  },
+  {
+   "occupiers": [
+    "New Netherland",
+    "Dutch Guiana"
+   ],
+   "from": 1622,
+   "to": 1799,
+   "new": "Dutch West Indies",
+   "why": "Curacao, Aruba, Bonaire, Sint Eustatius, Saba, Sint Maarten, and Tobago are Caribbean islands, not Guiana or New Netherland",
+   "inside": {
+    "bbox": [
+     -71,
+     10,
+     -59,
+     19
+    ]
+   },
+   "min_km2": 5
+  },
+  {
+   "occupiers": [
+    "Dutch Guiana"
+   ],
+   "from": 1665,
+   "to": 1669,
+   "new": "English Colonial Empire",
+   "why": "New Netherland surrendered to the English in 1664 and became New York",
+   "inside": {
+    "bbox": [
+     -80,
+     38,
+     -70,
+     46
+    ]
+   },
+   "min_km2": 50
+  },
+  {
+   "occupiers": [
+    "New Netherland"
+   ],
+   "from": 1655,
+   "to": 1658,
+   "new": "Portuguese Empire",
+   "why": "The Dutch surrendered Recife and the last of Dutch Brazil in January 1654",
+   "inside": {
+    "bbox": [
+     -50,
+     -13.5,
+     -34,
+     -1.5
+    ]
+   },
+   "min_km2": 50
   },
   {
    "occupiers": [
