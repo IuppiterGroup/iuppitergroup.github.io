@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Stats | luppiter Group</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <style>
+    .stats-wrap { max-width: 860px; margin: 0 auto; }
+    .stats-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .range { display: flex; gap: 6px; flex-wrap: wrap; }
+    .range button { background: transparent; border: 1px solid var(--border, rgba(196,164,74,0.3)); color: var(--text-dim, #9a9a9a); font: 500 0.85rem 'Inter', sans-serif; padding: 7px 14px; cursor: pointer; border-radius: 3px; }
+    .range button[aria-pressed="true"] { color: var(--gold, #c4a44a); border-color: var(--gold, #c4a44a); }
+    .total { font: 700 2.4rem 'Playfair Display', serif; color: var(--gold, #c4a44a); line-height: 1; }
+    .total small { display: block; font: 500 0.78rem 'Inter', sans-serif; color: var(--text-dim, #9a9a9a); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px; }
+    table.stats { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 0.92rem; }
+    table.stats th { text-align: left; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim, #9a9a9a); padding: 8px 10px; border-bottom: 1px solid rgba(196,164,74,0.25); }
+    table.stats td { padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: middle; }
+    table.stats td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; width: 80px; }
+    table.stats td.grp { color: var(--text-dim, #9a9a9a); font-size: 0.8rem; white-space: nowrap; width: 90px; }
+    .barcell { width: 32%; }
+    .bar { height: 8px; background: var(--gold, #c4a44a); border-radius: 0 4px 4px 0; min-width: 2px; opacity: 0.85; }
+    .note { font-size: 0.85rem; color: var(--text-dim, #9a9a9a); margin-top: 18px; line-height: 1.6; }
+    .notice { border: 1px solid rgba(196,164,74,0.35); padding: 14px 16px; margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; }
+    .notice[hidden] { display: none; }
+    .linkbtn { background: none; border: none; color: var(--gold, #c4a44a); font: inherit; cursor: pointer; padding: 0; text-decoration: underline; }
+    @media (max-width: 560px) { td.grp, th.grp { display: none; } .barcell { width: 28%; } }
+  </style>
+</head>
+<body>
+<header class="page-header">
+  <div class="container">
+    <div class="ornament">&#x2726; &#x2726; &#x2726;</div>
+    <h1>Site Stats</h1>
+    <p>Visitors by page, from GoatCounter. This page is unlisted.</p>
+  </div>
+</header>
+<section>
+  <div class="container stats-wrap">
+    <div class="notice" id="setup" hidden>
+      <strong>No counts yet.</strong> Counting starts once the GoatCounter site exists. Sign up at goatcounter.com with the site code <strong>jupitergroup</strong>, then in its Settings turn on <em>Allow adding visitor counts on your website</em>. Counts can take up to four hours to show here.
+    </div>
+    <div class="stats-bar">
+      <div class="total"><span id="total">&ndash;</span><small id="total-label">Visitors, all time</small></div>
+      <div class="range" role="group" aria-label="Time range">
+        <button type="button" data-start="" aria-pressed="true">All time</button>
+        <button type="button" data-start="year" aria-pressed="false">Past year</button>
+        <button type="button" data-start="month" aria-pressed="false">Past month</button>
+        <button type="button" data-start="week" aria-pressed="false">Past week</button>
+      </div>
+    </div>
+    <table class="stats">
+      <thead><tr><th>Page</th><th class="grp">Section</th><th class="barcell"></th><th style="text-align:right">Visitors</th></tr></thead>
+      <tbody id="rows"><tr><td colspan="4">Loading&hellip;</td></tr></tbody>
+    </table>
+    <p class="note">
+      Full dashboard with referrers, countries, devices, and daily charts: <a href="https://jupitergroup.goatcounter.com" rel="noopener">jupitergroup.goatcounter.com</a>.
+      GoatCounter caches these counts for up to four hours, so the newest visits show up later.
+      <span id="self-note"></span>
+    </p>
+  </div>
+</section>
+<script src="stats.js"></script>
+</body>
+</html>
