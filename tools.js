@@ -1,5 +1,5 @@
 /* luppiter Group: Tools page
-   Cash-secured put calculator, ex-dividend drop estimator,
+   Cash-secured put calculator, ex-dividend drop estimator and by-stock lookup,
    RSI study explorer, and RSI backtester. Runs entirely in the browser. */
 (function () {
   'use strict';
@@ -187,7 +187,163 @@
     if (basis === 'overall') return { ratio: DIV.overall.mean, ci: DIV.overall.ci.slice(), label: 'Overall mean, N = 19,218', ciNote: '95% CI of the average, clustered by date and firm, from the paper' };
     if (basis.indexOf('sector:') === 0) { var s = DIV.sectors[+basis.slice(7)]; return grp(s, s.name); }
     if (basis.indexOf('yield:') === 0) { var y = DIV.yields[+basis.slice(6)]; return grp(y, y.short + '-yield tercile'); }
+    if (basis.indexOf('stock:') === 0) {
+      var st = xlGet(basis.slice(6));
+      if (st && st.best != null) return {
+        ratio: st.best,
+        ci: [st.best - 1.96 * st.bestSd, st.best + 1.96 * st.bestSd],
+        label: st.ticker + ' best estimate, ' + intf(st.events) + ' events',
+        ciNote: '95% range of the best estimate for ' + st.ticker
+      };
+    }
     return { ratio: DIV.reg.a + DIV.reg.b * yieldFrac, ci: null, label: 'Regression on yield (R² below 1%)', ciNote: 'not reported for the regression fit' };
+  }
+
+  /* ───────────── Ex-dividend drop by stock ───────────── */
+  var XL = { rows: [], by: {}, meta: null };
+  var XL_ALIAS = { EQR: 'VMRK', GOOG: 'GOOGL', FOX: 'FOXA', NWS: 'NWSA' };
+
+  function xlInit() {
+    var src = window.EXDIV_STOCKS;
+    if (!src) return false;
+    XL.meta = src.meta;
+    src.rows.forEach(function (r) {
+      var o = {};
+      src.cols.forEach(function (c, i) { o[c] = r[i]; });
+      XL.rows.push(o);
+      XL.by[o.ticker] = o;
+    });
+    return true;
+  }
+  function xlGet(t) { return XL.by[t] || null; }
+  function xlNorm(s) { return String(s || '').trim().toUpperCase().replace(/\./g, '-').replace(/\s+/g, ' '); }
+
+  function xlFind(q, loose) {
+    var t = xlNorm(q);
+    if (!t) return null;
+    var m = t.match(/^([A-Z-]{1,6})(?: .*)?$/);           // "T" or "T AT&T" from the datalist
+    if (m && XL.by[m[1]]) return XL.by[m[1]];
+    if (XL_ALIAS[t]) return XL.by[XL_ALIAS[t]];
+    var low = String(q).trim().toLowerCase();
+    if (!loose) return XL.rows.filter(function (r) { return r.name.toLowerCase() === low; })[0] || null;
+    var hit = XL.rows.filter(function (r) { return r.name.toLowerCase() === low; })[0] ||
+      XL.rows.filter(function (r) { return r.name.toLowerCase().indexOf(low) === 0; })[0] ||
+      (low.length >= 3 ? XL.rows.filter(function (r) { return r.name.toLowerCase().indexOf(low) > -1; })[0] : null);
+    return hit || null;
+  }
+
+  function xlVerdict(s) {
+    if (!s.events) return { cls: '', html: '<strong>No usable events.</strong> Its only ex-date in the sample was removed by the paper’s outlier trim.' };
+    if (s.p == null) return { cls: '', html: '<strong>Too few events to test.</strong> ' + intf(s.events) + ' event' + (s.events === 1 ? '' : 's') + ' in the sample; the paper tests stocks with at least ' + XL.meta.minEvents + '.' };
+    if (s.q < 0.10 && s.mean < 1) return { cls: 'short', html: '<strong>Reliable shortfall.</strong> One of the 32 stocks whose drop stays significantly below the full dividend after correcting for testing 343 stocks.' };
+    if (s.p < 0.05 && s.mean < 1) return { cls: 'short', html: '<strong>Below a full drop on its own test</strong> (p ' + xlP(s.p) + '), but not after correcting for testing 343 stocks, where a result this strong can turn up by chance.' };
+    if (s.p < 0.05 && s.mean > 1) return { cls: 'full', html: '<strong>Above a full drop on its own test</strong> (p ' + xlP(s.p) + '), but not after correcting for testing 343 stocks.' };
+    return { cls: 'full', html: '<strong>Not distinguishable from a full drop.</strong> With ' + intf(s.events) + ' events, the record can’t separate this stock’s average from 1.00.' };
+  }
+  function xlP(p) { return p < 0.0001 ? '< 0.0001' : '= ' + (p < 0.01 ? fixed(p, 4) : fixed(p, 3)); }
+
+  function xlScale(s) {
+    var W = 420, H = 76, L = 12, R = 12, lo = -0.2, hi = 1.6;
+    function X(v) { return L + (Math.min(Math.max(v, lo), hi) - lo) / (hi - lo) * (W - L - R); }
+    var g = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" xmlns="http://www.w3.org/2000/svg">';
+    g += '<line x1="' + L + '" y1="34" x2="' + (W - R) + '" y2="34" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>';
+    [0, 0.5, 1, 1.5].forEach(function (t) {
+      g += '<line x1="' + X(t) + '" y1="30" x2="' + X(t) + '" y2="38" stroke="rgba(201,168,76,0.35)"/>';
+      g += '<text x="' + X(t) + '" y="56" text-anchor="middle">' + t.toFixed(1) + '</text>';
+    });
+    g += '<line x1="' + X(1) + '" y1="12" x2="' + X(1) + '" y2="44" stroke="#9a9a9a" stroke-dasharray="3 3"/>';
+    g += '<text x="' + X(1) + '" y="9" text-anchor="middle">full dividend</text>';
+    var c = XL.meta.center;
+    g += '<line x1="' + X(c) + '" y1="22" x2="' + X(c) + '" y2="44" stroke="rgba(201,168,76,0.55)"/>';
+    g += '<text x="' + (X(c) - 4) + '" y="72" text-anchor="end">all stocks ' + c.toFixed(2) + '</text>';
+    if (s.se != null) {
+      var a = s.mean - 1.96 * s.se, b = s.mean + 1.96 * s.se;
+      g += '<line x1="' + X(a) + '" y1="34" x2="' + X(b) + '" y2="34" stroke="#c9a84c" stroke-width="5" stroke-linecap="round" opacity="0.6"/>';
+    }
+    if (s.mean != null) g += '<circle cx="' + X(s.mean) + '" cy="34" r="6" fill="#c9a84c" stroke="#0f1218" stroke-width="2"/>';
+    if (s.best != null) g += '<rect x="' + (X(s.best) - 4.5) + '" y="29.5" width="9" height="9" transform="rotate(45 ' + X(s.best) + ' 34)" fill="#f0ece0" stroke="#0f1218" stroke-width="1.5"/>';
+    g += '</svg>';
+    return g;
+  }
+
+  function xlRender(s) {
+    var use = $('xl-use');
+    if (!s) {
+      ['mean', 'ci', 'best', 'median', 'pooled', 'raw', 'test', 'rank', 'yield', 'sector'].forEach(function (k) { setText('xl-' + k, 'n/a'); });
+      setText('xl-name', 'Average drop per $1 of dividend'); setText('xl-mean-sub', ' '); setText('xl-test-sub', '');
+      $('xl-verdict').hidden = true; $('xl-scale').innerHTML = ''; use.disabled = true; use.removeAttribute('data-tk');
+      return;
+    }
+    setText('xl-name', s.ticker + ' · ' + s.name);
+    setText('xl-mean', s.mean == null ? 'n/a' : fixed(s.mean, 2));
+    setText('xl-mean-sub', s.events ? 'Market-adjusted average across ' + intf(s.events) + ' ex-dividend event' + (s.events === 1 ? '' : 's') + ', 2010–2025' : 'No usable events');
+    var v = xlVerdict(s), box = $('xl-verdict');
+    var extra = (s.events && s.yield != null && s.yield < 0.005) ? ' Its dividend is tiny next to its share price, so single events swing widely; the best estimate is the steadier number.' : '';
+    box.className = 'xl-verdict' + (v.cls ? ' ' + v.cls : ''); box.innerHTML = v.html + extra; box.hidden = false;
+    $('xl-scale').innerHTML = s.events ? xlScale(s) : '';
+    setText('xl-ci', s.se == null ? 'n/a' : fixed(s.mean - 1.96 * s.se, 2) + ' to ' + fixed(s.mean + 1.96 * s.se, 2));
+    setText('xl-best', s.best == null ? 'n/a' : fixed(s.best, 2));
+    setText('xl-median', s.median == null ? 'n/a' : fixed(s.median, 2));
+    setText('xl-pooled', s.pooled == null ? 'n/a' : fixed(s.pooled, 2));
+    setText('xl-raw', s.raw == null ? 'n/a' : fixed(s.raw, 2));
+    if (s.p == null) { setText('xl-test', 'Not tested'); setText('xl-test-sub', 'Needs at least ' + XL.meta.minEvents + ' events'); }
+    else { setText('xl-test', 'p ' + xlP(s.p)); setText('xl-test-sub', 'False-discovery-adjusted q ' + (s.q < 0.0001 ? '< 0.0001' : '= ' + fixed(s.q, 3)) + '; reliable when q < 0.10'); }
+    setText('xl-rank', s.rank == null ? 'n/a' : intf(s.rank) + ' of ' + intf(XL.meta.tested));
+    setText('xl-yield', s.yield == null ? 'n/a' : pct(s.yield, 2));
+    setText('xl-sector', s.sector);
+    use.disabled = s.best == null;
+    use.setAttribute('data-tk', s.ticker);
+  }
+
+  function xlLookup(fromChip, live) {
+    var q = $('xl-q').value, s = xlFind(q, !live);
+    if (!String(q).trim()) { setText('xl-msg', ''); xlRender(null); return; }
+    if (!s && live) { setText('xl-msg', ''); xlRender(null); return; }   // still typing: wait for Enter or a pick
+    if (!s) {
+      setText('xl-msg', 'Not in the study. It covers companies in the S&P 500 in November 2026 that paid a dividend between 2010 and 2025 while in the index.');
+      xlRender(null); return;
+    }
+    setText('xl-msg', '');
+    xlRender(s);
+    if (fromChip) $('xl-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function xlUseInEstimator() {
+    var s = xlGet($('xl-use').getAttribute('data-tk'));
+    if (!s || s.best == null) return;
+    var sel = $('div-basis'), g = sel.querySelector('optgroup[data-xl]');
+    if (!g) { g = document.createElement('optgroup'); g.label = 'This stock (lookup below)'; g.setAttribute('data-xl', '1'); sel.insertBefore(g, sel.firstChild); }
+    g.innerHTML = '';
+    var o = document.createElement('option');
+    o.value = 'stock:' + s.ticker;
+    o.textContent = s.ticker + ' best estimate: ' + fixed(s.best, 3) + ' (' + intf(s.events) + ' events)';
+    g.appendChild(o);
+    sel.value = o.value;
+    updateDiv();
+    $('ex-dividend').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function xlSetup() {
+    if (!xlInit()) { setText('xl-msg', 'Stock data failed to load.'); return; }
+    var dl = $('xl-list'), h = '';
+    XL.rows.forEach(function (r) { h += '<option value="' + esc(r.ticker + ' ' + r.name) + '"></option>'; });
+    dl.innerHTML = h;
+    var top = XL.rows.filter(function (r) { return r.q != null && r.q < 0.10 && r.mean < 1; })
+      .sort(function (a, b) { return (a.mean - 1) / a.se - (b.mean - 1) / b.se; }).slice(0, 10);
+    var ch = $('xl-chips'), c = '';
+    top.forEach(function (r) { c += '<button type="button" data-tk="' + esc(r.ticker) + '">' + esc(r.ticker) + '<span>' + fixed(r.mean, 2) + '</span></button>'; });
+    ch.innerHTML = c;
+    ch.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-tk]');
+      if (!b) return;
+      $('xl-q').value = b.getAttribute('data-tk');
+      xlLookup(true);
+    });
+    $('xl-form').addEventListener('submit', function (e) { e.preventDefault(); xlLookup(false); });
+    on(['xl-q'], ['input'], function () { xlLookup(false, true); });
+    on(['xl-q'], ['change'], function () { xlLookup(false, false); });
+    $('xl-use').addEventListener('click', xlUseInEstimator);
+    xlRender(null);
   }
 
   function calcDiv(p) {
@@ -752,6 +908,7 @@
     $('div-form').addEventListener('submit', function (e) { e.preventDefault(); });
     on(['div-price', 'div-amount', 'div-freq', 'div-basis'], ['input', 'change'], updateDiv);
     updateDiv();
+    xlSetup();
 
     // RSI explorer
     buildRsiControls();
