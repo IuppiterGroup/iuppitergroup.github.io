@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lost Bonds of Rome · luppiter Group</title>
+  <meta name="description" content="Rome bound its people together through patronage, adult adoption, guest-friendship, and formal friendship. An essay on why reviving these bonds would strengthen society, the economy, and the individual.">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep:     #0a0f1a;
+      --bg-card:     #0f1623;
+      --bg-raised:   #141d2e;
+      --gold:        #c4a44a;
+      --gold-dim:    #8a7135;
+      --gold-light:  #e8c97a;
+      --text:        #d4cfc5;
+      --text-dim:    #8a8880;
+      --text-bright: #f0ece0;
+      --accent-red:  #8b2020;
+      --red-bright:  #c9503f;
+      --border:      rgba(196,164,74,0.18);
+      --border-dim:  rgba(196,164,74,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text);
+      font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+      font-size: 19px;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: var(--gold); }
+    .brand-l { font-family: Arial, Helvetica, sans-serif; font-style: normal; letter-spacing: inherit; }
+
+    /* Navigation */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,15,26,0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700;
+      color: var(--gold); text-decoration: none; letter-spacing: 0.12em;
+    }
+    .nav-logo span:not(.brand-l) { color: var(--text-dim); font-weight: 400; }
+    .nav-back {
+      font-family: 'Cinzel', serif; font-size: 0.78rem; color: var(--text-dim);
+      text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .progress {
+      position: fixed; top: 56px; left: 0; height: 2px; width: 0; z-index: 101;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+      box-shadow: 0 0 8px rgba(232,201,122,0.5);
+    }
+
+    /* Hero: the web of fides */
+    .paper-hero {
+      position: relative; overflow: hidden;
+      padding: 150px 24px 84px; text-align: center;
+      background: radial-gradient(ellipse at 50% 115%, #1d1a1a 0%, #0f1220 45%, var(--bg-deep) 75%);
+      border-bottom: 1px solid var(--border-dim);
+    }
+    #web { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .paper-hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(10,15,26,0.82) 0%, rgba(10,15,26,0.45) 60%, rgba(10,15,26,0) 100%);
+    }
+    .hero-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+    .paper-label {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.28em; color: var(--gold-dim); text-transform: uppercase;
+      border: 1px solid var(--border); padding: 5px 18px; margin-bottom: 28px;
+      background: rgba(10,15,26,0.6);
+    }
+    .paper-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2.3rem, 6.5vw, 4.4rem); font-weight: 700;
+      color: var(--gold-light); line-height: 1.1; letter-spacing: 0.03em; margin-bottom: 18px;
+      text-shadow: 0 0 44px rgba(232,201,122,0.22);
+    }
+    .paper-subtitle {
+      font-size: 1.3rem; color: var(--text); font-style: italic;
+      max-width: 680px; margin: 0 auto 38px; line-height: 1.5;
+    }
+    .epigraph { margin: 0 auto 36px; max-width: 640px; }
+    .epigraph .latin {
+      display: block; font-family: 'Cinzel', serif; font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+      letter-spacing: 0.24em; color: var(--gold); line-height: 1.7;
+    }
+    .epigraph .gloss { display: block; margin-top: 6px; font-size: 1rem; font-style: italic; color: var(--text-dim); }
+    .gold-rule {
+      width: 80px; height: 1px; margin: 0 auto 32px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .paper-meta {
+      display: flex; gap: 14px 32px; justify-content: center; flex-wrap: wrap;
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.1em;
+      color: var(--text-dim); border-top: 1px solid var(--border-dim); padding-top: 24px;
+    }
+    .paper-meta span { color: var(--gold-dim); }
+
+    /* Layout */
+    .paper-layout { max-width: 1180px; margin: 0 auto; padding: 56px 24px 80px; }
+    .paper-wrap { max-width: 780px; margin: 0 auto; min-width: 0; }
+    .toc { margin: 0 auto 40px; max-width: 780px; }
+    .toc details { border: 1px solid var(--border); background: var(--bg-card); padding: 14px 20px; }
+    .toc summary {
+      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.25em;
+      color: var(--gold); cursor: pointer; list-style: none;
+    }
+    .toc summary::-webkit-details-marker { display: none; }
+    .toc summary::after { content: ' +'; color: var(--gold-dim); }
+    .toc details[open] summary::after { content: ' \2212'; }
+    .toc ol { list-style: none; margin-top: 10px; }
+    .toc li a {
+      display: flex; gap: 12px; padding: 5px 0 5px 10px; text-decoration: none;
+      color: var(--text-dim); font-size: 0.95rem; line-height: 1.35;
+      border-left: 1px solid var(--border-dim); transition: color .2s, border-color .2s;
+    }
+    .toc li a .n { font-family: 'Cinzel', serif; font-size: 0.68rem; color: var(--gold-dim); min-width: 26px; padding-top: 3px; }
+    .toc li a:hover { color: var(--text-bright); }
+    .toc li a.active { color: var(--gold-light); border-left: 2px solid var(--gold); }
+    @media (min-width: 1100px) {
+      .paper-layout { display: grid; grid-template-columns: 230px minmax(0, 780px); gap: 64px; justify-content: center; }
+      .paper-wrap { margin: 0; }
+      .toc { margin: 0; }
+      .toc details { position: sticky; top: 84px; background: transparent; border: none; padding: 0; }
+      .toc summary { pointer-events: none; }
+      .toc summary::after { content: ''; }
+      .toc details[open] summary::after { content: ''; }
+    }
+
+    /* Sections */
+    section { scroll-margin-top: 80px; }
+    .section-header { margin: 72px 0 28px; }
+    main section:first-child .section-header { margin-top: 0; }
+    .section-number {
+      font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.3em;
+      color: var(--gold-dim); display: block; margin-bottom: 8px;
+    }
+    h2.section-title {
+      font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-light);
+      letter-spacing: 0.04em; line-height: 1.3; border-bottom: 1px solid var(--border-dim); padding-bottom: 12px;
+    }
+    p { margin-bottom: 1.3em; }
+    p strong, li strong { color: var(--text-bright); font-weight: 600; }
+    p a { text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color .2s; }
+    p a:hover { border-color: var(--gold); }
+    .lead { font-size: 1.12em; color: var(--text-bright); }
+    .lead::first-letter {
+      font-family: 'Cinzel', serif; float: left; font-size: 3.4em; line-height: 0.9;
+      padding: 6px 10px 0 0; color: var(--gold-light);
+    }
+    .la { font-style: italic; color: var(--text-bright); }
+
+    /* The five bonds */
+    .bonds { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 10px 0 46px; }
+    .bond {
+      grid-column: span 2; position: relative; background: var(--bg-card);
+      border: 1px solid var(--border-dim); border-top: 2px solid var(--gold-dim);
+      padding: 22px 22px 18px; transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+    .bond:nth-child(4) { grid-column: 2 / span 2; }
+    .bond:nth-child(5) { grid-column: 4 / span 2; }
+    .bond:hover { border-color: var(--border); border-top-color: var(--gold-light); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+    .bond .num {
+      position: absolute; top: 14px; right: 18px; font-family: 'Cinzel', serif;
+      font-size: 1.9rem; line-height: 1; color: rgba(196,164,74,0.16);
+    }
+    .bond h3 { font-family: 'Cinzel', serif; font-size: 1.05rem; letter-spacing: 0.05em; color: var(--gold-light); line-height: 1.25; padding-right: 34px; }
+    .bond .latin { display: block; font-style: italic; color: var(--gold-dim); font-size: 0.98rem; margin: 2px 0 12px; }
+    .bond dl { font-size: 0.95rem; line-height: 1.5; }
+    .bond dt { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold-dim); margin-top: 10px; }
+    .bond dd { color: var(--text); }
+    .bond dd b { color: var(--text-bright); font-weight: 600; }
+    .bond .dur {
+      display: inline-block; margin-top: 14px; font-family: 'Cinzel', serif; font-size: 0.62rem;
+      letter-spacing: 0.16em; color: var(--gold-light); border: 1px solid var(--border); padding: 3px 10px;
+      background: rgba(196,164,74,0.06);
+    }
+
+    /* Seal: fides */
+    .seal-row { display: grid; grid-template-columns: 112px 1fr; gap: 28px; align-items: center; margin: 8px 0 26px; }
+    .seal {
+      width: 112px; height: 112px; border-radius: 50%; position: relative;
+      background: radial-gradient(circle at 38% 32%, #b8432f 0%, #8b2020 55%, #5a1414 100%);
+      box-shadow: inset 0 0 0 5px rgba(0,0,0,0.18), inset 0 0 0 7px rgba(232,201,122,0.18), 0 6px 22px rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center; text-align: center;
+    }
+    .seal span { font-family: 'Cinzel', serif; font-weight: 700; color: #f3d9a6; letter-spacing: 0.16em; font-size: 1.05rem; line-height: 1.1; text-shadow: 0 1px 0 rgba(0,0,0,0.4); }
+    .seal small { display: block; font-size: 0.5rem; letter-spacing: 0.3em; font-weight: 400; margin-top: 4px; opacity: 0.8; }
+    .seal-row p { margin: 0; }
+
+    /* Stat band */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 6px 0 40px; }
+    .stat { background: var(--bg-raised); border: 1px solid var(--border-dim); padding: 20px 20px 16px; text-align: center; }
+    .stat .v { display: block; font-family: 'Cinzel', serif; font-size: 2rem; line-height: 1.15; color: var(--gold-light); letter-spacing: 0.02em; }
+    .stat .v small { font-size: 0.55em; color: var(--gold); }
+    .stat .k { display: block; font-size: 0.92rem; line-height: 1.4; color: var(--text-dim); margin-top: 8px; }
+    .stat-source { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--gold-dim); margin: -28px 0 40px; text-align: right; }
+
+    /* Figure: succession by adoption */
+    .figure { margin: 34px 0 44px; }
+    .figure-title { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.24em; color: var(--gold-dim); margin-bottom: 18px; }
+    .chain { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+    .chain::before {
+      content: ''; position: absolute; top: 27px; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold-light), var(--gold-dim));
+    }
+    .emp { position: relative; text-align: center; padding: 0 4px; }
+    .emp .medal {
+      width: 54px; height: 54px; margin: 0 auto 12px; border-radius: 50%; position: relative; z-index: 1;
+      background: radial-gradient(circle at 35% 30%, #f0d690, #c4a44a 55%, #7a6230);
+      box-shadow: 0 0 0 3px var(--bg-deep), 0 0 0 4px var(--gold-dim), 0 0 18px rgba(232,201,122,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.95rem; color: #2a2210;
+    }
+    .emp .name { display: block; font-family: 'Cinzel', serif; font-size: 0.86rem; color: var(--text-bright); letter-spacing: 0.04em; line-height: 1.25; }
+    .emp .yrs { display: block; font-size: 0.86rem; color: var(--text-dim); }
+    .emp .how { display: block; font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.16em; color: var(--gold); margin-top: 4px; }
+
+    /* Pull quote */
+    .pull-quote { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 10px; margin: 44px 0; text-align: center; }
+    .pull-quote p { font-size: 1.35rem; font-style: italic; color: var(--gold-light); line-height: 1.55; margin: 0 0 12px; }
+    .pull-quote cite { font-family: 'Cinzel', serif; font-style: normal; font-size: 0.66rem; letter-spacing: 0.22em; color: var(--gold-dim); }
+
+    /* Objections */
+    .obj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 10px 0 20px; }
+    .obj { background: var(--bg-card); border: 1px solid var(--border-dim); border-left: 2px solid var(--accent-red); padding: 20px 20px 8px; }
+    .obj h3 { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.1em; color: var(--gold-light); margin-bottom: 8px; font-weight: 600; }
+    .obj p { font-size: 0.97rem; line-height: 1.65; }
+
+    /* Proposals */
+    .proposals { list-style: none; margin: 18px 0 34px; counter-reset: prop; }
+    .proposals li { counter-increment: prop; position: relative; padding: 18px 0 16px 70px; border-bottom: 1px solid var(--border-dim); }
+    .proposals li::before {
+      content: counter(prop, upper-roman); position: absolute; left: 0; top: 15px; width: 50px; text-align: center;
+      font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); line-height: 1.2;
+    }
+    .proposals li h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--gold-light); margin-bottom: 2px; }
+    .proposals li p { margin: 0; }
+    .closing {
+      font-size: 1.22em; color: var(--text-bright); text-align: center; line-height: 1.6;
+      padding: 26px 10px 0; margin-top: 10px;
+    }
+    .closing::before {
+      content: '\2726'; display: block; color: var(--gold); font-size: 0.9rem; margin-bottom: 16px; letter-spacing: 0.4em;
+    }
+
+    /* References */
+    .references-section { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .references-section h2 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-dim); letter-spacing: 0.15em; margin-bottom: 20px; }
+    .references-section h3 { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.22em; color: var(--gold); margin: 28px 0 8px; }
+    .ref-list { list-style: none; }
+    .ref-list li { padding: 9px 0 9px 28px; text-indent: -28px; border-bottom: 1px solid var(--border-dim); font-size: 0.92rem; line-height: 1.6; color: var(--text-dim); }
+    .ref-list li em { color: var(--text); }
+    .ref-list li a { color: var(--gold-dim); text-decoration: none; }
+    .ref-list li a:hover { color: var(--gold); }
+
+    /* Footer */
+    .paper-footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border-dim); font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-dim); }
+    .paper-footer a { color: var(--gold-dim); text-decoration: none; margin: 0 12px; }
+    .paper-footer a:hover { color: var(--gold); }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .bonds { grid-template-columns: 1fr 1fr; }
+      .bond, .bond:nth-child(4), .bond:nth-child(5) { grid-column: auto; }
+      .bond:nth-child(5) { grid-column: 1 / -1; }
+      .obj-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      body { font-size: 17.5px; }
+      .paper-hero { padding: 112px 18px 58px; }
+      .paper-layout { padding: 36px 18px 60px; }
+      h2.section-title { font-size: 1.32rem; }
+      .bonds { grid-template-columns: 1fr; }
+      .bond:nth-child(5) { grid-column: auto; }
+      .seal-row { grid-template-columns: 1fr; justify-items: center; text-align: left; gap: 20px; }
+      .chain { grid-template-columns: 1fr; gap: 14px; padding-left: 4px; }
+      .chain::before { top: 27px; bottom: 27px; left: 31px; right: auto; width: 1px; height: auto; background: linear-gradient(180deg, var(--gold-dim), var(--gold-light), var(--gold-dim)); }
+      .emp { display: grid; grid-template-columns: 54px 1fr; gap: 0 16px; align-items: center; text-align: left; }
+      .emp .medal { margin: 0; grid-row: span 3; }
+      .proposals li { padding-left: 54px; }
+      .proposals li::before { width: 40px; font-size: 1.3rem; }
+      .pull-quote p { font-size: 1.18rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .bond:hover { transform: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><span class="brand-l">l</span>UPPITER <span>GROUP</span></a>
+    <a href="../research.html" class="nav-back">&larr; Research</a>
+  </div>
+</nav>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="paper-hero">
+  <canvas id="web" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="paper-label">Essay &middot; History &amp; Society</div>
+    <h1 class="paper-title">The Lost Bonds of Rome</h1>
+    <p class="paper-subtitle">How patronage, adoption, and guest-friendship could strengthen society, the economy, and the individual</p>
+    <div class="epigraph">
+      <span class="latin">PATRONVS SI CLIENTI FRAVDEM FECERIT, SACER ESTO</span>
+      <span class="gloss">If a patron defrauds his client, let him be accursed. &middot; The Twelve Tables</span>
+    </div>
+    <div class="gold-rule"></div>
+    <div class="paper-meta">
+      <div>Author <span>John &amp; <span class="brand-l">l</span>uppiter Group</span></div>
+      <div>Published <span>November 2026</span></div>
+      <div>Reading time <span>6 minutes</span></div>
+      <div>Sources <span>7</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="paper-layout">
+
+  <aside class="toc" aria-label="Contents">
+    <details id="toc" open>
+      <summary>CONTENTS</summary>
+      <ol>
+        <li><a href="#s1"><span class="n">I</span>Introduction</a></li>
+        <li><a href="#s2"><span class="n">II</span>The Roman Bonds</a></li>
+        <li><a href="#s3"><span class="n">III</span>Society</a></li>
+        <li><a href="#s4"><span class="n">IV</span>Economy</a></li>
+        <li><a href="#s5"><span class="n">V</span>Individuals</a></li>
+        <li><a href="#s6"><span class="n">VI</span>Objections and Safeguards</a></li>
+        <li><a href="#s7"><span class="n">VII</span>Conclusion</a></li>
+        <li><a href="#refs"><span class="n">&#x2726;</span>References</a></li>
+      </ol>
+    </details>
+  </aside>
+
+  <main class="paper-wrap">
+
+    <section id="s1">
+      <div class="section-header">
+        <span class="section-number">I</span>
+        <h2 class="section-title">Introduction</h2>
+      </div>
+      <p class="lead">Rome bound its people together through formal personal relationships that carried legal, religious, and social weight: patronage, adult adoption, guest-friendship, and <span class="la">amicitia</span>. Modern societies have let nearly all of them lapse, handing their work to the state, the market, or no one at all. This paper argues that reviving these bonds in modern form would strengthen society, the economy, and the individual.</p>
+      <p>The case is simple: the problems these bonds solved for Rome are the same ones modern data now flags as urgent. Those are isolation, stalled upward mobility, and weak succession in families and firms. Rome's answer was not a program or an agency but a web of named, reciprocal obligations between specific people.</p>
+    </section>
+
+    <section id="s2">
+      <div class="section-header">
+        <span class="section-number">II</span>
+        <h2 class="section-title">The Roman Bonds</h2>
+      </div>
+      <p>Each Roman bond was a named, public relationship with duties on both sides, and most passed from father to son. Five mattered most.</p>
+
+      <div class="bonds">
+        <article class="bond reveal">
+          <span class="num">I</span>
+          <h3>Patronage</h3>
+          <span class="latin">patrocinium</span>
+          <dl>
+            <dt>PARTIES</dt><dd>Patron and client, or a Roman and a whole city</dd>
+            <dt>DUTIES</dt><dd><b>Patron:</b> legal defense, loans, food, protection, and introductions. <b>Client:</b> the morning <span class="la">salutatio</span>, votes, escort, and loyalty</dd>
+          </dl>
+          <span class="dur">HEREDITARY</span>
+        </article>
+        <article class="bond reveal">
+          <span class="num">II</span>
+          <h3>Adult Adoption</h3>
+          <span class="latin">adoptio, adrogatio</span>
+          <dl>
+            <dt>PARTIES</dt><dd>A family head and a grown man</dd>
+            <dt>DUTIES</dt><dd><b>Father:</b> full name, inheritance, household rites, and political line. <b>Son:</b> carry the family forward as a full son and brother</dd>
+          </dl>
+          <span class="dur">PERMANENT</span>
+        </article>
+        <article class="bond reveal">
+          <span class="num">III</span>
+          <h3>Guest-Friendship</h3>
+          <span class="latin">hospitium</span>
+          <dl>
+            <dt>PARTIES</dt><dd>Two families or two cities</dd>
+            <dt>DUTIES</dt><dd><b>Each side:</b> lodging, protection, and legal help when the other travels</dd>
+          </dl>
+          <span class="dur">HEREDITARY, MARKED BY SPLIT TOKENS (TESSERAE HOSPITALES)</span>
+        </article>
+        <article class="bond reveal">
+          <span class="num">IV</span>
+          <h3>Formal Friendship</h3>
+          <span class="latin">amicitia</span>
+          <dl>
+            <dt>PARTIES</dt><dd>Peers in public life</dd>
+            <dt>DUTIES</dt><dd><b>Each side:</b> political support, favors, and counsel</dd>
+          </dl>
+          <span class="dur">UNTIL FORMALLY RENOUNCED</span>
+        </article>
+        <article class="bond reveal">
+          <span class="num">V</span>
+          <h3>Freedman and Patron</h3>
+          <span class="latin">libertus et patronus</span>
+          <dl>
+            <dt>PARTIES</dt><dd>A former master and the man he freed</dd>
+            <dt>DUTIES</dt><dd><b>Patron:</b> support and legal standing. <b>Freedman:</b> respect (<span class="la">obsequium</span>), agreed days of work (<span class="la">operae</span>), and the patron's family name</dd>
+          </dl>
+          <span class="dur">LIFELONG, THEN TO HEIRS</span>
+        </article>
+      </div>
+
+      <div class="seal-row reveal">
+        <div class="seal" aria-hidden="true"><span>FIDES<small>BONA FIDE</small></span></div>
+        <p>What held these bonds together was <span class="la">fides</span>, good faith, which Romans treated as sacred rather than polite. The Twelve Tables declared a patron who defrauded his client <span class="la">sacer</span>: cursed and outside divine protection. Breaking faith cost a man his standing in a city where standing was everything.</p>
+      </div>
+      <p>The bonds also scaled. Whole cities and provinces took Roman patrons, as Sicily did with the Claudii Marcelli, which gave distant communities a voice in the capital. Adoption shaped the state itself: Caesar's will adopted Octavian, and every emperor from Trajan to Marcus Aurelius came to the throne by adoption rather than birth.</p>
+    </section>
+
+    <section id="s3">
+      <div class="section-header">
+        <span class="section-number">III</span>
+        <h2 class="section-title">Society</h2>
+      </div>
+      <p>Roman bonds gave every citizen a fixed place in a web of named obligations, and modern America is short exactly that. The Surgeon General's 2023 advisory found that about half of U.S. adults report loneliness, and that lacking social connection raises the risk of early death about as much as smoking up to 15 cigarettes a day (<a href="https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf" target="_blank" rel="noopener">HHS, 2023</a>). Trust in other Americans fell from roughly 45% in 1972 to roughly 30% in 2016, and in-person time with friends for ages 15 to 24 fell nearly 70% from 2003 to 2020.</p>
+
+      <div class="stats reveal">
+        <div class="stat"><span class="v">1 <small>in</small> 2</span><span class="k">U.S. adults report loneliness</span></div>
+        <div class="stat"><span class="v">45% <small>&rarr;</small> 30%</span><span class="k">Americans who trust other Americans, 1972 to 2016</span></div>
+        <div class="stat"><span class="v"><small>NEARLY</small> 70%</span><span class="k">Drop in in-person time with friends, ages 15 to 24, 2003 to 2020</span></div>
+      </div>
+      <div class="stat-source">SOURCE: U.S. SURGEON GENERAL, 2023</div>
+
+      <p>Rome's bonds attacked this problem from three sides. The <span class="la">salutatio</span> put clients in a patron's house every morning, so contact was a daily duty rather than a choice left to mood. <span class="la">Hospitium</span> meant a traveler always had a door to knock on, and city patronage tied distant towns to the capital through a named advocate.</p>
+      <p>These ties also crossed class lines by design. A senator and a shopkeeper were bound to each other by name, so the orders of society depended on one another instead of drifting apart. The closest living descendant, the godparent system of <span class="la">compadrazgo</span> across the Mediterranean and Latin America, still does much of the same work.</p>
+    </section>
+
+    <section id="s4">
+      <div class="section-header">
+        <span class="section-number">IV</span>
+        <h2 class="section-title">Economy</h2>
+      </div>
+      <p>Patronage was, in modern terms, formalized cross-class friendship, and that is among the strongest predictors of upward mobility ever measured. Using 21 billion Facebook friendships, Chetty and colleagues found that the share of high-income friends among low-income people, which they call economic connectedness, outpredicts other forms of social capital (<a href="https://www.nature.com/articles/s41586-022-04996-4" target="_blank" rel="noopener">Nature, 2022</a>). If low-income children grew up in counties as connected as those of the average high-income child, their adult incomes would rise about 20% on average.</p>
+
+      <div class="stats reveal">
+        <div class="stat"><span class="v">+20%</span><span class="k">Adult income for low-income children raised in highly connected counties</span></div>
+        <div class="stat"><span class="v">21 <small>BILLION</small></span><span class="k">Friendships studied to measure economic connectedness</span></div>
+      </div>
+      <div class="stat-source">SOURCE: CHETTY ET AL., NATURE, 2022</div>
+
+      <p>A Roman client received what those friendships supply: introductions, credit, advice, and legal cover. Rome simply made the connection a duty instead of a lucky accident. Freedmen often went further, managing their patrons' businesses and building fortunes of their own.</p>
+      <p>Adoption answered a second economic problem: succession. Japan still uses adult adoption to keep family firms in capable hands, and firms run by adopted heirs outperform those run by blood heirs while matching or nearly matching founder-run firms (<a href="https://nber.org/papers/w16874" target="_blank" rel="noopener">Mehrotra, Morck, Shim, and Wiwattanakantang</a>). The authors' explanation is pure Roman logic: adoption lets the best candidate win the top job, motivates outside talent to compete for it, and pushes blood heirs to earn their place.</p>
+
+      <div class="figure reveal">
+        <div class="figure-title">SUCCESSION BY ADOPTION, A.D. 96 TO 180</div>
+        <div class="chain">
+          <div class="emp"><span class="medal">N</span><span class="name">Nerva</span><span class="yrs">96 to 98</span><span class="how">CHOSEN BY THE SENATE</span></div>
+          <div class="emp"><span class="medal">T</span><span class="name">Trajan</span><span class="yrs">98 to 117</span><span class="how">ADOPTED BY NERVA</span></div>
+          <div class="emp"><span class="medal">H</span><span class="name">Hadrian</span><span class="yrs">117 to 138</span><span class="how">ADOPTED BY TRAJAN</span></div>
+          <div class="emp"><span class="medal">A</span><span class="name">Antoninus Pius</span><span class="yrs">138 to 161</span><span class="how">ADOPTED BY HADRIAN</span></div>
+          <div class="emp"><span class="medal">M</span><span class="name">Marcus Aurelius</span><span class="yrs">161 to 180</span><span class="how">ADOPTED BY ANTONINUS</span></div>
+        </div>
+      </div>
+
+      <p>The Antonine emperors ran the state on the same principle. Gibbon called their era the period in which the human race was most happy and prosperous, and it was built on merit adoption.</p>
+
+      <blockquote class="pull-quote reveal">
+        <p>If a man were called to fix the period in the history of the world during which the condition of the human race was most happy and prosperous, he would, without hesitation, name that which elapsed from the death of Domitian to the accession of Commodus.</p>
+        <cite>EDWARD GIBBON, THE DECLINE AND FALL OF THE ROMAN EMPIRE</cite>
+      </blockquote>
+    </section>
+
+    <section id="s5">
+      <div class="section-header">
+        <span class="section-number">V</span>
+        <h2 class="section-title">Individuals</h2>
+      </div>
+      <p>The Roman bonds gave each person three things modern life often withholds: a defined place, a duty, and someone obligated to him by name. A client knew whose door to knock on in trouble, and a patron knew whose fortunes rode on his conduct. The health stakes of lacking such ties are measurable: the Surgeon General puts the added risk of early death at 26% for loneliness and 29% for isolation.</p>
+
+      <div class="stats reveal">
+        <div class="stat"><span class="v">+26%</span><span class="k">Risk of early death from loneliness</span></div>
+        <div class="stat"><span class="v">+29%</span><span class="k">Risk of early death from social isolation</span></div>
+      </div>
+      <div class="stat-source">SOURCE: U.S. SURGEON GENERAL, 2023</div>
+
+      <p>For the patron, the bond turned success into legacy. A Roman's standing was measured by the size and loyalty of his <span class="la">clientela</span>, so wealth and influence counted only when spent raising others. That gives the successful a reason to stay invested in the people and places around them.</p>
+      <p>For the client and the adopted son, the bond turned dependence into advancement. Horace, the son of a freedman, rose through Maecenas's patronage to become a leading poet of the Augustan age. Octavian entered Caesar's family as a young man and left it as Augustus.</p>
+    </section>
+
+    <section id="s6">
+      <div class="section-header">
+        <span class="section-number">VI</span>
+        <h2 class="section-title">Objections and Safeguards</h2>
+      </div>
+      <p>The strongest objections are nepotism, dependency, and corruption, and the Roman model already holds an answer to each.</p>
+      <div class="obj-grid">
+        <div class="obj reveal">
+          <h3>Nepotism</h3>
+          <p>Adoption is the cure, not the disease. It lets a family or firm reach past a weak blood heir to the best available candidate, which is exactly what the Japanese evidence shows.</p>
+        </div>
+        <div class="obj reveal">
+          <h3>Dependency</h3>
+          <p>Roman clientage was reciprocal, and a patron who cheated his client faced legal and religious sanction. A modern version should be voluntary, written down, and open to exit by either side.</p>
+        </div>
+        <div class="obj reveal">
+          <h3>Corruption</h3>
+          <p>Private favors corrupt because they are hidden. Roman bonds were announced, witnessed, and known to the whole city, and a revival should keep them that way.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="s7">
+      <div class="section-header">
+        <span class="section-number">VII</span>
+        <h2 class="section-title">Conclusion</h2>
+      </div>
+      <p>Reviving these bonds needs no new bureaucracy, only the return of old relationships under modern law.</p>
+      <ol class="proposals">
+        <li class="reveal"><h3>Patronage compacts</h3><p>Established professionals and firms take on clients under written, public terms of mutual duty, renewable across generations.</p></li>
+        <li class="reveal"><h3>Adult adoption for succession</h3><p>Family businesses and estates normalize adopting capable adults, as Japan does today.</p></li>
+        <li class="reveal"><h3>Hospitium between families and towns</h3><p>Standing, inherited pledges of hospitality and help turn sister-city programs into personal bonds.</p></li>
+        <li class="reveal"><h3>Civic patronage</h3><p>Successful natives formally take on their hometowns as patrons, with named responsibility for advocacy and upkeep.</p></li>
+      </ol>
+      <p class="closing">Rome held together for centuries because its people were bound to one another by name. Restoring those bonds would give modern society what it is visibly missing: belonging, mobility, and continuity.</p>
+    </section>
+
+    <section id="refs" class="references-section">
+      <h2>REFERENCES</h2>
+      <h3>ANCIENT AND CLASSICAL SOURCES</h3>
+      <ul class="ref-list">
+        <li>Cicero. <em>In Verrem</em>.</li>
+        <li>Gibbon, E. <em>The History of the Decline and Fall of the Roman Empire</em>, chapter 3.</li>
+        <li>Suetonius. <em>Divus Iulius</em>, 83.</li>
+        <li>The Twelve Tables, VIII.21, preserved in Servius on <em>Aeneid</em> 6.609.</li>
+      </ul>
+      <h3>MODERN WORKS</h3>
+      <ul class="ref-list">
+        <li>Chetty, R., et al. (2022). <a href="https://www.nature.com/articles/s41586-022-04996-4" target="_blank" rel="noopener">Social capital I: measurement and associations with economic mobility</a>. <em>Nature</em> 608, 108-121.</li>
+        <li>Mehrotra, V., Morck, R., Shim, J., and Wiwattanakantang, Y. (2013). <a href="https://nber.org/papers/w16874" target="_blank" rel="noopener">Adoptive expectations: Rising sons in Japanese family firms</a>. <em>Journal of Financial Economics</em> 108(3), 840-854.</li>
+        <li>Office of the U.S. Surgeon General (2023). <a href="https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf" target="_blank" rel="noopener">Our Epidemic of Loneliness and Isolation</a>. U.S. Department of Health and Human Services.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer class="paper-footer">
+  <div>
+    <a href="../index.html">Home</a>
+    <a href="../research.html">Research</a>
+    <a href="../roma.html">Roma</a>
+    <a href="../about.html">About</a>
+  </div>
+  <div style="margin-top:16px;">&copy; 2026 <span class="brand-l">l</span>UPPITER GROUP &middot; CC BY-NC-ND 4.0</div>
+  <div style="margin-top:8px; font-size:0.62rem;">Independent essay, not peer reviewed. The views expressed are those of the author.</div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* The web of fides: patrons, their clients, and the duties running both ways */
+  var c = document.getElementById('web');
+  if (c && c.getContext) {
+    var ctx = c.getContext('2d'), w = 0, h = 0, patrons = [], clients = [], running = false, visible = true;
+    var NAMES = ['PATRONVS', 'HOSPES', 'AMICVS', 'PATER', 'PATRONVS', 'HOSPES', 'AMICVS', 'PATRONVS'];
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function init() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = c.clientWidth; h = c.clientHeight;
+      c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var homes = w < 700
+        ? [[0.16, 0.11], [0.84, 0.17], [0.14, 0.86], [0.85, 0.92]]
+        : (w < 1100
+          ? [[0.12, 0.28], [0.5, 0.1], [0.88, 0.3], [0.12, 0.74], [0.5, 0.92], [0.88, 0.72]]
+          : [[0.12, 0.3], [0.38, 0.12], [0.62, 0.14], [0.88, 0.3], [0.12, 0.72], [0.38, 0.9], [0.62, 0.88], [0.88, 0.7]]);
+      patrons = []; clients = [];
+      for (var i = 0; i < homes.length; i++) {
+        var hx = homes[i][0] * w, hy = homes[i][1] * h;
+        patrons.push({ hx: hx, hy: hy, x: hx, y: hy, ax: rnd(18, 34), ay: rnd(10, 22), s: rnd(0.00012, 0.00022), ph: rnd(0, 6.283), name: NAMES[i % NAMES.length] });
+      }
+      var per = w < 700 ? 6 : 9;
+      patrons.forEach(function (p, pi) {
+        for (var k = 0; k < per; k++) {
+          var a = rnd(0, 6.283), d = rnd(45, w < 700 ? 90 : 140);
+          clients.push({
+            p: pi, a: a, d: d, da: rnd(-0.0016, 0.0016), wob: rnd(0, 6.283),
+            x: p.x + Math.cos(a) * d, y: p.y + Math.sin(a) * d,
+            ph: Math.random(), sp: rnd(0.00012, 0.00026), dir: Math.random() > 0.5 ? 1 : -1, r: rnd(1.3, 2.3)
+          });
+        }
+      });
+    }
+    function step(t) {
+      patrons.forEach(function (p) {
+        p.x = p.hx + Math.sin(t * p.s + p.ph) * p.ax;
+        p.y = p.hy + Math.cos(t * p.s * 1.3 + p.ph) * p.ay;
+      });
+      clients.forEach(function (q) {
+        var p = patrons[q.p];
+        q.a += q.da; q.wob += 0.01;
+        var d = q.d + Math.sin(q.wob) * 8;
+        q.x = p.x + Math.cos(q.a) * d; q.y = p.y + Math.sin(q.a) * d;
+      });
+    }
+    function draw(t) {
+      step(reduce ? 0 : t);
+      ctx.clearRect(0, 0, w, h);
+      var i, j, a, b, dx, dy, dist;
+      /* faint links where clientelae meet: the web across classes */
+      ctx.lineWidth = 0.6;
+      for (i = 0; i < clients.length; i++) {
+        a = clients[i];
+        for (j = i + 1; j < clients.length; j++) {
+          b = clients[j];
+          if (a.p === b.p) continue;
+          dx = a.x - b.x; dy = a.y - b.y; dist = dx * dx + dy * dy;
+          if (dist < 9000) {
+            ctx.strokeStyle = 'rgba(196,164,74,' + (0.16 * (1 - dist / 9000)) + ')';
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      /* amicitia between patrons */
+      ctx.lineWidth = 0.8;
+      for (i = 0; i < patrons.length; i++) {
+        for (j = i + 1; j < patrons.length; j++) {
+          dx = patrons[i].x - patrons[j].x; dy = patrons[i].y - patrons[j].y; dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 380) {
+            ctx.strokeStyle = 'rgba(232,201,122,' + (0.2 * (1 - dist / 380)) + ')';
+            ctx.setLineDash([2, 6]);
+            ctx.beginPath(); ctx.moveTo(patrons[i].x, patrons[i].y); ctx.lineTo(patrons[j].x, patrons[j].y); ctx.stroke();
+            ctx.setLineDash([]);
+          }
+        }
+      }
+      /* the bond itself, and the duty travelling along it */
+      for (i = 0; i < clients.length; i++) {
+        a = clients[i]; b = patrons[a.p];
+        ctx.strokeStyle = 'rgba(196,164,74,0.28)'; ctx.lineWidth = 0.8;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        var f = ((a.ph + (reduce ? 0 : t * a.sp)) % 1);
+        if (a.dir < 0) f = 1 - f;
+        var px = a.x + (b.x - a.x) * f, py = a.y + (b.y - a.y) * f;
+        var glow = Math.sin(f * 3.1416);
+        ctx.fillStyle = 'rgba(243,217,140,' + (0.85 * glow) + ')';
+        ctx.beginPath(); ctx.arc(px, py, 1.6, 0, 6.283); ctx.fill();
+        ctx.fillStyle = 'rgba(233,228,214,0.75)';
+        ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.283); ctx.fill();
+      }
+      /* patrons */
+      ctx.textAlign = 'center'; ctx.font = '600 9px Cinzel, serif';
+      for (i = 0; i < patrons.length; i++) {
+        b = patrons[i];
+        var pulse = reduce ? 1 : 0.75 + 0.25 * Math.sin(t * 0.0016 + i);
+        var g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, 24);
+        g.addColorStop(0, 'rgba(232,201,122,' + (0.42 * pulse) + ')');
+        g.addColorStop(1, 'rgba(232,201,122,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(b.x, b.y, 24, 0, 6.283); ctx.fill();
+        ctx.fillStyle = '#f3d98c'; ctx.beginPath(); ctx.arc(b.x, b.y, 3.4, 0, 6.283); ctx.fill();
+        ctx.fillStyle = 'rgba(196,164,74,0.62)';
+        ctx.fillText(b.name.split('').join(String.fromCharCode(8202)), b.x, b.y + 22);
+      }
+      if (!reduce && visible) { requestAnimationFrame(draw); } else { running = false; }
+    }
+    function start() { if (!running) { running = true; requestAnimationFrame(draw); } }
+    init(); start();
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { init(); if (reduce) draw(0); }, 150); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible && !reduce) start(); }).observe(c);
+    }
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { if (reduce) draw(0); }); }
+  }
+
+  /* Reading progress */
+  var bar = document.getElementById('progress');
+  function prog() {
+    var d = document.documentElement, max = d.scrollHeight - d.clientHeight;
+    bar.style.width = (max > 0 ? (d.scrollTop || document.body.scrollTop) / max * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', prog, { passive: true }); prog();
+
+  /* Contents: open on wide screens, collapsed on phones, highlight the current section */
+  var toc = document.getElementById('toc');
+  function tocMode() { toc.open = window.innerWidth >= 1100; }
+  tocMode();
+  var lastWide = window.innerWidth >= 1100;
+  window.addEventListener('resize', function () { var wide = window.innerWidth >= 1100; if (wide !== lastWide) { lastWide = wide; tocMode(); } });
+  toc.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { if (window.innerWidth < 1100) toc.open = false; });
+  });
+  var links = {}; toc.querySelectorAll('a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var secs = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  function spy() {
+    var cur = secs[0].id;
+    secs.forEach(function (s) { if (s.getBoundingClientRect().top <= 120) cur = s.id; });
+    Object.keys(links).forEach(function (k) { links[k].classList.toggle('active', k === cur); });
+  }
+  window.addEventListener('scroll', spy, { passive: true }); spy();
+
+  /* Reveal on scroll */
+  var rev = document.querySelectorAll('.reveal');
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    rev.forEach(function (el) { io.observe(el); });
+  } else { rev.forEach(function (el) { el.classList.add('in'); }); }
+})();
+</script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>
