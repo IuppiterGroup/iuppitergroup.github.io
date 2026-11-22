@@ -1,4 +1,4 @@
-// Wisdom of the Ages: 179 historical quotes, each checked and traced to a source
+// Wisdom of the Ages: 178 historical quotes, each checked and traced to a source
 // Categories: war, leadership, philosophy, empire, faith, strategy, virtue, ambition
 const QUOTES = [
 {q: "Veni, vidi, vici.",a: "Julius Caesar",era: "100–44 BC",civ: "Roman Republic",cat: ["war", "ambition"],src: "Suetonius, Divus Iulius 37; Plutarch, Life of Caesar 50"},
@@ -158,7 +158,6 @@ const QUOTES = [
 {q: "To every thing there is a season, and a time to every purpose under the heaven.",a: "Ecclesiastes 3:1",era: "~950 BC",civ: "Israel",cat: ["faith", "philosophy"],src: "Ecclesiastes 3:1, King James Version"},
 {q: "If we have our own why of life, we shall get along with almost any how.",a: "Friedrich Nietzsche",era: "1844–1900",civ: "Germany",cat: ["philosophy"],src: "Twilight of the Idols (1889), 'Maxims and Arrows' 12, trans. Walter Kaufmann"},
 {q: "What does not kill me makes me stronger.",a: "Friedrich Nietzsche",era: "1844–1900",civ: "Germany",cat: ["virtue", "philosophy"],src: "Twilight of the Idols (1889), 'Maxims and Arrows' 8"},
-{q: "God is dead. God remains dead. And we have killed him.",a: "Friedrich Nietzsche",era: "1844–1900",civ: "Germany",cat: ["philosophy"],src: "The Gay Science (1882), section 125 ('The Madman'), trans. Walter Kaufmann"},
 {q: "He who fights with monsters should look to it that he himself does not become a monster.",a: "Friedrich Nietzsche",era: "1844–1900",civ: "Germany",cat: ["philosophy", "virtue"],src: "Beyond Good and Evil (1886), section 146, trans. R. J. Hollingdale"},
 {q: "There is no agony like bearing an untold story inside you.",a: "Zora Neale Hurston",era: "1891–1960",civ: "United States",cat: ["philosophy"],src: "Dust Tracks on a Road (1942), ch. 11, 'Books and Things'"},
 {q: "The individual has always had to struggle to keep from being overwhelmed by the tribe.",a: "Rudyard Kipling",era: "1865–1936",civ: "United Kingdom",cat: ["philosophy", "virtue"],src: "Recalled by Arthur Gordon, 'Interview With an Immortal', Reader's Digest, July 1959 (conversation of June 1935)"},
