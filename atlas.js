@@ -200,10 +200,11 @@ function buildScene(feats, people, y) {
 // Which composites are seen up close (members shown on their own) at the current zoom.
 function revealSet(S) {
   // a composite shows its members when its home is large on screen, or, zoomed in, when its home lies off screen
-  // (New York in 1667 then reads as the English colonies, not as a nameless part of England)
+  // (New York in 1667 then reads as the English colonies, not as a nameless part of England);
+  // small leagues of city-states (Sumer, the Mycenaean palaces) open sooner, at half the width
   const lim = .6 * Math.min(W, H), out = new Set(), local = zoomLvl() > 1;
   for (const c of S.comps.values()) {
-    if (c.bw * cam.k > lim) { out.add(c.n); continue; }
+    if (c.bw * cam.k > (c.a < 150000 ? lim / 2 : lim)) { out.add(c.n); continue; }
     if (local) { const x = screenX(c.lx), y = screenY(c.ly); if (x < 0 || x > W || y < 0 || y > H) out.add(c.n); }
   }
   return out;
