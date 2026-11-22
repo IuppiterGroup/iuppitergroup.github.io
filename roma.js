@@ -46,10 +46,19 @@
   D.events.forEach(function (e) { (eventsByEra[e.era] = eventsByEra[e.era] || []).push(e); });
   D.figures.forEach(function (f) { figById[f.id] = f; (figsByEra[f.era] = figsByEra[f.era] || []).push(f); });
   D.quiz.forEach(function (q) { (quizByEra[q.era] = quizByEra[q.era] || []).push(q); });
+  /* the ancient writers (roma-sources.js), each passage pinned to an event */
+  var SRC = typeof ROMA_SOURCES === 'undefined' ? [] : ROMA_SOURCES;
+  var evById = {}, srcById = {}, srcByEv = {}, srcByEra = {};
+  D.events.forEach(function (e) { evById[e.id] = e; });
+  SRC.forEach(function (s) {
+    var e = evById[s.ev]; if (!e) return;
+    srcById[s.id] = s; (srcByEv[s.ev] = srcByEv[s.ev] || []).push(s); (srcByEra[e.era] = srcByEra[e.era] || []).push(s);
+  });
+  function srcRef(s) { return s.author + ', ' + s.work + ' ' + s.ref; }
 
   /* ---------- state ---------- */
   var state = { year: MIN, era: -1, sel: null, playing: false };
-  var cellsGold = [], cellsFill = [], markers = {}, capG, ring;
+  var cellsGold = [], cellsFill = [], markers = {}, srcMarks = {}, capG, ring;
 
   /* ---------- map ---------- */
   function buildMap() {
@@ -70,6 +79,12 @@
       if (e.x == null) return;
       h.push('<circle class="ev" data-id="' + e.id + '" cx="' + e.x + '" cy="' + e.y + '" r="' + (e.imp === 3 ? 5 : 4) + '"><title>' + esc(fmtYear(e.year) + ': ' + e.title) + '</title></circle>');
     });
+    h.push('</g><g id="srcMarks">');
+    D.events.forEach(function (e) {
+      if (e.x == null || !srcByEv[e.id]) return;
+      var s = srcByEv[e.id][0], x = e.x + 8, y = e.y - 8;
+      h.push('<path class="src" data-src="' + s.id + '" data-ev="' + e.id + '" d="M' + x + ' ' + (y - 5.5) + 'L' + (x + 5.5) + ' ' + y + 'L' + x + ' ' + (y + 5.5) + 'L' + (x - 5.5) + ' ' + y + 'Z"><title>' + esc(srcRef(s) + ': ' + s.title) + '</title></path>');
+    });
     h.push('</g><circle class="ring" id="selRing" cx="0" cy="0" r="6"/><g id="capG"></g>');
     svg.innerHTML += h.join('');
     var g = svg.querySelectorAll('.t-gold path'), f = svg.querySelectorAll('.t-fill path');
@@ -77,6 +92,10 @@
     svg.querySelectorAll('.ev').forEach(function (c) {
       markers[c.getAttribute('data-id')] = c;
       c.addEventListener('click', function () { selectEvent(c.getAttribute('data-id'), { scroll: true }); });
+    });
+    svg.querySelectorAll('.src').forEach(function (p) {
+      srcMarks[p.getAttribute('data-ev')] = p;
+      p.addEventListener('click', function () { state.userMoved = true; openSource(p.getAttribute('data-src')); });
     });
     capG = $('capG'); ring = $('selRing');
   }
@@ -165,6 +184,8 @@
       m.style.display = vis ? '' : 'none';
       m.classList.toggle('near', vis && Math.abs(e.year - y) <= 8);
       m.classList.toggle('sel', state.sel === e.id);
+      var sm = srcMarks[e.id];
+      if (sm) { sm.style.display = vis ? '' : 'none'; sm.classList.toggle('near', vis && Math.abs(e.year - y) <= 8); }
     });
   }
   function nearestEvent() {
@@ -227,6 +248,7 @@
           '<p class="ev-meta">' + esc(span) + ', year ' + roman(auc(e.year)) + ' of the City' + (e.place ? '. ' + esc(e.place) : '') + (e.latin && (e.place || '').indexOf(e.latin) === -1 ? '. <span lang="la">' + esc(e.latin) + '</span>' : '') + '</p>' +
           '<p class="ev-text">' + esc(e.text) + '</p>' +
           (figs ? '<div class="ev-figs"><span>Romans of this story:</span>' + figs + '</div>' : '') +
+          (srcByEv[e.id] ? '<div class="ev-figs"><span>In the ancient writers:</span>' + srcByEv[e.id].map(function (s) { return '<button type="button" class="chip chip-src" data-src="' + s.id + '">' + esc(srcRef(s)) + '</button>'; }).join('') + '</div>' : '') +
         '</div></li>');
     });
     list.innerHTML = h.join('');
@@ -237,8 +259,10 @@
         selectEvent(id, { fromList: true });
       });
     });
-    list.querySelectorAll('.chip').forEach(function (c) { c.addEventListener('click', function () { openFigure(c.getAttribute('data-fig')); }); });
+    list.querySelectorAll('.chip[data-fig]').forEach(function (c) { c.addEventListener('click', function () { openFigure(c.getAttribute('data-fig')); }); });
+    list.querySelectorAll('.chip-src').forEach(function (c) { c.addEventListener('click', function () { openSource(c.getAttribute('data-src')); }); });
 
+    renderSources(era);
     renderFigures(era);
     renderTrial(era, false);
   }
@@ -283,6 +307,37 @@
     }
     if (dir > 0) { for (i = 0; i < list.length; i++) if (list[i].year > y) { selectEvent(list[i].id); return; } }
     else { for (i = list.length - 1; i >= 0; i--) if (list[i].year < y) { selectEvent(list[i].id); return; } }
+  }
+
+  /* ---------- fontes: the ancient writers ---------- */
+  function renderSources(era) {
+    var box = $('fonsList'); if (!box) return;
+    var list = (srcByEra[era.id] || []).slice().sort(function (a, b) { return evById[a.ev].year - evById[b.ev].year; });
+    if (!list.length) { box.innerHTML = '<p class="fons-none">No passages are set in this age yet. The chronicle above tells its story.</p>'; return; }
+    box.innerHTML = list.map(function (s) {
+      var e = evById[s.ev];
+      return '<article class="fons" id="fons-' + s.id + '">' +
+        '<p class="fons-when">' + esc(fmtYear(e.year)) + (e.place ? ', ' + esc(e.place) : '') + '</p>' +
+        '<h3 class="fons-title">' + esc(s.title) + '</h3>' +
+        '<blockquote class="fons-text">' + esc(s.text) + '</blockquote>' +
+        '<p class="fons-cite"><b>' + esc(srcRef(s)) + '</b>. Translated by ' + esc(s.tr) + '.</p>' +
+        '<div class="fons-actions"><button type="button" data-ev="' + e.id + '" class="fons-map">Show it on the map</button>' +
+        '<button type="button" data-ev="' + e.id + '" class="fons-ev">Read the chronicle: ' + esc(e.title) + '</button></div>' +
+        '</article>';
+    }).join('');
+    box.querySelectorAll('.fons-map').forEach(function (b) {
+      b.addEventListener('click', function () { state.userMoved = true; selectEvent(b.getAttribute('data-ev')); $('map').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' }); });
+    });
+    box.querySelectorAll('.fons-ev').forEach(function (b) {
+      b.addEventListener('click', function () { state.userMoved = true; selectEvent(b.getAttribute('data-ev'), { scroll: true }); });
+    });
+  }
+  function openSource(id, quiet) {
+    var s = srcById[id]; if (!s) return;
+    selectEvent(s.ev);
+    var el = $('fons-' + id); if (!el) return;
+    if (!quiet) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
   }
 
   /* ---------- figures ---------- */
@@ -461,11 +516,13 @@
     $('eraPrev').addEventListener('click', function () { state.userMoved = true; if (state.era > 0) { state.sel = null; setYear(D.eras[state.era - 1].start); } });
     $('eraNext').addEventListener('click', function () { state.userMoved = true; if (state.era < D.eras.length - 1) { state.sel = null; setYear(D.eras[state.era + 1].start); } });
     $('nowEvent').addEventListener('click', function () { state.userMoved = true; selectEvent($('nowEvent').dataset.id, { scroll: true }); });
-    ['bands', 'eventList', 'figList', 'trial'].forEach(function (id) { $(id).addEventListener('pointerdown', function () { state.userMoved = true; }); });
+    ['bands', 'eventList', 'fonsList', 'figList', 'trial'].forEach(function (id) { $(id).addEventListener('pointerdown', function () { state.userMoved = true; }); });
 
-    var m = /#y=(-?\d+)/.exec(location.hash);
+    var m = /[#&]y=(-?\d+)/.exec(location.hash), mf = /[#&]fons=([\w-]+)/.exec(location.hash), me = /[#&]ev=([\w-]+)/.exec(location.hash);
     setYear(MIN, { noHash: true });
-    if (m) { state.userMoved = true; setYear(+m[1], { noHash: true }); }
+    if (mf && srcById[mf[1]]) { state.userMoved = true; openSource(mf[1], true); setTimeout(function () { var el = $('fons-' + mf[1]); if (el) el.scrollIntoView({ block: 'center' }); }, 60); }
+    else if (me && evById[me[1]]) { state.userMoved = true; selectEvent(me[1]); setTimeout(function () { var el = $('ev-' + me[1]); if (el) el.scrollIntoView({ block: 'center' }); }, 60); }
+    else if (m) { state.userMoved = true; setYear(+m[1], { noHash: true }); }
     else intro(117);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

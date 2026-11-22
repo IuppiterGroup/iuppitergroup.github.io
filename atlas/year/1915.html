@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1915 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1915: Russian Empire, French Africa, United States of America, Dominion of Canada, United States of Brazil, Republic of China, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1915.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1915 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1915: Russian Empire, French Africa, United States of America, Dominion of Canada, United States of Brazil, Republic of China, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1915.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1915">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1915</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1915, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1915</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/russian-empire.html">Russian Empire</a></td><td>Nicholas II (1894 to 1917)</td><td class="hide-s">St. Petersburg</td><td class="hide-s num">about 23 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/french-africa.html">French Africa</a></td><td>Hubert Lyautey (resident-general in Morocco) (1912 to 1925) and Raymond Poincaré (president) (1913 to 1920)</td><td class="hide-s">Algiers and Dakar and Brazzaville</td><td class="hide-s num">about 10 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Woodrow Wilson (1913 to 1921)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></td><td>Robert Borden (1911 to 1920)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 9.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></td><td>Venceslau Brás (1914 to 1918)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-china.html">Republic of China</a></td><td>Yuan Shikai (1912 to 1916)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 8.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/commonwealth-of-australia.html">Commonwealth of Australia</a></td><td>Andrew Fisher (1914 to 1915), then Billy Hughes (1915 to 1923)</td><td class="hide-s">Melbourne</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-africa.html">British Africa</a></td><td>George V (1910 to 1936)</td><td class="hide-s">London</td><td class="hide-s num">about 6.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-raj.html">British Raj</a></td><td>Lord Hardinge (viceroy) (1910 to 1916) and George V (1910 to 1936)</td><td class="hide-s">Delhi</td><td class="hide-s num">about 4.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Victorino de la Plaza (1914 to 1916)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/german-africa.html">German Africa</a></td><td>Wilhelm II (1888 to 1918)</td><td class="hide-s">Berlin</td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></td><td>Albert I (1909 to 1934)</td><td class="hide-s">Boma</td><td class="hide-s num">about 2.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/portuguese-republic.html">Portuguese Republic</a></td><td>Manuel de Arriaga (1911 to 1915) and Teófilo Braga (1915)</td><td class="hide-s">Lisbon</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mexico.html">Mexico</a></td><td>Venustiano Carranza (1914 to 1920) and Eulalio Gutiérrez (Convention) (1914 to 1915)</td><td class="hide-s">Mexico City</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1915</h3><ul><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/german-empire.html">German Empire</a></li><li><a href="/atlas/realm/austria-hungary.html">Austria-Hungary</a></li><li><a href="/atlas/realm/french-third-republic.html">French Third Republic</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-norway.html">Kingdom of Norway</a></li><li><a href="/atlas/realm/kingdom-of-italy.html">Kingdom of Italy</a></li><li><a href="/atlas/realm/kingdom-of-romania.html">Kingdom of Romania</a></li></ul><a class="see" href="/atlas/year/1915.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1915</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></li><li><a href="/atlas/realm/united-kingdom-of-great-britain-and-ireland.html">United Kingdom of Great Britain and Ireland</a></li><li><a href="/atlas/realm/emirate-of-nejd.html">Emirate of Nejd</a></li><li><a href="/atlas/realm/tsardom-of-bulgaria.html">Tsardom of Bulgaria</a></li><li><a href="/atlas/realm/imamate-of-oman.html">Imamate of Oman</a></li><li><a href="/atlas/realm/emirate-of-jabal-shammar.html">Emirate of Jabal Shammar</a></li><li><a href="/atlas/realm/trucial-states.html">Trucial States</a></li></ul><a class="see" href="/atlas/year/1915.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1915</h3><ul><li><a href="/atlas/realm/british-raj.html">British Raj</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/emirate-of-afghanistan.html">Emirate of Afghanistan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/kingdom-of-bhutan.html">Kingdom of Bhutan</a></li></ul><a class="see" href="/atlas/year/1915.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1915</h3><ul><li><a href="/atlas/realm/republic-of-china.html">Republic of China</a></li><li><a href="/atlas/realm/dutch-east-indies.html">Dutch East Indies</a></li><li><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></li><li><a href="/atlas/realm/great-mongol-state.html">Great Mongol State</a></li><li><a href="/atlas/realm/french-indochina.html">French Indochina</a></li><li><a href="/atlas/realm/empire-of-japan.html">Empire of Japan</a></li><li><a href="/atlas/realm/rattanakosin-kingdom.html">Rattanakosin Kingdom</a></li></ul><a class="see" href="/atlas/year/1915.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1915</h3><ul><li><a href="/atlas/realm/french-africa.html">French Africa</a></li><li><a href="/atlas/realm/british-africa.html">British Africa</a></li><li><a href="/atlas/realm/german-africa.html">German Africa</a></li><li><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></li><li><a href="/atlas/realm/portuguese-republic.html">Portuguese Republic</a></li><li><a href="/atlas/realm/italian-africa.html">Italian Africa</a></li><li><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li></ul><a class="see" href="/atlas/year/1915.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1915</h3><ul><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></li><li><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/republic-of-colombia.html">Republic of Colombia</a></li></ul><a class="see" href="/atlas/year/1915.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Sarajevo</b><span class="when">A.D. 1914</span>, <span class="where">Sarajevo, Bosnia</span>. On the twenty-eighth of June, Gavrilo Princip shoots Archduke Franz Ferdinand, heir to the Austro-Hungarian throne, in the streets of Sarajevo. Within six weeks the great powers of Europe are at war, and four empires will not survive it.</li>
+<li><b>The Germans Invade Belgium</b><span class="when">A.D. 1914</span>, <span class="where">Liège, Belgium</span>. Following the Schlieffen plan to defeat France by a wheel through the Low Countries, German armies crossed the Belgian frontier on 4 August 1914, and Britain, guarantor of Belgian neutrality, declared war that night. The forts of Liège held for twelve days until crushed by Krupp and Škoda siege howitzers, and at Louvain on 25 August the Germans burned the university library.</li>
+<li><b>Tannenberg</b><span class="when">A.D. 1914</span>, <span class="where">Tannenberg, East Prussia</span>. Russia invaded East Prussia sooner than Germany expected. Recalled from retirement, General Paul von Hindenburg, with Erich Ludendorff as chief of staff, fell on Samsonov's Second Army in the forests and lakes of Masuria from 26 to 30 August 1914, encircling it and taking some 92,000 prisoners. Samsonov shot himself; the victory was named for the field where the Teutonic Knights had fallen in 1410.</li>
+<li><b>The Miracle of the Marne</b><span class="when">A.D. 1914</span>, <span class="where">Meaux, France</span>. With the German right wing wheeling east of Paris, General Joffre turned his retreating armies on 6 September 1914 and struck its exposed flank along the Marne, while General Gallieni sent reinforcements from Paris in requisitioned taxicabs. A gap opened between the German First and Second Armies; on 9 September Moltke's staff ordered retreat to the Aisne, and the war of movement in the west ended in trenches.</li>
+<li><b>The Landings at Gallipoli</b><span class="when">A.D. 1915</span>, <span class="where">Anzac Cove, Gallipoli</span>. To force the Dardanelles and knock Turkey out of the war, as Winston Churchill urged, British, French, Australian, and New Zealand troops landed on the Gallipoli peninsula on 25 April 1915. The Turks, with Mustafa Kemal commanding above Anzac Cove, held the heights there and at Cape Helles; after eight months and over a quarter of a million casualties on each side, the allies withdrew in January 1916.</li>
+<li><b>The Armenian Genocide</b><span class="when">A.D. 1915</span>, <span class="where">Deir ez-Zor, Syria</span>. On the night of 24 April 1915 the Young Turk government arrested the Armenian leaders of Constantinople, and in the months that followed Armenian men across Anatolia were massacred and the women, children, and old driven on death marches into the Syrian desert toward Deir ez-Zor. Assyrian and Greek Christians suffered a like fate. Most historians reckon the Armenian dead at a million or more.</li>
+<li><b>The Bolsheviks Seize Petrograd</b><span class="when">A.D. 1917</span>, <span class="where">Winter Palace, Petrograd</span>. On the night of 7 November 1917, the October Revolution by the Russian calendar, the Red Guards and soldiers of the Military Revolutionary Committee directed by Trotsky occupied the bridges, stations, and telegraph of Petrograd and took the Winter Palace, arresting Kerensky's ministers. Lenin proclaimed Soviet power, peace, and land to the peasants, and founded the first communist state.</li>
+<li><b>The Treaty of Versailles</b><span class="when">A.D. 1919</span>, <span class="where">Hall of Mirrors, Versailles</span>. In the Hall of Mirrors where the German Empire had been proclaimed, the German delegates signed on 28 June 1919, five years to the day after Sarajevo, the treaty dictated by Clemenceau, Lloyd George, and Wilson. Germany lost Alsace-Lorraine, its colonies, and much of its eastern provinces to Poland, accepted responsibility for the war, and was disarmed and burdened with reparations; the Covenant of the League of Nations stood at its head.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1910.html" rel="prev">Earlier: the world in A.D. 1910</a><a href="/atlas/year/1920.html" rel="next">Later: the world in A.D. 1920</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1120 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1120: Kimek-Kipchak confederation, Great Seljuk Empire, Northern Song, Almoravid Dynasty, Liao Dynasty, Tibetans, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1120.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1120 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1120: Kimek-Kipchak confederation, Great Seljuk Empire, Northern Song, Almoravid Dynasty, Liao Dynasty, Tibetans, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1120.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1120">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1120</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 1120, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1120</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/kimek-kipchak-confederation.html">Kimek-Kipchak confederation</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 3.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/great-seljuk-empire.html">Great Seljuk Empire</a></td><td>Ahmad Sanjar (1118 to 1157) and Mahmud II (Iraq) (1118 to 1131)</td><td class="hide-s">Merv and Hamadan</td><td class="hide-s num">about 3.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/northern-song.html">Northern Song</a></td><td>Emperor Huizong of Song (1100 to 1126)</td><td class="hide-s">Kaifeng</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/almoravid-dynasty.html">Almoravid Dynasty</a></td><td>Ali ibn Yusuf (1106 to 1143)</td><td class="hide-s">Marrakesh</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/liao-dynasty.html">Liao Dynasty</a></td><td>Emperor Tianzuo of Liao (1101 to 1125)</td><td class="hide-s">Shangjing</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibetans.html">Tibetans</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ghaznavid-empire.html">Ghaznavid Empire</a></td><td>Bahram Shah (1117 to 1157)</td><td class="hide-s">Ghazni</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kievan-rus.html">Kievan Rus'</a></td><td>Vladimir II Monomakh (1113 to 1125)</td><td class="hide-s">Kiev</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-kara-khanids.html">Eastern Kara-Khanids</a></td><td></td><td class="hide-s">Kashgar and Balasagun</td><td class="hide-s num">about 916 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></td><td>Henry V (1105 to 1125)</td><td class="hide-s"></td><td class="hide-s num">about 884 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/fatimid-caliphate.html">Fatimid Caliphate</a></td><td>al-Amir (1101 to 1130)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 808 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/byzantine-empire.html">Byzantine Empire</a></td><td>John II Komnenos (1118 to 1143)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 694 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qocho-kingdom.html">Qocho Kingdom</a></td><td></td><td class="hide-s">Qocho</td><td class="hide-s num">about 652 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khwarezmian-empire.html">Khwarezmian Empire</a></td><td>Arslan Tegin Muhammad (1097 to 1127)</td><td class="hide-s">Gurganj</td><td class="hide-s num">about 616 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1120</h3><ul><li><a href="/atlas/realm/kievan-rus.html">Kievan Rus'</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/byzantine-empire.html">Byzantine Empire</a></li><li><a href="/atlas/realm/cumania.html">Cumania</a></li><li><a href="/atlas/realm/principality-of-novgorod.html">Principality of Novgorod</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></li></ul><a class="see" href="/atlas/year/1120.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1120</h3><ul><li><a href="/atlas/realm/great-seljuk-empire.html">Great Seljuk Empire</a></li><li><a href="/atlas/realm/najahid-dynasty.html">Najahid Dynasty</a></li><li><a href="/atlas/realm/sultanate-of-rum.html">Sultanate of Rum</a></li><li><a href="/atlas/realm/danishmendids.html">Danishmendids</a></li><li><a href="/atlas/realm/kingdom-of-georgia.html">Kingdom of Georgia</a></li><li><a href="/atlas/realm/uyunid-emirate.html">Uyunid Emirate</a></li><li><a href="/atlas/realm/kingdom-of-jerusalem.html">Kingdom of Jerusalem</a></li><li><a href="/atlas/realm/county-of-edessa.html">County of Edessa</a></li></ul><a class="see" href="/atlas/year/1120.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1120</h3><ul><li><a href="/atlas/realm/tibetans.html">Tibetans</a></li><li><a href="/atlas/realm/ghaznavid-empire.html">Ghaznavid Empire</a></li><li><a href="/atlas/realm/eastern-kara-khanids.html">Eastern Kara-Khanids</a></li><li><a href="/atlas/realm/qocho-kingdom.html">Qocho Kingdom</a></li><li><a href="/atlas/realm/khwarezmian-empire.html">Khwarezmian Empire</a></li><li><a href="/atlas/realm/western-chalukya-empire.html">Western Chalukya Empire</a></li><li><a href="/atlas/realm/pagan-kingdom.html">Pagan Kingdom</a></li><li><a href="/atlas/realm/chola-empire.html">Chola Empire</a></li></ul><a class="see" href="/atlas/year/1120.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1120</h3><ul><li><a href="/atlas/realm/northern-song.html">Northern Song</a></li><li><a href="/atlas/realm/liao-dynasty.html">Liao Dynasty</a></li><li><a href="/atlas/realm/srivijaya.html">Srivijaya</a></li><li><a href="/atlas/realm/western-xia.html">Western Xia</a></li><li><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></li><li><a href="/atlas/realm/kingdom-of-dali.html">Kingdom of Dali</a></li><li><a href="/atlas/realm/heian-japan.html">Heian Japan</a></li><li><a href="/atlas/realm/lavo-kingdom.html">Lavo Kingdom</a></li></ul><a class="see" href="/atlas/year/1120.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1120</h3><ul><li><a href="/atlas/realm/almoravid-dynasty.html">Almoravid Dynasty</a></li><li><a href="/atlas/realm/fatimid-caliphate.html">Fatimid Caliphate</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/ghana-empire.html">Ghana Empire</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/takrur.html">Takrur</a></li><li><a href="/atlas/realm/hammadid-dynasty.html">Hammadid Dynasty</a></li><li><a href="/atlas/realm/zirid-dynasty.html">Zirid dynasty</a></li></ul><a class="see" href="/atlas/year/1120.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1120</h3><ul><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/puebloans-chaco-regional-system.html">Puebloans - Chaco Regional System</a></li><li><a href="/atlas/realm/norse-greenland.html">Norse Greenland</a></li><li><a href="/atlas/realm/classic-veracruz-culture.html">Classic Veracruz Culture</a></li><li>Toltec</li><li>Chimor</li></ul><a class="see" href="/atlas/year/1120.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Suryavarman II Begins Angkor Wat</b><span class="when">c. A.D. 1113</span>, <span class="where">Angkor Wat, Cambodia</span>. Suryavarman II, who seized the throne in 1113, raised Angkor Wat to Vishnu: a temple-mountain of five lotus towers within a moat nearly two hundred meters wide, its galleries carved with the churning of the ocean of milk and the marching armies of the king. Facing west, toward the realm of the dead, it served also as his tomb, and is the largest religious monument on earth.</li>
+<li><b>Aguda Founds the Jin</b><span class="when">A.D. 1115</span>, <span class="where">Huining, Heilongjiang, China</span>. Wanyan Aguda, chief of the Jurchen tribes of the Manchurian forests, who had refused to dance for the Liao emperor at a fishing feast, rose against his Khitan overlords and beat a far larger Liao army at Hubudagang. He proclaimed the Jin, the Golden dynasty, and within ten years the Jurchen had taken all five Liao capitals and captured the last Liao emperor.</li>
+<li><b>The Knights Templar Founded</b><span class="when">c. A.D. 1120</span>, <span class="where">Temple Mount, Jerusalem</span>. Hugh de Payens and a handful of companions vowed to guard pilgrims on the roads of the Holy Land, and King Baldwin II housed them in the Aqsa mosque, held to be the Temple of Solomon. Endorsed by Bernard of Clairvaux and given a rule at the Council of Troyes in 1129, the warrior monks grew into the richest order in Christendom and the bankers of kings.</li>
+<li><b>David the Builder at Didgori</b><span class="when">A.D. 1121</span>, <span class="where">Didgori, Georgia</span>. King David IV of Georgia, who had rebuilt his army around some forty thousand Kipchak warriors settled with their families in his realm, met a great coalition of Seljuk emirs under Ilghazi at Didgori on 12 August 1121 and routed it. The next year he took Tbilisi, held by Muslim emirs for four centuries, and made it his capital. Georgia's golden age had begun.</li>
+<li><b>The Jingkang Incident</b><span class="when">A.D. 1127</span>, <span class="where">Kaifeng, Henan, China</span>. The Song had allied with the Jurchen against the Liao, then broken faith with them. The Jin armies besieged Kaifeng twice, and in the spring of 1127 carried off the retired emperor Huizong, painter and collector, his son Emperor Qinzong, and some three thousand of the imperial clan and court to the forests of Manchuria. A surviving prince, Zhao Gou, restored the Song in the south.</li>
+<li><b>Roger II Crowned King of Sicily</b><span class="when">A.D. 1130</span>, <span class="where">Palermo, Sicily</span>. On Christmas Day 1130 Roger II, son of the Norman conqueror of Sicily, was crowned in Palermo king of Sicily, Calabria, and Apulia. From his palace he ruled Greeks, Arabs, Lombards, and Normans with an even hand, and his court, where the geographer al-Idrisi drew his great map of the world, was among the most brilliant of the age.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1110.html" rel="prev">Earlier: the world in A.D. 1110</a><a href="/atlas/year/1130.html" rel="next">Later: the world in A.D. 1130</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

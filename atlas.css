@@ -62,7 +62,7 @@ canvas#map:active { cursor: grabbing; }
   min-width: 36px; height: 36px; padding: 0 10px; background: rgba(243, 234, 212, .94); color: #2a2017;
   border: 1px solid #4a3a26; font-family: var(--f-display); font-size: 18px; line-height: 1;
 }
-.mapctl #follow { font-size: 13px; letter-spacing: .08em; }
+.mapctl #follow, .mapctl #share { font-size: 13px; letter-spacing: .08em; }
 .mapctl #follow[aria-pressed="true"] { background: #2f2418; color: #f2ead6; }
 
 #markers { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
@@ -159,3 +159,45 @@ canvas#map:active { cursor: grabbing; }
   .scale span { font-size: 10.5px; }
 }
 @media (prefers-reduced-motion: reduce) { .ev.on::after { animation: none; } }
+
+/* ---------- Go to a year ---------- */
+.goto { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 15px; }
+.goto label { font-family: var(--f-italic); font-style: italic; color: var(--ink-soft); }
+.goto input { flex: 1 1 auto; min-width: 0; background: var(--chip); border: 1px solid var(--rule); color: var(--ink); font: inherit; padding: 4px 8px; }
+.goto input::placeholder { color: var(--ink-soft); opacity: .7; }
+.goto button { background: var(--chip-alt); border: 1px solid var(--rule); padding: 4px 12px; }
+.goto button:hover { border-color: var(--gilt); color: var(--gilt); }
+
+/* ---------- Almanac: the written page beneath the map (one for every year and realm) ---------- */
+.almanac { font-family: var(--f-body); font-size: 17px; line-height: 1.55; color: var(--ink); max-width: 1560px; margin: 26px auto 0; padding: 0 max(21px, env(safe-area-inset-left, 0px)) 40px; }
+.almanac:empty { display: none; }
+.almanac h1 { font-family: var(--f-display); font-weight: normal; font-size: clamp(28px, 4vw, 40px); letter-spacing: .04em; margin: 0 0 4px; line-height: 1.15; text-wrap: balance; }
+.almanac .lede { font-family: var(--f-italic); font-style: italic; color: var(--ink-soft); margin: 0 0 22px; max-width: 60em; }
+.almanac h2 { font-family: var(--f-display); font-weight: normal; font-size: 22px; letter-spacing: .06em; color: var(--gilt); margin: 30px 0 10px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }
+.almanac h3 { font-family: var(--f-display); font-weight: normal; font-size: 17px; letter-spacing: .08em; margin: 18px 0 6px; }
+.almanac a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--plate-edge); text-underline-offset: 3px; }
+.almanac a:hover { color: var(--gilt); }
+.almanac p { margin: 0 0 12px; max-width: 62em; }
+.almanac .realm-table { width: 100%; border-collapse: collapse; }
+.almanac .realm-table th { text-align: left; font-family: var(--f-display); font-weight: normal; font-size: 13px; letter-spacing: .12em; color: var(--ink-soft); padding: 6px 12px 6px 0; border-bottom: 1px solid var(--rule); }
+.almanac .realm-table td { vertical-align: top; padding: 7px 12px 7px 0; border-bottom: 1px solid var(--rule); }
+.almanac .realm-table td:first-child { font-weight: 600; }
+.almanac .num { font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; color: var(--ink-soft); }
+.almanac .regions { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 28px; }
+.almanac .regions ul, .almanac .plain { list-style: none; margin: 0; padding: 0; }
+.almanac .regions li { padding: 2px 0; }
+.almanac .see { font-family: var(--f-italic); font-style: italic; font-size: 15px; }
+.almanac .events { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 62em; }
+.almanac .events b { display: block; }
+.almanac .events .when { color: var(--gilt); font-variant-numeric: lining-nums; }
+.almanac .events .where { color: var(--ink-soft); font-style: italic; }
+.almanac .years { display: flex; flex-wrap: wrap; gap: 4px 12px; font-variant-numeric: lining-nums tabular-nums; }
+.almanac .pager { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.almanac .facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; margin: 0 0 14px; max-width: 62em; }
+.almanac .facts dt { font-family: var(--f-display); font-size: 13px; letter-spacing: .12em; color: var(--ink-soft); padding-top: 3px; }
+.almanac .facts dd { margin: 0; }
+.almanac .rulers { columns: 3 260px; column-gap: 28px; list-style: none; margin: 0; padding: 0; }
+.almanac .rulers li { break-inside: avoid; padding: 2px 0; }
+.almanac .az { columns: 4 240px; column-gap: 28px; list-style: none; margin: 0; padding: 0; }
+.almanac .az li { break-inside: avoid; padding: 2px 0; }
+@media (max-width: 640px) { .almanac .realm-table .hide-s { display: none; } .almanac { font-size: 16px; } }

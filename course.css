@@ -1,0 +1,93 @@
+/* Schola: the course. Shares Roma's palette and type (roma.css); this file is the reading layout. */
+.course main { font-family: var(--r-text); }
+.schola-head { padding: 44px 0 30px; border-bottom: 1px solid var(--r-line); background: radial-gradient(120% 140% at 80% 0%, #132a35 0%, var(--r-sea) 50%, #0b171d 100%); }
+.schola-eyebrow { margin: 0 0 6px; font-family: var(--r-display); letter-spacing: 0.22em; font-size: 0.9rem; color: var(--r-gold); text-transform: uppercase; }
+.schola-head h1 { margin: 0 0 12px; font-family: var(--r-display); font-weight: 600; font-size: clamp(1.8rem, 4.4vw, 3rem); line-height: 1.15; color: var(--r-marble); text-wrap: balance; }
+.schola-sub { margin: 0; max-width: 46em; font-size: 1.15rem; line-height: 1.6; color: var(--r-dust); }
+#view { padding-top: 32px; padding-bottom: 56px; min-height: 40vh; }
+.course a { color: var(--r-gold-hi); }
+.crumbs { margin: 0 0 18px; font-size: 1rem; color: var(--r-dust); }
+.crumbs a { text-underline-offset: 3px; }
+
+/* standing */
+.standing { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; padding: 22px 26px; border: 1px solid var(--r-line); border-radius: 4px; background: rgba(123, 30, 63, 0.12); }
+.standing-rank { margin: 0; font-family: var(--r-display); font-size: 1.7rem; font-weight: 600; color: var(--r-gold-hi); }
+.standing-rank small { font-family: var(--r-text); font-size: 1.05rem; font-weight: 400; font-style: italic; color: var(--r-dust); margin-left: 6px; }
+.standing-note { margin: 4px 0 0; color: var(--r-dust); font-size: 1.02rem; }
+.btn-go, .lesson-nav a, .t-link { display: inline-block; text-decoration: none; border: 1px solid var(--r-line); border-radius: 3px; padding: 10px 18px; font-size: 1.08rem; color: var(--r-marble) !important; background: transparent; }
+.btn-go, .lesson-nav a.primary, .t-link.primary { background: var(--r-porph); border-color: var(--r-porph-hi); }
+.btn-go:hover, .lesson-nav a.primary:hover, .t-link.primary:hover { background: var(--r-porph-hi); }
+.lesson-nav a:hover, .t-link:hover { border-color: var(--r-gold); }
+
+/* the plan of the course */
+.part-title { margin: 44px 0 18px; }
+.part-intro { max-width: 46em; margin: -6px 0 22px; font-size: 1.1rem; line-height: 1.6; color: var(--r-dust); }
+.units { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr)); gap: 22px 36px; }
+.unit { border-top: 1px solid var(--r-line); padding-top: 16px; }
+.unit-head { display: grid; grid-template-columns: 54px 1fr; gap: 12px; align-items: start; }
+.unit-n { font-family: var(--r-display); font-size: 1.5rem; color: var(--r-gold); line-height: 1.2; }
+.unit h3 { margin: 0; font-family: var(--r-display); font-weight: 600; font-size: 1.22rem; line-height: 1.3; color: var(--r-marble); }
+.unit h3 a { color: var(--r-marble); text-decoration: none; }
+.unit h3 a:hover { color: var(--r-gold-hi); }
+.unit-span { margin: 2px 0 0; color: var(--r-dust); font-size: 0.98rem; font-variant-numeric: lining-nums; }
+.laurel { margin-left: 8px; padding: 1px 8px; border: 1px solid var(--r-gold); border-radius: 10px; color: var(--r-gold-hi); font-size: 0.85rem; white-space: nowrap; }
+.lesson-list, .station-list { list-style: none; margin: 12px 0 0; padding: 0 0 0 66px; counter-reset: les; }
+.lesson-list li, .station-list > li { border-top: 1px solid rgba(201, 168, 76, 0.1); }
+.lesson-list a, .station-list > li > a { display: block; padding: 9px 0 9px 26px; text-decoration: none; position: relative; }
+.lesson-list a::before { content: ''; position: absolute; left: 2px; top: 16px; width: 11px; height: 11px; border: 1.5px solid var(--r-dust); border-radius: 50%; }
+.lesson-list li.read a::before { background: var(--r-gold); border-color: var(--r-gold); }
+.lesson-list li.trial-row a::before { border-radius: 2px; transform: rotate(45deg); }
+.l-title { display: block; font-size: 1.12rem; color: var(--r-marble); }
+.lesson-list a:hover .l-title, .station-list a:hover .l-title { color: var(--r-gold-hi); }
+.l-meta { display: block; font-size: 0.95rem; color: var(--r-dust); line-height: 1.4; }
+.lesson-list.big { padding-left: 0; max-width: 46em; margin-top: 26px; }
+.lesson-list.big .l-title { font-size: 1.22rem; }
+.lesson-list.big .l-meta { font-size: 1.05rem; line-height: 1.5; }
+.station-list > li > a { padding-left: 0; }
+.station-events { list-style: none; margin: 0 0 10px; padding: 0; font-size: 0.98rem; color: var(--r-dust); }
+.station-events b { font-weight: 500; color: var(--text); }
+.station-events span { font-variant-numeric: lining-nums; white-space: nowrap; }
+.unit-summary { max-width: 44em; font-size: 1.15rem; line-height: 1.65; color: var(--text); margin: 0; }
+.course .era-motto { max-width: 44em; }
+
+/* a lesson */
+.aim { max-width: 44em; margin: 0 0 22px; font-size: 1.18rem; line-height: 1.6; color: var(--r-marble); }
+.aim b { font-family: var(--r-display); font-size: 0.95rem; letter-spacing: 0.08em; color: var(--r-gold); font-weight: 600; margin-right: 4px; }
+.aim-span { color: var(--r-dust); font-style: italic; white-space: nowrap; }
+.lmap-wrap { margin: 0 0 12px; max-width: 900px; }
+.lmap { display: block; width: 100%; height: auto; background: var(--r-sea); border: 1px solid var(--r-line); border-radius: 3px; }
+.lmap .land { fill: var(--r-earth); }
+.lmap .held { fill: var(--r-porph); stroke: var(--r-porph); stroke-width: 0.6; }
+.lmap .coast { fill: none; stroke: var(--r-coast); }
+.lmap .pin { fill: var(--r-sea); stroke: var(--r-gold-hi); }
+.lmap .pin-n { fill: var(--r-gold-hi); font-family: 'Inter', sans-serif; font-weight: 600; font-variant-numeric: lining-nums; }
+.lmap-wrap figcaption { margin-top: 6px; font-size: 0.95rem; color: var(--r-dust); font-style: italic; }
+.see-also { display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 0 0 30px; font-size: 1.03rem; }
+.readings { list-style: none; margin: 0; padding: 0; max-width: 44em; }
+.reading { padding: 24px 0 26px; border-top: 1px solid var(--r-line); scroll-margin-top: 90px; }
+.r-when { margin: 0 0 4px; color: var(--r-dust); font-size: 1rem; font-variant-numeric: lining-nums; }
+.r-n { display: inline-block; min-width: 1.7em; height: 1.7em; line-height: 1.6em; margin-right: 10px; text-align: center; border: 1.5px solid var(--r-gold-hi); border-radius: 50%; color: var(--r-gold-hi); font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; }
+.reading h2 { margin: 0 0 10px; font-family: var(--r-display); font-weight: 600; font-size: 1.45rem; line-height: 1.3; color: var(--r-marble); }
+.r-text { margin: 0; font-size: 1.16rem; line-height: 1.7; color: var(--text); }
+.r-src { margin: 18px 0 0; padding: 16px 20px 14px; background: rgba(16, 33, 42, 0.5); border-left: 2px solid var(--r-porph-hi); }
+.r-src figcaption { font-family: var(--r-display); font-size: 0.92rem; letter-spacing: 0.06em; color: var(--r-gold); margin-bottom: 8px; }
+.r-src blockquote { margin: 0; font-size: 1.12rem; line-height: 1.68; color: var(--r-marble); }
+.r-cite { margin: 10px 0 0; font-size: 0.95rem; color: var(--r-dust); }
+.r-cite b { color: var(--r-gold-hi); font-weight: 500; }
+.sec-title.small { font-size: 1.3rem; margin: 34px 0 10px; }
+.l-romans { max-width: 44em; }
+.l-fig { border-top: 1px solid var(--r-line); padding: 10px 0; }
+.l-fig summary { cursor: pointer; font-size: 1.1rem; }
+.l-fig .fig-name { color: var(--r-marble); font-weight: 600; }
+.l-fig .fig-title { color: var(--r-dust); font-style: italic; }
+.l-fig p { margin: 10px 0 0; font-size: 1.08rem; line-height: 1.6; color: var(--text); }
+.l-fig blockquote { margin: 10px 0 0; padding-left: 14px; border-left: 2px solid var(--r-porph-hi); font-style: italic; color: var(--r-gold-hi); }
+.l-fig cite { display: block; font-style: normal; font-size: 0.92rem; color: var(--r-dust); }
+.lesson-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--r-line); max-width: 44em; }
+.course .trial .t-link { margin: 0; font-size: 1.05rem; }
+.course .roma-support { padding-bottom: 40px; }
+@media (max-width: 600px) {
+  .lesson-list, .station-list { padding-left: 0; }
+  .schola-head { padding: 30px 0 22px; }
+  .standing { padding: 18px 16px; }
+}

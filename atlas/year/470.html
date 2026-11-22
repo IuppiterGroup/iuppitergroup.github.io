@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 470 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 470: Rouran Khaganate, Sasanian Empire, Liu Song Dynasty, Gupta Empire, Eastern Roman Empire, Northern Wei, and the other realms of classical antiquity, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/470.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 470 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 470: Rouran Khaganate, Sasanian Empire, Liu Song Dynasty, Gupta Empire, Eastern Roman Empire, Northern Wei, and the other realms of classical antiquity, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/470.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="470">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 470</h1>
+<p class="lede">Classical antiquity. The realms that held the map in A.D. 470, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 470</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/rouran-khaganate.html">Rouran Khaganate</a></td><td>Yucheng (464 to 485)</td><td class="hide-s"></td><td class="hide-s num">about 3.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/sasanian-empire.html">Sasanian Empire</a></td><td>Peroz I (459 to 484)</td><td class="hide-s">Ctesiphon</td><td class="hide-s num">about 3.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/liu-song-dynasty.html">Liu Song Dynasty</a></td><td>Emperor Ming of Liu Song (466 to 472)</td><td class="hide-s">Jiankang</td><td class="hide-s num">about 2.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/gupta-empire.html">Gupta Empire</a></td><td>Purugupta (467 to 473)</td><td class="hide-s">Pataliputra</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></td><td>Leo I (457 to 474)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/northern-wei.html">Northern Wei</a></td><td>Emperor Xianwen of Northern Wei (465 to 471)</td><td class="hide-s">Pingcheng</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/white-huns.html">White Huns</a></td><td>Khingila (Alchon) (430 to 490)</td><td class="hide-s"></td><td class="hide-s num">about 1.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/vakataka-kingdom.html">Vakataka Kingdom</a></td><td>Devasena (Vatsagulma) (450 to 475) and Prithvishena II (460 to 480)</td><td class="hide-s">Pravarapura and Vatsagulma</td><td class="hide-s num">about 674 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/western-roman-empire.html">Western Roman Empire</a></td><td>Anthemius (467 to 472)</td><td class="hide-s">Ravenna</td><td class="hide-s num">about 628 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tarim-basin-city-states.html">Tarim Basin city-states</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 598 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/visigothic-kingdom.html">Visigothic Kingdom</a></td><td>Euric (466 to 484)</td><td class="hide-s">Toulouse</td><td class="hide-s num">about 596 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tuyuhun.html">Tuyuhun</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 393 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/goguryeo.html">Goguryeo</a></td><td>Jangsu of Goguryeo (413 to 491)</td><td class="hide-s">Pyongyang</td><td class="hide-s num">about 375 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></td><td></td><td class="hide-s">Tikal</td><td class="hide-s num">about 372 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 470</h3><ul><li><a href="/atlas/realm/western-roman-empire.html">Western Roman Empire</a></li><li><a href="/atlas/realm/visigothic-kingdom.html">Visigothic Kingdom</a></li><li><a href="/atlas/realm/vandal-kingdom.html">Vandal Kingdom</a></li><li><a href="/atlas/realm/brythonic-kingdoms.html">Brythonic Kingdoms</a></li><li><a href="/atlas/realm/ostrogoths.html">Ostrogoths</a></li><li><a href="/atlas/realm/burgundian-kingdom.html">Burgundian Kingdom</a></li><li><a href="/atlas/realm/kingdom-of-alamannia.html">Kingdom of Alamannia</a></li><li><a href="/atlas/realm/kingdom-of-the-suebi.html">Kingdom of the Suebi</a></li></ul><a class="see" href="/atlas/year/470.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 470</h3><ul><li><a href="/atlas/realm/sasanian-empire.html">Sasanian Empire</a></li><li><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></li><li><a href="/atlas/realm/himyarite-kingdom.html">Himyarite Kingdom</a></li><li><a href="/atlas/realm/lakhmid-kingdom.html">Lakhmid Kingdom</a></li><li><a href="/atlas/realm/marzpanate-of-armenia.html">Marzpanate of Armenia</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/caucasian-albania.html">Caucasian Albania</a></li><li><a href="/atlas/realm/caucasian-iberia.html">Caucasian Iberia</a></li></ul><a class="see" href="/atlas/year/470.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 470</h3><ul><li><a href="/atlas/realm/gupta-empire.html">Gupta Empire</a></li><li><a href="/atlas/realm/white-huns.html">White Huns</a></li><li><a href="/atlas/realm/vakataka-kingdom.html">Vakataka Kingdom</a></li><li><a href="/atlas/realm/tarim-basin-city-states.html">Tarim Basin city-states</a></li><li><a href="/atlas/realm/kadamba-empire.html">Kadamba Empire</a></li><li><a href="/atlas/realm/kalabhra-dynasty.html">Kalabhra Dynasty</a></li><li><a href="/atlas/realm/kamarupa-kingdom.html">Kamarupa Kingdom</a></li><li><a href="/atlas/realm/pyu-city-states.html">Pyu City-States</a></li></ul><a class="see" href="/atlas/year/470.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 470</h3><ul><li><a href="/atlas/realm/rouran-khaganate.html">Rouran Khaganate</a></li><li><a href="/atlas/realm/liu-song-dynasty.html">Liu Song Dynasty</a></li><li><a href="/atlas/realm/northern-wei.html">Northern Wei</a></li><li><a href="/atlas/realm/tuyuhun.html">Tuyuhun</a></li><li><a href="/atlas/realm/goguryeo.html">Goguryeo</a></li><li><a href="/atlas/realm/funan.html">Funan</a></li><li><a href="/atlas/realm/champa.html">Champa</a></li><li><a href="/atlas/realm/baekje.html">Baekje</a></li></ul><a class="see" href="/atlas/year/470.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 470</h3><ul><li><a href="/atlas/realm/vandal-kingdom.html">Vandal Kingdom</a></li><li><a href="/atlas/realm/nobatia.html">Nobatia</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li></ul><a class="see" href="/atlas/year/470.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 470</h3><ul><li><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></li><li><a href="/atlas/realm/zapotec-civilization.html">Zapotec Civilization</a></li><li>Teotihuacan</li></ul><a class="see" href="/atlas/year/470.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Pope Leo Meets Attila</b><span class="when">A.D. 452</span>, <span class="where">Mincio River, Italy</span>. Attila crossed the Julian Alps, razed Aquileia after a long siege, and sacked Milan and the cities of the Po. Near the Mincio he was met by an embassy from Valentinian III led by Pope Leo I, and he turned back from Italy, whether from awe, from plague in his army, or from fear of an Eastern army behind him. He died the next year.</li>
+<li><b>The Vandals Sack Rome</b><span class="when">A.D. 455</span>, <span class="where">Rome, Italy</span>. After the murder of Valentinian III, Genseric sailed from Carthage and took Rome without resistance. At the plea of Pope Leo he spared the people from slaughter and the city from fire, but for fourteen days the Vandals stripped it of its treasures, among them the spoils of the Temple of Jerusalem, and carried off the empress Eudoxia and her daughters.</li>
+<li><b>Skandagupta Repels the Huns</b><span class="when">c. A.D. 455</span>, <span class="where">Bhitari, Uttar Pradesh, India</span>. Skandagupta, coming to the throne in a season of peril, drove back the Hunas who had poured into India from the northwest. His pillar at Bhitari tells that the earth shook when he closed with them in battle, and that he passed a night sleeping on the bare ground to restore his family's shaken fortune. The empire held, but its treasury was drained.</li>
+<li><b>The Painted Caves of Ajanta</b><span class="when">c. A.D. 470</span>, <span class="where">Ajanta, Maharashtra, India</span>. In the reign of the Vakataka emperor Harishena, ministers and vassals carved monasteries and halls of worship into a horseshoe cliff above the Waghora river. Their walls were painted with the lives of the Buddha and tales of his former births, crowded with princes, dancers, and beasts, the finest painting to survive from ancient India. Abandoned soon after, they lay hidden in jungle for thirteen centuries.</li>
+<li><b>The Last Emperor of the West</b><span class="when">A.D. 476</span>, <span class="where">Ravenna, Italy</span>. The German general Odoacer deposes the boy emperor Romulus Augustulus at Ravenna and sends the imperial regalia to Constantinople. The Western Empire is ended. In the East, Rome endures for nearly a thousand years more.</li>
+<li><b>Kashyapa's Rock at Sigiriya</b><span class="when">c. A.D. 477</span>, <span class="where">Sigiriya, Sri Lanka</span>. Kashyapa, who had seized the throne of Lanka and walled his father Dhatusena up alive, feared his brother's vengeance and built a palace on the summit of a sheer rock nearly two hundred metres high, entered through the paws of a colossal lion. Painted maidens still float on its face. When his brother Moggallana returned with an army from India in 495, Kashyapa took his own life on the field.</li>
+<li><b>The Huns Slay Shah Peroz</b><span class="when">A.D. 484</span>, <span class="where">Herat, Afghanistan</span>. Peroz, king of kings of Persia, had once been taken prisoner by the Hephthalites and ransomed. Seeking revenge, he marched against their king Akhshunwar in 484; the Hephthalites lured his army into a concealed trench, and Peroz perished with much of the Persian nobility. For a generation Persia paid tribute to the White Huns, whose power stretched from the Oxus into India.</li>
+<li><b>Clovis Defeats Syagrius</b><span class="when">A.D. 486</span>, <span class="where">Soissons, Gaul</span>. Clovis, the twenty-year-old king of the Salian Franks of Tournai, defeated Syagrius, the last Roman ruler in northern Gaul, at Soissons. Syagrius fled to the Visigoths, who handed him over to be killed. Clovis took his realm between the Somme and the Loire, the foundation of the Frankish kingdom of France.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/460.html" rel="prev">Earlier: the world in A.D. 460</a><a href="/atlas/year/480.html" rel="next">Later: the world in A.D. 480</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

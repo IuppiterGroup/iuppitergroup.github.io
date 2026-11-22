@@ -167,6 +167,30 @@ body.roma {
 .chip:hover { border-color: var(--r-gold); }
 
 /* ------------------------------------------------------------ romans */
+/* ------------------------------------------------------------ fontes */
+#map .src { fill: var(--r-sea); stroke: var(--r-marble); stroke-width: 1.4; cursor: pointer; opacity: 0.75; transition: opacity 0.2s, fill 0.2s; }
+#map .src.near, #map .src:hover { opacity: 1; fill: var(--r-porph-hi); }
+.key-src { background: var(--r-sea); border: 1.4px solid var(--r-marble); transform: rotate(45deg) scale(0.72); }
+.chip-src { font-style: italic; }
+.fontes { padding: 40px 0 48px; font-family: var(--r-text); border-top: 1px solid var(--border); }
+.fontes .sec-title { margin-bottom: 10px; }
+.fontes-intro { max-width: 46em; margin: 0 0 26px; font-size: 1.1rem; line-height: 1.6; color: var(--r-dust); }
+.fontes-intro a, .cursus-intro a, .fontes-note a { color: var(--r-gold-hi); }
+.fons-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 430px), 1fr)); gap: 22px 34px; }
+.fons { border-top: 1px solid var(--r-line); padding-top: 16px; scroll-margin-top: 90px; }
+.fons.flash { animation: fonsflash 1.6s ease-out 1; }
+@keyframes fonsflash { 0% { background: rgba(201, 168, 76, 0.2); } 100% { background: transparent; } }
+.fons-when { margin: 0 0 2px; color: var(--r-dust); font-size: 0.95rem; font-variant-numeric: lining-nums; }
+.fons-title { margin: 0 0 10px; font-family: var(--r-display); font-weight: 600; font-size: 1.15rem; color: var(--r-marble); }
+.fons-text { margin: 0; padding-left: 16px; border-left: 2px solid var(--r-porph-hi); font-size: 1.1rem; line-height: 1.68; color: var(--text); }
+.fons-cite { margin: 10px 0 0; font-size: 0.95rem; color: var(--r-dust); }
+.fons-cite b { color: var(--r-gold-hi); font-weight: 500; }
+.fons-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.fons-actions button { background: transparent; border: 1px solid var(--r-line); color: var(--r-marble); border-radius: 3px; padding: 6px 12px; font-size: 0.98rem; text-align: left; }
+.fons-actions button:hover { border-color: var(--r-gold); color: var(--r-gold-hi); }
+.fons-none { color: var(--r-dust); font-style: italic; font-size: 1.05rem; margin: 0; }
+.fontes-note { max-width: 46em; margin: 28px 0 0; font-size: 0.95rem; line-height: 1.55; color: var(--r-dust); }
+
 .romans { padding: 40px 0 56px; font-family: var(--r-text); border-top: 1px solid var(--border); }
 .sec-title { font-family: var(--r-display); font-weight: 600; font-size: clamp(1.5rem, 2.6vw, 2rem); color: var(--r-marble); margin: 0 0 24px; }
 .fig-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 0 40px; }
@@ -247,5 +271,5 @@ body.roma {
 }
 @media (prefers-reduced-motion: reduce) {
   #map .t-gold path, #map .t-fill path { transition: none; }
-  #map .ring.on, .fig.flash { animation: none; }
+  #map .ring.on, .fig.flash, .fons.flash { animation: none; }
 }

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1565 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1565: Spanish Empire, Ottoman Empire, Ming Dynasty, Tsardom of Russia, Tümed, Safavid Dynasty, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1565.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1565 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1565: Spanish Empire, Ottoman Empire, Ming Dynasty, Tsardom of Russia, Tümed, Safavid Dynasty, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1565.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1565">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1565</h1>
+<p class="lede">The early modern age. The realms that held the map in A.D. 1565, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1565</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/spanish-empire.html">Spanish Empire</a></td><td>Philip II (1556 to 1598)</td><td class="hide-s">Mexico City (New Spain) and Lima (Peru)</td><td class="hide-s num">about 4.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Suleiman I the Magnificent (1520 to 1566)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 3.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></td><td>Jiajing Emperor (1521 to 1567)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 3.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tsardom-of-russia.html">Tsardom of Russia</a></td><td>Ivan IV the Terrible (1547 to 1584)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 3.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tumed.html">Tümed</a></td><td>Altan Khan (1542 to 1582)</td><td class="hide-s"></td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/safavid-dynasty.html">Safavid Dynasty</a></td><td>Tahmasp I (1524 to 1576)</td><td class="hide-s">Qazvin</td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></td><td>Haqnazar Khan (1538 to 1580)</td><td class="hide-s"></td><td class="hide-s num">about 2.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibet.html">Tibet</a></td><td>Ngawang Jigme Drakpa (Rinpungpa) (1547 to 1565), then Karma Tseten (Tsangpa) (1565 to 1599)</td><td class="hide-s">Rinpung and Shigatse</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mughal-empire.html">Mughal Empire</a></td><td>Akbar (1556 to 1605)</td><td class="hide-s">Agra</td><td class="hide-s num">about 1.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-moghulistan.html">Eastern Moghulistan</a></td><td>Shah Khan (1543 to 1570)</td><td class="hide-s">Turfan</td><td class="hide-s num">about 938 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khanate-of-sibir.html">Khanate of Sibir</a></td><td>Kuchum (1563 to 1598)</td><td class="hide-s">Qashliq</td><td class="hide-s num">about 854 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/poland-lithuania.html">Poland-Lithuania</a></td><td>Sigismund II Augustus (1548 to 1572)</td><td class="hide-s">Kraków</td><td class="hide-s num">about 771 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/first-toungoo-empire.html">First Toungoo Empire</a></td><td>Bayinnaung (1550 to 1581)</td><td class="hide-s">Pegu</td><td class="hide-s num">about 758 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></td><td>Philip II (1556 to 1598)</td><td class="hide-s">Madrid</td><td class="hide-s num">about 736 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1565</h3><ul><li><a href="/atlas/realm/poland-lithuania.html">Poland-Lithuania</a></li><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/denmark-norway.html">Denmark-Norway</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/habsburg-monarchy.html">Habsburg Monarchy</a></li><li><a href="/atlas/realm/kingdom-of-portugal.html">Kingdom of Portugal</a></li></ul><a class="see" href="/atlas/year/1565.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1565</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/safavid-dynasty.html">Safavid Dynasty</a></li><li><a href="/atlas/realm/khanate-of-khiva.html">Khanate of Khiva</a></li><li><a href="/atlas/realm/kingdom-of-kartli.html">Kingdom of Kartli</a></li><li><a href="/atlas/realm/kingdom-of-kakheti.html">Kingdom of Kakheti</a></li><li>Principality of Mingrelia</li><li>Kingdom of Imereti</li><li>Principality of Guria</li></ul><a class="see" href="/atlas/year/1565.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1565</h3><ul><li><a href="/atlas/realm/tumed.html">Tümed</a></li><li><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/mughal-empire.html">Mughal Empire</a></li><li><a href="/atlas/realm/eastern-moghulistan.html">Eastern Moghulistan</a></li><li><a href="/atlas/realm/khanate-of-bukhara.html">Khanate of Bukhara</a></li><li><a href="/atlas/realm/vijayanagara-empire.html">Vijayanagara Empire</a></li><li><a href="/atlas/realm/karrani-sultanate.html">Karrani Sultanate</a></li></ul><a class="see" href="/atlas/year/1565.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1565</h3><ul><li><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></li><li><a href="/atlas/realm/first-toungoo-empire.html">First Toungoo Empire</a></li><li><a href="/atlas/realm/mongol-khanate.html">Mongol Khanate</a></li><li><a href="/atlas/realm/ayutthaya-kingdom.html">Ayutthaya Kingdom</a></li><li><a href="/atlas/realm/lan-xang.html">Lan Xang</a></li><li><a href="/atlas/realm/warring-states-japan.html">Warring States Japan</a></li><li><a href="/atlas/realm/kingdom-of-cambodia.html">Kingdom of Cambodia</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li></ul><a class="see" href="/atlas/year/1565.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1565</h3><ul><li><a href="/atlas/realm/songhai-empire.html">Songhai Empire</a></li><li><a href="/atlas/realm/funj-sultanate.html">Funj Sultanate</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/saadi-sultanate.html">Saadi Sultanate</a></li><li><a href="/atlas/realm/bornu-empire.html">Bornu Empire</a></li><li><a href="/atlas/realm/kingdom-of-kongo.html">Kingdom of Kongo</a></li><li><a href="/atlas/realm/mali-empire.html">Mali Empire</a></li><li><a href="/atlas/realm/hafsid-dynasty.html">Hafsid Dynasty</a></li></ul><a class="see" href="/atlas/year/1565.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1565</h3><ul><li><a href="/atlas/realm/spanish-empire.html">Spanish Empire</a></li><li><a href="/atlas/realm/portuguese-empire.html">Portuguese Empire</a></li><li><a href="/atlas/realm/haudenosaunee.html">Haudenosaunee</a></li><li><a href="/atlas/realm/itza-mayans.html">Itza Mayans</a></li><li>France Antarctique</li><li><a href="/atlas/realm/inca-empire.html">Inca Empire</a></li></ul><a class="see" href="/atlas/year/1565.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Setthathirath Moves to Vientiane</b><span class="when">A.D. 1560</span>, <span class="where">Vientiane, Laos</span>. Threatened by the armies of Bayinnaung, King Setthathirath moved the capital of Lan Xang down the Mekong to Vientiane, leaving the Phra Bang at the old capital, which took its name as Luang Prabang. At Vientiane he housed the Emerald Buddha, brought from Chiang Mai, and in 1566 raised the great golden stupa of That Luang.</li>
+<li><b>The Great Siege of Malta</b><span class="when">A.D. 1565</span>, <span class="where">Birgu, Malta</span>. From May to September 1565 Grand Master Jean de Valette, with some six hundred knights and a few thousand Maltese and Spanish soldiers, held the harbor forts of Malta against Suleiman's armada. Fort St. Elmo fell after a month; Birgu and Senglea held through repeated assaults until a Spanish relief force landed and the Turks sailed away. Valletta, the new capital, bears the Grand Master's name.</li>
+<li><b>The Battle of Talikota</b><span class="when">A.D. 1565</span>, <span class="where">Talikota, Karnataka, India</span>. The sultans of Bijapur, Ahmadnagar, Golconda, and Bidar buried their quarrels and met the army of Vijayanagara under the aged regent Aliya Rama Raya near Talikota. Rama Raya was captured and beheaded, and his host broke. The victors spent months sacking the City of Victory, burning, levering apart, and hacking at its temples and palaces until it was a ruin.</li>
+<li><b>Legazpi at Cebu</b><span class="when">A.D. 1565</span>, <span class="where">Cebu, Philippines</span>. Miguel Lopez de Legazpi, sent from New Spain by Philip II, after whom the islands had been named, landed at Cebu and founded the first Spanish town in Asia. A soldier found in a burned hut the image of the Holy Child left by Magellan's men, and the Augustinian Andres de Urdaneta sailed north to find the westerly winds that would carry the galleons home to Acapulco.</li>
+<li><b>The Union of Lublin</b><span class="when">A.D. 1569</span>, <span class="where">Lublin, Poland</span>. On 1 July 1569, under pressure of the long war with Muscovy, the Polish and Lithuanian nobles sealed at Lublin a lasting union of their states into one Commonwealth of Both Nations, with a common king elected by all the nobility and a common Diet. Lithuania's Ukrainian lands passed to the Polish crown, and the Commonwealth was among the largest states of Europe.</li>
+<li><b>Bayinnaung Takes Ayutthaya</b><span class="when">A.D. 1569</span>, <span class="where">Ayutthaya, Thailand</span>. Bayinnaung, who styled himself king of kings, took Ayutthaya after a siege of ten months and set Maha Thammarachathirat on its throne as his vassal. His empire, the largest Southeast Asia had ever seen, stretched from Manipur to Lan Xang; yet when he died in 1581 it was held together by little more than his own will.</li>
+<li><b>Lepanto</b><span class="when">A.D. 1571</span>, <span class="where">Gulf of Patras, Greece</span>. The galleys of the Holy League under Don John of Austria shatter the Ottoman fleet at Lepanto, the last great battle of oared ships. A young soldier named Cervantes, who lost the use of his left hand there, called it the noblest occasion the centuries had ever seen.</li>
+<li><b>Legazpi Founds Spanish Manila</b><span class="when">A.D. 1571</span>, <span class="where">Manila, Philippines</span>. Having driven Rajah Sulayman from his stockade on the Pasig, Legazpi proclaimed Manila the capital of the Spanish Philippines on 24 June 1571. From 1573 the Manila galleons carried Chinese silk and porcelain to Acapulco and returned with Mexican silver: for the first time the trade of the Americas, Asia, and Europe was joined in one ring around the globe.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1560.html" rel="prev">Earlier: the world in A.D. 1560</a><a href="/atlas/year/1570.html" rel="next">Later: the world in A.D. 1570</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1350 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1350: Yuan Dynasty, Golden Horde, Chagatai Khanate, Delhi Sultanate, Mamluk Sultanate, Novgorod Republic, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1350.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1350 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1350: Yuan Dynasty, Golden Horde, Chagatai Khanate, Delhi Sultanate, Mamluk Sultanate, Novgorod Republic, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1350.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1350">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1350</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 1350, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1350</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/yuan-dynasty.html">Yuan Dynasty</a></td><td>Toghon Temür (Emperor Huizong) (1333 to 1370)</td><td class="hide-s">Khanbaliq</td><td class="hide-s num">about 14 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/golden-horde.html">Golden Horde</a></td><td>Jani Beg (1342 to 1357)</td><td class="hide-s">Sarai</td><td class="hide-s num">about 4.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/chagatai-khanate.html">Chagatai Khanate</a></td><td>Tughlugh Timur (1347 to 1363) and Bayan Quli (1348 to 1358)</td><td class="hide-s"></td><td class="hide-s num">about 2.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/delhi-sultanate.html">Delhi Sultanate</a></td><td>Muhammad bin Tughlaq (1325 to 1351)</td><td class="hide-s">Delhi</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></td><td>al-Nasir Hasan (1347 to 1351)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/novgorod-republic.html">Novgorod Republic</a></td><td>Vasily Kalika (archbishop) (1330 to 1352)</td><td class="hide-s">Novgorod</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mali-empire.html">Mali Empire</a></td><td>Sulayman (1341 to 1360)</td><td class="hide-s">Niani</td><td class="hide-s num">about 978 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 903 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/marinid-sultanate.html">Marinid Sultanate</a></td><td>Abu Inan Faris (1348 to 1358)</td><td class="hide-s">Fez</td><td class="hide-s num">about 516 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></td><td>Lompong Reachea (1347 to 1352)</td><td class="hide-s">Yasodharapura</td><td class="hide-s num">about 510 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/jalayirid-sultanate.html">Jalayirid Sultanate</a></td><td>Hasan Buzurg (1336 to 1356)</td><td class="hide-s">Baghdad</td><td class="hide-s num">about 504 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></td><td>Magnus VII (1319 to 1355) and Haakon VI (1343 to 1380)</td><td class="hide-s">Oslo</td><td class="hide-s num">about 487 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kartids.html">Kartids</a></td><td>Mu'izz al-Din Husayn Kart (1332 to 1370)</td><td class="hide-s">Herat</td><td class="hide-s num">about 474 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></td><td>Philip VI (1328 to 1350), then John II (1350 to 1364)</td><td class="hide-s">Paris</td><td class="hide-s num">about 435 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1350</h3><ul><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/crown-of-castile.html">Crown of Castile</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/grand-duchy-of-lithuania.html">Grand Duchy of Lithuania</a></li><li><a href="/atlas/realm/kingdom-of-england.html">Kingdom of England</a></li></ul><a class="see" href="/atlas/year/1350.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1350</h3><ul><li><a href="/atlas/realm/jalayirid-sultanate.html">Jalayirid Sultanate</a></li><li><a href="/atlas/realm/sarbadars.html">Sarbadars</a></li><li><a href="/atlas/realm/rasulid-dynasty.html">Rasulid Dynasty</a></li><li><a href="/atlas/realm/muzaffarids.html">Muzaffarids</a></li><li><a href="/atlas/realm/germiyanids.html">Germiyanids</a></li><li><a href="/atlas/realm/chobanids.html">Chobanids</a></li><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/kingdom-of-georgia.html">Kingdom of Georgia</a></li></ul><a class="see" href="/atlas/year/1350.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1350</h3><ul><li><a href="/atlas/realm/golden-horde.html">Golden Horde</a></li><li><a href="/atlas/realm/chagatai-khanate.html">Chagatai Khanate</a></li><li><a href="/atlas/realm/delhi-sultanate.html">Delhi Sultanate</a></li><li><a href="/atlas/realm/kartids.html">Kartids</a></li><li><a href="/atlas/realm/shan-states.html">Shan States</a></li><li><a href="/atlas/realm/vijayanagara-empire.html">Vijayanagara Empire</a></li><li><a href="/atlas/realm/eastern-ganga-kingdom.html">Eastern Ganga Kingdom</a></li><li><a href="/atlas/realm/kashmiri-sultanate.html">Kashmiri Sultanate</a></li></ul><a class="see" href="/atlas/year/1350.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1350</h3><ul><li><a href="/atlas/realm/yuan-dynasty.html">Yuan Dynasty</a></li><li><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></li><li><a href="/atlas/realm/majapahit.html">Majapahit</a></li><li><a href="/atlas/realm/sukhothai-kingdom.html">Sukhothai Kingdom</a></li><li><a href="/atlas/realm/ashikaga-shogunate.html">Ashikaga Shogunate</a></li><li><a href="/atlas/realm/tran-dynasty.html">Trần dynasty</a></li><li><a href="/atlas/realm/malaya.html">Malaya</a></li><li><a href="/atlas/realm/goryeo.html">Goryeo</a></li></ul><a class="see" href="/atlas/year/1350.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1350</h3><ul><li><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></li><li><a href="/atlas/realm/mali-empire.html">Mali Empire</a></li><li><a href="/atlas/realm/marinid-sultanate.html">Marinid Sultanate</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/hafsid-dynasty.html">Hafsid Dynasty</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/ifat-sultanate.html">Ifat Sultanate</a></li></ul><a class="see" href="/atlas/year/1350.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1350</h3><ul><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/chimu-empire.html">Chimu Empire</a></li><li>Cuzco</li><li><a href="/atlas/realm/michoacan.html">Michoacán</a></li><li>Tenochtitlan</li><li>Texcoco</li></ul><a class="see" href="/atlas/year/1350.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Stefan Dušan Crowned Emperor</b><span class="when">A.D. 1346</span>, <span class="where">Skopje, Macedonia</span>. At Easter 1346 in Skopje, Stefan Dušan, conqueror of Macedonia and Albania, had his archbishop raised to patriarch and was crowned by him Emperor of the Serbs and Greeks. His law code of 1349 bound the strongest realm in the Balkans, but on his death in 1355 it fell apart among his lords.</li>
+<li><b>The Longbow at Crécy</b><span class="when">A.D. 1346</span>, <span class="where">Crécy, Picardy</span>. On 26 August 1346 Edward III, marching through northern France, drew up his army on a slope near Crécy. The Genoese crossbowmen were shot down by English and Welsh archers, and the French knights rode again and again into the arrow storm until some fifteen hundred lords and knights lay dead. The blind King John of Bohemia had himself led into the fight to die.</li>
+<li><b>The Black Death Arrives</b><span class="when">A.D. 1347</span>, <span class="where">Messina, Sicily</span>. In October 1347 Genoese galleys from the Black Sea put in at Messina with dying men at the oars. The plague they carried, borne along the trade routes by rats and fleas, swept Italy, France, England, and Germany within three years and killed perhaps a third or more of Europe's people. Labor grew dear, serfdom loosened, and the faith and art of Europe were shadowed for generations.</li>
+<li><b>The Bahmani Sultanate Founded</b><span class="when">A.D. 1347</span>, <span class="where">Gulbarga, Karnataka, India</span>. The amirs of the Deccan rose against Muhammad bin Tughlaq and crowned one of their number, Hasan Gangu, as Ala al-Din Bahman Shah at Daulatabad. He made Gulbarga his capital, and the Bahmani kingdom he founded ruled the northern Deccan for nearly two centuries, waging almost ceaseless war with Vijayanagara for the rich lands between the Krishna and the Tungabhadra.</li>
+<li><b>The Black Death in Cairo</b><span class="when">A.D. 1348</span>, <span class="where">Cairo, Egypt</span>. Carried by ships from the Black Sea, the plague reached Alexandria in the autumn of 1347 and Cairo the following spring. At its height, the historian al-Maqrizi wrote, the dead of Cairo numbered thousands a day, and corpses were carried to burial on planks and ladders. Egypt and Syria may have lost a third of their people, and the Mamluk lands never wholly recovered.</li>
+<li><b>The Red Turbans Rise</b><span class="when">A.D. 1351</span>, <span class="where">Yingzhou, Anhui, China</span>. The Yuan conscripted 150,000 labourers to repair the broken dikes of the Yellow River, and among them the White Lotus sect of Han Shantong spread the word that a one-eyed stone man would be dug up to herald the fall of the dynasty. The Red Turban armies rose along the Huai, and within a decade the Yuan had lost the south to rebel warlords.</li>
+<li><b>U Thong Founds Ayutthaya</b><span class="when">A.D. 1351</span>, <span class="where">Ayutthaya, Thailand</span>. Prince U Thong, fleeing, the chronicles say, from an epidemic, crossed to an island where three rivers meet and there founded Ayutthaya, taking the name Ramathibodi. Heir to the Khmer arts of government and the Mon and Thai traditions of the Chao Phraya basin, his city ruled Siam for four centuries and became one of the richest ports of Asia.</li>
+<li><b>Fa Ngum Founds Lan Xang</b><span class="when">A.D. 1353</span>, <span class="where">Xieng Thong, Laos</span>. Fa Ngum, a Lao prince raised in exile at the Khmer court of Angkor, marched up the Mekong with a Khmer army and his wife, a Cambodian princess, and was crowned at Xieng Dong Xieng Thong. He named his realm Lan Xang, the Million Elephants, and Khmer monks brought with them the Theravada faith and, by tradition, the golden image called the Phra Bang.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1340.html" rel="prev">Earlier: the world in A.D. 1340</a><a href="/atlas/year/1360.html" rel="next">Later: the world in A.D. 1360</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

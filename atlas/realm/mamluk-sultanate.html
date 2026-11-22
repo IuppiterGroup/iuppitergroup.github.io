@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Mamluk Sultanate: Map, Rulers, and History, 1241 to 1518 | Orbis Terrarum</title>
+  <meta name="description" content="The state of the Mamluks, Turkish and later Circassian slave soldiers bought as boys and trained to arms, who seized Egypt in 1250. They turned back the Mongols at Ain Jalut, drove the last Crusaders from Syria, and ruled Egypt, Syria, and the Hijaz from Cairo with shadow Abbasid caliphs, until…">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/mamluk-sultanate.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Mamluk Sultanate: Map, Rulers, and History, 1241 to 1518 | Orbis Terrarum">
+  <meta property="og:description" content="The state of the Mamluks, Turkish and later Circassian slave soldiers bought as boys and trained to arms, who seized Egypt in 1250. They turned back the Mongols at Ain Jalut, drove the last Crusaders from Syria, and ruled Egypt, Syria, and the Hijaz from Cairo with shadow Abbasid caliphs, until…">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/mamluk-sultanate.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1516" data-view="16.8,10.6,54.6,39.8" data-realm="Mamluk Sultanate">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Mamluk Sultanate</h1>
+<p class="lede">1241 to 1518. Shown above as it stood in A.D. 1516; drag the timeline to watch it rise and fall.</p>
+<p>The state of the Mamluks, Turkish and later Circassian slave soldiers bought as boys and trained to arms, who seized Egypt in 1250. They turned back the Mongols at Ain Jalut, drove the last Crusaders from Syria, and ruled Egypt, Syria, and the Hijaz from Cairo with shadow Abbasid caliphs, until the Ottomans conquered them in 1517.</p>
+<dl class="facts"><dt>Government</dt><dd>Military oligarchy under an elective sultan</dd><dt>Faith</dt><dd>Sunni Islam</dd><dt>Capital</dt><dd>Cairo <span class="num">(1250 to 1517)</span></dd><dt>Greatest extent</dt><dd>About 1.9 million sq. km, as drawn on this atlas for A.D. 1516</dd></dl>
+<h2>Rulers of the Mamluk Sultanate</h2>
+<ul class="rulers"><li>Shajar al-Durr <span class="num">1250</span></li><li>al-Mu'izz Aybak <span class="num">1250 to 1257</span></li><li>al-Mansur Ali <span class="num">1257 to 1259</span></li><li>al-Muzaffar Qutuz <span class="num">1259 to 1260</span></li><li>al-Zahir Baybars <span class="num">1260 to 1277</span></li><li>al-Sa'id Baraka Khan <span class="num">1277 to 1279</span></li><li>al-Adil Solamish <span class="num">1279</span></li><li>al-Mansur Qalawun <span class="num">1279 to 1290</span></li><li>al-Ashraf Khalil <span class="num">1290 to 1293</span></li><li>al-Nasir Muhammad <span class="num">1293 to 1294</span></li><li>al-Adil Kitbugha <span class="num">1294 to 1296</span></li><li>al-Mansur Lajin <span class="num">1296 to 1299</span></li><li>al-Nasir Muhammad (second reign) <span class="num">1299 to 1309</span></li><li>al-Muzaffar Baybars II <span class="num">1309 to 1310</span></li><li>al-Nasir Muhammad (third reign) <span class="num">1310 to 1341</span></li><li>al-Mansur Abu Bakr <span class="num">1341</span></li><li>al-Ashraf Kujuk <span class="num">1341 to 1342</span></li><li>al-Nasir Ahmad <span class="num">1342</span></li><li>al-Salih Isma'il <span class="num">1342 to 1345</span></li><li>al-Kamil Sha'ban <span class="num">1345 to 1346</span></li><li>al-Muzaffar Hajji <span class="num">1346 to 1347</span></li><li>al-Nasir Hasan <span class="num">1347 to 1351</span></li><li>al-Salih Salih <span class="num">1351 to 1354</span></li><li>al-Nasir Hasan (second reign) <span class="num">1354 to 1361</span></li><li>al-Mansur Muhammad <span class="num">1361 to 1363</span></li><li>al-Ashraf Sha'ban <span class="num">1363 to 1377</span></li><li>al-Mansur Ali II <span class="num">1377 to 1381</span></li><li>al-Salih Hajji <span class="num">1381 to 1382</span></li><li>al-Zahir Barquq <span class="num">1382 to 1389</span></li><li>al-Salih Hajji (second reign) <span class="num">1389 to 1390</span></li><li>al-Zahir Barquq (second reign) <span class="num">1390 to 1399</span></li><li>al-Nasir Faraj <span class="num">1399 to 1405</span></li><li>al-Mansur Abd al-Aziz <span class="num">1405</span></li><li>al-Nasir Faraj (second reign) <span class="num">1405 to 1412</span></li><li>al-Adil al-Musta'in (caliph) <span class="num">1412</span></li><li>al-Mu'ayyad Shaykh <span class="num">1412 to 1421</span></li><li>al-Muzaffar Ahmad <span class="num">1421</span></li><li>al-Zahir Tatar <span class="num">1421</span></li><li>al-Salih Muhammad <span class="num">1421 to 1422</span></li><li>al-Ashraf Barsbay <span class="num">1422 to 1438</span></li><li>al-Aziz Yusuf <span class="num">1438</span></li><li>al-Zahir Jaqmaq <span class="num">1438 to 1453</span></li><li>al-Mansur Uthman <span class="num">1453</span></li><li>al-Ashraf Inal <span class="num">1453 to 1461</span></li><li>al-Mu'ayyad Ahmad <span class="num">1461</span></li><li>al-Zahir Khushqadam <span class="num">1461 to 1467</span></li><li>al-Zahir Bilbay <span class="num">1467</span></li><li>al-Zahir Timurbugha <span class="num">1467 to 1468</span></li><li>al-Ashraf Qaitbay <span class="num">1468 to 1496</span></li><li>al-Nasir Muhammad ibn Qaitbay <span class="num">1496 to 1498</span></li><li>al-Zahir Qansuh <span class="num">1498 to 1500</span></li><li>al-Ashraf Janbalat <span class="num">1500 to 1501</span></li><li>al-Adil Tumanbay I <span class="num">1501</span></li><li>al-Ashraf Qansuh al-Ghawri <span class="num">1501 to 1516</span></li><li>al-Ashraf Tumanbay II <span class="num">1516 to 1517</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/1250.html?v=16.8,10.6,54.6,39.8">A.D. 1250</a><a href="/atlas/year/1270.html?v=16.8,10.6,54.6,39.8">A.D. 1270</a><a href="/atlas/year/1280.html?v=16.8,10.6,54.6,39.8">A.D. 1280</a><a href="/atlas/year/1300.html?v=16.8,10.6,54.6,39.8">A.D. 1300</a><a href="/atlas/year/1320.html?v=16.8,10.6,54.6,39.8">A.D. 1320</a><a href="/atlas/year/1330.html?v=16.8,10.6,54.6,39.8">A.D. 1330</a><a href="/atlas/year/1350.html?v=16.8,10.6,54.6,39.8">A.D. 1350</a><a href="/atlas/year/1370.html?v=16.8,10.6,54.6,39.8">A.D. 1370</a><a href="/atlas/year/1380.html?v=16.8,10.6,54.6,39.8">A.D. 1380</a><a href="/atlas/year/1400.html?v=16.8,10.6,54.6,39.8">A.D. 1400</a><a href="/atlas/year/1410.html?v=16.8,10.6,54.6,39.8">A.D. 1410</a><a href="/atlas/year/1430.html?v=16.8,10.6,54.6,39.8">A.D. 1430</a><a href="/atlas/year/1450.html?v=16.8,10.6,54.6,39.8">A.D. 1450</a><a href="/atlas/year/1460.html?v=16.8,10.6,54.6,39.8">A.D. 1460</a><a href="/atlas/year/1480.html?v=16.8,10.6,54.6,39.8">A.D. 1480</a><a href="/atlas/year/1500.html?v=16.8,10.6,54.6,39.8">A.D. 1500</a><a href="/atlas/year/1505.html?v=16.8,10.6,54.6,39.8">A.D. 1505</a><a href="/atlas/year/1515.html?v=16.8,10.6,54.6,39.8">A.D. 1515</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

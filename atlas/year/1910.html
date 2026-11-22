@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1910 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1910: Russian Empire, Qing Dynasty, French Africa, United States of America, United States of Brazil, Commonwealth of Australia, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1910.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1910 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1910: Russian Empire, Qing Dynasty, French Africa, United States of America, United States of Brazil, Commonwealth of Australia, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1910.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1910">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1910</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1910, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1910</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/russian-empire.html">Russian Empire</a></td><td>Nicholas II (1894 to 1917)</td><td class="hide-s">St. Petersburg</td><td class="hide-s num">about 22 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></td><td>Xuantong Emperor (Puyi) (1908 to 1912)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 11 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/french-africa.html">French Africa</a></td><td>Armand Fallières (president) (1906 to 1913)</td><td class="hide-s">Algiers and Dakar and Brazzaville</td><td class="hide-s num">about 10 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>William Howard Taft (1909 to 1913)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></td><td>Nilo Peçanha (1909 to 1910), then Hermes da Fonseca (1910 to 1914)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/commonwealth-of-australia.html">Commonwealth of Australia</a></td><td>Alfred Deakin (1909 to 1910), then Andrew Fisher (1910 to 1913)</td><td class="hide-s">Melbourne</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-africa.html">British Africa</a></td><td>Edward VII (1901 to 1910), then George V (1910 to 1936)</td><td class="hide-s">London</td><td class="hide-s num">about 6.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></td><td>Wilfrid Laurier (1896 to 1911)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 5.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-raj.html">British Raj</a></td><td>Edward VII (1901 to 1910) and Lord Minto (viceroy) (1905 to 1910)</td><td class="hide-s">Calcutta</td><td class="hide-s num">about 4.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>José Figueroa Alcorta (1906 to 1910), then Roque Sáenz Peña (1910 to 1914)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/german-africa.html">German Africa</a></td><td>Wilhelm II (1888 to 1918)</td><td class="hide-s">Berlin</td><td class="hide-s num">about 2.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></td><td>Albert I (1909 to 1934)</td><td class="hide-s">Boma</td><td class="hide-s num">about 2.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Mehmed V (1909 to 1918)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mexico.html">Mexico</a></td><td>Porfirio Díaz (1884 to 1911)</td><td class="hide-s">Mexico City</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1910</h3><ul><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/german-empire.html">German Empire</a></li><li><a href="/atlas/realm/austria-hungary.html">Austria-Hungary</a></li><li><a href="/atlas/realm/french-third-republic.html">French Third Republic</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-norway.html">Kingdom of Norway</a></li><li><a href="/atlas/realm/kingdom-of-italy.html">Kingdom of Italy</a></li><li><a href="/atlas/realm/kingdom-of-romania.html">Kingdom of Romania</a></li></ul><a class="see" href="/atlas/year/1910.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1910</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></li><li><a href="/atlas/realm/united-kingdom-of-great-britain-and-ireland.html">United Kingdom of Great Britain and Ireland</a></li><li><a href="/atlas/realm/emirate-of-nejd.html">Emirate of Nejd</a></li><li><a href="/atlas/realm/sultanate-of-muscat-and-oman.html">Sultanate of Muscat and Oman</a></li><li><a href="/atlas/realm/tsardom-of-bulgaria.html">Tsardom of Bulgaria</a></li><li><a href="/atlas/realm/emirate-of-jabal-shammar.html">Emirate of Jabal Shammar</a></li><li><a href="/atlas/realm/trucial-states.html">Trucial States</a></li></ul><a class="see" href="/atlas/year/1910.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1910</h3><ul><li><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></li><li><a href="/atlas/realm/british-raj.html">British Raj</a></li><li><a href="/atlas/realm/emirate-of-afghanistan.html">Emirate of Afghanistan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/kingdom-of-bhutan.html">Kingdom of Bhutan</a></li></ul><a class="see" href="/atlas/year/1910.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1910</h3><ul><li><a href="/atlas/realm/dutch-east-indies.html">Dutch East Indies</a></li><li><a href="/atlas/realm/french-indochina.html">French Indochina</a></li><li><a href="/atlas/realm/rattanakosin-kingdom.html">Rattanakosin Kingdom</a></li><li><a href="/atlas/realm/empire-of-japan.html">Empire of Japan</a></li><li><a href="/atlas/realm/korean-empire.html">Korean Empire</a></li><li><a href="/atlas/realm/portuguese-colonies.html">Portuguese Colonies</a></li><li>Sultanate of Kedah</li><li>Kedah-Perlis District</li></ul><a class="see" href="/atlas/year/1910.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1910</h3><ul><li><a href="/atlas/realm/french-africa.html">French Africa</a></li><li><a href="/atlas/realm/british-africa.html">British Africa</a></li><li><a href="/atlas/realm/german-africa.html">German Africa</a></li><li><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></li><li><a href="/atlas/realm/kingdom-of-portugal.html">Kingdom of Portugal</a></li><li><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/british-west-africa.html">British West Africa</a></li></ul><a class="see" href="/atlas/year/1910.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1910</h3><ul><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></li><li><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></li></ul><a class="see" href="/atlas/year/1910.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Young Turk Revolution</b><span class="when">A.D. 1908</span>, <span class="where">Salonica, Macedonia</span>. Officers of the Committee of Union and Progress in the Third Army in Macedonia, among them Enver Bey, took to the hills in July 1908 and threatened to march on the capital. Abdul Hamid II restored the constitution of 1876 on 24 July, and the empire rejoiced in a brief brotherhood of creeds. When a counter-revolution failed in 1909, the sultan was deposed and sent to Salonica.</li>
+<li><b>Oil at Masjed Soleyman</b><span class="when">A.D. 1908</span>, <span class="where">Masjed Soleyman, Persia</span>. After seven years of fruitless drilling under William Knox D'Arcy's concession, a British crew struck oil at Masjed Soleyman in the Zagros foothills on 26 May 1908, the first great oil field of the Middle East. The Anglo-Persian Oil Company was formed the next year, and in 1914 the British government, turning its navy from coal to oil, bought a controlling share.</li>
+<li><b>Belgium Takes the Congo</b><span class="when">A.D. 1908</span>, <span class="where">Boma, Congo</span>. King Leopold II had ruled the Congo Free State as his private domain since 1885, and his agents and concession companies drove its people to gather wild rubber by terror, with the taking of hostages and the severing of hands. After the reports of Roger Casement and the agitation of E. D. Morel, Belgium annexed the territory in 1908 as the Belgian Congo; the toll in lives had been immense.</li>
+<li><b>The Annexation of Korea</b><span class="when">A.D. 1910</span>, <span class="where">Seoul, Korea</span>. Having made Korea a protectorate in 1905 and forced Emperor Gojong to abdicate, Japan annexed the country outright, and the last emperor, Sunjong, yielded his throne. For thirty-five years Korea was ruled by Japanese governors-general from Keijō, its land surveyed and taken, its schools taught in Japanese, and its patriots hunted.</li>
+<li><b>The Wuchang Uprising</b><span class="when">A.D. 1911</span>, <span class="where">Wuchang, Hubei, China</span>. A bomb that went off by accident in a revolutionary hideout in Hankou forced the hand of the plotters in the New Army at Wuchang, who rose on the night of 10 October and seized the city. Province after province declared for the revolution, and on 12 February 1912 the six-year-old Xuantong Emperor, Puyi, abdicated. More than two thousand years of imperial rule had ended.</li>
+<li><b>The Bogd Khan Enthroned</b><span class="when">A.D. 1911</span>, <span class="where">Urga, Mongolia</span>. As the Qing fell, the princes of Outer Mongolia declared their independence and enthroned the Jebtsundamba Khutughtu, the highest lama of the Mongols, as Bogd Khan, the Holy Emperor, at Urga. The new state turned to Russia for protection, and China would grant it only autonomy, but Mongolia was never again ruled from Beijing for long.</li>
+<li><b>The Fall of Porfirio Díaz</b><span class="when">A.D. 1911</span>, <span class="where">Ciudad Juárez, Mexico</span>. Francisco Madero, a wealthy landowner jailed for daring to run against the aged dictator Porfirio Díaz, called the nation to arms in November 1910. In May 1911 the irregulars of Pascual Orozco and Pancho Villa took Ciudad Juárez, and Díaz, after some thirty-five years in power, sailed for exile; a decade of revolution followed in which perhaps a million Mexicans died.</li>
+<li><b>Sarajevo</b><span class="when">A.D. 1914</span>, <span class="where">Sarajevo, Bosnia</span>. On the twenty-eighth of June, Gavrilo Princip shoots Archduke Franz Ferdinand, heir to the Austro-Hungarian throne, in the streets of Sarajevo. Within six weeks the great powers of Europe are at war, and four empires will not survive it.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1905.html" rel="prev">Earlier: the world in A.D. 1905</a><a href="/atlas/year/1915.html" rel="next">Later: the world in A.D. 1915</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

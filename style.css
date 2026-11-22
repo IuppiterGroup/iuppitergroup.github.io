@@ -464,11 +464,11 @@ section + section { border-top: 1px solid var(--border); }
 @media (max-width: 600px) { .donate-banner { padding: 18px 16px; } .btn-donate { width: 100%; text-align: center; } }
 
 /* ---- RESPONSIVE ---- */
-@media (max-width: 1180px) {
+@media (max-width: 1300px) {
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 0.78rem; letter-spacing: 0.4px; }
 }
-@media (max-width: 1080px) {
+@media (max-width: 1160px) {
   .nav-links { display: none; }
   .nav-links.open {
     display: flex; flex-direction: column;

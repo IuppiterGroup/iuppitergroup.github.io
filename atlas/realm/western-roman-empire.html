@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Western Roman Empire: Map, Rulers, and History, 395 to 479 | Orbis Terrarum</title>
+  <meta name="description" content="The western half of the Roman Empire after 395, ruled from Milan and then Ravenna by emperors more and more in the hands of their barbarian generals. It lost Britain, Spain, Africa, and Gaul to Goths, Vandals, Franks, and others, and ended when Odoacer deposed Romulus Augustulus in 476.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/western-roman-empire.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Western Roman Empire: Map, Rulers, and History, 395 to 479 | Orbis Terrarum">
+  <meta property="og:description" content="The western half of the Roman Empire after 395, ruled from Milan and then Ravenna by emperors more and more in the hands of their barbarian generals. It lost Britain, Spain, Africa, and Gaul to Goths, Vandals, Franks, and others, and ended when Odoacer deposed Romulus Augustulus in 476.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/western-roman-empire.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="396" data-view="-11.5,34,22.3,54.3" data-realm="Western Roman Empire">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Western Roman Empire</h1>
+<p class="lede">395 to 479. Shown above as it stood in A.D. 396; drag the timeline to watch it rise and fall.</p>
+<p>The western half of the Roman Empire after 395, ruled from Milan and then Ravenna by emperors more and more in the hands of their barbarian generals. It lost Britain, Spain, Africa, and Gaul to Goths, Vandals, Franks, and others, and ended when Odoacer deposed Romulus Augustulus in 476.</p>
+<dl class="facts"><dt>Government</dt><dd>Autocratic monarchy (emperor)</dd><dt>Faith</dt><dd>Christianity (Catholic)</dd><dt>Capitals</dt><dd>Milan <span class="num">(395 to 402)</span>; Ravenna <span class="num">(402 to 476)</span></dd><dt>Greatest extent</dt><dd>About 2.1 million sq. km, as drawn on this atlas for A.D. 396</dd></dl>
+<h2>Rulers of the Western Roman Empire</h2>
+<ul class="rulers"><li>Honorius <span class="num">395 to 423</span></li><li>Constantine III (usurper) <span class="num">407 to 411</span></li><li>Priscus Attalus (usurper) <span class="num">409 to 410</span></li><li>Constantius III <span class="num">421</span></li><li>Joannes (usurper) <span class="num">423 to 425</span></li><li>Valentinian III <span class="num">425 to 455</span></li><li>Petronius Maximus <span class="num">455</span></li><li>Avitus <span class="num">455 to 456</span></li><li>Majorian <span class="num">457 to 461</span></li><li>Libius Severus <span class="num">461 to 465</span></li><li>Anthemius <span class="num">467 to 472</span></li><li>Olybrius <span class="num">472</span></li><li>Glycerius <span class="num">473 to 474</span></li><li>Julius Nepos <span class="num">474 to 480</span></li><li>Romulus Augustulus <span class="num">475 to 476</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/400.html?v=-11.5,34,22.3,54.3">A.D. 400</a><a href="/atlas/year/410.html?v=-11.5,34,22.3,54.3">A.D. 410</a><a href="/atlas/year/420.html?v=-11.5,34,22.3,54.3">A.D. 420</a><a href="/atlas/year/430.html?v=-11.5,34,22.3,54.3">A.D. 430</a><a href="/atlas/year/440.html?v=-11.5,34,22.3,54.3">A.D. 440</a><a href="/atlas/year/450.html?v=-11.5,34,22.3,54.3">A.D. 450</a><a href="/atlas/year/460.html?v=-11.5,34,22.3,54.3">A.D. 460</a><a href="/atlas/year/470.html?v=-11.5,34,22.3,54.3">A.D. 470</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

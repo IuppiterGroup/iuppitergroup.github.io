@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Kingdom of the Franks: Map, Rulers, and History, 462 to 849 | Orbis Terrarum</title>
+  <meta name="description" content="The whole realm of the Franks, from the Merovingian kingdom of Clovis and his heirs, divided again and again among their sons, to the Carolingian empire of Pepin, Charlemagne, and Louis the Pious, which stretched from the Ebro to the Elbe and was parted among Louis's sons at Verdun in 843.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/kingdom-of-the-franks.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Kingdom of the Franks: Map, Rulers, and History, 462 to 849 | Orbis Terrarum">
+  <meta property="og:description" content="The whole realm of the Franks, from the Merovingian kingdom of Clovis and his heirs, divided again and again among their sons, to the Carolingian empire of Pepin, Charlemagne, and Louis the Pious, which stretched from the Ebro to the Elbe and was parted among Louis's sons at Verdun in 843.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/kingdom-of-the-franks.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="806" data-view="-4.8,39.2,21.2,56.7" data-realm="Kingdom of the Franks">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Kingdom of the Franks</h1>
+<p class="lede">462 to 849. Shown above as it stood in A.D. 806; drag the timeline to watch it rise and fall.</p>
+<p>The whole realm of the Franks, from the Merovingian kingdom of Clovis and his heirs, divided again and again among their sons, to the Carolingian empire of Pepin, Charlemagne, and Louis the Pious, which stretched from the Ebro to the Elbe and was parted among Louis's sons at Verdun in 843.</p>
+<dl class="facts"><dt>Government</dt><dd>Hereditary monarchy, divided among heirs</dd><dt>Faith</dt><dd>Catholic Christianity</dd><dt>Capitals</dt><dd>Tournai <span class="num">(457 to 486)</span>; Soissons <span class="num">(486 to 508)</span>; Paris <span class="num">(508 to 768)</span>; Aachen <span class="num">(794 to 843)</span></dd><dt>Greatest extent</dt><dd>About 1.3 million sq. km, as drawn on this atlas for A.D. 806</dd></dl>
+<h2>Rulers of the Kingdom of the Franks</h2>
+<ul class="rulers"><li>Childeric I <span class="num">457 to 481</span></li><li>Clovis I <span class="num">481 to 511</span></li><li>Theuderic I <span class="num">511 to 533</span></li><li>Chlodomer <span class="num">511 to 524</span></li><li>Childebert I <span class="num">511 to 558</span></li><li>Chlothar I <span class="num">511 to 561</span></li><li>Theudebert I <span class="num">533 to 548</span></li><li>Theudebald <span class="num">548 to 555</span></li><li>Charibert I <span class="num">561 to 567</span></li><li>Guntram <span class="num">561 to 592</span></li><li>Sigebert I <span class="num">561 to 575</span></li><li>Chilperic I <span class="num">561 to 584</span></li><li>Childebert II <span class="num">575 to 596</span></li><li>Chlothar II <span class="num">584 to 629</span></li><li>Theudebert II <span class="num">596 to 612</span></li><li>Theuderic II <span class="num">596 to 613</span></li><li>Sigebert II <span class="num">613</span></li><li>Dagobert I <span class="num">623 to 639</span></li><li>Charibert II <span class="num">629 to 632</span></li><li>Sigebert III <span class="num">633 to 656</span></li><li>Clovis II <span class="num">639 to 657</span></li><li>Childebert the Adopted <span class="num">656 to 661</span></li><li>Chlothar III <span class="num">657 to 673</span></li><li>Childeric II <span class="num">662 to 675</span></li><li>Theuderic III <span class="num">673 to 691</span></li><li>Dagobert II <span class="num">676 to 679</span></li><li>Pepin of Herstal (mayor of the palace) <span class="num">687 to 714</span></li><li>Clovis IV <span class="num">691 to 695</span></li><li>Childebert III <span class="num">695 to 711</span></li><li>Dagobert III <span class="num">711 to 715</span></li><li>Chilperic II <span class="num">715 to 721</span></li><li>Chlothar IV <span class="num">717 to 718</span></li><li>Charles Martel (mayor of the palace) <span class="num">718 to 741</span></li><li>Theuderic IV <span class="num">721 to 737</span></li><li>Childeric III <span class="num">743 to 751</span></li><li>Pepin the Short <span class="num">751 to 768</span></li><li>Carloman I <span class="num">768 to 771</span></li><li>Charlemagne <span class="num">768 to 814</span></li><li>Louis the Pious <span class="num">814 to 840</span></li><li>Lothair I <span class="num">840 to 855</span></li><li>Charles the Bald <span class="num">843 to 877</span></li><li>Louis the German <span class="num">843 to 876</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/470.html?v=-4.8,39.2,21.2,56.7">A.D. 470</a><a href="/atlas/year/490.html?v=-4.8,39.2,21.2,56.7">A.D. 490</a><a href="/atlas/year/510.html?v=-4.8,39.2,21.2,56.7">A.D. 510</a><a href="/atlas/year/540.html?v=-4.8,39.2,21.2,56.7">A.D. 540</a><a href="/atlas/year/560.html?v=-4.8,39.2,21.2,56.7">A.D. 560</a><a href="/atlas/year/580.html?v=-4.8,39.2,21.2,56.7">A.D. 580</a><a href="/atlas/year/600.html?v=-4.8,39.2,21.2,56.7">A.D. 600</a><a href="/atlas/year/620.html?v=-4.8,39.2,21.2,56.7">A.D. 620</a><a href="/atlas/year/640.html?v=-4.8,39.2,21.2,56.7">A.D. 640</a><a href="/atlas/year/670.html?v=-4.8,39.2,21.2,56.7">A.D. 670</a><a href="/atlas/year/690.html?v=-4.8,39.2,21.2,56.7">A.D. 690</a><a href="/atlas/year/710.html?v=-4.8,39.2,21.2,56.7">A.D. 710</a><a href="/atlas/year/730.html?v=-4.8,39.2,21.2,56.7">A.D. 730</a><a href="/atlas/year/750.html?v=-4.8,39.2,21.2,56.7">A.D. 750</a><a href="/atlas/year/770.html?v=-4.8,39.2,21.2,56.7">A.D. 770</a><a href="/atlas/year/800.html?v=-4.8,39.2,21.2,56.7">A.D. 800</a><a href="/atlas/year/820.html?v=-4.8,39.2,21.2,56.7">A.D. 820</a><a href="/atlas/year/840.html?v=-4.8,39.2,21.2,56.7">A.D. 840</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

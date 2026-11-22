@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 770 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 770: Abbasid Caliphate, Uyghur Khaganate, Tibetan Empire, Tang Dynasty, Kimek-Kipchak confederation, Khazaria, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/770.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 770 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 770: Abbasid Caliphate, Uyghur Khaganate, Tibetan Empire, Tang Dynasty, Kimek-Kipchak confederation, Khazaria, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/770.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="770">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 770</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 770, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 770</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/abbasid-caliphate.html">Abbasid Caliphate</a></td><td>al-Mansur (754 to 775)</td><td class="hide-s">Baghdad</td><td class="hide-s num">about 8.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/uyghur-khaganate.html">Uyghur Khaganate</a></td><td>Bögü Qaghan (759 to 779)</td><td class="hide-s">Ordu-Baliq</td><td class="hide-s num">about 3.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibetan-empire.html">Tibetan Empire</a></td><td>Trisong Detsen (755 to 797)</td><td class="hide-s">Lhasa</td><td class="hide-s num">about 3.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tang-dynasty.html">Tang Dynasty</a></td><td>Emperor Daizong of Tang (762 to 779)</td><td class="hide-s">Chang'an</td><td class="hide-s num">about 3.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kimek-kipchak-confederation.html">Kimek-Kipchak confederation</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khazaria.html">Khazaria</a></td><td></td><td class="hide-s">Atil</td><td class="hide-s num">about 767 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/rashtrakuta-dynasty.html">Rashtrakuta Dynasty</a></td><td>Krishna I (756 to 774)</td><td class="hide-s"></td><td class="hide-s num">about 736 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-the-franks.html">Kingdom of the Franks</a></td><td>Carloman I (768 to 771) and Charlemagne (768 to 814)</td><td class="hide-s"></td><td class="hide-s num">about 719 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/byzantine-empire.html">Byzantine Empire</a></td><td>Constantine V (741 to 775)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 703 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/nanzhao.html">Nanzhao</a></td><td>Geluofeng (748 to 779)</td><td class="hide-s">Taihe</td><td class="hide-s num">about 592 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kannauj-varman-dynasty.html">Kannauj-Varman Dynasty</a></td><td></td><td class="hide-s">Kannauj</td><td class="hide-s num">about 571 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/gurjara-pratihara-dynasty.html">Gurjara-Pratihara Dynasty</a></td><td>Kakustha and Devaraja (760 to 780)</td><td class="hide-s">Ujjain</td><td class="hide-s num">about 537 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/srivijaya.html">Srivijaya</a></td><td></td><td class="hide-s">Palembang</td><td class="hide-s num">about 516 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/oghuz-turks.html">Oghuz Turks</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 458 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 770</h3><ul><li><a href="/atlas/realm/khazaria.html">Khazaria</a></li><li><a href="/atlas/realm/kingdom-of-the-franks.html">Kingdom of the Franks</a></li><li><a href="/atlas/realm/emirate-of-cordoba.html">Emirate of Córdoba</a></li><li><a href="/atlas/realm/scandinavian-minor-kingdoms.html">Scandinavian minor kingdoms</a></li><li><a href="/atlas/realm/avar-khaganate.html">Avar Khaganate</a></li><li><a href="/atlas/realm/kingdom-of-the-lombards.html">Kingdom of the Lombards</a></li><li><a href="/atlas/realm/first-bulgarian-empire.html">First Bulgarian Empire</a></li><li><a href="/atlas/realm/anglo-saxon-england.html">Anglo-Saxon England</a></li></ul><a class="see" href="/atlas/year/770.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 770</h3><ul><li><a href="/atlas/realm/abbasid-caliphate.html">Abbasid Caliphate</a></li><li><a href="/atlas/realm/byzantine-empire.html">Byzantine Empire</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/kingdom-of-lazica.html">Kingdom of Lazica</a></li><li>Cyprus Condominium</li></ul><a class="see" href="/atlas/year/770.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 770</h3><ul><li><a href="/atlas/realm/uyghur-khaganate.html">Uyghur Khaganate</a></li><li><a href="/atlas/realm/tibetan-empire.html">Tibetan Empire</a></li><li><a href="/atlas/realm/kimek-kipchak-confederation.html">Kimek-Kipchak confederation</a></li><li><a href="/atlas/realm/rashtrakuta-dynasty.html">Rashtrakuta Dynasty</a></li><li><a href="/atlas/realm/kannauj-varman-dynasty.html">Kannauj-Varman Dynasty</a></li><li><a href="/atlas/realm/gurjara-pratihara-dynasty.html">Gurjara-Pratihara Dynasty</a></li><li><a href="/atlas/realm/turk-shahis.html">Turk Shahis</a></li><li><a href="/atlas/realm/pala-empire.html">Pala Empire</a></li></ul><a class="see" href="/atlas/year/770.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 770</h3><ul><li><a href="/atlas/realm/tang-dynasty.html">Tang Dynasty</a></li><li><a href="/atlas/realm/nanzhao.html">Nanzhao</a></li><li><a href="/atlas/realm/srivijaya.html">Srivijaya</a></li><li><a href="/atlas/realm/balhae.html">Balhae</a></li><li><a href="/atlas/realm/water-chenla.html">Water Chenla</a></li><li><a href="/atlas/realm/nara-japan.html">Nara Japan</a></li><li><a href="/atlas/realm/land-chenla.html">Land Chenla</a></li><li><a href="/atlas/realm/haripunjaya.html">Haripuñjaya</a></li></ul><a class="see" href="/atlas/year/770.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 770</h3><ul><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li>Emirate of Nekor</li><li>Cyprus Condominium</li></ul><a class="see" href="/atlas/year/770.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 770</h3><ul><li><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></li><li><a href="/atlas/realm/classic-veracruz-culture.html">Classic Veracruz Culture</a></li><li><a href="/atlas/realm/zapotec-civilization.html">Zapotec Civilization</a></li></ul><a class="see" href="/atlas/year/770.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Rebellion of An Lushan</b><span class="when">A.D. 755</span>, <span class="where">Fanyang, Hebei, China</span>. An Lushan, a general of Sogdian and Turkic blood who commanded three frontier armies, rose at Fanyang, took Luoyang, and proclaimed himself emperor of Yan. Emperor Xuanzong fled Chang'an, and his mutinous guards forced him to have his beloved Yang Guifei strangled at Mawei. Eight years of war followed, and the Tang census fell from over fifty million to under seventeen.</li>
+<li><b>The Donation of Pepin</b><span class="when">A.D. 756</span>, <span class="where">St. Peter's, Rome</span>. Twice summoned by Pope Stephen II against the Lombards, Pepin crossed the Alps, besieged King Aistulf in Pavia, and gave the cities he surrendered, the old Exarchate of Ravenna, to St. Peter. The abbot Fulrad laid their keys on the apostle's tomb. Thus were born the Papal States, which would endure for eleven centuries.</li>
+<li><b>The Umayyad Emirate of Córdoba</b><span class="when">A.D. 756</span>, <span class="where">Córdoba, Spain</span>. Abd al-Rahman, grandson of the caliph Hisham, escaped the slaughter of his house and wandered five years through Africa before crossing to Spain. In May 756 he defeated the governor Yusuf al-Fihri on the banks of the Guadalquivir and was proclaimed emir at Córdoba. His dynasty ruled al-Andalus for nearly three centuries, owing nothing to Baghdad.</li>
+<li><b>The Kailasa Temple of Ellora</b><span class="when">c. A.D. 760</span>, <span class="where">Ellora, Maharashtra, India</span>. Under the Rashtrakuta king Krishna I, masons cut a whole temple to Shiva downward out of the basalt hillside at Ellora, removing some two hundred thousand tonnes of rock to free a shrine, a hall, and a gateway in a single piece. Carved to stand for Mount Kailasa, the god's Himalayan home, it is the greatest of all rock-cut temples.</li>
+<li><b>Al-Mansur Founds Baghdad</b><span class="when">A.D. 762</span>, <span class="where">Baghdad, Iraq</span>. The caliph al-Mansur chose a site on the Tigris where the canals from the Euphrates came nearest, and in 762 began his City of Peace: a perfect circle of brick walls, four gates facing the quarters of his empire, and at the center his green-domed palace and mosque. Within fifty years Baghdad was the greatest city west of China.</li>
+<li><b>The Rearguard at Roncevaux</b><span class="when">A.D. 778</span>, <span class="where">Roncevaux Pass, Navarre</span>. Returning from a fruitless campaign before Zaragoza, Charlemagne razed the walls of Pamplona. On 15 August 778 Basques fell upon his rearguard in the Pyrenean passes and slew it to a man, among them Roland, prefect of the Breton March. Three centuries later the disaster was sung, with Saracens in place of Basques, as the Song of Roland.</li>
+<li><b>The Founding of Samye</b><span class="when">c. A.D. 779</span>, <span class="where">Samye, Tibet</span>. King Trisong Detsen, with the Indian masters Śāntarakṣita and Padmasambhava, completed Samye, the first Buddhist monastery in Tibet, laid out as a mandala of the universe, and saw the first Tibetans ordained as monks. A great debate held there between Indian and Chinese teachers ended, by Tibetan tradition, in favour of the Indian school.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/760.html" rel="prev">Earlier: the world in A.D. 760</a><a href="/atlas/year/780.html" rel="next">Later: the world in A.D. 780</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1260 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1260: Mongol Empire, Southern Song, Mamluk Sultanate, Delhi Sultanate, Mali Empire, Holy Roman Empire, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1260.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1260 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1260: Mongol Empire, Southern Song, Mamluk Sultanate, Delhi Sultanate, Mali Empire, Holy Roman Empire, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1260.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1260">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1260</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 1260, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1260</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/mongol-empire.html">Mongol Empire</a></td><td>Ariq Böke (rival khan) (1260 to 1264) and Kublai Khan (1260 to 1294)</td><td class="hide-s">Karakorum and Shangdu</td><td class="hide-s num">about 25 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/southern-song.html">Southern Song</a></td><td>Emperor Lizong of Song (1224 to 1264)</td><td class="hide-s">Lin'an</td><td class="hide-s num">about 1.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></td><td>al-Muzaffar Qutuz (1259 to 1260), then al-Zahir Baybars (1260 to 1277)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/delhi-sultanate.html">Delhi Sultanate</a></td><td>Nasir al-Din Mahmud (1246 to 1266)</td><td class="hide-s">Delhi</td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mali-empire.html">Mali Empire</a></td><td>Uli I (1255 to 1270)</td><td class="hide-s">Niani</td><td class="hide-s num">about 978 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></td><td>Richard of Cornwall (1257 to 1272) and Alfonso X of Castile (1257 to 1275)</td><td class="hide-s"></td><td class="hide-s num">about 873 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></td><td>Jayavarman VIII (1243 to 1295)</td><td class="hide-s">Yasodharapura</td><td class="hide-s num">about 510 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/yadava-dynasty.html">Yadava Dynasty</a></td><td>Krishna (1246 to 1261)</td><td class="hide-s">Devagiri</td><td class="hide-s num">about 487 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></td><td>Louis IX (St. Louis) (1226 to 1270)</td><td class="hide-s">Paris</td><td class="hide-s num">about 446 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/srivijaya.html">Srivijaya</a></td><td></td><td class="hide-s">Jambi</td><td class="hide-s num">about 443 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/pagan-kingdom.html">Pagan Kingdom</a></td><td>Narathihapate (1256 to 1287)</td><td class="hide-s">Pagan</td><td class="hide-s num">about 442 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/marinid-sultanate.html">Marinid Sultanate</a></td><td>Abu Yusuf Ya'qub (1258 to 1286)</td><td class="hide-s">Fez</td><td class="hide-s num">about 389 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/rasulid-dynasty.html">Rasulid Dynasty</a></td><td>al-Muzaffar Yusuf (1249 to 1295)</td><td class="hide-s">Ta'izz and Zabid</td><td class="hide-s num">about 373 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/crown-of-castile.html">Crown of Castile</a></td><td>Alfonso X the Wise (1252 to 1284)</td><td class="hide-s">Toledo</td><td class="hide-s num">about 355 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1260</h3><ul><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/crown-of-castile.html">Crown of Castile</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></li><li><a href="/atlas/realm/principality-of-vladimir-suzdal.html">Principality of Vladimir-Suzdal</a></li><li><a href="/atlas/realm/novgorod-republic.html">Novgorod Republic</a></li><li><a href="/atlas/realm/kingdom-of-england.html">Kingdom of England</a></li></ul><a class="see" href="/atlas/year/1260.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1260</h3><ul><li><a href="/atlas/realm/rasulid-dynasty.html">Rasulid Dynasty</a></li><li><a href="/atlas/realm/nicaean-empire.html">Nicaean Empire</a></li><li><a href="/atlas/realm/second-bulgarian-empire.html">Second Bulgarian Empire</a></li><li><a href="/atlas/realm/nabhani-dynasty.html">Nabhani dynasty</a></li><li><a href="/atlas/realm/bahrani-dynasty.html">Bahrani Dynasty</a></li><li><a href="/atlas/realm/armenian-kingdom-of-cilicia.html">Armenian Kingdom of Cilicia</a></li><li><a href="/atlas/realm/empire-of-trebizond.html">Empire of Trebizond</a></li><li>Zagwe dynasty</li></ul><a class="see" href="/atlas/year/1260.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1260</h3><ul><li><a href="/atlas/realm/mongol-empire.html">Mongol Empire</a></li><li><a href="/atlas/realm/delhi-sultanate.html">Delhi Sultanate</a></li><li><a href="/atlas/realm/yadava-dynasty.html">Yadava Dynasty</a></li><li><a href="/atlas/realm/pagan-kingdom.html">Pagan Kingdom</a></li><li><a href="/atlas/realm/kakatiya-dynasty.html">Kakatiya Dynasty</a></li><li><a href="/atlas/realm/pandya-empire.html">Pandya Empire</a></li><li><a href="/atlas/realm/eastern-ganga-kingdom.html">Eastern Ganga Kingdom</a></li><li><a href="/atlas/realm/chandela-kingdom.html">Chandela Kingdom</a></li></ul><a class="see" href="/atlas/year/1260.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1260</h3><ul><li><a href="/atlas/realm/southern-song.html">Southern Song</a></li><li><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></li><li><a href="/atlas/realm/srivijaya.html">Srivijaya</a></li><li><a href="/atlas/realm/kamakura-shogunate.html">Kamakura Shogunate</a></li><li><a href="/atlas/realm/sukhothai-kingdom.html">Sukhothai Kingdom</a></li><li><a href="/atlas/realm/tran-dynasty.html">Trần dynasty</a></li><li><a href="/atlas/realm/goryeo.html">Goryeo</a></li><li><a href="/atlas/realm/champa.html">Champa</a></li></ul><a class="see" href="/atlas/year/1260.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1260</h3><ul><li><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></li><li><a href="/atlas/realm/mali-empire.html">Mali Empire</a></li><li><a href="/atlas/realm/marinid-sultanate.html">Marinid Sultanate</a></li><li><a href="/atlas/realm/hafsid-dynasty.html">Hafsid Dynasty</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/zayyanid-dynasty.html">Zayyanid dynasty</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/emirate-of-granada.html">Emirate of Granada</a></li></ul><a class="see" href="/atlas/year/1260.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1260</h3><ul><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/norse-greenland.html">Norse Greenland</a></li><li>Puebloans - Aztec Regional System</li><li><a href="/atlas/realm/chimu-empire.html">Chimu Empire</a></li><li>Texcoco</li></ul><a class="see" href="/atlas/year/1260.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Mamluks Seize Egypt</b><span class="when">A.D. 1250</span>, <span class="where">Mansura, Egypt</span>. King Louis IX of France took Damietta in 1249, but in February 1250 his brother Robert of Artois charged into the streets of Mansura and was slain by the Bahri Mamluks, the slave guards of the late sultan al-Salih Ayyub. Louis was captured in the retreat and ransomed. In May the Mamluks murdered the new sultan Turanshah, and Egypt passed into the hands of its slave soldiers.</li>
+<li><b>The Sun Temple of Konark</b><span class="when">c. A.D. 1250</span>, <span class="where">Konark, Odisha, India</span>. Narasimhadeva I of the Eastern Ganga dynasty, who had carried the war against the Muslims of Bengal into their own land, built at Konark on the Orissa coast a temple to the Sun in the form of the god's chariot, drawn by seven stone horses on twenty-four carved wheels. Its great tower, a landmark for sailors who called it the Black Pagoda, fell in later centuries.</li>
+<li><b>The Mongols Sack Baghdad</b><span class="when">A.D. 1258</span>, <span class="where">Baghdad, Iraq</span>. Hulagu, brother of the Great Khan Möngke, having reduced the Assassin castles, summoned the caliph al-Musta'sim to submit. When he temporized, the Mongols stormed Baghdad in February 1258 and sacked it for a week; the dead were reckoned in the hundreds of thousands. The last Abbasid caliph of Baghdad was rolled in a carpet and trampled by horses, and the Tigris, it was said, ran black with the ink of its libraries.</li>
+<li><b>The Battle of Ain Jalut</b><span class="when">A.D. 1260</span>, <span class="where">Ain Jalut, Galilee</span>. When the death of the Great Khan drew Hulagu east with most of his army, the Mamluk sultan Qutuz marched out of Egypt against the force left in Syria under Kitbuqa. On 3 September 1260, at the Spring of Goliath in the valley of Jezreel, the Mamluks drew the Mongols into an ambush and destroyed them; Kitbuqa was slain. The westward tide of the Mongol conquest was turned for good.</li>
+<li><b>The Greeks Recover Constantinople</b><span class="when">A.D. 1261</span>, <span class="where">Constantinople, Thrace</span>. On 25 July 1261 the Nicaean general Alexios Strategopoulos, passing near the city with a small force while the Venetian fleet was away, slipped into Constantinople by an unguarded gate. The Latin emperor Baldwin II fled, and on 15 August Michael VIII Palaiologos entered the city on foot behind the icon of the Virgin. His dynasty ruled until the end.</li>
+<li><b>Baybars Destroys Antioch</b><span class="when">A.D. 1268</span>, <span class="where">Antioch, Syria</span>. On 18 May 1268 the Mamluk sultan Baybars stormed Antioch, held by the Franks for 170 years. The gates were shut that none might escape; the men were put to the sword and the women and children sold, so many that the price of a captive fell to a few dirhams. Baybars wrote to the absent prince Bohemond VI to describe the slaughter. The great city never recovered.</li>
+<li><b>The Marinids Take Marrakesh</b><span class="when">A.D. 1269</span>, <span class="where">Marrakesh, Morocco</span>. The Banu Marin, Zenata nomads who had come up from the desert fringes as the Almohads weakened after Las Navas, took Fez in 1248. In September 1269 Abu Yusuf Ya'qub entered Marrakesh, and the last Almohad caliph was slain in flight. The Marinids ruled Morocco from Fez, raised there a new royal city and splendid madrasas, and crossed often into Spain to aid Granada.</li>
+<li><b>Saint Louis Dies Before Tunis</b><span class="when">A.D. 1270</span>, <span class="where">Carthage, Tunisia</span>. Louis IX of France, hoping, it was said, to convert the Hafsid sultan al-Mustansir, turned his second crusade against Tunis and landed at the ruins of Carthage in July 1270. Dysentery swept the camp in the African heat; the king died on 25 August, murmuring the name of Jerusalem. His brother Charles of Anjou made terms with the sultan and sailed home.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1250.html" rel="prev">Earlier: the world in A.D. 1250</a><a href="/atlas/year/1270.html" rel="next">Later: the world in A.D. 1270</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>
