@@ -223,14 +223,14 @@ const ROMA_SOURCES = [
   "text": "“The wild beasts that roam over Italy,” he would say, “have every one of them a cave or lair to lurk in; but the men who fight and die for Italy enjoy the common air and light, indeed, but nothing else; houseless and homeless they wander about with their wives and children. And it is with lying lips that their imperators exhort the soldiers in their battles to defend sepulchres and shrines from the enemy; for not a man of them has an hereditary altar, not one of all these many Romans an ancestral tomb, but they fight and die to support others in wealth and luxury, and though they are styled masters of the world, they have not a single clod of earth that is their own.”"
  },
  {
-  "id": "plut-spartacus",
+  "id": "app-spartacus",
   "ev": "spartacus",
-  "author": "Plutarch",
-  "work": "Life of Crassus",
-  "ref": "8",
-  "tr": "Bernadotte Perrin, 1916",
-  "title": "The gladiators break out of Capua",
-  "text": "The insurrection of the gladiators and their devastation of Italy, which is generally called the war of Spartacus, had its origin as follows. A certain Lentulus Batiatus had a school of gladiators at Capua, most of whom were Gauls and Thracians. Through no misconduct of theirs, but owing to the injustice of their owner, they were kept in close confinement and reserved for gladiatorial combats. Two hundred of these planned to make their escape, and when information was laid against them, those who got wind of it and succeeded in getting away, seventy-eight in number, seized cleavers and spits from some kitchen and sallied out. On the road they fell in with waggons conveying gladiators’ weapons to another city; these they plundered and armed themselves. Then they took up a strong position and elected three leaders. The first of these was Spartacus, a Thracian of Nomadic stock, possessed not only of great courage and strength, but also in sagacity and culture superior to his fortune, and more Hellenic than Thracian."
+  "author": "Appian",
+  "work": "Civil Wars",
+  "ref": "1.120",
+  "tr": "Horace White, 1899",
+  "title": "Crassus ends the war of Spartacus",
+  "text": "Spartacus himself, thinking to anticipate Pompey, invited Crassus to come to terms with him. When his proposals were rejected with scorn he resolved to risk a battle, and as his cavalry had arrived he made a dash with his whole army through the lines of the besieging force and pushed on to Brundusium with Crassus in pursuit. When Spartacus learned that Lucullus had just arrived in Brundusium from his victory over Mithridates he despaired of everything and brought his forces, which were even then very numerous, to close quarters with Crassus. The battle was long and bloody, as might have been expected with so many thousands of desperate men. Spartacus was wounded in the thigh with a spear and sank upon his knee, holding his shield in front of him and contending in this way against his assailants until he and the great mass of those with him were surrounded and slain. The remainder of his army was thrown into confusion and butchered in crowds. So great was the slaughter that it was impossible to count them. The Roman loss was about 1000. The body of Spartacus was not found. A large number of his men fled from the battle-field to the mountains and Crassus followed them thither. They divided themselves in four parts, and continued to fight until they all perished except 6000, who were captured and crucified along the whole road from Capua to Rome."
  },
  {
   "id": "cic-catiline",

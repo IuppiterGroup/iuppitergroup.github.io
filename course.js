@@ -132,7 +132,7 @@
     h.push('</ol>');
     if (WORLD.length) {
       h.push('<h2 class="sec-title part-title" id="orbis">Part II. The world\'s ages, on the atlas</h2>' +
-        '<p class="part-intro">Rome was one realm among many. This second road runs through the whole atlas, from the first cities of Egypt and Sumer to the present, one station at a time. Each station opens the map of the world in that year, with its great realms, their rulers, and the events of the age.</p><ol class="units world">');
+        '<p class="part-intro">Rome stands at the center of this course. This second road shows the world around her: the cities that came before, the realms she mastered, and the nations that rose in her shadow. It runs through the whole atlas, from the first cities of Egypt and Sumer to the present, one station at a time. Each station opens the map of the world in that year, with its great realms, their rulers, and the events of the age.</p><ol class="units world">');
       WORLD.forEach(function (w, i) {
         h.push('<li class="unit"><div class="unit-head"><span class="unit-n">' + roman(i + 1) + '</span><div><h3>' + esc(w.name) + '</h3><p class="unit-span">' + esc(w.span) + '</p></div></div><ol class="station-list">');
         w.stations.forEach(function (st) {
