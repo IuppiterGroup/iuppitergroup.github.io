@@ -73,4 +73,5 @@ PY
 cp out/base.json "$DEST/base.json"
 cp hb/LICENSE "$DEST/LICENSE-historical-basemaps.txt"
 cp clio/LICENSE.md "$DEST/LICENSE-cliopatria.md"
+python3 "$BUILD/rename_final.py" "$DEST"
 echo "atlas/data rebuilt."
