@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Delhi Sultanate: Map, Rulers, and History, 1333 to 1343 | Orbis Terrarum</title>
+  <meta name="description" content="The succession of Muslim sultanates that ruled northern India from Delhi between 1206 and 1526 under the Mamluk, Khalji, Tughlaq, Sayyid, and Lodi dynasties. It held off the Mongols, carried its arms to the far south, raised the Qutb Minar, and took Hindu captives into slavery in great numbers.…">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/delhi-sultanate.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Delhi Sultanate: Map, Rulers, and History, 1333 to 1343 | Orbis Terrarum">
+  <meta property="og:description" content="The succession of Muslim sultanates that ruled northern India from Delhi between 1206 and 1526 under the Mamluk, Khalji, Tughlaq, Sayyid, and Lodi dynasties. It held off the Mongols, carried its arms to the far south, raised the Qutb Minar, and took Hindu captives into slavery in great numbers.…">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/delhi-sultanate.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1333" data-view="65.4,8.3,93.8,36.5" data-realm="Delhi Sultanate">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Delhi Sultanate</h1>
+<p class="lede">1333 to 1343. Shown above as it stood in A.D. 1333; drag the timeline to watch it rise and fall.</p>
+<p>The succession of Muslim sultanates that ruled northern India from Delhi between 1206 and 1526 under the Mamluk, Khalji, Tughlaq, Sayyid, and Lodi dynasties. It held off the Mongols, carried its arms to the far south, raised the Qutb Minar, and took Hindu captives into slavery in great numbers. Timur shattered it in 1398, and Babur ended it at Panipat.</p>
+<dl class="facts"><dt>Government</dt><dd>Sultanate (Turkic and Afghan military monarchy)</dd><dt>Faith</dt><dd>Sunni Islam; Hindu majority</dd><dt>Capitals</dt><dd>Lahore <span class="num">(1206 to 1211)</span>; Delhi <span class="num">(1211 to 1327)</span>; Daulatabad <span class="num">(1327 to 1335)</span>; Delhi <span class="num">(1335 to 1506)</span>; Agra <span class="num">(1506 to 1526)</span></dd><dt>Greatest extent</dt><dd>About 2.4 million sq. km, as drawn on this atlas for A.D. 1333</dd></dl>
+<h2>Rulers of the Delhi Sultanate</h2>
+<ul class="rulers"><li>Qutb al-Din Aibak <span class="num">1206 to 1210</span></li><li>Aram Shah <span class="num">1210 to 1211</span></li><li>Iltutmish <span class="num">1211 to 1236</span></li><li>Rukn al-Din Firuz <span class="num">1236</span></li><li>Razia Sultana <span class="num">1236 to 1240</span></li><li>Mu'izz al-Din Bahram <span class="num">1240 to 1242</span></li><li>Ala al-Din Mas'ud <span class="num">1242 to 1246</span></li><li>Nasir al-Din Mahmud <span class="num">1246 to 1266</span></li><li>Ghiyath al-Din Balban <span class="num">1266 to 1287</span></li><li>Mu'izz al-Din Qaiqabad <span class="num">1287 to 1290</span></li><li>Shams al-Din Kayumars <span class="num">1290</span></li><li>Jalal al-Din Firuz Khalji <span class="num">1290 to 1296</span></li><li>Rukn al-Din Ibrahim <span class="num">1296</span></li><li>Ala al-Din Khalji <span class="num">1296 to 1316</span></li><li>Shihab al-Din Umar <span class="num">1316</span></li><li>Qutb al-Din Mubarak Shah <span class="num">1316 to 1320</span></li><li>Khusrau Khan <span class="num">1320</span></li><li>Ghiyath al-Din Tughlaq <span class="num">1320 to 1325</span></li><li>Muhammad bin Tughlaq <span class="num">1325 to 1351</span></li><li>Firuz Shah Tughlaq <span class="num">1351 to 1388</span></li><li>Ghiyath al-Din Tughlaq II <span class="num">1388 to 1389</span></li><li>Abu Bakr Shah <span class="num">1389 to 1390</span></li><li>Nasir al-Din Muhammad Shah III <span class="num">1390 to 1394</span></li><li>Ala al-Din Sikandar Shah <span class="num">1394</span></li><li>Nusrat Shah (rival) <span class="num">1394 to 1398</span></li><li>Nasir al-Din Mahmud Shah <span class="num">1394 to 1412</span></li><li>Daulat Khan Lodi <span class="num">1412 to 1414</span></li><li>Khizr Khan <span class="num">1414 to 1421</span></li><li>Mubarak Shah <span class="num">1421 to 1434</span></li><li>Muhammad Shah <span class="num">1434 to 1445</span></li><li>Alam Shah <span class="num">1445 to 1451</span></li><li>Bahlul Lodi <span class="num">1451 to 1489</span></li><li>Sikandar Lodi <span class="num">1489 to 1517</span></li><li>Ibrahim Lodi <span class="num">1517 to 1526</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/1340.html?v=65.4,8.3,93.8,36.5">A.D. 1340</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

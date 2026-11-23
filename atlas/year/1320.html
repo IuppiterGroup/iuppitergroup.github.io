@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1320 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1320: Yuan Dynasty, Golden Horde, Ilkhanate, Chagatai Khanate, Delhi Sultanate, Mamluk Sultanate, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1320.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1320 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1320: Yuan Dynasty, Golden Horde, Ilkhanate, Chagatai Khanate, Delhi Sultanate, Mamluk Sultanate, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1320.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1320">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1320</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 1320, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1320</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/yuan-dynasty.html">Yuan Dynasty</a></td><td>Ayurbarwada (Emperor Renzong) (1311 to 1320), then Shidebala (Emperor Yingzong) (1320 to 1323)</td><td class="hide-s">Khanbaliq</td><td class="hide-s num">about 14 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/golden-horde.html">Golden Horde</a></td><td>Özbeg (1313 to 1341)</td><td class="hide-s">Sarai</td><td class="hide-s num">about 4.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ilkhanate.html">Ilkhanate</a></td><td>Abu Sa'id (1316 to 1335)</td><td class="hide-s">Soltaniyeh</td><td class="hide-s num">about 3.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/chagatai-khanate.html">Chagatai Khanate</a></td><td>Kebek (restored) (1318 to 1325)</td><td class="hide-s">Almaliq</td><td class="hide-s num">about 2.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/delhi-sultanate.html">Delhi Sultanate</a></td><td>Qutb al-Din Mubarak Shah (1316 to 1320) and Khusrau Khan (1320)</td><td class="hide-s">Delhi</td><td class="hide-s num">about 1.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></td><td>al-Nasir Muhammad (third reign) (1310 to 1341)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/novgorod-republic.html">Novgorod Republic</a></td><td></td><td class="hide-s">Novgorod</td><td class="hide-s num">about 1.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mali-empire.html">Mali Empire</a></td><td>Musa I (Mansa Musa) (1312 to 1337)</td><td class="hide-s">Niani</td><td class="hide-s num">about 978 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 896 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></td><td>Indrajayavarman (1308 to 1327)</td><td class="hide-s">Yasodharapura</td><td class="hide-s num">about 510 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/yadava-dynasty.html">Yadava Dynasty</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 486 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></td><td>Magnus VII (1319 to 1355)</td><td class="hide-s">Oslo</td><td class="hide-s num">about 459 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></td><td>Philip V (1316 to 1322)</td><td class="hide-s">Paris</td><td class="hide-s num">about 456 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/marinid-sultanate.html">Marinid Sultanate</a></td><td>Abu Sa'id Uthman II (1310 to 1331)</td><td class="hide-s">Fez</td><td class="hide-s num">about 389 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1320</h3><ul><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></li><li><a href="/atlas/realm/crown-of-castile.html">Crown of Castile</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-england.html">Kingdom of England</a></li><li><a href="/atlas/realm/grand-duchy-of-lithuania.html">Grand Duchy of Lithuania</a></li></ul><a class="see" href="/atlas/year/1320.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1320</h3><ul><li><a href="/atlas/realm/ilkhanate.html">Ilkhanate</a></li><li><a href="/atlas/realm/rasulid-dynasty.html">Rasulid Dynasty</a></li><li><a href="/atlas/realm/second-bulgarian-empire.html">Second Bulgarian Empire</a></li><li><a href="/atlas/realm/beylik-of-karaman.html">Beylik of Karaman</a></li><li><a href="/atlas/realm/nabhani-dynasty.html">Nabhani dynasty</a></li><li><a href="/atlas/realm/bahrani-dynasty.html">Bahrani Dynasty</a></li><li><a href="/atlas/realm/beylik-of-hamid.html">Beylik of Hamid</a></li><li><a href="/atlas/realm/armenian-kingdom-of-cilicia.html">Armenian Kingdom of Cilicia</a></li></ul><a class="see" href="/atlas/year/1320.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1320</h3><ul><li><a href="/atlas/realm/golden-horde.html">Golden Horde</a></li><li><a href="/atlas/realm/ilkhanate.html">Ilkhanate</a></li><li><a href="/atlas/realm/chagatai-khanate.html">Chagatai Khanate</a></li><li><a href="/atlas/realm/delhi-sultanate.html">Delhi Sultanate</a></li><li><a href="/atlas/realm/yadava-dynasty.html">Yadava Dynasty</a></li><li><a href="/atlas/realm/kakatiya-dynasty.html">Kakatiya Dynasty</a></li><li><a href="/atlas/realm/shan-states.html">Shan States</a></li><li><a href="/atlas/realm/pandya-empire.html">Pandya Empire</a></li></ul><a class="see" href="/atlas/year/1320.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1320</h3><ul><li><a href="/atlas/realm/yuan-dynasty.html">Yuan Dynasty</a></li><li><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></li><li><a href="/atlas/realm/sukhothai-kingdom.html">Sukhothai Kingdom</a></li><li><a href="/atlas/realm/dharmasraya.html">Dharmasraya</a></li><li><a href="/atlas/realm/kamakura-shogunate.html">Kamakura Shogunate</a></li><li><a href="/atlas/realm/tran-dynasty.html">Trần dynasty</a></li><li><a href="/atlas/realm/malaya.html">Malaya</a></li><li><a href="/atlas/realm/goryeo.html">Goryeo</a></li></ul><a class="see" href="/atlas/year/1320.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1320</h3><ul><li><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></li><li><a href="/atlas/realm/mali-empire.html">Mali Empire</a></li><li><a href="/atlas/realm/marinid-sultanate.html">Marinid Sultanate</a></li><li><a href="/atlas/realm/hafsid-dynasty.html">Hafsid Dynasty</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/zayyanid-dynasty.html">Zayyanid dynasty</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li></ul><a class="see" href="/atlas/year/1320.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1320</h3><ul><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li>Cuzco</li><li><a href="/atlas/realm/chimu-empire.html">Chimu Empire</a></li><li><a href="/atlas/realm/michoacan.html">Michoacán</a></li><li>Texcoco</li></ul><a class="see" href="/atlas/year/1320.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Popes at Avignon</b><span class="when">A.D. 1309</span>, <span class="where">Avignon, Provence</span>. Clement V, a Gascon pope elected under the shadow of the French king, settled in 1309 at Avignon on the Rhône, beside the papal Comtat Venaissin. For nearly seventy years his successors ruled the Church from its great palace there, an age Petrarch called the Babylonian Captivity, until Gregory XI returned to Rome in 1377.</li>
+<li><b>Malik Kafur Reaches Madurai</b><span class="when">A.D. 1311</span>, <span class="where">Madurai, Tamil Nadu, India</span>. Malik Kafur, a slave bought for a thousand dinars and raised to command Alauddin's armies, swept through the south: he humbled the Kakatiyas of Warangal, sacked the Hoysala capital of Dwarasamudra, and pressed on into the Pandya country during a war between royal brothers, plundering Madurai and the temples of the Kaveri. He returned to Delhi with elephants and treasure beyond any earlier hoard.</li>
+<li><b>Özbeg Khan Brings Islam to the Horde</b><span class="when">A.D. 1313</span>, <span class="where">Sarai, Volga</span>. Özbeg, khan of the Golden Horde from 1313, embraced Islam and made it the faith of the house of Jochi. In his reign of nearly thirty years Sarai on the lower Volga was one of the great cities of the world, the clearing house of the trade between the Black Sea, Persia, and the Russian forests, and the princes of Rus came to it to buy their patents of rule.</li>
+<li><b>Robert the Bruce at Bannockburn</b><span class="when">A.D. 1314</span>, <span class="where">Bannockburn, Scotland</span>. On 23 and 24 June 1314 Robert the Bruce met the far larger army of Edward II marching to relieve Stirling Castle. Bruce slew Henry de Bohun with his axe in single combat before the hosts, and on the second day the Scottish spearmen drove the English knights into the Bannock burn. Scotland's freedom was won in fact, and in 1328 by treaty.</li>
+<li><b>Mansa Musa Comes to Cairo</b><span class="when">A.D. 1324</span>, <span class="where">Cairo, Egypt</span>. On his pilgrimage to Mecca, Mansa Musa of Mali reached Cairo with a train of thousands and spent and gave away gold so freely that its value in the city was depressed for years, as al-Umari recorded a dozen years later. Returning, he built mosques at Gao and Timbuktu; the Catalan Atlas of 1375 shows him enthroned, holding a nugget of gold.</li>
+<li><b>The Mexica Found Tenochtitlan</b><span class="when">c. A.D. 1325</span>, <span class="where">Tenochtitlan, Mexico</span>. The Mexica, latecomers to the Valley of Mexico who had served its lords as mercenaries, settled on a marshy island in Lake Texcoco where, their priests said, they saw the sign promised by their god Huitzilopochtli: an eagle perched upon a cactus growing from a rock. There they built Tenochtitlan, which within two centuries was a city of perhaps two hundred thousand.</li>
+<li><b>Orhan Takes Bursa</b><span class="when">A.D. 1326</span>, <span class="where">Bursa, Bithynia</span>. Prusa, at the foot of Mount Olympus in Bithynia, had been blockaded by Ottoman forts for years when it surrendered in April 1326 to Orhan, son of Osman, who died about that time. As Bursa it became the first Ottoman capital, where Osman and Orhan were buried. Nicaea fell in 1331 and Nicomedia in 1337, and the Eastern Roman hold on Bithynia was ended.</li>
+<li><b>Muhammad bin Tughlaq Moves to Daulatabad</b><span class="when">A.D. 1327</span>, <span class="where">Daulatabad, Maharashtra, India</span>. Muhammad bin Tughlaq, a sultan of vast learning and wild schemes, ordered the people of Delhi to remove to Devagiri, which he renamed Daulatabad, some seven hundred miles to the south, to rule the Deccan from its centre. Many died on the road. Within a few years he let them return, and Ibn Battuta found Delhi, the greatest city of the Muslim east, half empty.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1310.html" rel="prev">Earlier: the world in A.D. 1310</a><a href="/atlas/year/1330.html" rel="next">Later: the world in A.D. 1330</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

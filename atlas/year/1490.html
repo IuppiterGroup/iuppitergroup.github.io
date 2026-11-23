@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1490 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1490: Mongol Khanate, Ming Dynasty, Kazakh Khanate, Grand Principality of Moscow, Timurid Empire, Aq Qoyunlu, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1490.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1490 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1490: Mongol Khanate, Ming Dynasty, Kazakh Khanate, Grand Principality of Moscow, Timurid Empire, Aq Qoyunlu, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1490.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1490">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1490</h1>
+<p class="lede">The early modern age. The realms that held the map in A.D. 1490, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1490</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/mongol-khanate.html">Mongol Khanate</a></td><td>Dayan Khan (1479 to 1517)</td><td class="hide-s"></td><td class="hide-s num">about 4.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></td><td>Hongzhi Emperor (1487 to 1505)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 4.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></td><td>Buryndyq Khan (1480 to 1511)</td><td class="hide-s"></td><td class="hide-s num">about 2.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/grand-principality-of-moscow.html">Grand Principality of Moscow</a></td><td>Ivan III the Great (1462 to 1505)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/timurid-empire.html">Timurid Empire</a></td><td>Sultan Ahmad Mirza (Samarkand) (1469 to 1494) and Sultan Husayn Bayqara (Herat) (1469 to 1506)</td><td class="hide-s">Herat</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/aq-qoyunlu.html">Aq Qoyunlu</a></td><td>Ya'qub (1478 to 1490), then Baysunghur (1490 to 1493)</td><td class="hide-s">Tabriz</td><td class="hide-s num">about 1.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibet.html">Tibet</a></td><td>Donyo Dorje (Rinpungpa) (1479 to 1512) and Ngagi Wangpo (1481 to 1491)</td><td class="hide-s">Rinpung</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></td><td>al-Ashraf Qaitbay (1468 to 1496)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/moghulistan.html">Moghulistan</a></td><td>Sultan Mahmud Khan (1487 to 1508)</td><td class="hide-s">Tashkent</td><td class="hide-s num">about 1.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kalmar-union.html">Kalmar Union</a></td><td>Sten Sture the Elder (regent of Sweden) (1470 to 1503) and John (1481 to 1513)</td><td class="hide-s">Copenhagen</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/poland-lithuania.html">Poland-Lithuania</a></td><td>Casimir IV Jagiellon (1447 to 1492)</td><td class="hide-s">Kraków</td><td class="hide-s num">about 1.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Bayezid II (1481 to 1512)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 951 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/nogai-horde.html">Nogai Horde</a></td><td></td><td class="hide-s">Saraichik</td><td class="hide-s num">about 715 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/songhai-empire.html">Songhai Empire</a></td><td>Sunni Ali (1464 to 1492)</td><td class="hide-s">Gao</td><td class="hide-s num">about 631 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1490</h3><ul><li><a href="/atlas/realm/grand-principality-of-moscow.html">Grand Principality of Moscow</a></li><li><a href="/atlas/realm/kalmar-union.html">Kalmar Union</a></li><li><a href="/atlas/realm/poland-lithuania.html">Poland-Lithuania</a></li><li><a href="/atlas/realm/golden-horde.html">Golden Horde</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/crown-of-castile.html">Crown of Castile</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li></ul><a class="see" href="/atlas/year/1490.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1490</h3><ul><li><a href="/atlas/realm/aq-qoyunlu.html">Aq Qoyunlu</a></li><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/tahirid-sultanate.html">Tahirid Sultanate</a></li><li><a href="/atlas/realm/bahrani-dynasty.html">Bahrani Dynasty</a></li><li><a href="/atlas/realm/shirvan.html">Shirvan</a></li><li><a href="/atlas/realm/samtskhe-saatabago.html">Samtskhe-Saatabago</a></li><li><a href="/atlas/realm/beylik-of-dulkadir.html">Beylik of Dulkadir</a></li><li><a href="/atlas/realm/kingdom-of-kartli.html">Kingdom of Kartli</a></li></ul><a class="see" href="/atlas/year/1490.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1490</h3><ul><li><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></li><li><a href="/atlas/realm/timurid-empire.html">Timurid Empire</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/moghulistan.html">Moghulistan</a></li><li><a href="/atlas/realm/vijayanagara-empire.html">Vijayanagara Empire</a></li><li><a href="/atlas/realm/bahmani-sultanate.html">Bahmani Sultanate</a></li><li><a href="/atlas/realm/delhi-sultanate.html">Delhi Sultanate</a></li><li><a href="/atlas/realm/sultanate-of-bengal.html">Sultanate of Bengal</a></li></ul><a class="see" href="/atlas/year/1490.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1490</h3><ul><li><a href="/atlas/realm/mongol-khanate.html">Mongol Khanate</a></li><li><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></li><li><a href="/atlas/realm/ayutthaya-kingdom.html">Ayutthaya Kingdom</a></li><li><a href="/atlas/realm/lan-xang.html">Lan Xang</a></li><li><a href="/atlas/realm/warring-states-japan.html">Warring States Japan</a></li><li><a href="/atlas/realm/kingdom-of-cambodia.html">Kingdom of Cambodia</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li><li><a href="/atlas/realm/le-dynasty.html">Lê Dynasty</a></li></ul><a class="see" href="/atlas/year/1490.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1490</h3><ul><li><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></li><li><a href="/atlas/realm/songhai-empire.html">Songhai Empire</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/wattasid-dynasty.html">Wattasid dynasty</a></li><li><a href="/atlas/realm/mali-empire.html">Mali Empire</a></li><li><a href="/atlas/realm/hafsid-dynasty.html">Hafsid Dynasty</a></li><li><a href="/atlas/realm/makuria-kingdom.html">Makuria Kingdom</a></li><li><a href="/atlas/realm/bornu-empire.html">Bornu Empire</a></li></ul><a class="see" href="/atlas/year/1490.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1490</h3><ul><li><a href="/atlas/realm/inca-empire.html">Inca Empire</a></li><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/aztec-triple-alliance.html">Aztec Triple Alliance</a></li><li><a href="/atlas/realm/michoacan.html">Michoacán</a></li><li><a href="/atlas/realm/haudenosaunee.html">Haudenosaunee</a></li></ul><a class="see" href="/atlas/year/1490.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Bosworth Field</b><span class="when">A.D. 1485</span>, <span class="where">Bosworth, England</span>. On 22 August 1485 Henry Tudor, a Lancastrian exile with French backing, met Richard III near Market Bosworth. When the Stanleys turned against the king, Richard charged at Henry and was hacked down, the last English king to die in battle. Henry VII founded the Tudor dynasty and, marrying Elizabeth of York, ended the Wars of the Roses.</li>
+<li><b>Dias Rounds the Cape</b><span class="when">A.D. 1488</span>, <span class="where">Mossel Bay, South Africa</span>. Driven south out of sight of land by storms, Bartolomeu Dias turned east and found the coast running northeast: he had passed the tip of Africa unawares. He landed at Mossel Bay among Khoikhoi herders, pressed on to the Great Fish River until his crews refused to go farther, and on the voyage home sighted the cape that King John II named Good Hope.</li>
+<li><b>The King of Kongo Baptized</b><span class="when">A.D. 1491</span>, <span class="where">Mbanza Kongo, Angola</span>. Eight years after Diogo Cão's ships entered the Congo River, a Portuguese embassy of priests and masons reached Mbanza Kongo, and the manikongo Nzinga a Nkuwu was baptized as João I. His son Afonso I, who reigned from 1509 to 1542, made Kongo a Catholic kingdom, sent his son Henrique to study in Lisbon, and saw him made in 1518 the first black African bishop of the Latin Church.</li>
+<li><b>A New World</b><span class="when">A.D. 1492</span>, <span class="where">San Salvador, Bahamas</span>. In January, Ferdinand and Isabella take Granada, ending nearly eight centuries of Moorish rule in Spain. In October, sailing under their flag, Christopher Columbus crosses the Atlantic and makes landfall in the Bahamas. The known world is about to double in size.</li>
+<li><b>The Fall of Granada</b><span class="when">A.D. 1492</span>, <span class="where">Alhambra, Granada</span>. On 2 January 1492, after a war of ten years, Boabdil, last Nasrid emir of Granada, handed the keys of the Alhambra to Ferdinand and Isabella and rode into exile. The silver cross was raised on the Torre de la Vela. Nearly eight centuries after the Muslim conquest, all Spain was Christian, and that same year the queen sent Columbus across the Ocean Sea.</li>
+<li><b>The Expulsion of the Jews from Spain</b><span class="when">A.D. 1492</span>, <span class="where">Granada, Spain</span>. By the edict signed at Granada on 31 March 1492, Ferdinand and Isabella commanded every Jew in their kingdoms to accept baptism or leave by the end of July. Many thousands chose exile, to Portugal, Italy, North Africa, and the Ottoman lands, where Sultan Bayezid II welcomed them; the Sephardim carried their Spanish tongue across the Mediterranean for four centuries.</li>
+<li><b>Vasco da Gama at Calicut</b><span class="when">A.D. 1498</span>, <span class="where">Kozhikode, Kerala, India</span>. Vasco da Gama, having rounded the Cape of Good Hope and found a pilot at Malindi, anchored off Calicut in May 1498, ten months out of Lisbon. Asked what they sought, his men answered: Christians and spices. The Zamorin received him coldly, but the sea road from Europe to India was open, and Portuguese cannon would soon command the Arabian Sea.</li>
+<li><b>Shah Ismail Crowned at Tabriz</b><span class="when">A.D. 1501</span>, <span class="where">Tabriz, Persia</span>. Ismail, the fourteen-year-old head of the Safavid Sufi order of Ardabil, led his red-capped Qizilbash Turkmen to victory over the Aq Qoyunlu and entered Tabriz in the summer of 1501. Proclaimed shah, he decreed Twelver Shi'ism the faith of his realm and imposed it by the sword on a largely Sunni people. Iran took the religious identity that has set it apart from its neighbors ever since.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1480.html" rel="prev">Earlier: the world in A.D. 1480</a><a href="/atlas/year/1500.html" rel="next">Later: the world in A.D. 1500</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

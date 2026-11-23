@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 870 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 870: Abbasid Caliphate, Tang Dynasty, Tibetans, Kimek-Kipchak confederation, Carolingian Empire, Kara-Khanids, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/870.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 870 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 870: Abbasid Caliphate, Tang Dynasty, Tibetans, Kimek-Kipchak confederation, Carolingian Empire, Kara-Khanids, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/870.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="870">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 870</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 870, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 870</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/abbasid-caliphate.html">Abbasid Caliphate</a></td><td>al-Muhtadi (869 to 870), then al-Mu'tamid (870 to 892)</td><td class="hide-s">Samarra</td><td class="hide-s num">about 7.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tang-dynasty.html">Tang Dynasty</a></td><td>Emperor Yizong of Tang (859 to 873)</td><td class="hide-s">Chang'an</td><td class="hide-s num">about 3.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibetans.html">Tibetans</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kimek-kipchak-confederation.html">Kimek-Kipchak confederation</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/carolingian-empire.html">Carolingian Empire</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kara-khanids.html">Kara-Khanids</a></td><td>Bilge Kul Qadir Khan (840 to 893)</td><td class="hide-s"></td><td class="hide-s num">about 806 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khazaria.html">Khazaria</a></td><td></td><td class="hide-s">Atil</td><td class="hide-s num">about 768 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/rashtrakuta-dynasty.html">Rashtrakuta Dynasty</a></td><td>Amoghavarsha I (814 to 878)</td><td class="hide-s">Manyakheta</td><td class="hide-s num">about 735 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qocho-kingdom.html">Qocho Kingdom</a></td><td></td><td class="hide-s">Qocho</td><td class="hide-s num">about 652 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></td><td>Basil I (867 to 886)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 647 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/gurjara-pratihara-dynasty.html">Gurjara-Pratihara Dynasty</a></td><td>Mihira Bhoja (836 to 885)</td><td class="hide-s">Kannauj</td><td class="hide-s num">about 640 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/srivijaya.html">Srivijaya</a></td><td></td><td class="hide-s">Palembang</td><td class="hide-s num">about 516 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/balhae.html">Balhae</a></td><td></td><td class="hide-s">Sanggyeong</td><td class="hide-s num">about 478 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/rustamid-dynasty.html">Rustamid dynasty</a></td><td>Aflah (823 to 872)</td><td class="hide-s">Tahert</td><td class="hide-s num">about 470 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 870</h3><ul><li><a href="/atlas/realm/carolingian-empire.html">Carolingian Empire</a></li><li><a href="/atlas/realm/khazaria.html">Khazaria</a></li><li><a href="/atlas/realm/first-bulgarian-empire.html">First Bulgarian Empire</a></li><li><a href="/atlas/realm/emirate-of-cordoba.html">Emirate of Córdoba</a></li><li><a href="/atlas/realm/magyars.html">Magyars</a></li><li><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></li><li><a href="/atlas/realm/scandinavian-minor-kingdoms.html">Scandinavian minor kingdoms</a></li><li><a href="/atlas/realm/great-moravia.html">Great Moravia</a></li></ul><a class="see" href="/atlas/year/870.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 870</h3><ul><li><a href="/atlas/realm/abbasid-caliphate.html">Abbasid Caliphate</a></li><li><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></li><li><a href="/atlas/realm/ziyadid-dynasty.html">Ziyadid dynasty</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/zaydi-alid-dynasties.html">Zaydi Alid dynasties</a></li><li><a href="/atlas/realm/shirvan.html">Shirvan</a></li><li><a href="/atlas/realm/kingdom-of-abkhazia.html">Kingdom of Abkhazia</a></li><li><a href="/atlas/realm/kingdom-of-the-iberians.html">Kingdom of the Iberians</a></li></ul><a class="see" href="/atlas/year/870.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 870</h3><ul><li><a href="/atlas/realm/tibetans.html">Tibetans</a></li><li><a href="/atlas/realm/kimek-kipchak-confederation.html">Kimek-Kipchak confederation</a></li><li><a href="/atlas/realm/kara-khanids.html">Kara-Khanids</a></li><li><a href="/atlas/realm/rashtrakuta-dynasty.html">Rashtrakuta Dynasty</a></li><li><a href="/atlas/realm/qocho-kingdom.html">Qocho Kingdom</a></li><li><a href="/atlas/realm/gurjara-pratihara-dynasty.html">Gurjara-Pratihara Dynasty</a></li><li><a href="/atlas/realm/saffarid-dynasty.html">Saffarid Dynasty</a></li><li><a href="/atlas/realm/pala-empire.html">Pala Empire</a></li></ul><a class="see" href="/atlas/year/870.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 870</h3><ul><li><a href="/atlas/realm/tang-dynasty.html">Tang Dynasty</a></li><li><a href="/atlas/realm/srivijaya.html">Srivijaya</a></li><li><a href="/atlas/realm/balhae.html">Balhae</a></li><li><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></li><li><a href="/atlas/realm/nanzhao.html">Nanzhao</a></li><li><a href="/atlas/realm/ganzhou-kingdom.html">Ganzhou Kingdom</a></li><li><a href="/atlas/realm/heian-japan.html">Heian Japan</a></li><li><a href="/atlas/realm/haripunjaya.html">Haripuñjaya</a></li></ul><a class="see" href="/atlas/year/870.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 870</h3><ul><li><a href="/atlas/realm/rustamid-dynasty.html">Rustamid dynasty</a></li><li><a href="/atlas/realm/aghlabid-dynasty.html">Aghlabid Dynasty</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/ghana-empire.html">Ghana Empire</a></li><li><a href="/atlas/realm/idrisids.html">Idrisids</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/barghawata-confederation.html">Barghawata Confederation</a></li></ul><a class="see" href="/atlas/year/870.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 870</h3><ul><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/puebloans-chaco-regional-system.html">Puebloans - Chaco Regional System</a></li><li><a href="/atlas/realm/classic-veracruz-culture.html">Classic Veracruz Culture</a></li><li><a href="/atlas/realm/zapotec-civilization.html">Zapotec Civilization</a></li></ul><a class="see" href="/atlas/year/870.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Rurik Called to Novgorod</b><span class="when">A.D. 862</span>, <span class="where">Novgorod, Rus'</span>. The Primary Chronicle tells how the Slav and Finnic tribes of the north, weary of strife among themselves, sent across the sea to the Varangian Rus': 'Our land is great and rich, but there is no order in it. Come and rule over us.' Rurik and his brothers came, and Rurik's house would rule in Rus' and Muscovy until 1598.</li>
+<li><b>Cyril and Methodius in Moravia</b><span class="when">A.D. 863</span>, <span class="where">Velehrad, Moravia</span>. At the request of Prince Rastislav, who wished for teachers in his people's own tongue, Michael III sent two brothers from Thessalonica, Constantine, called Cyril, and Methodius. For the Slavs they devised the Glagolitic alphabet and rendered the Gospels and the liturgy into Slavonic, laying the foundation of the written culture of the Orthodox Slavs.</li>
+<li><b>The Great Heathen Army</b><span class="when">A.D. 865</span>, <span class="where">East Anglia, England</span>. A host of Danes, which the Anglo-Saxon Chronicle called the great army, landed in East Anglia in 865, led, tradition says, by the sons of Ragnar Lodbrok, Ivar the Boneless and Halfdan. Within five years they had taken York, slain the kings of Northumbria and King Edmund of East Anglia, and broken both kingdoms; of the English realms only Wessex would stand.</li>
+<li><b>The Diamond Sutra Printed</b><span class="when">A.D. 868</span>, <span class="where">Dunhuang, Gansu, China</span>. On a scroll five metres long, a man named Wang Jie had the Diamond Sutra printed from carved wooden blocks for free distribution, on behalf of his parents. Found in the sealed library cave at Dunhuang, it is the oldest printed book that bears a date. Under the Song, printing spread to the classics, the histories, and paper money, and transformed learning in East Asia.</li>
+<li><b>The Zanj Sack Basra</b><span class="when">A.D. 871</span>, <span class="where">Basra, Iraq</span>. On the salt flats below Basra, thousands of East African slaves, the Zanj, shipped up the Gulf by Arab and Persian traders, toiled in gangs to clear the soil for the planters. In 869 a pretender named Ali ibn Muhammad roused them to revolt, and in September 871 the Zanj stormed and burned Basra and slaughtered its people. Their marsh state endured fourteen years, until the regent al-Muwaffaq stormed their capital, al-Mukhtara, in 883.</li>
+<li><b>Ingolf Settles Iceland</b><span class="when">A.D. 874</span>, <span class="where">Reykjavik, Iceland</span>. Ingolf Arnarson, a Norwegian chieftain, cast the pillars of his high seat overboard as he neared Iceland and vowed to settle wherever they came ashore. His thralls found them at a bay he named Reykjavik, the bay of smoke, for the steam of its hot springs. Within sixty years, the Book of Settlements records, every habitable shore had been taken by Norse families and their Irish slaves.</li>
+<li><b>Alfred Victorious at Edington</b><span class="when">A.D. 878</span>, <span class="where">Edington, England</span>. Surprised at Chippenham in midwinter by Guthrum's Danes, Alfred of Wessex took refuge in the marshes of Athelney. In May 878 he gathered the men of Somerset, Wiltshire, and Hampshire and routed the Danes at Edington. Guthrum accepted baptism with Alfred as his godfather, and England was soon divided between Wessex and the Danelaw.</li>
+<li><b>Huang Chao Takes Chang'an</b><span class="when">A.D. 881</span>, <span class="where">Chang'an, Shaanxi, China</span>. Huang Chao, a salt smuggler who had failed the examinations, led a rebel host the length of China, massacring the foreign merchants of Canton in 879, and entered Chang'an in triumph. He proclaimed himself emperor of Qi, but his men pillaged the city and slaughtered its officials. The Tang outlived his defeat only as a shell, ruled by its generals.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/860.html" rel="prev">Earlier: the world in A.D. 860</a><a href="/atlas/year/880.html" rel="next">Later: the world in A.D. 880</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

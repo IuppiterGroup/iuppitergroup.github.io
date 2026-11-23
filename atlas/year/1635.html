@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1635 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1635: Tsardom of Russia, Spanish Empire, Ming Dynasty, Ottoman Empire, Safavid Dynasty, Mughal Empire, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1635.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1635 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1635: Tsardom of Russia, Spanish Empire, Ming Dynasty, Ottoman Empire, Safavid Dynasty, Mughal Empire, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1635.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1635">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1635</h1>
+<p class="lede">The early modern age. The realms that held the map in A.D. 1635, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1635</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/tsardom-of-russia.html">Tsardom of Russia</a></td><td>Michael Romanov (1613 to 1645)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 7.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/spanish-empire.html">Spanish Empire</a></td><td>Philip IV (1621 to 1665)</td><td class="hide-s">Mexico City (New Spain) and Lima (Peru)</td><td class="hide-s num">about 6.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></td><td>Chongzhen Emperor (1627 to 1644)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 3.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Murad IV (1623 to 1640)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 3.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/safavid-dynasty.html">Safavid Dynasty</a></td><td>Safi (1629 to 1642)</td><td class="hide-s">Isfahan</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mughal-empire.html">Mughal Empire</a></td><td>Shah Jahan (1628 to 1658)</td><td class="hide-s">Agra</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></td><td>Jahangir Khan (1630 to 1652)</td><td class="hide-s">Turkestan</td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibet.html">Tibet</a></td><td>Karma Tenkyong (Tsangpa) (1620 to 1642)</td><td class="hide-s">Shigatse</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/swedish-empire.html">Swedish Empire</a></td><td>Axel Oxenstierna (chancellor) (1612 to 1654) and Christina (1632 to 1654)</td><td class="hide-s">Stockholm</td><td class="hide-s num">about 1.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-moghulistan.html">Eastern Moghulistan</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 936 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/polish-lithuanian-commonwealth.html">Polish-Lithuanian Commonwealth</a></td><td>Władysław IV Vasa (1632 to 1648)</td><td class="hide-s">Warsaw</td><td class="hide-s num">about 869 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/portuguese-empire.html">Portuguese Empire</a></td><td>Philip III (Philip IV of Spain) (1621 to 1640)</td><td class="hide-s">Salvador</td><td class="hide-s num">about 836 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/iberian-union.html">Iberian Union</a></td><td>Philip IV (III of Portugal) (1621 to 1640)</td><td class="hide-s">Madrid</td><td class="hide-s num">about 795 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/funj-sultanate.html">Funj Sultanate</a></td><td></td><td class="hide-s">Sennar</td><td class="hide-s num">about 629 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1635</h3><ul><li><a href="/atlas/realm/swedish-empire.html">Swedish Empire</a></li><li><a href="/atlas/realm/polish-lithuanian-commonwealth.html">Polish-Lithuanian Commonwealth</a></li><li><a href="/atlas/realm/iberian-union.html">Iberian Union</a></li><li><a href="/atlas/realm/denmark-norway.html">Denmark-Norway</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/habsburg-monarchy.html">Habsburg Monarchy</a></li><li><a href="/atlas/realm/kingdom-of-england.html">Kingdom of England</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li></ul><a class="see" href="/atlas/year/1635.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1635</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/safavid-dynasty.html">Safavid Dynasty</a></li><li><a href="/atlas/realm/khanate-of-khiva.html">Khanate of Khiva</a></li><li><a href="/atlas/realm/yarubid-dynasty.html">Yarubid dynasty</a></li><li><a href="/atlas/realm/kingdom-of-kartli.html">Kingdom of Kartli</a></li><li>Principality of Mingrelia</li><li>Kingdom of Imereti</li><li>Principality of Guria</li></ul><a class="see" href="/atlas/year/1635.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1635</h3><ul><li><a href="/atlas/realm/mughal-empire.html">Mughal Empire</a></li><li><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/eastern-moghulistan.html">Eastern Moghulistan</a></li><li><a href="/atlas/realm/restored-toungoo-dynasty.html">Restored Toungoo dynasty</a></li><li><a href="/atlas/realm/khanate-of-bukhara.html">Khanate of Bukhara</a></li><li><a href="/atlas/realm/oirat-confederation.html">Oirat Confederation</a></li><li><a href="/atlas/realm/khoshut-khanate.html">Khoshut Khanate</a></li></ul><a class="see" href="/atlas/year/1635.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1635</h3><ul><li><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></li><li><a href="/atlas/realm/mongol-khanate.html">Mongol Khanate</a></li><li><a href="/atlas/realm/tumed.html">Tümed</a></li><li><a href="/atlas/realm/lan-xang.html">Lan Xang</a></li><li><a href="/atlas/realm/ayutthaya-kingdom.html">Ayutthaya Kingdom</a></li><li><a href="/atlas/realm/tokugawa-shogunate.html">Tokugawa Shogunate</a></li><li><a href="/atlas/realm/later-jin-dynasty.html">Later Jin Dynasty</a></li><li><a href="/atlas/realm/kingdom-of-cambodia.html">Kingdom of Cambodia</a></li></ul><a class="see" href="/atlas/year/1635.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1635</h3><ul><li><a href="/atlas/realm/funj-sultanate.html">Funj Sultanate</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/saadi-sultanate.html">Saadi Sultanate</a></li><li><a href="/atlas/realm/bornu-empire.html">Bornu Empire</a></li><li><a href="/atlas/realm/sultanate-of-darfur.html">Sultanate of Darfur</a></li><li><a href="/atlas/realm/kingdom-of-kongo.html">Kingdom of Kongo</a></li><li><a href="/atlas/realm/oyo-empire.html">Oyo Empire</a></li></ul><a class="see" href="/atlas/year/1635.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1635</h3><ul><li><a href="/atlas/realm/spanish-empire.html">Spanish Empire</a></li><li><a href="/atlas/realm/portuguese-empire.html">Portuguese Empire</a></li><li><a href="/atlas/realm/jesuit-reducciones.html">Jesuit Reducciones</a></li><li><a href="/atlas/realm/haudenosaunee.html">Haudenosaunee</a></li><li><a href="/atlas/realm/itza-mayans.html">Itza Mayans</a></li><li><a href="/atlas/realm/kingdom-of-england.html">Kingdom of England</a></li><li><a href="/atlas/realm/dutch-guiana.html">Dutch Guiana</a></li><li><a href="/atlas/realm/new-netherland.html">New Netherland</a></li></ul><a class="see" href="/atlas/year/1635.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Sultan Agung Besieges Batavia</b><span class="when">A.D. 1628</span>, <span class="where">Batavia, Java</span>. Sultan Agung of Mataram, master of nearly all Java, sent his armies against the Dutch at Batavia in 1628 and again in 1629. The Javanese dug siegeworks and dammed the river, but the Dutch burned their rice stores along the coast, and famine and disease wasted the besiegers. Coen died of sickness during the second siege, yet Batavia held.</li>
+<li><b>The Sack of Magdeburg</b><span class="when">A.D. 1631</span>, <span class="where">Magdeburg, Saxony</span>. On 20 May 1631 the imperial army of Tilly and Pappenheim stormed Magdeburg, the Protestant city that had defied the emperor. Fire swept the town and soldiers butchered its people; of perhaps 25,000 inhabitants some 20,000 perished, and little but the cathedral stood. Magdeburg quarter became the cry of Protestant soldiers who would give no mercy.</li>
+<li><b>Gustavus Adolphus Falls at Lützen</b><span class="when">A.D. 1632</span>, <span class="where">Lützen, Saxony</span>. Victor at Breitenfeld the year before, Gustavus Adolphus met Wallenstein's army near Lützen on 16 November 1632, in fog and gunsmoke. Leading a cavalry charge, the king was lost in the mist and shot dead. His men fought on and drove Wallenstein from the field, but the Protestant cause had lost its champion, and Sweden passed to his daughter Christina, not yet six.</li>
+<li><b>The Taj Mahal Begun</b><span class="when">A.D. 1632</span>, <span class="where">Agra, Uttar Pradesh, India</span>. When his empress Mumtaz Mahal died bearing their fourteenth child in 1631, Shah Jahan began on the Yamuna at Agra a tomb of white marble inlaid with precious stones. Some twenty thousand workmen laboured on it for two decades, and the domed mausoleum in its garden became the crown of Mughal architecture.</li>
+<li><b>Hong Taiji Proclaims the Qing</b><span class="when">A.D. 1636</span>, <span class="where">Mukden, Liaoning, China</span>. Hong Taiji, son of Nurhaci, having won the imperial seal of the Yuan from the heirs of Ligdan Khan of the Chahar, renamed his people Manchu and his dynasty Qing, the Pure, and took the title of emperor at Mukden. That winter his armies overran Joseon, and King Injo knelt to him at Samjeondo. The Ming now faced a rival empire beyond the wall.</li>
+<li><b>Fasilides Builds Gondar</b><span class="when">A.D. 1636</span>, <span class="where">Gondar, Ethiopia</span>. Having expelled the Jesuits, whose Latin rites his father Susenyos had imposed at the cost of civil war, the emperor Fasilides ended the wandering of the royal camp and founded a fixed capital at Gondar, north of Lake Tana. There he and his heirs raised castles of stone with battlements and towers and dozens of churches; Gondar remained the capital for more than two centuries.</li>
+<li><b>The Treaty of Zuhab</b><span class="when">A.D. 1639</span>, <span class="where">Qasr-e Shirin, Persia</span>. Murad IV, a sultan of iron severity, retook Baghdad from the Persians in December 1638 after a siege of forty days. The next May the two empires made peace at Zuhab near Qasr-e Shirin: Mesopotamia remained Ottoman, the Caucasus was divided, and the frontier drawn along the Zagros endures in substance as the border of Iran with Turkey and Iraq.</li>
+<li><b>The Dutch Take Malacca</b><span class="when">A.D. 1641</span>, <span class="where">Malacca, Malaya</span>. After a siege of five months, in which plague and hunger wasted the defenders, the Dutch East India Company, with the help of Johor, took Malacca from the Portuguese on 14 January 1641. The city that had been the emporium of the East sank into a quiet Dutch outpost, its trade drawn away to Batavia.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1630.html" rel="prev">Earlier: the world in A.D. 1630</a><a href="/atlas/year/1640.html" rel="next">Later: the world in A.D. 1640</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

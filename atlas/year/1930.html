@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1930 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1930: Union of Soviet Socialist Republics, French Africa, United States of America, Dominion of Canada, United States of Brazil, Republic of China, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1930.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1930 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1930: Union of Soviet Socialist Republics, French Africa, United States of America, Dominion of Canada, United States of Brazil, Republic of China, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1930.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1930">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1930</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1930, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1930</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/union-of-soviet-socialist-republics.html">Union of Soviet Socialist Republics</a></td><td>Joseph Stalin (general secretary, leader of the Soviet Union) (1922 to 1953) and Mikhail Kalinin (head of state) (1922 to 1946)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 21 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/french-africa.html">French Africa</a></td><td>Gaston Doumergue (president) (1924 to 1931)</td><td class="hide-s">Algiers and Dakar and Brazzaville</td><td class="hide-s num">about 11 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Herbert Hoover (1929 to 1933)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></td><td>William Lyon Mackenzie King (1926 to 1930), then R. B. Bennett (1930 to 1935)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 9.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></td><td>Washington Luís (1926 to 1930) and Military junta (Tasso Fragoso, Mena Barreto, and Isaías de Noronha) (1930)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-china.html">Republic of China</a></td><td>Chiang Kai-shek (1928 to 1931)</td><td class="hide-s">Nanjing</td><td class="hide-s num">about 7.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/commonwealth-of-australia.html">Commonwealth of Australia</a></td><td>James Scullin (1929 to 1932)</td><td class="hide-s">Canberra</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-africa.html">British Africa</a></td><td>George V (1910 to 1936)</td><td class="hide-s">London</td><td class="hide-s num">about 6.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-raj.html">British Raj</a></td><td>George V (1910 to 1936) and Lord Irwin (viceroy) (1926 to 1931)</td><td class="hide-s">Delhi</td><td class="hide-s num">about 4.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Hipólito Yrigoyen (1928 to 1930), then José Félix Uriburu (1930 to 1932)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></td><td>Albert I (1909 to 1934)</td><td class="hide-s">Léopoldville</td><td class="hide-s num">about 2.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/portuguese-republic.html">Portuguese Republic</a></td><td>Óscar Carmona (1926 to 1951)</td><td class="hide-s">Lisbon</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/italian-africa.html">Italian Africa</a></td><td>Victor Emmanuel III (1900 to 1946) and Benito Mussolini (prime minister) (1922 to 1943)</td><td class="hide-s">Rome</td><td class="hide-s num">about 2.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></td><td>J. B. M. Hertzog (1924 to 1939)</td><td class="hide-s">Pretoria (administrative) and Cape Town (legislative)</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1930</h3><ul><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/french-third-republic.html">French Third Republic</a></li><li><a href="/atlas/realm/weimar-republic.html">Weimar Republic</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-norway.html">Kingdom of Norway</a></li><li><a href="/atlas/realm/second-polish-republic.html">Second Polish Republic</a></li><li><a href="/atlas/realm/republic-of-finland.html">Republic of Finland</a></li><li><a href="/atlas/realm/kingdom-of-italy.html">Kingdom of Italy</a></li></ul><a class="see" href="/atlas/year/1930.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1930</h3><ul><li><a href="/atlas/realm/kingdom-of-hejaz-and-nejd.html">Kingdom of Hejaz and Nejd</a></li><li><a href="/atlas/realm/pahlavi-dynasty.html">Pahlavi Dynasty</a></li><li><a href="/atlas/realm/republic-of-turkey.html">Republic of Turkey</a></li><li><a href="/atlas/realm/united-kingdom.html">United Kingdom</a></li><li><a href="/atlas/realm/british-mandates.html">British Mandates</a></li><li><a href="/atlas/realm/sultanate-of-muscat-and-oman.html">Sultanate of Muscat and Oman</a></li><li><a href="/atlas/realm/french-mandate-for-syria-and-lebanon.html">French Mandate for Syria and Lebanon</a></li><li><a href="/atlas/realm/north-yemen.html">North Yemen</a></li></ul><a class="see" href="/atlas/year/1930.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1930</h3><ul><li><a href="/atlas/realm/british-raj.html">British Raj</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/kingdom-of-afghanistan.html">Kingdom of Afghanistan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/tuvan-people-s-republic.html">Tuvan People's Republic</a></li><li><a href="/atlas/realm/kingdom-of-bhutan.html">Kingdom of Bhutan</a></li></ul><a class="see" href="/atlas/year/1930.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1930</h3><ul><li><a href="/atlas/realm/republic-of-china.html">Republic of China</a></li><li><a href="/atlas/realm/dutch-east-indies.html">Dutch East Indies</a></li><li><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></li><li><a href="/atlas/realm/mongolian-people-s-republic.html">Mongolian People's Republic</a></li><li><a href="/atlas/realm/french-indochina.html">French Indochina</a></li><li><a href="/atlas/realm/empire-of-japan.html">Empire of Japan</a></li><li><a href="/atlas/realm/anti-kuomintang-coalition.html">Anti-Kuomintang Coalition</a></li><li><a href="/atlas/realm/rattanakosin-kingdom.html">Rattanakosin Kingdom</a></li></ul><a class="see" href="/atlas/year/1930.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1930</h3><ul><li><a href="/atlas/realm/french-africa.html">French Africa</a></li><li><a href="/atlas/realm/british-africa.html">British Africa</a></li><li><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></li><li><a href="/atlas/realm/portuguese-republic.html">Portuguese Republic</a></li><li><a href="/atlas/realm/italian-africa.html">Italian Africa</a></li><li><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></li><li><a href="/atlas/realm/british-west-africa.html">British West Africa</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li></ul><a class="see" href="/atlas/year/1930.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1930</h3><ul><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></li><li><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/republic-of-colombia.html">Republic of Colombia</a></li></ul><a class="see" href="/atlas/year/1930.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Wall Street Crash</b><span class="when">A.D. 1929</span>, <span class="where">New York, New York</span>. After years of speculation on borrowed money, the New York stock market broke in October 1929; on Black Tuesday, the 29th, some sixteen million shares changed hands as prices collapsed. The crash opened the Great Depression: by 1933 a quarter of American workers were idle and thousands of banks had failed, and the slump, spreading round the world, helped carry Hitler to power.</li>
+<li><b>The Salt March</b><span class="when">A.D. 1930</span>, <span class="where">Dandi, Gujarat, India</span>. Mohandas Gandhi set out from his ashram at Sabarmati with seventy-eight followers and walked 385 kilometres in twenty-four days to the sea at Dandi. There on 6 April 1930 he picked up a lump of natural salt in defiance of the government monopoly. Across India tens of thousands followed his example and went to prison, and the world watched.</li>
+<li><b>The Statute of Westminster</b><span class="when">A.D. 1931</span>, <span class="where">Westminster, London</span>. The Imperial Conference of 1926 under Arthur Balfour declared Britain and the dominions autonomous communities, equal in status and united by allegiance to the Crown. The Statute of Westminster of 11 December 1931 made it law: Canada, South Africa, and the Irish Free State were freed at once from legislation by Westminster, Australia and New Zealand when they adopted it in the 1940s, and the British Commonwealth of Nations took shape.</li>
+<li><b>The Mukden Incident</b><span class="when">A.D. 1931</span>, <span class="where">Mukden, Liaoning, China</span>. Officers of Japan's Kwantung Army set off a small charge on the South Manchuria Railway outside Mukden and blamed Chinese soldiers. Without orders from Tokyo they seized the city and within months all Manchuria, where in 1932 they set up the puppet state of Manchukuo under Puyi, the last Qing emperor. When the League of Nations condemned it, Japan walked out.</li>
+<li><b>The Famine in Ukraine</b><span class="when">A.D. 1932</span>, <span class="where">Kharkov, Ukraine</span>. Stalin's forced collectivization of the peasants and impossible grain quotas brought famine to the Soviet countryside in 1932 and 1933. In Ukraine, where it is remembered as the Holodomor, villages were stripped of food, blacklisted, and sealed, and peasants were forbidden to leave in search of bread; some four million Ukrainians starved, and over a million more died in Kazakhstan.</li>
+<li><b>The Kingdom of Saudi Arabia</b><span class="when">A.D. 1932</span>, <span class="where">Riyadh, Najd</span>. Ibn Saud's Ikhwan warriors had won him the Hejaz and Mecca in 1924 and 1925, but would not stop at his frontiers; he broke them at Sabilla in 1929. On 23 September 1932 he united his realms by decree as the Kingdom of Saudi Arabia. It was a poor desert kingdom living on the pilgrimage, but in 1933 he granted an oil concession to Standard Oil of California.</li>
+<li><b>The Siamese Revolution of 1932</b><span class="when">A.D. 1932</span>, <span class="where">Bangkok, Siam</span>. At dawn on 24 June 1932 the People's Party, a band of officers and officials schooled in Europe and led by Pridi Banomyong and Phraya Phahon, seized key points in Bangkok while King Prajadhipok was at Hua Hin. The king accepted a constitution and the end of absolute monarchy. Quarrels with the new men followed, and in 1935 he abdicated in England.</li>
+<li><b>Hitler Becomes Chancellor</b><span class="when">A.D. 1933</span>, <span class="where">Reich Chancellery, Berlin</span>. On 30 January 1933 President Hindenburg, persuaded by Franz von Papen that the conservatives could hold him in check, appointed Adolf Hitler chancellor at the head of a coalition cabinet. Within two months the Reichstag fire had served as pretext to suspend civil liberties, and the Enabling Act of 23 March gave Hitler power to make laws without parliament. By summer every other party was gone.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1925.html" rel="prev">Earlier: the world in A.D. 1925</a><a href="/atlas/year/1935.html" rel="next">Later: the world in A.D. 1935</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

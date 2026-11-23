@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Mauretania: Map, Rulers, and History, 212 B.C. to 42 | Orbis Terrarum</title>
+  <meta name="description" content="The kingdom of the Moors in northwest Africa, from the Atlantic to the river Mulucha, ruled by kings such as Bocchus I, who betrayed Jugurtha to Sulla, and Juba II, the scholar king of Iol Caesarea. Caligula had its last king, Ptolemy, put to death in A.D. 40, and Claudius made it two provinces.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/mauretania.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Mauretania: Map, Rulers, and History, 212 B.C. to 42 | Orbis Terrarum">
+  <meta property="og:description" content="The kingdom of the Moors in northwest Africa, from the Atlantic to the river Mulucha, ruled by kings such as Bocchus I, who betrayed Jugurtha to Sulla, and Juba II, the scholar king of Iol Caesarea. Caligula had its last king, Ptolemy, put to death in A.D. 40, and Claudius made it two provinces.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/mauretania.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="-27" data-view="-10.7,30.9,7.4,38.9" data-realm="Mauretania">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Mauretania</h1>
+<p class="lede">212 B.C. to 42. Shown above as it stood in 27 B.C.; drag the timeline to watch it rise and fall.</p>
+<p>The kingdom of the Moors in northwest Africa, from the Atlantic to the river Mulucha, ruled by kings such as Bocchus I, who betrayed Jugurtha to Sulla, and Juba II, the scholar king of Iol Caesarea. Caligula had its last king, Ptolemy, put to death in A.D. 40, and Claudius made it two provinces.</p>
+<dl class="facts"><dt>Government</dt><dd>Monarchy (Roman client)</dd><dt>Faith</dt><dd>Berber and Punic religion; Roman cults</dd><dt>Capital</dt><dd>Iol Caesarea <span class="num">(25 B.C. to 40)</span></dd><dt>Greatest extent</dt><dd>About 219 thousand sq. km, as drawn on this atlas for 27 B.C.</dd></dl>
+<h2>Rulers of the Mauretania</h2>
+<ul class="rulers"><li>Bocchus I <span class="num">110 B.C. to 80 B.C.</span></li><li>Bogud <span class="num">49 B.C. to 38 B.C.</span></li><li>Bocchus II <span class="num">49 B.C. to 33 B.C.</span></li><li>Juba II <span class="num">25 B.C. to 23</span></li><li>Ptolemy of Mauretania <span class="num">23 to 40</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/210-bc.html?v=-10.7,30.9,7.4,38.9">210 B.C.</a><a href="/atlas/year/200-bc.html?v=-10.7,30.9,7.4,38.9">200 B.C.</a><a href="/atlas/year/180-bc.html?v=-10.7,30.9,7.4,38.9">180 B.C.</a><a href="/atlas/year/170-bc.html?v=-10.7,30.9,7.4,38.9">170 B.C.</a><a href="/atlas/year/150-bc.html?v=-10.7,30.9,7.4,38.9">150 B.C.</a><a href="/atlas/year/140-bc.html?v=-10.7,30.9,7.4,38.9">140 B.C.</a><a href="/atlas/year/120-bc.html?v=-10.7,30.9,7.4,38.9">120 B.C.</a><a href="/atlas/year/110-bc.html?v=-10.7,30.9,7.4,38.9">110 B.C.</a><a href="/atlas/year/90-bc.html?v=-10.7,30.9,7.4,38.9">90 B.C.</a><a href="/atlas/year/80-bc.html?v=-10.7,30.9,7.4,38.9">80 B.C.</a><a href="/atlas/year/60-bc.html?v=-10.7,30.9,7.4,38.9">60 B.C.</a><a href="/atlas/year/50-bc.html?v=-10.7,30.9,7.4,38.9">50 B.C.</a><a href="/atlas/year/30-bc.html?v=-10.7,30.9,7.4,38.9">30 B.C.</a><a href="/atlas/year/20-bc.html?v=-10.7,30.9,7.4,38.9">20 B.C.</a><a href="/atlas/year/1.html?v=-10.7,30.9,7.4,38.9">A.D. 1</a><a href="/atlas/year/10.html?v=-10.7,30.9,7.4,38.9">A.D. 10</a><a href="/atlas/year/30.html?v=-10.7,30.9,7.4,38.9">A.D. 30</a><a href="/atlas/year/40.html?v=-10.7,30.9,7.4,38.9">A.D. 40</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

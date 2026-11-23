@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1010 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1010: Northern Song, Ghaznavid Empire, Fatimid Caliphate, Liao Dynasty, Tibetans, Kimek-Kipchak confederation, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1010.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1010 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1010: Northern Song, Ghaznavid Empire, Fatimid Caliphate, Liao Dynasty, Tibetans, Kimek-Kipchak confederation, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1010.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1010">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1010</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 1010, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1010</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/northern-song.html">Northern Song</a></td><td>Emperor Zhenzong of Song (997 to 1022)</td><td class="hide-s">Kaifeng</td><td class="hide-s num">about 2.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ghaznavid-empire.html">Ghaznavid Empire</a></td><td>Mahmud of Ghazni (998 to 1030)</td><td class="hide-s">Ghazni</td><td class="hide-s num">about 2.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/fatimid-caliphate.html">Fatimid Caliphate</a></td><td>al-Hakim (996 to 1021)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/liao-dynasty.html">Liao Dynasty</a></td><td>Emperor Shengzong of Liao (982 to 1031)</td><td class="hide-s">Shangjing</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibetans.html">Tibetans</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kimek-kipchak-confederation.html">Kimek-Kipchak confederation</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kara-khanids.html">Kara-Khanids</a></td><td>Ahmad Arslan Qara Khan (998 to 1017) and Nasr ibn Ali (ilek of Transoxiana) (999 to 1012)</td><td class="hide-s">Balasagun and Kashgar</td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kievan-rus.html">Kievan Rus'</a></td><td>Vladimir I the Great (980 to 1015)</td><td class="hide-s">Kiev</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/buyid-dynasty.html">Buyid Dynasty</a></td><td>Baha al-Dawla (989 to 1012) and Majd al-Dawla (Rayy) (997 to 1029)</td><td class="hide-s">Shiraz and Rayy and Baghdad</td><td class="hide-s num">about 1.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></td><td>Basil II (976 to 1025)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 1.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></td><td>Henry II (1002 to 1024)</td><td class="hide-s"></td><td class="hide-s num">about 846 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qocho-kingdom.html">Qocho Kingdom</a></td><td></td><td class="hide-s">Qocho</td><td class="hide-s num">about 652 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/western-chalukya-empire.html">Western Chalukya Empire</a></td><td>Vikramaditya V (1008 to 1015)</td><td class="hide-s">Manyakheta</td><td class="hide-s num">about 603 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/srivijaya.html">Srivijaya</a></td><td>Mara Vijayottungavarman (1004 to 1017)</td><td class="hide-s">Palembang</td><td class="hide-s num">about 516 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1010</h3><ul><li><a href="/atlas/realm/kievan-rus.html">Kievan Rus'</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/kingdom-of-poland.html">Kingdom of Poland</a></li><li><a href="/atlas/realm/old-kingdom-of-norway.html">Old Kingdom of Norway</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/taifas-of-iberia.html">Taifas of Iberia</a></li><li><a href="/atlas/realm/first-bulgarian-empire.html">First Bulgarian Empire</a></li></ul><a class="see" href="/atlas/year/1010.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1010</h3><ul><li><a href="/atlas/realm/fatimid-caliphate.html">Fatimid Caliphate</a></li><li><a href="/atlas/realm/buyid-dynasty.html">Buyid Dynasty</a></li><li><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></li><li><a href="/atlas/realm/ziyadid-dynasty.html">Ziyadid dynasty</a></li><li><a href="/atlas/realm/kingdom-of-georgia.html">Kingdom of Georgia</a></li><li><a href="/atlas/realm/bagratid-armenia.html">Bagratid Armenia</a></li><li><a href="/atlas/realm/shirvan.html">Shirvan</a></li><li><a href="/atlas/realm/kingdom-of-vaspurakan.html">Kingdom of Vaspurakan</a></li></ul><a class="see" href="/atlas/year/1010.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1010</h3><ul><li><a href="/atlas/realm/ghaznavid-empire.html">Ghaznavid Empire</a></li><li><a href="/atlas/realm/tibetans.html">Tibetans</a></li><li><a href="/atlas/realm/kimek-kipchak-confederation.html">Kimek-Kipchak confederation</a></li><li><a href="/atlas/realm/kara-khanids.html">Kara-Khanids</a></li><li><a href="/atlas/realm/qocho-kingdom.html">Qocho Kingdom</a></li><li><a href="/atlas/realm/western-chalukya-empire.html">Western Chalukya Empire</a></li><li><a href="/atlas/realm/chola-empire.html">Chola Empire</a></li><li><a href="/atlas/realm/seljuk-dynasty.html">Seljuk Dynasty</a></li></ul><a class="see" href="/atlas/year/1010.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1010</h3><ul><li><a href="/atlas/realm/northern-song.html">Northern Song</a></li><li><a href="/atlas/realm/liao-dynasty.html">Liao Dynasty</a></li><li><a href="/atlas/realm/srivijaya.html">Srivijaya</a></li><li><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></li><li><a href="/atlas/realm/kingdom-of-dali.html">Kingdom of Dali</a></li><li><a href="/atlas/realm/ganzhou-kingdom.html">Ganzhou Kingdom</a></li><li><a href="/atlas/realm/heian-japan.html">Heian Japan</a></li><li><a href="/atlas/realm/haripunjaya.html">Haripuñjaya</a></li></ul><a class="see" href="/atlas/year/1010.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1010</h3><ul><li><a href="/atlas/realm/caliphate-of-cordoba.html">Caliphate of Córdoba</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/ghana-empire.html">Ghana Empire</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/barghawata-confederation.html">Barghawata Confederation</a></li><li>Zagwe dynasty</li><li>Emirate of Nekor</li></ul><a class="see" href="/atlas/year/1010.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1010</h3><ul><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/viking-settlements.html">Viking settlements</a></li><li><a href="/atlas/realm/puebloans-chaco-regional-system.html">Puebloans - Chaco Regional System</a></li><li><a href="/atlas/realm/classic-veracruz-culture.html">Classic Veracruz Culture</a></li><li>Toltec</li><li>Chimor</li></ul><a class="see" href="/atlas/year/1010.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Treaty of Chanyuan</b><span class="when">A.D. 1005</span>, <span class="where">Chanyuan, Henan, China</span>. When the Liao empress dowager Xiao Chuo and Emperor Shengzong drove deep into Song territory, Emperor Zhenzong was persuaded by his minister Kou Zhun to go to the front at Chanyuan. The armies stood deadlocked and made peace: Song would pay 100,000 taels of silver and 200,000 bolts of silk each year, and the two emperors would call each other brothers. The peace held for over a century.</li>
+<li><b>The Tale of Genji</b><span class="when">c. A.D. 1008</span>, <span class="where">Heian-kyō, Kyoto, Japan</span>. Murasaki Shikibu, a lady-in-waiting to the empress Shōshi, daughter of the all-powerful regent Fujiwara no Michinaga, was at work on a long tale of the loves of Prince Genji, which her diary mentions in 1008. Its fifty-four chapters, rich in poetry and the sadness of passing things, are often called the first novel, and they are the crown of Heian court culture.</li>
+<li><b>Al-Hakim Destroys the Holy Sepulchre</b><span class="when">A.D. 1009</span>, <span class="where">Jerusalem, Palestine</span>. The Fatimid caliph al-Hakim, whose edicts against Christians and Jews grew wilder with the years, ordered the Church of the Holy Sepulchre at Jerusalem torn down to its foundations in 1009. The rock-cut tomb of Christ was hacked away nearly to the bedrock. The church was rebuilt by agreement with Constantinople some decades later, but the outrage was long remembered in the West.</li>
+<li><b>Ferdowsi Completes the Shahnameh</b><span class="when">A.D. 1010</span>, <span class="where">Tus, Khorasan</span>. After some thirty years of labor, the poet Abu'l-Qasim Ferdowsi of Tus completed in 1010 the Book of Kings, some fifty thousand couplets of Persian verse telling the history of Iran from the creation of the world to the Arab conquest. He presented it to Mahmud of Ghazni, who paid him poorly. The Shahnameh preserved the Persian tongue and the memory of its heroes for all the centuries after.</li>
+<li><b>The Great Temple of Thanjavur</b><span class="when">A.D. 1010</span>, <span class="where">Thanjavur, Tamil Nadu, India</span>. Rajaraja I dedicated the Brihadishvara temple at Thanjavur in 1010, its granite tower rising sixty-six metres above the shrine, the tallest in India in its day. Its walls carry his inscriptions listing lands, gifts of gold and jewels, and the four hundred temple women assigned to its service. It stands as the noblest monument of the Chola age.</li>
+<li><b>The Rising Dragon: Thang Long</b><span class="when">A.D. 1010</span>, <span class="where">Thang Long, Vietnam</span>. Ly Cong Uan, a palace commander raised in a Buddhist pagoda, founded the Ly dynasty in 1009 and the next year moved the court from cramped Hoa Lu to the old Chinese citadel of Dai La on the Red River. Legend says a golden dragon rose there before his boat, and he named the place Thang Long, the city that is now Hanoi.</li>
+<li><b>Basil II Blinds the Bulgarians</b><span class="when">A.D. 1014</span>, <span class="where">Kleidion, Macedonia</span>. On 29 July 1014 Basil II turned the Bulgarian stockade in the pass of Kleidion and captured the army of Tsar Samuel. He had the prisoners blinded, by the chroniclers' count fifteen thousand, leaving one man in each hundred a single eye to lead the rest home. Samuel, the story goes, died of grief at the sight, and by 1018 Bulgaria was an Eastern Roman province.</li>
+<li><b>Brian Boru at Clontarf</b><span class="when">A.D. 1014</span>, <span class="where">Clontarf, Ireland</span>. On Good Friday 1014 Brian Boru, High King of Ireland, met the men of Leinster and the Norse of Dublin with their allies from Orkney and Man. The Norse were driven into the sea, but Brian, past seventy, was cut down in his tent by the fleeing Viking Brodir. The victory broke Norse power in Ireland, but Brian's high kingship died with him.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1000.html" rel="prev">Earlier: the world in A.D. 1000</a><a href="/atlas/year/1020.html" rel="next">Later: the world in A.D. 1020</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 660 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 660: Tang Dynasty, Rashidun Caliphate, Tibetan Empire, Western Göktürks, Eastern Roman Empire, Chalukya Dynasty, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/660.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 660 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 660: Tang Dynasty, Rashidun Caliphate, Tibetan Empire, Western Göktürks, Eastern Roman Empire, Chalukya Dynasty, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/660.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="660">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 660</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 660, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 660</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/tang-dynasty.html">Tang Dynasty</a></td><td>Emperor Gaozong of Tang (649 to 683)</td><td class="hide-s">Chang'an</td><td class="hide-s num">about 7.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/rashidun-caliphate.html">Rashidun Caliphate</a></td><td>Ali ibn Abi Talib (656 to 661)</td><td class="hide-s">Kufa</td><td class="hide-s num">about 6.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibetan-empire.html">Tibetan Empire</a></td><td>Mangsong Mangtsen (650 to 676)</td><td class="hide-s">Lhasa</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/western-gokturks.html">Western Göktürks</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></td><td>Constans II (641 to 668)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 1.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/chalukya-dynasty.html">Chalukya Dynasty</a></td><td>Vikramaditya I (655 to 680)</td><td class="hide-s">Vatapi</td><td class="hide-s num">about 805 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-the-franks.html">Kingdom of the Franks</a></td><td>Childebert the Adopted (656 to 661) and Chlothar III (657 to 673)</td><td class="hide-s">Paris</td><td class="hide-s num">about 619 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/visigothic-kingdom.html">Visigothic Kingdom</a></td><td>Recceswinth (649 to 672)</td><td class="hide-s">Toledo</td><td class="hide-s num">about 607 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khazaria.html">Khazaria</a></td><td></td><td class="hide-s">Balanjar</td><td class="hide-s num">about 476 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/yenisei-kyrgyz.html">Yenisei Kyrgyz</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 422 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/chenla.html">Chenla</a></td><td>Jayavarman I (657 to 681)</td><td class="hide-s">Ishanapura</td><td class="hide-s num">about 419 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/scandinavian-minor-kingdoms.html">Scandinavian minor kingdoms</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 393 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/umayyad-caliphate.html">Umayyad Caliphate</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 389 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></td><td>K'inich Janaab Pakal (Palenque) (615 to 683) and Yuknoom Ch'een II (Calakmul) (636 to 686)</td><td class="hide-s">Tikal and Calakmul</td><td class="hide-s num">about 372 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 660</h3><ul><li><a href="/atlas/realm/kingdom-of-the-franks.html">Kingdom of the Franks</a></li><li><a href="/atlas/realm/visigothic-kingdom.html">Visigothic Kingdom</a></li><li><a href="/atlas/realm/khazaria.html">Khazaria</a></li><li><a href="/atlas/realm/scandinavian-minor-kingdoms.html">Scandinavian minor kingdoms</a></li><li><a href="/atlas/realm/old-great-bulgaria.html">Old Great Bulgaria</a></li><li><a href="/atlas/realm/avar-khaganate.html">Avar Khaganate</a></li><li><a href="/atlas/realm/samo-s-empire.html">Samo's Empire</a></li><li><a href="/atlas/realm/kingdom-of-the-lombards.html">Kingdom of the Lombards</a></li></ul><a class="see" href="/atlas/year/660.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 660</h3><ul><li><a href="/atlas/realm/rashidun-caliphate.html">Rashidun Caliphate</a></li><li><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></li><li><a href="/atlas/realm/umayyad-caliphate.html">Umayyad Caliphate</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/dabuyid-dynasty.html">Dabuyid Dynasty</a></li><li><a href="/atlas/realm/kingdom-of-lazica.html">Kingdom of Lazica</a></li></ul><a class="see" href="/atlas/year/660.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 660</h3><ul><li><a href="/atlas/realm/tibetan-empire.html">Tibetan Empire</a></li><li><a href="/atlas/realm/western-gokturks.html">Western Göktürks</a></li><li><a href="/atlas/realm/chalukya-dynasty.html">Chalukya Dynasty</a></li><li><a href="/atlas/realm/maitraka-dynasty.html">Maitraka Dynasty</a></li><li><a href="/atlas/realm/turk-shahis.html">Turk Shahis</a></li><li><a href="/atlas/realm/karkota-dynasty.html">Karkota Dynasty</a></li><li><a href="/atlas/realm/pyu-city-states.html">Pyu City-States</a></li><li><a href="/atlas/realm/kamarupa-kingdom.html">Kamarupa Kingdom</a></li></ul><a class="see" href="/atlas/year/660.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 660</h3><ul><li><a href="/atlas/realm/tang-dynasty.html">Tang Dynasty</a></li><li><a href="/atlas/realm/chenla.html">Chenla</a></li><li><a href="/atlas/realm/goguryeo.html">Goguryeo</a></li><li><a href="/atlas/realm/tuyuhun.html">Tuyuhun</a></li><li><a href="/atlas/realm/asuka-japan.html">Asuka Japan</a></li><li><a href="/atlas/realm/lavo-kingdom.html">Lavo Kingdom</a></li><li><a href="/atlas/realm/silla.html">Silla</a></li><li><a href="/atlas/realm/champa.html">Champa</a></li></ul><a class="see" href="/atlas/year/660.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 660</h3><ul><li><a href="/atlas/realm/makuria.html">Makuria</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li></ul><a class="see" href="/atlas/year/660.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 660</h3><ul><li><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></li><li><a href="/atlas/realm/zapotec-civilization.html">Zapotec Civilization</a></li><li><a href="/atlas/realm/classic-veracruz-culture.html">Classic Veracruz Culture</a></li><li>Teotihuacan</li></ul><a class="see" href="/atlas/year/660.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Nubian Archers Hold Dongola</b><span class="when">A.D. 652</span>, <span class="where">Old Dongola, Sudan</span>. When the Arab conquerors of Egypt marched up the Nile under Abdallah ibn Sa'd, the bowmen of Christian Makuria, whom the Arabs called 'the pupil-smiters,' met them before Dongola. A catapult struck the cathedral, but the Nubians held, and the Baqt treaty that followed, an annual tribute of 360 slaves exchanged for grain, wine, and cloth, kept Christian Nubia free for six centuries.</li>
+<li><b>The Murder of Uthman</b><span class="when">A.D. 656</span>, <span class="where">Medina, Arabia</span>. Rebels from Egypt and Iraq, aggrieved by the favor the aged caliph showed his Umayyad kinsmen, besieged Uthman ibn Affan in his house at Medina and cut him down as he read the Quran, his blood falling upon its pages. Ali ibn Abi Talib was acclaimed caliph in the confusion, and the first civil war of Islam, the fitna, began.</li>
+<li><b>The Arbitration of Siffin</b><span class="when">A.D. 657</span>, <span class="where">Siffin, Syria</span>. On the plain of Siffin by the Euphrates, Ali faced Mu'awiya, governor of Syria and avenger of his kinsman Uthman. When the Syrians were near defeat they raised leaves of the Quran upon their lances and called for arbitration. Ali consented, and a part of his army, crying that judgment belonged to God alone, departed from him. These were the Kharijites, the first sect of Islam.</li>
+<li><b>The Fall of Baekje</b><span class="when">A.D. 660</span>, <span class="where">Sabi, Korea</span>. A Tang fleet under Su Dingfang landed at the mouth of the Geum River while the Silla general Kim Yu-sin marched from the east. At Hwangsanbeol the Baekje general Gyebaek, who had killed his own family rather than see them enslaved, fell with his five thousand. Sabi was taken, King Uija was led captive to Chang'an, and Baekje was no more.</li>
+<li><b>Ali Struck Down at Kufa</b><span class="when">A.D. 661</span>, <span class="where">Kufa, Iraq</span>. As he entered the mosque of Kufa for the dawn prayer in January 661, Ali was struck with a poisoned sword by the Kharijite Ibn Muljam, and he died two days later. His son Hasan soon gave up the caliphate to Mu'awiya, who ruled from Damascus as the first caliph of the house of Umayya. The Shi'a, the party of Ali, venerate his tomb at Najaf.</li>
+<li><b>The Battle of Baekgang</b><span class="when">A.D. 663</span>, <span class="where">Gunsan, Korea</span>. Yamato sent fleets and tens of thousands of men to restore Baekje. At the mouth of the Baekgang the Tang navy, though fewer, caught the Japanese ships in the narrows and burned four hundred of them. Japan withdrew from the peninsula and began to build fortresses at home against a Tang invasion that never came.</li>
+<li><b>The Synod of Whitby</b><span class="when">A.D. 664</span>, <span class="where">Whitby, England</span>. At the abbey of the abbess Hilda, King Oswiu of Northumbria heard the Irish party of Bishop Colman and the Roman party of Wilfrid dispute the reckoning of Easter and the form of the tonsure. When Wilfrid declared that Peter held the keys of heaven, the king chose Rome, and the English Church was bound thenceforth to the Roman order rather than to the customs of Iona.</li>
+<li><b>The Fall of Goguryeo</b><span class="when">A.D. 668</span>, <span class="where">Pyongyang, Korea</span>. After the death of the dictator Yeon Gaesomun his sons fell to quarrelling, and the eldest went over to Tang. The armies of Li Ji and of Silla closed on Pyongyang, which fell after a month's siege, and King Bojang was carried to Chang'an. Goguryeo had lasted seven centuries; within eight years Silla had driven the Tang from the peninsula south of the Taedong.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/650.html" rel="prev">Earlier: the world in A.D. 650</a><a href="/atlas/year/670.html" rel="next">Later: the world in A.D. 670</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

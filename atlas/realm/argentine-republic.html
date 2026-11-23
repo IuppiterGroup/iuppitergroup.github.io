@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Argentine Republic: Map, Rulers, and History, 1861 to today | Orbis Terrarum</title>
+  <meta name="description" content="The Argentine nation reunited under Buenos Aires after Pavón in 1861, which by immigration from Italy and Spain, by railways, and by the wheat and beef of the pampas became one of the richest nations on earth by 1914. Its twentieth century brought coups, Peronism, the Dirty War of the military…">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/argentine-republic.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Argentine Republic: Map, Rulers, and History, 1861 to today | Orbis Terrarum">
+  <meta property="og:description" content="The Argentine nation reunited under Buenos Aires after Pavón in 1861, which by immigration from Italy and Spain, by railways, and by the wheat and beef of the pampas became one of the richest nations on earth by 1914. Its twentieth century brought coups, Peronism, the Dirty War of the military…">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/argentine-republic.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1885" data-view="-75.6,-54.4,-51.8,-19.8" data-realm="Argentine Republic">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Argentine Republic</h1>
+<p class="lede">1861 to today. Shown above as it stood in A.D. 1885; drag the timeline to watch it rise and fall.</p>
+<p>The Argentine nation reunited under Buenos Aires after Pavón in 1861, which by immigration from Italy and Spain, by railways, and by the wheat and beef of the pampas became one of the richest nations on earth by 1914. Its twentieth century brought coups, Peronism, the Dirty War of the military junta, and defeat in the Falklands in 1982.</p>
+<dl class="facts"><dt>Government</dt><dd>Federal presidential republic</dd><dt>Faith</dt><dd>Catholic Christianity</dd><dt>Capital</dt><dd>Buenos Aires <span class="num">(from 1861)</span></dd><dt>Greatest extent</dt><dd>About 2.8 million sq. km, as drawn on this atlas for A.D. 1885</dd></dl>
+<h2>Rulers of the Argentine Republic</h2>
+<ul class="rulers"><li>Santiago Derqui <span class="num">1860 to 1861</span></li><li>Juan Esteban Pedernera <span class="num">1861</span></li><li>Bartolomé Mitre <span class="num">1862 to 1868</span></li><li>Domingo Faustino Sarmiento <span class="num">1868 to 1874</span></li><li>Nicolás Avellaneda <span class="num">1874 to 1880</span></li><li>Julio Argentino Roca <span class="num">1880 to 1886</span></li><li>Miguel Juárez Celman <span class="num">1886 to 1890</span></li><li>Carlos Pellegrini <span class="num">1890 to 1892</span></li><li>Luis Sáenz Peña <span class="num">1892 to 1895</span></li><li>José Evaristo Uriburu <span class="num">1895 to 1898</span></li><li>Julio Argentino Roca <span class="num">1898 to 1904</span></li><li>Manuel Quintana <span class="num">1904 to 1906</span></li><li>José Figueroa Alcorta <span class="num">1906 to 1910</span></li><li>Roque Sáenz Peña <span class="num">1910 to 1914</span></li><li>Victorino de la Plaza <span class="num">1914 to 1916</span></li><li>Hipólito Yrigoyen <span class="num">1916 to 1922</span></li><li>Marcelo Torcuato de Alvear <span class="num">1922 to 1928</span></li><li>Hipólito Yrigoyen <span class="num">1928 to 1930</span></li><li>José Félix Uriburu <span class="num">1930 to 1932</span></li><li>Agustín Pedro Justo <span class="num">1932 to 1938</span></li><li>Roberto Marcelino Ortiz <span class="num">1938 to 1942</span></li><li>Ramón Castillo <span class="num">1942 to 1943</span></li><li>Arturo Rawson <span class="num">1943</span></li><li>Pedro Pablo Ramírez <span class="num">1943 to 1944</span></li><li>Edelmiro Julián Farrell <span class="num">1944 to 1946</span></li><li>Juan Perón <span class="num">1946 to 1955</span></li><li>Eduardo Lonardi <span class="num">1955</span></li><li>Pedro Eugenio Aramburu <span class="num">1955 to 1958</span></li><li>Arturo Frondizi <span class="num">1958 to 1962</span></li><li>José María Guido <span class="num">1962 to 1963</span></li><li>Arturo Umberto Illia <span class="num">1963 to 1966</span></li><li>Juan Carlos Onganía <span class="num">1966 to 1970</span></li><li>Roberto Marcelo Levingston <span class="num">1970 to 1971</span></li><li>Alejandro Agustín Lanusse <span class="num">1971 to 1973</span></li><li>Héctor José Cámpora <span class="num">1973</span></li><li>Raúl Lastiri <span class="num">1973</span></li><li>Juan Perón <span class="num">1973 to 1974</span></li><li>Isabel Perón <span class="num">1974 to 1976</span></li><li>Jorge Rafael Videla <span class="num">1976 to 1981</span></li><li>Roberto Eduardo Viola <span class="num">1981</span></li><li>Carlos Lacoste (interim) <span class="num">1981</span></li><li>Leopoldo Galtieri <span class="num">1981 to 1982</span></li><li>Alfredo Oscar Saint-Jean (interim) <span class="num">1982</span></li><li>Reynaldo Bignone <span class="num">1982 to 1983</span></li><li>Raúl Alfonsín <span class="num">1983 to 1989</span></li><li>Carlos Menem <span class="num">1989 to 1999</span></li><li>Fernando de la Rúa <span class="num">1999 to 2001</span></li><li>Ramón Puerta (acting) <span class="num">2001</span></li><li>Adolfo Rodríguez Saá <span class="num">2001</span></li><li>Eduardo Camaño (acting) <span class="num">2001 to 2002</span></li><li>Eduardo Duhalde <span class="num">2002 to 2003</span></li><li>Néstor Kirchner <span class="num">2003 to 2007</span></li><li>Cristina Fernández de Kirchner <span class="num">2007 to 2015</span></li><li>Mauricio Macri <span class="num">2015 to 2019</span></li><li>Alberto Fernández <span class="num">2019 to 2023</span></li><li>Javier Milei <span class="num">from 2023</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/1865.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1865</a><a href="/atlas/year/1875.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1875</a><a href="/atlas/year/1885.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1885</a><a href="/atlas/year/1895.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1895</a><a href="/atlas/year/1905.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1905</a><a href="/atlas/year/1910.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1910</a><a href="/atlas/year/1920.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1920</a><a href="/atlas/year/1930.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1930</a><a href="/atlas/year/1940.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1940</a><a href="/atlas/year/1950.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1950</a><a href="/atlas/year/1960.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1960</a><a href="/atlas/year/1970.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1970</a><a href="/atlas/year/1980.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1980</a><a href="/atlas/year/1985.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1985</a><a href="/atlas/year/1995.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 1995</a><a href="/atlas/year/2005.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 2005</a><a href="/atlas/year/2015.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 2015</a><a href="/atlas/year/2024.html?v=-75.6,-54.4,-51.8,-19.8">A.D. 2024</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

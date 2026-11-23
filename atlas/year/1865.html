@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1865 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1865: Russian Empire, Qing Dynasty, Empire of Brazil, British Colonial Empire, United States of America, British Raj, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1865.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1865 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1865: Russian Empire, Qing Dynasty, Empire of Brazil, British Colonial Empire, United States of America, British Raj, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1865.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1865">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1865</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1865, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1865</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/russian-empire.html">Russian Empire</a></td><td>Alexander II (1855 to 1881)</td><td class="hide-s">St. Petersburg</td><td class="hide-s num">about 23 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></td><td>Tongzhi Emperor (1861 to 1875) and Empress Dowager Cixi (regent) (1861 to 1908)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 8.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/empire-of-brazil.html">Empire of Brazil</a></td><td>Pedro II (1831 to 1889)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></td><td>Victoria (1837 to 1901) and Lord Palmerston (prime minister) (1859 to 1865)</td><td class="hide-s">London</td><td class="hide-s num">about 7.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Abraham Lincoln (1861 to 1865), then Andrew Johnson (1865 to 1869)</td><td class="hide-s">Washington</td><td class="hide-s num">about 6.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-raj.html">British Raj</a></td><td>Queen Victoria (empress from 1876) (1858 to 1901) and Sir John Lawrence (viceroy) (1864 to 1869)</td><td class="hide-s">Calcutta</td><td class="hide-s num">about 4.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Abdulaziz (1861 to 1876)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/second-mexican-empire.html">Second Mexican Empire</a></td><td>Maximilian I (1864 to 1867)</td><td class="hide-s">Mexico City</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/muhammad-ali-dynasty.html">Muhammad Ali dynasty</a></td><td>Isma'il (1863 to 1879)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 1.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/bolivia.html">Bolivia</a></td><td>Mariano Melgarejo (1864 to 1871)</td><td class="hide-s">Sucre</td><td class="hide-s num">about 1.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></td><td>Naser al-Din Shah (1848 to 1896)</td><td class="hide-s">Tehran</td><td class="hide-s num">about 1.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Bartolomé Mitre (1862 to 1868)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 1.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></td><td>Juan Antonio Pezet (1863 to 1865) and Pedro Diez Canseco (interim) (1865)</td><td class="hide-s">Lima</td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-colombia.html">United States of Colombia</a></td><td>Manuel Murillo Toro (1864 to 1866)</td><td class="hide-s">Bogotá</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1865</h3><ul><li><a href="/atlas/realm/united-kingdoms-of-sweden-and-norway.html">United Kingdoms of Sweden and Norway</a></li><li><a href="/atlas/realm/second-french-empire.html">Second French Empire</a></li><li><a href="/atlas/realm/austrian-empire.html">Austrian Empire</a></li><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/united-kingdom-of-great-britain-and-ireland.html">United Kingdom of Great Britain and Ireland</a></li><li><a href="/atlas/realm/kingdom-of-prussia.html">Kingdom of Prussia</a></li><li><a href="/atlas/realm/kingdom-of-italy.html">Kingdom of Italy</a></li><li><a href="/atlas/realm/kingdom-of-portugal.html">Kingdom of Portugal</a></li></ul><a class="see" href="/atlas/year/1865.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1865</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></li><li><a href="/atlas/realm/emirate-of-nejd.html">Emirate of Nejd</a></li><li><a href="/atlas/realm/khanate-of-khiva.html">Khanate of Khiva</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/imamate-of-yemen.html">Imamate of Yemen</a></li><li><a href="/atlas/realm/sultanate-of-oman.html">Sultanate of Oman</a></li><li><a href="/atlas/realm/trucial-states.html">Trucial States</a></li></ul><a class="see" href="/atlas/year/1865.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1865</h3><ul><li><a href="/atlas/realm/british-raj.html">British Raj</a></li><li><a href="/atlas/realm/emirate-of-afghanistan.html">Emirate of Afghanistan</a></li><li><a href="/atlas/realm/burma.html">Burma</a></li><li><a href="/atlas/realm/emirate-of-bukhara.html">Emirate of Bukhara</a></li><li><a href="/atlas/realm/kashmir-and-jammu.html">Kashmir and Jammu</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/khanate-of-kokand.html">Khanate of Kokand</a></li><li><a href="/atlas/realm/bhutan.html">Bhutan</a></li></ul><a class="see" href="/atlas/year/1865.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1865</h3><ul><li><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></li><li><a href="/atlas/realm/dutch-east-indies.html">Dutch East Indies</a></li><li><a href="/atlas/realm/rattanakosin-kingdom.html">Rattanakosin Kingdom</a></li><li><a href="/atlas/realm/dali-sultanate.html">Dali Sultanate</a></li><li><a href="/atlas/realm/tokugawa-shogunate.html">Tokugawa Shogunate</a></li><li><a href="/atlas/realm/nguyen-dynasty.html">Nguyễn dynasty</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li><li><a href="/atlas/realm/kingdom-of-luang-phrabang.html">Kingdom of Luang Phrabang</a></li></ul><a class="see" href="/atlas/year/1865.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1865</h3><ul><li><a href="/atlas/realm/muhammad-ali-dynasty.html">Muhammad Ali dynasty</a></li><li><a href="/atlas/realm/ottoman-tripolitania.html">Ottoman Tripolitania</a></li><li><a href="/atlas/realm/sokoto-caliphate.html">Sokoto Caliphate</a></li><li><a href="/atlas/realm/british-cape-colony.html">British Cape Colony</a></li><li><a href="/atlas/realm/merina-kingdom.html">Merina Kingdom</a></li><li><a href="/atlas/realm/morocco.html">Morocco</a></li><li><a href="/atlas/realm/sultanate-of-darfur.html">Sultanate of Darfur</a></li><li><a href="/atlas/realm/south-african-republic.html">South African Republic</a></li></ul><a class="see" href="/atlas/year/1865.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1865</h3><ul><li><a href="/atlas/realm/empire-of-brazil.html">Empire of Brazil</a></li><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/second-mexican-empire.html">Second Mexican Empire</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/united-states-of-colombia.html">United States of Colombia</a></li><li><a href="/atlas/realm/confederate-states-of-america.html">Confederate States of America</a></li></ul><a class="see" href="/atlas/year/1865.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Emancipation Proclamation</b><span class="when">A.D. 1863</span>, <span class="where">Washington, D.C.</span>. Taking the occasion of the Union's narrow victory at Antietam, Lincoln proclaimed that on 1 January 1863 all slaves in the states in rebellion would be 'then, thenceforward, and forever free.' The proclamation made the war a war against slavery, opened the Union armies to black soldiers, of whom some 180,000 served, and led to the Thirteenth Amendment of 1865.</li>
+<li><b>Gettysburg</b><span class="when">A.D. 1863</span>, <span class="where">Gettysburg, Pennsylvania</span>. Robert E. Lee's second invasion of the North met George Meade's Army of the Potomac at Gettysburg in the first three days of July 1863. After two days of savage fighting at Little Round Top and Culp's Hill, Pickett's charge against the Union center failed; the two armies lost some fifty thousand men killed, wounded, or captured, and Lee never again invaded the North. The next day Vicksburg surrendered to Grant.</li>
+<li><b>The Circassian Exodus</b><span class="when">A.D. 1864</span>, <span class="where">Sochi, Circassia</span>. Russia's long war for the western Caucasus ended in May 1864 with a victory parade at Kbaada above Sochi. The Circassian tribes who would not move to the plains were driven to the Black Sea shore and shipped to Ottoman lands; hundreds of thousands were expelled, and tens of thousands died of hunger and typhus in the ports and on the voyage. Their descendants live from Turkey to Jordan.</li>
+<li><b>The Fall of the Heavenly Capital</b><span class="when">A.D. 1864</span>, <span class="where">Nanjing, Jiangsu, China</span>. After a siege of two years the Hunan Army of Zeng Guofan, led by his brother Zeng Guoquan, blew a breach in the walls of Nanjing and stormed the Taiping capital. Hong Xiuquan had died weeks before, and his followers were slaughtered in their tens of thousands. The provincial armies that had saved the dynasty became the power behind it.</li>
+<li><b>Lee Surrenders at Appomattox</b><span class="when">A.D. 1865</span>, <span class="where">Appomattox Court House, Virginia</span>. With Richmond fallen and his starving army cut off in its retreat west, Robert E. Lee surrendered to Ulysses S. Grant in the parlor of the McLean house at Appomattox Court House on 9 April 1865. The war that had cost some 620,000 lives preserved the Union and ended slavery in the United States; five days later Lincoln was shot by John Wilkes Booth at Ford's Theatre.</li>
+<li><b>Königgrätz</b><span class="when">A.D. 1866</span>, <span class="where">Königgrätz, Bohemia</span>. On 3 July 1866 three Prussian armies, moved by railway and directed by telegraph by General von Moltke, converged on Benedek's Austrian army at Königgrätz in Bohemia; the Crown Prince's arrival on the Austrian flank in the afternoon decided the day. The war lasted seven weeks. Austria was shut out of Germany, and Prussia annexed Hanover, Hesse-Kassel, Nassau, and Frankfurt.</li>
+<li><b>The Meiji Restoration</b><span class="when">A.D. 1868</span>, <span class="where">Heian-kyō, Kyoto, Japan</span>. Young samurai of Satsuma and Chōshū, resolved that Japan should not share China's humiliation, forced the last shogun, Tokugawa Yoshinobu, to give up his power, and proclaimed the rule of the boy Emperor Meiji. Within a generation they abolished the domains and the samurai class, built railways, factories, and a conscript army, and made Japan the first industrial power of Asia.</li>
+<li><b>The Suez Canal Opens</b><span class="when">A.D. 1869</span>, <span class="where">Port Said, Egypt</span>. Ferdinand de Lesseps had begun digging at Port Said in 1859 under a concession from the viceroy Said, and tens of thousands of Egyptian peasants were drafted to the work. On 17 November 1869, before the Empress Eugénie and the princes of Europe, the khedive Isma'il opened the canal from the Mediterranean to the Red Sea. The voyage from London to Bombay was shortened by some four thousand miles.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1860.html" rel="prev">Earlier: the world in A.D. 1860</a><a href="/atlas/year/1870.html" rel="next">Later: the world in A.D. 1870</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1430 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1430: Ming Dynasty, Timurid Empire, Northern Yuan, Tibet, Chagatai Khanate, Golden Horde, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1430.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1430 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1430: Ming Dynasty, Timurid Empire, Northern Yuan, Tibet, Chagatai Khanate, Golden Horde, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1430.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1430">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1430</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 1430, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1430</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></td><td>Xuande Emperor (1425 to 1435)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 6.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/timurid-empire.html">Timurid Empire</a></td><td>Shah Rukh (1405 to 1447)</td><td class="hide-s">Herat</td><td class="hide-s num">about 3.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/northern-yuan.html">Northern Yuan</a></td><td>Adai Khan (1425 to 1438)</td><td class="hide-s"></td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibet.html">Tibet</a></td><td>Drakpa Gyaltsen (1385 to 1432)</td><td class="hide-s">Nedong</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/chagatai-khanate.html">Chagatai Khanate</a></td><td>Satuq Khan (1429 to 1434) and Esen Buqa II (1429 to 1462)</td><td class="hide-s"></td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/golden-horde.html">Golden Horde</a></td><td>Ulugh Muhammad (1419 to 1437) and Kichi Muhammad (1428 to 1459)</td><td class="hide-s">Sarai</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></td><td>al-Ashraf Barsbay (1422 to 1438)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/novgorod-republic.html">Novgorod Republic</a></td><td>Euthymius II (archbishop) (1429 to 1458)</td><td class="hide-s">Novgorod</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kalmar-union.html">Kalmar Union</a></td><td>Eric of Pomerania (1397 to 1439)</td><td class="hide-s">Roskilde</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/four-oirats.html">Four Oirats</a></td><td>Toghon Taishi (1416 to 1438)</td><td class="hide-s"></td><td class="hide-s num">about 1.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mali-empire.html">Mali Empire</a></td><td></td><td class="hide-s">Niani</td><td class="hide-s num">about 1.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/polish-lithuania-kingdom.html">Polish-Lithuania Kingdom</a></td><td>Władysław II Jagiełło (1386 to 1434) and Vytautas the Great (grand duke) (1392 to 1430)</td><td class="hide-s">Kraków</td><td class="hide-s num">about 1.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/uzbek-khanate.html">Uzbek Khanate</a></td><td>Abu'l-Khayr Khan (1428 to 1468)</td><td class="hide-s">Chimgi-Tura</td><td class="hide-s num">about 1.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/majapahit.html">Majapahit</a></td><td>Suhita (1429 to 1447)</td><td class="hide-s">Majapahit (Trowulan)</td><td class="hide-s num">about 911 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1430</h3><ul><li><a href="/atlas/realm/kalmar-union.html">Kalmar Union</a></li><li><a href="/atlas/realm/polish-lithuania-kingdom.html">Polish-Lithuania Kingdom</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/crown-of-castile.html">Crown of Castile</a></li><li><a href="/atlas/realm/kingdom-of-england.html">Kingdom of England</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/grand-principality-of-moscow.html">Grand Principality of Moscow</a></li></ul><a class="see" href="/atlas/year/1430.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1430</h3><ul><li><a href="/atlas/realm/qara-qoyunlu.html">Qara Qoyunlu</a></li><li><a href="/atlas/realm/rasulid-dynasty.html">Rasulid Dynasty</a></li><li><a href="/atlas/realm/jalayirid-sultanate.html">Jalayirid Sultanate</a></li><li><a href="/atlas/realm/kingdom-of-georgia.html">Kingdom of Georgia</a></li><li><a href="/atlas/realm/beylik-of-karaman.html">Beylik of Karaman</a></li><li><a href="/atlas/realm/nabhani-dynasty.html">Nabhani dynasty</a></li><li><a href="/atlas/realm/aq-qoyunlu.html">Aq Qoyunlu</a></li><li><a href="/atlas/realm/bahrani-dynasty.html">Bahrani Dynasty</a></li></ul><a class="see" href="/atlas/year/1430.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1430</h3><ul><li><a href="/atlas/realm/timurid-empire.html">Timurid Empire</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/chagatai-khanate.html">Chagatai Khanate</a></li><li><a href="/atlas/realm/four-oirats.html">Four Oirats</a></li><li><a href="/atlas/realm/bahmani-sultanate.html">Bahmani Sultanate</a></li><li><a href="/atlas/realm/vijayanagara-empire.html">Vijayanagara Empire</a></li><li><a href="/atlas/realm/sultanate-of-bengal.html">Sultanate of Bengal</a></li><li><a href="/atlas/realm/shan-states.html">Shan States</a></li></ul><a class="see" href="/atlas/year/1430.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1430</h3><ul><li><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></li><li><a href="/atlas/realm/northern-yuan.html">Northern Yuan</a></li><li><a href="/atlas/realm/majapahit.html">Majapahit</a></li><li><a href="/atlas/realm/lan-xang.html">Lan Xang</a></li><li><a href="/atlas/realm/ayutthaya-kingdom.html">Ayutthaya Kingdom</a></li><li><a href="/atlas/realm/ashikaga-shogunate.html">Ashikaga Shogunate</a></li><li><a href="/atlas/realm/khmer-empire.html">Khmer Empire</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li></ul><a class="see" href="/atlas/year/1430.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1430</h3><ul><li><a href="/atlas/realm/mamluk-sultanate.html">Mamluk Sultanate</a></li><li><a href="/atlas/realm/mali-empire.html">Mali Empire</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/marinid-sultanate.html">Marinid Sultanate</a></li><li><a href="/atlas/realm/hafsid-dynasty.html">Hafsid Dynasty</a></li><li><a href="/atlas/realm/makuria-kingdom.html">Makuria Kingdom</a></li><li><a href="/atlas/realm/adal-sultanate.html">Adal Sultanate</a></li><li><a href="/atlas/realm/zayyanid-dynasty.html">Zayyanid dynasty</a></li></ul><a class="see" href="/atlas/year/1430.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1430</h3><ul><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/chimu-empire.html">Chimu Empire</a></li><li><a href="/atlas/realm/michoacan.html">Michoacán</a></li><li>Cuzco</li><li><a href="/atlas/realm/aztec-triple-alliance.html">Aztec Triple Alliance</a></li></ul><a class="see" href="/atlas/year/1430.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Forbidden City</b><span class="when">A.D. 1421</span>, <span class="where">Peking, China</span>. The Yongle Emperor, who had seized the throne from his nephew in 1402 and left the palace at Nanjing in flames, moved his capital north to Beijing, his old princely seat. There a hundred thousand craftsmen and perhaps a million labourers had raised the Forbidden City, some 980 buildings behind a moat and walls, the home of twenty-four emperors until 1912.</li>
+<li><b>Le Loi Drives Out the Ming</b><span class="when">A.D. 1428</span>, <span class="where">Thang Long, Vietnam</span>. Le Loi, a landowner of Lam Son, rose against the Ming in 1418 and fought a guerrilla war for ten years. In 1427 he destroyed a Ming relief army at the pass of Chi Lang, where its general Liu Sheng was killed, and the Ming withdrew. Crowned as Le Thai To, he proclaimed the victory in Nguyen Trai's Great Proclamation upon the Pacification of the Wu.</li>
+<li><b>The Triple Alliance</b><span class="when">A.D. 1428</span>, <span class="where">Azcapotzalco, Mexico</span>. Itzcoatl of Tenochtitlan joined Nezahualcoyotl, the exiled poet-prince of Texcoco, and the lord of Tlacopan to overthrow Maxtla and the Tepanec overlords of Azcapotzalco, to whom the Mexica had paid tribute. The victors formed the Triple Alliance that became the Aztec empire, and Itzcoatl had the old painted books burned so that the history of the Mexica could be written anew.</li>
+<li><b>Joan of Arc Relieves Orléans</b><span class="when">A.D. 1429</span>, <span class="where">Orléans, France</span>. Joan, a peasant girl of Domrémy who heard the voices of saints bidding her save France, came to the Dauphin Charles at Chinon and was sent with a convoy to besieged Orléans. Within nine days of her arrival the English forts were taken and the siege raised on 8 May 1429; in July she stood beside Charles at his crowning in Reims. Captured the next year, she was burned at Rouen in 1431.</li>
+<li><b>Min Saw Mon Founds Mrauk U</b><span class="when">A.D. 1430</span>, <span class="where">Mrauk U, Burma</span>. Min Saw Mon, king of Arakan, driven out by the Burmans of Ava, spent twenty-four years in exile at the court of Bengal and returned with a Bengali army to win back his throne. In 1430 he founded Mrauk U, whose Buddhist kings took Muslim titles and struck coins in Persian, and whose fleets and Portuguese freebooters made it a terror of the Bay of Bengal.</li>
+<li><b>Ayutthaya Sacks Angkor</b><span class="when">A.D. 1431</span>, <span class="where">Angkor, Cambodia</span>. King Borommarachathirat II of Ayutthaya besieged Yasodharapura for seven months, took it, and carried off its images, Brahmans, and dancers to Siam. The Khmer court soon abandoned the city for the region of the Four Faces, where the Mekong meets the Tonle Sap; Angkor was left to the monks and the forest, and the age of the god-kings was over.</li>
+<li><b>Brunelleschi's Dome</b><span class="when">A.D. 1436</span>, <span class="where">Florence, Italy</span>. On 25 March 1436 Pope Eugenius IV consecrated the cathedral of Florence, crowned at last with the great dome Filippo Brunelleschi had raised without wooden centering, ring upon ring of brick laid in herringbone. The largest dome built since antiquity, it was the first triumph of the art of the Renaissance, and Florence its capital.</li>
+<li><b>Pachacuti Saves Cusco</b><span class="when">c. A.D. 1438</span>, <span class="where">Cusco, Peru</span>. When the Chanka invaded the valley of Cusco and the old Inca ruler Viracocha fled, his son Cusi Yupanqui stayed to defend the town and, by Inca tradition, saw the very stones rise up as warriors to help him. Victorious, he took the name Pachacuti, 'Earth-shaker,' rebuilt Cusco in fitted stone, and began the conquests that made the Inca masters of the Andes.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1420.html" rel="prev">Earlier: the world in A.D. 1420</a><a href="/atlas/year/1440.html" rel="next">Later: the world in A.D. 1440</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

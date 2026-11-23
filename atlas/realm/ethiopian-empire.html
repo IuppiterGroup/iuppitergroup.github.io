@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Ethiopian Empire: Map, Rulers, and History, 1272 to 1935 | Orbis Terrarum</title>
+  <meta name="description" content="The Christian empire of the Ethiopian highlands under the Solomonic dynasty, which traced its line to Solomon and the Queen of Sheba. It withstood the jihad of Ahmad Gragn, the Jesuit missions, and the Era of the Princes, and under Menelik II crushed Italy at Adwa in 1896, remaining free until…">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/ethiopian-empire.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Ethiopian Empire: Map, Rulers, and History, 1272 to 1935 | Orbis Terrarum">
+  <meta property="og:description" content="The Christian empire of the Ethiopian highlands under the Solomonic dynasty, which traced its line to Solomon and the Queen of Sheba. It withstood the jihad of Ahmad Gragn, the Jesuit missions, and the Era of the Princes, and under Menelik II crushed Italy at Adwa in 1896, remaining free until…">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/ethiopian-empire.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1908" data-view="31,1.4,49.9,16.8" data-realm="Ethiopian Empire">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Ethiopian Empire</h1>
+<p class="lede">1272 to 1935. Shown above as it stood in A.D. 1908; drag the timeline to watch it rise and fall.</p>
+<p>The Christian empire of the Ethiopian highlands under the Solomonic dynasty, which traced its line to Solomon and the Queen of Sheba. It withstood the jihad of Ahmad Gragn, the Jesuit missions, and the Era of the Princes, and under Menelik II crushed Italy at Adwa in 1896, remaining free until Mussolini's invasion of 1935.</p>
+<dl class="facts"><dt>Government</dt><dd>Monarchy (negusa nagast, king of kings)</dd><dt>Faith</dt><dd>Ethiopian Orthodox Christianity</dd><dt>Capitals</dt><dd>Roving royal camp <span class="num">(1270 to 1635)</span>; Gondar <span class="num">(1636 to 1855)</span>; Debre Tabor <span class="num">(1855 to 1868)</span>; Mekelle <span class="num">(1872 to 1889)</span>; Addis Ababa <span class="num">(1889 to 1936)</span></dd><dt>Greatest extent</dt><dd>About 1.1 million sq. km, as drawn on this atlas for A.D. 1908</dd></dl>
+<h2>Rulers of the Ethiopian Empire</h2>
+<ul class="rulers"><li>Yekuno Amlak <span class="num">1270 to 1285</span></li><li>Yagbe'u Seyon <span class="num">1285 to 1294</span></li><li>Senfa Arad <span class="num">1294 to 1295</span></li><li>Hezba Asgad <span class="num">1295 to 1296</span></li><li>Qedma Asgad <span class="num">1296 to 1297</span></li><li>Jin Asgad <span class="num">1297 to 1298</span></li><li>Saba Asgad <span class="num">1298 to 1299</span></li><li>Wedem Arad <span class="num">1299 to 1314</span></li><li>Amda Seyon I <span class="num">1314 to 1344</span></li><li>Newaya Krestos <span class="num">1344 to 1372</span></li><li>Newaya Maryam <span class="num">1372 to 1382</span></li><li>Dawit I <span class="num">1382 to 1413</span></li><li>Tewodros I <span class="num">1413 to 1414</span></li><li>Yeshaq I <span class="num">1414 to 1429</span></li><li>Andreyas <span class="num">1429 to 1430</span></li><li>Takla Maryam <span class="num">1430 to 1433</span></li><li>Sarwe Iyasus <span class="num">1433</span></li><li>Amda Iyasus <span class="num">1433 to 1434</span></li><li>Zara Yaqob <span class="num">1434 to 1468</span></li><li>Baeda Maryam I <span class="num">1468 to 1478</span></li><li>Eskender <span class="num">1478 to 1494</span></li><li>Amda Seyon II <span class="num">1494</span></li><li>Na'od <span class="num">1494 to 1508</span></li><li>Dawit II (Lebna Dengel) <span class="num">1508 to 1540</span></li><li>Gelawdewos <span class="num">1540 to 1559</span></li><li>Menas <span class="num">1559 to 1563</span></li><li>Sarsa Dengel <span class="num">1563 to 1597</span></li><li>Yaqob <span class="num">1597 to 1603</span></li><li>Za Dengel <span class="num">1603 to 1604</span></li><li>Yaqob (restored) <span class="num">1604 to 1606</span></li><li>Susenyos I <span class="num">1606 to 1632</span></li><li>Fasilides <span class="num">1632 to 1667</span></li><li>Yohannes I <span class="num">1667 to 1682</span></li><li>Iyasu I <span class="num">1682 to 1706</span></li><li>Tekle Haymanot I <span class="num">1706 to 1708</span></li><li>Tewoflos <span class="num">1708 to 1711</span></li><li>Yostos <span class="num">1711 to 1716</span></li><li>Dawit III <span class="num">1716 to 1721</span></li><li>Bakaffa <span class="num">1721 to 1730</span></li><li>Iyasu II <span class="num">1730 to 1755</span></li><li>Iyoas I <span class="num">1755 to 1769</span></li><li>Yohannes II <span class="num">1769</span></li><li>Tekle Haymanot II <span class="num">1769 to 1770</span></li><li>Susenyos II <span class="num">1770</span></li><li>Tekle Haymanot II (restored) <span class="num">1770 to 1777</span></li><li>Solomon II <span class="num">1777 to 1779</span></li><li>Tekle Giyorgis I <span class="num">1779 to 1784</span></li><li>Iyasu III <span class="num">1784 to 1788</span></li><li>Tekle Giyorgis I (restored) <span class="num">1788 to 1789</span></li><li>Hezqeyas <span class="num">1789 to 1794</span></li><li>Tekle Giyorgis I (restored) <span class="num">1794 to 1795</span></li><li>Baeda Maryam II <span class="num">1795</span></li><li>Tekle Giyorgis I (restored) <span class="num">1795 to 1796</span></li><li>Solomon III <span class="num">1796 to 1797</span></li><li>Yonas <span class="num">1797 to 1798</span></li><li>Tekle Giyorgis I (restored) <span class="num">1798 to 1799</span></li><li>Solomon III (restored) <span class="num">1799</span></li><li>Demetros <span class="num">1799 to 1800</span></li><li>Tekle Giyorgis I (restored) <span class="num">1800</span></li><li>Demetros (restored) <span class="num">1800 to 1801</span></li><li>Egwale Seyon <span class="num">1801 to 1818</span></li><li>Iyoas II <span class="num">1818 to 1821</span></li><li>Gigar <span class="num">1821 to 1826</span></li><li>Baeda Maryam III <span class="num">1826</span></li><li>Gigar (restored) <span class="num">1826 to 1830</span></li><li>Iyasu IV <span class="num">1830 to 1832</span></li><li>Gebre Krestos <span class="num">1832</span></li><li>Sahle Dengel <span class="num">1832 to 1840</span></li><li>Yohannes III <span class="num">1840 to 1841</span></li><li>Sahle Dengel (restored) <span class="num">1841 to 1845</span></li><li>Yohannes III (restored) <span class="num">1845</span></li><li>Sahle Dengel (restored) <span class="num">1845 to 1850</span></li><li>Yohannes III (restored) <span class="num">1850 to 1851</span></li><li>Sahle Dengel (restored) <span class="num">1851 to 1855</span></li><li>Tewodros II <span class="num">1855 to 1868</span></li><li>Tekle Giyorgis II <span class="num">1868 to 1871</span></li><li>Yohannes IV <span class="num">1871 to 1889</span></li><li>Menelik II <span class="num">1889 to 1913</span></li><li>Iyasu V <span class="num">1913 to 1916</span></li><li>Zewditu <span class="num">1916 to 1930</span></li><li>Haile Selassie <span class="num">1930 to 1936</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/1280.html?v=31,1.4,49.9,16.8">A.D. 1280</a><a href="/atlas/year/1340.html?v=31,1.4,49.9,16.8">A.D. 1340</a><a href="/atlas/year/1410.html?v=31,1.4,49.9,16.8">A.D. 1410</a><a href="/atlas/year/1470.html?v=31,1.4,49.9,16.8">A.D. 1470</a><a href="/atlas/year/1520.html?v=31,1.4,49.9,16.8">A.D. 1520</a><a href="/atlas/year/1550.html?v=31,1.4,49.9,16.8">A.D. 1550</a><a href="/atlas/year/1580.html?v=31,1.4,49.9,16.8">A.D. 1580</a><a href="/atlas/year/1615.html?v=31,1.4,49.9,16.8">A.D. 1615</a><a href="/atlas/year/1645.html?v=31,1.4,49.9,16.8">A.D. 1645</a><a href="/atlas/year/1680.html?v=31,1.4,49.9,16.8">A.D. 1680</a><a href="/atlas/year/1710.html?v=31,1.4,49.9,16.8">A.D. 1710</a><a href="/atlas/year/1745.html?v=31,1.4,49.9,16.8">A.D. 1745</a><a href="/atlas/year/1775.html?v=31,1.4,49.9,16.8">A.D. 1775</a><a href="/atlas/year/1805.html?v=31,1.4,49.9,16.8">A.D. 1805</a><a href="/atlas/year/1840.html?v=31,1.4,49.9,16.8">A.D. 1840</a><a href="/atlas/year/1870.html?v=31,1.4,49.9,16.8">A.D. 1870</a><a href="/atlas/year/1905.html?v=31,1.4,49.9,16.8">A.D. 1905</a><a href="/atlas/year/1935.html?v=31,1.4,49.9,16.8">A.D. 1935</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -4,11 +4,11 @@
 (() => {
 'use strict';
 const $ = s => document.querySelector(s);
-const START = -3100, END = 2024, DATA = 'atlas/data/';
+const START = -3100, END = 2024, DATA = '/atlas/data/';
 
 EVENTS.forEach((e, i) => { e.id = i; e.lvl = e.lvl || 1; });
 // realm cards and the wider chronicle load after the map (atlas/info/)
-const INFO = 'atlas/info/';
+const INFO = '/atlas/info/';
 let REALM_INFO = {};
 
 /* ---------- Time scale ---------- */
@@ -23,6 +23,16 @@ const eraOf = y => (ERAS.find(e => y < e[1]) || ERAS[ERAS.length - 1])[2];
 const stepFor = y => y < -1200 ? 100 : y < -500 ? 25 : y < 1500 ? 10 : 5;
 const snapYear = y => { const s = stepFor(y); let r = Math.round(y / s) * s; if (r === 0) r = y < 0 ? -1 : 1; return Math.max(START, Math.min(END, r)); };
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Where to open: every year and realm has its own address ----------
+   /atlas/year/1200.html and /atlas/realm/<name>.html are written by atlas/build/pages.mjs and carry the year, realm,
+   and view on <body>; ?y= and ?v=west,south,east,north in the address override them, so any view can be shared. */
+const parseYear = v => { const n = parseInt(v, 10); return Number.isFinite(n) && n !== 0 ? Math.max(START, Math.min(END, n)) : null; };
+const parseBox = v => { const b = String(v || '').split(',').map(Number); return b.length === 4 && b.every(Number.isFinite) && b[2] !== b[0] && b[3] > b[1] ? b : null; };
+const QS = new URLSearchParams(location.search), BODY = document.body.dataset;
+const INIT = { y: parseYear(QS.get('y')) ?? parseYear(BODY.year) ?? 117, v: parseBox(QS.get('v')) || parseBox(BODY.view), realm: BODY.realm || '' };
+const yearSlug = y => y < 0 ? `${-y}-bc` : `${y}`;
+const hasPage = y => snapYear(y) === y;
 
 /* ---------- Colors ---------- */
 const PALETTE = ['#b8643f', '#5d7ea8', '#7a9850', '#b48a2c', '#87699f', '#3f8782', '#ad5a6c', '#6c7d3b', '#a3714a', '#4e6d98', '#97573a', '#5a8968', '#a9855a', '#78598a', '#3a789a', '#a6698a', '#8a7a3a', '#6a8aa6'];
@@ -121,6 +131,11 @@ function fitBox(box, pad = .94) {
   const contain = Math.min(W / bw, H / bh) * pad, cover = Math.max(W / bw, H / bh) * pad;
   return { k: contain * Math.min(W > H * 1.1 ? 1.1 : 1.3, Math.sqrt(cover / contain)), cx: (x0 + x1) / 2, cy: (y0 + y1) / 2 };
 }
+// the whole box on screen, for a view asked for by address (a realm page, or a shared link)
+function fitInside(box, pad = .92) {
+  const [x0, y0, x1, y1] = boxPlanar(box);
+  return { k: Math.min(W / Math.max(1, x1 - x0), H / Math.max(1, y1 - y0)) * pad, cx: (x0 + x1) / 2, cy: (y0 + y1) / 2 };
+}
 function camBoxFor(y) {
   const col = W < H * 1.1 ? 2 : 1;
   let i = CAM.findIndex(c => c[0] >= y); if (i <= 0) return CAM[0][col]; if (i === -1) return CAM[CAM.length - 1][col];
@@ -135,7 +150,7 @@ function camBoxFor(y) {
 const screenX = px => W / 2 + (px - cam.cx) * cam.k, screenY = py => H / 2 + (py - cam.cy) * cam.k;
 
 /* ---------- Data ---------- */
-let year = 117, playing = false, selected = null, userPicked = false;
+let year = INIT.y, playing = false, selected = null, userPicked = false;
 let windows = [], peopleIdx = [], RELATIONS = {}, REALMS = {};
 const winCache = new Map(), peopleCache = new Map();
 let cur = null, prev = null, fadeStart = 0, wanted = '';
@@ -536,14 +551,14 @@ function frame(now) {
 const zoomer = d3.zoom().clickDistance(5).on('zoom', ev => {
   if (!ev.sourceEvent) return;
   const t = ev.transform; cam.k = t.k; cam.cx = (W / 2 - t.x) / t.k; cam.cy = (H / 2 - t.y) / t.k;
-  Object.assign(target, cam); setFollow(false); $('#tip').hidden = true; updatePanelThrottled(); kick();
+  Object.assign(target, cam); setFollow(false); $('#tip').hidden = true; updatePanelThrottled(); kick(); touched();
 });
 d3.select(canvas).call(zoomer);
 function syncZoom() { canvas.__zoom = d3.zoomIdentity.translate(W / 2 - cam.cx * cam.k, H / 2 - cam.cy * cam.k).scale(cam.k); }
 function setFollow(on) { follow = on; $('#follow').setAttribute('aria-pressed', String(on)); if (on) kick(); }
-$('#follow').addEventListener('click', () => setFollow(!follow));
-$('#zin').addEventListener('click', () => { setFollow(false); target.k = Math.min(kWorld * 40, target.k * 1.7); kick(); });
-$('#zout').addEventListener('click', () => { setFollow(false); target.k = Math.max(kWorld * .8, target.k / 1.7); kick(); });
+$('#follow').addEventListener('click', () => { setFollow(!follow); touched(); });
+$('#zin').addEventListener('click', () => { setFollow(false); target.k = Math.min(kWorld * 40, target.k * 1.7); kick(); touched(); });
+$('#zout').addEventListener('click', () => { setFollow(false); target.k = Math.max(kWorld * .8, target.k / 1.7); kick(); touched(); });
 
 const fmtArea = a => a >= 1e6 ? `About ${(a / 1e6).toFixed(a >= 1e7 ? 0 : 1)} million sq. km` : a >= 1e4 ? `About ${Math.round(a / 1e3).toLocaleString()} thousand sq. km` : `About ${Math.round(a / 100) * 100 || a} sq. km`;
 function realmSpan(n) { const r = REALMS[n]; return r ? `${fmtSpan(r.f)} to ${r.t >= 2024 ? 'today' : fmtSpan(r.t)}` : ''; }
@@ -621,31 +636,32 @@ function setYear(y, fromPlay) {
     userPicked = false; const live = liveEvents(); const nsel = live.length ? live[live.length - 1] : null;
     if (nsel !== selected) { selected = nsel; renderChron(); }
   }
-  updatePanelThrottled(); kick();
+  updatePanelThrottled(); kick(); syncAddress();
 }
 let dragging = false;
 function yearFromPointer(ev) { const r = track.getBoundingClientRect(); return snapYear(t2y(Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)))); }
-track.addEventListener('pointerdown', ev => { dragging = true; track.setPointerCapture(ev.pointerId); stopPlay(); setYear(yearFromPointer(ev)); });
+track.addEventListener('pointerdown', ev => { interacted = true; dragging = true; track.setPointerCapture(ev.pointerId); stopPlay(); setYear(yearFromPointer(ev)); });
 track.addEventListener('pointermove', ev => { if (dragging) setYear(yearFromPointer(ev)); });
-track.addEventListener('pointerup', () => { dragging = false; renderChron(); });
+track.addEventListener('pointerup', () => { dragging = false; renderChron(); syncAddress(); });
 const stepBack = () => { const y = Math.round(year) || 1; let n = snapYear(y - stepFor(y - 1)); if (n >= y) n = snapYear(y - 2 * stepFor(y - 1)); return n; };
 const stepFwd = () => { const y = Math.round(year) || 1; let n = snapYear(y + stepFor(y)); if (n <= y) n = snapYear(y + 2 * stepFor(y)); return n; };
 track.addEventListener('keydown', ev => {
+  interacted = true;
   if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') { stopPlay(); setYear(ev.shiftKey ? snapYear(year + 10 * stepFor(year)) : stepFwd()); ev.preventDefault(); }
   else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') { stopPlay(); setYear(ev.shiftKey ? snapYear(year - 10 * stepFor(year - 1)) : stepBack()); ev.preventDefault(); }
   else if (ev.key === ' ') { togglePlay(); ev.preventDefault(); }
 });
-$('#back').addEventListener('click', () => { stopPlay(); setYear(stepBack()); renderChron(); });
-$('#fwd').addEventListener('click', () => { stopPlay(); setYear(stepFwd()); renderChron(); });
+$('#back').addEventListener('click', () => { interacted = true; stopPlay(); setYear(stepBack()); renderChron(); });
+$('#fwd').addEventListener('click', () => { interacted = true; stopPlay(); setYear(stepFwd()); renderChron(); });
 function setPlayIcon() { $('#playIcon').innerHTML = playing ? '<path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/>' : '<path d="M4 2.5v11l9-5.5z"/>'; $('#play').setAttribute('aria-label', playing ? 'Pause' : 'Play'); }
-function stopPlay() { if (playing) { playing = false; setPlayIcon(); } }
-function togglePlay() { playing = !playing; if (playing) { if (year >= END) setYear(START); userPicked = false; setFollow(true); } setPlayIcon(); kick(); }
+function stopPlay() { if (playing) { playing = false; setPlayIcon(); syncAddress(); } }
+function togglePlay() { interacted = true; playing = !playing; if (playing) { if (year >= END) setYear(START); userPicked = false; setFollow(true); } setPlayIcon(); kick(); }
 $('#play').addEventListener('click', togglePlay);
-$('#fromStart').addEventListener('click', () => { setYear(START); userPicked = false; playing = true; setFollow(true); setPlayIcon(); kick(); });
+$('#fromStart').addEventListener('click', () => { interacted = true; setYear(START); userPicked = false; playing = true; setFollow(true); setPlayIcon(); kick(); });
 
 /* ---------- Panel ---------- */
 function pickEvent(e, fly) {
-  stopPlay(); selected = e; userPicked = true; setYear(e.y);
+  interacted = true; stopPlay(); selected = e; userPicked = true; setYear(e.y);
   if (fly) {
     const base = fitBox(camBoxFor(e.y)), p = proj(e.ll);
     setFollow(false); target.k = Math.max(base.k * 1.9, target.k); target.cx = p[0]; target.cy = p[1];
@@ -730,7 +746,7 @@ function updatePanel() {
     b.querySelector('.rn > span').textContent = f.n;
     const who = rulerAt(f.n.startsWith('(') ? f.n : (REALM_INFO[`(${f.n})`] ? `(${f.n})` : f.n));
     b.querySelector('small').textContent = who;
-    b.addEventListener('click', () => { setFollow(false); Object.assign(target, fitBox(f.box, .8)); kick(); });
+    b.addEventListener('click', () => { setFollow(false); Object.assign(target, fitBox(f.box, .8)); kick(); touched(); });
     li.appendChild(b); ul.appendChild(li);
   }
 }
@@ -766,6 +782,55 @@ function capitalAt(n, y = Math.round(year) || 1) {
   const now = c.cap.filter(r => r[1] <= y && y <= r[2]); return now.map(r => r[0]).join(' and ');
 }
 
+/* ---------- Address, sharing, and the almanac below the map ---------- */
+let interacted = false, addrTimer = 0, almanacFor = '';
+const canPush = /^https?:$/.test(location.protocol);
+function pageAddress(withView) {
+  const y = Math.round(year) || 1;
+  let u = hasPage(y) ? `/atlas/year/${yearSlug(y)}.html` : `/atlas.html?y=${y}`;
+  if (withView && !follow) u += (u.includes('?') ? '&' : '?') + 'v=' + viewBounds().map(n => Math.round(n * 10) / 10).join(',');
+  return u;
+}
+function touched() { interacted = true; syncAddress(); }
+function syncAddress() {
+  if (!interacted || playing) return;
+  clearTimeout(addrTimer);
+  addrTimer = setTimeout(() => {
+    if (playing || dragging) return;
+    const y = Math.round(year) || 1, u = pageAddress(true);
+    document.title = `The World in ${fmtYear(y)} | Orbis Terrarum | luppiter Group`;
+    if (canPush) { try { history.replaceState(null, '', u); } catch (err) { /* file preview: keep the address */ } }
+    loadAlmanac(y);
+  }, 450);
+}
+// each year page carries a written almanac of that year; bring in the one for the year now shown
+const almanacCache = new Map();
+function loadAlmanac(y) {
+  const box = $('#almanac'); if (!box || !canPush || !hasPage(y)) return;
+  const u = `/atlas/year/${yearSlug(y)}.html`; if (almanacFor === u) return; almanacFor = u;
+  if (!almanacCache.has(u)) almanacCache.set(u, fetch(u).then(r => r.ok ? r.text() : '').then(t => {
+    const el = t && new DOMParser().parseFromString(t, 'text/html').querySelector('#almanac'); return el ? el.innerHTML : '';
+  }).catch(() => ''));
+  almanacCache.get(u).then(html => { if (html && almanacFor === u) box.innerHTML = html; });
+}
+const shareBtn = $('#share');
+if (shareBtn) shareBtn.addEventListener('click', () => {
+  const y = Math.round(year) || 1, u = location.origin + pageAddress(true), done = ok => {
+    shareBtn.textContent = ok ? 'Copied' : 'Link'; if (!ok) window.prompt(`Link to ${fmtYear(y)}`, u);
+    setTimeout(() => { shareBtn.textContent = 'Link'; }, 1600);
+  };
+  interacted = true; syncAddress();
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(u).then(() => done(true), () => done(false)); else done(false);
+});
+// "44 BC", "1200", "A.D. 476": any single year, not only the timeline's steps
+const gotoForm = $('#goto');
+if (gotoForm) gotoForm.addEventListener('submit', ev => {
+  ev.preventDefault();
+  const inp = $('#gotoYear'), m = /(\d{1,4})/.exec(inp.value); if (!m) return;
+  const bc = /b\.?\s*c|bce|^\s*-/i.test(inp.value), y = parseYear((bc ? -1 : 1) * +m[1]); if (y == null) return;
+  interacted = true; stopPlay(); userPicked = false; setYear(y); renderChron(); inp.value = ''; inp.blur();
+});
+
 /* ---------- Resize & boot ---------- */
 function resize() {
   const r = wrap.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
@@ -774,6 +839,7 @@ function resize() {
   kWorld = fitBox([-180, -60, 180, 82], .98).k;
   zoomer.scaleExtent([kWorld * .8, kWorld * 40]);
   if (follow) Object.assign(target, fitBox(camBoxFor(year)));
+  else if (INIT.v && !interacted) Object.assign(target, fitInside(INIT.v));
   kick();
 }
 new ResizeObserver(resize).observe(wrap);
@@ -807,7 +873,8 @@ async function boot() {
     cur = buildScene(feats, people, year);
     if (document.fonts && document.fonts.load) await Promise.race([Promise.all([document.fonts.load(FONT_SC(20)), document.fonts.load(FONT_IT(20))]), new Promise(r => setTimeout(r, 2500))]);
     $('#loading').hidden = true;
-    selected = EVENTS.find(e => e.y === 117); setYear(117); renderChron(true); updatePanel(); kick();
+    if (INIT.v) { setFollow(false); Object.assign(target, fitInside(INIT.v)); Object.assign(cam, target); }
+    selected = EVENTS.find(e => e.y === INIT.y) || null; setYear(INIT.y); renderChron(true); updatePanel(); kick();
     loadInfo();
   } catch (err) {
     console.error(err);

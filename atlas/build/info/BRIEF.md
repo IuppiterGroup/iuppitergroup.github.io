@@ -53,6 +53,8 @@ A JSON array of 40 to 80 cities that are not already in existing_cities.json, ea
 - Never use em dashes or en dashes (the characters U+2014 and U+2013). Use commas, colons, semicolons, or "to". Use the Oxford comma.
 - "Barbarian" is fine in the Roman sense (peoples beyond the frontier). "Savage" may describe conduct, never a people.
 - Give the Islamic conquests, raids, and the enslavement of Christians their full historical weight where they belong to your scope.
+- The Roman Empire in the East is the "Eastern Roman Empire" from 395 to 1453, and its people are Eastern Romans. Do not write "Byzantine" or "Byzantium" for the state; Byzantium is only the Greek city before 330.
+- The slave trades: say plainly that the captives were enslaved in Africa, taken in the wars and raids of African kings and merchants and sold at the coast, and give the older and longer Muslim trade by the Sahara, the Red Sea, and the Indian Ocean its weight beside the Atlantic.
 - Christianity: state its founding events as events, never as "claims" or with skeptical framing. The Crucifixion: Jesus was handed over to Pontius Pilate by the high priest Caiaphas and the Temple authorities, and Pilate ordered him crucified. Do not write that "the Jews" killed Christ. Nothing blasphemous.
 - Treat all peoples and faiths with the same standard of accuracy.
 - English names for people and places (Constantinople, not Konstantinoupolis; Charlemagne; Genghis Khan).

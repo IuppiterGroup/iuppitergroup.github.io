@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1855 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1855: Russian Empire, Qing Dynasty, Empire of Brazil, United States of America, British Empire, Ottoman Empire, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1855.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1855 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1855: Russian Empire, Qing Dynasty, Empire of Brazil, United States of America, British Empire, Ottoman Empire, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1855.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1855">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1855</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1855, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1855</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/russian-empire.html">Russian Empire</a></td><td>Nicholas I (1825 to 1855), then Alexander II (1855 to 1881)</td><td class="hide-s">St. Petersburg</td><td class="hide-s num">about 21 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></td><td>Xianfeng Emperor (1850 to 1861)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 12 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/empire-of-brazil.html">Empire of Brazil</a></td><td>Pedro II (1831 to 1889)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Franklin Pierce (1853 to 1857)</td><td class="hide-s">Washington</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-empire.html">British Empire</a></td><td>Lord Dalhousie (governor-general) (1848 to 1856)</td><td class="hide-s">Calcutta</td><td class="hide-s num">about 4.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Abdulmejid I (1839 to 1861)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/federated-republic-of-mexico.html">Federated Republic of Mexico</a></td><td>Antonio López de Santa Anna (dictator) (1853 to 1855) and Martín Carrera (1855)</td><td class="hide-s">Mexico City</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/muhammad-ali-dynasty.html">Muhammad Ali dynasty</a></td><td>Said (1854 to 1863)</td><td class="hide-s">Cairo</td><td class="hide-s num">about 1.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/bolivia.html">Bolivia</a></td><td>Manuel Isidoro Belzu (1848 to 1855), then Jorge Córdova (1855 to 1857)</td><td class="hide-s">Sucre</td><td class="hide-s num">about 1.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></td><td>Naser al-Din Shah (1848 to 1896)</td><td class="hide-s">Tehran</td><td class="hide-s num">about 1.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></td><td>Victoria (1837 to 1901) and Lord Palmerston (prime minister) (1855 to 1858)</td><td class="hide-s">London</td><td class="hide-s num">about 1.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-confederation.html">Argentine Confederation</a></td><td>Justo José de Urquiza (1852 to 1860)</td><td class="hide-s">Paraná</td><td class="hide-s num">about 1.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></td><td>José Rufino Echenique (1851 to 1855), then Ramón Castilla (1855 to 1862)</td><td class="hide-s">Lima</td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-new-granada.html">Republic of New Granada</a></td><td>Manuel María Mallarino (1855 to 1857)</td><td class="hide-s">Bogotá</td><td class="hide-s num">about 1.2 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1855</h3><ul><li><a href="/atlas/realm/united-kingdoms-of-sweden-and-norway.html">United Kingdoms of Sweden and Norway</a></li><li><a href="/atlas/realm/austrian-empire.html">Austrian Empire</a></li><li><a href="/atlas/realm/second-french-empire.html">Second French Empire</a></li><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/united-kingdom-of-great-britain-and-ireland.html">United Kingdom of Great Britain and Ireland</a></li><li><a href="/atlas/realm/kingdom-of-prussia.html">Kingdom of Prussia</a></li><li><a href="/atlas/realm/kingdom-of-portugal.html">Kingdom of Portugal</a></li><li><a href="/atlas/realm/kingdom-of-the-two-sicilies.html">Kingdom of the Two Sicilies</a></li></ul><a class="see" href="/atlas/year/1855.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1855</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></li><li><a href="/atlas/realm/emirate-of-nejd.html">Emirate of Nejd</a></li><li><a href="/atlas/realm/khanate-of-khiva.html">Khanate of Khiva</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/sultanate-of-oman.html">Sultanate of Oman</a></li><li><a href="/atlas/realm/imamate-of-yemen.html">Imamate of Yemen</a></li><li><a href="/atlas/realm/caucasian-imamate.html">Caucasian Imamate</a></li></ul><a class="see" href="/atlas/year/1855.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1855</h3><ul><li><a href="/atlas/realm/british-empire.html">British Empire</a></li><li><a href="/atlas/realm/emirate-of-afghanistan.html">Emirate of Afghanistan</a></li><li><a href="/atlas/realm/khanate-of-kokand.html">Khanate of Kokand</a></li><li><a href="/atlas/realm/burma.html">Burma</a></li><li><a href="/atlas/realm/emirate-of-bukhara.html">Emirate of Bukhara</a></li><li><a href="/atlas/realm/rajput-states.html">Rajput states</a></li><li><a href="/atlas/realm/kashmir-and-jammu.html">Kashmir and Jammu</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li></ul><a class="see" href="/atlas/year/1855.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1855</h3><ul><li><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></li><li><a href="/atlas/realm/rattanakosin-kingdom.html">Rattanakosin Kingdom</a></li><li><a href="/atlas/realm/dutch-east-indies.html">Dutch East Indies</a></li><li><a href="/atlas/realm/tokugawa-shogunate.html">Tokugawa Shogunate</a></li><li><a href="/atlas/realm/nguyen-dynasty.html">Nguyễn dynasty</a></li><li><a href="/atlas/realm/taiping-heavenly-kingdom.html">Taiping Heavenly Kingdom</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li><li><a href="/atlas/realm/kingdom-of-luang-phrabang.html">Kingdom of Luang Phrabang</a></li></ul><a class="see" href="/atlas/year/1855.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1855</h3><ul><li><a href="/atlas/realm/muhammad-ali-dynasty.html">Muhammad Ali dynasty</a></li><li><a href="/atlas/realm/ottoman-tripolitania.html">Ottoman Tripolitania</a></li><li><a href="/atlas/realm/sokoto-caliphate.html">Sokoto Caliphate</a></li><li><a href="/atlas/realm/british-cape-colony.html">British Cape Colony</a></li><li><a href="/atlas/realm/merina-kingdom.html">Merina Kingdom</a></li><li><a href="/atlas/realm/morocco.html">Morocco</a></li><li><a href="/atlas/realm/sultanate-of-darfur.html">Sultanate of Darfur</a></li><li><a href="/atlas/realm/wadai-empire.html">Wadai Empire</a></li></ul><a class="see" href="/atlas/year/1855.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1855</h3><ul><li><a href="/atlas/realm/empire-of-brazil.html">Empire of Brazil</a></li><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/federated-republic-of-mexico.html">Federated Republic of Mexico</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li><li><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></li><li><a href="/atlas/realm/argentine-confederation.html">Argentine Confederation</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/republic-of-new-granada.html">Republic of New Granada</a></li></ul><a class="see" href="/atlas/year/1855.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Coup of the Second of December</b><span class="when">A.D. 1851</span>, <span class="where">Paris, France</span>. Barred by the constitution from a second term, President Louis-Napoléon Bonaparte struck on 2 December 1851, the anniversary of Austerlitz: troops occupied Paris, the leading deputies were arrested, and resistance on the boulevards was shot down; Victor Hugo, who had tried to raise the barricades, fled into exile. A plebiscite approved the coup, and a year later to the day he was proclaimed Napoleon III.</li>
+<li><b>Perry's Black Ships</b><span class="when">A.D. 1853</span>, <span class="where">Uraga, Kanagawa, Japan</span>. Commodore Matthew Perry steamed into Edo Bay with four black ships, their guns run out, and delivered a letter from President Fillmore asking that Japan open its ports. He returned the next year with a larger squadron, and the shogunate signed the Treaty of Kanagawa. Two centuries of seclusion were over, and the authority of the shogun began to crumble.</li>
+<li><b>The First Train in India</b><span class="when">A.D. 1853</span>, <span class="where">Mumbai, Maharashtra, India</span>. On 16 April 1853 a train of fourteen carriages drawn by three locomotives, Sultan, Sindh, and Sahib, ran thirty-four kilometres from Bori Bunder in Bombay to Thane with four hundred guests aboard, to a salute of twenty-one guns. Within half a century India had one of the largest railway systems on earth, binding the subcontinent together.</li>
+<li><b>The Bowring Treaty</b><span class="when">A.D. 1855</span>, <span class="where">Bangkok, Siam</span>. King Mongkut, a monk for twenty-seven years who read Latin and English, chose to bend before the West rather than break. With Sir John Bowring, governor of Hong Kong, he signed a treaty opening Siam to free trade at a duty of three percent and granting British subjects their own courts. Like treaties with other powers followed, and Siam kept its independence.</li>
+<li><b>The Rising at Meerut</b><span class="when">A.D. 1857</span>, <span class="where">Meerut, Uttar Pradesh, India</span>. On 10 May 1857, after eighty-five troopers had been fettered for refusing cartridges rumoured to be greased with cow and pig fat, the sepoys at Meerut rose, shot their officers, and rode for Delhi. There they proclaimed the aged Bahadur Shah II emperor of Hindustan. Rebellion spread across the north, and the British needed more than a year to put it down.</li>
+<li><b>The Massacre at Cawnpore</b><span class="when">A.D. 1857</span>, <span class="where">Kanpur, Uttar Pradesh, India</span>. Nana Sahib, adopted son of the last Peshwa, besieged the British entrenchment at Cawnpore for three weeks and then offered safe passage downriver. At the Satichaura ghat the boats were fired upon and most of the men killed. The surviving women and children, some two hundred, were held in the Bibighar and hacked to death as a relieving column drew near. British vengeance was merciless.</li>
+<li><b>Mindon Founds Mandalay</b><span class="when">A.D. 1857</span>, <span class="where">Mandalay, Burma</span>. King Mindon, who had seized the throne after the British took Lower Burma in 1852, founded a new royal city at the foot of Mandalay Hill, where the Buddha was said to have foretold a great city. A devout and gentle ruler, he held the Fifth Buddhist Council there in 1871 and had the whole Pali canon carved on 729 marble slabs at the Kuthodaw pagoda.</li>
+<li><b>The Crown Takes India</b><span class="when">A.D. 1858</span>, <span class="where">Prayagraj, Uttar Pradesh, India</span>. The Government of India Act ended the rule of the East India Company, and on 1 November 1858 Lord Canning read at Allahabad Queen Victoria's proclamation promising religious toleration and equal law to her Indian subjects. Bahadur Shah II, the last Mughal emperor, was tried and exiled to Rangoon, and the British Raj began.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1850.html" rel="prev">Earlier: the world in A.D. 1850</a><a href="/atlas/year/1860.html" rel="next">Later: the world in A.D. 1860</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

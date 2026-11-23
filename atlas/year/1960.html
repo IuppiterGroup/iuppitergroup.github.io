@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1960 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1960: Union of Soviet Socialist Republics, Canada, United States of America, People's Republic of China, United States of Brazil, French Fifth Republic, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1960.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1960 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1960: Union of Soviet Socialist Republics, Canada, United States of America, People's Republic of China, United States of Brazil, French Fifth Republic, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1960.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1960">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1960</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1960, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1960</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/union-of-soviet-socialist-republics.html">Union of Soviet Socialist Republics</a></td><td>Nikita Khrushchev (first secretary) (1953 to 1964) and Kliment Voroshilov (head of state) (1953 to 1960)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 22 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/canada.html">Canada</a></td><td>John Diefenbaker (1957 to 1963)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 9.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Dwight D. Eisenhower (1953 to 1961)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/people-s-republic-of-china.html">People's Republic of China</a></td><td>Mao Zedong (chairman) (1949 to 1976) and Zhou Enlai (premier) (1949 to 1976)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 9.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></td><td>Juscelino Kubitschek (1956 to 1961)</td><td class="hide-s">Rio de Janeiro and Brasília</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/french-fifth-republic.html">French Fifth Republic</a></td><td>Charles de Gaulle (president) (1959 to 1969) and Michel Debré (prime minister) (1959 to 1962)</td><td class="hide-s">Paris</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/commonwealth-of-australia.html">Commonwealth of Australia</a></td><td>Robert Menzies (1949 to 1966)</td><td class="hide-s">Canberra</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-africa.html">British Africa</a></td><td>Elizabeth II (1952 to 2022)</td><td class="hide-s">London</td><td class="hide-s num">about 3.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-india.html">Republic of India</a></td><td>Jawaharlal Nehru (prime minister) (1947 to 1964)</td><td class="hide-s">New Delhi</td><td class="hide-s num">about 3.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Arturo Frondizi (1958 to 1962)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-sudan.html">Republic of Sudan</a></td><td>Ibrahim Abboud (1958 to 1964)</td><td class="hide-s">Khartoum</td><td class="hide-s num">about 2.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/democratic-republic-of-the-congo.html">Democratic Republic of the Congo</a></td><td>Joseph Kasavubu (president) (1960 to 1965) and Patrice Lumumba (prime minister) (1960)</td><td class="hide-s">Léopoldville</td><td class="hide-s num">about 2.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/denmark.html">Denmark</a></td><td>Frederick IX (1947 to 1972)</td><td class="hide-s">Copenhagen</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/estado-novo.html">Estado Novo</a></td><td>António de Oliveira Salazar (prime minister) (1932 to 1968) and Américo Tomás (president) (1958 to 1974)</td><td class="hide-s">Lisbon</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1960</h3><ul><li><a href="/atlas/realm/francoist-spain.html">Francoist Spain</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-norway.html">Kingdom of Norway</a></li><li><a href="/atlas/realm/republic-of-finland.html">Republic of Finland</a></li><li><a href="/atlas/realm/polish-people-s-republic.html">Polish People's Republic</a></li><li><a href="/atlas/realm/republic-of-italy.html">Republic of Italy</a></li><li><a href="/atlas/realm/federal-people-s-republic-of-yugoslavia.html">Federal People's Republic of Yugoslavia</a></li><li><a href="/atlas/realm/federal-republic-of-germany.html">Federal Republic of Germany</a></li></ul><a class="see" href="/atlas/year/1960.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1960</h3><ul><li><a href="/atlas/realm/kingdom-of-saudi-arabia.html">Kingdom of Saudi Arabia</a></li><li><a href="/atlas/realm/pahlavi-dynasty.html">Pahlavi Dynasty</a></li><li><a href="/atlas/realm/republic-of-turkey.html">Republic of Turkey</a></li><li><a href="/atlas/realm/united-kingdom.html">United Kingdom</a></li><li><a href="/atlas/realm/iraqi-republic.html">Iraqi Republic</a></li><li><a href="/atlas/realm/north-yemen.html">North Yemen</a></li><li><a href="/atlas/realm/sultanate-of-muscat-and-oman.html">Sultanate of Muscat and Oman</a></li><li><a href="/atlas/realm/kingdom-of-jordan.html">Kingdom of Jordan</a></li></ul><a class="see" href="/atlas/year/1960.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1960</h3><ul><li><a href="/atlas/realm/republic-of-india.html">Republic of India</a></li><li><a href="/atlas/realm/islamic-republic-of-pakistan.html">Islamic Republic of Pakistan</a></li><li><a href="/atlas/realm/burma.html">Burma</a></li><li><a href="/atlas/realm/kingdom-of-afghanistan.html">Kingdom of Afghanistan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/dominion-of-ceylon.html">Dominion of Ceylon</a></li><li><a href="/atlas/realm/kingdom-of-bhutan.html">Kingdom of Bhutan</a></li></ul><a class="see" href="/atlas/year/1960.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1960</h3><ul><li><a href="/atlas/realm/people-s-republic-of-china.html">People's Republic of China</a></li><li><a href="/atlas/realm/mongolian-people-s-republic.html">Mongolian People's Republic</a></li><li><a href="/atlas/realm/republic-of-indonesia.html">Republic of Indonesia</a></li><li><a href="/atlas/realm/kingdom-of-thailand.html">Kingdom of Thailand</a></li><li><a href="/atlas/realm/territory-of-papua-and-new-guinea.html">Territory of Papua and New Guinea</a></li><li><a href="/atlas/realm/netherlands-new-guinea.html">Netherlands New Guinea</a></li><li><a href="/atlas/realm/japan.html">Japan</a></li><li><a href="/atlas/realm/republic-of-the-philippines.html">Republic of the Philippines</a></li></ul><a class="see" href="/atlas/year/1960.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1960</h3><ul><li><a href="/atlas/realm/french-fifth-republic.html">French Fifth Republic</a></li><li><a href="/atlas/realm/british-africa.html">British Africa</a></li><li><a href="/atlas/realm/republic-of-sudan.html">Republic of Sudan</a></li><li><a href="/atlas/realm/democratic-republic-of-the-congo.html">Democratic Republic of the Congo</a></li><li><a href="/atlas/realm/estado-novo.html">Estado Novo</a></li><li><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></li><li><a href="/atlas/realm/kingdom-of-libya.html">Kingdom of Libya</a></li><li><a href="/atlas/realm/mali-federation.html">Mali Federation</a></li></ul><a class="see" href="/atlas/year/1960.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1960</h3><ul><li><a href="/atlas/realm/canada.html">Canada</a></li><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/republic-of-colombia.html">Republic of Colombia</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li></ul><a class="see" href="/atlas/year/1960.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>De Gaulle and the Fifth Republic</b><span class="when">A.D. 1958</span>, <span class="where">Paris, France</span>. When the army and the settlers of Algiers rose on 13 May 1958 against a government they feared would abandon Algeria, and paratroops landed in Corsica, the Fourth Republic turned to General de Gaulle. Invested as premier on 1 June, he gave France a constitution with a strong president, approved by referendum on 28 September, and became its first president in January 1959.</li>
+<li><b>The Dalai Lama Flees Lhasa</b><span class="when">A.D. 1959</span>, <span class="where">Lhasa, Tibet</span>. Nine years after the People's Liberation Army had marched into eastern Tibet and broken the Tibetan army at Chamdo, crowds surrounded the Norbulingka palace in Lhasa to keep the Fourteenth Dalai Lama from Chinese hands. On the night of 17 March he slipped away disguised as a soldier and made for India. The rising was crushed by artillery, and the old Tibetan government was dissolved.</li>
+<li><b>Castro Enters Havana</b><span class="when">A.D. 1959</span>, <span class="where">Havana, Cuba</span>. Fidel Castro, a lawyer who had landed from the yacht Granma in 1956 with eighty-two men, waged guerrilla war from the Sierra Maestra until the dictator Fulgencio Batista fled on New Year's Day 1959. Castro entered Havana in triumph on 8 January, shot hundreds of Batista's men, seized American property, and by 1961 had declared Cuba a socialist state allied with Moscow.</li>
+<li><b>The Congo Independent</b><span class="when">A.D. 1960</span>, <span class="where">Léopoldville, Congo</span>. In the Year of Africa, when seventeen African nations became independent, the Belgian Congo became independent on 30 June 1960, and Prime Minister Patrice Lumumba answered King Baudouin's speech with an attack on Belgian rule. Within days the army mutinied and Katanga seceded under Moise Tshombe; Lumumba was deposed, delivered to his enemies, and shot in Katanga in January 1961.</li>
+<li><b>Sharpeville</b><span class="when">A.D. 1960</span>, <span class="where">Sharpeville, South Africa</span>. On 21 March 1960 a crowd of several thousand gathered outside the police station of Sharpeville, near Vereeniging, at the call of the Pan Africanist Congress to protest the pass laws. The police opened fire and killed 69 people, many of them shot in the back. The government declared an emergency and banned the ANC and the PAC, which turned from protest to sabotage and armed struggle.</li>
+<li><b>Brasília Inaugurated</b><span class="when">A.D. 1960</span>, <span class="where">Brasília, Brazil</span>. President Juscelino Kubitschek, promising 'fifty years of progress in five,' built a new capital on the empty plateau of Goiás to draw Brazil's people into the interior. Laid out by Lúcio Costa in the shape of an airplane, with palaces and a cathedral by Oscar Niemeyer, Brasília was inaugurated on 21 April 1960, after forty-one months of building.</li>
+<li><b>The Berlin Wall</b><span class="when">A.D. 1961</span>, <span class="where">Bernauer Strasse, Berlin</span>. By 1961 some three million East Germans had fled to the West, most through Berlin. In the early hours of 13 August soldiers and workers' militia of the German Democratic Republic strung barbed wire along the sector border, soon replaced by a concrete wall of guard towers and a death strip. At least 140 people died at the Wall before 1989, most of them shot while trying to cross.</li>
+<li><b>The Cuban Missile Crisis</b><span class="when">A.D. 1962</span>, <span class="where">San Cristóbal, Cuba</span>. After the failure of the American-backed invasion at the Bay of Pigs in 1961, Khrushchev secretly sent nuclear missiles to Cuba, and on 14 October 1962 a U-2 photographed their launch sites near San Cristóbal. President Kennedy proclaimed a naval quarantine of the island, and for thirteen days the world stood nearer to nuclear war than ever before or since, until Khrushchev agreed to remove the missiles.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1955.html" rel="prev">Earlier: the world in A.D. 1955</a><a href="/atlas/year/1965.html" rel="next">Later: the world in A.D. 1965</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

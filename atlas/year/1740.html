@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1740 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1740: Russian Empire, Qing Dynasty, Spanish Empire, Ottoman Empire, Afsharid Iran, Mughal Empire, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1740.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1740 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1740: Russian Empire, Qing Dynasty, Spanish Empire, Ottoman Empire, Afsharid Iran, Mughal Empire, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1740.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1740">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1740</h1>
+<p class="lede">The early modern age. The realms that held the map in A.D. 1740, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1740</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/russian-empire.html">Russian Empire</a></td><td>Anna (1730 to 1740), then Ivan VI (1740 to 1741)</td><td class="hide-s">St. Petersburg</td><td class="hide-s num">about 15 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></td><td>Qianlong Emperor (1735 to 1796)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 9.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/spanish-empire.html">Spanish Empire</a></td><td>Philip V (restored) (1724 to 1746)</td><td class="hide-s">Mexico City (New Spain) and Lima (Peru) and Santa Fe de Bogotá (New Granada)</td><td class="hide-s num">about 6.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Mahmud I (1730 to 1754)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/afsharid-iran.html">Afsharid Iran</a></td><td>Nader Shah (1736 to 1747)</td><td class="hide-s">Mashhad</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mughal-empire.html">Mughal Empire</a></td><td>Muhammad Shah (1719 to 1748)</td><td class="hide-s">Delhi (Shahjahanabad)</td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></td><td>Abulkhair Khan (Junior Horde) (1718 to 1748)</td><td class="hide-s"></td><td class="hide-s num">about 2.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/dzungar-khanate.html">Dzungar Khanate</a></td><td>Galdan Tseren (1727 to 1745)</td><td class="hide-s">Ghulja</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/portuguese-empire.html">Portuguese Empire</a></td><td>John V (1706 to 1750)</td><td class="hide-s">Salvador</td><td class="hide-s num">about 1.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibet.html">Tibet</a></td><td>Seventh Dalai Lama, Kelzang Gyatso (1720 to 1757) and Polhané Sönam Topgyé (1728 to 1747)</td><td class="hide-s">Lhasa</td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></td><td>Frederick I (1720 to 1751)</td><td class="hide-s">Stockholm</td><td class="hide-s num">about 781 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></td><td>Louis XV (1715 to 1774)</td><td class="hide-s">Versailles</td><td class="hide-s num">about 768 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/polish-lithuanian-commonwealth.html">Polish-Lithuanian Commonwealth</a></td><td>Augustus III (1733 to 1763)</td><td class="hide-s">Warsaw</td><td class="hide-s num">about 760 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/habsburg-monarchy.html">Habsburg Monarchy</a></td><td>Charles VI (1711 to 1740), then Maria Theresa (1740 to 1780)</td><td class="hide-s">Vienna</td><td class="hide-s num">about 662 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1740</h3><ul><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/polish-lithuanian-commonwealth.html">Polish-Lithuanian Commonwealth</a></li><li><a href="/atlas/realm/habsburg-monarchy.html">Habsburg Monarchy</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/denmark-norway.html">Denmark-Norway</a></li><li><a href="/atlas/realm/kingdom-of-great-britain.html">Kingdom of Great Britain</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li></ul><a class="see" href="/atlas/year/1740.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1740</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/afsharid-iran.html">Afsharid Iran</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/qasimids.html">Qasimids</a></li><li><a href="/atlas/realm/khanate-of-khiva.html">Khanate of Khiva</a></li><li><a href="/atlas/realm/yarubid-dynasty.html">Yarubid dynasty</a></li><li>Kingdom of Imereti</li><li>Principality of Mingrelia</li></ul><a class="see" href="/atlas/year/1740.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1740</h3><ul><li><a href="/atlas/realm/mughal-empire.html">Mughal Empire</a></li><li><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></li><li><a href="/atlas/realm/dzungar-khanate.html">Dzungar Khanate</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/restored-toungoo-dynasty.html">Restored Toungoo dynasty</a></li><li><a href="/atlas/realm/nawabs-of-bengal.html">Nawabs of Bengal</a></li><li><a href="/atlas/realm/khanate-of-bukhara.html">Khanate of Bukhara</a></li><li><a href="/atlas/realm/hyderabad-state.html">Hyderabad State</a></li></ul><a class="see" href="/atlas/year/1740.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1740</h3><ul><li><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></li><li><a href="/atlas/realm/ayutthaya-kingdom.html">Ayutthaya Kingdom</a></li><li><a href="/atlas/realm/tokugawa-shogunate.html">Tokugawa Shogunate</a></li><li><a href="/atlas/realm/dutch-republic.html">Dutch Republic</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li><li><a href="/atlas/realm/kingdom-of-cambodia.html">Kingdom of Cambodia</a></li><li><a href="/atlas/realm/vientiane.html">Vientiane</a></li><li><a href="/atlas/realm/kingdom-of-luang-phrabang.html">Kingdom of Luang Phrabang</a></li></ul><a class="see" href="/atlas/year/1740.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1740</h3><ul><li><a href="/atlas/realm/funj-sultanate.html">Funj Sultanate</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/morocco.html">Morocco</a></li><li><a href="/atlas/realm/bornu-empire.html">Bornu Empire</a></li><li><a href="/atlas/realm/sultanate-of-darfur.html">Sultanate of Darfur</a></li><li><a href="/atlas/realm/wadai-empire.html">Wadai Empire</a></li><li><a href="/atlas/realm/regency-of-algiers.html">Regency of Algiers</a></li><li><a href="/atlas/realm/kingdom-of-lunda.html">Kingdom of Lunda</a></li></ul><a class="see" href="/atlas/year/1740.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1740</h3><ul><li><a href="/atlas/realm/spanish-empire.html">Spanish Empire</a></li><li><a href="/atlas/realm/portuguese-empire.html">Portuguese Empire</a></li><li><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></li><li><a href="/atlas/realm/jesuit-reducciones.html">Jesuit Reducciones</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/haudenosaunee.html">Haudenosaunee</a></li><li><a href="/atlas/realm/dutch-guiana.html">Dutch Guiana</a></li><li><a href="/atlas/realm/greenland.html">Greenland</a></li></ul><a class="see" href="/atlas/year/1740.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Nader Shah Crowned on the Mughan Plain</b><span class="when">A.D. 1736</span>, <span class="where">Mughan Plain, Azerbaijan</span>. Nader Qoli, an Afshar Turkmen of Khorasan who had driven the Afghans from Persia and the Ottomans from the Caucasus in the name of the Safavids, summoned the notables of the realm to the Mughan plain and in March 1736 had himself proclaimed shah. Three years later he sacked Delhi and carried home the Peacock Throne and the Koh-i-Noor diamond.</li>
+<li><b>Nadir Shah Sacks Delhi</b><span class="when">A.D. 1739</span>, <span class="where">Delhi, India</span>. Nadir Shah of Persia routed the Mughal army at Karnal and entered Delhi as the guest of the emperor Muhammad Shah. When a riot killed some of his soldiers, he drew his sword in the Sunehri mosque and gave the order; in a single day some twenty thousand or more of the people were slaughtered. He left with the Peacock Throne, the Koh-i-Noor, and the hoarded wealth of the Mughals.</li>
+<li><b>Frederick the Great Seizes Silesia</b><span class="when">A.D. 1740</span>, <span class="where">Breslau, Silesia</span>. Seven months after coming to the throne, Frederick II of Prussia marched into the Habsburg province of Silesia in December 1740, as the young Maria Theresa struggled to secure her inheritance. His victory at Mollwitz the next spring kept it. The rich province gave Prussia the weight of a great power and began the long rivalry of Hohenzollern and Habsburg for Germany.</li>
+<li><b>The Massacre of the Chinese at Batavia</b><span class="when">A.D. 1740</span>, <span class="where">Batavia, Java</span>. Fearing a rising of the Chinese sugar workers in the countryside, whom the Company had threatened with deportation to Ceylon, Governor-General Adriaan Valckenier let soldiers and townsfolk loose on the Chinese quarter of Batavia in October 1740. Some ten thousand were slaughtered. The survivors joined a war across Java that drew in Mataram and ended in the Company's greater mastery.</li>
+<li><b>The Pact of Diriyah</b><span class="when">A.D. 1744</span>, <span class="where">Diriyah, Najd</span>. Muhammad ibn Abd al-Wahhab, a preacher from Uyayna who condemned the veneration of saints and tombs as idolatry, was received in 1744 by Muhammad ibn Saud, emir of the oasis of Diriyah. Each swore to uphold the other: the emir would wage holy war for the reformer's doctrine, and the reformer would sanctify the emir's rule. The alliance of the two houses still governs Arabia.</li>
+<li><b>Ahmad Shah Durrani Crowned</b><span class="when">A.D. 1747</span>, <span class="where">Kandahar, Afghanistan</span>. After Nadir Shah was murdered in his tent, the Afghan chiefs met in council near Kandahar and chose Ahmad Khan Abdali, commander of Nadir's Afghan cavalry and not yet thirty, as their king. Taking the title Durr-i-Durran, pearl of pearls, he built the Durrani Empire from Khurasan to Kashmir and the Punjab, and is honoured as the father of Afghanistan.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1735.html" rel="prev">Earlier: the world in A.D. 1735</a><a href="/atlas/year/1745.html" rel="next">Later: the world in A.D. 1745</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 230 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 230: Roman Empire, Cao Wei, Parthian Empire, Kushan Empire, Shu Han, Sasanian Empire, and the other realms of classical antiquity, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/230.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 230 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 230: Roman Empire, Cao Wei, Parthian Empire, Kushan Empire, Shu Han, Sasanian Empire, and the other realms of classical antiquity, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/230.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="230">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 230</h1>
+<p class="lede">Classical antiquity. The realms that held the map in A.D. 230, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 230</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/roman-empire.html">Roman Empire</a></td><td>Severus Alexander (222 to 235)</td><td class="hide-s">Rome</td><td class="hide-s num">about 4.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/cao-wei.html">Cao Wei</a></td><td>Emperor Ming of Wei (Cao Rui) (226 to 239)</td><td class="hide-s">Luoyang</td><td class="hide-s num">about 2.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/parthian-empire.html">Parthian Empire</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kushan-empire.html">Kushan Empire</a></td><td>Vasudeva I (190 to 230), then Kanishka II (230 to 247)</td><td class="hide-s">Purushapura</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/shu-han.html">Shu Han</a></td><td>Liu Shan (223 to 263) and Zhuge Liang (chancellor) (223 to 234)</td><td class="hide-s">Chengdu</td><td class="hide-s num">about 882 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/sasanian-empire.html">Sasanian Empire</a></td><td>Ardashir I (224 to 242)</td><td class="hide-s">Ctesiphon</td><td class="hide-s num">about 637 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/xianbei.html">Xianbei</a></td><td>Kebineng (220 to 235)</td><td class="hide-s"></td><td class="hide-s num">about 625 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/western-satraps.html">Western Satraps</a></td><td></td><td class="hide-s">Ujjain</td><td class="hide-s num">about 615 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-wu.html">Eastern Wu</a></td><td>Sun Quan (200 to 252)</td><td class="hide-s">Jianye</td><td class="hide-s num">about 598 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-kush.html">Kingdom of Kush</a></td><td></td><td class="hide-s">Meroë</td><td class="hide-s num">about 337 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/funan.html">Funan</a></td><td>Fan Zhan (225 to 244)</td><td class="hide-s">Vyadhapura</td><td class="hide-s num">about 236 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-armenia.html">Kingdom of Armenia</a></td><td>Tiridates II (217 to 252)</td><td class="hide-s">Vagharshapat</td><td class="hide-s num">about 220 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/gothia.html">Gothia</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 210 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></td><td></td><td class="hide-s">Tikal</td><td class="hide-s num">about 200 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 230</h3><ul><li><a href="/atlas/realm/roman-empire.html">Roman Empire</a></li><li><a href="/atlas/realm/gothia.html">Gothia</a></li><li><a href="/atlas/realm/burgundians.html">Burgundians</a></li><li><a href="/atlas/realm/cimmerian-bosporus.html">Cimmerian Bosporus</a></li><li><a href="/atlas/realm/caucasian-iberia.html">Caucasian Iberia</a></li><li><a href="/atlas/realm/lazica.html">Lazica</a></li><li><a href="/atlas/realm/norse.html">Norse</a></li></ul><a class="see" href="/atlas/year/230.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 230</h3><ul><li><a href="/atlas/realm/parthian-empire.html">Parthian Empire</a></li><li><a href="/atlas/realm/sasanian-empire.html">Sasanian Empire</a></li><li><a href="/atlas/realm/kingdom-of-armenia.html">Kingdom of Armenia</a></li><li><a href="/atlas/realm/hadhramaut.html">Hadhramaut</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/himyarite-kingdom.html">Himyarite Kingdom</a></li><li><a href="/atlas/realm/sabaeans.html">Sabaeans</a></li><li><a href="/atlas/realm/caucasian-albania.html">Caucasian Albania</a></li></ul><a class="see" href="/atlas/year/230.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 230</h3><ul><li><a href="/atlas/realm/parthian-empire.html">Parthian Empire</a></li><li><a href="/atlas/realm/kushan-empire.html">Kushan Empire</a></li><li><a href="/atlas/realm/western-satraps.html">Western Satraps</a></li><li><a href="/atlas/realm/indo-scythians.html">Indo-Scythians</a></li><li><a href="/atlas/realm/pyu-city-states.html">Pyu City-States</a></li><li><a href="/atlas/realm/anuradhapura.html">Anurādhapura</a></li><li><a href="/atlas/realm/wusun.html">Wusun</a></li><li><a href="/atlas/realm/early-pandyas.html">Early Pandyas</a></li></ul><a class="see" href="/atlas/year/230.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 230</h3><ul><li><a href="/atlas/realm/cao-wei.html">Cao Wei</a></li><li><a href="/atlas/realm/shu-han.html">Shu Han</a></li><li><a href="/atlas/realm/xianbei.html">Xianbei</a></li><li><a href="/atlas/realm/eastern-wu.html">Eastern Wu</a></li><li><a href="/atlas/realm/funan.html">Funan</a></li><li><a href="/atlas/realm/goguryeo.html">Goguryeo</a></li><li><a href="/atlas/realm/champa.html">Champa</a></li><li><a href="/atlas/realm/mahan.html">Mahan</a></li></ul><a class="see" href="/atlas/year/230.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 230</h3><ul><li><a href="/atlas/realm/kingdom-of-kush.html">Kingdom of Kush</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li></ul><a class="see" href="/atlas/year/230.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 230</h3><ul><li><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></li><li><a href="/atlas/realm/zapotec-civilization.html">Zapotec Civilization</a></li><li>Teotihuacan</li></ul><a class="see" href="/atlas/year/230.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Battle of Red Cliffs</b><span class="when">A.D. 208</span>, <span class="where">Chibi, Hubei, China</span>. Cao Cao, master of the north, came down the Yangtze with a great army to finish Sun Quan and Liu Bei. At the Red Cliffs, Huang Gai sent fire ships loaded with oil and dry reeds into the crowded enemy fleet, and as a southeast wind spread the blaze Cao Cao's host fled north through the marshes, wasted by fever. China would stay divided for seventy years.</li>
+<li><b>Citizenship for All Free Men</b><span class="when">A.D. 212</span>, <span class="where">Rome, Italy</span>. By the Constitutio Antoniniana the emperor Caracalla granted Roman citizenship to nearly all free inhabitants of the empire. Dio says he did it to make more men liable to the inheritance tax; but henceforth the peoples of the Mediterranean, from Britain to Syria, called themselves Romans, and the name endured in the East for a thousand years.</li>
+<li><b>The End of the Han</b><span class="when">A.D. 220</span>, <span class="where">Xuchang, Henan, China</span>. Months after the death of Cao Cao, his son Cao Pi had the puppet Emperor Xian yield the throne to him on a platform near Xu, and proclaimed the Wei dynasty. Liu Bei answered by declaring himself emperor of Han at Chengdu, and Sun Quan later took the imperial title in the south. The four centuries of Han were over, and the Three Kingdoms began.</li>
+<li><b>Ardashir Crowned at Ctesiphon</b><span class="when">A.D. 226</span>, <span class="where">Ctesiphon, Mesopotamia</span>. Ardashir, a prince of Persis, overthrew and killed the last Parthian king, Artabanus IV, on the plain of Hormozgan and was crowned King of Kings of Iran at Ctesiphon. His Sasanian dynasty made Zoroastrianism the faith of the realm, laid claim to the old Achaemenid lands, and fought Rome for four centuries.</li>
+<li><b>The Queen of Wa Sends Envoys</b><span class="when">A.D. 239</span>, <span class="where">Luoyang, Henan, China</span>. Himiko, a priestess queen who ruled the Wa from her palace at Yamatai, unseen by her people and served by a thousand women, sent envoys by way of Daifang to the Wei court. Wei named her Queen of Wa, Friend of Wei, and sent her a gold seal, a hundred bronze mirrors, and silks. Whether Yamatai lay in Kyushu or in the Yamato plain is still disputed.</li>
+<li><b>Persia Takes the Kushan West</b><span class="when">c. A.D. 240</span>, <span class="where">Bactra (Balkh), Afghanistan</span>. The Sasanian kings Ardashir I and Shapur I carried Persian arms over the Kushan lands of Bactria and the Kabul valley; Shapur's inscription at Naqsh-e Rustam names Kushanshahr as far as Peshawar among his provinces. Sasanian princes ruled there as Kushanshahs, striking coins in the Kushan manner, while the old Kushan line lingered in the Punjab and at Mathura.</li>
+<li><b>Kang Tai and Zhu Ying in Funan</b><span class="when">c. A.D. 245</span>, <span class="where">Angkor Borei, Cambodia</span>. The Wu kingdom sent the envoys Kang Tai and Zhu Ying to Funan, whose king Fan Xun ruled from a walled city on the lower Mekong. Kang Tai wrote of a people who kept books and archives in a script like that of India, and of the founding legend: the stranger Kaundinya, who came by sea, shot an arrow into the boat of the queen Liuye and took her to wife.</li>
+<li><b>Decius Dies at Abritus</b><span class="when">A.D. 251</span>, <span class="where">Abritus, Moesia</span>. The emperor Decius, who had ordered every citizen to sacrifice to the gods and so begun the first empire-wide persecution of Christians, pursued the Gothic king Cniva into the marshes near Abritus. The Goths cut down the legions in the mud, and Decius and his son Herennius became the first Roman emperors to die in battle against a foreign foe.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/220.html" rel="prev">Earlier: the world in A.D. 220</a><a href="/atlas/year/240.html" rel="next">Later: the world in A.D. 240</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

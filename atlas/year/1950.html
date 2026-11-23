@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1950 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1950: Union of Soviet Socialist Republics, French Africa, Canada, United States of America, United States of Brazil, People's Republic of China, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1950.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1950 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1950: Union of Soviet Socialist Republics, French Africa, Canada, United States of America, United States of Brazil, People's Republic of China, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1950.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1950">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1950</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1950, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1950</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/union-of-soviet-socialist-republics.html">Union of Soviet Socialist Republics</a></td><td>Joseph Stalin (general secretary, leader of the Soviet Union) (1922 to 1953) and Joseph Stalin (premier) (1941 to 1953)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 22 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/french-africa.html">French Africa</a></td><td>Vincent Auriol (president) (1947 to 1954)</td><td class="hide-s">Algiers and Dakar and Brazzaville</td><td class="hide-s num">about 12 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/canada.html">Canada</a></td><td>Louis St. Laurent (1948 to 1957)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 9.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Harry S. Truman (1945 to 1953)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></td><td>Eurico Gaspar Dutra (1946 to 1951)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/people-s-republic-of-china.html">People's Republic of China</a></td><td>Mao Zedong (chairman) (1949 to 1976) and Zhou Enlai (premier) (1949 to 1976)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 8.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-africa.html">British Africa</a></td><td>George VI (1936 to 1952)</td><td class="hide-s">London</td><td class="hide-s num">about 7.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/commonwealth-of-australia.html">Commonwealth of Australia</a></td><td>Robert Menzies (1949 to 1966)</td><td class="hide-s">Canberra</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-india.html">Republic of India</a></td><td>Jawaharlal Nehru (prime minister) (1947 to 1964)</td><td class="hide-s">New Delhi</td><td class="hide-s num">about 3.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Juan Perón (1946 to 1955)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></td><td>Leopold III (1934 to 1951)</td><td class="hide-s">Léopoldville</td><td class="hide-s num">about 2.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/denmark.html">Denmark</a></td><td>Frederick IX (1947 to 1972)</td><td class="hide-s">Copenhagen</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/estado-novo.html">Estado Novo</a></td><td>Óscar Carmona (president) (1926 to 1951) and António de Oliveira Salazar (prime minister) (1932 to 1968)</td><td class="hide-s">Lisbon</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></td><td>D. F. Malan (1948 to 1954)</td><td class="hide-s">Pretoria (administrative) and Cape Town (legislative)</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1950</h3><ul><li><a href="/atlas/realm/francoist-spain.html">Francoist Spain</a></li><li><a href="/atlas/realm/french-fourth-republic.html">French Fourth Republic</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-norway.html">Kingdom of Norway</a></li><li><a href="/atlas/realm/republic-of-finland.html">Republic of Finland</a></li><li><a href="/atlas/realm/republic-of-poland.html">Republic of Poland</a></li><li><a href="/atlas/realm/republic-of-italy.html">Republic of Italy</a></li><li><a href="/atlas/realm/federal-people-s-republic-of-yugoslavia.html">Federal People's Republic of Yugoslavia</a></li></ul><a class="see" href="/atlas/year/1950.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1950</h3><ul><li><a href="/atlas/realm/kingdom-of-saudi-arabia.html">Kingdom of Saudi Arabia</a></li><li><a href="/atlas/realm/pahlavi-dynasty.html">Pahlavi Dynasty</a></li><li><a href="/atlas/realm/republic-of-turkey.html">Republic of Turkey</a></li><li><a href="/atlas/realm/united-kingdom.html">United Kingdom</a></li><li><a href="/atlas/realm/kingdom-of-iraq.html">Kingdom of Iraq</a></li><li><a href="/atlas/realm/sultanate-of-muscat-and-oman.html">Sultanate of Muscat and Oman</a></li><li><a href="/atlas/realm/second-syrian-republic.html">Second Syrian Republic</a></li><li><a href="/atlas/realm/north-yemen.html">North Yemen</a></li></ul><a class="see" href="/atlas/year/1950.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1950</h3><ul><li><a href="/atlas/realm/republic-of-india.html">Republic of India</a></li><li><a href="/atlas/realm/dominion-of-pakistan.html">Dominion of Pakistan</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/burma.html">Burma</a></li><li><a href="/atlas/realm/kingdom-of-afghanistan.html">Kingdom of Afghanistan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/kingdom-of-bhutan.html">Kingdom of Bhutan</a></li><li><a href="/atlas/realm/dominion-of-ceylon.html">Dominion of Ceylon</a></li></ul><a class="see" href="/atlas/year/1950.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1950</h3><ul><li><a href="/atlas/realm/people-s-republic-of-china.html">People's Republic of China</a></li><li><a href="/atlas/realm/mongolian-people-s-republic.html">Mongolian People's Republic</a></li><li><a href="/atlas/realm/republic-of-indonesia.html">Republic of Indonesia</a></li><li><a href="/atlas/realm/french-indochina.html">French Indochina</a></li><li><a href="/atlas/realm/kingdom-of-thailand.html">Kingdom of Thailand</a></li><li><a href="/atlas/realm/territory-of-papua-and-new-guinea.html">Territory of Papua and New Guinea</a></li><li><a href="/atlas/realm/netherlands-new-guinea.html">Netherlands New Guinea</a></li><li><a href="/atlas/realm/occupied-japan.html">Occupied Japan</a></li></ul><a class="see" href="/atlas/year/1950.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1950</h3><ul><li><a href="/atlas/realm/french-africa.html">French Africa</a></li><li><a href="/atlas/realm/british-africa.html">British Africa</a></li><li><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></li><li><a href="/atlas/realm/estado-novo.html">Estado Novo</a></li><li><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></li><li><a href="/atlas/realm/british-west-africa.html">British West Africa</a></li><li><a href="/atlas/realm/ethiopia.html">Ethiopia</a></li><li><a href="/atlas/realm/kingdom-of-egypt.html">Kingdom of Egypt</a></li></ul><a class="see" href="/atlas/year/1950.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1950</h3><ul><li><a href="/atlas/realm/canada.html">Canada</a></li><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/republic-of-colombia.html">Republic of Colombia</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li></ul><a class="see" href="/atlas/year/1950.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Independence and Partition</b><span class="when">A.D. 1947</span>, <span class="where">New Delhi, India</span>. At midnight on 14 August 1947 British rule ended and two dominions were born, Pakistan and India, divided by lines Sir Cyril Radcliffe had drawn in five weeks through the Punjab and Bengal. Nehru told the Constituent Assembly that India awoke to life and freedom. Some fifteen million people fled across the new borders, and perhaps a million were killed in the massacres.</li>
+<li><b>The State of Israel Proclaimed</b><span class="when">A.D. 1948</span>, <span class="where">Tel Aviv, Palestine</span>. On 14 May 1948, as the British Mandate expired, David Ben-Gurion read the declaration of independence of the State of Israel in the Tel Aviv museum. The next day the armies of Egypt, Transjordan, Syria, Iraq, and Lebanon invaded. By the armistices of 1949 Israel held more than three-quarters of Mandatory Palestine; Jordan held the West Bank and East Jerusalem, and Egypt the Gaza Strip.</li>
+<li><b>The People's Republic Proclaimed</b><span class="when">A.D. 1949</span>, <span class="where">Tiananmen, Peking, China</span>. On 1 October, from the Gate of Heavenly Peace, Mao Zedong proclaimed the founding of the People's Republic of China. The Communists had won the civil war in three years of campaigns; within months they held the whole mainland and began to remake it through land reform, the destruction of the landlord class, and campaigns that cost millions of lives.</li>
+<li><b>The North Atlantic Treaty</b><span class="when">A.D. 1949</span>, <span class="where">Washington, United States</span>. On 4 April 1949 the foreign ministers of the United States, Canada, Britain, France, the Benelux states, Italy, Portugal, Norway, Denmark, and Iceland signed in Washington a treaty declaring that an armed attack against one of them in Europe or North America would be considered an attack against them all. West Germany joined in 1955, and the Soviet bloc answered with the Warsaw Pact.</li>
+<li><b>Two German States</b><span class="when">A.D. 1949</span>, <span class="where">Bonn, West Germany</span>. On 23 May 1949 the Basic Law of the Federal Republic of Germany was proclaimed at Bonn, the small Rhineland university town chosen as a provisional capital, and in September Konrad Adenauer became chancellor by a single vote, his own. In the Soviet zone the German Democratic Republic was founded on 7 October, and Germany stayed divided for forty-one years.</li>
+<li><b>The Schuman Declaration</b><span class="when">A.D. 1950</span>, <span class="where">Quai d'Orsay, Paris</span>. In the Salon de l'Horloge of the French foreign ministry on 9 May 1950, Robert Schuman proposed, on a plan drafted by Jean Monnet, to pool the coal and steel of France and Germany under a common High Authority, making war between them materially impossible. Italy and the Benelux states joined; the European Coal and Steel Community of 1951 was the first of the European Communities.</li>
+<li><b>North Korea Invades the South</b><span class="when">A.D. 1950</span>, <span class="where">Kaesong, Korea</span>. At dawn on 25 June, with Stalin's consent, Kim Il Sung's army crossed the 38th parallel behind Soviet tanks and took Seoul in three days. The United Nations sent forces under General MacArthur, whose landing at Incheon in September broke the invaders; when the Americans pressed on to the Yalu, some three hundred thousand Chinese soldiers fell upon them in the winter mountains.</li>
+<li><b>The Republic of India</b><span class="when">A.D. 1950</span>, <span class="where">New Delhi, India</span>. On 26 January 1950 the Constitution of India, drafted under the chairmanship of B. R. Ambedkar, came into force, and India became a sovereign republic with Rajendra Prasad as its first president. With 395 articles it was the longest written constitution of any nation, and it granted the vote to every adult at a stroke.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1945.html" rel="prev">Earlier: the world in A.D. 1945</a><a href="/atlas/year/1955.html" rel="next">Later: the world in A.D. 1955</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

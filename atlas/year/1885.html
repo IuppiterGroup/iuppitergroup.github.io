@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1885 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1885: Russian Empire, Qing Dynasty, United States of America, Dominion of Canada, Empire of Brazil, British Colonial Empire, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1885.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1885 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1885: Russian Empire, Qing Dynasty, United States of America, Dominion of Canada, Empire of Brazil, British Colonial Empire, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1885.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1885">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1885</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1885, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1885</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/russian-empire.html">Russian Empire</a></td><td>Alexander III (1881 to 1894)</td><td class="hide-s">St. Petersburg</td><td class="hide-s num">about 22 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></td><td>Empress Dowager Cixi (regent) (1861 to 1908) and Guangxu Emperor (1875 to 1908)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 11 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Chester A. Arthur (1881 to 1885), then Grover Cleveland (1885 to 1889)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></td><td>John A. Macdonald (1878 to 1891)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 9.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/empire-of-brazil.html">Empire of Brazil</a></td><td>Pedro II (1831 to 1889)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></td><td>Victoria (1837 to 1901) and William Gladstone (prime minister) (1880 to 1885)</td><td class="hide-s">London</td><td class="hide-s num">about 6.9 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-raj.html">British Raj</a></td><td>Queen Victoria (empress from 1876) (1858 to 1901) and Lord Dufferin (viceroy) (1884 to 1888)</td><td class="hide-s">Calcutta</td><td class="hide-s num">about 4.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-africa.html">British Africa</a></td><td>Victoria (1837 to 1901)</td><td class="hide-s">London</td><td class="hide-s num">about 3.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Julio Argentino Roca (1880 to 1886)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Abdul Hamid II (1876 to 1909)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mexico.html">Mexico</a></td><td>Porfirio Díaz (1884 to 1911)</td><td class="hide-s">Mexico City</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></td><td>Naser al-Din Shah (1848 to 1896)</td><td class="hide-s">Tehran</td><td class="hide-s num">about 1.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/bolivia.html">Bolivia</a></td><td>Gregorio Pacheco (1884 to 1888)</td><td class="hide-s">Sucre</td><td class="hide-s num">about 1.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/french-africa.html">French Africa</a></td><td>Jules Grévy (president) (1879 to 1887)</td><td class="hide-s">Algiers</td><td class="hide-s num">about 1.3 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1885</h3><ul><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/german-empire.html">German Empire</a></li><li><a href="/atlas/realm/united-kingdoms-of-sweden-and-norway.html">United Kingdoms of Sweden and Norway</a></li><li><a href="/atlas/realm/austria-hungary.html">Austria-Hungary</a></li><li><a href="/atlas/realm/french-third-republic.html">French Third Republic</a></li><li><a href="/atlas/realm/united-kingdom-of-great-britain-and-ireland.html">United Kingdom of Great Britain and Ireland</a></li><li><a href="/atlas/realm/kingdom-of-italy.html">Kingdom of Italy</a></li><li><a href="/atlas/realm/kingdom-of-romania.html">Kingdom of Romania</a></li></ul><a class="see" href="/atlas/year/1885.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1885</h3><ul><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/qajar-dynasty.html">Qajar Dynasty</a></li><li><a href="/atlas/realm/emirate-of-nejd.html">Emirate of Nejd</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/emirate-of-jabal-shammar.html">Emirate of Jabal Shammar</a></li><li><a href="/atlas/realm/sultanate-of-oman.html">Sultanate of Oman</a></li><li><a href="/atlas/realm/principality-of-bulgaria.html">Principality of Bulgaria</a></li><li><a href="/atlas/realm/trucial-states.html">Trucial States</a></li></ul><a class="see" href="/atlas/year/1885.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1885</h3><ul><li><a href="/atlas/realm/british-raj.html">British Raj</a></li><li><a href="/atlas/realm/emirate-of-afghanistan.html">Emirate of Afghanistan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/bhutan.html">Bhutan</a></li></ul><a class="see" href="/atlas/year/1885.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1885</h3><ul><li><a href="/atlas/realm/qing-dynasty.html">Qing Dynasty</a></li><li><a href="/atlas/realm/dutch-east-indies.html">Dutch East Indies</a></li><li><a href="/atlas/realm/rattanakosin-kingdom.html">Rattanakosin Kingdom</a></li><li><a href="/atlas/realm/french-indochina.html">French Indochina</a></li><li><a href="/atlas/realm/empire-of-japan.html">Empire of Japan</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li><li><a href="/atlas/realm/kingdom-of-luang-phrabang.html">Kingdom of Luang Phrabang</a></li><li><a href="/atlas/realm/kingdom-of-sarawak.html">Kingdom of Sarawak</a></li></ul><a class="see" href="/atlas/year/1885.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1885</h3><ul><li><a href="/atlas/realm/british-africa.html">British Africa</a></li><li><a href="/atlas/realm/french-africa.html">French Africa</a></li><li><a href="/atlas/realm/kingdom-of-portugal.html">Kingdom of Portugal</a></li><li><a href="/atlas/realm/khedivate-of-egypt.html">Khedivate of Egypt</a></li><li><a href="/atlas/realm/ottoman-tripolitania.html">Ottoman Tripolitania</a></li><li><a href="/atlas/realm/sokoto-caliphate.html">Sokoto Caliphate</a></li><li><a href="/atlas/realm/german-africa.html">German Africa</a></li><li><a href="/atlas/realm/merina-kingdom.html">Merina Kingdom</a></li></ul><a class="see" href="/atlas/year/1885.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1885</h3><ul><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/dominion-of-canada.html">Dominion of Canada</a></li><li><a href="/atlas/realm/empire-of-brazil.html">Empire of Brazil</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/united-states-of-colombia.html">United States of Colombia</a></li></ul><a class="see" href="/atlas/year/1885.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The British at Tel el-Kebir</b><span class="when">A.D. 1882</span>, <span class="where">Tel el-Kebir, Egypt</span>. Colonel Ahmed Urabi led a movement of Egyptian officers against the khedive Tewfik and the European controllers of Egypt's debts. After riots in Alexandria, the British bombarded the city, landed an army on the Suez Canal, and on 13 September 1882 stormed Urabi's lines at Tel el-Kebir after a night march. Britain occupied Egypt for seventy-four years.</li>
+<li><b>The Eruption of Krakatoa</b><span class="when">A.D. 1883</span>, <span class="where">Krakatoa, Sunda Strait</span>. On 27 August 1883 the volcano of Krakatoa in the Sunda Strait destroyed itself in four tremendous explosions, the last heard on Rodrigues in the Indian Ocean, three thousand miles away. Its waves, more than thirty meters high, swept away 165 villages on the coasts of Java and Sumatra and some 36,000 people; the telegraph carried the news around the world within hours.</li>
+<li><b>The Berlin Conference on Africa</b><span class="when">A.D. 1884</span>, <span class="where">Wilhelmstrasse, Berlin</span>. From November 1884 to February 1885 the delegates of fourteen powers met in Bismarck's residence on the Wilhelmstrasse to settle the rules for claiming Africa. The General Act required effective occupation of coasts claimed, declared free trade on the Congo and the Niger, and in effect recognized King Leopold II's International Association as the Congo Free State, the King's personal domain.</li>
+<li><b>The Indian National Congress</b><span class="when">A.D. 1885</span>, <span class="where">Mumbai, Maharashtra, India</span>. Seventy-two delegates, lawyers, journalists, and teachers from every province, gathered at Gokuldas Tejpal College in Bombay in December 1885 at the call of the retired civil servant Allan Octavian Hume, and founded the Indian National Congress. Moderate and loyal at first, it became the vehicle of the movement that won India its independence.</li>
+<li><b>Ham Nghi and the Can Vuong</b><span class="when">A.D. 1885</span>, <span class="where">Hue, Vietnam</span>. The treaties of 1883 and 1884 made Annam and Tonkin French protectorates. In July 1885 the regent Ton That Thuyet attacked the French garrison at Hue and fled to the hills with the boy emperor Ham Nghi, who called on the scholars to rise in the Can Vuong, Aid the King. Bands of the movement slaughtered thousands of Vietnamese Catholics before Ham Nghi was betrayed in 1888.</li>
+<li><b>Thibaw Deposed</b><span class="when">A.D. 1885</span>, <span class="where">Mandalay, Burma</span>. King Thibaw's court fined a British timber company and sought friendship with France. In November 1885 a British force steamed up the Irrawaddy and took Mandalay almost without a fight, and Thibaw and Queen Supayalat were carried off to exile in India. On 1 January 1886 Upper Burma was annexed and joined to British India, and a long guerrilla war followed.</li>
+<li><b>The Fall of Khartoum</b><span class="when">A.D. 1885</span>, <span class="where">Khartoum, Sudan</span>. Muhammad Ahmad, a Dongolawi holy man who had proclaimed himself the Mahdi, the redeemer awaited by Muslims, raised the Sudan against its Egyptian masters and destroyed every army sent against him. After a siege of ten months his ansar stormed Khartoum on 26 January 1885 and slew General Charles Gordon at the governor's palace, two days before British relief steamers came in sight.</li>
+<li><b>Gold on the Witwatersrand</b><span class="when">A.D. 1886</span>, <span class="where">Johannesburg, South Africa</span>. George Harrison, an Australian prospector, struck the main gold reef on the farm Langlaagte, and within months a camp named Johannesburg spread across the high veld of Paul Kruger's South African Republic. The Rand proved the richest goldfield on earth, and the quarrel between Kruger and its foreign miners, the uitlanders, and their mining magnates led on to the Boer War.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1880.html" rel="prev">Earlier: the world in A.D. 1880</a><a href="/atlas/year/1890.html" rel="next">Later: the world in A.D. 1890</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

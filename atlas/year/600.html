@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 600 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 600: Sui Dynasty, Western Göktürks, Sasanian Empire, Eastern Göktürks, Eastern Roman Empire, Avar Khaganate, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/600.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 600 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 600: Sui Dynasty, Western Göktürks, Sasanian Empire, Eastern Göktürks, Eastern Roman Empire, Avar Khaganate, and the other realms of the Middle Ages, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/600.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="600">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 600</h1>
+<p class="lede">The Middle Ages. The realms that held the map in A.D. 600, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 600</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/sui-dynasty.html">Sui Dynasty</a></td><td>Emperor Wen of Sui (581 to 604)</td><td class="hide-s">Daxing (Chang'an)</td><td class="hide-s num">about 3.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/western-gokturks.html">Western Göktürks</a></td><td>Tardu (576 to 603)</td><td class="hide-s"></td><td class="hide-s num">about 3.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/sasanian-empire.html">Sasanian Empire</a></td><td>Khosrow II (590 to 628)</td><td class="hide-s">Ctesiphon</td><td class="hide-s num">about 3.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-gokturks.html">Eastern Göktürks</a></td><td>Yami Qaghan (599 to 609)</td><td class="hide-s">Ötüken</td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></td><td>Maurice (582 to 602) and Theodosius (son of Maurice) (590 to 602)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/avar-khaganate.html">Avar Khaganate</a></td><td>Bayan I (562 to 602)</td><td class="hide-s"></td><td class="hide-s num">about 962 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-the-franks.html">Kingdom of the Franks</a></td><td>Chlothar II (584 to 629) and Theudebert II (596 to 612)</td><td class="hide-s">Paris</td><td class="hide-s num">about 685 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tuyuhun.html">Tuyuhun</a></td><td>Murong Fuyun (597 to 635)</td><td class="hide-s">Fuqi</td><td class="hide-s num">about 554 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/maukhari-dynasty.html">Maukhari Dynasty</a></td><td>Grahavarman (600 to 606)</td><td class="hide-s">Kannauj</td><td class="hide-s num">about 537 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/visigothic-kingdom.html">Visigothic Kingdom</a></td><td>Reccared I (586 to 601)</td><td class="hide-s">Toledo</td><td class="hide-s num">about 533 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tarim-basin-city-states.html">Tarim Basin city-states</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 533 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/yenisei-kyrgyz.html">Yenisei Kyrgyz</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 422 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/scandinavian-minor-kingdoms.html">Scandinavian minor kingdoms</a></td><td></td><td class="hide-s"></td><td class="hide-s num">about 393 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></td><td></td><td class="hide-s">Tikal</td><td class="hide-s num">about 372 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 600</h3><ul><li><a href="/atlas/realm/avar-khaganate.html">Avar Khaganate</a></li><li><a href="/atlas/realm/kingdom-of-the-franks.html">Kingdom of the Franks</a></li><li><a href="/atlas/realm/visigothic-kingdom.html">Visigothic Kingdom</a></li><li><a href="/atlas/realm/scandinavian-minor-kingdoms.html">Scandinavian minor kingdoms</a></li><li><a href="/atlas/realm/kingdom-of-the-lombards.html">Kingdom of the Lombards</a></li><li><a href="/atlas/realm/anglo-saxon-england.html">Anglo-Saxon England</a></li><li><a href="/atlas/realm/saxons.html">Saxons</a></li><li><a href="/atlas/realm/bavarians.html">Bavarians</a></li></ul><a class="see" href="/atlas/year/600.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 600</h3><ul><li><a href="/atlas/realm/sasanian-empire.html">Sasanian Empire</a></li><li><a href="/atlas/realm/eastern-roman-empire.html">Eastern Roman Empire</a></li><li><a href="/atlas/realm/sasanian-yemen.html">Sasanian Yemen</a></li><li><a href="/atlas/realm/ghassanids.html">Ghassanids</a></li><li><a href="/atlas/realm/lakhmid-kingdom.html">Lakhmid Kingdom</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li></ul><a class="see" href="/atlas/year/600.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 600</h3><ul><li><a href="/atlas/realm/western-gokturks.html">Western Göktürks</a></li><li><a href="/atlas/realm/tuyuhun.html">Tuyuhun</a></li><li><a href="/atlas/realm/maukhari-dynasty.html">Maukhari Dynasty</a></li><li><a href="/atlas/realm/tarim-basin-city-states.html">Tarim Basin city-states</a></li><li><a href="/atlas/realm/chalukya-dynasty.html">Chalukya Dynasty</a></li><li><a href="/atlas/realm/maitraka-dynasty.html">Maitraka Dynasty</a></li><li><a href="/atlas/realm/turk-shahis.html">Turk Shahis</a></li><li><a href="/atlas/realm/kamarupa-kingdom.html">Kamarupa Kingdom</a></li></ul><a class="see" href="/atlas/year/600.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 600</h3><ul><li><a href="/atlas/realm/sui-dynasty.html">Sui Dynasty</a></li><li><a href="/atlas/realm/eastern-gokturks.html">Eastern Göktürks</a></li><li><a href="/atlas/realm/goguryeo.html">Goguryeo</a></li><li><a href="/atlas/realm/funan.html">Funan</a></li><li><a href="/atlas/realm/asuka-japan.html">Asuka Japan</a></li><li><a href="/atlas/realm/chenla.html">Chenla</a></li><li><a href="/atlas/realm/early-ly-dynasty.html">Early Lý Dynasty</a></li><li><a href="/atlas/realm/silla.html">Silla</a></li></ul><a class="see" href="/atlas/year/600.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 600</h3><ul><li><a href="/atlas/realm/nobatia.html">Nobatia</a></li><li><a href="/atlas/realm/alodia.html">Alodia</a></li><li><a href="/atlas/realm/kingdom-of-axum.html">Kingdom of Axum</a></li><li><a href="/atlas/realm/makuria.html">Makuria</a></li></ul><a class="see" href="/atlas/year/600.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 600</h3><ul><li><a href="/atlas/realm/mayan-city-states.html">Mayan City-States</a></li><li><a href="/atlas/realm/zapotec-civilization.html">Zapotec Civilization</a></li><li><a href="/atlas/realm/classic-veracruz-culture.html">Classic Veracruz Culture</a></li><li>Teotihuacan</li></ul><a class="see" href="/atlas/year/600.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Gregory the Great Becomes Pope</b><span class="when">A.D. 590</span>, <span class="where">Lateran, Rome</span>. Gregory, a former prefect of Rome turned monk, was elected pope while plague raged in the city, and led a procession of penitence through its streets. He fed Rome from the papal estates, bargained with the Lombards, reformed the liturgy and its chant, and called himself the servant of the servants of God; the medieval papacy begins with him.</li>
+<li><b>Augustine Comes to Canterbury</b><span class="when">A.D. 597</span>, <span class="where">Canterbury, Kent</span>. Pope Gregory, who had seen fair-haired English boys for sale in the slave market of Rome, sent the monk Augustine with forty companions to the English. Æthelberht of Kent, whose Frankish queen Bertha was a Christian, received them, was baptized, and gave them a church at Canterbury, where Augustine became the first archbishop.</li>
+<li><b>Seafarers from the East Settle Madagascar</b><span class="when">c. A.D. 600</span>, <span class="where">Central Highlands, Madagascar</span>. Seafarers from the islands of the Indonesian archipelago, speaking a tongue whose nearest kin is still spoken in southern Borneo, crossed the breadth of the Indian Ocean to settle the great island of Madagascar, joined in later centuries by Bantu peoples from the mainland. Their descendants, the Malagasy, kept the rice terraces, outrigger canoes, and language of their Austronesian forebears.</li>
+<li><b>Tiwanaku and Wari</b><span class="when">c. A.D. 600</span>, <span class="where">Tiwanaku, Bolivia</span>. Near the southern shore of Lake Titicaca, nearly four thousand metres above the sea, Tiwanaku raised its terraced Akapana pyramid and the monolithic Gateway of the Sun, fed by raised fields that defied the frosts of the altiplano. To the north, the Wari of the Ayacucho basin built the first empire of the Andes, bound by roads and administrative centers that the Inca would one day imitate.</li>
+<li><b>Phocas Overthrows Maurice</b><span class="when">A.D. 602</span>, <span class="where">Chalcedon, Bithynia</span>. Ordered to winter beyond the Danube among the Slavs, the army mutinied and raised the centurion Phocas on a shield. Maurice fled the capital, was taken, and at Chalcedon watched his five sons butchered before his own head fell. Khosrow II of Persia, whom Maurice had restored to his throne, took the murder as cause for a war that lasted twenty-six years.</li>
+<li><b>The Grand Canal</b><span class="when">A.D. 605</span>, <span class="where">Yangzhou, Jiangsu, China</span>. Emperor Yang of Sui set more than a million labourers to dig the Tongji Canal from Luoyang to the Huai, and then the Yongji Canal to the north, joining them with older works into a waterway from the Yangtze to the frontier near Beijing. Grain from the rich south could now feed the capitals and armies of the north, and the emperor sailed to Jiangdu in dragon boats.</li>
+<li><b>Harsha Ascends at Thanesar</b><span class="when">A.D. 606</span>, <span class="where">Thanesar, Haryana, India</span>. When his elder brother Rajyavardhana was treacherously slain by Shashanka of Gauda, the sixteen-year-old Harsha took the throne of Thanesar and vowed to rid the earth of his enemies. He rescued his widowed sister Rajyashri as she was about to mount the pyre, made Kannauj his capital, and built the last great native empire of northern India. His era begins in 606.</li>
+<li><b>The First Revelation on Mount Hira</b><span class="when">c. A.D. 610</span>, <span class="where">Jabal al-Nour, Arabia</span>. In a cave on Mount Hira above Mecca, Muhammad ibn Abdallah, a merchant of the Quraysh some forty years of age, began to receive the revelations that became the Quran, opening with the command &quot;Recite in the name of thy Lord.&quot; For a dozen years he preached the one God in Mecca, gathering a small following that the city's chiefs mocked and persecuted.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/590.html" rel="prev">Earlier: the world in A.D. 590</a><a href="/atlas/year/610.html" rel="next">Later: the world in A.D. 610</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

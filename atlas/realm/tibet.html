@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Tibet: Map, Rulers, and History, 1363 to 1952 | Orbis Terrarum</title>
+  <meta name="description" content="Tibet from the fall of Sakya rule to the coming of the Chinese army, governed in turn by the Phagmodrupa princes, the Rinpungpa and Tsangpa lords of Tsang, and from 1642 by the Dalai Lamas of the Gelug church under Mongol and later Qing protection. The Thirteenth Dalai Lama declared independence…">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/realm/tibet.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Tibet: Map, Rulers, and History, 1363 to 1952 | Orbis Terrarum">
+  <meta property="og:description" content="Tibet from the fall of Sakya rule to the coming of the Chinese army, governed in turn by the Phagmodrupa princes, the Rinpungpa and Tsangpa lords of Tsang, and from 1642 by the Dalai Lamas of the Gelug church under Mongol and later Qing protection. The Thirteenth Dalai Lama declared independence…">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/realm/tibet.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1683" data-view="76.5,25.4,103.9,39" data-realm="Tibet">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>Tibet</h1>
+<p class="lede">1363 to 1952. Shown above as it stood in A.D. 1683; drag the timeline to watch it rise and fall.</p>
+<p>Tibet from the fall of Sakya rule to the coming of the Chinese army, governed in turn by the Phagmodrupa princes, the Rinpungpa and Tsangpa lords of Tsang, and from 1642 by the Dalai Lamas of the Gelug church under Mongol and later Qing protection. The Thirteenth Dalai Lama declared independence in 1913; Chinese troops entered in 1950.</p>
+<dl class="facts"><dt>Government</dt><dd>Princely rule, then the theocracy of the Dalai Lamas (Ganden Phodrang)</dd><dt>Faith</dt><dd>Tibetan Buddhism</dd><dt>Capitals</dt><dd>Nedong <span class="num">(1354 to 1481)</span>; Rinpung <span class="num">(1481 to 1565)</span>; Shigatse <span class="num">(1565 to 1642)</span>; Lhasa <span class="num">(1642 to 1952)</span></dd><dt>Greatest extent</dt><dd>About 1.6 million sq. km, as drawn on this atlas for A.D. 1683</dd></dl>
+<h2>Rulers of the Tibet</h2>
+<ul class="rulers"><li>Changchub Gyaltsen <span class="num">1354 to 1364</span></li><li>Jamyang Shakya Gyaltsen <span class="num">1364 to 1373</span></li><li>Drakpa Changchub <span class="num">1374 to 1381</span></li><li>Sonam Drakpa <span class="num">1381 to 1385</span></li><li>Drakpa Gyaltsen <span class="num">1385 to 1432</span></li><li>Drakpa Jungne <span class="num">1432 to 1445</span></li><li>Norzang (Rinpungpa) <span class="num">1435 to 1466</span></li><li>Kunga Lekpa <span class="num">1448 to 1481</span></li><li>Donyo Dorje (Rinpungpa) <span class="num">1479 to 1512</span></li><li>Ngagi Wangpo <span class="num">1481 to 1491</span></li><li>Tsokye Dorje (regent) <span class="num">1491 to 1499</span></li><li>Ngawang Tashi Drakpa <span class="num">1499 to 1554</span></li><li>Ngawang Namgyal (Rinpungpa) <span class="num">1512 to 1544</span></li><li>Ngawang Jigme Drakpa (Rinpungpa) <span class="num">1547 to 1565</span></li><li>Karma Tseten (Tsangpa) <span class="num">1565 to 1599</span></li><li>Karma Tensung (Tsangpa) <span class="num">1599 to 1611</span></li><li>Karma Phuntsok Namgyal (Tsangpa) <span class="num">1611 to 1620</span></li><li>Karma Tenkyong (Tsangpa) <span class="num">1620 to 1642</span></li><li>Güshi Khan (King of Tibet) <span class="num">1642 to 1655</span></li><li>Fifth Dalai Lama, Ngawang Lobsang Gyatso <span class="num">1642 to 1682</span></li><li>Sonam Rapten (regent) <span class="num">1642 to 1658</span></li><li>Sangye Gyatso (regent) <span class="num">1679 to 1703</span></li><li>Sixth Dalai Lama, Tsangyang Gyatso <span class="num">1697 to 1706</span></li><li>Lha-bzang Khan <span class="num">1697 to 1717</span></li><li>Seventh Dalai Lama, Kelzang Gyatso <span class="num">1720 to 1757</span></li><li>Polhané Sönam Topgyé <span class="num">1728 to 1747</span></li><li>Eighth Dalai Lama, Jamphel Gyatso <span class="num">1762 to 1804</span></li><li>Ninth Dalai Lama, Lungtok Gyatso <span class="num">1810 to 1815</span></li><li>Tenth Dalai Lama, Tsultrim Gyatso <span class="num">1826 to 1837</span></li><li>Eleventh Dalai Lama, Khedrup Gyatso <span class="num">1842 to 1856</span></li><li>Twelfth Dalai Lama, Trinley Gyatso <span class="num">1860 to 1875</span></li><li>Thirteenth Dalai Lama, Thubten Gyatso <span class="num">1879 to 1933</span></li><li>Reting Rinpoche (regent) <span class="num">1934 to 1941</span></li><li>Taktra Rinpoche (regent) <span class="num">1941 to 1950</span></li><li>Fourteenth Dalai Lama, Tenzin Gyatso <span class="num">1940 to 1959</span></li></ul>
+<h2>On the map, year by year</h2>
+<div class="years"><a href="/atlas/year/1370.html?v=76.5,25.4,103.9,39">A.D. 1370</a><a href="/atlas/year/1430.html?v=76.5,25.4,103.9,39">A.D. 1430</a><a href="/atlas/year/1490.html?v=76.5,25.4,103.9,39">A.D. 1490</a><a href="/atlas/year/1525.html?v=76.5,25.4,103.9,39">A.D. 1525</a><a href="/atlas/year/1555.html?v=76.5,25.4,103.9,39">A.D. 1555</a><a href="/atlas/year/1585.html?v=76.5,25.4,103.9,39">A.D. 1585</a><a href="/atlas/year/1615.html?v=76.5,25.4,103.9,39">A.D. 1615</a><a href="/atlas/year/1645.html?v=76.5,25.4,103.9,39">A.D. 1645</a><a href="/atlas/year/1675.html?v=76.5,25.4,103.9,39">A.D. 1675</a><a href="/atlas/year/1710.html?v=76.5,25.4,103.9,39">A.D. 1710</a><a href="/atlas/year/1740.html?v=76.5,25.4,103.9,39">A.D. 1740</a><a href="/atlas/year/1770.html?v=76.5,25.4,103.9,39">A.D. 1770</a><a href="/atlas/year/1800.html?v=76.5,25.4,103.9,39">A.D. 1800</a><a href="/atlas/year/1830.html?v=76.5,25.4,103.9,39">A.D. 1830</a><a href="/atlas/year/1860.html?v=76.5,25.4,103.9,39">A.D. 1860</a><a href="/atlas/year/1890.html?v=76.5,25.4,103.9,39">A.D. 1890</a><a href="/atlas/year/1920.html?v=76.5,25.4,103.9,39">A.D. 1920</a><a href="/atlas/year/1950.html?v=76.5,25.4,103.9,39">A.D. 1950</a></div>
+<div class="pager"><a href="/atlas/realms.html">Every realm</a><a href="/atlas.html#almanac">Every year</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

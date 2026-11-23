@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1940 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1940: Union of Soviet Socialist Republics, United States of America, French Africa, Canada, United States of Brazil, Commonwealth of Australia, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1940.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1940 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1940: Union of Soviet Socialist Republics, United States of America, French Africa, Canada, United States of Brazil, Commonwealth of Australia, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1940.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1940">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1940</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 1940, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1940</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/union-of-soviet-socialist-republics.html">Union of Soviet Socialist Republics</a></td><td>Joseph Stalin (general secretary, leader of the Soviet Union) (1922 to 1953) and Mikhail Kalinin (head of state) (1922 to 1946)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 21 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Franklin D. Roosevelt (1933 to 1945)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/french-africa.html">French Africa</a></td><td>Albert Lebrun (president) (1932 to 1940) and Philippe Pétain (Chief of the French State) (1940 to 1944)</td><td class="hide-s">Algiers and Dakar and Brazzaville</td><td class="hide-s num">about 9.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/canada.html">Canada</a></td><td>William Lyon Mackenzie King (1935 to 1948)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 9.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></td><td>Getúlio Vargas (1930 to 1945)</td><td class="hide-s">Rio de Janeiro</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/commonwealth-of-australia.html">Commonwealth of Australia</a></td><td>Robert Menzies (1939 to 1941)</td><td class="hide-s">Canberra</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-africa.html">British Africa</a></td><td>George VI (1936 to 1952)</td><td class="hide-s">London</td><td class="hide-s num">about 6.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-china.html">Republic of China</a></td><td>Lin Sen (chairman) (1931 to 1943)</td><td class="hide-s">Chongqing</td><td class="hide-s num">about 5.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/british-raj.html">British Raj</a></td><td>Lord Linlithgow (viceroy) (1936 to 1943) and George VI (1936 to 1947)</td><td class="hide-s">New Delhi</td><td class="hide-s num">about 4.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/italian-africa.html">Italian Africa</a></td><td>Victor Emmanuel III (1900 to 1946) and Benito Mussolini (prime minister) (1922 to 1943)</td><td class="hide-s">Rome</td><td class="hide-s num">about 3.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Roberto Marcelino Ortiz (1938 to 1942)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></td><td>Leopold III (1934 to 1951)</td><td class="hide-s">Léopoldville</td><td class="hide-s num">about 2.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/estado-novo.html">Estado Novo</a></td><td>Óscar Carmona (president) (1926 to 1951) and António de Oliveira Salazar (prime minister) (1932 to 1968)</td><td class="hide-s">Lisbon</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/greenland.html">Greenland</a></td><td>Christian X (1912 to 1947)</td><td class="hide-s">Godthåb</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1940</h3><ul><li><a href="/atlas/realm/german-occupied-territory.html">German-occupied territory</a></li><li><a href="/atlas/realm/francoist-spain.html">Francoist Spain</a></li><li><a href="/atlas/realm/nazi-germany.html">Nazi Germany</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-norway.html">Kingdom of Norway</a></li><li><a href="/atlas/realm/vichy-france.html">Vichy France</a></li><li><a href="/atlas/realm/republic-of-finland.html">Republic of Finland</a></li><li><a href="/atlas/realm/kingdom-of-italy.html">Kingdom of Italy</a></li></ul><a class="see" href="/atlas/year/1940.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1940</h3><ul><li><a href="/atlas/realm/kingdom-of-saudi-arabia.html">Kingdom of Saudi Arabia</a></li><li><a href="/atlas/realm/pahlavi-dynasty.html">Pahlavi Dynasty</a></li><li><a href="/atlas/realm/republic-of-turkey.html">Republic of Turkey</a></li><li><a href="/atlas/realm/united-kingdom.html">United Kingdom</a></li><li><a href="/atlas/realm/kingdom-of-iraq.html">Kingdom of Iraq</a></li><li><a href="/atlas/realm/sultanate-of-muscat-and-oman.html">Sultanate of Muscat and Oman</a></li><li><a href="/atlas/realm/french-mandate-for-syria-and-lebanon.html">French Mandate for Syria and Lebanon</a></li><li><a href="/atlas/realm/north-yemen.html">North Yemen</a></li></ul><a class="see" href="/atlas/year/1940.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1940</h3><ul><li><a href="/atlas/realm/british-raj.html">British Raj</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/british-burma.html">British Burma</a></li><li><a href="/atlas/realm/kingdom-of-afghanistan.html">Kingdom of Afghanistan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li><li><a href="/atlas/realm/tuvan-people-s-republic.html">Tuvan People's Republic</a></li><li><a href="/atlas/realm/kingdom-of-bhutan.html">Kingdom of Bhutan</a></li></ul><a class="see" href="/atlas/year/1940.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1940</h3><ul><li><a href="/atlas/realm/republic-of-china.html">Republic of China</a></li><li><a href="/atlas/realm/dutch-east-indies.html">Dutch East Indies</a></li><li><a href="/atlas/realm/mongolian-people-s-republic.html">Mongolian People's Republic</a></li><li><a href="/atlas/realm/british-colonial-empire.html">British Colonial Empire</a></li><li><a href="/atlas/realm/manchukuo.html">Manchukuo</a></li><li><a href="/atlas/realm/japanese-occupied-territory.html">Japanese-occupied territory</a></li><li><a href="/atlas/realm/french-indochina.html">French Indochina</a></li><li><a href="/atlas/realm/empire-of-japan.html">Empire of Japan</a></li></ul><a class="see" href="/atlas/year/1940.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1940</h3><ul><li><a href="/atlas/realm/french-africa.html">French Africa</a></li><li><a href="/atlas/realm/british-africa.html">British Africa</a></li><li><a href="/atlas/realm/italian-africa.html">Italian Africa</a></li><li><a href="/atlas/realm/belgian-congo.html">Belgian Congo</a></li><li><a href="/atlas/realm/estado-novo.html">Estado Novo</a></li><li><a href="/atlas/realm/union-of-south-africa.html">Union of South Africa</a></li><li><a href="/atlas/realm/free-french.html">Free French</a></li><li><a href="/atlas/realm/british-west-africa.html">British West Africa</a></li></ul><a class="see" href="/atlas/year/1940.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1940</h3><ul><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/canada.html">Canada</a></li><li><a href="/atlas/realm/united-states-of-brazil.html">United States of Brazil</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/republic-of-colombia.html">Republic of Colombia</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li></ul><a class="see" href="/atlas/year/1940.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>The Invasion of Poland</b><span class="when">A.D. 1939</span>, <span class="where">Westerplatte, Danzig</span>. At dawn on 1 September 1939 the old battleship Schleswig-Holstein opened fire on the Polish depot at Westerplatte in Danzig harbor, and German armies crossed the Polish frontier from three sides. Britain and France declared war on 3 September. On the 17th the Red Army invaded from the east; Warsaw surrendered on the 28th, and Poland was partitioned between the two dictators.</li>
+<li><b>The Katyn Massacre</b><span class="when">A.D. 1940</span>, <span class="where">Katyn Forest, Russia</span>. In April and May 1940, on an order signed by Stalin and the Politburo, the NKVD shot some 22,000 Polish prisoners, army officers, police, landowners, and professional men, in the Katyn forest near Smolensk, at Kalinin, at Kharkov, and other places. The Germans found the graves at Katyn in 1943; Moscow blamed them for the crime until 1990.</li>
+<li><b>The Evacuation from Dunkirk</b><span class="when">A.D. 1940</span>, <span class="where">Dunkirk, France</span>. The German armor broke through the Ardennes at Sedan in May 1940 and reached the Channel in ten days, cutting off the British Expeditionary Force and the French northern armies. From 26 May to 4 June destroyers, ferries, and hundreds of small boats brought some 338,000 men off the beaches and mole of Dunkirk, while the French rearguard held the perimeter.</li>
+<li><b>The Battle of Britain</b><span class="when">A.D. 1940</span>, <span class="where">Biggin Hill, Kent</span>. Through the summer of 1940 Göring's Luftwaffe tried to destroy the Royal Air Force as the prelude to invasion. Guided by radar and the operations rooms of Dowding's Fighter Command, the Hurricanes and Spitfires held; on 15 September the great daylight raids on London were beaten off, and Hitler postponed the invasion. The night Blitz on British cities went on until May 1941.</li>
+<li><b>Operation Barbarossa</b><span class="when">A.D. 1941</span>, <span class="where">Brest Fortress, Belarus</span>. Before dawn on 22 June 1941 more than three million German soldiers in three army groups, with their allies, crossed the Soviet frontier from the Baltic to the Black Sea. The garrison of the Brest fortress fought on for weeks, but the Red Army lost millions in vast encirclements at Białystok, Minsk, Smolensk, and Kiev. By December the Germans stood before Moscow and Leningrad.</li>
+<li><b>The Attack on Pearl Harbor</b><span class="when">A.D. 1941</span>, <span class="where">Pearl Harbor, Hawaii</span>. Facing an American embargo on oil, Japan struck first. On the morning of 7 December, aircraft from six carriers under Admiral Nagumo Chūichi, carrying out the plan of Admiral Yamamoto Isoroku, sank or crippled eight American battleships at Pearl Harbor and killed over 2,400 Americans. Within hours Japan fell upon Malaya, Hong Kong, and the Philippines, and the war became a world war in full.</li>
+<li><b>The Fall of Singapore</b><span class="when">A.D. 1942</span>, <span class="where">Singapore</span>. After a campaign of seventy days down the length of Malaya, General Yamashita's army crossed the Johor Strait, and on 15 February 1942 General Arthur Percival surrendered Singapore with some eighty thousand British, Australian, and Indian troops, the greatest capitulation in British history. The belief in European invincibility in Asia died with it, and tens of thousands of Chinese were massacred in the purge that followed.</li>
+<li><b>The Surrender at Stalingrad</b><span class="when">A.D. 1943</span>, <span class="where">Stalingrad, Russia</span>. Through the autumn of 1942 the German Sixth Army fought for Stalingrad street by street and factory by factory on the Volga. On 19 November Zhukov and Vasilevsky's Operation Uranus broke the Romanian armies on its flanks and closed the ring. Forbidden to break out, the newly made Field Marshal Friedrich Paulus surrendered on 31 January 1943; some 91,000 starving men went into captivity, and few came home.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1935.html" rel="prev">Earlier: the world in A.D. 1935</a><a href="/atlas/year/1945.html" rel="next">Later: the world in A.D. 1945</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

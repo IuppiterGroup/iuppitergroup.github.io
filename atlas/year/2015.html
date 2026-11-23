@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 2015 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 2015: Russian Federation, Canada, United States of America, People's Republic of China, Federative Republic of Brazil, Commonwealth of Australia, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/2015.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 2015 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 2015: Russian Federation, Canada, United States of America, People's Republic of China, Federative Republic of Brazil, Commonwealth of Australia, and the other realms of the modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/2015.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="2015">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 2015</h1>
+<p class="lede">The modern age. The realms that held the map in A.D. 2015, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 2015</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/russian-federation.html">Russian Federation</a></td><td>Vladimir Putin (president) (from 2012) and Dmitry Medvedev (prime minister) (2012 to 2020)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 17 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/canada.html">Canada</a></td><td>Stephen Harper (2006 to 2015), then Justin Trudeau (from 2015)</td><td class="hide-s">Ottawa</td><td class="hide-s num">about 9.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/united-states-of-america.html">United States of America</a></td><td>Barack Obama (2009 to 2017)</td><td class="hide-s">Washington</td><td class="hide-s num">about 9.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/people-s-republic-of-china.html">People's Republic of China</a></td><td>Xi Jinping (from 2012)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 9.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/federative-republic-of-brazil.html">Federative Republic of Brazil</a></td><td>Dilma Rousseff (2011 to 2016)</td><td class="hide-s">Brasília</td><td class="hide-s num">about 8.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/commonwealth-of-australia.html">Commonwealth of Australia</a></td><td>Tony Abbott (2013 to 2015), then Malcolm Turnbull (2015 to 2018)</td><td class="hide-s">Canberra</td><td class="hide-s num">about 7.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/republic-of-india.html">Republic of India</a></td><td>Narendra Modi (prime minister) (from 2014)</td><td class="hide-s">New Delhi</td><td class="hide-s num">about 3.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></td><td>Cristina Fernández de Kirchner (2007 to 2015), then Mauricio Macri (2015 to 2019)</td><td class="hide-s">Buenos Aires</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kazakhstan.html">Kazakhstan</a></td><td>Nursultan Nazarbayev (1991 to 2019)</td><td class="hide-s">Astana</td><td class="hide-s num">about 2.6 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/people-s-democratic-republic-of-algeria.html">People's Democratic Republic of Algeria</a></td><td>Abdelaziz Bouteflika (1999 to 2019)</td><td class="hide-s">Algiers</td><td class="hide-s num">about 2.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/democratic-republic-of-the-congo.html">Democratic Republic of the Congo</a></td><td>Joseph Kabila (2001 to 2019)</td><td class="hide-s">Kinshasa</td><td class="hide-s num">about 2.3 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/denmark.html">Denmark</a></td><td>Margrethe II (from 1972)</td><td class="hide-s">Copenhagen</td><td class="hide-s num">about 2.2 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/mexico.html">Mexico</a></td><td>Enrique Peña Nieto (2012 to 2018)</td><td class="hide-s">Mexico City</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-saudi-arabia.html">Kingdom of Saudi Arabia</a></td><td>Abdullah (2005 to 2015), then Salman (from 2015)</td><td class="hide-s">Riyadh</td><td class="hide-s num">about 1.9 million sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 2015</h3><ul><li><a href="/atlas/realm/french-fifth-republic.html">French Fifth Republic</a></li><li><a href="/atlas/realm/ukraine.html">Ukraine</a></li><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-norway.html">Kingdom of Norway</a></li><li><a href="/atlas/realm/federal-republic-of-germany.html">Federal Republic of Germany</a></li><li><a href="/atlas/realm/republic-of-finland.html">Republic of Finland</a></li><li><a href="/atlas/realm/republic-of-poland.html">Republic of Poland</a></li></ul><a class="see" href="/atlas/year/2015.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 2015</h3><ul><li><a href="/atlas/realm/kingdom-of-saudi-arabia.html">Kingdom of Saudi Arabia</a></li><li><a href="/atlas/realm/islamic-republic-of-iran.html">Islamic Republic of Iran</a></li><li><a href="/atlas/realm/republic-of-turkey.html">Republic of Turkey</a></li><li><a href="/atlas/realm/turkmenistan.html">Turkmenistan</a></li><li><a href="/atlas/realm/republic-of-yemen.html">Republic of Yemen</a></li><li><a href="/atlas/realm/republic-of-iraq.html">Republic of Iraq</a></li><li><a href="/atlas/realm/sultanate-of-oman.html">Sultanate of Oman</a></li><li>Islamic State</li></ul><a class="see" href="/atlas/year/2015.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 2015</h3><ul><li><a href="/atlas/realm/republic-of-india.html">Republic of India</a></li><li><a href="/atlas/realm/kazakhstan.html">Kazakhstan</a></li><li><a href="/atlas/realm/islamic-republic-of-pakistan.html">Islamic Republic of Pakistan</a></li><li><a href="/atlas/realm/union-of-myanmar.html">Union of Myanmar</a></li><li><a href="/atlas/realm/islamic-republic-of-afghanistan.html">Islamic Republic of Afghanistan</a></li><li><a href="/atlas/realm/republic-of-uzbekistan.html">Republic of Uzbekistan</a></li><li><a href="/atlas/realm/kyrgyzstan.html">Kyrgyzstan</a></li><li><a href="/atlas/realm/nepal.html">Nepal</a></li></ul><a class="see" href="/atlas/year/2015.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 2015</h3><ul><li><a href="/atlas/realm/people-s-republic-of-china.html">People's Republic of China</a></li><li><a href="/atlas/realm/republic-of-indonesia.html">Republic of Indonesia</a></li><li><a href="/atlas/realm/mongolia.html">Mongolia</a></li><li><a href="/atlas/realm/kingdom-of-thailand.html">Kingdom of Thailand</a></li><li><a href="/atlas/realm/papua-new-guinea.html">Papua New Guinea</a></li><li><a href="/atlas/realm/japan.html">Japan</a></li><li><a href="/atlas/realm/malaysia.html">Malaysia</a></li><li><a href="/atlas/realm/socialist-republic-of-vietnam.html">Socialist Republic of Vietnam</a></li></ul><a class="see" href="/atlas/year/2015.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 2015</h3><ul><li><a href="/atlas/realm/people-s-democratic-republic-of-algeria.html">People's Democratic Republic of Algeria</a></li><li><a href="/atlas/realm/democratic-republic-of-the-congo.html">Democratic Republic of the Congo</a></li><li><a href="/atlas/realm/republic-of-sudan.html">Republic of Sudan</a></li><li><a href="/atlas/realm/republic-of-chad.html">Republic of Chad</a></li><li><a href="/atlas/realm/republic-of-mali.html">Republic of Mali</a></li><li><a href="/atlas/realm/republic-of-angola.html">Republic of Angola</a></li><li><a href="/atlas/realm/south-africa.html">South Africa</a></li><li><a href="/atlas/realm/republic-of-the-niger.html">Republic of the Niger</a></li></ul><a class="see" href="/atlas/year/2015.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 2015</h3><ul><li><a href="/atlas/realm/canada.html">Canada</a></li><li><a href="/atlas/realm/united-states-of-america.html">United States of America</a></li><li><a href="/atlas/realm/federative-republic-of-brazil.html">Federative Republic of Brazil</a></li><li><a href="/atlas/realm/argentine-republic.html">Argentine Republic</a></li><li><a href="/atlas/realm/mexico.html">Mexico</a></li><li><a href="/atlas/realm/republic-of-peru.html">Republic of Peru</a></li><li><a href="/atlas/realm/republic-of-colombia.html">Republic of Colombia</a></li><li><a href="/atlas/realm/bolivia.html">Bolivia</a></li></ul><a class="see" href="/atlas/year/2015.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Tahrir Square</b><span class="when">A.D. 2011</span>, <span class="where">Cairo, Egypt</span>. Inspired by Tunisia, crowds filled Cairo's Tahrir Square on 25 January 2011 and held it for eighteen days against police, hired thugs on camels, and the regime's propaganda. On 11 February Hosni Mubarak resigned after thirty years. The Muslim Brotherhood's Mohamed Morsi won the presidency in 2012, but in July 2013 the army under Abdel Fattah el-Sisi removed him and killed hundreds of his supporters at the Rabaa sit-in.</li>
+<li><b>The Revolution of Dignity</b><span class="when">A.D. 2014</span>, <span class="where">Independence Square, Kyiv</span>. When President Yanukovych, under pressure from Moscow, refused in November 2013 to sign an association agreement with the European Union, protesters occupied Independence Square in Kyiv for three winter months. Between 18 and 20 February 2014 snipers and riot police killed about a hundred of them, remembered as the Heavenly Hundred; Yanukovych fled the capital on the night of the 21st, and on 22 February parliament removed him.</li>
+<li><b>Russia Seizes the Crimea</b><span class="when">A.D. 2014</span>, <span class="where">Simferopol, Crimea</span>. Days after Yanukovych's fall, Russian soldiers without insignia seized the Crimean parliament and the airports of the peninsula. A referendum held under occupation on 16 March 2014 was followed on the 18th by Russia's annexation of the Crimea, which the United Nations General Assembly declared invalid. In April Russian-led militias seized towns in the Donbas, and war began in eastern Ukraine.</li>
+<li><b>The Islamic State Takes Mosul</b><span class="when">A.D. 2014</span>, <span class="where">Mosul, Iraq</span>. In June 2014 a few thousand fighters of the Islamic State of Iraq and Syria routed the Iraqi army and seized Mosul. From the pulpit of its Great Mosque Abu Bakr al-Baghdadi proclaimed himself caliph. Mosul's Christians, their houses marked with the Arabic letter nun, were given the choice of conversion, tribute, or the sword and fled, leaving the city without a Christian community for the first time in many centuries.</li>
+<li><b>War in Yemen</b><span class="when">A.D. 2015</span>, <span class="where">Sana'a, Yemen</span>. The Houthis, a Zaydi revivalist movement from the mountains of Sa'da, seized Sana'a in September 2014 and drove President Abd Rabbuh Mansur Hadi south to Aden. On 26 March 2015 Saudi Arabia and its allies began a campaign of air strikes and blockade on his behalf. The war that followed brought famine and cholera to the poorest country in Arabia.</li>
+<li><b>Britain Votes to Leave</b><span class="when">A.D. 2016</span>, <span class="where">Westminster, London</span>. In a referendum called by David Cameron on 23 June 2016, the British people voted by 51.9 percent to 48.1 percent to leave the European Union they had joined in 1973. Cameron resigned; after three years of parliamentary deadlock under Theresa May, Boris Johnson won an election on the promise to get Brexit done, and the United Kingdom left on 31 January 2020.</li>
+<li><b>The Rohingya Exodus</b><span class="when">A.D. 2017</span>, <span class="where">Maungdaw, Rakhine</span>. After Rohingya militants attacked police posts in northern Rakhine on 25 August 2017, the Burmese army burned hundreds of villages of the Muslim Rohingya, whom the state had long denied citizenship. More than seven hundred thousand fled across the Naf River into Bangladesh, and investigators of the United Nations accused the generals of genocidal intent.</li>
+<li><b>Contagion at Wuhan</b><span class="when">A.D. 2019</span>, <span class="where">Wuhan, Hubei, China</span>. In December doctors in Wuhan began to see a cluster of pneumonia cases caused by a new coronavirus, and the authorities silenced those who raised the alarm. In January 2020 the city of eleven million was sealed off, but the disease had already spread. The COVID-19 pandemic killed some seven million people by official counts across the world and halted much of its economy.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/2010.html" rel="prev">Earlier: the world in A.D. 2010</a><a href="/atlas/year/2020.html" rel="next">Later: the world in A.D. 2020</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://jupitergroup.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; connect-src 'self' https://jupitergroup.goatcounter.com;">
+  <title>Map of the World in A.D. 1520 | Orbis Terrarum</title>
+  <meta name="description" content="Historical map of the world in A.D. 1520: Mongol Khanate, Ming Dynasty, Safavid Dynasty, Ottoman Empire, Grand Principality of Moscow, Inca Empire, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <link rel="canonical" href="https://jupitergroup.org/atlas/year/1520.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="luppiter Group">
+  <meta property="og:title" content="Map of the World in A.D. 1520 | Orbis Terrarum">
+  <meta property="og:description" content="Historical map of the world in A.D. 1520: Mongol Khanate, Ming Dynasty, Safavid Dynasty, Ottoman Empire, Grand Principality of Moscow, Inca Empire, and the other realms of the early modern age, with their rulers, capitals, and the events of the age.">
+  <meta property="og:url" content="https://jupitergroup.org/atlas/year/1520.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body class="atlas" data-year="1520">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="l-as-i">l</span>uppiter <span>GROUP</span></a>
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/software.html">Software</a></li>
+      <li><a href="/tools.html">Tools</a></li>
+      <li><a href="/chrome-extensions.html">Extensions</a></li>
+      <li><a href="/games.html">Games</a></li>
+      <li><a href="/roma.html">Roma</a></li>
+      <li><a href="/atlas.html" class="active">Atlas</a></li>
+      <li><a href="/course.html">Course</a></li>
+      <li><a href="/quotes.html">Wisdom</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="atlas-app">
+  <header class="top">
+    <div class="brand">
+      <span class="title">Orbis Terrarum</span>
+      <span class="sub">An atlas of the world's history</span>
+    </div>
+    <span class="proof">Working Proof</span>
+  </header>
+
+  <div class="mapwrap" id="mapwrap" role="region" aria-label="Historical world map">
+    <canvas id="map"></canvas>
+    <div id="markers"></div>
+    <div class="cartouche" aria-live="polite">
+      <div class="yr" id="yr">A.D. 117</div>
+      <div class="auc" id="auc">A.U.C. 870</div>
+    </div>
+    <div class="mapctl">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">&minus;</button>
+      <button id="follow" aria-pressed="true" title="Let the view follow the age">Follow</button>
+      <button id="share" title="Copy a link to this year and view">Link</button>
+    </div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="loading" id="loading">Engraving the plates&hellip;</div>
+  </div>
+
+  <div class="timebar" aria-label="Timeline">
+    <button class="tbtn" id="play" aria-label="Play">
+      <svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg>
+    </button>
+    <button class="tbtn" id="back" aria-label="Back ten years"><svg viewBox="0 0 16 16"><path d="M11 2.5v11L3 8z"/></svg></button>
+    <div class="track" id="track" role="slider" tabindex="0" aria-label="Year" aria-valuemin="-3100" aria-valuemax="2010" aria-valuenow="117" aria-valuetext="A.D. 117">
+      <div class="scale" id="scale"></div>
+      <div class="eras" id="eras"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <button class="tbtn" id="fwd" aria-label="Forward ten years"><svg viewBox="0 0 16 16"><path d="M5 2.5v11L13 8z"/></svg></button>
+  </div>
+
+  <aside class="panel">
+    <div class="age">
+      <span class="eyebrow" id="eraName">Classical Antiquity</span>
+      <h2 id="ageYear">A.D. 117</h2>
+      <span class="from">Drag the timeline, or <button id="fromStart">play from the first cities</button>.</span>
+      <form class="goto" id="goto"><label for="gotoYear">Go to a year</label><input id="gotoYear" inputmode="text" autocomplete="off" placeholder="1200, or 44 BC" size="12"><button type="submit">Go</button></form>
+    </div>
+    <div class="sect">
+      <h3 id="realmsTitle">The Great Realms</h3>
+      <ul class="realms" id="realms"></ul>
+    </div>
+    <div class="sect">
+      <h3>The Chronicle <span class="scope" id="chronScope"></span></h3>
+      <div class="chron" id="chron"></div>
+    </div>
+  </aside>
+
+  <footer class="foot">
+    <b>Working proof.</b> Borders change in the year they actually changed, as closely as the sources allow, from a few decades in the Bronze Age to a few years in modern times. Zoom in on a region and the chronicle, the realms, and the cities follow it; click a realm for its rulers and capital in that year.
+    Borders from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener"><i>Cliopatria</i></a> (Seshat Global History Databank, CC BY 4.0), corrected by luppiter Group. Peoples without a state from <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener"><i>historical-basemaps</i></a> by A. Ourednik (GNU GPL v3). Coastlines, rivers, and mountains from Natural Earth (public domain).
+  </footer>
+</main>
+
+<section class="almanac" id="almanac" aria-label="Almanac"><!--ALMANAC--><h1>The World in A.D. 1520</h1>
+<p class="lede">The early modern age. The realms that held the map in A.D. 1520, who ruled them and from where, and what was happening in the world. Drag the timeline above to move through the years, or zoom the map to any land.</p>
+<h2>The great realms of A.D. 1520</h2>
+<table class="realm-table"><thead><tr><th>Realm</th><th>Ruler</th><th class="hide-s">Capital</th><th class="hide-s">Extent</th></tr></thead><tbody>
+<tr><td><a href="/atlas/realm/mongol-khanate.html">Mongol Khanate</a></td><td>Bodi Alagh Khan (1519 to 1547)</td><td class="hide-s"></td><td class="hide-s num">about 5.1 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></td><td>Zhengde Emperor (1505 to 1521)</td><td class="hide-s">Beijing</td><td class="hide-s num">about 3.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/safavid-dynasty.html">Safavid Dynasty</a></td><td>Ismail I (1501 to 1524)</td><td class="hide-s">Tabriz</td><td class="hide-s num">about 2.8 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></td><td>Selim I (1512 to 1520), then Suleiman I the Magnificent (1520 to 1566)</td><td class="hide-s">Constantinople</td><td class="hide-s num">about 2.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/grand-principality-of-moscow.html">Grand Principality of Moscow</a></td><td>Vasily III (1505 to 1533)</td><td class="hide-s">Moscow</td><td class="hide-s num">about 2.4 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/inca-empire.html">Inca Empire</a></td><td>Huayna Capac (1493 to 1527)</td><td class="hide-s">Cusco</td><td class="hide-s num">about 2.0 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></td><td>Kasym Khan (1511 to 1521)</td><td class="hide-s"></td><td class="hide-s num">about 1.7 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/tibet.html">Tibet</a></td><td>Ngawang Tashi Drakpa (1499 to 1554) and Ngawang Namgyal (Rinpungpa) (1512 to 1544)</td><td class="hide-s">Rinpung</td><td class="hide-s num">about 1.5 million sq. km</td></tr>
+<tr><td><a href="/atlas/realm/eastern-moghulistan.html">Eastern Moghulistan</a></td><td>Mansur Khan (1503 to 1543) and Sultan Said Khan (Yarkent) (1514 to 1533)</td><td class="hide-s">Turfan</td><td class="hide-s num">about 938 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></td><td>Charles I (1516 to 1556)</td><td class="hide-s">Toledo</td><td class="hide-s num">about 922 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/khanate-of-sibir.html">Khanate of Sibir</a></td><td></td><td class="hide-s">Qashliq</td><td class="hide-s num">about 854 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/kalmar-union.html">Kalmar Union</a></td><td>Sten Sture the Younger (regent of Sweden) (1512 to 1520) and Christian II (1513 to 1523)</td><td class="hide-s">Copenhagen</td><td class="hide-s num">about 777 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/poland-lithuania.html">Poland-Lithuania</a></td><td>Sigismund I the Old (1506 to 1548)</td><td class="hide-s">Kraków</td><td class="hide-s num">about 748 thousand sq. km</td></tr>
+<tr><td><a href="/atlas/realm/nogai-horde.html">Nogai Horde</a></td><td></td><td class="hide-s">Saraichik</td><td class="hide-s num">about 715 thousand sq. km</td></tr>
+</tbody></table>
+<h2>Region by region</h2>
+<div class="regions">
+<div><h3>Europe in A.D. 1520</h3><ul><li><a href="/atlas/realm/kingdom-of-spain.html">Kingdom of Spain</a></li><li><a href="/atlas/realm/kalmar-union.html">Kalmar Union</a></li><li><a href="/atlas/realm/poland-lithuania.html">Poland-Lithuania</a></li><li><a href="/atlas/realm/kingdom-of-france.html">Kingdom of France</a></li><li><a href="/atlas/realm/kingdom-of-sweden.html">Kingdom of Sweden</a></li><li><a href="/atlas/realm/kingdom-of-hungary.html">Kingdom of Hungary</a></li><li><a href="/atlas/realm/holy-roman-empire.html">Holy Roman Empire</a></li><li><a href="/atlas/realm/kingdom-of-england.html">Kingdom of England</a></li></ul><a class="see" href="/atlas/year/1520.html?v=-12,35.8,45,71">See Europe on the map</a></div>
+<div><h3>The Near East in A.D. 1520</h3><ul><li><a href="/atlas/realm/safavid-dynasty.html">Safavid Dynasty</a></li><li><a href="/atlas/realm/ottoman-empire.html">Ottoman Empire</a></li><li><a href="/atlas/realm/khanate-of-khiva.html">Khanate of Khiva</a></li><li><a href="/atlas/realm/bahrani-dynasty.html">Bahrani Dynasty</a></li><li><a href="/atlas/realm/shirvan.html">Shirvan</a></li><li><a href="/atlas/realm/kingdom-of-kartli.html">Kingdom of Kartli</a></li><li><a href="/atlas/realm/kingdom-of-kakheti.html">Kingdom of Kakheti</a></li><li>Principality of Mingrelia</li></ul><a class="see" href="/atlas/year/1520.html?v=25,12,63,43">See the Near East on the map</a></div>
+<div><h3>India and Central Asia in A.D. 1520</h3><ul><li><a href="/atlas/realm/kazakh-khanate.html">Kazakh Khanate</a></li><li><a href="/atlas/realm/tibet.html">Tibet</a></li><li><a href="/atlas/realm/eastern-moghulistan.html">Eastern Moghulistan</a></li><li><a href="/atlas/realm/khanate-of-bukhara.html">Khanate of Bukhara</a></li><li><a href="/atlas/realm/vijayanagara-empire.html">Vijayanagara Empire</a></li><li><a href="/atlas/realm/sultanate-of-bengal.html">Sultanate of Bengal</a></li><li><a href="/atlas/realm/western-moghulistan.html">Western Moghulistan</a></li><li><a href="/atlas/realm/shan-states.html">Shan States</a></li></ul><a class="see" href="/atlas/year/1520.html?v=60,5,97,52">See India and Central Asia on the map</a></div>
+<div><h3>East Asia in A.D. 1520</h3><ul><li><a href="/atlas/realm/mongol-khanate.html">Mongol Khanate</a></li><li><a href="/atlas/realm/ming-dynasty.html">Ming Dynasty</a></li><li><a href="/atlas/realm/ayutthaya-kingdom.html">Ayutthaya Kingdom</a></li><li><a href="/atlas/realm/lan-xang.html">Lan Xang</a></li><li><a href="/atlas/realm/warring-states-japan.html">Warring States Japan</a></li><li><a href="/atlas/realm/kingdom-of-cambodia.html">Kingdom of Cambodia</a></li><li><a href="/atlas/realm/johor-sultanate.html">Johor Sultanate</a></li><li><a href="/atlas/realm/joseon.html">Joseon</a></li></ul><a class="see" href="/atlas/year/1520.html?v=97,-11,150,55">See East Asia on the map</a></div>
+<div><h3>Africa in A.D. 1520</h3><ul><li><a href="/atlas/realm/funj-sultanate.html">Funj Sultanate</a></li><li><a href="/atlas/realm/songhai-empire.html">Songhai Empire</a></li><li><a href="/atlas/realm/ethiopian-empire.html">Ethiopian Empire</a></li><li><a href="/atlas/realm/wattasid-dynasty.html">Wattasid dynasty</a></li><li><a href="/atlas/realm/mali-empire.html">Mali Empire</a></li><li><a href="/atlas/realm/hafsid-dynasty.html">Hafsid Dynasty</a></li><li><a href="/atlas/realm/bornu-empire.html">Bornu Empire</a></li><li><a href="/atlas/realm/adal-sultanate.html">Adal Sultanate</a></li></ul><a class="see" href="/atlas/year/1520.html?v=-20,-36,52,37.5">See Africa on the map</a></div>
+<div><h3>The Americas in A.D. 1520</h3><ul><li><a href="/atlas/realm/inca-empire.html">Inca Empire</a></li><li><a href="/atlas/realm/aztec-triple-alliance.html">Aztec Triple Alliance</a></li><li><a href="/atlas/realm/later-mayan-city-states.html">Later Mayan City-States</a></li><li><a href="/atlas/realm/portuguese-empire.html">Portuguese Empire</a></li><li><a href="/atlas/realm/michoacan.html">Michoacán</a></li><li><a href="/atlas/realm/haudenosaunee.html">Haudenosaunee</a></li></ul><a class="see" href="/atlas/year/1520.html?v=-170,-56,-30,72">See the Americas on the map</a></div>
+</div>
+<h2>The chronicle of these years</h2>
+<ul class="events">
+<li><b>Luther's Ninety-Five Theses</b><span class="when">A.D. 1517</span>, <span class="where">Wittenberg, Saxony</span>. On 31 October 1517 Martin Luther, Augustinian friar and professor of theology, sent his ninety-five theses against the sale of indulgences to the Archbishop of Mainz, and by tradition nailed them to the door of the castle church at Wittenberg. Printed and carried across Germany within weeks, they began the Reformation, which divided Western Christendom forever.</li>
+<li><b>Charles I Licenses the African Slave Trade</b><span class="when">A.D. 1518</span>, <span class="where">Santo Domingo, Hispaniola</span>. With the Taíno of the Antilles dying of overwork and disease, Charles I licensed the shipment of four thousand African slaves to the Indies, the first great grant of what became the asiento; soon ships sailed direct from Guinea and São Tomé to the islands. The slaves were made in Africa: taken in the wars and raids of African kings and merchants and sold by them at the coast, as captives had been sold north across the Sahara to the Muslim world since the seventh century. In three and a half centuries some twelve and a half million were carried in chains across the Atlantic, and nearly two million died on the way; the older Muslim trade, which outlasted it, took more than seven million across the Sahara alone, and millions more by the Red Sea and the Indian Ocean.</li>
+<li><b>Cortés Meets Moctezuma</b><span class="when">A.D. 1519</span>, <span class="where">Tenochtitlan, Mexico</span>. Hernán Cortés, who had landed on the Gulf coast with some five hundred soldiers, scuttled his ships, and won the Tlaxcalans to his side, came over the southern causeway into Tenochtitlan on 8 November 1519. Moctezuma II received him with gifts and lodged him in the palace of his father Axayacatl; within a week Cortés had made the emperor his prisoner.</li>
+<li><b>Magellan's Strait</b><span class="when">A.D. 1520</span>, <span class="where">Strait of Magellan, Chile</span>. Ferdinand Magellan, a Portuguese sailing for Spain, wintered on the Patagonian coast, crushed a mutiny there, and on 21 October 1520 entered the strait that bears his name. After thirty-eight days among its fjords and squalls three of his ships came out into an ocean so calm he called it the Pacific; one of them, the Victoria, completed the first voyage around the world in 1522.</li>
+<li><b>Tenochtitlan Falls</b><span class="when">A.D. 1521</span>, <span class="where">Valley of Mexico</span>. Hernán Cortés, with a few hundred Spaniards and tens of thousands of native allies, takes the Aztec capital of Tenochtitlan after a siege of nearly three months. The Aztec Empire falls, and on its ruins the Spaniards build Mexico City, capital of New Spain.</li>
+<li><b>Magellan Falls at Mactan</b><span class="when">A.D. 1521</span>, <span class="where">Mactan, Philippines</span>. Pressing the chiefs of the islands to submit to his ally Humabon, Ferdinand Magellan waded ashore at Mactan on 27 April 1521 with some fifty men against the warriors of Lapulapu, and was cut down in the shallows. Of his five ships only the Victoria, under Juan Sebastian Elcano, came home to Spain in 1522, completing the first voyage around the world.</li>
+<li><b>Luther Before the Diet of Worms</b><span class="when">A.D. 1521</span>, <span class="where">Worms, Germany</span>. Summoned before the young emperor Charles V and the princes of the Empire, Luther refused on 18 April 1521 to recant his writings unless convinced by Scripture and plain reason, and is said to have ended, 'Here I stand; I can do no other.' Outlawed by the Edict of Worms, he was spirited away by his prince to the Wartburg, where he turned the New Testament into German.</li>
+<li><b>The First Battle of Panipat</b><span class="when">A.D. 1526</span>, <span class="where">Panipat, Haryana, India</span>. Babur came down from Kabul with some twelve thousand men and met Ibrahim Lodi's army, perhaps eight times larger, at Panipat. Lashing carts together to shelter his matchlockmen and field guns, and sweeping round the flanks with mounted archers, he broke the Afghan host before midday. Ibrahim died on the field, and the Mughal Empire was born.</li>
+</ul>
+<div class="pager"><a href="/atlas/year/1515.html" rel="prev">Earlier: the world in A.D. 1515</a><a href="/atlas/year/1525.html" rel="next">Later: the world in A.D. 1525</a><a href="/atlas.html#almanac">Every year</a><a href="/atlas/realms.html">Every realm</a></div>
+<!--/ALMANAC--></section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="/research.html">Research</a>
+      <a href="/software.html">Software</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/chrome-extensions.html">Extensions</a>
+      <a href="/games.html">Games</a>
+      <a href="/roma.html">Roma</a>
+      <a href="/atlas.html">Atlas</a>
+      <a href="/course.html">Course</a>
+      <a href="/quotes.html">Wisdom</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <p>&copy; 2026 <span class="l-as-i">l</span>uppiter Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/atlas/vendor/d3.min.js"></script>
+<script src="/atlas/vendor/topojson-client.min.js"></script>
+<script src="/atlas-data.js"></script>
+<script src="/main.js"></script>
+<script src="/atlas.js"></script>
+<script data-goatcounter="https://jupitergroup.goatcounter.com/count" async src="/gc.js"></script>
+</body>
+</html>
